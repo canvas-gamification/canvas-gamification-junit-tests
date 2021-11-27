@@ -1,3 +1,4 @@
 # JetBrains IDEA
 /.idea
 *.iml
+/out/production
