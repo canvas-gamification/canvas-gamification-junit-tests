@@ -1,4 +1,4 @@
-package pre_defined_classes.programs_with_changing_behaviour.easy;
+package pre_defined_classes.programs_with_changing_behaviour.medium;
 
 import global.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +12,7 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class Question1 extends BaseTest {
+public class Question4 extends BaseTest {
     /*
      * Programs with Changing Behavior Programs
      * Medium
