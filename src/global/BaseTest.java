@@ -49,18 +49,6 @@ public class BaseTest {
         assertFalse(matcher.find());
     }
 
-    public void testRandomNumberRange(int min, int max, int... randomNumbers) {
-        for (int randomNumber : randomNumbers) {
-            assertTrue(randomNumber >= min && randomNumber < max, "One or more of your randomly generated numbers fall outside of the required range.");
-        }
-    }
-
-    public void testRandomNumberRange(double min, double max, double... randomNumbers) {
-        for (double randomNumber : randomNumbers) {
-            assertTrue(randomNumber >= min && randomNumber < max, "One or more of your randomly generated numbers fall outside of the required range.");
-        }
-    }
-
     @AfterEach
     public void restoreSystemInputOutput() {
         System.setIn(systemIn);
