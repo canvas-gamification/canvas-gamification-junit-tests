@@ -1,6 +1,7 @@
 package temp;
 
 import java.util.Random;
+import org.apache.commons.math3.stat.inference.ChiSquareTest;
 
 public class ProphetRobot {
     public static void main(String[] args) {
