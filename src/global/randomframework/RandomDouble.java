@@ -23,6 +23,8 @@ public class RandomDouble implements VariableNode, RandomVariable {
 
     @Override
     public String getRegex() {
-        return RandomUtil.getRegexInt();
+        int[] lowSplit = RandomUtil.getSplitDecimal(lower);
+        int[] highSplit = RandomUtil.getSplitDecimal(upper);
+        return "(" + RandomUtil.getRegexInt(lowSplit[0], highSplit[0]) + "\\." + RandomUtil.getRegexInt(lowSplit[1], highSplit[1]) + ")";
     }
 }

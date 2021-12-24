@@ -18,6 +18,6 @@ public class RandomInteger implements VariableNode, RandomVariable {
 
     @Override
     public String getRegex() {
-        return RandomUtil.getRegexInt();
+        return "(" + RandomUtil.getRegexInt(getLower(), getUpper()) + ")";
     }
 }
