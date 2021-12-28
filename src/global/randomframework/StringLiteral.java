@@ -13,6 +13,6 @@ public class StringLiteral implements VariableNode, RandomVariable {
 
     @Override
     public String getRegex() {
-        return "";
+        return "(" + getText() + ")";
     }
 }

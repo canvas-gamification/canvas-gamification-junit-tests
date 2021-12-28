@@ -18,6 +18,7 @@ public class RandomChar implements VariableNode, RandomVariable {
 
     @Override
     public String getRegex() {
-        return "";
+        String regex = "[" + (char)getLower() + "-" + (char)getUpper() + "]";
+        return "(" + regex + ")";
     }
 }
