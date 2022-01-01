@@ -3,6 +3,8 @@ package pre_defined_classes.programs_with_changing_behaviour.medium;
 //import static org.junit.Assert.*;
 
 import global.BaseTest;
+import static global.variables.RandomUtil.*;
+import static global.variables.RegexUtil.*;
 import org.junit.jupiter.api.*;
 import temp.ProphetRobot;
 

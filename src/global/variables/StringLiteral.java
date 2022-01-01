@@ -1,6 +1,6 @@
 package global.variables;
 
-public class StringLiteral implements VariableNode, RandomVariable {
+public class StringLiteral implements Regexable, RandomVariable {
     String text;
 
     public StringLiteral(String text) {

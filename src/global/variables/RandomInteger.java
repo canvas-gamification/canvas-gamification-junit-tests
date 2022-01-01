@@ -1,6 +1,6 @@
 package global.variables;
 
-public class RandomInteger implements VariableNode, RandomVariable {
+public class RandomInteger implements Regexable, RandomVariable {
     private int lower, upper;
 
     public RandomInteger(int lower, int upper) {

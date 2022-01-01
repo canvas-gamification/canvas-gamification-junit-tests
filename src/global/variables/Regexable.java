@@ -1,5 +1,5 @@
 package global.variables;
 
-public interface VariableNode {
+public interface Regexable {
     String getRegex();
 }
