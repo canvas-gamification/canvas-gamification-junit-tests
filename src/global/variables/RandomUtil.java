@@ -1,4 +1,4 @@
-package global.randomframework;
+package global.variables;
 
 public class RandomUtil {
     public static String getRegexInt(int lower, int upper) {

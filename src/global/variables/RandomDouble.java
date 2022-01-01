@@ -1,4 +1,4 @@
-package global.randomframework;
+package global.variables;
 
 public class RandomDouble implements VariableNode, RandomVariable {
     private double lower, upper;

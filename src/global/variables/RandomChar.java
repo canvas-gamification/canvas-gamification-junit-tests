@@ -1,4 +1,4 @@
-package global.randomframework;
+package global.variables;
 
 public class RandomChar implements VariableNode, RandomVariable {
     public int lower, upper;

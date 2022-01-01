@@ -1,4 +1,4 @@
-package global.randomframework;
+package global.variables;
 
 public class RandomInteger implements VariableNode, RandomVariable {
     private int lower, upper;

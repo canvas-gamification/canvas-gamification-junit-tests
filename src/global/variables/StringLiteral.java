@@ -1,4 +1,4 @@
-package global.randomframework;
+package global.variables;
 
 public class StringLiteral implements VariableNode, RandomVariable {
     String text;
