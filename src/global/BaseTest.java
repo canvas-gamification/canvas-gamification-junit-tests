@@ -13,17 +13,46 @@ import java.util.regex.Matcher;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
-public class BaseTest {
+public abstract class BaseTest {
     private final InputStream systemIn = System.in;
     private final PrintStream systemOut = System.out;
+    private String currentOutput = null;
+    private Regexable[] regexSentence;
 
     private ByteArrayOutputStream testOut;
 
-    @BeforeEach
-    public void setUpOutput() {
-        testOut = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(testOut));
+    // Setters and Getters
+    public abstract Regexable[] getExpectedOutput();
+
+    public void setRegexSentence(Regexable[] regexSentence) {
+        this.regexSentence = regexSentence;
+    }
+
+    public Regexable[] getRegexSentence() {
+        return this.regexSentence;
+    }
+
+    public String getItemAtIndex(int index) {
+        Matcher matcher = getMatches(getOutput(), processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
+        try {
+            if (matcher.find()) return matcher.group(index);
+            else fail("Your code's output did not follow the correct structure/syntax");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            fail("The specified group doesn't exist");
+        }
+        return "";  // TODO: logically how does this behave?
+    }
+
+    // Utilities
+    // TODO: if possible, make this getTestedClass() and then use reflections to call .main() inside executeMain()
+    public abstract void runMain();
+
+    public void executeMain() {
+        currentOutput = null;
+        runMain();
+        // TODO: reflections and such
     }
 
     public void provideInput(String data) {
@@ -32,12 +61,26 @@ public class BaseTest {
     }
 
     public String getOutput() {
-        return testOut.toString();
+        if (currentOutput != null) {
+            return currentOutput;
+        }
+        currentOutput = testOut.toString();
+        return currentOutput;
     }
 
-    public void checkOutputFollowsPattern(String outputString, String patternString) {
-        // TODO: FIX
-        Matcher matcher = RegexUtil.getMatches(outputString, patternString);
+    // Default Tests and Setup
+    @BeforeEach
+    public void setUp() {
+        setRegexSentence(getExpectedOutput());
+        testOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(testOut));
+        executeMain();
+    }
+
+    @Test
+    public void checkOutputFollowsPattern() {
+        String output = getOutput();
+        Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
         assertTrue(matcher.find(), "Your code's output did not follow the correct structure/syntax.");
         // This ensures that their output only contains 1 instance of the matched regex string
         assertFalse(matcher.find());
@@ -45,6 +88,7 @@ public class BaseTest {
 
     @AfterEach
     public void restoreSystemInputOutput() {
+        currentOutput = null;
         System.setIn(systemIn);
         System.setOut(systemOut);
     }
