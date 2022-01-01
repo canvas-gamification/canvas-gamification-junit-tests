@@ -41,7 +41,6 @@ public class Question1 extends BaseTest {
 
         if(repetitionInfo.getCurrentRepetition() == repetitionInfo.getTotalRepetitions()) {
             assertNotEquals(1, outputValues1.size(), "You do not seem to be properly generating random values.");
-            assertNotEquals(1, outputValues2.size(), "You do not seem to be properly generating random values.");
         }
     }
 }

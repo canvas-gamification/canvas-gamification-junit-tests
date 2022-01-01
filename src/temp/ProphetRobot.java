@@ -7,8 +7,7 @@ import org.apache.commons.math3.stat.inference.ChiSquareTest;
 public class ProphetRobot {
     public static void main(String[] args) {
         Random gen = new Random();
-//        int fingersHeldUp = gen.nextInt(2);
-        int fingersHeldUp = 10;
+        int fingersHeldUp = gen.nextInt(2);
         int prediction = gen.nextInt(11);
         boolean same = fingersHeldUp == prediction;
         if (same) {

@@ -35,31 +35,12 @@ public class BaseTest {
         return testOut.toString();
     }
 
-    public String processRegexForPrintlnOutput(String regexPattern) {
-        return regexPattern + "\\R";
-    }
-
-    public Matcher getMatches(String outputString, String patternString) {
-        return Pattern.compile(patternString).matcher(outputString);
-    }
-
     public void checkOutputFollowsPattern(String outputString, String patternString) {
-        Matcher matcher = getMatches(outputString, patternString);
+        // TODO: FIX
+        Matcher matcher = RegexUtil.getMatches(outputString, patternString);
         assertTrue(matcher.find(), "Your code's output did not follow the correct structure/syntax.");
         // This ensures that their output only contains 1 instance of the matched regex string
         assertFalse(matcher.find());
-    }
-
-    public void testRandomNumberRange(int min, int max, int... randomNumbers) {
-        for (int randomNumber : randomNumbers) {
-            assertTrue(randomNumber >= min && randomNumber < max, "One or more of your randomly generated numbers fall outside of the required range.");
-        }
-    }
-
-    public void testRandomNumberRange(double min, double max, double... randomNumbers) {
-        for (double randomNumber : randomNumbers) {
-            assertTrue(randomNumber >= min && randomNumber < max, "One or more of your randomly generated numbers fall outside of the required range.");
-        }
     }
 
     @AfterEach
