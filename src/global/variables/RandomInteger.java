@@ -1,6 +1,6 @@
 package global.variables;
 
-public class RandomInteger implements Regexable, RandomVariable {
+public class RandomInteger implements Regexable, RandomVariable<Integer> {
     private int lower, upper;
 
     public RandomInteger(int lower, int upper) {
@@ -14,6 +14,11 @@ public class RandomInteger implements Regexable, RandomVariable {
 
     public int getLower() {
         return lower;
+    }
+
+    public Integer convertFromRegexGroup(String groupString) {
+        // TODO: try catch
+        return Integer.parseInt(groupString);
     }
 
     @Override

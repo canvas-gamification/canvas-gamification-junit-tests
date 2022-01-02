@@ -12,8 +12,7 @@ public class ProphetRobot {
         boolean same = fingersHeldUp == prediction;
         if (same) {
             System.out.println("The prediction by Simon was: " + prediction + ", and the number of fingers you held up was: " + fingersHeldUp + ". They are the same!");
-        }
-        else {
+        } else {
             System.out.println("The prediction by Simon was: " + prediction + ", and the number of fingers you held up was: " + fingersHeldUp);
         }
     }

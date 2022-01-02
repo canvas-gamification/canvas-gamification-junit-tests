@@ -80,6 +80,7 @@ public abstract class BaseTest {
     @Test
     public void checkOutputFollowsPattern() {
         String output = getOutput();
+        // TODO: not always println though (in general how do we handle multi line outputs?)
         Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
         assertTrue(matcher.find(), "Your code's output did not follow the correct structure/syntax.");
         // This ensures that their output only contains 1 instance of the matched regex string

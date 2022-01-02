@@ -1,6 +1,6 @@
 package global.variables;
 
-public class RandomDouble implements Regexable, RandomVariable {
+public class RandomDouble implements Regexable, RandomVariable<Double> {
     private double lower, upper;
 
     public RandomDouble(double lower, double upper) {
@@ -19,6 +19,11 @@ public class RandomDouble implements Regexable, RandomVariable {
 
     public double getUpper() {
         return upper;
+    }
+
+    public Double convertFromRegexGroup(String groupString) {
+        // TODO: try catch
+        return Double.parseDouble(groupString);
     }
 
     @Override

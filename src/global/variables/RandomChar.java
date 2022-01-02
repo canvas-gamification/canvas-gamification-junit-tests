@@ -1,6 +1,6 @@
 package global.variables;
 
-public class RandomChar implements Regexable, RandomVariable {
+public class RandomChar implements Regexable, RandomVariable<Character> {
     public int lower, upper;
 
     public RandomChar(char lower, char upper) {
@@ -14,6 +14,14 @@ public class RandomChar implements Regexable, RandomVariable {
 
     public int getUpper() {
         return upper;
+    }
+
+    public Character convertFromRegexGroup(String groupString) {
+        if(groupString.length() > 1) {
+            // TODO: throw appropriate error for this case
+            throw new IndexOutOfBoundsException();
+        }
+        return groupString.charAt(0);
     }
 
     @Override
