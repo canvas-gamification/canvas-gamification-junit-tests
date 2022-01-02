@@ -3,8 +3,8 @@
 ////import static org.junit.Assert.*;
 //
 //import global.BaseTest;
-//import static global.variables.RandomUtil.*;
-//import static global.variables.RegexUtil.*;
+//import static global.utils.RandomUtil.*;
+//import static global.utils.RegexUtil.*;
 //
 //import global.variables.Regexable;
 //import org.junit.jupiter.api.*;

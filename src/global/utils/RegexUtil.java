@@ -1,4 +1,6 @@
-package global.variables;
+package global.utils;
+
+import global.variables.Regexable;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,6 +1,6 @@
 package global;
 
-import static global.variables.RegexUtil.*;
+import static global.utils.RegexUtil.*;
 
 import global.variables.Regexable;
 import org.junit.jupiter.api.*;

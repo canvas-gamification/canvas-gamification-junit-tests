@@ -1,5 +1,7 @@
 package global.variables;
 
+import global.utils.RandomUtil;
+
 public class RandomInteger implements Regexable, RandomVariable<Integer> {
     private int lower, upper;
 
