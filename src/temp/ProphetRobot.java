@@ -2,13 +2,11 @@ package temp;
 
 import java.util.Random;
 
-import org.apache.commons.math3.stat.inference.ChiSquareTest;
-
 public class ProphetRobot {
     public static void main(String[] args) {
         Random gen = new Random();
-        int fingersHeldUp = gen.nextInt(2);
-        int prediction = gen.nextInt(11);
+        int prediction = gen.nextInt(100);
+        double fingersHeldUp = 6.5 + gen.nextDouble() * 4;
         boolean same = fingersHeldUp == prediction;
         if (same) {
             System.out.println("The prediction by Simon was: " + prediction + ", and the number of fingers you held up was: " + fingersHeldUp + ". They are the same!");

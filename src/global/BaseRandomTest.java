@@ -1,6 +1,9 @@
 package global;
 
-import global.variables.*;
+import global.variables.RandomDouble;
+import global.variables.RandomInteger;
+import global.variables.RandomVariable;
+import global.variables.Regexable;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
 
@@ -9,12 +12,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 
+import static global.utils.RandomUtil.followsUniformDistribution;
 import static global.utils.RegexUtil.*;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public abstract class BaseRandomTest extends BaseTest {
     static Map<Integer, ArrayList<?>> randomMap = new HashMap<>();
+    static boolean alreadyFailed = false;
 
     public void resetRandomMap() {
         randomMap = null;
@@ -22,54 +27,31 @@ public abstract class BaseRandomTest extends BaseTest {
     }
 
     public void initializeRandomNumberMaps() {
+        resetRandomMap();
         // TODO: need to adapt to multi line output
         Regexable[] regexSentence = getRegexSentence();
         for (int i = 0; i < regexSentence.length; i++) {
             Regexable regexClause = regexSentence[i];
             if (!(regexClause instanceof RandomVariable)) continue;
-            int regexGroup = i + 1;
+            RandomVariable<?> randomVariable = (RandomVariable<?>) regexClause;
 
-            if (regexClause instanceof RandomInteger) randomMap.put(regexGroup, new ArrayList<Integer>());
-            if (regexClause instanceof RandomDouble) randomMap.put(regexGroup, new ArrayList<Double>());
-            if (regexClause instanceof RandomChar) randomMap.put(regexGroup, new ArrayList<Character>());
+            int regexGroup = i + 1;
+            randomMap.put(regexGroup, randomVariable.createArrayList());
         }
     }
 
     public void addValueToMapList(RandomVariable<?> randomVariable, int mapKey, Object newListValue) {
-        if (randomVariable instanceof RandomInteger) {
-            int castedValue = (int) newListValue;
-            addValueToMapListHelper(mapKey, castedValue);
-        }
-        if (randomVariable instanceof RandomDouble) {
-            double castedValue = (double) newListValue;
-            addValueToMapListHelper(mapKey, castedValue);
-        }
-        if (randomVariable instanceof RandomChar) {
-            char castedValue = (char) newListValue;
-            addValueToMapListHelper(mapKey, castedValue);
-        }
-    }
-
-    public void addValueToMapListHelper(int mapKey, int newListValue) {
-        ((ArrayList<Integer>) randomMap.get(mapKey)).add(newListValue);
-    }
-
-    public void addValueToMapListHelper(int mapKey, double newListValue) {
-        ((ArrayList<Double>) randomMap.get(mapKey)).add(newListValue);
-    }
-
-    public void addValueToMapListHelper(int mapKey, char newListValue) {
-        ((ArrayList<Character>) randomMap.get(mapKey)).add(newListValue);
+        randomVariable.addValueToMapListHelper((HashMap<Integer, ?>) randomMap, mapKey, newListValue);
     }
 
     // TODO: choose number
     @RepeatedTest(500)
     public void testRandomNumbers(RepetitionInfo repetitionInfo) {
         if (repetitionInfo.getCurrentRepetition() == 1) {
-            // Initialization and setup before the 1st iteration
-            resetRandomMap();
             initializeRandomNumberMaps();
         }
+
+        if (alreadyFailed) fail();  // TODO: No message (?)
 
         String output = getOutput();
         // TODO: not always println though (in general how do we handle multi line outputs?) - arrays for each line in regex sentence?
@@ -79,23 +61,45 @@ public abstract class BaseRandomTest extends BaseTest {
                 Regexable regexClause = getRegexSentence()[i];
                 if (!(regexClause instanceof RandomVariable)) continue;
                 RandomVariable<?> randomVariable = (RandomVariable<?>) regexClause;
+
                 int matchGroupNum = i + 1;
                 String groupValue = matcher.group(matchGroupNum);
                 addValueToMapList(randomVariable, matchGroupNum, randomVariable.convertFromRegexGroup(groupValue));
             }
         } else {
+            alreadyFailed = true;
             fail("Incorrect format.");
         }
 
         if (repetitionInfo.getCurrentRepetition() == repetitionInfo.getTotalRepetitions()) {
-            int a = 2;
-//            // TODO: inefficient as it runs through all sets for each call on the last repetition - this can be better
-//            for (Set<Integer> randomIntegerSet : randomIntegerSets) {
-//                assertNotEquals(1, randomIntegerSet.size(), "You do not seem to be properly generating random values.");
-//            }
-//            for (Set<Double> randomDoubleSet : randomDoubleSets) {
-//                assertNotEquals(1, randomDoubleSet.size(), "You do not seem to be properly generating random values.");
-//            }
+            for (int i = 0; i < getRegexSentence().length; i++) {
+                Regexable regexClause = getRegexSentence()[i];
+                if (!(regexClause instanceof RandomVariable)) continue;
+                int mapKey = i + 1;
+
+                boolean isUniformlyRandom = true;
+                if (regexClause instanceof RandomInteger) {
+                    ArrayList<Integer> values = (ArrayList<Integer>) randomMap.get(mapKey);
+                    RandomInteger randomInteger = (RandomInteger) regexClause;
+                    isUniformlyRandom = followsUniformDistribution(values, randomInteger.getLower(), randomInteger.getUpper());
+                }
+
+                if (regexClause instanceof RandomDouble) {
+                    ArrayList<Double> values = (ArrayList<Double>) randomMap.get(mapKey);
+                    RandomDouble randomDouble = (RandomDouble) regexClause;
+                    isUniformlyRandom = followsUniformDistribution(values, randomDouble.getLower(), randomDouble.getUpper());
+                }
+
+//                if(regexClause instanceof RandomChar) {
+//                    // TODO: handle this the smart way
+//                    ArrayList<Character> values = (ArrayList<Character>) randomMap.get(mapKey);
+//                    RandomChar randomChar = (RandomChar) regexClause;
+//                    isUniformlyRandom &= followsUniformDistribution(values, randomChar.getLower(), randomChar.getUpper());
+//                }
+
+                // TODO: more info about which value, the way it's bad (out of bounds, within bounds, obviously hardcoded, etc) (?)
+                assertTrue(isUniformlyRandom, "You do not seem to be properly generating random values.");
+            }
         }
     }
 }
