@@ -5,7 +5,7 @@ import global.utils.RandomUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RandomInteger implements Regexable, RandomVariable<Integer> {
+public class RandomInteger implements Clause, RandomVariable<Integer> {
     private int lower, upper;
 
     public RandomInteger(int lower, int upper) {

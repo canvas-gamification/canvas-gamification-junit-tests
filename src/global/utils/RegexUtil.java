@@ -1,6 +1,6 @@
 package global.utils;
 
-import global.variables.Regexable;
+import global.variables.Clause;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,9 +14,9 @@ public class RegexUtil {
         return Pattern.compile(patternString).matcher(outputString);
     }
 
-    public static String combineRegex(Regexable[] regexVariables) {
+    public static String combineRegex(Clause[] regexVariables) {
         StringBuilder combinedRegex = new StringBuilder();
-        for (Regexable item : regexVariables) {
+        for (Clause item : regexVariables) {
             combinedRegex.append(item.getRegex());
         }
         return combinedRegex.toString();

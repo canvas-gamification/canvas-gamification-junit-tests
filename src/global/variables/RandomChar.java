@@ -3,7 +3,7 @@ package global.variables;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RandomChar implements Regexable, RandomVariable<Character> {
+public class RandomChar implements Clause, RandomVariable<Character> {
     public int lower, upper;
 
     public RandomChar(char lower, char upper) {

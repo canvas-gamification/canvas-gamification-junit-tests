@@ -5,7 +5,7 @@ import global.utils.RandomUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RandomDouble implements Regexable, RandomVariable<Double> {
+public class RandomDouble implements Clause, RandomVariable<Double> {
     private double lower, upper;
     private int precision = 16;  // max double precision
 
