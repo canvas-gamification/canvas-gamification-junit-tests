@@ -1,18 +1,18 @@
 package global.variables.wrappers;
 
-import global.variables.Regexable;
+import global.variables.Clause;
 
-public class Optional implements Regexable {
-    Regexable regexable;
+public class Optional implements Clause {
+    Clause clause;
     int lower, upper;
     boolean zeroOrOne = true;
 
-    public Optional(Regexable regexable) {
-        this.regexable = regexable;
+    public Optional(Clause clause) {
+        this.clause = clause;
     }
 
-    public Optional(Regexable regexable, int lower, int upper) {
-        this.regexable = regexable;
+    public Optional(Clause clause, int lower, int upper) {
+        this.clause = clause;
         this.zeroOrOne = false;
         this.lower = lower;
         this.upper = upper;
@@ -22,8 +22,8 @@ public class Optional implements Regexable {
         return zeroOrOne;
     }
 
-    public Regexable getVariableNode() {
-        return regexable;
+    public Clause getVariableNode() {
+        return clause;
     }
 
     public int getUpper() {

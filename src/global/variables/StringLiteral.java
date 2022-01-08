@@ -1,6 +1,6 @@
 package global.variables;
 
-public class StringLiteral implements Regexable {
+public class StringLiteral implements Clause {
     String text;
 
     public StringLiteral(String text) {

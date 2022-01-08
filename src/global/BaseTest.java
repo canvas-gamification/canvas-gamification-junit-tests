@@ -2,7 +2,7 @@ package global;
 
 import static global.utils.RegexUtil.*;
 
-import global.variables.Regexable;
+import global.variables.Clause;
 import org.junit.jupiter.api.*;
 
 import java.io.ByteArrayInputStream;
@@ -19,18 +19,18 @@ public abstract class BaseTest {
     private final InputStream systemIn = System.in;
     private final PrintStream systemOut = System.out;
     private String currentOutput = null;
-    private Regexable[] regexSentence;
+    private Clause[] regexSentence;
 
     private ByteArrayOutputStream testOut;
 
     // Setters and Getters
-    public abstract Regexable[] getExpectedOutput();
+    public abstract Clause[] getExpectedOutput();
 
-    public void setRegexSentence(Regexable[] regexSentence) {
+    public void setRegexSentence(Clause[] regexSentence) {
         this.regexSentence = regexSentence;
     }
 
-    public Regexable[] getRegexSentence() {
+    public Clause[] getRegexSentence() {
         return this.regexSentence;
     }
 

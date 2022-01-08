@@ -1,17 +1,17 @@
 package global.variables.wrappers;
 
-import global.variables.Regexable;
+import global.variables.Clause;
 
 // Idea: AnyOf([RandomChar(), StringLiteral()], [StringLiteral(), RandomInt()])
-public class AnyOf implements Regexable {
+public class AnyOf implements Clause {
     // Any one of the options
-    Regexable[][] outputOptions;
-    public AnyOf(Regexable[]... outputOptions) {
+    Clause[][] outputOptions;
+    public AnyOf(Clause[]... outputOptions) {
         this.outputOptions = outputOptions;
     }
 
     public String getRegex() {
         // TODO: finish
         return "|";
-    };
+    }
 }

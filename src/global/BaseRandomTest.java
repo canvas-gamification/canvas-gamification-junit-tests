@@ -3,7 +3,7 @@ package global;
 import global.variables.RandomDouble;
 import global.variables.RandomInteger;
 import global.variables.RandomVariable;
-import global.variables.Regexable;
+import global.variables.Clause;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
 
@@ -29,9 +29,9 @@ public abstract class BaseRandomTest extends BaseTest {
     public void initializeRandomNumberMaps() {
         resetRandomMap();
         // TODO: need to adapt to multi line output
-        Regexable[] regexSentence = getRegexSentence();
+        Clause[] regexSentence = getRegexSentence();
         for (int i = 0; i < regexSentence.length; i++) {
-            Regexable regexClause = regexSentence[i];
+            Clause regexClause = regexSentence[i];
             if (!(regexClause instanceof RandomVariable)) continue;
             RandomVariable<?> randomVariable = (RandomVariable<?>) regexClause;
 
@@ -58,7 +58,7 @@ public abstract class BaseRandomTest extends BaseTest {
         Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
         if (matcher.find()) {
             for (int i = 0; i < getRegexSentence().length; i++) {
-                Regexable regexClause = getRegexSentence()[i];
+                Clause regexClause = getRegexSentence()[i];
                 if (!(regexClause instanceof RandomVariable)) continue;
                 RandomVariable<?> randomVariable = (RandomVariable<?>) regexClause;
 
@@ -73,7 +73,7 @@ public abstract class BaseRandomTest extends BaseTest {
 
         if (repetitionInfo.getCurrentRepetition() == repetitionInfo.getTotalRepetitions()) {
             for (int i = 0; i < getRegexSentence().length; i++) {
-                Regexable regexClause = getRegexSentence()[i];
+                Clause regexClause = getRegexSentence()[i];
                 if (!(regexClause instanceof RandomVariable)) continue;
                 int mapKey = i + 1;
 
