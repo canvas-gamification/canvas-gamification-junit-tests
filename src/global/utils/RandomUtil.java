@@ -77,20 +77,12 @@ public class RandomUtil {
 
     public static int assignedBinNumHelper(double range, double value, double lower, double upper, int numBins) {
         double gap = range / numBins;
-        double binLower = lower;
-        int count = 0;
 
         assertWithinRange(value, lower, upper, "One or more of your randomly generated numbers fall outside of the required range.");
 
-        while (binLower < upper) {
-            double binUpper = binLower + gap;
-            if (binLower <= value && value < binUpper)
-                return count;
-            count++;
-            binLower = binUpper;
-        }
+        int binNumber = (int) ((value - lower) / gap);
 
-        return NO_BIN;
+        return (binNumber <= numBins) ? binNumber : NO_BIN;
     }
 
     public static int getNumBins(int lower, int upper) {
