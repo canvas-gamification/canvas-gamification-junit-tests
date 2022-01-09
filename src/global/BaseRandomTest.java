@@ -28,7 +28,6 @@ public abstract class BaseRandomTest extends BaseTest {
 
     public void initializeRandomNumberMaps() {
         resetRandomMap();
-        // TODO: need to adapt to multi line output
         Clause[] regexSentence = getRegexSentence();
         for (int i = 0; i < regexSentence.length; i++) {
             Clause regexClause = regexSentence[i];
@@ -54,7 +53,6 @@ public abstract class BaseRandomTest extends BaseTest {
         if (alreadyFailed) fail();  // TODO: No message (?)
 
         String output = getOutput();
-        // TODO: not always println though (in general how do we handle multi line outputs?) - arrays for each line in regex sentence?
         Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
         if (matcher.find()) {
             for (int i = 0; i < getRegexSentence().length; i++) {
