@@ -13,5 +13,7 @@ public class ProphetRobot {
         } else {
             System.out.println("The prediction by Simon was: " + prediction + ", and the number of fingers you held up was: " + fingersHeldUp);
         }
+
+        System.out.println(fingersHeldUp);
     }
 }
