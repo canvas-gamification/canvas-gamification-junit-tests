@@ -8,7 +8,7 @@ public abstract class Clause implements Regexable {
     }
 
     public Clause() {
-        this.name = "";
+        this.name = null;
     }
 
     public String getName() {

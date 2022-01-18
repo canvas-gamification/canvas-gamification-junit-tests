@@ -40,19 +40,19 @@ public abstract class BaseTest {
             if (matcher.find()) return matcher.group(index);
             else fail("Your code's output did not follow the correct structure/syntax");
         } catch (IndexOutOfBoundsException e) {
-            fail("The specified group (" + (index) + ") doesn't exist");
+            fail("The specified group doesn't exist");
         }
         return "";  // TODO: logically how does this behave?
     }
 
     public String getItemByName(String name) {
         Clause[] regSen = getRegexSentence();
-        int index = -1;
         for (int i = 0; i < regSen.length; i++) {
             if (regSen[i].getName().equals(name))
-                index = i + 1;
+                return getItemAtIndex(i + 1);
         }
-        return getItemAtIndex(index);
+        fail("The specified group doesn't exist");
+        return ""; // TODO: logically how does this behave?
     }
 
 
