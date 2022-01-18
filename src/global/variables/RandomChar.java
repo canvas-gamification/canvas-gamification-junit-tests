@@ -3,10 +3,17 @@ package global.variables;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RandomChar implements Clause, RandomVariable<Character> {
+public class RandomChar extends Clause implements RandomVariable<Character> {
     public int lower, upper;
 
     public RandomChar(char lower, char upper) {
+        super();
+        this.lower = lower;
+        this.upper = upper;
+    }
+
+    public RandomChar(char lower, char upper, String name) {
+        super(name);
         this.lower = lower;
         this.upper = upper;
     }
@@ -28,7 +35,7 @@ public class RandomChar implements Clause, RandomVariable<Character> {
     }
 
     public Character convertFromRegexGroup(String groupString) {
-        if(groupString.length() > 1) {
+        if (groupString.length() > 1) {
             // TODO: throw appropriate error for this case
             throw new IndexOutOfBoundsException();
         }
@@ -37,7 +44,7 @@ public class RandomChar implements Clause, RandomVariable<Character> {
 
     @Override
     public String getRegex() {
-        String regex = "[" + (char)getLower() + "-" + (char)getUpper() + "]";
+        String regex = "[" + (char) getLower() + "-" + (char) getUpper() + "]";
         return "(" + regex + ")";
     }
 }

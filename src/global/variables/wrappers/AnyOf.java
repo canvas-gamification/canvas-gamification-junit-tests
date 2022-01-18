@@ -3,7 +3,7 @@ package global.variables.wrappers;
 import global.variables.Clause;
 
 // Idea: AnyOf([RandomChar(), StringLiteral()], [StringLiteral(), RandomInt()])
-public class AnyOf implements Clause {
+public class AnyOf extends Clause {
     // Any one of the options
     Clause[][] outputOptions;
     public AnyOf(Clause[]... outputOptions) {
