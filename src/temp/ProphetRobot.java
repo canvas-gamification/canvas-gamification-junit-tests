@@ -16,7 +16,6 @@ public class ProphetRobot {
 //            System.out.println("The prediction by Simon was: " + prediction + ", num: " + num + " and the number of fingers you held up was: " + fingersHeldUp);
 //        }
 
-        System.out.println(prediction);
-        // TODO: test still passes if this part isn't in the format
+        System.out.println(fingersHeldUp);
     }
 }

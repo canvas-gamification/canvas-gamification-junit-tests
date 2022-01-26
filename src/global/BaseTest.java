@@ -1,6 +1,7 @@
 package global;
 
 import static global.utils.RegexUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import global.variables.Clause;
 import org.junit.jupiter.api.*;
@@ -10,10 +11,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.regex.Matcher;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public abstract class BaseTest {
     private final InputStream systemIn = System.in;
@@ -82,6 +79,8 @@ public abstract class BaseTest {
         String output = getOutput();
         Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
         assertTrue(matcher.find(), "Your code's output did not follow the correct structure/syntax.");
+        //Ensures that the output matches the pattern exactly
+        assertEquals(output.substring(matcher.start(), matcher.end()), output, "Your code's output did not follow the correct structure/syntax.");
         // This ensures that their output only contains 1 instance of the matched regex string
         assertFalse(matcher.find());
     }
