@@ -4,8 +4,10 @@ import global.utils.RandomUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class RandomDouble implements Clause, RandomVariable<Double> {
+    static Map<Integer, ArrayList<Double>> valueStore = new HashMap<>();
     private double lower, upper;
     private int precision = 16;  // max double precision
 
@@ -31,12 +33,22 @@ public class RandomDouble implements Clause, RandomVariable<Double> {
         this.precision = precision;
     }
 
-    public void addValueToMapListHelper(HashMap<Integer, ?> map, int mapKey, Object newListValue) {
-        ((ArrayList<Double>) map.get(mapKey)).add((double) newListValue);
+    public int getNumBins(double lower, double upper) {
+        return 50;  // TODO: do properly
+    };
+
+    public void trackValue(int groupNum, String groupValue) {
+        if (valueStore.get(groupNum) == null)
+            valueStore.put(groupNum, new ArrayList<>());
+
+        (valueStore.get(groupNum)).add(convertFromRegexGroup(groupValue));
     }
 
-    public ArrayList<Double> createArrayList() {
-        return new ArrayList<>();
+    public boolean validateRandom(int groupNum) {
+        if (valueStore.get(groupNum) == null)
+            return false;
+        ArrayList<Double> values = valueStore.get(groupNum);
+        return followsUniformDistribution(values, getLower(), getUpper());
     }
 
     public double getLower() {

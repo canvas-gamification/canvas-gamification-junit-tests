@@ -4,8 +4,10 @@ import global.utils.RandomUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class RandomInteger implements Clause, RandomVariable<Integer> {
+    static Map<Integer, ArrayList<Integer>> valueStore = new HashMap<>();
     private int lower, upper;
 
     public RandomInteger(int lower, int upper) {
@@ -13,12 +15,24 @@ public class RandomInteger implements Clause, RandomVariable<Integer> {
         this.upper = upper;
     }
 
-    public void addValueToMapListHelper(HashMap<Integer, ?> map, int mapKey, Object newListValue) {
-        ((ArrayList<Integer>) map.get(mapKey)).add((int) newListValue);
+    public int getNumBins(double lower, double upper) {
+        int range = (int) (upper - lower);
+        return Math.min(range, 50);
+    };
+
+    public void trackValue(int groupNum, String groupValue) {
+        // TODO: create array list if not made and attach to correct key
+        if (valueStore.get(groupNum) == null)
+            valueStore.put(groupNum, new ArrayList<>());
+
+        (valueStore.get(groupNum)).add(convertFromRegexGroup(groupValue));
     }
 
-    public ArrayList<Integer> createArrayList() {
-        return new ArrayList<>();
+    public boolean validateRandom(int groupNum) {
+        if (valueStore.get(groupNum) == null)
+            return false;
+        ArrayList<Integer> values = valueStore.get(groupNum);
+        return followsUniformDistribution(values, getLower(), getUpper());
     }
 
     public int getUpper() {
