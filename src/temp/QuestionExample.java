@@ -20,24 +20,13 @@ public class QuestionExample extends BaseRandomTest {
                 new RandomDouble(12, 62),
                 new StringLiteral(" and the number of fingers you held up was: "),
                 new RandomChar('A', 'F'),
+                new Optional(new StringLiteral(". They are the same!")),
                 new NewLine(),
-                new RandomChar('A', 'F'),
-                new Optional(new StringLiteral(". They are the same!"))
+                new RandomChar('A', 'F')
         };
     }
 
     public void runMain() {
         ProphetRobot.main(new String[0]);
-    }
-
-    @Test
-    public void sampleTest() {
-        String output = getOutput();
-        System.err.println(output);
-        System.err.println(processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
-        Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
-        assertTrue(matcher.find(), "Your code's output did not follow the correct structure/syntax.");
-        // This ensures that their output only contains 1 instance of the matched regex string
-        assertFalse(matcher.find());
     }
 }

@@ -21,11 +21,10 @@ public class RandomChar implements Clause, RandomVariable<Character> {
     public int getNumBins(double lower, double upper) {
         int range = (int) (upper - lower);
         return Math.min(range, 50);
-    };
+    }
 
     public void trackValue(int groupNum, String groupValue) {
-        if (valueStore.get(groupNum) == null)
-            valueStore.put(groupNum, new ArrayList<>());
+        valueStore.computeIfAbsent(groupNum, k -> new ArrayList<>());
 
         (valueStore.get(groupNum)).add(convertFromRegexGroup(groupValue));
     }
@@ -57,8 +56,9 @@ public class RandomChar implements Clause, RandomVariable<Character> {
     }
 
     public Character convertFromRegexGroup(String groupString) {
-        if(groupString.length() > 1) {
+        if (groupString.length() > 1) {
             // TODO: throw appropriate error for this case
+            System.err.println("One of your inputs is not a valid character");
             throw new IndexOutOfBoundsException();
         }
         return groupString.charAt(0);
@@ -66,7 +66,7 @@ public class RandomChar implements Clause, RandomVariable<Character> {
 
     @Override
     public String getRegex() {
-        String regex = "[" + (char)getLower() + "-" + (char)getUpper() + "]";
+        String regex = "[" + (char) getLower() + "-" + (char) getUpper() + "]";
         return "(" + regex + ")";
     }
 }

@@ -38,8 +38,7 @@ public class RandomDouble implements Clause, RandomVariable<Double> {
     };
 
     public void trackValue(int groupNum, String groupValue) {
-        if (valueStore.get(groupNum) == null)
-            valueStore.put(groupNum, new ArrayList<>());
+        valueStore.computeIfAbsent(groupNum, k -> new ArrayList<>());
 
         (valueStore.get(groupNum)).add(convertFromRegexGroup(groupValue));
     }

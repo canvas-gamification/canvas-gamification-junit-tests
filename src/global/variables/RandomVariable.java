@@ -4,8 +4,6 @@ import org.apache.commons.math3.stat.inference.ChiSquareTest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -52,7 +50,6 @@ public interface RandomVariable<T> {
     }
 
     default void assertWithinRange(double value, double lower, double upper, String message) {
-        // TODO: is message too specific / giving away too much?
         assertTrue(lower <= value && value < upper, message);
     }
 }

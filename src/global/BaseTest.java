@@ -43,13 +43,11 @@ public abstract class BaseTest {
     }
 
     // Utilities
-    // TODO: if possible, make this getTestedClass() and then use reflections to call .main() inside executeMain()
     public abstract void runMain();
 
     public void executeMain() {
         currentOutput = null;
         runMain();
-        // TODO: reflections and such
     }
 
     public void provideInput(String data) {

@@ -18,12 +18,10 @@ public class RandomInteger implements Clause, RandomVariable<Integer> {
     public int getNumBins(double lower, double upper) {
         int range = (int) (upper - lower);
         return Math.min(range, 50);
-    };
+    }
 
     public void trackValue(int groupNum, String groupValue) {
-        // TODO: create array list if not made and attach to correct key
-        if (valueStore.get(groupNum) == null)
-            valueStore.put(groupNum, new ArrayList<>());
+        valueStore.computeIfAbsent(groupNum, k -> new ArrayList<>());
 
         (valueStore.get(groupNum)).add(convertFromRegexGroup(groupValue));
     }
