@@ -34,6 +34,7 @@ public abstract class BaseTest {
         return this.regexSentence;
     }
 
+
     public String getItemAtIndex(int index) {
         Matcher matcher = getMatches(getOutput(), processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
         try {
