@@ -1,9 +1,15 @@
 package global.variables;
 
-public class StringLiteral implements Clause {
+public class StringLiteral extends Clause {
     String text;
 
     public StringLiteral(String text) {
+        super();
+        this.text = text;
+    }
+
+    public StringLiteral(String text, String name) {
+        super(name);
         this.text = text;
     }
 

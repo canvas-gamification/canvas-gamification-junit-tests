@@ -5,10 +5,16 @@ import global.utils.RandomUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RandomInteger implements Clause, RandomVariable<Integer> {
+public class RandomInteger extends Clause implements RandomVariable<Integer> {
     private int lower, upper;
 
     public RandomInteger(int lower, int upper) {
+        super();
+        this.lower = lower;
+        this.upper = upper;
+    }
+    public RandomInteger(int lower, int upper, String name) {
+        super(name);
         this.lower = lower;
         this.upper = upper;
     }
