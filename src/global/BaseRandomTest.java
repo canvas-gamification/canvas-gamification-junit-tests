@@ -4,8 +4,7 @@ import global.variables.RandomDouble;
 import global.variables.RandomInteger;
 import global.variables.RandomVariable;
 import global.variables.Clause;
-import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.RepetitionInfo;
+import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +16,7 @@ import static global.utils.RegexUtil.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public abstract class BaseRandomTest extends BaseTest {
     static Map<Integer, ArrayList<?>> randomMap = new HashMap<>();
     static boolean alreadyFailed = false;
@@ -45,6 +45,7 @@ public abstract class BaseRandomTest extends BaseTest {
 
     // TODO: choose number
     @RepeatedTest(500)
+    @Order(1)
     public void testRandomNumbers(RepetitionInfo repetitionInfo) {
         if (repetitionInfo.getCurrentRepetition() == 1) {
             initializeRandomNumberMaps();
