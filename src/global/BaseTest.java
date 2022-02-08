@@ -24,7 +24,7 @@ public abstract class BaseTest {
     private ByteArrayOutputStream testOut;
 
     // Setters and Getters
-    public abstract Clause[] getExpectedOutput();
+    public abstract Clause[] testSentence();
 
     public void setRegexSentence(Clause[] regexSentence) {
         this.regexSentence = regexSentence;
@@ -48,7 +48,7 @@ public abstract class BaseTest {
     public String getItemByName(String name) {
         Clause[] regSen = getRegexSentence();
         for (int i = 0; i < regSen.length; i++) {
-            if (regSen[i].getName().equals(name))
+            if (regSen[i].getName() != null && regSen[i].getName().equals(name))
                 return getItemAtIndex(i + 1);
         }
         fail("The specified group doesn't exist");
@@ -82,7 +82,7 @@ public abstract class BaseTest {
     // Default Tests and Setup
     @BeforeEach
     public void setUp() {
-        setRegexSentence(getExpectedOutput());
+        setRegexSentence(testSentence());
         testOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(testOut));
         executeMain();

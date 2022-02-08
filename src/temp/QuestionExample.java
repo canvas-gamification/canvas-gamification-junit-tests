@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class QuestionExample extends BaseRandomTest {
-    public Clause[] getExpectedOutput() {
+    public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The prediction by Simon was: "),
                 new RandomInteger(0, 100),
