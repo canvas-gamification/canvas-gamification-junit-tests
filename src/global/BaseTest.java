@@ -9,6 +9,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -27,6 +29,16 @@ public abstract class BaseTest {
     public abstract Clause[] testSentence();
 
     public void setRegexSentence(Clause[] regexSentence) {
+        //By using a set we can ensure that there are no duplicates in the regexSentence
+        Set<String> namesSet = new HashSet<>();
+        for (Clause clause : regexSentence) {
+            if (clause.getName() != null) {
+                if (namesSet.contains(clause.getName())) {
+                    fail("The name " + clause.getName() + " is already in use. make sure all names are unique");
+                }
+                namesSet.add(clause.getName());
+            }
+        }
         this.regexSentence = regexSentence;
     }
 
@@ -40,7 +52,7 @@ public abstract class BaseTest {
             if (matcher.find()) return matcher.group(index);
             else fail("Your code's output did not follow the correct structure/syntax");
         } catch (IndexOutOfBoundsException e) {
-            fail("The specified group doesn't exist");
+            fail("The specified group (" + index + ") doesn't exist");
         }
         return "";  // TODO: logically how does this behave?
     }
@@ -51,7 +63,7 @@ public abstract class BaseTest {
             if (regSen[i].getName() != null && regSen[i].getName().equals(name))
                 return getItemAtIndex(i + 1);
         }
-        fail("The specified group doesn't exist");
+        fail("The specified group (" + name + ") doesn't exist");
         return ""; // TODO: logically how does this behave?
     }
 
