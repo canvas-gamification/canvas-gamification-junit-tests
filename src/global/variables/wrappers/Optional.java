@@ -22,7 +22,7 @@ public class Optional extends Clause {
         return zeroOrOne;
     }
 
-    public Clause getVariableNode() {
+    public Clause getClause() {
         return clause;
     }
 
@@ -37,6 +37,6 @@ public class Optional extends Clause {
     @Override
     public String getRegex() {
         String modifier = isZeroOrOne() ? "?" : "{" + getLower() + "," + getUpper() + "}";
-        return getVariableNode().getRegex() + modifier;
+        return getClause().getRegex() + modifier;
     }
 }
