@@ -32,7 +32,7 @@ public class RandomChar extends Clause implements RandomVariable<Character> {
             return false;
         ArrayList<Character> values = valueStore.get(matchGroupNum);
         ArrayList<Integer> intValues = new ArrayList<>();
-        for (char c: values) {
+        for (char c : values) {
             intValues.add((int) c);
         }
         return followsUniformDistribution(intValues, getLower(), getUpper());

@@ -1,7 +1,5 @@
 package global.variables;
 
-import global.utils.RandomUtil;
-
 public interface RandomVariable<T> {
     void trackValue(int groupNum, String newListValue);
 
