@@ -14,6 +14,11 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.regex.Matcher;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public abstract class BaseTest {
     private final InputStream systemIn = System.in;
     private final PrintStream systemOut = System.out;
@@ -90,6 +95,7 @@ public abstract class BaseTest {
     }
 
     @Test
+    @Order(1)
     public void checkOutputFollowsPattern() {
         String output = getOutput();
         Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));

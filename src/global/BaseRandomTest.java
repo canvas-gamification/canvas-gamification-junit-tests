@@ -2,8 +2,7 @@ package global;
 
 import global.variables.Clause;
 import global.variables.RandomClause;
-import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.RepetitionInfo;
+import org.junit.jupiter.api.*;
 
 import java.util.regex.Matcher;
 
@@ -11,11 +10,13 @@ import static global.tools.CustomAssertions._assertTrue;
 import static global.utils.RegexUtil.*;
 import static org.junit.jupiter.api.Assertions.fail;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public abstract class BaseRandomTest extends BaseTest {
     static boolean alreadyFailed = false;
 
     // TODO: choose number
     @RepeatedTest(500)
+    @Order(1)
     public void testRandomNumbers(RepetitionInfo repetitionInfo) {
         if (alreadyFailed) fail();  // TODO: No message (?)
 
