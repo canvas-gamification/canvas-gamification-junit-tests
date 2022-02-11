@@ -2,26 +2,14 @@ package temp;
 
 import global.BaseRandomTest;
 import global.variables.*;
-import global.variables.wrappers.Optional;
-import org.junit.jupiter.api.Test;
-
-import java.util.regex.Matcher;
-
-import static global.utils.RegexUtil.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class QuestionExample extends BaseRandomTest {
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The prediction by Simon was: "),
-                new RandomInteger(0, 100),
-                new StringLiteral(", num: "),
-                new RandomDouble(12, 62),
-                new StringLiteral(" and the number of fingers you held up was: "),
-                new RandomChar('A', 'F'),
-                new Optional(new StringLiteral(". They are the same!")),
-                new NewLine(),
-                new RandomChar('A', 'F')
+                new RandomInteger(0, 10),
+                new StringLiteral(", and the number of fingers you held up was: "),
+                new RandomInteger(0, 10)
         };
     }
 
