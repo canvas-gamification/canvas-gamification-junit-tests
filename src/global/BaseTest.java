@@ -1,6 +1,7 @@
 package global;
 
 import static global.tools.CustomAssertions._assertTrue;
+import static global.tools.CustomAssertions._fail;
 import static global.utils.RegexUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,7 +36,8 @@ public abstract class BaseTest {
         for (Clause clause : regexSentence) {
             if (clause.getName() != null) {
                 if (namesSet.contains(clause.getName())) {
-                    fail("The name " + clause.getName() + " is already in use. make sure all names are unique");
+                    _fail("There is an issue with the test definition",
+                            "The name " + clause.getName() + " is already in use. make sure all names are unique");
                 }
                 namesSet.add(clause.getName());
             }
@@ -119,7 +121,7 @@ public abstract class BaseTest {
         assertTrue(matcher.find(), "Your code's output did not follow the correct structure/syntax.");
 
         int matchGroupNum = 1;  // match group numbers are 1-indexed
-        for(Clause clause: getRegexSentence()) {
+        for (Clause clause : getRegexSentence()) {
             // TODO: devMessage could be improved
             _assertTrue(clause.validate(matcher.group(matchGroupNum)), clause.getInvalidMessage(), "Invalid Clause at index " + matchGroupNum);
             matchGroupNum++;
