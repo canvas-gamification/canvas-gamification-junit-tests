@@ -96,10 +96,14 @@ public abstract class BaseTest {
 
     @Test
     public void allClausesValid() {
+        String output = getOutput();
+        Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
+        assertTrue(matcher.find(), "Your code's output did not follow the correct structure/syntax.");
+
         int matchGroupNum = 1;  // match group numbers are 1-indexed
         for(Clause clause: getRegexSentence()) {
             // TODO: devMessage could be improved
-            _assertTrue(clause.validate(matchGroupNum), clause.getInvalidMessage(), "Invalid Clause at index " + matchGroupNum);
+            _assertTrue(clause.validate(matcher.group(matchGroupNum)), clause.getInvalidMessage(), "Invalid Clause at index " + matchGroupNum);
             matchGroupNum++;
         }
     }

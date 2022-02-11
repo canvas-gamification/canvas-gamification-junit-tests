@@ -3,7 +3,6 @@ package global.variables;
 import java.util.Objects;
 
 public abstract class Clause implements Regexable {
-    String INVALID_MESSAGE;
     String name;
 
     public Clause(String name) {
@@ -18,12 +17,11 @@ public abstract class Clause implements Regexable {
         return this.name;
     }
 
-    public boolean validate(int matchGroupNum) {
+    public boolean validate(String matchGroupString) {
         return true;
     }
 
     public String getInvalidMessage() {
-        // TODO: return "Invalid ClauseClassName" if INVALID_MESSAGE == null
-        return Objects.requireNonNullElse(this.INVALID_MESSAGE, "Invalid Clause");
+        return "Invalid Clause";
     }
 }
