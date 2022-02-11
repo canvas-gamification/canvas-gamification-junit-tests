@@ -7,8 +7,8 @@ import org.junit.jupiter.api.RepetitionInfo;
 
 import java.util.regex.Matcher;
 
+import static global.tools.CustomAssertions._assertTrue;
 import static global.utils.RegexUtil.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public abstract class BaseRandomTest extends BaseTest {
@@ -44,7 +44,8 @@ public abstract class BaseRandomTest extends BaseTest {
 
                 int mapKey = i + 1;
                 // TODO: more info about which value, the way it's bad (out of bounds, within bounds, obviously hardcoded, etc) (?)
-                assertTrue(randomVariable.validateRandom(mapKey), "You do not seem to be properly generating random values.");
+                _assertTrue(randomVariable.validateRandom(mapKey), "You do not seem to be properly generating random values.",
+                        "Invalid Random Values at "+mapKey);
             }
         }
     }

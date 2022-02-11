@@ -5,9 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CustomAssertions {
     // Underscore indicates a custom assertion is being used
     public static void _assertTrue(boolean condition, String userMessage, String devMessage) {
+        if(!condition) {
+            Logger.logMessage(devMessage);
+        }
         assertTrue(condition, userMessage);
-        // Or some way to make the dev see this message without it being returned as an assertion failure message
-        System.out.println(devMessage);
     }
 
     public static void assertWithinRange(double value, double lower, double upper, String message) {

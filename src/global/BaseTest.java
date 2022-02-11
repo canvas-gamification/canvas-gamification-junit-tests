@@ -4,6 +4,7 @@ import static global.tools.CustomAssertions._assertTrue;
 import static global.utils.RegexUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import global.tools.Logger;
 import global.variables.Clause;
 import org.junit.jupiter.api.*;
 
@@ -75,6 +76,11 @@ public abstract class BaseTest {
     }
 
     // Default Tests and Setup
+    @BeforeAll
+    public static void setUpLogger() {
+        Logger.setCurrentSystemOut();
+    }
+
     @BeforeEach
     public void setUp() {
         setRegexSentence(testSentence());
