@@ -76,13 +76,4 @@ public class Temp {
         int firstInt = ((ArrayList<Integer>) map.get(1)).get(0);
         System.out.println(firstInt);
     }
-
-    public static void testReflections() throws ClassNotFoundException {
-        Class<?> cls = Class.forName("temp.ProphetRobot");
-        // TODO: so we'd need to know the exact location of the file (?)
-        // TODO: is there a way to get the current class file path
-        Method[] m = cls.getDeclaredMethods();
-        for (int i = 0; i < m.length; i++)
-            System.out.println(m[i].toString());
-    }
 }
