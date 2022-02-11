@@ -2,8 +2,7 @@ package global;
 
 import global.variables.Clause;
 import global.variables.RandomClause;
-import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.RepetitionInfo;
+import org.junit.jupiter.api.*;
 
 import java.util.regex.Matcher;
 
