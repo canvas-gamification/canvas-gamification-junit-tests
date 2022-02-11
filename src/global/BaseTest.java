@@ -1,7 +1,10 @@
 package global;
 
+import static global.tools.CustomAssertions._assertTrue;
 import static global.utils.RegexUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
+import global.tools.Logger;
 import global.variables.Clause;
 import org.junit.jupiter.api.*;
 
@@ -20,19 +23,40 @@ public abstract class BaseTest {
     private final InputStream systemIn = System.in;
     private final PrintStream systemOut = System.out;
     private String currentOutput = null;
+    private ByteArrayOutputStream testOut;
     private Clause[] regexSentence;
 
-    private ByteArrayOutputStream testOut;
-
-    // Setters and Getters
+    // Test Developer defined
     public abstract Clause[] testSentence();
 
+    public abstract void runMain();
+
+    // Setters and Getters
     public void setRegexSentence(Clause[] regexSentence) {
         this.regexSentence = regexSentence;
     }
 
     public Clause[] getRegexSentence() {
         return this.regexSentence;
+    }
+
+    // Utilities
+    public void executeMain() {
+        currentOutput = null;
+        runMain();
+    }
+
+    public void provideInput(String data) {
+        ByteArrayInputStream testIn = new ByteArrayInputStream(data.getBytes());
+        System.setIn(testIn);
+    }
+
+    public String getOutput() {
+        if (currentOutput != null) {
+            return currentOutput;
+        }
+        currentOutput = testOut.toString();
+        return currentOutput;
     }
 
     public String getItemAtIndex(int index) {
@@ -56,31 +80,12 @@ public abstract class BaseTest {
         return ""; // TODO: logically how does this behave?
     }
 
-
-    // Utilities
-    // TODO: if possible, make this getTestedClass() and then use reflections to call .main() inside executeMain()
-    public abstract void runMain();
-
-    public void executeMain() {
-        currentOutput = null;
-        runMain();
-        // TODO: reflections and such
-    }
-
-    public void provideInput(String data) {
-        ByteArrayInputStream testIn = new ByteArrayInputStream(data.getBytes());
-        System.setIn(testIn);
-    }
-
-    public String getOutput() {
-        if (currentOutput != null) {
-            return currentOutput;
-        }
-        currentOutput = testOut.toString();
-        return currentOutput;
-    }
-
     // Default Tests and Setup
+    @BeforeAll
+    public static void setUpLogger() {
+        Logger.setCurrentSystemOut();
+    }
+
     @BeforeEach
     public void setUp() {
         setRegexSentence(testSentence());
@@ -95,8 +100,24 @@ public abstract class BaseTest {
         String output = getOutput();
         Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
         assertTrue(matcher.find(), "Your code's output did not follow the correct structure/syntax.");
+        //Ensures that the output matches the pattern exactly
+        assertEquals(output.substring(matcher.start(), matcher.end()), output, "Your code's output did not follow the correct structure/syntax.");
         // This ensures that their output only contains 1 instance of the matched regex string
         assertFalse(matcher.find());
+    }
+
+    @Test
+    public void allClausesValid() {
+        String output = getOutput();
+        Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
+        assertTrue(matcher.find(), "Your code's output did not follow the correct structure/syntax.");
+
+        int matchGroupNum = 1;  // match group numbers are 1-indexed
+        for(Clause clause: getRegexSentence()) {
+            // TODO: devMessage could be improved
+            _assertTrue(clause.validate(matcher.group(matchGroupNum)), clause.getInvalidMessage(), "Invalid Clause at index " + matchGroupNum);
+            matchGroupNum++;
+        }
     }
 
     @AfterEach

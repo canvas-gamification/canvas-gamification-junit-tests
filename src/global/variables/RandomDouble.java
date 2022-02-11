@@ -4,8 +4,13 @@ import global.utils.RandomUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
-public class RandomDouble extends Clause implements RandomVariable<Double> {
+import static global.tools.CustomAssertions.assertWithinRange;
+import static global.utils.RandomUtil.describesUniform;
+
+public class RandomDouble extends Clause implements RandomClause<Double> {
+    static Map<Integer, ArrayList<Double>> valueStore = new HashMap<>();
     private double lower, upper;
     private int precision = 16;  // max double precision
 
@@ -44,21 +49,38 @@ public class RandomDouble extends Clause implements RandomVariable<Double> {
         this.precision = precision;
     }
 
-    public RandomDouble(int lower, int upper, int precision) {
-        this((double) lower, upper, precision);
-        //needs one value to be explicitly casted otherwise it calls the same constructor recursively
+    public void trackValue(int matchGroupNum, String matchGroupValue) {
+        valueStore.computeIfAbsent(matchGroupNum, k -> new ArrayList<>());
+
+        (valueStore.get(matchGroupNum)).add(convertFromRegexGroup(matchGroupValue));
     }
 
-    public RandomDouble(int lower, int upper, int precision, String name) {
-        this((double) lower, upper, precision, name);
+    public boolean validateRandom(int matchGroupNum) {
+        if (valueStore.get(matchGroupNum) == null)
+            return false;
+        ArrayList<Double> values = valueStore.get(matchGroupNum);
+
+        final int numBins = RandomDouble.getNumBins(lower, upper);
+
+        long[] observedCounts = new long[numBins];
+        for (double value : values) {
+            int binNum = RandomDouble.assignedBinIndex(value, lower, upper, numBins);
+            if (binNum == RandomUtil.NO_BIN) return false;
+            observedCounts[binNum]++;
+        }
+
+        return describesUniform(values.size(), observedCounts, RandomUtil.ALPHA_LEVEL);
     }
 
-    public void addValueToMapListHelper(HashMap<Integer, ?> map, int mapKey, Object newListValue) {
-        ((ArrayList<Double>) map.get(mapKey)).add((double) newListValue);
+    private static int getNumBins(double lower, double upper) {
+        return 50;  // TODO: do properly
     }
 
-    public ArrayList<Double> createArrayList() {
-        return new ArrayList<>();
+    private static int assignedBinIndex(double value, double lower, double upper, int numBins) {
+        double gap = (upper - lower) / numBins;
+        assertWithinRange(value, lower, upper, "One or more of your randomly generated numbers fall outside of the required range.");
+        int binNumber = (int) ((value - lower) / gap);
+        return (binNumber <= numBins) ? binNumber : RandomUtil.NO_BIN;
     }
 
     public double getLower() {
@@ -73,9 +95,9 @@ public class RandomDouble extends Clause implements RandomVariable<Double> {
         return precision;
     }
 
-    public Double convertFromRegexGroup(String groupString) {
+    public Double convertFromRegexGroup(String matchGroupString) {
         // TODO: try catch
-        return Double.parseDouble(groupString);
+        return Double.parseDouble(matchGroupString);
     }
 
     @Override

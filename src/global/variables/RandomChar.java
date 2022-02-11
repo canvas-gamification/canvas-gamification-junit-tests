@@ -2,8 +2,12 @@ package global.variables;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
-public class RandomChar extends Clause implements RandomVariable<Character> {
+import static global.utils.RandomUtil.followsUniformDistribution;
+
+public class RandomChar extends Clause implements RandomClause<Character> {
+    static Map<Integer, ArrayList<Character>> valueStore = new HashMap<>();
     public int lower, upper;
 
     public RandomChar(char lower, char upper) {
@@ -18,12 +22,20 @@ public class RandomChar extends Clause implements RandomVariable<Character> {
         this.upper = upper;
     }
 
-    public void addValueToMapListHelper(HashMap<Integer, ?> map, int mapKey, Object newListValue) {
-        ((ArrayList<Character>) map.get(mapKey)).add((char) newListValue);
+    public void trackValue(int matchGroupNum, String matchGroupValue) {
+        valueStore.computeIfAbsent(matchGroupNum, k -> new ArrayList<>());
+        (valueStore.get(matchGroupNum)).add(convertFromRegexGroup(matchGroupValue));
     }
 
-    public ArrayList<Character> createArrayList() {
-        return new ArrayList<>();
+    public boolean validateRandom(int matchGroupNum) {
+        if (valueStore.get(matchGroupNum) == null)
+            return false;
+        ArrayList<Character> values = valueStore.get(matchGroupNum);
+        ArrayList<Integer> intValues = new ArrayList<>();
+        for (char c : values) {
+            intValues.add((int) c);
+        }
+        return followsUniformDistribution(intValues, getLower(), getUpper());
     }
 
     public int getLower() {
@@ -34,12 +46,13 @@ public class RandomChar extends Clause implements RandomVariable<Character> {
         return upper;
     }
 
-    public Character convertFromRegexGroup(String groupString) {
-        if (groupString.length() > 1) {
+    public Character convertFromRegexGroup(String matchGroupString) {
+        if (matchGroupString.length() > 1) {
             // TODO: throw appropriate error for this case
+            System.err.println("One of your inputs is not a valid character");
             throw new IndexOutOfBoundsException();
         }
-        return groupString.charAt(0);
+        return matchGroupString.charAt(0);
     }
 
     @Override
