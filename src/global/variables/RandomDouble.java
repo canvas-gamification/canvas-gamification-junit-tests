@@ -9,7 +9,7 @@ import java.util.Map;
 import static global.tools.CustomAssertions.assertWithinRange;
 import static global.utils.RandomUtil.describesUniform;
 
-public class RandomDouble extends Clause implements RandomVariable<Double> {
+public class RandomDouble extends Clause implements RandomClause<Double> {
     static Map<Integer, ArrayList<Double>> valueStore = new HashMap<>();
     private double lower, upper;
     private int precision = 16;  // max double precision

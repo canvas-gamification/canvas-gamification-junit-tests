@@ -1,7 +1,7 @@
 package global;
 
 import global.variables.Clause;
-import global.variables.RandomVariable;
+import global.variables.RandomClause;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
 
@@ -24,8 +24,8 @@ public abstract class BaseRandomTest extends BaseTest {
         if (matcher.find()) {
             for (int i = 0; i < getRegexSentence().length; i++) {
                 Clause regexClause = getRegexSentence()[i];
-                if (!(regexClause instanceof RandomVariable)) continue;
-                RandomVariable<?> randomVariable = (RandomVariable<?>) regexClause;
+                if (!(regexClause instanceof RandomClause)) continue;
+                RandomClause<?> randomVariable = (RandomClause<?>) regexClause;
 
                 int matchGroupNum = i + 1;
                 String groupValue = matcher.group(matchGroupNum);
@@ -37,18 +37,14 @@ public abstract class BaseRandomTest extends BaseTest {
         }
 
         if (repetitionInfo.getCurrentRepetition() == repetitionInfo.getTotalRepetitions()) {
-            boolean isUniformlyRandom = true;
-
             for (int i = 0; i < getRegexSentence().length; i++) {
                 Clause regexClause = getRegexSentence()[i];
-                if (!(regexClause instanceof RandomVariable)) continue;
-                RandomVariable<?> randomVariable = (RandomVariable<?>) regexClause;
+                if (!(regexClause instanceof RandomClause)) continue;
+                RandomClause<?> randomVariable = (RandomClause<?>) regexClause;
 
                 int mapKey = i + 1;
-                isUniformlyRandom &= randomVariable.validateRandom(mapKey);
-
                 // TODO: more info about which value, the way it's bad (out of bounds, within bounds, obviously hardcoded, etc) (?)
-                assertTrue(isUniformlyRandom, "You do not seem to be properly generating random values.");
+                assertTrue(randomVariable.validateRandom(mapKey), "You do not seem to be properly generating random values.");
             }
         }
     }

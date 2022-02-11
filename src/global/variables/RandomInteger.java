@@ -8,7 +8,7 @@ import java.util.Map;
 
 import static global.utils.RandomUtil.followsUniformDistribution;
 
-public class RandomInteger extends Clause implements RandomVariable<Integer> {
+public class RandomInteger extends Clause implements RandomClause<Integer> {
     static Map<Integer, ArrayList<Integer>> valueStore = new HashMap<>();
     private int lower, upper;
 

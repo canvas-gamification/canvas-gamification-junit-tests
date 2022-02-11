@@ -6,7 +6,7 @@ import java.util.Map;
 
 import static global.utils.RandomUtil.followsUniformDistribution;
 
-public class RandomChar extends Clause implements RandomVariable<Character> {
+public class RandomChar extends Clause implements RandomClause<Character> {
     static Map<Integer, ArrayList<Character>> valueStore = new HashMap<>();
     public int lower, upper;
 

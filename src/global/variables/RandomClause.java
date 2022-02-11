@@ -1,6 +1,6 @@
 package global.variables;
 
-public interface RandomVariable<T> {
+public interface RandomClause<T> {
     void trackValue(int groupNum, String newListValue);
 
     boolean validateRandom(int groupNum);
