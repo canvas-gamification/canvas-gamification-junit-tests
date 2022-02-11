@@ -11,8 +11,7 @@ import static global.utils.RegexUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class QuestionExample extends BaseRandomTest {
-    //    System.out.println("The prediction by Simon was: " + prediction + ", num: " + num + " and the number of fingers you held up was: " + fingersHeldUp);
-    public Clause[] getExpectedOutput() {
+    public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The prediction by Simon was: "),
                 new RandomInteger(0, 100),

@@ -6,28 +6,41 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RandomDouble implements Clause, RandomVariable<Double> {
+public class RandomDouble extends Clause implements RandomVariable<Double> {
     static Map<Integer, ArrayList<Double>> valueStore = new HashMap<>();
     private double lower, upper;
     private int precision = 16;  // max double precision
 
     public RandomDouble(double lower, double upper) {
+        super();
+        this.lower = lower;
+        this.upper = upper;
+    }
+
+    public RandomDouble(double lower, double upper, String name) {
+        super(name);
         this.lower = lower;
         this.upper = upper;
     }
 
     public RandomDouble(int lower, int upper) {
-        this.lower = lower;
-        this.upper = upper;
+        this((double) lower, upper);
+        //needs one value to be explicitly casted otherwise it calls the same constructor recursively
+    }
+
+    public RandomDouble(int lower, int upper, String name) {
+        this((double) lower, upper, name);
     }
 
     public RandomDouble(double lower, double upper, int precision) {
+        super();
         this.lower = lower;
         this.upper = upper;
         this.precision = precision;
     }
 
-    public RandomDouble(int lower, int upper, int precision) {
+    public RandomDouble(double lower, double upper, int precision, String name) {
+        super(name);
         this.lower = lower;
         this.upper = upper;
         this.precision = precision;

@@ -2,7 +2,7 @@ package global.variables.wrappers;
 
 import global.variables.Clause;
 
-public class Optional implements Clause {
+public class Optional extends Clause {
     Clause clause;
     int lower, upper;
     boolean zeroOrOne = true;

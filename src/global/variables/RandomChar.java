@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RandomChar implements Clause, RandomVariable<Character> {
+public class RandomChar extends Clause implements RandomVariable<Character> {
     static Map<Integer, ArrayList<Character>> valueStore = new HashMap<>();
     public int lower, upper;
 
     public RandomChar(char lower, char upper) {
+        super();
         this.lower = lower;
         this.upper = upper;
     }
 
-    public RandomChar(int lower, int upper) {
+    public RandomChar(char lower, char upper, String name) {
+        super(name);
         this.lower = lower;
         this.upper = upper;
     }
@@ -25,7 +27,6 @@ public class RandomChar implements Clause, RandomVariable<Character> {
 
     public void trackValue(int groupNum, String groupValue) {
         valueStore.computeIfAbsent(groupNum, k -> new ArrayList<>());
-
         (valueStore.get(groupNum)).add(convertFromRegexGroup(groupValue));
     }
 
