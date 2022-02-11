@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static global.utils.RandomUtil.followsUniformDistribution;
+
 public class RandomInteger extends Clause implements RandomVariable<Integer> {
     static Map<Integer, ArrayList<Integer>> valueStore = new HashMap<>();
     private int lower, upper;
@@ -15,6 +17,7 @@ public class RandomInteger extends Clause implements RandomVariable<Integer> {
         this.lower = lower;
         this.upper = upper;
     }
+
     public RandomInteger(int lower, int upper, String name) {
         super(name);
         this.lower = lower;
@@ -26,16 +29,15 @@ public class RandomInteger extends Clause implements RandomVariable<Integer> {
         return Math.min(range, 50);
     }
 
-    public void trackValue(int groupNum, String groupValue) {
-        valueStore.computeIfAbsent(groupNum, k -> new ArrayList<>());
-
-        (valueStore.get(groupNum)).add(convertFromRegexGroup(groupValue));
+    public void trackValue(int matchGroupNum, String matchGroupValue) {
+        valueStore.computeIfAbsent(matchGroupNum, k -> new ArrayList<>());
+        (valueStore.get(matchGroupNum)).add(convertFromRegexGroup(matchGroupValue));
     }
 
-    public boolean validateRandom(int groupNum) {
-        if (valueStore.get(groupNum) == null)
+    public boolean validateRandom(int matchGroupNum) {
+        if (valueStore.get(matchGroupNum) == null)
             return false;
-        ArrayList<Integer> values = valueStore.get(groupNum);
+        ArrayList<Integer> values = valueStore.get(matchGroupNum);
         return followsUniformDistribution(values, getLower(), getUpper());
     }
 
@@ -47,9 +49,9 @@ public class RandomInteger extends Clause implements RandomVariable<Integer> {
         return lower;
     }
 
-    public Integer convertFromRegexGroup(String groupString) {
+    public Integer convertFromRegexGroup(String matchGroupString) {
         // TODO: try catch
-        return Integer.parseInt(groupString);
+        return Integer.parseInt(matchGroupString);
     }
 
     @Override

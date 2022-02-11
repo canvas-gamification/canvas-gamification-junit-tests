@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static global.tools.CustomAssertions.assertWithinRange;
+import static global.utils.RandomUtil.describesUniform;
+
 public class RandomDouble extends Clause implements RandomVariable<Double> {
     static Map<Integer, ArrayList<Double>> valueStore = new HashMap<>();
     private double lower, upper;
@@ -46,21 +49,38 @@ public class RandomDouble extends Clause implements RandomVariable<Double> {
         this.precision = precision;
     }
 
-    public int getNumBins(double lower, double upper) {
-        return 50;  // TODO: do properly
-    };
+    public void trackValue(int matchGroupNum, String matchGroupValue) {
+        valueStore.computeIfAbsent(matchGroupNum, k -> new ArrayList<>());
 
-    public void trackValue(int groupNum, String groupValue) {
-        valueStore.computeIfAbsent(groupNum, k -> new ArrayList<>());
-
-        (valueStore.get(groupNum)).add(convertFromRegexGroup(groupValue));
+        (valueStore.get(matchGroupNum)).add(convertFromRegexGroup(matchGroupValue));
     }
 
-    public boolean validateRandom(int groupNum) {
-        if (valueStore.get(groupNum) == null)
+    public boolean validateRandom(int matchGroupNum) {
+        if (valueStore.get(matchGroupNum) == null)
             return false;
-        ArrayList<Double> values = valueStore.get(groupNum);
-        return followsUniformDistribution(values, getLower(), getUpper());
+        ArrayList<Double> values = valueStore.get(matchGroupNum);
+
+        final int numBins = RandomDouble.getNumBins(lower, upper);
+
+        long[] observedCounts = new long[numBins];
+        for (double value : values) {
+            int binNum = RandomDouble.assignedBinIndex(value, lower, upper, numBins);
+            if (binNum == RandomUtil.NO_BIN) return false;
+            observedCounts[binNum]++;
+        }
+
+        return describesUniform(values.size(), observedCounts, RandomUtil.ALPHA_LEVEL);
+    }
+
+    private static int getNumBins(double lower, double upper) {
+        return 50;  // TODO: do properly
+    }
+
+    private static int assignedBinIndex(double value, double lower, double upper, int numBins) {
+        double gap = (upper - lower) / numBins;
+        assertWithinRange(value, lower, upper, "One or more of your randomly generated numbers fall outside of the required range.");
+        int binNumber = (int) ((value - lower) / gap);
+        return (binNumber <= numBins) ? binNumber : RandomUtil.NO_BIN;
     }
 
     public double getLower() {
@@ -75,9 +95,9 @@ public class RandomDouble extends Clause implements RandomVariable<Double> {
         return precision;
     }
 
-    public Double convertFromRegexGroup(String groupString) {
+    public Double convertFromRegexGroup(String matchGroupString) {
         // TODO: try catch
-        return Double.parseDouble(groupString);
+        return Double.parseDouble(matchGroupString);
     }
 
     @Override
