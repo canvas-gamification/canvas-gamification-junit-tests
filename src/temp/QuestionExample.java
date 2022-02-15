@@ -2,6 +2,8 @@ package temp;
 
 import global.BaseRandomTest;
 import global.variables.*;
+import global.variables.clauses.RandomInteger;
+import global.variables.clauses.StringLiteral;
 
 public class QuestionExample extends BaseRandomTest {
     public Clause[] testSentence() {
