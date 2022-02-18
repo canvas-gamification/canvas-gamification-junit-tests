@@ -17,6 +17,5 @@ public class Question2Test extends BaseTest {
         };
     }
 
-
     public void runMain() {Question2.main(new String[0]);}
 }
