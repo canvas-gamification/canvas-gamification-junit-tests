@@ -13,7 +13,7 @@ public class Question2Test extends BaseRandomTest {
                 new StringLiteral(" has been decrypted using "),
                 new RandomInteger(1, 10),
                 new StringLiteral(" into "),
-                //don't know how to extract this part from output
+                //can't finish this test until Integer Literal is updated
         };
     }
 
