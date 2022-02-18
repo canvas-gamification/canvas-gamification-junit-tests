@@ -7,6 +7,7 @@ program will calculate how many people are going to be infected in t = 30 days.
  */
 public class Question2 {
     public static void main( String[] args )
+
     {
         double r = 0.3;
         int t = 30;

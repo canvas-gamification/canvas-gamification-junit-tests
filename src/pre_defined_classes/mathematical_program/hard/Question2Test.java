@@ -6,7 +6,7 @@ import global.variables.IntegerLiteral;
 import global.variables.StringLiteral;
 
 public class Question2Test extends BaseTest {
-    @Override
+
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("Num cases of infections in "),
@@ -17,6 +17,6 @@ public class Question2Test extends BaseTest {
         };
     }
 
-    @Override
+
     public void runMain() {Question2.main(new String[0]);}
 }
