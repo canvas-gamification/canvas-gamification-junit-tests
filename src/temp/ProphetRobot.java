@@ -14,7 +14,7 @@ import java.util.Random;
 public class ProphetRobot {
     public static void main(String[] args) {
         Random gen = new Random();
-        int prediction = gen.nextInt(100);
+        int prediction = gen.nextInt(10);
         int fingersHeldUp = gen.nextInt(10);
         System.out.println("The prediction by Simon was: " + prediction +
                 ", and the number of fingers you held up was: " + fingersHeldUp);
