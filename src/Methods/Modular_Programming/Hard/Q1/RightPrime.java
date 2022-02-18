@@ -1,4 +1,4 @@
-package temp;
+package Methods.Modular_Programming.Hard.Q1;
 import java.util.Scanner;
 
 /*

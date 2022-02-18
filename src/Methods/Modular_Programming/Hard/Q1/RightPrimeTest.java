@@ -1,10 +1,9 @@
-package Methods;
+package Methods.Modular_Programming.Hard.Q1;
 import global.BaseTest;
 import global.variables.*;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.api.Test;
-import temp.RightPrime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
