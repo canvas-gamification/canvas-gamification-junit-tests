@@ -1,4 +1,6 @@
-package global.variables;
+package global.variables.clauses;
+
+import global.variables.Clause;
 
 public class IntegerLiteral extends Clause {
     int value;
