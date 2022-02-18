@@ -14,6 +14,7 @@ public class Question2Test extends BaseRandomTest {
                 new RandomInteger(1, 10),
                 new StringLiteral(" into "),
                 // this question can't be finished until IntegerLiteral class is updated
+
         };
     }
 
