@@ -5,6 +5,7 @@ import static global.tools.CustomAssertions._fail;
 import static global.utils.RegexUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import global.tools.InvalidClauseException;
 import global.tools.Logger;
 import global.variables.Clause;
 import org.junit.jupiter.api.*;
@@ -35,7 +36,7 @@ public abstract class BaseTest {
     public abstract void runMain();
 
     // Setters and Getters
-    public void setRegexSentence(Clause[] regexSentence) {
+    public void setRegexSentence(Clause[] regexSentence) throws InvalidClauseException {
         //By using a set we can ensure that there are no duplicates in the regexSentence
         Set<String> namesSet = new HashSet<>();
         for (Clause clause : regexSentence) {
@@ -47,6 +48,15 @@ public abstract class BaseTest {
                 namesSet.add(clause.getName());
             }
         }
+
+        //validate all parameters used for the clauses
+        for (int i = 0; i < regexSentence.length; i++) {
+            Clause clause = regexSentence[i];
+            if (!clause.validateParams()) {
+                throw new InvalidClauseException("The parameter(s) for the clause at index " + (i + 1) + " are invalid");
+            }
+        }
+
         this.regexSentence = regexSentence;
     }
 
@@ -101,7 +111,7 @@ public abstract class BaseTest {
     }
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws InvalidClauseException {
         setRegexSentence(testSentence());
         testOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(testOut));

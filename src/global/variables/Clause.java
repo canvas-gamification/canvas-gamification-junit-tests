@@ -19,6 +19,10 @@ public abstract class Clause implements Regexable {
         return true;
     }
 
+    public boolean validateParams() {
+        return true;
+    }
+
     public String getInvalidMessage() {
         return "Invalid Clause";
     }

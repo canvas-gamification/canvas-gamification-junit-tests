@@ -1,6 +1,7 @@
 package temp;
 
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Simon the prophet claims that he can predict the future. An easy way to test his predictive power is to see whether
@@ -14,7 +15,9 @@ import java.util.Random;
 public class ProphetRobot {
     public static void main(String[] args) {
         Random gen = new Random();
-        int prediction = gen.nextInt(100);
+        int num = 100;
+        System.out.println(num);
+        int prediction = gen.nextInt(10);
         int fingersHeldUp = gen.nextInt(10);
         System.out.println("The prediction by Simon was: " + prediction +
                 ", and the number of fingers you held up was: " + fingersHeldUp);
