@@ -52,8 +52,10 @@ public abstract class BaseTest {
         //validate all parameters used for the clauses
         for (int i = 0; i < regexSentence.length; i++) {
             Clause clause = regexSentence[i];
-            if (!clause.validateParams()) {
-                throw new InvalidClauseException("The parameter(s) for the clause at index " + (i + 1) + " are invalid");
+            try {
+                clause.validateParams();
+            } catch (InvalidClauseException e) {
+                throw new InvalidClauseException("The parameter(s) for the clause at index " + (i + 1) + " are invalid. " + e.getMessage());
             }
         }
 

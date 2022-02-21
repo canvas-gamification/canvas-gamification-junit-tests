@@ -1,5 +1,6 @@
 package global.variables.clauses;
 
+import global.tools.InvalidClauseException;
 import global.utils.RegexUtil;
 import global.variables.Clause;
 
@@ -57,11 +58,12 @@ public class IntegerLiteral extends Clause {
     }
 
     @Override
-    public boolean validateParams() {
+    public void validateParams() throws InvalidClauseException {
         if (getLower() != getUpper()) {
-            return getLower() < getUpper();
+            if (getLower() > getUpper()) {
+                throw new InvalidClauseException("Lower bound cannot be greater than upper bound");
+            }
         }
-        return true;
     }
 
     public String getValueOrRegexRange() {
