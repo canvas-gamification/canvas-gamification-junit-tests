@@ -1,4 +1,4 @@
-package pre_defined_classes.mathematical_program.hard;
+package pre_defined_classes.mathematical_program.hard.q2;
 
 /*
 Make a program to calculate the growth in the number of cases (xt) for a pandemic at a given time <tt>t</tt> using the
@@ -6,7 +6,7 @@ equation: xt= (1+r)t x0, where r = 0.3 is the rate of growth, the initial number
 program will calculate how many people are going to be infected in t = 30 days.
  */
 
-public class Question2 {
+public class Javademic {
     public static void main( String[] args )
 
     {

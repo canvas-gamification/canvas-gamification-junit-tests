@@ -1,11 +1,11 @@
-package pre_defined_classes.mathematical_program.hard;
+package pre_defined_classes.mathematical_program.hard.q2;
 
 import global.BaseTest;
 import global.variables.Clause;
 import global.variables.IntegerLiteral;
 import global.variables.StringLiteral;
 
-public class Question2Test extends BaseTest {
+public class JavademicTest extends BaseTest {
 
     public Clause[] testSentence() {
         return new Clause[]{
@@ -17,5 +17,6 @@ public class Question2Test extends BaseTest {
         };
     }
 
-    public void runMain() {Question2.main(new String[0]);}
+    public void runMain() {
+        Javademic.main(new String[0]);}
 }
