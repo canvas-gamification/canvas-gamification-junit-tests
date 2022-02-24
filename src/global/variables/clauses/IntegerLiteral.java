@@ -4,61 +4,51 @@ import global.tools.InvalidClauseException;
 import global.utils.RegexUtil;
 import global.variables.Clause;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class IntegerLiteral extends Clause {
-    private Map<String, Boolean> MODES;
+    private String mode;
+    public static final String RANGE = "range";
+    public static final String VALUE = "value";
     int value;
     int upper;
     int lower;
 
-    public void initalizeModeMap() {
-        this.MODES = new HashMap<>();
-    }
 
     public IntegerLiteral() {
         super();
-        initalizeModeMap();
-        this.MODES.put("RANGE", true);
+        this.mode = RANGE;
         this.lower = Integer.MIN_VALUE;
         this.upper = Integer.MAX_VALUE;
     }
 
     public IntegerLiteral(String name) {
         super(name);
-        initalizeModeMap();
-        this.MODES.put("RANGE", true);
+        this.mode = RANGE;
         this.lower = Integer.MIN_VALUE;
         this.upper = Integer.MAX_VALUE;
     }
 
     public IntegerLiteral(int value) {
         super();
-        initalizeModeMap();
-        this.MODES.put("VALUE", true);
+        this.mode = VALUE;
         this.value = value;
     }
 
     public IntegerLiteral(int value, String name) {
         super(name);
-        initalizeModeMap();
-        this.MODES.put("VALUE", true);
+        this.mode = VALUE;
         this.value = value;
     }
 
     public IntegerLiteral(int lower, int upper) {
         super();
-        initalizeModeMap();
-        this.MODES.put("RANGE", true);
+        this.mode = RANGE;
         this.lower = lower;
         this.upper = upper;
     }
 
     public IntegerLiteral(int lower, int upper, String name) {
         super(name);
-        initalizeModeMap();
-        this.MODES.put("RANGE", true);
+        this.mode = RANGE;
         this.lower = lower;
         this.upper = upper;
     }
@@ -77,7 +67,7 @@ public class IntegerLiteral extends Clause {
 
     @Override
     public boolean validate(String matchGroupString) {
-        if (this.MODES.get("RANGE") != null && this.MODES.get("RANGE")) {
+        if (this.mode != null && this.mode.equals(IntegerLiteral.RANGE)) {
             int matchGroupInt = Integer.parseInt(matchGroupString);
             return getLower() <= matchGroupInt && matchGroupInt <= getUpper();
         }
@@ -86,7 +76,7 @@ public class IntegerLiteral extends Clause {
 
     @Override
     public void validateParams() throws InvalidClauseException {
-        if (this.MODES.get("RANGE") != null && this.MODES.get("RANGE")) {
+        if (this.mode != null && this.mode.equals(IntegerLiteral.RANGE)) {
             if (getLower() > getUpper()) {
                 throw new InvalidClauseException("Lower bound cannot be greater than upper bound");
             }
@@ -94,7 +84,7 @@ public class IntegerLiteral extends Clause {
     }
 
     public String getValueOrRegexRange() {
-        if (this.MODES.get("RANGE") != null && this.MODES.get("RANGE")) {
+        if (this.mode != null && this.mode.equals(IntegerLiteral.RANGE)) {
             return RegexUtil.getRegexInt(getLower(), getUpper());
         } else {
             return String.valueOf(getValue());
