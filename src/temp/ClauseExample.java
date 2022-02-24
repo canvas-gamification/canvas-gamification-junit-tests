@@ -2,9 +2,11 @@ package temp;
 
 import global.BaseTest;
 import global.variables.*;
+import global.variables.clauses.NewLine;
+import global.variables.clauses.RandomInteger;
+import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
