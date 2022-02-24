@@ -23,6 +23,9 @@ public class RegexUtil {
     }
 
     public static String getRegexInt(int lower, int upper) {
+        if (lower == Integer.MIN_VALUE && upper == Integer.MAX_VALUE) {
+            return "\\d+";
+        }
         int minDigits = String.valueOf(lower).length();
         int maxDigits = String.valueOf(upper).length();
 
