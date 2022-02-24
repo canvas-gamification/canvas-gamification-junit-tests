@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class RegexUtil {
     public static String processRegexForPrintlnOutput(String regexPattern) {
-        return regexPattern + "\\R";
+        return regexPattern + "\\R?";
     }
 
     public static Matcher getMatches(String outputString, String patternString) {
