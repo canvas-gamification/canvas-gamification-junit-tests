@@ -11,6 +11,6 @@ public class BMI {
         double height = 1.63;
         double bmi = weight / Math.pow(height, 2);
         System.out.print("The BMI of a person that weighs " + weight + " kilograms");
-        System.out.print(" and is " + height + " metres tall is: " + bmi);
+        System.out.println(" and is " + height + " metres tall is: " + bmi);
     }
 }
