@@ -38,8 +38,8 @@ public class RightPrimeTest extends BaseTest{
     public void variousInputsTest(RepetitionInfo n){
         boolean b = RightPrime.isRightPrime(in[n.getCurrentRepetition()-1]);
         if(boo[n.getCurrentRepetition()-1])
-            assertTrue(b);
+            assertTrue(b, "Asserted false for a true random number");
         else
-            assertFalse(b);
+            assertFalse(b, "Asserted true for a false random number");
     }
 }
