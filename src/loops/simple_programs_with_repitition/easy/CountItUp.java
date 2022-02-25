@@ -1,4 +1,4 @@
-package temp;
+package loops.simple_programs_with_repitition.easy;
 
 /*
 Write a program that will ask the user for a sentence and then a character and 
