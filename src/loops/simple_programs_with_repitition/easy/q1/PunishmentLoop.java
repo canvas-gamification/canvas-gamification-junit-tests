@@ -1,4 +1,4 @@
-package loops.simple_programs_with_repitition.easy;
+package loops.simple_programs_with_repitition.easy.q1;
 
 /*
 Write a program that will ask the user to input a sentence, and then ask them for a "n", that represents how many times the program should repeat the sentence.
