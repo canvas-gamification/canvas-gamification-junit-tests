@@ -1,4 +1,4 @@
-package pre_defined_classes.mathematical_program.hard.q2;
+package pre_defined_classes.mathematical_program.hard.q1;
 
 /*
 Make a program to calculate the growth in the number of cases (xt) for a pandemic at a given time <tt>t</tt> using the
