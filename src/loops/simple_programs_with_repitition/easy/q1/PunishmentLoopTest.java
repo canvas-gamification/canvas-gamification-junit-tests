@@ -7,7 +7,7 @@ import global.BaseTest;
 public class PunishmentLoopTest extends BaseTest {
     
     String sentence = "Hello World";
-    int repetitions = 3;
+    int repetitions = 15;
 
     public Clause[] testSentence() {
 
