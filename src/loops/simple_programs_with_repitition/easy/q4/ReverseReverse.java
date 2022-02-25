@@ -1,7 +1,8 @@
-package loops.simple_programs_with_repitition.easy;
+package loops.simple_programs_with_repitition.easy.q4;
 
 /*
 Write a program to reverse a number.
+Example: 1234 -> 4321
 */
 
 import java.util.Scanner;
