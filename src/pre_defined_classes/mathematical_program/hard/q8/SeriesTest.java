@@ -4,7 +4,6 @@ import global.BaseTest;
 import global.variables.Clause;
 import global.variables.StringLiteral;
 import org.junit.jupiter.api.Test;
-import temp.Example;
 
 public class SeriesTest extends BaseTest {
     public Clause[] testSentence() {
