@@ -14,7 +14,7 @@ public class SeriesTest extends BaseTest {
     }
 
     public void runMain() {
-        Example.main(new String[]{});
+        Series.main(new String[]{});
     }
 
     @Test
