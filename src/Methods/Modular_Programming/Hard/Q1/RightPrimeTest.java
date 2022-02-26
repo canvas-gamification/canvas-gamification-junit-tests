@@ -1,9 +1,9 @@
 package Methods.Modular_Programming.Hard.Q1;
 import global.BaseTest;
 import global.variables.*;
-import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,14 +32,17 @@ public class RightPrimeTest extends BaseTest{
         assertTrue(RightPrime.isRightPrime(59393), "Your program does not handle large right truncatable primes");
     }
 
-    int[] in = {3, 67, 345};
-    boolean [] boo = {true, false, false};
-    @RepeatedTest(3)
-    public void variousInputsTest(RepetitionInfo n){
-        boolean b = RightPrime.isRightPrime(in[n.getCurrentRepetition()-1]);
-        if(boo[n.getCurrentRepetition()-1])
-            assertTrue(b, "Asserted false for a true random number");
+    @ParameterizedTest
+    @CsvSource({
+            "3, true",
+            "67, false",
+            "345, false"
+    })
+    public void variousInputsTest(int inputs, boolean results){
+        boolean b = RightPrime.isRightPrime(inputs);
+        if(results)
+            assertTrue(b, "Your method isRightPrime returned 'false' for an integer that is indeed a right-truncate-prime");
         else
-            assertFalse(b, "Asserted true for a false random number");
+            assertFalse(b, "Your method isRightPrime returned 'true' for an integer that is not a right-truncate-prime");
     }
 }
