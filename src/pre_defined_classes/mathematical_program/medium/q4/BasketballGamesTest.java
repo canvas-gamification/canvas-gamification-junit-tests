@@ -21,7 +21,6 @@ public class BasketballGamesTest extends BaseRandomTest {
                 new StringLiteral("The lowest score was "),
                 new IntegerLiteral(32),
                 new StringLiteral(" points."),
-                new NewLine()
         };
     }
 
