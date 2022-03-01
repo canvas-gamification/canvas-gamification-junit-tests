@@ -7,7 +7,7 @@ random <strong>1-digit</strong> number. At the end of the program, print out the
 Sample Output: 68056441 has been encrypted using 5 into 13611288
  */
 
-public class Question2 {
+public class DeCryptic {
     public static void main( String[] args )
     {
         Random gen = new Random();

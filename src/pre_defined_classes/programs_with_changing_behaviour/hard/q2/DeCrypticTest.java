@@ -6,8 +6,9 @@ import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.RandomInteger;
 import global.variables.clauses.StringLiteral;
+import static org.junit.jupiter.api.Assertions.fail;
 
-public class Question2Test extends BaseRandomTest {
+public class DeCrypticTest extends BaseRandomTest {
 
     public Clause[] testSentence() {
         return new Clause[]{
@@ -20,6 +21,11 @@ public class Question2Test extends BaseRandomTest {
     }
 
     public void runMain() {
-        Question2.main(new String[0]);
+        try {
+            DeCryptic.main(new String[0]);
+        }catch(ArithmeticException e){
+            fail("Tried to divide by 0. Make sure your key is larger than 0");
+        }
     }
+
 }
