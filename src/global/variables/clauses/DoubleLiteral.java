@@ -6,7 +6,6 @@ import global.variables.Clause;
 public class DoubleLiteral extends Clause {
     private String mode;
     public static final String RANGE = "range";
-    public static final String NO_RANGE = "no range";
     double upper;
     double lower;
 
@@ -26,11 +25,9 @@ public class DoubleLiteral extends Clause {
 
     public DoubleLiteral(String name) {
         super(name);
-        this.mode = NO_RANGE;
     }
 
     public DoubleLiteral() {
-        this.mode = NO_RANGE;
     }
 
     public double getUpper() {
