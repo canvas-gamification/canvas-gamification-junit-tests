@@ -1,4 +1,4 @@
-package pre_defined_classes.loops.simple_problems_with_repitition.medium.q1;
+package loops.simple_problems_with_repitition.medium.q1;
 
 /*
 Write a program to convert a given integer to binary.

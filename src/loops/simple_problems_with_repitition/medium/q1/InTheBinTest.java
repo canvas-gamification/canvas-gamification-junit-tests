@@ -1,4 +1,4 @@
-package pre_defined_classes.loops.simple_problems_with_repitition.medium.q1;
+package loops.simple_problems_with_repitition.medium.q1;
 
 import global.variables.*;
 import global.variables.clauses.*;
