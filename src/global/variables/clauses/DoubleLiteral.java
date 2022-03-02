@@ -10,7 +10,7 @@ public class DoubleLiteral extends Clause {
     double lower;
 
 
-    public DoubleLiteral(String name, double lower, double upper) {
+    public DoubleLiteral(double lower, double upper, String name) {
         super(name);
         this.mode = RANGE;
         this.upper = upper;

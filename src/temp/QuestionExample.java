@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class QuestionExample extends BaseRandomTest {
     public Clause[] testSentence() {
         return new Clause[]{
-                new DoubleLiteral("testDouble", 10.0, 200.0),
+                new DoubleLiteral(10.0, 200.0, "testDouble"),
                 new NewLine(),
                 new StringLiteral("The prediction by Simon was: "),
                 new RandomInteger(0, 10),
