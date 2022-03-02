@@ -1,5 +1,7 @@
 package global.variables;
 
+import global.tools.InvalidClauseException;
+
 public abstract class Clause implements Regexable {
     String name;
 
@@ -17,6 +19,9 @@ public abstract class Clause implements Regexable {
 
     public boolean validate(String matchGroupString) {
         return true;
+    }
+
+    public void validateParams() throws InvalidClauseException {
     }
 
     public String getInvalidMessage() {
