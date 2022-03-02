@@ -9,29 +9,17 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CountArTest extends BaseTest{
+public class CountArTest extends BaseTest {
+    int[] inputs = {0, 1, 0, 2, 3, 1, 0, 2, 0};
+
     public Clause[] testSentence() {
-        return new Clause[]{
-                new IntegerLiteral(0),
-                new NewLine(),
-                new IntegerLiteral(1),
-                new NewLine(),
-                new IntegerLiteral(0),
-                new NewLine(),
-                new IntegerLiteral(2),
-                new NewLine(),
-                new IntegerLiteral(3),
-                new NewLine(),
-                new IntegerLiteral(1),
-                new NewLine(),
-                new IntegerLiteral(0),
-                new NewLine(),
-                new IntegerLiteral(2),
-                new NewLine(),
-                new IntegerLiteral(0),
-                new NewLine(),
-                new IntegerLiteral(3),
-        };
+        Clause[] output = new Clause[19];
+        for (int x = 0; x < 17; x += 2) {
+            output[x] = new IntegerLiteral(inputs[x / 2]);
+            output[x + 1] = new NewLine();
+        }
+        output[18] = new IntegerLiteral(3);
+        return output;
     }
 
     public void runMain() {
@@ -39,35 +27,33 @@ public class CountArTest extends BaseTest{
     }
 
     @RepeatedTest(50)
-    public void methodTestRandomNums(){
+    public void methodTestRandomNums() {
         int[] expected = new int[10];
         int[] passed = new int[10];
-        for(int x = 0; x <10; x++){
-            int n = (int)(Math.random()*10);
+        for (int x = 0; x < 10; x++) {
+            int n = (int) (Math.random() * 10);
             passed[x] = n;
             expected[n]++;
         }
         int[] actual = CountAr.countThisPlease(passed);
 
-        assertArrayEquals(expected, actual, "Expected output: " + Arrays.toString(expected) + " Received output: " + Arrays.toString(actual));
+        assertArrayEquals(expected, actual, "Your method did not correctly count for the array: " + Arrays.toString(passed));
     }
 
     @Test
-    public void methodOutOfBoundsException(){
+    public void methodOutOfBoundsException() {
 
-        try{
+        try {
             //noinspection ResultOfMethodCallIgnored
-            CountAr.countThisPlease(new int[]{10, 10, 10, 9, 2,3,4,5,1,7, 5});
-            fail("Returning array is larger than it should be");
-        }
-        catch (IndexOutOfBoundsException e){
-            assertTrue(true);
-        }
+            CountAr.countThisPlease(new int[]{10, 10, 10, 9, 2, 3, 4, 5, 1, 7, 5});
+            fail("Your program should not count numbers larger than 9");
+        } catch (IndexOutOfBoundsException e) {}
     }
+
     @Test
-    public void methodPassingAnArrayLargerThan10(){
+    public void methodPassingAnArrayLargerThan10() {
         int[] expected = {1, 2, 3, 0, 1, 1, 1, 1, 0, 1};
         int[] actual = CountAr.countThisPlease(new int[]{2, 2, 4, 2, 1, 9, 5, 1, 6, 0, 7});
-        assertArrayEquals(expected, actual, "Your program did not count all the passed numbers");
+        assertArrayEquals(expected, actual, "Your program did not correctly count all the numbers given in the input");
     }
 }
