@@ -1,4 +1,4 @@
-package loops.simple_programs_with_repitition.q3;
+package loops.simple_programs_with_repitition.medium.q3;
 
 /*
 Write a Java program to ask the user for a number and 
