@@ -2,16 +2,13 @@ package temp;
 
 import global.BaseRandomTest;
 import global.variables.Clause;
-import global.variables.clauses.IntegerLiteral;
-import global.variables.clauses.NewLine;
-import global.variables.clauses.RandomInteger;
-import global.variables.clauses.StringLiteral;
+import global.variables.clauses.*;
 import org.junit.jupiter.api.Test;
 
 public class QuestionExample extends BaseRandomTest {
     public Clause[] testSentence() {
         return new Clause[]{
-                new IntegerLiteral("testInt"),
+                new DoubleLiteral(10.0, 200.0, "testDouble"),
                 new NewLine(),
                 new StringLiteral("The prediction by Simon was: "),
                 new RandomInteger(0, 10),
@@ -26,6 +23,6 @@ public class QuestionExample extends BaseRandomTest {
 
     @Test
     public void testMain() {
-        System.err.println(getItemByName("testInt"));
+        System.err.println("testDouble: " + getItemByName("testDouble"));
     }
 }
