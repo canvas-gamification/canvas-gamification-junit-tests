@@ -2,17 +2,16 @@ package pre_defined_classes.mathematical_program.hard.q3;
 
 import global.BaseTest;
 import global.variables.Clause;
-import global.variables.NewLine;
-import global.variables.RandomInteger;
-import global.variables.StringLiteral;
-import global.variables.wrappers.Optional;
+import global.variables.clauses.*;
 import org.junit.jupiter.api.Test;
-import temp.Example;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AreaSectorTest extends BaseTest {
     public Clause[] testSentence() {
         return new Clause[]{
-                new StringLiteral("The area of the sector is: 24.801128670839425")
+                new StringLiteral("The area of the sector is: "),
+                new DoubleLiteral(24.801128670839425, 24.801128670839425, "math")
         };
     }
 
@@ -21,7 +20,7 @@ public class AreaSectorTest extends BaseTest {
     }
 
     @Test
-    public void mathTest(){
-        //test that the math is incorrect, not just the formatting
+    public void mathTest() {
+        assertEquals("24.801128670839425", getItemByName("math"), "Your program's math calculations are incorrect");
     }
 }
