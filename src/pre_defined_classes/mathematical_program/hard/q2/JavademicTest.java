@@ -1,4 +1,4 @@
-package pre_defined_classes.mathematical_program.hard.Q2;
+package pre_defined_classes.mathematical_program.hard.q2;
 
 import global.BaseTest;
 import global.variables.*;

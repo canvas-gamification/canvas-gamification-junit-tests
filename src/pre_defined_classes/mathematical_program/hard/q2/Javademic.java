@@ -1,4 +1,4 @@
-package pre_defined_classes.mathematical_program.hard.Q2;
+package pre_defined_classes.mathematical_program.hard.q2;
 
 /*
 Make a program to calculate the time it takes for a pandemic to reach some number of infections.
