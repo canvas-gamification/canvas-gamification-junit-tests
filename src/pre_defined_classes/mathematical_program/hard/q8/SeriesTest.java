@@ -2,8 +2,7 @@ package pre_defined_classes.mathematical_program.hard.q8;
 
 import global.BaseTest;
 import global.variables.Clause;
-import global.variables.StringLiteral;
-import org.junit.jupiter.api.Test;
+import global.variables.clauses.*;
 
 public class SeriesTest extends BaseTest {
     public Clause[] testSentence() {
@@ -16,8 +15,4 @@ public class SeriesTest extends BaseTest {
         Series.main(new String[]{});
     }
 
-    @Test
-    public void mathTest() {
-        //this test will check if the math is wrong, not just the formatting, to provide a more accurate error message
-    }
 }
