@@ -2,11 +2,7 @@ package pre_defined_classes.mathematical_program.hard.q5;
 
 import global.BaseTest;
 import global.variables.Clause;
-import global.variables.NewLine;
-import global.variables.RandomInteger;
-import global.variables.StringLiteral;
-import global.variables.wrappers.Optional;
-import temp.Example;
+import global.variables.clauses.*;
 
 public class LeftRightTest extends BaseTest {
     public Clause[] testSentence() {
