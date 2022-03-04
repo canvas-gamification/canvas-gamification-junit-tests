@@ -1,4 +1,4 @@
-package global.variables;
+package global.variables.clauses;
 
 public interface RandomClause<T> {
     void trackValue(int groupNum, String newListValue);

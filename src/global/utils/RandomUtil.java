@@ -16,18 +16,6 @@ public class RandomUtil {
     public static final int NO_BIN = -1;
     public static final double ALPHA_LEVEL = 0.12;
 
-    public static String getRegexInt(int lower, int upper) {
-        int minDigits = String.valueOf(lower).length();
-        int maxDigits = String.valueOf(upper).length();
-
-        return String.format("\\d{%d,%d}", minDigits, maxDigits);
-    }
-
-    public static int[] getSplitDecimal(double num) {
-        String[] lowSplit = String.valueOf(num).split("\\.");
-        return new int[]{Integer.parseInt(lowSplit[0]), Integer.parseInt(lowSplit[1])};
-    }
-
     /**
      * Returns if the set of values described by the total number of values considered and an array of "bin sizes" is
      * uniform. "Bin counts" refers to the number of values that are placed in each bin. This method assumes that the

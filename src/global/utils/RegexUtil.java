@@ -14,11 +14,26 @@ public class RegexUtil {
         return Pattern.compile(patternString).matcher(outputString);
     }
 
-    public static String combineRegex(Clause[] regexVariables) {
+    public static String combineRegex(Clause[] clauses) {
         StringBuilder combinedRegex = new StringBuilder();
-        for (Clause item : regexVariables) {
-            combinedRegex.append(item.getRegex());
+        for (Clause clause : clauses) {
+            combinedRegex.append(clause.getRegex());
         }
         return combinedRegex.toString();
+    }
+
+    public static String getRegexInt(int lower, int upper) {
+        if (lower == Integer.MIN_VALUE && upper == Integer.MAX_VALUE) {
+            return "\\d+";
+        }
+        int minDigits = String.valueOf(lower).length();
+        int maxDigits = String.valueOf(upper).length();
+
+        return String.format("\\d{%d,%d}", minDigits, maxDigits);
+    }
+
+    public static int[] getSplitDecimal(double num) {
+        String[] lowSplit = String.valueOf(num).split("\\.");
+        return new int[]{Integer.parseInt(lowSplit[0]), Integer.parseInt(lowSplit[1])};
     }
 }
