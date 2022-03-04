@@ -9,6 +9,12 @@ where Population1 and Population2 are population sizes at two points in time.
 With this, make a program to determine the growth rate of a country with Population1 = 32000 and Population2 = 50000
 reported as a percentage.
 
+Distractors:
+int population2 = 32000;
+int population1 = 50000;
+double growthRate = (population2-population1)/population1;
+double growthRate = (population2-population1)/population2;
+growthRate = growthRate*100;
  */
 public class GrowthRate {
     public static void main( String[] args )

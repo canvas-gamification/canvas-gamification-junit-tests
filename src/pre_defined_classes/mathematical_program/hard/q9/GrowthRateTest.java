@@ -2,13 +2,16 @@ package pre_defined_classes.mathematical_program.hard.q9;
 
 import global.BaseTest;
 import global.variables.Clause;
-import global.variables.StringLiteral;
+import global.variables.clauses.*;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GrowthRateTest extends BaseTest {
     public Clause[] testSentence() {
         return new Clause[]{
-                new StringLiteral("The growth rate for the country is:56.25")
+                new StringLiteral("The growth rate for the country is:"),
+                new DoubleLiteral(56.25, 56.25, "math")
         };
     }
 
@@ -18,6 +21,6 @@ public class GrowthRateTest extends BaseTest {
 
     @Test
     public void mathTest() {
-        //this test will check if the math is wrong to provide better direction to students
+        assertEquals("56.25", getItemByName("math"));
     }
 }
