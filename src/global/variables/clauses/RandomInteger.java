@@ -1,6 +1,7 @@
-package global.variables;
+package global.variables.clauses;
 
-import global.utils.RandomUtil;
+import global.utils.RegexUtil;
+import global.variables.Clause;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,6 +57,6 @@ public class RandomInteger extends Clause implements RandomClause<Integer> {
 
     @Override
     public String getRegex() {
-        return "(" + RandomUtil.getRegexInt(getLower(), getUpper()) + ")";
+        return "(" + RegexUtil.getRegexInt(getLower(), getUpper()) + ")";
     }
 }
