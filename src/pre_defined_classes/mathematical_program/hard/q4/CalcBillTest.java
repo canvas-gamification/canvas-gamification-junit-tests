@@ -11,7 +11,7 @@ public class CalcBillTest extends BaseTest {
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("With tips, the amount you need to pay is: "),
-                new DoubleLiteral(4.0,28.0, "math")
+                new DoubleLiteral(28.0,28.0, "math")
         };
     }
 
