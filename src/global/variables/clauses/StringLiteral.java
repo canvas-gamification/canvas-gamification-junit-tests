@@ -1,4 +1,6 @@
-package global.variables;
+package global.variables.clauses;
+
+import global.variables.Clause;
 
 public class StringLiteral extends Clause {
     String text;
