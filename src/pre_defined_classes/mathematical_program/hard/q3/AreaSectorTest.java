@@ -11,7 +11,7 @@ public class AreaSectorTest extends BaseTest {
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The area of the sector is: "),
-                new DoubleLiteral(24.801128670839425, 24.801128670839425, "math")
+                new DoubleLiteral(3.5430183815484892, 24.801128670839425, "math")
         };
     }
 
