@@ -1,4 +1,6 @@
-package global.variables;
+package global.variables.clauses;
+
+import global.variables.Clause;
 
 import java.util.ArrayList;
 import java.util.HashMap;
