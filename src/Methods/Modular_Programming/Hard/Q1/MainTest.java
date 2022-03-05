@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class RightPrimeTest extends BaseTest{
+public class MainTest extends BaseTest{
 
     public Clause[] testSentence() {
         provideInput("5");
