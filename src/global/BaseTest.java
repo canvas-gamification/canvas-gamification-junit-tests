@@ -28,7 +28,7 @@ public abstract class BaseTest {
     private final PrintStream systemOut = System.out;
     private String currentOutput = null;
     private ByteArrayOutputStream testOut;
-    private Clause[] regexSentence;
+    private static Clause[] regexSentence;
 
     // Test Developer defined
     public abstract Clause[] testSentence();
@@ -59,11 +59,11 @@ public abstract class BaseTest {
             }
         }
 
-        this.regexSentence = regexSentence;
+        BaseTest.regexSentence = regexSentence;
     }
 
     public Clause[] getRegexSentence() {
-        return this.regexSentence;
+        return BaseTest.regexSentence;
     }
 
     // Utilities
@@ -114,7 +114,8 @@ public abstract class BaseTest {
 
     @BeforeEach
     public void setUp() throws InvalidClauseException {
-        setRegexSentence(testSentence());
+        if(BaseTest.regexSentence == null) setRegexSentence(testSentence());  // messy memoization
+
         testOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(testOut));
         executeMain();
