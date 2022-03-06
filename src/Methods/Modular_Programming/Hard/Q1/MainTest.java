@@ -8,9 +8,10 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest extends BaseTest{
+    String input = "5";
 
     public Clause[] testSentence() {
-        provideInput("5");
+        provideInput(input);
         return new Clause[]{
                 new StringLiteral("Enter a number"),
                 new NewLine(),
