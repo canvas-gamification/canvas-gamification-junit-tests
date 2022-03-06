@@ -92,6 +92,12 @@ public abstract class BaseTest {
         runMain();
     }
 
+    public void executeMain(String input) {
+        provideInput(input);
+        currentOutput = null;
+        runMain();
+    }
+
     public void provideInput(String data) {
         ByteArrayInputStream testIn = new ByteArrayInputStream(data.getBytes());
         System.setIn(testIn);
@@ -123,21 +129,19 @@ public abstract class BaseTest {
             if (regSen[i].getName() != null && regSen[i].getName().equals(name))
                 return getItemAtIndex(i + 1);
         }
-        fail("The specified group (" + name + ") doesn't exist");
+        fail("The specified group ('" + name + "') doesn't exist");
         return ""; // TODO: logically how does this behave?
     }
 
     public void runWithInput(String input) {
-        provideInput(input);
-        executeMain();
+        executeMain(input);
     }
 
-    public void runWithInput(String input, Clause[] injectedClauses) throws InvalidClauseException {
+    public void runWithInput(String input, Clause[] injectedClauses) throws InvalidClauseException, InvalidTestOptionException {
         // run with input when you have clauses to inject too
         setInjectedClauses(injectedClauses);
         setRegexSentence(injectClauses(testSentence(), getInjectedClauses()));
-        provideInput(input);
-        executeMain();
+        executeMain(input);
     }
 
     // Default Tests and Setup
@@ -168,7 +172,7 @@ public abstract class BaseTest {
         assertTrue(matcher.find(), "Your code's output did not follow the correct structure/syntax.");
         //Ensures that the output matches the pattern exactly
         assertEquals(output.substring(matcher.start(), matcher.end()), output, "Your code's output did not follow the correct structure/syntax.");
-        // This ensures that their output only contains 1 instance of the matched regex string
+        // This ensures that their output only contains 1 instance of the matched regex string  // TODO: still needed?
         assertFalse(matcher.find());
     }
 
