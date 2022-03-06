@@ -137,7 +137,7 @@ public abstract class BaseTest {
         executeMain(input);
     }
 
-    public void runWithInput(String input, Clause[] injectedClauses) throws InvalidClauseException, InvalidTestOptionException {
+    public void runWithInput(String input, Clause[] injectedClauses) throws InvalidClauseException {
         // run with input when you have clauses to inject too
         setInjectedClauses(injectedClauses);
         setRegexSentence(injectClauses(testSentence(), getInjectedClauses()));
@@ -185,7 +185,7 @@ public abstract class BaseTest {
         int matchGroupNum = 1;  // match group numbers are 1-indexed
         for (Clause clause : getRegexSentence()) {
             // TODO: devMessage could be improved
-            _assertTrue(clause.validate(matcher.group(matchGroupNum)), clause.getInvalidMessage(), "Invalid Clause at index " + matchGroupNum);
+            _assertTrue(clause.validate(matcher.group(matchGroupNum)), clause.getInvalidMessage(), "Invalid Clause output at index " + matchGroupNum);
             matchGroupNum++;
         }
     }

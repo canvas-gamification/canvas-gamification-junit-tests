@@ -39,7 +39,7 @@ public class ClauseExample extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(String input) throws InvalidClauseException, InvalidTestOptionException {
+    void testWithInput(String input) throws InvalidClauseException {
         runWithInput(input, new Clause[]{
                 new StringLiteral(input, "injected")
         });
