@@ -1,12 +1,9 @@
 package global;
 
-import static global.tools.CustomAssertions._assertTrue;
-import static global.tools.CustomAssertions._fail;
-import static global.utils.RegexUtil.*;
-import static org.junit.jupiter.api.Assertions.*;
-
-import global.tools.InvalidClauseException;
+import global.exceptions.InvalidClauseException;
+import global.exceptions.InvalidTestOptionException;
 import global.tools.Logger;
+import global.tools.TestOption;
 import global.variables.Clause;
 import org.junit.jupiter.api.*;
 
@@ -18,9 +15,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static global.tools.CustomAssertions._assertTrue;
+import static global.tools.CustomAssertions._fail;
+import static global.tools.TestSentenceUtil.injectClauses;
+import static global.tools.TestSentenceUtil.placeHolderCount;
+import static global.utils.RegexUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public abstract class BaseTest {
@@ -29,6 +29,7 @@ public abstract class BaseTest {
     private String currentOutput = null;
     private ByteArrayOutputStream testOut;
     private static Clause[] regexSentence;
+    private static Clause[] injectedClauses;
 
     // Test Developer defined
     public abstract Clause[] testSentence();
@@ -42,7 +43,7 @@ public abstract class BaseTest {
         for (Clause clause : regexSentence) {
             if (clause.getName() != null) {
                 if (namesSet.contains(clause.getName())) {
-                    _fail("There is an issue with the test definition",
+                    _fail("There is an issue with the test definition. Please contact an administrator.",
                             "The name " + clause.getName() + " is already in use. make sure all names are unique");
                 }
                 namesSet.add(clause.getName());
@@ -66,6 +67,25 @@ public abstract class BaseTest {
         return BaseTest.regexSentence;
     }
 
+    public void setInjectedClauses(Clause[] injectedClauses) {
+        if (injectedClauses != null) {
+            if (injectedClauses.length != placeHolderCount(testSentence())) {
+                // TODO: check if failing here stops errors from invalid TestOptions from being a problem
+                _fail("There is an issue with the test definition. Please contact an administrator.",
+                        "The number of injected clauses is not equal to the number of placeholders in the test sentence");
+            }
+        }
+        BaseTest.injectedClauses = injectedClauses;
+    }
+
+    public Clause[] getInjectedClauses() {
+        return BaseTest.injectedClauses;
+    }
+
+    public boolean hasInjectedClauses() {
+        return BaseTest.injectedClauses != null;
+    }
+
     // Utilities
     public void executeMain() {
         currentOutput = null;
@@ -86,6 +106,7 @@ public abstract class BaseTest {
     }
 
     public String getItemAtIndex(int index) {
+        // TODO: this needs to be memoized
         Matcher matcher = getMatches(getOutput(), processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
         try {
             if (matcher.find()) return matcher.group(index);
@@ -106,6 +127,19 @@ public abstract class BaseTest {
         return ""; // TODO: logically how does this behave?
     }
 
+    public void runWithInput(String input) {
+        provideInput(input);
+        executeMain();
+    }
+
+    public void runWithInput(String input, Clause[] injectedClauses) throws InvalidClauseException {
+        // run with input when you have clauses to inject too
+        setInjectedClauses(injectedClauses);
+        setRegexSentence(injectClauses(testSentence(), getInjectedClauses()));
+        provideInput(input);
+        executeMain();
+    }
+
     // Default Tests and Setup
     @BeforeAll
     public static void setUpLogger() {
@@ -113,12 +147,17 @@ public abstract class BaseTest {
     }
 
     @BeforeEach
-    public void setUp() throws InvalidClauseException {
-        if(BaseTest.regexSentence == null) setRegexSentence(testSentence());  // messy memoization
-
+    public void setUp() throws InvalidClauseException, InvalidTestOptionException {
+        // TODO: before each test, we always set the regex sentence again. If injected clauses are provided, inject them
+        setRegexSentence(testSentence());  // TODO: think harder
+        TestOption.validate();  // check that test options were set with valid options
         testOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(testOut));
-        executeMain();
+
+        if (TestOption.shouldRunMainBeforeEach()) {
+            // Do not execute main by default if told not to
+            executeMain();
+        }
     }
 
     @Test
