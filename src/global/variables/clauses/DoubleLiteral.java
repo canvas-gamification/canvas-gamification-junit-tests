@@ -57,6 +57,11 @@ public class DoubleLiteral extends Clause {
     }
 
     @Override
+    public String getInvalidMessage() {
+        return "Invalid double value or value out of range";
+    }
+
+    @Override
     public String getRegex() {
         // This matches any double value as long as it has 1 or more digits in the number part and the decimal part
         return "(\\d+\\.\\d+)";
