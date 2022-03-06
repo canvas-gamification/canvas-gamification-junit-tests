@@ -5,6 +5,16 @@ Make a program to calculate the time it takes for a pandemic to reach some numbe
 In particular, given a growth rate of r = 0.39, an initial number of infected cases of x0= 2,
 and an outbreak of xt= 1,000,000, use the following equation to determine how many days it takes to reach
 1,000,000 infected cases: t = log(xt/x0)/log(1 + r).
+
+Distractors:
+ int xt = 1,000,000, x0 = 2;
+double t = Math.exp( xt / x0 ) / Math.exp( 1 + r );
+int t = Math.exp( xt / x0 ) / Math.exp( 1 + r );
+int t = ( int )Math.exp( xt / x0 ) / Math.exp( 1 + r );
+int t = ( double )( Math.exp( xt / x0 ) / Math.exp( 1 + r ));
+int t = Math.round( numerator / denominator );
+double numerator = log( xt / x0 );
+double denominator = log( 1 + r );
  */
 
 public class Javademic {

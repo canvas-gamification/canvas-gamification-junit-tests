@@ -3,7 +3,8 @@ package pre_defined_classes.mathematical_program.hard.q2;
 import global.BaseTest;
 import global.variables.*;
 
-public class JavademicTest extends BaseTest {
+public class MainTest extends BaseTest {
+    //parsons
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("It will take "),
