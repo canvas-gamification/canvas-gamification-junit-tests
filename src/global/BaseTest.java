@@ -133,6 +133,16 @@ public abstract class BaseTest {
         return ""; // TODO: logically how does this behave?
     }
 
+    public void runWithInput() {
+        // Run with default input if specified, fail if not specified
+        if (TestOption.isInputTest && TestOption.defaultInput != null) {
+            executeMain(TestOption.defaultInput);
+        } else {
+            // TODO: better message
+            _fail("Internal Error.", "Tried to run input without default input.");
+        }
+    }
+
     public void runWithInput(String input) {
         executeMain(input);
     }
@@ -158,8 +168,9 @@ public abstract class BaseTest {
         testOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(testOut));
 
-        if (TestOption.shouldRunMainBeforeEach()) {
-            // Do not execute main by default if told not to
+        if (TestOption.isInputTest) {
+            runWithInput();
+        } else {
             executeMain();
         }
     }
