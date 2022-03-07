@@ -9,23 +9,25 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.RandomInteger;
 import global.variables.clauses.StringLiteral;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ClauseExample extends BaseTest {
     public Clause[] testSentence() {
-        TestOption.runMainBeforeEach = false;
+        TestOption.isInputTest = true;
+        TestOption.defaultInput = "something";
 
         return new Clause[]{
                 new StringLiteral("This is a test with retrieval."),
                 new NewLine(),
-                new RandomInteger(0, 10),
+                new PlaceHolder(),
                 new NewLine(),
-                new PlaceHolder()
+                new RandomInteger(0, 10),
         };
     }
 
@@ -46,13 +48,13 @@ public class ClauseExample extends BaseTest {
         assertEquals(getItemByName("injected"), input);
     }
 
-//    @RepeatedTest(50)
-//    public void retrieveValueTest() {
-////        int randomIntegerValue = Integer.parseInt(getItemAtIndex(3));
-//        if (getItemAtIndex(3) != null) {
-//            int randomIntegerValue = Integer.parseInt(getItemAtIndex(3));
-//            System.out.println(randomIntegerValue);
-//            assertEquals(11, randomIntegerValue);
-//        }
-//    }
+    @RepeatedTest(50)
+    public void retrieveValueTest() {
+//        int randomIntegerValue = Integer.parseInt(getItemAtIndex(3));
+        if (getItemAtIndex(3) != null) {
+            int randomIntegerValue = Integer.parseInt(getItemAtIndex(5));
+            System.out.println(randomIntegerValue);
+            assertNotEquals(randomIntegerValue, -1);
+        }
+    }
 }

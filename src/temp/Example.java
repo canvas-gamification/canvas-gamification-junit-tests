@@ -9,7 +9,7 @@ public class Example {
         Scanner input = new Scanner(System.in);
         int val = gen.nextInt(10);
         System.out.println("This is a test with retrieval.");
-        System.out.println(val);
         System.out.println(input.nextLine());
+        System.out.println(val);
     }
 }
