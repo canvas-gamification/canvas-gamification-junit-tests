@@ -7,20 +7,29 @@ import global.variables.clauses.PlaceHolder;
 public class TestSentenceUtil {
     public static boolean hasRandom(Clause[] testSentence) {
         // does the sentence contain random clauses
-        for(Clause clause: testSentence) {
-            if(clause instanceof RandomClause) return true;
+        for (Clause clause : testSentence) {
+            if (clause instanceof RandomClause) return true;
         }
         return false;
     }
 
     public static boolean hasPlaceHolders(Clause[] testSentence) {
-        // TODO: does the sentence contain placeholders
+        for (Clause clause : testSentence) {
+            if (clause instanceof PlaceHolder) return true;
+        }
         return false;
     }
 
     public static int placeHolderCount(Clause[] testSentence) {
-        // TODO: return number of placeholders
-        return 1;
+        if (hasPlaceHolders(testSentence)) {
+            int count = 0;
+            for (Clause clause : testSentence) {
+                if (clause instanceof PlaceHolder)
+                    count++;
+            }
+            return count;
+        }
+        return 0;
     }
 
     public static Clause[] injectClauses(Clause[] testSentence, Clause[] injectedClauses) {

@@ -82,11 +82,12 @@ public abstract class BaseTest {
         return BaseTest.injectedClauses;
     }
 
-    public boolean hasInjectedClauses() {
-        return BaseTest.injectedClauses != null;
+    // Utilities
+    public void refreshOutputStream() {
+        testOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(testOut));
     }
 
-    // Utilities
     public void executeMain() {
         currentOutput = null;
         runMain();
@@ -136,7 +137,9 @@ public abstract class BaseTest {
     public void runWithInput() {
         // Run with default input if specified, fail if not specified
         if (TestOption.isInputTest && TestOption.defaultInput != null) {
+            refreshOutputStream();
             executeMain(TestOption.defaultInput);
+            checkOutputFollowsPatternAndClausesAreValid();
         } else {
             // TODO: better message
             _fail("Internal Error.", "Tried to run input without default input.");
@@ -144,14 +147,18 @@ public abstract class BaseTest {
     }
 
     public void runWithInput(String input) {
+        refreshOutputStream();
         executeMain(input);
+        checkOutputFollowsPatternAndClausesAreValid();
     }
 
     public void runWithInput(String input, Clause[] injectedClauses) throws InvalidClauseException {
         // run with input when you have clauses to inject too
+        refreshOutputStream();
         setInjectedClauses(injectedClauses);
         setRegexSentence(injectClauses(testSentence(), getInjectedClauses()));
         executeMain(input);
+        checkOutputFollowsPatternAndClausesAreValid();
     }
 
     // Default Tests and Setup
@@ -162,11 +169,9 @@ public abstract class BaseTest {
 
     @BeforeEach
     public void setUp() throws InvalidClauseException, InvalidTestOptionException {
-        // TODO: before each test, we always set the regex sentence again. If injected clauses are provided, inject them
-        setRegexSentence(testSentence());  // TODO: think harder
+        setRegexSentence(testSentence());
         TestOption.validate();  // check that test options were set with valid options
-        testOut = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(testOut));
+        refreshOutputStream();
 
         if (TestOption.isInputTest) {
             runWithInput();
@@ -177,28 +182,23 @@ public abstract class BaseTest {
 
     @Test
     @Order(1)
-    public void checkOutputFollowsPattern() {
+    public void checkOutputFollowsPatternAndClausesAreValid() {
         String output = getOutput();
         Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
         assertTrue(matcher.find(), "Your code's output did not follow the correct structure/syntax.");
         //Ensures that the output matches the pattern exactly
         assertEquals(output.substring(matcher.start(), matcher.end()), output, "Your code's output did not follow the correct structure/syntax.");
-        // This ensures that their output only contains 1 instance of the matched regex string  // TODO: still needed?
-        assertFalse(matcher.find());
-    }
 
-    @Test
-    public void allClausesValid() {
-        String output = getOutput();
-        Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
-        assertTrue(matcher.find(), "Your code's output did not follow the correct structure/syntax.");
-
+        // check all clauses valid
         int matchGroupNum = 1;  // match group numbers are 1-indexed
         for (Clause clause : getRegexSentence()) {
             // TODO: devMessage could be improved
             _assertTrue(clause.validate(matcher.group(matchGroupNum)), clause.getInvalidMessage(), "Invalid Clause output at index " + matchGroupNum);
             matchGroupNum++;
         }
+
+        // This ensures that their output only contains 1 instance of the matched regex string
+        assertFalse(matcher.find());
     }
 
     @AfterEach

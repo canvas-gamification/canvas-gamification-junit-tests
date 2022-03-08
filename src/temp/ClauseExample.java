@@ -2,7 +2,6 @@ package temp;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
-import global.exceptions.InvalidTestOptionException;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
