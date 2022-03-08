@@ -7,11 +7,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AreaSectorTest extends BaseTest {
+public class MainTest extends BaseTest {
+    //parsons
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The area of the sector is: "),
-                new DoubleLiteral(24.801128670839425, 24.801128670839425, "math")
+                new DoubleLiteral("math")
         };
     }
 
@@ -21,6 +22,6 @@ public class AreaSectorTest extends BaseTest {
 
     @Test
     public void mathTest() {
-        assertEquals("24.801128670839425", getItemByName("math"), "Your program's math calculations are incorrect");
+        assertEquals(24.801128670839425, Double.parseDouble(getItemByName("math")), 0.1, "Your program's math calculations are incorrect");
     }
 }
