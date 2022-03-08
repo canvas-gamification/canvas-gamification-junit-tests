@@ -4,9 +4,9 @@ import global.variables.*;
 import global.variables.clauses.*;
 import global.BaseTest;
 
-public class PunishmentLoopTest extends BaseTest {
+public class MainTest extends BaseTest { //Parson's Test
     
-    String sentence = "Hello World";
+    String sentence = "This is an example sentence.";
     int repetitions = 15;
 
     public Clause[] testSentence() {
