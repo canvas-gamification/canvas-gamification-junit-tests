@@ -53,7 +53,7 @@ public class MainTest extends BaseTest {
     @Test
     public void methodPassingAnArrayLargerThan10() {
         int[] expected = new int[10];
-        int[] passed = new int[12];
+        int[] passed = new int[30];
         for (int x = 0; x < passed.length; x++) {
             int n = (int) (Math.random() * 10);
             passed[x] = n;
