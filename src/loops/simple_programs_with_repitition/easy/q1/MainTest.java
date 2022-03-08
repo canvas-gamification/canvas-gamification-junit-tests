@@ -7,7 +7,7 @@ import global.BaseTest;
 public class MainTest extends BaseTest { //Parson's Test
     
     String sentence = "This is an example sentence.";
-    int repetitions = 15;
+    int repetitions = 10;
 
     public Clause[] testSentence() {
 
