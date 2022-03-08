@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CountArTest extends BaseTest {
+public class MainTest extends BaseTest {
     int[] inputs = {0, 1, 0, 2, 3, 1, 0, 2, 0};
 
     public Clause[] testSentence() {
@@ -44,16 +44,22 @@ public class CountArTest extends BaseTest {
     public void methodOutOfBoundsException() {
 
         try {
-            //noinspection ResultOfMethodCallIgnored
-            CountAr.countThisPlease(new int[]{10, 10, 10, 9, 2, 3, 4, 5, 1, 7, 5});
+            int[] hold = CountAr.countThisPlease(new int[]{10, 10, 10, 9, 2, 3, 4, 5, 1, 7, 5});
             fail("Your program should not count numbers larger than 9");
-        } catch (IndexOutOfBoundsException e) {}
+        } catch (IndexOutOfBoundsException e) {
+        }
     }
 
     @Test
     public void methodPassingAnArrayLargerThan10() {
-        int[] expected = {1, 2, 3, 0, 1, 1, 1, 1, 0, 1};
-        int[] actual = CountAr.countThisPlease(new int[]{2, 2, 4, 2, 1, 9, 5, 1, 6, 0, 7});
+        int[] expected = new int[10];
+        int[] passed = new int[12];
+        for (int x = 0; x < passed.length; x++) {
+            int n = (int) (Math.random() * 10);
+            passed[x] = n;
+            expected[n]++;
+        }
+        int[] actual = CountAr.countThisPlease(passed);
         assertArrayEquals(expected, actual, "Your program did not correctly count all the numbers given in the input");
     }
 }
