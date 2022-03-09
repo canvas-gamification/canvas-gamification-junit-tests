@@ -1,6 +1,6 @@
 package global.variables.clauses;
 
-import global.tools.InvalidClauseException;
+import global.exceptions.InvalidClauseException;
 import global.variables.Clause;
 
 public class DoubleLiteral extends Clause {
