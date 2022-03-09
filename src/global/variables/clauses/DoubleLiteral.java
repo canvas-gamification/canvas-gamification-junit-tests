@@ -64,6 +64,6 @@ public class DoubleLiteral extends Clause {
     @Override
     public String getRegex() {
         // This matches any double value as long as it has 1 or more digits in the number part and the decimal part
-        return "(\\d+\\.\\d+)";
+        return "(-?\\d+\\.\\d+)";
     }
 }

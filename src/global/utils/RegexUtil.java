@@ -26,14 +26,14 @@ public class RegexUtil {
         if (lower == Integer.MIN_VALUE && upper == Integer.MAX_VALUE) {
             return "\\d+";
         }
-        int minDigits = String.valueOf(lower).length();
-        int maxDigits = String.valueOf(upper).length();
+        int minDigits = String.valueOf(Math.abs(lower)).length();
+        int maxDigits = String.valueOf(Math.abs(upper)).length();
 
-        return String.format("\\d{%d,%d}", minDigits, maxDigits);
+        return String.format("-?\\d{%d,%d}", minDigits, maxDigits);
     }
 
     public static int[] getSplitDecimal(double num) {
-        String[] lowSplit = String.valueOf(num).split("\\.");
+        String[] lowSplit = String.valueOf(Math.abs(num)).split("\\.");
         return new int[]{Integer.parseInt(lowSplit[0]), Integer.parseInt(lowSplit[1])};
     }
 }
