@@ -4,22 +4,19 @@ import global.variables.*;
 import global.variables.clauses.*;
 import global.BaseTest;
 
-public class CountItUpTest extends BaseTest {
+public class MainTest extends BaseTest { // Parsons Test
     
     String input1 = "This is just for testing. Do not copy!";
     String input2 = "s";
 
     public Clause[] testSentence() {
-
-        Clause[] output = new Clause[5];
-
-        output[0] = new StringLiteral("Enter a sentence: ");
-        output[1] = new NewLine();
-        output[2] = new StringLiteral("Enter the character to count: ");
-        output[3] = new NewLine();
-        output[4] = new StringLiteral("The number of times " + input2 + " occurs in the sentence is " + countingLetter(input1, input2.charAt(0)) + " times.");
-        return output;
-        
+        return new Clause[]{
+            new StringLiteral("Enter a sentence: "),
+            new NewLine(),
+            new StringLiteral("Enter the character to count: "),
+            new NewLine(),
+            new StringLiteral("The number of times " + input2 + " occurs in the sentence is " + countingLetter(input1, input2.charAt(0)) + " times.")
+        };
     }
 
     public void runMain() {
