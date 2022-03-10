@@ -8,17 +8,16 @@ import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class JavademicTest extends BaseTest {
-    final double xtExpected = 13099.97821824974;
+public class MainTest extends BaseTest {
+    //Parsons with distractors
+    final double xtExpected = 13100.00;
 
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("Num cases of infections in "),
                 new IntegerLiteral(30),
                 new StringLiteral(" days is "),
-                //These are the possible range of values if they select on of the parsons distractors, and the proper
-                //value is tested for below
-                new DoubleLiteral(44, 1.23453340530816128E17, "xt"),
+                new DoubleLiteral( "xt"),
                 new StringLiteral(" people")
         };
     }
@@ -29,6 +28,6 @@ public class JavademicTest extends BaseTest {
 
     @Test
     public void xtTest(){
-        assertEquals(Double.parseDouble(getItemByName("xt")) , xtExpected, "Calculated value of xt is incorrect");
+        assertEquals(Double.parseDouble(getItemByName("xt")) , xtExpected, 0.5, "Calculated value of xt is incorrect");
     }
 }
