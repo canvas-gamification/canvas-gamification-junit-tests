@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class RegexUtil {
     public static String processRegexForPrintlnOutput(String regexPattern) {
-        return regexPattern + "\\R";
+        return regexPattern + "\\R?";
     }
 
     public static Matcher getMatches(String outputString, String patternString) {
@@ -23,14 +23,17 @@ public class RegexUtil {
     }
 
     public static String getRegexInt(int lower, int upper) {
-        int minDigits = String.valueOf(lower).length();
-        int maxDigits = String.valueOf(upper).length();
+        if (lower == Integer.MIN_VALUE && upper == Integer.MAX_VALUE) {
+            return "\\d+";
+        }
+        int minDigits = String.valueOf(Math.abs(lower)).length();
+        int maxDigits = String.valueOf(Math.abs(upper)).length();
 
-        return String.format("\\d{%d,%d}", minDigits, maxDigits);
+        return String.format("-?\\d{%d,%d}", minDigits, maxDigits);
     }
 
     public static int[] getSplitDecimal(double num) {
-        String[] lowSplit = String.valueOf(num).split("\\.");
+        String[] lowSplit = String.valueOf(Math.abs(num)).split("\\.");
         return new int[]{Integer.parseInt(lowSplit[0]), Integer.parseInt(lowSplit[1])};
     }
 }
