@@ -7,14 +7,14 @@ import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EarthquakeTest extends BaseTest {
-
+public class MainTest extends BaseTest {
+    //Parsons
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The magnitude of an earthquake with intensity "),
                 new DoubleLiteral(23200.0, 23200.0, "intensity"),
                 new StringLiteral(" is "),
-                new DoubleLiteral(10, 11, "magnitude"),
+                new DoubleLiteral(9, 11, "magnitude"),
                 new StringLiteral(" on the Richter scale.")
         };
     }
@@ -25,6 +25,6 @@ public class EarthquakeTest extends BaseTest {
 
     @Test
     public void magnitudeTest(){
-        assertEquals("" + 10.0519075576544, getItemByName("magnitude"), "The calculated magnitude value is incorrect");
+        assertEquals(10.05, Double.parseDouble(getItemByName("magnitude")), 0.05,"The calculated magnitude value is incorrect");
     }
 }
