@@ -10,14 +10,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    //Parsons with distractors
+    // Parsons (with distractors)
     public Clause[] testSentence() {
         return new Clause[]{
-                new StringLiteral("How many hours have you worked\\Q?\\E"),
+                new StringLiteral("How many hours have you worked\\?"),
                 new NewLine(),
-                new StringLiteral("What is your hourly wage\\Q?\\E"),
+                new StringLiteral("What is your hourly wage\\?"),
                 new NewLine(),
-                new StringLiteral("What is the tax rate\\Q?\\E \\Q(\\EEnter 0\\Q.\\E12 for 12\\Q%\\E\\Q)\\E"),
+                new StringLiteral("What is the tax rate\\? \\(Enter 0\\.12 for 12\\%\\)"),
                 new NewLine(),
                 new StringLiteral("Pay Amount: "),
                 new DoubleLiteral("pay"),
