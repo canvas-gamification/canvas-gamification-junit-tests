@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    //Parsons
+    // Parsons
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The value of tan\\^2 is: "),
@@ -18,7 +18,7 @@ public class MainTest extends BaseTest {
                 new StringLiteral("The value of sec\\^2 is: "),
                 new DoubleLiteral(3, 5, "sec2"),
                 new NewLine(),
-                new StringLiteral("Their sum is\\: "),
+                new StringLiteral("Their sum is: "),
                 new DoubleLiteral(6, 8, "sum")
         };
     }
