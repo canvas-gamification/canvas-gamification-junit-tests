@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    //Parsons
+    // Parsons
     final double cos2 = 0.25;
     final double sin2 = 0.75;
     final double sum = 1.0;
