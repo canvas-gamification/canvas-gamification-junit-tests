@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AbsolutelySureTest extends BaseTest {
+public class MainTest extends BaseTest {
+    //Parsons
     int input = 5;
     String negativeInput = "-46";
 
