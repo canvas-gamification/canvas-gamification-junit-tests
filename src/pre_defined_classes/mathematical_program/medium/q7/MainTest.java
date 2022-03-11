@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    //Parsons
+    // Parsons
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The speed of a tsunami starting at a depth of 5000 is "),
