@@ -7,11 +7,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class WaterTest extends BaseTest {
+public class MainTest extends BaseTest {
+    //Parsons
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The speed of a tsunami is "),
-                new DoubleLiteral(7.0, 7.0, "math"),
+                new DoubleLiteral("math"),
                 new StringLiteral("km/hr")
         };
     }
@@ -22,6 +23,6 @@ public class WaterTest extends BaseTest {
 
     @Test
     public void mathTest(){
-        assertEquals("7.0", getItemByName("math"), "Your math is incorrect");
+        assertEquals(7.0, Double.parseDouble(getItemByName("math")), 0.1, "Your math is incorrect");
     }
 }
