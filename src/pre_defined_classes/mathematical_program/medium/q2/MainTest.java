@@ -7,13 +7,14 @@ import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class HeronTest extends BaseTest {
+public class MainTest extends BaseTest {
+    //Parsons
     final double area = 8.317902379807064;
 
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The area of the triangle is: "),
-                new DoubleLiteral(8, 9, "area"),
+                new DoubleLiteral("area"),
                 new StringLiteral(" units squared.")
         };
     }
@@ -24,6 +25,6 @@ public class HeronTest extends BaseTest {
 
     @Test
     public void areaTest(){
-        assertEquals(area + "", getItemByName("area"), "Calculated area is inccorect, try again.");
+        assertEquals(Double.parseDouble(getItemByName("area")), area, 0.2, "Calculated area is incorrect, try again.");
     }
 }
