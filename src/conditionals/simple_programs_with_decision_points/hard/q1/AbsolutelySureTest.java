@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AbsolutelySureTest extends BaseTest {
     int input = 5;
+    String negativeInput = "-46";
 
     public Clause[] testSentence() {
         return new Clause[]{
@@ -25,10 +26,10 @@ public class AbsolutelySureTest extends BaseTest {
 
     @Test
     public void negativeValueTest() {
-        provideInput("-46");
+        provideInput(negativeInput);
         AbsolutelySure.main(new String[]{});
         String output = getOutput();
-        int contains = output.indexOf("-46");
+        int contains = output.indexOf(negativeInput);
         assertEquals(-1, contains, "Your program does not change negative numbers to positive numbers");
     }
 }
