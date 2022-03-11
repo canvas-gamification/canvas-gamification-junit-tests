@@ -8,16 +8,18 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AbsolutelySureTest extends BaseTest {
+    int input = 5;
+
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("Enter a number: "),
                 new NewLine(),
-                new IntegerLiteral(5, "returnedValue")
+                new IntegerLiteral(input, "returnedValue")
         };
     }
 
     public void runMain() {
-        provideInput("5");
+        provideInput(String.valueOf(input));
         AbsolutelySure.main(new String[]{});
     }
 
