@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    //Parsons with distractors
+    // Parsons (with distractors)
     final double xtExpected = 13100.00;
 
     public Clause[] testSentence() {
