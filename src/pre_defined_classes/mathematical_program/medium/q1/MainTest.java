@@ -3,19 +3,18 @@ package pre_defined_classes.mathematical_program.medium.q1;
 import global.BaseTest;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
-import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BMITest extends BaseTest {
-
+public class MainTest extends BaseTest {
+    //Parsons
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The BMI of a person that weighs "),
-                new DoubleLiteral(70.5, 70.5),
+                new DoubleLiteral("weight"),
                 new StringLiteral(" kilograms and is "),
-                new DoubleLiteral(1.63, 1.63),
+                new DoubleLiteral("height"),
                 new StringLiteral(" metres tall is: "),
                 new DoubleLiteral(26, 27, "BMI")
         };
@@ -27,6 +26,7 @@ public class BMITest extends BaseTest {
 
     @Test
     public void BMIValueTest(){
-        assertEquals(26.53468327750386 + "", getItemByName("BMI").trim(), "Calculated value of BMI is incorrect");
+        double bmi = Double.parseDouble(getItemByName("weight" ))/ Math.pow(Double.parseDouble(getItemByName("height")), 2);
+        assertEquals(Double.parseDouble(getItemByName("BMI")), bmi, 0.5, "The value of BMI has been calculated incorrectly");
     }
 }
