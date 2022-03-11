@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    //Parsons
+    // Parsons
     final double area = 8.317902379807064;
 
     public Clause[] testSentence() {
