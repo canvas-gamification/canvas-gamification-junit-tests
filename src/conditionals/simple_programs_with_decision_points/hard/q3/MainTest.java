@@ -2,13 +2,10 @@ package conditionals.simple_programs_with_decision_points.hard.q3;
 
 import global.BaseTest;
 import global.variables.Clause;
-import global.variables.clauses.NewLine;
-import global.variables.clauses.RandomInteger;
 import global.variables.clauses.StringLiteral;
-import global.variables.wrappers.Optional;
-import temp.Example;
 
-public class SleepyTimeTest extends BaseTest {
+public class MainTest extends BaseTest {
+    //Parsons
 
     //test if greater than 21 but not greater than 30 mins
     //test if not greater than 21 but greater than 30 mins
