@@ -1,13 +1,18 @@
 package pre_defined_classes.simple_programs_taking_user_input.hard.q1;
 
 /*
+(vary double with: int (for hoursWorked and payRate);
+vary variable name for "pay": payAmount; payAmt;
+vary variable name for "tax": taxAmount; taxAmt;
+vary variable name for "net": netAmount; netAmt;
+vary 12% with: integer in 10 to 49;)
 Make a program that calculates an employee's pay cheque. The program should ask the user how many hours were worked,
 the hourly wage, and the tax rate. The program will display the amount of earnings and the amount of tax deductions on
 the paycheque.
  */
 
 import java.util.Scanner;
-
+//48.75 59.86 0.16
 public class PayrollTax {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
