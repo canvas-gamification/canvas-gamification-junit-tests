@@ -7,11 +7,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GrowthRateTest extends BaseTest {
+public class MainTest extends BaseTest {
+    //Parsons
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The growth rate for the country is:"),
-                new DoubleLiteral(56.25, 56.25, "math")
+                new DoubleLiteral("math")
         };
     }
 
@@ -21,6 +22,6 @@ public class GrowthRateTest extends BaseTest {
 
     @Test
     public void mathTest() {
-        assertEquals("56.25", getItemByName("math"));
+        assertEquals(56.25, Double.parseDouble(getItemByName("math")), 0.1, "Math is incorrect");
     }
 }
