@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    //parsons
+    //Parsons
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("With tips, the amount you need to pay is: "),
