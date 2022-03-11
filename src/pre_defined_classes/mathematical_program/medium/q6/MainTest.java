@@ -7,12 +7,12 @@ import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SoundsGoodTest extends BaseTest {
-
+public class MainTest extends BaseTest {
+    //Parsons
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("A person speaking is "),
-                new DoubleLiteral(160, 162, "decibels"),
+                new DoubleLiteral(160, 170, "decibels"),
                 new StringLiteral(" decibels loud!")
         };
     }
@@ -23,7 +23,7 @@ public class SoundsGoodTest extends BaseTest {
 
     @Test
     public void decibelMathTest(){
-        assertEquals("" + 161.1809565095832, getItemByName("decibels"), "Your decibel value is incorrect");
+        assertEquals( 161.18, Double.parseDouble(getItemByName("decibels")), 0.25,"Your decibel value is incorrect");
     }
 
 }
