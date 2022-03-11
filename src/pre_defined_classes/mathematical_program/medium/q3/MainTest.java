@@ -38,4 +38,5 @@ public class MainTest extends BaseTest {
         assertEquals(cos2 , Double.parseDouble(getItemByName("cos2")), 0.05,  "Your value for cos^2 is incorrect");
         assertEquals(sum , Double.parseDouble(getItemByName("sum")), 0.05, "Your value for the sum of the angles is incorrect");
     }
+
 }
