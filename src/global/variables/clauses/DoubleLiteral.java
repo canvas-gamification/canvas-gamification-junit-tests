@@ -1,6 +1,6 @@
 package global.variables.clauses;
 
-import global.tools.InvalidClauseException;
+import global.exceptions.InvalidClauseException;
 import global.variables.Clause;
 
 public class DoubleLiteral extends Clause {
@@ -54,6 +54,11 @@ public class DoubleLiteral extends Clause {
                 throw new InvalidClauseException("Lower bound cannot be greater than upper bound");
             }
         }
+    }
+
+    @Override
+    public String getInvalidMessage() {
+        return "Invalid double value or value out of range";
     }
 
     @Override
