@@ -1,9 +1,4 @@
 package conditionals.simple_programs_with_decision_points.medium.q1;
-
-/*
-Write a program that will ask the user for their investment and double it if it is above $5000
- */
-
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
@@ -13,13 +8,8 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-
 import java.util.stream.Stream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.Random;
-
 
 public class MainTest extends BaseTest {
     // Parsons
