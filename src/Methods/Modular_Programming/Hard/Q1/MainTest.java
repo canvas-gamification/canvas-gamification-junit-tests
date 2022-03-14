@@ -11,7 +11,7 @@ public class MainTest extends BaseTest{
     String input = "5";
 
     public Clause[] testSentence() {
-        provideInput(input);
+
         return new Clause[]{
                 new StringLiteral("Enter a number"),
                 new NewLine(),
@@ -20,6 +20,7 @@ public class MainTest extends BaseTest{
     }
 
     public void runMain() {
+        provideInput(input);
         RightPrime.main(new String[]{});
     }
 
