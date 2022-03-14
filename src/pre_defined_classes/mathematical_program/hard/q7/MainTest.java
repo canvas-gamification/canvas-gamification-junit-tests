@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    //Parsons
+    // Parsons (with distractors)
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The speed of a tsunami is "),
-                new DoubleLiteral("math"),
+                new DoubleLiteral("speed"),
                 new StringLiteral("km/hr")
         };
     }
@@ -23,6 +23,6 @@ public class MainTest extends BaseTest {
 
     @Test
     public void mathTest(){
-        assertEquals(7.0, Double.parseDouble(getItemByName("math")), 0.1, "Your math is incorrect");
+        assertEquals(7.0, Double.parseDouble(getItemByName("speed")), 0.1, "Your speed calculation is incorrect. Try referring back to the question for what the correct calculation should look like");
     }
 }
