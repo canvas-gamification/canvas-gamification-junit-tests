@@ -4,7 +4,7 @@ import global.BaseTest;
 import global.variables.*;
 
 public class MainTest extends BaseTest {
-    //parsons
+    // Parsons (with distractors)
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("It will take "),
