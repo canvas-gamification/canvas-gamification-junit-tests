@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    //Parsons
+    // Parsons (with distractors)
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The 7th term in the geometric sequence is: "),
-                new DoubleLiteral("math"),
+                new DoubleLiteral("7thTerm"),
                 new StringLiteral("E-4")
         };
     }
@@ -23,7 +23,7 @@ public class MainTest extends BaseTest {
 
     @Test
     public void testMath(){
-        assertEquals(2.44140625, Double.parseDouble(getItemByName("math")), 0.1, "Your math calculation is incorrect");
+        assertEquals(2.44140625, Double.parseDouble(getItemByName("7thTerm")), 0.1, "Your math calculation is incorrect. Try referring back to the question for what the correct calculation looks like");
     }
 
 }
