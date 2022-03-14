@@ -12,7 +12,7 @@ public class MainTest extends BaseTest {
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("With tips, the amount you need to pay is: "),
-                new DoubleLiteral("math")
+                new DoubleLiteral("billAmount")
         };
     }
 
@@ -22,6 +22,6 @@ public class MainTest extends BaseTest {
 
     @Test
     public void tipPercentageTest() {
-        assertEquals(28.0, Double.parseDouble(getItemByName("math")), 0.1, "Your math is incorrect");
+        assertEquals(28.0, Double.parseDouble(getItemByName("billAmount")), 0.1, "Your math is incorrect");
     }
 }
