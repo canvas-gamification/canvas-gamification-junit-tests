@@ -8,20 +8,20 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    //Parsons
+    // Parsons (with distractors)
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The area of the sector is: "),
-                new DoubleLiteral("math")
+                new DoubleLiteral("area")
         };
     }
 
     public void runMain() {
-        AreaSector.main(new String[]{});
+        AreaSector.main(new String[0]);
     }
 
     @Test
     public void mathTest() {
-        assertEquals(24.801128670839425, Double.parseDouble(getItemByName("math")), 0.1, "Your program's math calculations are incorrect");
+        assertEquals(24.801128670839425, Double.parseDouble(getItemByName("area")), 0.1, "Your program's math calculations are incorrect");
     }
 }
