@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class MainTest extends BaseRandomTest {
-    //Parsons with Distractors
+    // Parsons with Distractors
     public Clause[] testSentence() {
         return new Clause[]{
                 new RandomInteger(10000000, 100000000, "crypt"),
