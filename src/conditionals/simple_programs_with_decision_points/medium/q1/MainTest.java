@@ -7,6 +7,7 @@ import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,7 +17,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = joinInputs("5001", "499", "5000", "8765");
+        TestOption.defaultInput = "5001";
         return new Clause[]{
                 new StringLiteral("What is your investment in \\$ \\(rounded to the nearest dollar\\)\\? "),
                 new NewLine(),
@@ -29,26 +30,15 @@ public class MainTest extends BaseTest {
         InvestOp.main(new String[0]);
     }
 
-    static Stream<String> inputProvider() {
-        return Stream.of("5001", "499", "5000", "8765");
+    static Stream<Arguments> inputProvider() {
+        return Stream.of(Arguments.of(5001,10002), Arguments.of(499, 499), Arguments.of(5000, 5000), Arguments.of(8765, 17530));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(String input) throws InvalidClauseException {
-        runWithInput(input);
-        int investmentOutput = Integer.parseInt(input);
-        if(investmentOutput > 5000)
-            investmentOutput *= 2;
-        assertEquals(Integer.parseInt(getItemByName("investment")), investmentOutput, "The calculated investment output is wrong");
+    void testWithInput(int input, int output) throws InvalidClauseException {
+        runWithInput(input + "");
+        assertEquals(Integer.parseInt(getItemByName("investment")), output, "The calculated investment output is wrong");
     }
 
-    // Helper method
-    public static String joinInputs(String... inputs) {
-        StringBuilder sb = new StringBuilder();
-        for (String input : inputs) {
-            sb.append(input).append(System.lineSeparator());
-        }
-        return sb.toString();
-    }
 }
