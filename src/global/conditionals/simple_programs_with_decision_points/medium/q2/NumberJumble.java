@@ -1,9 +1,10 @@
 package global.conditionals.simple_programs_with_decision_points.medium.q2;
 import java.util.Scanner;
 
-/*Write a program that asks the user for a number and divides the number by 10 if it is greater than 10, and multiplies
- it by 10 if it is less than 10.
-*/
+/*
+Write a program that asks the user for a number and divides the number by 10 (using integer division) if it is greater
+than 10, and multiplies it by 10 if it is less than 10.
+ */
 
 public class NumberJumble
 {
