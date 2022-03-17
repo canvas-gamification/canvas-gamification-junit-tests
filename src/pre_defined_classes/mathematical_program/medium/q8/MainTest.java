@@ -14,7 +14,7 @@ public class MainTest extends BaseTest {
                 new StringLiteral("The magnitude of an earthquake with intensity "),
                 new DoubleLiteral(23200.0, 23200.0, "intensity"),
                 new StringLiteral(" is "),
-                new DoubleLiteral(9, 11, "magnitude"),
+                new DoubleLiteral( "magnitude"),
                 new StringLiteral(" on the Richter scale.")
         };
     }
