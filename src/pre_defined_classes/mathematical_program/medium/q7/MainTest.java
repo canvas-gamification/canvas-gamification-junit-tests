@@ -12,7 +12,7 @@ public class MainTest extends BaseTest {
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The speed of a tsunami starting at a depth of 5000 is "),
-                new DoubleLiteral(220, 222, "waterSpeed"),
+                new DoubleLiteral("waterSpeed"),
                 new StringLiteral("km/hr.")
         };
     }
