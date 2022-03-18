@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest extends BaseTest {
-    //Parsons
+    // Parsons
     int input = 5;
     String negativeInput = "-46";
 
