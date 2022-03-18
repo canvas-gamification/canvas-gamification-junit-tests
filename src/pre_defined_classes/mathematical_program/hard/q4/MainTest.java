@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    // Parsons (with distractors)
+    // Parsons with distractors
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("With tips, the amount you need to pay is: "),
@@ -22,6 +22,6 @@ public class MainTest extends BaseTest {
 
     @Test
     public void tipPercentageTest() {
-        assertEquals(28.0, Double.parseDouble(getItemByName("billAmount")), 0.1, "Your math is incorrect");
+        assertEquals(28.0, Double.parseDouble(getItemByName("billAmount")), 0.1, "Your final bill calculation is incorrect");
     }
 }
