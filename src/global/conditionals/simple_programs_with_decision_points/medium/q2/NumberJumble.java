@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 /*
 Write a program that asks the user for a number and divides the number by 10 (using integer division) if it is greater
-than 10, and multiplies it by 10 if it is less than 10.
+than 10; otherwise, it multiplies it by 10.
  */
 
 public class NumberJumble
