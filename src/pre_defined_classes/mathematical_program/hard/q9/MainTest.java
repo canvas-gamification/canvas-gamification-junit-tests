@@ -22,6 +22,6 @@ public class MainTest extends BaseTest {
 
     @Test
     public void mathTest() {
-        assertEquals(56.25, Double.parseDouble(getItemByName("growthRate")), 0.1, "Growth rate calculation is incorrect. Refer back to the question for what the correct calculation should look like");
+        assertEquals(56.25, Double.parseDouble(getItemByName("growthRate")), 0.01, "Growth rate calculation is incorrect. Refer back to the question for what the correct calculation should look like");
     }
 }
