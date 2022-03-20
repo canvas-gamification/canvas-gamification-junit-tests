@@ -18,11 +18,11 @@ public class MainTest extends BaseTest {
 
 
     public void runMain() {
-        ShoutOut.main(new String[]{});
+        ShoutOut.main(new String[0]);
     }
 
     @Test
     public void mathTest() {
-        assertEquals(0.8749999999999999, Double.parseDouble(getItemByName("ratio")), 0.1, "Your ratio calculation is incorrect");
+        assertEquals(0.8749999999999999, Double.parseDouble(getItemByName("ratio")), 0.1, "Your ratio calculation is incorrect.");
     }
 }
