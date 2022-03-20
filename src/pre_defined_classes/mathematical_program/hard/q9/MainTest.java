@@ -17,7 +17,7 @@ public class MainTest extends BaseTest {
     }
 
     public void runMain() {
-        GrowthRate.main(new String[]{});
+        GrowthRate.main(new String[0]);
     }
 
     @Test
