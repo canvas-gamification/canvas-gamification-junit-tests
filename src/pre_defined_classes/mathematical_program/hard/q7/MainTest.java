@@ -18,7 +18,7 @@ public class MainTest extends BaseTest {
     }
 
     public void runMain() {
-        Water.main(new String[]{});
+        Water.main(new String[0]);
     }
 
     @Test
