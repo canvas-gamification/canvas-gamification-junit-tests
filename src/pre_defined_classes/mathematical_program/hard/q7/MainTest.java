@@ -23,6 +23,6 @@ public class MainTest extends BaseTest {
 
     @Test
     public void mathTest(){
-        assertEquals(7.0, Double.parseDouble(getItemByName("speed")), 0.1, "Your speed calculation is incorrect. Try referring back to the question for what the correct calculation should look like");
+        assertEquals(7.0, Double.parseDouble(getItemByName("speed")), 0.1, "Your speed calculation is incorrect. Try referring back to the question for what the correct calculation should look like.");
     }
 }
