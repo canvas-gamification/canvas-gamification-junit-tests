@@ -18,12 +18,12 @@ public class MainTest extends BaseTest {
     }
 
     public void runMain() {
-        Series.main(new String[]{});
+        Series.main(new String[0]);
     }
 
     @Test
     public void testMath(){
-        assertEquals(2.44140625, Double.parseDouble(getItemByName("7thTerm")), 0.1, "Your math calculation is incorrect. Try referring back to the question for what the correct calculation looks like");
+        assertEquals(2.44140625, Double.parseDouble(getItemByName("7thTerm")), 0.1, "Your math calculation is incorrect. Try referring back to the question for what the correct calculation looks like.");
     }
 
 }
