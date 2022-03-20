@@ -1,7 +1,7 @@
 package global;
 
 import global.variables.Clause;
-import global.variables.clauses.RandomClause;
+import global.variables.RandomClause;
 import org.junit.jupiter.api.*;
 
 import java.util.regex.Matcher;
