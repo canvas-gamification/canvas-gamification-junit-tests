@@ -16,6 +16,6 @@ public class MainTest extends BaseTest {
     }
 
     public void runMain() {
-        Javademic.main(new String[]{});
+        Javademic.main(new String[0]);
     }
 }
