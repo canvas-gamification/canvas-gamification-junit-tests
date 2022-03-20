@@ -17,11 +17,11 @@ public class MainTest extends BaseTest {
     }
 
     public void runMain() {
-        CalcBill.main(new String[]{});
+        CalcBill.main(new String[0]);
     }
 
     @Test
     public void tipPercentageTest() {
-        assertEquals(28.0, Double.parseDouble(getItemByName("billAmount")), 0.1, "Your final bill calculation is incorrect");
+        assertEquals(28.0, Double.parseDouble(getItemByName("billAmount")), 0.1, "Your final bill calculation is incorrect.");
     }
 }
