@@ -23,7 +23,7 @@ public class MainTest extends BaseTest {
 
     @Test
     public void testMath(){
-        assertEquals(2.44140625, Double.parseDouble(getItemByName("7thTerm")), 0.1, "Your math calculation is incorrect. Try referring back to the question for what the correct calculation looks like.");
+        assertEquals(2.44140625, Double.parseDouble(getItemByName("7thTerm")), 0.00001, "Your math calculation is incorrect. Try referring back to the question for what the correct calculation looks like.");
     }
 
 }
