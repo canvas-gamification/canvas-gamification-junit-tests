@@ -20,12 +20,12 @@ public class MainTest extends BaseTest {
     }
 
     public void runMain() {
-        LeftRight.main(new String[]{});
+        LeftRight.main(new String[0]);
     }
 
     @Test
     public void mathTest(){
-        assertEquals(-0.7760683270883323, Double.parseDouble(getItemByName("leftSide")), 0.1, "Your calculations for the left hand side is incorrect");
-        assertEquals(-0.7760683270883322, Double.parseDouble(getItemByName("rightSide")), 0.1, "Your calculations for the right hand side is incorrect");
+        assertEquals(-0.7760683270883323, Double.parseDouble(getItemByName("leftSide")), 0.000001, "Your calculations for the left hand side is incorrect.");
+        assertEquals(-0.7760683270883322, Double.parseDouble(getItemByName("rightSide")), 0.000001, "Your calculations for the right hand side is incorrect.");
     }
 }
