@@ -4,7 +4,6 @@ import global.BaseTest;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.*;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -37,9 +36,9 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void testWithInput(int input, int output) {
-        String error = "The absolute value was calculated incorrectly";
+        String error = "The absolute value was calculated incorrectly. ";
         if(input<0 )
-            error += ", negative values were no handled properly";
+            error += "Negative values were no handled properly.";
         runWithInput(input + "");
         assertEquals(Integer.parseInt(getItemByName("absoluteValue")), output, error);
     }
