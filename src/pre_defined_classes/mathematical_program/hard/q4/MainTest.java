@@ -22,6 +22,6 @@ public class MainTest extends BaseTest {
 
     @Test
     public void tipPercentageTest() {
-        assertEquals(28.0, Double.parseDouble(getItemByName("billAmount")), 0.1, "Your final bill calculation is incorrect.");
+        assertEquals(28.0, Double.parseDouble(getItemByName("billAmount")), 0.01, "Your final bill calculation is incorrect.");
     }
 }
