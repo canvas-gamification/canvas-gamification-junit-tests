@@ -12,7 +12,7 @@ public class MainTest extends BaseTest {
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("A person speaking is "),
-                new DoubleLiteral(160, 170, "decibels"),
+                new DoubleLiteral("decibels"),
                 new StringLiteral(" decibels loud!")
         };
     }
@@ -23,7 +23,7 @@ public class MainTest extends BaseTest {
 
     @Test
     public void decibelMathTest(){
-        assertEquals( 161.18, Double.parseDouble(getItemByName("decibels")), 0.25,"Your decibel value is incorrect");
+        assertEquals( 161.181, Double.parseDouble(getItemByName("decibels")), 0.01,"Your calculated decibel value is incorrect.");
     }
 
 }
