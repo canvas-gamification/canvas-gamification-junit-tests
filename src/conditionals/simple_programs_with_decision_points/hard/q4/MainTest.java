@@ -4,6 +4,7 @@ import global.BaseTest;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 
 public class MainTest extends BaseTest {
     // Parsons
@@ -11,7 +12,8 @@ public class MainTest extends BaseTest {
         return new Clause[]{
                 new StringLiteral("Is the door open or closed right now? (Enter true for open and false for closed)"),
                 new NewLine(),
-                new StringLiteral("")//either I will close the door or Time to open the door
+                new Optional(new StringLiteral("I will close the door")),
+                new Optional(new StringLiteral("Time to open the door"))
         };
     }
 
