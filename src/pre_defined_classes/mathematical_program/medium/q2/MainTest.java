@@ -25,6 +25,6 @@ public class MainTest extends BaseTest {
 
     @Test
     public void areaTest(){
-        assertEquals(Double.parseDouble(getItemByName("area")), area, 0.2, "Calculated area is incorrect, try again.");
+        assertEquals(Double.parseDouble(getItemByName("area")), area, 0.01, "Calculated area is incorrect, try again.");
     }
 }
