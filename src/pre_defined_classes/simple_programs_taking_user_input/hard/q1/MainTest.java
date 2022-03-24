@@ -1,17 +1,24 @@
 package pre_defined_classes.simple_programs_taking_user_input.hard.q1;
 
 import global.BaseTest;
+import global.exceptions.InvalidClauseException;
+import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
-import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    // Parsons (with distractors)
+    // Parsons with distractors
+
     public Clause[] testSentence() {
+        TestOption.isInputTest = true;
+        TestOption.defaultInput = "10 10 10";
         return new Clause[]{
                 new StringLiteral("How many hours have you worked\\?"),
                 new NewLine(),
@@ -31,14 +38,21 @@ public class MainTest extends BaseTest {
     }
 
     public void runMain() {
-        provideInput("48.75 59.86 0.16 ");
         PayrollTax.main(new String[0]);
     }
 
-    @Test
-    public void outputTest(){
-        assertEquals(Double.parseDouble(getItemByName("pay")), 2918.0, 0.5, "Calculated pay value is incorrect");
-        assertEquals(Double.parseDouble(getItemByName("tax")), 466.9, 0.5, "Calculated tax value is incorrect");
-        assertEquals(Double.parseDouble(getItemByName("net")), 2451.0, 0.5, "Calculated net earnings is wrong");
+    static Stream<Arguments> inputProvider() {
+        return Stream.of(Arguments.of(48.75, 59.86, 0.16, 2918.175, 466.908, 2451.267),
+                Arguments.of(17.50, 45, 0.10, 787.5, 78.75, 708.75),
+                Arguments.of(34.79, 39.75, 0.20, 1382.9025, 276.5805, 1106.322));
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    void testWithInput(double hours, double wage, double taxRate, double pay, double tax, double earnings) throws InvalidClauseException {
+        runWithInput(hours + System.lineSeparator() + wage + System.lineSeparator() + taxRate + System.lineSeparator());
+        assertEquals(Double.parseDouble(getItemByName("pay")), pay, 0.001, "Calculated pay amount is incorrect");
+        assertEquals(Double.parseDouble(getItemByName("tax")), tax, 0.001, "Calculated tax amount is incorrect");
+        assertEquals(Double.parseDouble(getItemByName("net")), earnings, 0.001, "Calculated net earnings is incorrect");
     }
 }
