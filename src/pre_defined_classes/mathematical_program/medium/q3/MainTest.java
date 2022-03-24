@@ -34,9 +34,9 @@ public class MainTest extends BaseTest {
 
     @Test
     public void testDoubleValues(){
-        assertEquals(sin2 , Double.parseDouble(getItemByName("sin2")), 0.05, "Your value for sin^2 is incorrect");
-        assertEquals(cos2 , Double.parseDouble(getItemByName("cos2")), 0.05,  "Your value for cos^2 is incorrect");
-        assertEquals(sum , Double.parseDouble(getItemByName("sum")), 0.05, "Your value for the sum of the angles is incorrect");
+        assertEquals(sin2 , Double.parseDouble(getItemByName("sin2")), 0.01, "Your value for sin^2 is incorrect.");
+        assertEquals(cos2 , Double.parseDouble(getItemByName("cos2")), 0.01,  "Your value for cos^2 is incorrect.");
+        assertEquals(sum , Double.parseDouble(getItemByName("sum")), 0.01, "Your value for the sum of the angles is incorrect.");
     }
 
 }
