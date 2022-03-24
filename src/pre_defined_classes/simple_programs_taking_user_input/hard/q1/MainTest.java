@@ -19,6 +19,7 @@ public class MainTest extends BaseTest {
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "10 10 10";
+
         return new Clause[]{
                 new StringLiteral("How many hours have you worked\\?"),
                 new NewLine(),
