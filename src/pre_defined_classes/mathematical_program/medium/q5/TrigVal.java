@@ -6,6 +6,7 @@ function and <tt>tan()</tt> for the tangent function. Using these functions, we 
 trigonometric identities. Make a Java program that verifies the following trigonometric identity: sec2() + tan2() = 1
 where(theta) is the degree in radians and sec is a mathematical formula that calculates the length of the hypotenuse
 divided by the length of the adjacent side. Note, the formula to obtain sec2()is : sec2()=1cos2()
+
 Sample Output:
 	The value of tan^2 is: 1
 	The value of sec^2 is: 1
