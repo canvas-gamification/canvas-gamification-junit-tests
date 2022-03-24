@@ -5,6 +5,7 @@ import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
@@ -13,7 +14,7 @@ public class MainTest extends BaseTest {
         return new Clause[]{
                 new StringLiteral("The speed of a tsunami starting at a depth of 5000 is "),
                 new DoubleLiteral("waterSpeed"),
-                new StringLiteral("km/hr.")
+                new StringLiteral(" km/hr.")
         };
     }
 
@@ -22,7 +23,7 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    public void waterSpeedMathTest(){
-        assertEquals(221.4 , Double.parseDouble(getItemByName("waterSpeed")), 0.2,  "Your calculated water speed is incorrect");
+    public void waterSpeedMathTest() {
+        assertEquals(221.36, Double.parseDouble(getItemByName("waterSpeed")), 0.01, "Your calculated water speed is incorrect.");
     }
 }
