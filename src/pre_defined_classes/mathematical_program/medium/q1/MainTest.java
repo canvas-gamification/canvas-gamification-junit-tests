@@ -27,6 +27,6 @@ public class MainTest extends BaseTest {
     @Test
     public void BMIValueTest(){
         double bmi = Double.parseDouble(getItemByName("weight" ))/ Math.pow(Double.parseDouble(getItemByName("height")), 2);
-        assertEquals(Double.parseDouble(getItemByName("BMI")), bmi, 0.5, "The value of BMI has been calculated incorrectly");
+        assertEquals(Double.parseDouble(getItemByName("BMI")), bmi, 0.5, "The value of BMI has been calculated incorrectly.");
     }
 }
