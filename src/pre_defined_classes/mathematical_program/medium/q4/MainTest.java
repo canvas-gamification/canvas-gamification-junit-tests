@@ -14,15 +14,15 @@ public class MainTest extends BaseRandomTest {
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("Our team scored "),
-                new IntegerLiteral(120, 130, "totalPoints"),
-                new StringLiteral(" points in the season!"),
+                new IntegerLiteral( "totalPoints"),
+                new StringLiteral(" points this season!"),
                 new NewLine(),
                 new StringLiteral("The highest score was "),
-                new IntegerLiteral(55, 65, "highScore"),
+                new IntegerLiteral("highScore"),
                 new StringLiteral(" points."),
                 new NewLine(),
                 new StringLiteral("The lowest score was "),
-                new IntegerLiteral(30, 35, "lowScore"),
+                new IntegerLiteral("lowScore"),
                 new StringLiteral(" points."),
         };
     }
@@ -33,8 +33,8 @@ public class MainTest extends BaseRandomTest {
 
     @Test
     public void outputTest(){
-        assertEquals(127, Integer.parseInt(getItemByName("totalPoints")),  "Calculated number of points is incorrect");
-        assertEquals(59, Integer.parseInt(getItemByName("highScore")), "Calculated high score is incorrect");
-        assertEquals(32, Integer.parseInt(getItemByName("lowScore")), "Calculated lowest score is incorrect");
+        assertEquals(127, Integer.parseInt(getItemByName("totalPoints")),  "Calculated number of points is incorrect.");
+        assertEquals(59, Integer.parseInt(getItemByName("highScore")), "Calculated high score is incorrect.");
+        assertEquals(32, Integer.parseInt(getItemByName("lowScore")), "Calculated lowest score is incorrect.");
     }
 }
