@@ -24,12 +24,12 @@ public class SleepyTime
     {
         Scanner input = new Scanner( System.in );
         System.out.println("Current Time Hours (in a 24h clock): ");
-//        int hours = input.nextInt();
-//        System.out.println("Current Time Minutes:  ");
-//        int mins = input.nextInt();
-//        if( hours >= 21 && mins >= 30 )
-//            System.out.println("Please go to sleep.");
-//        else
-//            System.out.println("The night is still young!");
+        int hours = input.nextInt();
+        System.out.println("Current Time Minutes:  ");
+        int mins = input.nextInt();
+        if( (hours == 21 && mins >= 30)||hours>21 )
+            System.out.println("Please go to sleep.");
+        else
+            System.out.println("The night is still young!");
     }
 }
