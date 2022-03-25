@@ -5,12 +5,14 @@ import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.*;
 import global.variables.wrappers.Optional;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
@@ -56,5 +58,12 @@ public class MainTest extends BaseTest {
         runWithInput((hours + "") + " " + (minutes + ""));
         String output = getOutput();
         assertTrue(output.contains("The night is still young!"), "Your program tells the user to go to sleep when they should be staying up.");
+    }
+
+    @Test
+    void doubleMessageTest(){
+        runWithInput("15 21");
+        String output = getOutput();
+        assertTrue(output.contains("The night is still young!") ^ output.contains("Please go to sleep."), "Your program prints both possible responses to the input");
     }
 }
