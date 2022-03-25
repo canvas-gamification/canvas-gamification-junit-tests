@@ -6,6 +6,7 @@ import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -42,5 +43,12 @@ public class MainTest extends BaseTest {
         runWithInput(open);
         String output = getOutput();
         assertTrue(output.contains(message), "Your program does not tell the user the correct action to take with the door.");
+    }
+
+    @Test
+    void doubleMessageTest(){
+        runWithInput("true");
+        String output = getOutput();
+        assertTrue(output.contains("I will close the door") ^ output.contains("Time to open the door"), "Your program prints both possible responses to the input");
     }
 }
