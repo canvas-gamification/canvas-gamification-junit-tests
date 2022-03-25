@@ -19,7 +19,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "22 31";
+        TestOption.defaultInput = "a";
 
         return new Clause[]{
                 new StringLiteral("Enter a character: "),
