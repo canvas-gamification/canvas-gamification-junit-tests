@@ -1,6 +1,9 @@
-package global.variables;
+package global.variables.clauses;
 
 import global.utils.RandomUtil;
+import global.utils.RegexUtil;
+import global.variables.Clause;
+import global.variables.RandomClause;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -102,8 +105,8 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
 
     @Override
     public String getRegex() {
-        int[] lowSplit = RandomUtil.getSplitDecimal(lower);
-        int[] highSplit = RandomUtil.getSplitDecimal(upper);
-        return "(" + RandomUtil.getRegexInt(lowSplit[0], highSplit[0]) + "\\.\\d+" + ")";
+        int[] lowSplit = RegexUtil.getSplitDecimal(lower);
+        int[] highSplit = RegexUtil.getSplitDecimal(upper);
+        return "(" + RegexUtil.getRegexInt(lowSplit[0], highSplit[0]) + "\\.\\d+" + ")";
     }
 }
