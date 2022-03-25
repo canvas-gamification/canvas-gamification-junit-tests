@@ -36,9 +36,9 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void testWithInput(int input, String output) throws InvalidClassException{
         runWithInput(input + "");
-        String errorMessage = "Output string incorrect for age 18 or below" ;
+        String errorMessage = "Output string incorrect for age 18 or below." ;
         if(input >= 19)
-            errorMessage = "Output string incorrect for age 19 or above";
+            errorMessage = "Output string incorrect for age 19 or above.";
         assertEquals(getItemByName("underAge"), output, errorMessage);
     }
 }
