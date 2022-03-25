@@ -1,12 +1,9 @@
 package global;
 
-import static global.tools.CustomAssertions._assertTrue;
-import static global.tools.CustomAssertions._fail;
-import static global.utils.RegexUtil.*;
-import static org.junit.jupiter.api.Assertions.*;
-
-import global.tools.InvalidClauseException;
+import global.exceptions.InvalidClauseException;
+import global.exceptions.InvalidTestOptionException;
 import global.tools.Logger;
+import global.tools.TestOption;
 import global.variables.Clause;
 import org.junit.jupiter.api.*;
 
@@ -18,9 +15,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static global.tools.CustomAssertions._assertTrue;
+import static global.tools.CustomAssertions._fail;
+import static global.tools.TestSentenceUtil.injectClauses;
+import static global.tools.TestSentenceUtil.placeHolderCount;
+import static global.utils.RegexUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public abstract class BaseTest {
@@ -28,7 +28,8 @@ public abstract class BaseTest {
     private final PrintStream systemOut = System.out;
     private String currentOutput = null;
     private ByteArrayOutputStream testOut;
-    private Clause[] regexSentence;
+    private static Clause[] regexSentence;
+    private static Clause[] injectedClauses;
 
     // Test Developer defined
     public abstract Clause[] testSentence();
@@ -42,7 +43,7 @@ public abstract class BaseTest {
         for (Clause clause : regexSentence) {
             if (clause.getName() != null) {
                 if (namesSet.contains(clause.getName())) {
-                    _fail("There is an issue with the test definition",
+                    _fail("There is an issue with the test definition. Please contact an administrator.",
                             "The name " + clause.getName() + " is already in use. make sure all names are unique");
                 }
                 namesSet.add(clause.getName());
@@ -59,15 +60,41 @@ public abstract class BaseTest {
             }
         }
 
-        this.regexSentence = regexSentence;
+        BaseTest.regexSentence = regexSentence;
     }
 
     public Clause[] getRegexSentence() {
-        return this.regexSentence;
+        return BaseTest.regexSentence;
+    }
+
+    public void setInjectedClauses(Clause[] injectedClauses) {
+        if (injectedClauses != null) {
+            if (injectedClauses.length != placeHolderCount(testSentence())) {
+                // TODO: check if failing here stops errors from invalid TestOptions from being a problem
+                _fail("There is an issue with the test definition. Please contact an administrator.",
+                        "The number of injected clauses is not equal to the number of placeholders in the test sentence");
+            }
+        }
+        BaseTest.injectedClauses = injectedClauses;
+    }
+
+    public Clause[] getInjectedClauses() {
+        return BaseTest.injectedClauses;
     }
 
     // Utilities
+    public void refreshOutputStream() {
+        testOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(testOut));
+    }
+
     public void executeMain() {
+        currentOutput = null;
+        runMain();
+    }
+
+    public void executeMain(String input) {
+        provideInput(input);
         currentOutput = null;
         runMain();
     }
@@ -86,6 +113,7 @@ public abstract class BaseTest {
     }
 
     public String getItemAtIndex(int index) {
+        // TODO: this needs to be memoized
         Matcher matcher = getMatches(getOutput(), processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
         try {
             if (matcher.find()) return matcher.group(index);
@@ -102,8 +130,35 @@ public abstract class BaseTest {
             if (regSen[i].getName() != null && regSen[i].getName().equals(name))
                 return getItemAtIndex(i + 1);
         }
-        fail("The specified group (" + name + ") doesn't exist");
+        fail("The specified group ('" + name + "') doesn't exist");
         return ""; // TODO: logically how does this behave?
+    }
+
+    public void runWithInput() {
+        // Run with default input if specified, fail if not specified
+        if (TestOption.isInputTest && TestOption.defaultInput != null) {
+            refreshOutputStream();
+            executeMain(TestOption.defaultInput);
+            checkOutputFollowsPatternAndClausesAreValid();
+        } else {
+            // TODO: better message
+            _fail("Internal Error.", "Tried to run input without default input.");
+        }
+    }
+
+    public void runWithInput(String input) {
+        refreshOutputStream();
+        executeMain(input);
+        checkOutputFollowsPatternAndClausesAreValid();
+    }
+
+    public void runWithInput(String input, Clause[] injectedClauses) throws InvalidClauseException {
+        // run with input when you have clauses to inject too
+        refreshOutputStream();
+        setInjectedClauses(injectedClauses);
+        setRegexSentence(injectClauses(testSentence(), getInjectedClauses()));
+        executeMain(input);
+        checkOutputFollowsPatternAndClausesAreValid();
     }
 
     // Default Tests and Setup
@@ -113,37 +168,37 @@ public abstract class BaseTest {
     }
 
     @BeforeEach
-    public void setUp() throws InvalidClauseException {
+    public void setUp() throws InvalidClauseException, InvalidTestOptionException {
         setRegexSentence(testSentence());
-        testOut = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(testOut));
-        executeMain();
+        TestOption.validate();  // check that test options were set with valid options
+        refreshOutputStream();
+
+        if (TestOption.isInputTest) {
+            runWithInput();
+        } else {
+            executeMain();
+        }
     }
 
     @Test
     @Order(1)
-    public void checkOutputFollowsPattern() {
+    public void checkOutputFollowsPatternAndClausesAreValid() {
         String output = getOutput();
         Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
         assertTrue(matcher.find(), "Your code's output did not follow the correct structure/syntax.");
         //Ensures that the output matches the pattern exactly
         assertEquals(output.substring(matcher.start(), matcher.end()), output, "Your code's output did not follow the correct structure/syntax.");
-        // This ensures that their output only contains 1 instance of the matched regex string
-        assertFalse(matcher.find());
-    }
 
-    @Test
-    public void allClausesValid() {
-        String output = getOutput();
-        Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
-        assertTrue(matcher.find(), "Your code's output did not follow the correct structure/syntax.");
-
+        // check all clauses valid
         int matchGroupNum = 1;  // match group numbers are 1-indexed
         for (Clause clause : getRegexSentence()) {
             // TODO: devMessage could be improved
-            _assertTrue(clause.validate(matcher.group(matchGroupNum)), clause.getInvalidMessage(), "Invalid Clause at index " + matchGroupNum);
+            _assertTrue(clause.validate(matcher.group(matchGroupNum)), clause.getInvalidMessage(), "Invalid Clause output at index " + matchGroupNum);
             matchGroupNum++;
         }
+
+        // This ensures that their output only contains 1 instance of the matched regex string
+        assertFalse(matcher.find());
     }
 
     @AfterEach
