@@ -64,6 +64,6 @@ public class MainTest extends BaseTest {
     void doubleMessageTest(){
         runWithInput("15 21");
         String output = getOutput();
-        assertTrue(output.contains("The night is still young!") ^ output.contains("Please go to sleep."), "Your program prints both possible responses to the input");
+        assertTrue(output.contains("The night is still young!") ^ output.contains("Please go to sleep."), "Your program prints both possible responses to the input.");
     }
 }
