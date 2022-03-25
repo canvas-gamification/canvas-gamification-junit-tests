@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
-    // Parsons
+    // Parsons with distractors
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "true";
