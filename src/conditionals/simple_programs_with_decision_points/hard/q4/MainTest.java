@@ -49,6 +49,6 @@ public class MainTest extends BaseTest {
     void doubleMessageTest(){
         runWithInput("true");
         String output = getOutput();
-        assertTrue(output.contains("I will close the door") ^ output.contains("Time to open the door"), "Your program prints both possible responses to the input");
+        assertTrue(output.contains("I will close the door") ^ output.contains("Time to open the door"), "Your program prints both possible responses to the input.");
     }
 }
