@@ -1,16 +1,23 @@
 package Methods.Modular_Programming.Hard.Q1;
 import global.BaseTest;
+import global.tools.TestOption;
 import global.variables.*;
+import global.variables.clauses.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest extends BaseTest{
-    String input = "5";
 
     public Clause[] testSentence() {
+        TestOption.isInputTest = true;
+        TestOption.defaultInput = "5";
 
         return new Clause[]{
                 new StringLiteral("Enter a number"),
@@ -20,7 +27,6 @@ public class MainTest extends BaseTest{
     }
 
     public void runMain() {
-        provideInput(input);
         RightPrime.main(new String[]{});
     }
 
@@ -34,12 +40,12 @@ public class MainTest extends BaseTest{
         assertTrue(RightPrime.isRightPrime(59393), "Your program does not handle large right truncatable primes");
     }
 
+    static Stream<Arguments> inputProvider() {
+        return Stream.of(Arguments.of(3, true), Arguments.of(67, false), Arguments.of(345, false));
+    }
+
     @ParameterizedTest
-    @CsvSource({
-            "3, true",
-            "67, false",
-            "345, false"
-    })
+    @MethodSource("inputProvider")
     public void variousInputsTest(int inputs, boolean results){
         boolean b = RightPrime.isRightPrime(inputs);
         if(results)
