@@ -22,6 +22,10 @@ public class RegexUtil {
         return combinedRegex.toString();
     }
 
+    public static String orNegative(String regexString) {
+        return "-?" + regexString;
+    }
+
     public static String getRegexInt(int lower, int upper) {
         if (lower == Integer.MIN_VALUE && upper == Integer.MAX_VALUE) {
             return "\\d+";
@@ -29,7 +33,7 @@ public class RegexUtil {
         int minDigits = String.valueOf(Math.abs(lower)).length();
         int maxDigits = String.valueOf(Math.abs(upper)).length();
 
-        return String.format("-?\\d{%d,%d}", minDigits, maxDigits);
+        return String.format("\\d{%d,%d}", minDigits, maxDigits);
     }
 
     public static int[] getSplitDecimal(double num) {
