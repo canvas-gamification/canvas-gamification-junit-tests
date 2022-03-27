@@ -54,7 +54,7 @@ public class MainTest extends BaseTest {
         runWithInput(input, new Clause[] {
             new StringLiteral(alternate(input), "stringOutput")
         });
-        assertEquals(getItemByName("stringOutput"), alternate(input), "Calculated value of output is incorrect");
+        assertEquals(getItemByName("stringOutput"), alternate(input), "Your output string output is not correct");
     }
 
 }
