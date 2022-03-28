@@ -1,6 +1,6 @@
 package global.variables;
 
-import global.tools.InvalidClauseException;
+import global.exceptions.InvalidClauseException;
 
 public abstract class Clause implements Regexable {
     String name;
