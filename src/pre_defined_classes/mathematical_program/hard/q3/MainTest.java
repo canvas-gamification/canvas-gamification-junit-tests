@@ -22,6 +22,6 @@ public class MainTest extends BaseTest {
 
     @Test
     public void mathTest() {
-        assertEquals(24.801128670839425, Double.parseDouble(getItemByName("area")), 0.001, "Your calculated sector area is incorrect.");
+        assertEquals(24.801, Double.parseDouble(getItemByName("area")), 0.001, "Your calculated sector area is incorrect.");
     }
 }
