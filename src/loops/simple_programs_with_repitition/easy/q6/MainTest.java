@@ -25,7 +25,7 @@ public class MainTest extends BaseTest {
             new StringLiteral("Enter the character to count: "),
             new NewLine(),
             new StringLiteral("The number of times "),
-            new StringLiteral("StringOutput"),
+            new PlaceHolder(),
             new StringLiteral(" occurs in the sentence is "),
             new IntegerLiteral("numberOutput"),
             new StringLiteral(" times.")
@@ -52,8 +52,9 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void testWithInput(String input1, String input2) throws InvalidClauseException{
         char newInput2 = input2.charAt(0);
-        runWithInput(input1 + System.lineSeparator() + input2);
-        assertEquals("" + getItemByName("StringOutput"), input2, "Output formatting is incorrect");
+        runWithInput(input1 + System.lineSeparator() + input2, new Clause[]{
+            new StringLiteral(input2)
+        });
         assertEquals(Integer.parseInt(getItemByName("numberOutput")), countingLetter(input1, newInput2), "Calculated value of output is incorrect");
     }
 }
