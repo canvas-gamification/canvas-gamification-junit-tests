@@ -1,18 +1,15 @@
 package conditionals.simple_programs_with_decision_points.hard.q5;
 
 import global.BaseTest;
+import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.*;
-import global.variables.wrappers.Optional;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
     // Parsons with distractors
@@ -24,8 +21,7 @@ public class MainTest extends BaseTest {
         return new Clause[]{
                 new StringLiteral("Enter a character: "),
                 new NewLine(),
-                new Optional(new StringLiteral("Vowel")),
-                new Optional(new StringLiteral("Not a vowel"))
+                new PlaceHolder()
         };
     }
 
@@ -39,16 +35,9 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInputLate(String letter, String message) {
-        runWithInput(letter);
-        String output = getOutput();
-        assertTrue(output.contains(message), "Your program does not correctly identify if " + letter + " is a vowel or consonant.");
-    }
-
-    @Test
-    void doubleMessageTest() {
-        runWithInput("a");
-        String output = getOutput();
-        assertTrue(output.contains("Vowel") ^ output.contains("Not a vowel"), "Your program prints both possible responses to the input.");
+    void testWithInputLate(String letter, String message) throws InvalidClauseException {
+        runWithInput(letter, new Clause[]{
+                new StringLiteral(message)
+        });
     }
 }
