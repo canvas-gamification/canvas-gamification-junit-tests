@@ -1,9 +1,11 @@
 package conditionals.simple_programs_with_decision_points.hard.q4;
 
 import global.BaseTest;
+import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
+import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.Test;
@@ -24,8 +26,7 @@ public class MainTest extends BaseTest {
         return new Clause[]{
                 new StringLiteral("Is the door open or closed right now\\? \\(Enter true for open and false for closed\\)"),
                 new NewLine(),
-                new Optional(new StringLiteral("I will close the door")),
-                new Optional(new StringLiteral("Time to open the door"))
+                new PlaceHolder()
         };
     }
 
@@ -39,16 +40,9 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(String open, String message) {
-        runWithInput(open);
-        String output = getOutput();
-        assertTrue(output.contains(message), "Your program does not tell the user the correct action to take with the door.");
-    }
-
-    @Test
-    void doubleMessageTest(){
-        runWithInput("true");
-        String output = getOutput();
-        assertTrue(output.contains("I will close the door") ^ output.contains("Time to open the door"), "Your program prints both possible responses to the input.");
+    void testWithInput(String open, String message) throws InvalidClauseException {
+        runWithInput(open, new Clause[]{
+                new StringLiteral(message)
+        });
     }
 }
