@@ -2,6 +2,7 @@ package global.variables.clauses;
 
 import global.utils.RegexUtil;
 import global.variables.Clause;
+import global.variables.RandomClause;
 
 import java.util.ArrayList;
 import java.util.HashMap;
