@@ -17,6 +17,7 @@ import java.util.regex.Matcher;
 
 import static global.tools.CustomAssertions._assertTrue;
 import static global.tools.CustomAssertions._fail;
+import static global.tools.Logger.parseTestInformation;
 import static global.tools.TestSentenceUtil.injectClauses;
 import static global.tools.TestSentenceUtil.placeHolderCount;
 import static global.utils.RegexUtil.*;
@@ -186,7 +187,7 @@ public abstract class BaseTest {
         String output = getOutput();
         Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
         String incorrectOutputMessage = "Your code's output did not follow the correct structure/syntax.";
-        assertTrue(matcher.find(), incorrectOutputMessage);
+       _assertTrue(matcher.find(), incorrectOutputMessage, parseTestInformation(output, getRegexSentence(), incorrectOutputMessage));
         //Ensures that the output matches the pattern exactly
         assertEquals(output.substring(matcher.start(), matcher.end()), output, incorrectOutputMessage);
 
