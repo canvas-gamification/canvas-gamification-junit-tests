@@ -12,8 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MainTest extends BaseTest {
     // Parsons with distractors
 
-    final double xtExpected = 13100.00;
-
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("Num cases of infections in "),
@@ -30,6 +28,6 @@ public class MainTest extends BaseTest {
 
     @Test
     public void xtTest() {
-        assertEquals(Double.parseDouble(getItemByName("xt")), xtExpected, 0.5, "Calculated value of xt is incorrect");
+        assertEquals(Double.parseDouble(getItemByName("xt")), 13099.98, 0.01, "Calculated value of xt is incorrect");
     }
 }
