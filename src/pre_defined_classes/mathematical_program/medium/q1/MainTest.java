@@ -16,7 +16,7 @@ public class MainTest extends BaseTest {
                 new StringLiteral(" kilograms and is "),
                 new DoubleLiteral("height"),
                 new StringLiteral(" metres tall is: "),
-                new DoubleLiteral(26, 27, "BMI")
+                new DoubleLiteral("BMI")
         };
     }
 
