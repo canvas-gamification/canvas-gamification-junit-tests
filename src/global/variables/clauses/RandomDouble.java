@@ -55,7 +55,6 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
 
     public void trackValue(int matchGroupNum, String matchGroupValue) {
         valueStore.computeIfAbsent(matchGroupNum, k -> new ArrayList<>());
-
         (valueStore.get(matchGroupNum)).add(convertFromRegexGroup(matchGroupValue));
     }
 
