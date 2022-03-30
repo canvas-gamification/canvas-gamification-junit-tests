@@ -1,9 +1,11 @@
 package pre_defined_classes.conditionals.simple_programs_with_decision_points.medium.q3;
 
 import global.BaseTest;
+import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
+import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,7 +22,7 @@ public class MainTest extends BaseTest {
         return new Clause[]{
                 new StringLiteral("What is your age\\? "),
                 new NewLine(),
-                new StringLiteral(".*", "underAge")
+                new PlaceHolder()
         };
     }
 
@@ -34,8 +36,10 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(int input, String output) throws InvalidClassException{
-        runWithInput(input + "");
+    void testWithInput(int input, String output) throws InvalidClauseException {
+        runWithInput(input + "", new Clause[]{
+                new StringLiteral(output, "underAge")
+        });
         String errorMessage = "Output string incorrect for age 18 or below." ;
         if(input >= 19)
             errorMessage = "Output string incorrect for age 19 or above.";
