@@ -1,6 +1,6 @@
 package global.variables.clauses;
 
-import global.tools.InvalidClauseException;
+import global.exceptions.InvalidClauseException;
 import global.utils.RegexUtil;
 import global.variables.Clause;
 

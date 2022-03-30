@@ -17,7 +17,9 @@ public class RegexUtil {
     public static String combineRegex(Clause[] clauses) {
         StringBuilder combinedRegex = new StringBuilder();
         for (Clause clause : clauses) {
-            combinedRegex.append(clause.getRegex());
+            if (clause.getRegex() != null) {
+                combinedRegex.append(clause.getRegex());
+            }
         }
         return combinedRegex.toString();
     }
