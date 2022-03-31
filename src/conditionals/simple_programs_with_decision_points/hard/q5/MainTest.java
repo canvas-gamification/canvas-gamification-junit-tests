@@ -35,7 +35,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInputLate(String letter, String message) throws InvalidClauseException {
+    void testWithInput(String letter, String message) throws InvalidClauseException {
         runWithInput(letter, new Clause[]{
                 new StringLiteral(message)
         });
