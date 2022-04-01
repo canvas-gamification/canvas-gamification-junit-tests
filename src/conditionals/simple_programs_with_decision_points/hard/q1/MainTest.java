@@ -38,7 +38,7 @@ public class MainTest extends BaseTest {
     void testWithInput(int input, int output) {
         String error = "The absolute value was calculated incorrectly. ";
         if(input<0 )
-            error += "Negative values were not handled properly.";
+            error = "Negative values were not handled properly.";
         runWithInput(input + "");
         assertEquals(Integer.parseInt(getItemByName("absoluteValue")), output, error);
     }
