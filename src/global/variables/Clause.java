@@ -1,7 +1,5 @@
 package global.variables;
 
-import java.util.Objects;
-
 public abstract class Clause implements Regexable {
     String name;
 
