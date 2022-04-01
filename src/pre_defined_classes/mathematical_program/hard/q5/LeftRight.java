@@ -2,7 +2,7 @@ package pre_defined_classes.mathematical_program.hard.q5;
 
 /*
 Make a Java program to check the following trigonometric identity by displaying the value of the left hand side of the
-equation as well as the right hand side of the equation:
+equation and then the right hand side of the equation:
 sin( A + B ) = sin( A )cos( B ) + cos( A )sin( B ) where A and B are angles in radians.
 
 Distractors:
