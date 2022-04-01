@@ -47,7 +47,7 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of(1), Arguments.of(345), Arguments.of(898468));
+        return Stream.of(Arguments.of(0), Arguments.of(1), Arguments.of(345), Arguments.of(898468));
     }
 
     @ParameterizedTest
@@ -56,5 +56,6 @@ public class MainTest extends BaseTest {
         runWithInput("" + input, new Clause[] {
             new StringLiteral(convertBinary(input))
         });
+        assertEquals(Integer.parseInt(getItemByName("numberOutput")), input, "Calculated value of output is incorrect");
     }
 }
