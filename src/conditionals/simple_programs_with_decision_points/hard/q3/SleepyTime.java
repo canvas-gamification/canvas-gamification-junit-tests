@@ -6,6 +6,13 @@ import java.util.Scanner;
 Write a program to ask for the current time, in hours and minutes, and tell the user to go to sleep if it is past 21:30.
 (Assume the use of a 24h clock)
 
+Sample output:
+Current Time Hours (in a 24h clock):
+15
+Current Time Minutes:
+35
+The night is still young!
+
 Distractors:
 if( hours > 21 && mins > 30 )
 if( hours >= 21 )
