@@ -39,7 +39,7 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of(15), Arguments.of(456), Arguments.of(45646), Arguments.of(0)); // Doesn't work with empty string
+        return Stream.of(Arguments.of(0), Arguments.of(15), Arguments.of(456), Arguments.of(45646)); // Doesn't work with empty string
     }
 
     @ParameterizedTest
