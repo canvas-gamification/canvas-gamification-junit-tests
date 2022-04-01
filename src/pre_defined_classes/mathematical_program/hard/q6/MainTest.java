@@ -23,6 +23,6 @@ public class MainTest extends BaseTest {
 
     @Test
     public void mathTest() {
-        assertEquals(0.8749999999999999, Double.parseDouble(getItemByName("ratio")), 0.001, "Your ratio calculation is incorrect.");
+        assertEquals(0.875, Double.parseDouble(getItemByName("ratio")), 0.001, "Your ratio calculation is incorrect.");
     }
 }
