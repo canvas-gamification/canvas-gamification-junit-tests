@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-
+    // Parsons
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "20 40";
@@ -42,7 +42,7 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void inputTest(int inputA, int inputB, int outputA, int outputB){
         runWithInput(inputA + System.lineSeparator() + inputB);
-        assertEquals(Integer.parseInt(getItemByName("a")), outputA, "Calculated value of A is incorrect. Make sure a = a - b if a > b");
+        assertEquals(Integer.parseInt(getItemByName("a")), outputA, "Calculated value of A is incorrect. Make sure a = a - b if a > b.");
         assertEquals(Integer.parseInt(getItemByName("b")), outputB, "Calculated value of B is incorrect.");
     }
 }
