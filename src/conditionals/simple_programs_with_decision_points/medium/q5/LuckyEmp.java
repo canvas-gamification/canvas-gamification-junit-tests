@@ -16,4 +16,3 @@ public class LuckyEmp
         System.out.println("Annual Salary: $" + salary);
     }
 }
-

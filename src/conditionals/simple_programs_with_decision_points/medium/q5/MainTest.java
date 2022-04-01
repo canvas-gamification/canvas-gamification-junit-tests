@@ -53,5 +53,4 @@ public class MainTest extends BaseTest {
         runWithInput(input + "", c);
         assertEquals(Double.parseDouble(getItemByName("salary")), outputSalary, "The calculated salary values was incorrect.");
     }
-
 }
