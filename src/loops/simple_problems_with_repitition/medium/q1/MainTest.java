@@ -56,6 +56,6 @@ public class MainTest extends BaseTest {
         runWithInput("" + input, new Clause[] {
             new StringLiteral(convertBinary(input))
         });
-        assertEquals(Integer.parseInt(getItemByName("numberOutput")), input, "Calculated value of output is incorrect");
+        assertEquals(Integer.parseInt(getItemByName("numberOutput")), input, "The output doesn't follow the pattern");
     }
 }
