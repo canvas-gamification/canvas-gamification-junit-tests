@@ -1,4 +1,8 @@
 package conditionals.simple_programs_with_decision_points.medium.q5;
+/*
+Write a program that will give out a bonus of 15% of their salary to someone's yearly salary if their salary is less
+than $12000.
+ */
 
 import java.util.Scanner;
 public class LuckyEmp

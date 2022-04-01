@@ -37,25 +37,18 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of(10000.0, "Congratulations!, you received a bonus of 15%!", 11500.0), Arguments.of(
-                12000.0, "", 12000.0)
+        return Stream.of(Arguments.of(10000.0, true, "Congratulations!, you received a bonus of 15%!", 11500.0),
+                Arguments.of(12000.0, false, "", 12000.0)
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(double input, String message, double outputSalary) throws InvalidClauseException {
-        Clause[] c = new Clause[]{
-                new StringLiteral(""),
-                new StringLiteral("")
-        };
-        if (message.equals("Congratulations!, you received a bonus of 15%!")) {
-            c = new Clause[]{
-                    new StringLiteral(message),
-                    new NewLine()
-            };
-        }
-        runWithInput(input + "", c);
+    void testWithInput(double input, boolean bonus, String message, double outputSalary) throws InvalidClauseException {
+        runWithInput(input + "", new Clause[]{
+                new StringLiteral(message),
+                (bonus)? new NewLine() : new StringLiteral("")
+        });
         assertEquals(Double.parseDouble(getItemByName("salary")), outputSalary, 0.01, "The calculated salary values was incorrect.");
     }
 }
