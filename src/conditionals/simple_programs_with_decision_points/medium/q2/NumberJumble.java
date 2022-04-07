@@ -6,8 +6,8 @@ Write a program that asks the user for a number and divides the number by 10 (us
 than 10; otherwise, it multiplies it by 10.
  */
 
-public class NumberJumble
-{
+public class NumberJumble {
+
     public static void main( String [] args )
     {
         Scanner input = new Scanner( System.in );
