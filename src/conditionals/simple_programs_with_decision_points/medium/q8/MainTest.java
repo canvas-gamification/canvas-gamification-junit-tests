@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "60 60 60";
@@ -33,7 +34,7 @@ public class MainTest extends BaseTest {
         TryAngle.main(new String[0]);
     }
 
-    static Stream<Arguments> inputProvider(){
+    static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of(90, 90, 90, "How can you even have a perfectly closed 3-sided shape without the angles being 180\\?\\?\\?!!\\?"),
                 Arguments.of(60, 60, 60, "Now that's a valid triangle!"), Arguments.of(33.5, 77.8, 68.7, "Now that's a valid triangle!"));
     }
@@ -45,4 +46,5 @@ public class MainTest extends BaseTest {
                 new StringLiteral(triangleOutput)
         });
     }
+
 }

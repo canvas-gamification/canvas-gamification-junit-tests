@@ -1,15 +1,20 @@
 package conditionals.simple_programs_with_decision_points.medium.q8;
+
 import java.util.Scanner;
+
 /*
 Write a program to ask for the three angles of a triangle and determine if it is a valid triangle or not.
 (Note: Every triangle must have 3 angles whose sum is 180). Assume the user only enter numbers greater than 0.
+
 Sample Output:
 	Enter angle 1 in degrees: 90
 	Enter angle 2 in degrees: 90
 	Enter angle 3 in degrees: 90
 How can you even have a perfectly closed 3-sided shape without the angles being 180???!!?
  */
+
 public class TryAngle {
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter angle 1 in degrees: ");
@@ -23,4 +28,5 @@ public class TryAngle {
         else
             System.out.println("How can you even have a perfectly closed 3-sided shape without the angles being 180???!!?");
     }
+
 }
