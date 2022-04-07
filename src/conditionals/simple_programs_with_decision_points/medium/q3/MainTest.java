@@ -40,7 +40,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(int input, String output) throws InvalidClauseException {
+    void printsCorrectOutputMessage(int input, String output) throws InvalidClauseException {
         runWithInput(input + "", new Clause[]{
                 new StringLiteral(output, "underAge")
         });
