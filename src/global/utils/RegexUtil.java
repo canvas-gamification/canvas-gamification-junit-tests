@@ -53,7 +53,7 @@ public class RegexUtil {
     }
 
     public static int[] getSplitDecimal(double num) {
-        String[] lowSplit = String.valueOf(Math.abs(num)).split("\\.");
+        String[] lowSplit = String.valueOf(num).split("\\.");
         return new int[]{Integer.parseInt(lowSplit[0]), Integer.parseInt(lowSplit[1])};
     }
 
