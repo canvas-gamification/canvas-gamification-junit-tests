@@ -36,25 +36,17 @@ public class MainTest extends BaseTest {
         CountItUp.main(new String[0]);
     }
 
-    public static int countingLetter(String message, char c) {
-        int count = 0;
-        for(int i = 0; i < message.length(); i++) 
-            if( message.charAt(i) == c )
-                count++;
-        return count;
-    }
-
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of("This is just for testing. Do not copy!", "s"), Arguments.of("This is for second testing. Do not copy!", "O"), Arguments.of("AAAAAAaaaaAAaaaa AaaA AA", "a"), Arguments.of(" ", "z"));
+        return Stream.of(Arguments.of("This is just for testing. Do not copy!", "s", 4), Arguments.of("This is for second testing. Do not copy!", "o", 5), Arguments.of("NNNNNNNN", "n", 0), Arguments.of(" ", "z", 0));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(String input1, String input2) throws InvalidClauseException{
+    void testWithInput(String input1, String input2, int output) throws InvalidClauseException{
         char newInput2 = input2.charAt(0);
         runWithInput(input1 + System.lineSeparator() + input2, new Clause[]{
             new StringLiteral(input2)
         });
-        assertEquals(Integer.parseInt(getItemByName("numberOutput")), countingLetter(input1, newInput2), "Calculated value of output is incorrect");
+        assertEquals(Integer.parseInt(getItemByName("numberOutput")), output, "Number of occurrences is not correct.");
     }
 }
