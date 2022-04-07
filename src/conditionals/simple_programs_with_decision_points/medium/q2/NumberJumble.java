@@ -1,11 +1,11 @@
 package conditionals.simple_programs_with_decision_points.medium.q2;
 
-import java.util.Scanner;
-
 /*
 Write a program that asks the user for a number and divides the number by 10 (using integer division) if it is greater
 than 10; otherwise, it multiplies it by 10.
  */
+
+import java.util.Scanner;
 
 public class NumberJumble {
 
