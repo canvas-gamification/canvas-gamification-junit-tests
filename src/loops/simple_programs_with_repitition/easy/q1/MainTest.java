@@ -4,7 +4,8 @@ import global.variables.*;
 import global.variables.clauses.*;
 import global.BaseTest;
 
-public class MainTest extends BaseTest { //Parson's Test
+public class MainTest extends BaseTest { 
+    // Parsons
     
     String sentence = "This is an example sentence.";
     int repetitions = 10;
