@@ -14,16 +14,16 @@ Current Time Minutes:
 The night is still young!
 
 Distractors:
-if( hours > 21 && mins > 30 )
+if( hours > 21 && mins > 30 || hours > 21)
 if( hours >= 21 )
-if( mins >= 30 )
-if( hours >= 21 || mins >= 30 )
-if( hours >= 21 ^ mins >= 30 )
+if( mins >= 30 || hours > 21)
+if( hours >= 21 | | mins >= 30 )
+if( hours >= 21 ^ mins >= 30 || hours > 21)
 if( hours >= 21 && mins >= 30 );
 else !( hours >= 21 && mins >= 30 )
 else ( hours >= 21 && mins >= 30 )
 else ( hours < 21 && mins < 30 );
-else ( hours < 21 || mins < 30 )
+else ( hours < 21 | | mins < 30 )
  */
 public class SleepyTime
 {
