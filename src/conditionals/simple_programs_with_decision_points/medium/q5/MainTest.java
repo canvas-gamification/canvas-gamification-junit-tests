@@ -19,6 +19,7 @@ import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "12000.0";
@@ -38,7 +39,8 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of(10000.0, true, "Congratulations!, you received a bonus of 15%!", 11500.0),
-                Arguments.of(12000.0, false, "", 12000.0)
+                Arguments.of(12000.0, false, "", 12000.0), Arguments.of(550.50, true, "Congratulations!, you received a bonus of 15%!", 633.075),
+                Arguments.of(50755.96, false, "", 50755.96)
         );
     }
 
@@ -47,8 +49,8 @@ public class MainTest extends BaseTest {
     void testWithInput(double input, boolean bonus, String message, double outputSalary) throws InvalidClauseException {
         runWithInput(input + "", new Clause[]{
                 new StringLiteral(message),
-                (bonus)? new NewLine() : new StringLiteral("")
+                bonus ? new NewLine() : new StringLiteral("")
         });
-        assertEquals(Double.parseDouble(getItemByName("salary")), outputSalary, 0.01, "The calculated salary values was incorrect.");
+        assertEquals(Double.parseDouble(getItemByName("salary")), outputSalary, 0.01, "The calculated salary value is incorrect.");
     }
 }
