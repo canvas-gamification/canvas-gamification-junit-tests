@@ -15,4 +15,3 @@ public class Earthquake {
         System.out.println("The magnitude of an earthquake with intensity " + intensity + " is " + magnitude + " on the Richter scale.");
     }
 }
-

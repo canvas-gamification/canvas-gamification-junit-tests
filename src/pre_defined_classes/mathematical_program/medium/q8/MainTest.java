@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The magnitude of an earthquake with intensity "),
@@ -28,4 +29,5 @@ public class MainTest extends BaseTest {
     public void magnitudeTest() {
         assertEquals(10.05, Double.parseDouble(getItemByName("magnitude")), 0.001, "The calculated magnitude value is incorrect.");
     }
+
 }
