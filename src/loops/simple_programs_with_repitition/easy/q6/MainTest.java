@@ -43,7 +43,6 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void testWithInput(String input1, String input2, int output) throws InvalidClauseException{
-        char newInput2 = input2.charAt(0);
         runWithInput(input1 + System.lineSeparator() + input2, new Clause[]{
             new StringLiteral(input2)
         });
