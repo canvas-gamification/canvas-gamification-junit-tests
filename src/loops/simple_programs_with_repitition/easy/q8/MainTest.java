@@ -45,14 +45,14 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of("This is just for testing. Do not copy!", 1), Arguments.of("This is second test", 100), Arguments.of(" ", 0)); // Doesn't work with empty string
+        return Stream.of(Arguments.of("This is just for testing. Do not copy!", 1, encrypt("This is just for testing. Do not copy!", 1)), Arguments.of("This is second test", 100, encrypt("This is second test", 100)), Arguments.of("hard", 1, "ibse"), Arguments.of(" ", 1, "!")); // Doesn't work with empty string
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(String input1, int input2) throws InvalidClauseException{
+    void testWithInput(String input1, int input2, String output) throws InvalidClauseException{
         runWithInput(input1 + System.lineSeparator() + input2, new Clause[] {
-            new StringLiteral(encrypt(input1, input2))
+            new StringLiteral(output)
         });
     }
 }

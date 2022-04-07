@@ -1,9 +1,11 @@
 package loops.simple_programs_with_repitition.easy.q8;
 
 /*
-Write a program that will ask the user for a sentence and 
-encrypt the sentence by adding a set number, that the user enters, to each character. ( Hint: "ABC" offset by 2 becomes "CDE" )
-
+Write a program that will ask the user for a sentence and encrypt 
+the sentence by adding a set number, that the user enters, to each character. 
+( Hint: "ABC" offset by 2 becomes "CDE" ). 
+The offset will not take negative numbers due to negative values of the ASCII table. 
+Always assume the input is a sentence.
 */
 
 import java.util.Scanner;
