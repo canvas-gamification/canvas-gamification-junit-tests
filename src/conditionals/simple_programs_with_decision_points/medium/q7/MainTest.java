@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "0";
@@ -35,9 +36,10 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(double hpInput, String output) throws InvalidClauseException {
+    void correctHPMessage(double hpInput, String output) throws InvalidClauseException {
         runWithInput(hpInput + "", new Clause[]{
                 new StringLiteral(output)
         });
     }
+
 }
