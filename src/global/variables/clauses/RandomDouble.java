@@ -1,6 +1,9 @@
-package global.variables;
+package global.variables.clauses;
 
 import global.utils.RandomUtil;
+import global.utils.RegexUtil;
+import global.variables.Clause;
+import global.variables.RandomClause;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +11,7 @@ import java.util.Map;
 
 import static global.tools.CustomAssertions.assertWithinRange;
 import static global.utils.RandomUtil.describesUniform;
+import static global.utils.RegexUtil.orNegative;
 
 public class RandomDouble extends Clause implements RandomClause<Double> {
     static Map<Integer, ArrayList<Double>> valueStore = new HashMap<>();
@@ -51,7 +55,6 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
 
     public void trackValue(int matchGroupNum, String matchGroupValue) {
         valueStore.computeIfAbsent(matchGroupNum, k -> new ArrayList<>());
-
         (valueStore.get(matchGroupNum)).add(convertFromRegexGroup(matchGroupValue));
     }
 
@@ -102,8 +105,9 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
 
     @Override
     public String getRegex() {
-        int[] lowSplit = RandomUtil.getSplitDecimal(lower);
-        int[] highSplit = RandomUtil.getSplitDecimal(upper);
-        return "(" + RandomUtil.getRegexInt(lowSplit[0], highSplit[0]) + "\\.\\d+" + ")";
+        int lowSplit = RegexUtil.getSplitDecimal(lower)[0];
+        int highSplit = RegexUtil.getSplitDecimal(upper)[0];
+        String regexContent = RegexUtil.getRegexInt(lowSplit, highSplit);
+        return "(" + orNegative(regexContent + "\\.\\d+") + ")";
     }
 }

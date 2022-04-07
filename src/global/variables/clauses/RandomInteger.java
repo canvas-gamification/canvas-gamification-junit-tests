@@ -1,12 +1,15 @@
-package global.variables;
+package global.variables.clauses;
 
-import global.utils.RandomUtil;
+import global.utils.RegexUtil;
+import global.variables.Clause;
+import global.variables.RandomClause;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import static global.utils.RandomUtil.followsUniformDistribution;
+import static global.utils.RegexUtil.orNegative;
 
 public class RandomInteger extends Clause implements RandomClause<Integer> {
     static Map<Integer, ArrayList<Integer>> valueStore = new HashMap<>();
@@ -22,11 +25,6 @@ public class RandomInteger extends Clause implements RandomClause<Integer> {
         super(name);
         this.lower = lower;
         this.upper = upper;
-    }
-
-    public int getNumBins(double lower, double upper) {
-        int range = (int) (upper - lower);
-        return Math.min(range, 50);
     }
 
     public void trackValue(int matchGroupNum, String matchGroupValue) {
@@ -56,6 +54,7 @@ public class RandomInteger extends Clause implements RandomClause<Integer> {
 
     @Override
     public String getRegex() {
-        return "(" + RandomUtil.getRegexInt(getLower(), getUpper()) + ")";
+        String regexContent = RegexUtil.getRegexInt(getLower(), getUpper());
+        return "(" + orNegative(regexContent) + ")";
     }
 }
