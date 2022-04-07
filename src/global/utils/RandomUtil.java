@@ -59,4 +59,9 @@ public class RandomUtil {
         int binNumber = (int) ((value - lower) / gap);
         return (binNumber <= numBins) ? binNumber : NO_BIN;
     }
+
+    public static RandomClause<?> castRandomClause(Clause clause) {
+        if (!(clause instanceof RandomClause)) return null;
+        return (RandomClause<?>) clause;
+    }
 }
