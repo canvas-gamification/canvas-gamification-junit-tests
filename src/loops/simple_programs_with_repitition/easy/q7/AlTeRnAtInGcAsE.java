@@ -2,8 +2,10 @@ package loops.simple_programs_with_repitition.easy.q7;
 
 /*
 Write a program that will ask the user for a sentence and 
-convert the sentence into an alternating case, ex. "Seven" would become "SeVeN".
-
+convert the sentence into an alternating case, 
+ex. "Seven" would become "SeVeN". 
+The alternating case should start with an uppercase. 
+Always assume the input is a sentence. 
 */
 
 import java.util.Scanner;

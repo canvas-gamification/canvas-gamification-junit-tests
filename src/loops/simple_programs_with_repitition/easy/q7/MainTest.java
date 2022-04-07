@@ -45,16 +45,16 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of("This is just for testing. Do not copy!"), Arguments.of("This is second test"), Arguments.of(" ")); // Doesn't work with empty string
+        return Stream.of(Arguments.of("This is just for testing. Do not copy!", alternate("This is just for testing. Do not copy!")), Arguments.of("This is second test", "ThIs iS SeCoNd tEsT"), Arguments.of("THIS IS ANOTHER HARDCODED TEST", "ThIs iS AnOtHeR HaRdCoDeD TeSt"), Arguments.of(" ", " ")); // Doesn't work with empty string
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(String input) throws InvalidClauseException{
+    void testWithInput(String input, String output) throws InvalidClauseException{
         runWithInput(input, new Clause[] {
             new StringLiteral(alternate(input), "stringOutput")
         });
-        assertEquals(getItemByName("stringOutput"), alternate(input), "Your output string output is not correct");
+        assertEquals(getItemByName("stringOutput"), output, "Your alternating string output doesn't match the pattern");
     }
 
 }
