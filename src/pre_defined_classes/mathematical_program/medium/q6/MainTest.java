@@ -23,7 +23,7 @@ public class MainTest extends BaseTest {
 
     @Test
     public void decibelMathTest(){
-        assertEquals( 161.181, Double.parseDouble(getItemByName("decibels")), 0.01,"Your calculated decibel value is incorrect.");
+        assertEquals( 161.181, Double.parseDouble(getItemByName("decibels")), 0.01,"The calculated decibel value is incorrect.");
     }
 
 }
