@@ -44,9 +44,9 @@ public class MainTest extends BaseTest {
         runWithInput(input + "", new Clause[]{
                 new StringLiteral(output, "underAge")
         });
-        String errorMessage = "Output string incorrect for age 18 or below.";
+        String errorMessage = "The output string is incorrect for age 18 or below.";
         if (input >= 19)
-            errorMessage = "Output string incorrect for age 19 or above.";
+            errorMessage = "The output string is incorrect for age 19 or above.";
         assertEquals(getItemByName("underAge"), output, errorMessage);
     }
 
