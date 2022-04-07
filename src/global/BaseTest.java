@@ -139,7 +139,11 @@ public abstract class BaseTest {
         if (TestOption.isInputTest && TestOption.defaultInput != null) {
             refreshOutputStream();
             executeMain(TestOption.defaultInput);
+<<<<<<< HEAD
             checkOutputFollowsPatternAndClausesAreValid();
+=======
+            outputFollowsCorrectStructure();
+>>>>>>> origin/main
         } else {
             // TODO: better message
             _fail("Internal Error.", "Tried to run input without default input.");
@@ -149,7 +153,11 @@ public abstract class BaseTest {
     public void runWithInput(String input) {
         refreshOutputStream();
         executeMain(input);
+<<<<<<< HEAD
         checkOutputFollowsPatternAndClausesAreValid();
+=======
+        outputFollowsCorrectStructure();
+>>>>>>> origin/main
     }
 
     public void runWithInput(String input, Clause[] injectedClauses) throws InvalidClauseException {
@@ -158,7 +166,11 @@ public abstract class BaseTest {
         setInjectedClauses(injectedClauses);
         setRegexSentence(injectClauses(testSentence(), getInjectedClauses()));
         executeMain(input);
+<<<<<<< HEAD
         checkOutputFollowsPatternAndClausesAreValid();
+=======
+        outputFollowsCorrectStructure();
+>>>>>>> origin/main
     }
 
     // Default Tests and Setup
@@ -182,18 +194,32 @@ public abstract class BaseTest {
 
     @Test
     @Order(1)
+<<<<<<< HEAD
     public void checkOutputFollowsPatternAndClausesAreValid() {
+=======
+    public void outputFollowsCorrectStructure() {
+>>>>>>> origin/main
         String output = getOutput();
         Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
-        assertTrue(matcher.find(), "Your code's output did not follow the correct structure/syntax.");
+        String incorrectOutputMessage = "Your code's output did not follow the correct structure/syntax.";
+       _assertTrue(matcher.find(), incorrectOutputMessage, parseTestInformation(output, getRegexSentence(), incorrectOutputMessage));
         //Ensures that the output matches the pattern exactly
+<<<<<<< HEAD
         assertEquals(output.substring(matcher.start(), matcher.end()), output, "Your code's output did not follow the correct structure/syntax.");
+=======
+        assertEquals(output.substring(matcher.start(), matcher.end()), output, incorrectOutputMessage);
+>>>>>>> origin/main
 
         // check all clauses valid
         int matchGroupNum = 1;  // match group numbers are 1-indexed
         for (Clause clause : getRegexSentence()) {
+<<<<<<< HEAD
             // TODO: devMessage could be improved
             _assertTrue(clause.validate(matcher.group(matchGroupNum)), clause.getInvalidMessage(), "Invalid Clause output at index " + matchGroupNum);
+=======
+            // TODO: student-facing message can include details + feedback should be dynamic to the clause's error
+            _assertTrue(clause.validate(matcher.group(matchGroupNum)), incorrectOutputMessage, "Invalid Clause output at index " + matchGroupNum + " :" + clause.getInvalidMessage());
+>>>>>>> origin/main
             matchGroupNum++;
         }
 
