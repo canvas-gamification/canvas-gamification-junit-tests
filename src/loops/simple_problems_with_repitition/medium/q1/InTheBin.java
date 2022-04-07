@@ -1,12 +1,12 @@
 package loops.simple_problems_with_repitition.medium.q1;
 
 /*
-Write a program to convert a given integer to binary.
+Write a program to convert a given integer to binary. 
+Always assume the input is a positive integer.
  Sample Output:
  Enter a number: 
  5
  5 in binary is 101
-
  */
 
 import java.util.Scanner;

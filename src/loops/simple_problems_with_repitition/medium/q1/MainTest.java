@@ -34,28 +34,16 @@ public class MainTest extends BaseTest {
         InTheBin.main(new String[0]);
     }
 
-    public String convertBinary(int n) {
-      String result = "";
-      int rem;
-      while( n > 0 ) 
-      {
-         rem = n % 2;
-         result = rem + result;  
-         n = n / 2;
-      }
-      return(result);
-    }
-
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of(0), Arguments.of(1), Arguments.of(345), Arguments.of(898468));
+        return Stream.of(Arguments.of(0, ""), Arguments.of(1, "1"), Arguments.of(345, "101011001"), Arguments.of(898468, "11011011010110100100"));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(int input) throws InvalidClauseException{
+    void testWithInput(int input, String output) throws InvalidClauseException{
         runWithInput("" + input, new Clause[] {
-            new StringLiteral(convertBinary(input))
+            new StringLiteral(output)
         });
-        assertEquals(Integer.parseInt(getItemByName("numberOutput")), input, "The output doesn't follow the pattern");
+        assertEquals(Integer.parseInt(getItemByName("numberOutput")), input, "The input integer doesn't get printed out correctly");
     }
 }
