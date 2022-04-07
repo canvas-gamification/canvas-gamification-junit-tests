@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The left hand side is "),
@@ -26,11 +27,12 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    public void outputTest(){
+    public void outputTest() {
         double rightSide = Double.parseDouble(getItemByName("RHS"));
         double leftSide = Double.parseDouble(getItemByName("LHS"));
-        assertEquals(0.53, leftSide, 0.1, "The left hand side has been calculated incorrectly");
-        assertEquals(0.53, rightSide, 0.1, "The right hand side has been calculated incorrectly");
+        assertEquals(0.53, leftSide, 0.1, "The calculated left hand side value is incorrect.");
+        assertEquals(0.53, rightSide, 0.1, "The calculated right hand side value is incorrect.");
         assertEquals(rightSide, leftSide, 0.1, "The right hand side does not equal the left hand side");
     }
+
 }
