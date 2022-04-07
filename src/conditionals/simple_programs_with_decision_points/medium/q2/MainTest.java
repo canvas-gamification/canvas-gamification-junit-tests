@@ -41,7 +41,7 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void correctOutputNumber(int input, int output) throws InvalidClauseException {
         runWithInput(input + "");
-        assertEquals(Integer.parseInt(getItemByName("numberOutput")), output, "The calculated value of output is incorrect.");
+        assertEquals(Integer.parseInt(getItemByName("numberOutput")), output, "The calculated output is incorrect.");
     }
 
 }
