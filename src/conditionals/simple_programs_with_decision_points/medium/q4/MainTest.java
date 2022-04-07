@@ -10,11 +10,14 @@ import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
 import java.util.stream.Stream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "20 40";
@@ -34,15 +37,17 @@ public class MainTest extends BaseTest {
         TheBiggerInt.main(new String[0]);
     }
 
-    static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of(-20, -40, 20, -40), Arguments.of(49, 10, 39, 10), Arguments.of(20, 50, 20, 50), Arguments.of(500, 0, 500, 0), Arguments.of(-40, -20, -40, -20));
+    static Stream<Arguments> inputProvider() {
+        return Stream.of(Arguments.of(-20, -40, 20, -40), Arguments.of(49, 10, 39, 10), Arguments.of(20, 50, 20, 50),
+                Arguments.of(500, 0, 500, 0), Arguments.of(-40, -20, -40, -20));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void inputTest(int inputA, int inputB, int outputA, int outputB){
+    void correctNumberOutput(int inputA, int inputB, int outputA, int outputB) {
         runWithInput(inputA + System.lineSeparator() + inputB);
-        assertEquals(Integer.parseInt(getItemByName("a")), outputA, "Calculated value of A is incorrect. Make sure a = a - b if a > b.");
-        assertEquals(Integer.parseInt(getItemByName("b")), outputB, "Calculated value of B is incorrect.");
+        assertEquals(Integer.parseInt(getItemByName("a")), outputA, "The calculated value of A is incorrect.");
+        assertEquals(Integer.parseInt(getItemByName("b")), outputB, "The calculated value of B is incorrect.");
     }
+
 }
