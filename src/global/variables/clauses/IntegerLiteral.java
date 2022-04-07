@@ -1,8 +1,10 @@
 package global.variables.clauses;
 
-import global.tools.InvalidClauseException;
+import global.exceptions.InvalidClauseException;
 import global.utils.RegexUtil;
 import global.variables.Clause;
+
+import static global.utils.RegexUtil.orNegative;
 
 public class IntegerLiteral extends Clause {
     private String mode;
@@ -93,6 +95,6 @@ public class IntegerLiteral extends Clause {
 
     @Override
     public String getRegex() {
-        return "(" + getValueOrRegexRange() + ")";
+        return "(" + orNegative(getValueOrRegexRange()) + ")";
     }
 }
