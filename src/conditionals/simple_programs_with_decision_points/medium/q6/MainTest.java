@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "5.00 5.00";
@@ -31,16 +32,17 @@ public class MainTest extends BaseTest {
         SquareUp.main(new String[0]);
     }
 
-    static Stream<Arguments> inputProvider(){
+    static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of(5.00, 5.00, "It's a square!"), Arguments.of(4.99, 5.00, "Just another rectangle..."),
-                Arguments.of(5.1, 5.0, "Just another rectangle..."));
+                Arguments.of(5.1, 5.0, "Just another rectangle..."), Arguments.of(77.84, 77.84, "It's a square!"));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(double length, double width, String rectangle) throws InvalidClauseException {
+    void correctOutputMessage(double length, double width, String rectangle) throws InvalidClauseException {
         runWithInput(length + System.lineSeparator() + width, new Clause[]{
                 new StringLiteral(rectangle)
         });
     }
+
 }
