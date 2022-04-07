@@ -2,7 +2,7 @@ package pre_defined_classes.mathematical_program.medium.q8;
 
 /*
 The Richter scale is a useful indication of the magnitude of an earthquake. Using a logarithmic formula, it classifies
-earthquakes based on their intensity. The formula to determine the magnitude of an earthquake is: M = log(II0), where I
+earthquakes based on their intensity. The formula to determine the magnitude of an earthquake is: M = log(I/I0), where I
 is the intensity of that earthquake and I0 is the baseline intensity of an earthquake with magnitude 0
 (and hence always has a value of 1). Make a Java program that prints out the magnitude of an earthquake that had an
 intensity of 2.32*10^4 units.
