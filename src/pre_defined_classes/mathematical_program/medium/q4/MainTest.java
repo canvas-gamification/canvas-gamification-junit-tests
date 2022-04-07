@@ -1,6 +1,6 @@
 package pre_defined_classes.mathematical_program.medium.q4;
 
-import global.BaseRandomTest;
+import global.BaseTest;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MainTest extends BaseRandomTest {
+public class MainTest extends BaseTest {
     // Parsons
     public Clause[] testSentence() {
         return new Clause[]{
@@ -32,7 +32,7 @@ public class MainTest extends BaseRandomTest {
     }
 
     @Test
-    public void outputTest(){
+    public void gameStatisticsOutput(){
         assertEquals(127, Integer.parseInt(getItemByName("totalPoints")),  "Calculated number of points is incorrect.");
         assertEquals(59, Integer.parseInt(getItemByName("highScore")), "Calculated high score is incorrect.");
         assertEquals(32, Integer.parseInt(getItemByName("lowScore")), "Calculated lowest score is incorrect.");
