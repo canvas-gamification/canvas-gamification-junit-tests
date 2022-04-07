@@ -1,4 +1,7 @@
-package global.variables;
+package global.variables.clauses;
+
+import global.variables.Clause;
+import global.variables.RandomClause;
 
 import java.util.ArrayList;
 import java.util.HashMap;
