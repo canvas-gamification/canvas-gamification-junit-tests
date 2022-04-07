@@ -11,6 +11,7 @@ Sample Output:
 	The value of tan^2 is: 1
 	The value of sec^2 is: 1
 	Their sum is: 2
+
  */
 
 public class TrigVal {
