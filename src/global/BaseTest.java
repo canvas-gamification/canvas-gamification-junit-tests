@@ -198,9 +198,6 @@ public abstract class BaseTest {
             _assertTrue(clause.validate(matcher.group(matchGroupNum)), incorrectOutputMessage, "Invalid Clause output at index " + matchGroupNum + " :" + clause.getInvalidMessage());
             matchGroupNum++;
         }
-
-        // This ensures that their output only contains 1 instance of the matched regex string
-        assertFalse(matcher.find());
     }
 
     @AfterEach
