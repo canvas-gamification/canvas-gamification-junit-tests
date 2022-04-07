@@ -54,8 +54,8 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void testWithInput(double hours, double wage, double taxRate, double pay, double tax, double earnings) throws InvalidClauseException {
         runWithInput(hours + System.lineSeparator() + wage + System.lineSeparator() + taxRate + System.lineSeparator());
-        assertEquals(Double.parseDouble(getItemByName("pay")), pay, 0.001, "Calculated pay amount is incorrect");
-        assertEquals(Double.parseDouble(getItemByName("tax")), tax, 0.001, "Calculated tax amount is incorrect");
-        assertEquals(Double.parseDouble(getItemByName("net")), earnings, 0.001, "Calculated net earnings is incorrect");
+        assertEquals(Double.parseDouble(getItemByName("pay")), pay, 0.001, "Calculated pay amount is incorrect.");
+        assertEquals(Double.parseDouble(getItemByName("tax")), tax, 0.001, "Calculated tax amount is incorrect.");
+        assertEquals(Double.parseDouble(getItemByName("net")), earnings, 0.001, "Calculated net earnings is incorrect.");
     }
 }
