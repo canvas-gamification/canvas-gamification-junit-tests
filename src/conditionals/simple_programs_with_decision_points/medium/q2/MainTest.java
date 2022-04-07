@@ -1,4 +1,4 @@
-package global.conditionals.simple_programs_with_decision_points.medium.q2;
+package conditionals.simple_programs_with_decision_points.medium.q2;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
@@ -38,9 +38,9 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(int input, int output) throws InvalidClauseException{
+    void correctOutputNumber(int input, int output) throws InvalidClauseException{
         runWithInput(input + "");
-        assertEquals(Integer.parseInt(getItemByName("numberOutput")), output, "Calculated value of output is incorrect");
+        assertEquals(Integer.parseInt(getItemByName("numberOutput")), output, "The calculated value of output is incorrect.");
     }
 
 }

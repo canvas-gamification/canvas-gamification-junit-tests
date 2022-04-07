@@ -1,4 +1,4 @@
-package global.conditionals.simple_programs_with_decision_points.medium.q2;
+package conditionals.simple_programs_with_decision_points.medium.q2;
 import java.util.Scanner;
 
 /*
