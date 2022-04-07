@@ -43,14 +43,14 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of("This is just for testing. Do not copy!"), Arguments.of("This is second test"), Arguments.of(" ")); // Doesn't work with empty string
+        return Stream.of(Arguments.of("This is just for testing. Do not copy!", countingWords("This is just for testing. Do not copy!")), Arguments.of("This is second test", 4), Arguments.of("Another hardcoded test is over here.", 6), Arguments.of(" ", 2)); // Doesn't work with empty string
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(String input) throws InvalidClauseException{
+    void testWithInput(String input, int output) throws InvalidClauseException{
         runWithInput(input);
-        assertEquals(Integer.parseInt(getItemByName("numberOutput")), countingWords(input), "Calculated value of output is incorrect");
+        assertEquals(Integer.parseInt(getItemByName("numberOutput")), output, "Total number of words is incorrect");
     }
 
 }

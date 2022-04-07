@@ -1,9 +1,9 @@
 package loops.simple_programs_with_repitition.easy.q5;
 
 /*
-Write a program that will ask the user for a sentence and 
-then prints out the number of words in the user's sentence. 
-(Hint:  Assume that the number of words = number of spaces + 1 )
+Write a program that will ask the user for a sentence and then prints out the number of words 
+in the user's sentence. (Hint:  Assume that the number of words = number of spaces + 1 ). 
+Always assume the input is a sentence.
 */
 
 import java.util.Scanner;
