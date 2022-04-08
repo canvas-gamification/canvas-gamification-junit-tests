@@ -33,15 +33,6 @@ public class MainTest extends BaseTest {
         WordCount.main(new String[0]);
     }
 
-    public static int countingWords(String message) {
-        message.toLowerCase();
-        int count = 0;
-        for (int i = 0; i < message.length(); i++)
-            if (message.charAt(i) == ' ')
-                count++;
-        return count + 1;
-    }
-
     static Stream<Arguments> inputProvider(){
         return Stream.of(Arguments.of("This is just for testing. Do not copy!", 8), Arguments.of("This is second test", 4), Arguments.of("Another hardcoded test is over here.", 6), Arguments.of(" ", 2)); // Doesn't work with empty string
     }
