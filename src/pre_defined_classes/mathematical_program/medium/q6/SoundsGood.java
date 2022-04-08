@@ -11,8 +11,7 @@ speaking if the intensity of the voice is 10-5 W/m2.
 public class SoundsGood {
     public static void main(String[] args) {
         double I0 = Math.pow(10, -12);
-        double voice = Math.pow(10, -5);
-        double Ip = voice;
+        double Ip = Math.pow(10, -5);
         double dB = 10 * (Math.log(Ip / I0));
         System.out.println("A person speaking is " + dB + " decibels loud!");
     }
