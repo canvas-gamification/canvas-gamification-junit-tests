@@ -43,7 +43,7 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of("This is just for testing. Do not copy!", countingWords("This is just for testing. Do not copy!")), Arguments.of("This is second test", 4), Arguments.of("Another hardcoded test is over here.", 6), Arguments.of(" ", 2)); // Doesn't work with empty string
+        return Stream.of(Arguments.of("This is just for testing. Do not copy!", 8), Arguments.of("This is second test", 4), Arguments.of("Another hardcoded test is over here.", 6), Arguments.of(" ", 2)); // Doesn't work with empty string
     }
 
     @ParameterizedTest
