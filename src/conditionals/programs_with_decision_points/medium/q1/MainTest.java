@@ -31,21 +31,13 @@ public class MainTest extends BaseTest {
 
     //check lower-case a and z for if statement, then uppercase, then random symbols
     static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of("a", 1), Arguments.of("z", 1), Arguments.of("A", 2), Arguments.of("Z", 2), Arguments.of("&", 3), Arguments.of("/", 3));
+        return Stream.of(Arguments.of("a", "a is a lowercase letter"), Arguments.of("z", "z is a lowercase letter"), Arguments.of("A", "A is an uppercase letter"), Arguments.of("Z", "Z is an uppercase letter"), Arguments.of("&", "& is neither uppercase not lowercase"), Arguments.of("/", "/ is neither uppercase not lowercase"));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInputLate(String input, int version) throws InvalidClauseException {
+    void testWithInput(String input, String message) throws InvalidClauseException {
 
-        String message;
-        if (version == 1) {
-            message = input + " is a lowercase letter";
-        } else if (version == 2) {
-            message = input + " is an uppercase letter";
-        } else {
-            message = input + " is neither uppercase not lowercase";
-        }
 
         runWithInput(input, new Clause[]{
                 new StringLiteral(message)
