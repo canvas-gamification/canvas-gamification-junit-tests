@@ -39,7 +39,7 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void testWithInput(String input, String output) throws InvalidClauseException{
         runWithInput(input, new Clause[] {
-            new StringLiteral(output, "stringOutput")
+            new StringLiteral(output)
         });
     }
 }
