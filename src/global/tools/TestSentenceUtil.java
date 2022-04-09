@@ -4,6 +4,9 @@ import global.variables.Clause;
 import global.variables.RandomClause;
 import global.variables.clauses.PlaceHolder;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class TestSentenceUtil {
     public static boolean hasRandom(Clause[] testSentence) {
         // does the sentence contain random clauses
@@ -11,6 +14,43 @@ public class TestSentenceUtil {
             if (clause instanceof RandomClause) return true;
         }
         return false;
+    }
+
+    public static Clause[] expandTestSentence(Clause[] testSentence, Clause[][] multipleInjections){
+        int multipleInjectionIndex = 0;
+        ArrayList<Clause> modifiedTestSentence = new ArrayList<>();
+        for (Clause currClause : testSentence) {
+            if (!(currClause instanceof PlaceHolder)) {
+                modifiedTestSentence.add(currClause);
+                continue;
+            }
+
+            Clause[] clausesToInject = multipleInjections[multipleInjectionIndex];
+            modifiedTestSentence.addAll(Arrays.asList(clausesToInject));
+            multipleInjectionIndex++;
+        }
+
+        Clause[] outputClauses = new Clause[modifiedTestSentence.size()];
+        for(int i = 0; i < modifiedTestSentence.size(); i++) {
+            outputClauses[i] = modifiedTestSentence.get(i);
+        }
+
+        return outputClauses;
+    }
+
+    public static Clause[] flattenMultipleInjections(Clause[][] multipleInjections) {
+        // Flattens a 2D array of clause injections into a 1D array
+        ArrayList<Clause> injectedClauses = new ArrayList<>();
+        for(Clause[] clauses: multipleInjections) {
+            injectedClauses.addAll(Arrays.asList(clauses));
+        }
+
+        Clause[] flattenedClauses = new Clause[injectedClauses.size()];
+        for(int i = 0; i < injectedClauses.size(); i++) {
+            flattenedClauses[i] = injectedClauses.get(i);
+        }
+
+        return flattenedClauses;
     }
 
     public static boolean hasPlaceHolders(Clause[] testSentence) {
