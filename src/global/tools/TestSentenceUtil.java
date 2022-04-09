@@ -30,12 +30,7 @@ public class TestSentenceUtil {
             multipleInjectionIndex++;
         }
 
-        Clause[] outputClauses = new Clause[modifiedTestSentence.size()];
-        for(int i = 0; i < modifiedTestSentence.size(); i++) {
-            outputClauses[i] = modifiedTestSentence.get(i);
-        }
-
-        return outputClauses;
+        return modifiedTestSentence.toArray(new Clause[0]);
     }
 
     public static Clause[] flattenMultipleInjections(Clause[][] multipleInjections) {
@@ -44,13 +39,7 @@ public class TestSentenceUtil {
         for(Clause[] clauses: multipleInjections) {
             injectedClauses.addAll(Arrays.asList(clauses));
         }
-
-        Clause[] flattenedClauses = new Clause[injectedClauses.size()];
-        for(int i = 0; i < injectedClauses.size(); i++) {
-            flattenedClauses[i] = injectedClauses.get(i);
-        }
-
-        return flattenedClauses;
+        return injectedClauses.toArray(new Clause[0]);
     }
 
     public static boolean hasPlaceHolders(Clause[] testSentence) {
