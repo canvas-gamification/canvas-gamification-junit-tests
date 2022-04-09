@@ -25,7 +25,7 @@ public class MainTest extends BaseTest {
 
     @Test
     public void mathTest(){
-        assertEquals(-0.7760683270883323, Double.parseDouble(getItemByName("leftSide")), 0.000001, "Your calculations for the left hand side is incorrect.");
-        assertEquals(-0.7760683270883322, Double.parseDouble(getItemByName("rightSide")), 0.000001, "Your calculations for the right hand side is incorrect.");
+        assertEquals(-0.7760683270883323, Double.parseDouble(getItemByName("leftSide")), 0.000001, "Your calculations for the left hand side are incorrect.");
+        assertEquals(-0.7760683270883322, Double.parseDouble(getItemByName("rightSide")), 0.000001, "Your calculations for the right hand side are incorrect.");
     }
 }
