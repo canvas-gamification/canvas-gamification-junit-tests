@@ -35,7 +35,12 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of(0, ""), Arguments.of(1, "1"), Arguments.of(345, "101011001"), Arguments.of(898468, "11011011010110100100"));
+        return Stream.of(
+            Arguments.of(0, ""),
+            Arguments.of(1, "1"),
+            Arguments.of(345, "101011001"),
+            Arguments.of(898468, "11011011010110100100")
+        );
     }
 
     @ParameterizedTest
@@ -44,6 +49,6 @@ public class MainTest extends BaseTest {
         runWithInput("" + input, new Clause[] {
             new StringLiteral(output)
         });
-        assertEquals(Integer.parseInt(getItemByName("numberOutput")), input, "The input integer doesn't get printed out correctly");
+        assertEquals(Integer.parseInt(getItemByName("numberOutput")), input, "Incorrect binary conversion.");
     }
 }
