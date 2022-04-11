@@ -50,7 +50,7 @@ public class MainTest extends BaseTest {
             Arguments.of("This is second test", 100, encrypt("This is second test", 100)),
             Arguments.of("hard", 1, "ibse"),
             Arguments.of(" ", 1, "!")
-        ); // Doesn't work with empty string
+        );
     }
 
     @ParameterizedTest
