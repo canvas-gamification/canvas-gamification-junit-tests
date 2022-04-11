@@ -5,6 +5,7 @@ import global.exceptions.InvalidTestOptionException;
 public class TestOption {
     public static boolean isInputTest = false;
     public static String defaultInput = null;
+    public static String incorrectStructureErrorMessage = null;
 
     public static void validate() throws InvalidTestOptionException {
         // TODO: catch these errors somewhere and make sure they are only logged to the devs and not returned to the user.
@@ -16,5 +17,9 @@ public class TestOption {
         if(defaultInput != null && !isInputTest) {
             throw new InvalidTestOptionException("You have defined a defaultInput without setting TestOption.isInputTest = true.");
         }
+    }
+
+    public static void resetIncorrectStructureErrorMessage() {
+        TestOption.incorrectStructureErrorMessage = "Your code's output did not follow the correct structure/syntax.";
     }
 }
