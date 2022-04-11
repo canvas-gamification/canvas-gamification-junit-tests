@@ -37,7 +37,7 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void testWithInput(int input, int output) throws InvalidClauseException{
         runWithInput(input + "");
-        assertEquals(Integer.parseInt(getItemByName("numberOutput")), output, "Incorrect reversed value");
+        assertEquals(Integer.parseInt(getItemByName("numberOutput")), output, "Incorrect reversed value.");
     }
 
 }
