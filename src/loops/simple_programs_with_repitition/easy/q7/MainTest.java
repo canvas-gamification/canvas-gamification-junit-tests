@@ -36,7 +36,8 @@ public class MainTest extends BaseTest {
             Arguments.of("This is first test!", "ThIs iS FiRsT TeSt!"),
             Arguments.of("This is second test", "ThIs iS SeCoNd tEsT"),
             Arguments.of("THIS IS ANOTHER HARDCODED TEST", "ThIs iS AnOtHeR HaRdCoDeD TeSt"),
-            Arguments.of(" ", " "));
+            Arguments.of(" ", " ")
+        );
     }
 
     @ParameterizedTest
