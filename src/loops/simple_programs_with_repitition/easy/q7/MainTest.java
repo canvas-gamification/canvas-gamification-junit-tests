@@ -32,7 +32,11 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of("This is first test!", "ThIs iS FiRsT TeSt!"), Arguments.of("This is second test", "ThIs iS SeCoNd tEsT"), Arguments.of("THIS IS ANOTHER HARDCODED TEST", "ThIs iS AnOtHeR HaRdCoDeD TeSt"), Arguments.of(" ", " ")); // Doesn't work with empty string
+        return Stream.of(
+            Arguments.of("This is first test!", "ThIs iS FiRsT TeSt!"),
+            Arguments.of("This is second test", "ThIs iS SeCoNd tEsT"),
+            Arguments.of("THIS IS ANOTHER HARDCODED TEST", "ThIs iS AnOtHeR HaRdCoDeD TeSt"),
+            Arguments.of(" ", " "));
     }
 
     @ParameterizedTest
