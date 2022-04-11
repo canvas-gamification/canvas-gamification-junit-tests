@@ -37,7 +37,11 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of("This is just for testing. Do not copy!", "s", 4), Arguments.of("This is for second testing. Do not copy!", "o", 5), Arguments.of("NNNNNNNN", "n", 0), Arguments.of(" ", "z", 0));
+        return Stream.of(
+            Arguments.of("This is just for testing. Do not copy!", "s", 4),
+            Arguments.of("This is for second testing. Do not copy!", "o", 5),
+            Arguments.of("NNNNNNNN", "n", 0),
+            Arguments.of(" ", "z", 0));
     }
 
     @ParameterizedTest
