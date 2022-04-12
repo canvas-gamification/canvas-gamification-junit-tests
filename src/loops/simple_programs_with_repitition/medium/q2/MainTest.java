@@ -31,21 +31,19 @@ public class MainTest extends BaseTest {
         AlternateIt.main(new String[0]);
     }
 
-    public int seriesSum(int n) {
-        int sum  = 0; 
-        for(int i = 0; i < n; i++) 
-           sum += Math.pow( -1, i ) * ( i + 1 );
-        return(sum);
-    }
-
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of(0), Arguments.of(15), Arguments.of(456), Arguments.of(45646)); // Doesn't work with empty string
+        return Stream.of(
+            Arguments.of(0, 0),
+            Arguments.of(15, 8),
+            Arguments.of(456, -228),
+            Arguments.of(45646, -22823)
+        );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(int input) throws InvalidClauseException {
+    void testWithInput(int input, int output) throws InvalidClauseException {
         runWithInput("" + input);
-        assertEquals(Integer.parseInt(getItemByName("numberOutput")), seriesSum(input), "Calculated value of output is incorrect");
+        assertEquals(Integer.parseInt(getItemByName("numberOutput")), output, "Series sum value is incorrect.");
     }
 }
