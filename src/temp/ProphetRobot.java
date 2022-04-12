@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class ProphetRobot {
     public static void main(String[] args) {
         Random gen = new Random();
-        int num = 100;
+        double num = -100.998;
         System.out.println(num);
         int prediction = gen.nextInt(10);
         int fingersHeldUp = gen.nextInt(10);
