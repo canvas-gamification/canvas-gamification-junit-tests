@@ -30,7 +30,13 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of(10, 1), Arguments.of(11, 11), Arguments.of(1776, 6771), Arguments.of(1346000, 6431));
+        return Stream.of(
+            Arguments.of(0, 0),
+            Arguments.of(10, 1),
+            Arguments.of(11, 11),
+            Arguments.of(1776, 6771),
+            Arguments.of(1346000, 6431)
+        );
     }
 
     @ParameterizedTest
