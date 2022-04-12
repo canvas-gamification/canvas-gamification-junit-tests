@@ -192,6 +192,7 @@ public abstract class BaseTest {
     public void setUp() throws InvalidClauseException, InvalidTestOptionException {
         setRegexSentence(testSentence());
         TestOption.validate();  // check that test options were set with valid options
+        TestOption.resetIncorrectStructureErrorMessage();
         refreshOutputStream();
 
         if (TestOption.isInputTest) {
@@ -206,7 +207,7 @@ public abstract class BaseTest {
     public void outputFollowsCorrectStructure() {
         String output = getOutput();
         Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
-        String incorrectOutputMessage = "Your code's output did not follow the correct structure/syntax.";
+        String incorrectOutputMessage = TestOption.incorrectStructureErrorMessage;
        _assertTrue(matcher.find(), incorrectOutputMessage, parseTestInformation(output, getRegexSentence(), incorrectOutputMessage));
         //Ensures that the output matches the pattern exactly
         assertEquals(output.substring(matcher.start(), matcher.end()), output, incorrectOutputMessage);
