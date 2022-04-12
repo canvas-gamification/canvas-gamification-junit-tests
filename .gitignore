@@ -1,4 +1,5 @@
 # JetBrains IDEA
-/.idea
+/.idea/
 *.iml
 /out/production
+/src/test/
