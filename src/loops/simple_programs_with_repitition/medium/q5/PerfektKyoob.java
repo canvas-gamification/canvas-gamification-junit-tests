@@ -1,7 +1,7 @@
 package loops.simple_programs_with_repitition.medium.q5;
 
 /*
-Write a program that asks the user for a number and determines if it is a "Perfect Cube", i.e the sum of its digits is equal to its cube root. (Eg: 512 = 83 , and 5 + 1 + 2 = 8)
+Write a program that asks the user for a number and determines if it is a "Perfect Cube", i.e the sum of its digits is equal to its cube root. (Eg: 512 = 8^3 , and 5 + 1 + 2 = 8)
 */
 
 import java.util.Scanner;

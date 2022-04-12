@@ -2,39 +2,49 @@ package loops.simple_programs_with_repitition.medium.q5;
 
 import global.variables.*;
 import global.variables.clauses.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.stream.Stream;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import global.BaseTest;
-
+import global.exceptions.InvalidClauseException;
+import global.tools.TestOption;
 public class PerfektKyoobTest extends BaseTest {
-
-    int input1 = 27;
+    // Parsons
 
     public Clause[] testSentence() {
-
-        Clause conditional = null;
-        if(cubify(input1) == (int) Math.pow(input1, 1 / 3.0))
-            conditional = new StringLiteral(" is a Perfect Cube!");
-        else
-            conditional = new StringLiteral(" is NOT a Perfect Cube!");
+        TestOption.isInputTest = true;
+        TestOption.defaultInput = "10";
 
         return new Clause[] {
                 new StringLiteral("Enter a number: "),
                 new NewLine(),
-                new IntegerLiteral(input1),
-                conditional
+                new IntegerLiteral("numberOutput"),
+                new PlaceHolder()
         };
     }
 
     public void runMain() {
-        provideInput("" + input1);
         PerfektKyoob.main(new String[0]);
     }
 
-    public int cubify(int n) {
-        int result = 0;
-        while (n > 0) {
-            result += n % 10;
-            n = n / 10;
-        }
-        return(result);
+    static Stream<Arguments> inputProvider(){
+        return Stream.of(
+            Arguments.of(0, " is a Perfect Cube!"),
+            Arguments.of(1, " is a Perfect Cube!"),
+            Arguments.of(15, " is NOT a Perfect Cube!"),
+            Arguments.of(456, " is NOT a Perfect Cube!")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    void testWithInput(int input, String output) throws InvalidClauseException {
+        runWithInput("" + input, new Clause[] {
+            new StringLiteral(output)
+        });
+        assertEquals(Integer.parseInt(getItemByName("numberOutput")), input, "The output is not formatted correctly.");
     }
 }
