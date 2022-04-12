@@ -43,6 +43,6 @@ public class DivSeriesTest extends BaseTest {
     @MethodSource("inputProvider")
     void testWithInput(int input, int output) throws InvalidClauseException {
         runWithInput("" + input);
-        assertEquals(Integer.parseInt(getItemByName("numberOutput")), output, "Series sum value is incorrect.");
+        assertEquals(Integer.parseInt(getItemByName("numberOutput")), output, "Division series sum value is incorrect.");
     }
 }
