@@ -30,9 +30,8 @@ public class MainTest extends BaseTest {
     public void outputTest() {
         double rightSide = Double.parseDouble(getItemByName("RHS"));
         double leftSide = Double.parseDouble(getItemByName("LHS"));
-        assertEquals(0.53, leftSide, 0.1, "The calculated left hand side value is incorrect.");
-        assertEquals(0.53, rightSide, 0.1, "The calculated right hand side value is incorrect.");
-        assertEquals(rightSide, leftSide, 0.1, "The right hand side does not equal the left hand side");
+        assertEquals(0.5284847399429308, leftSide, 0.001, "The calculated left hand side value is incorrect.");
+        assertEquals(0.5284847399429308, rightSide, 0.001, "The calculated right hand side value is incorrect.");
     }
 
 }
