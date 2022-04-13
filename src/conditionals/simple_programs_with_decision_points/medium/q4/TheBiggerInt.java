@@ -3,8 +3,8 @@ package conditionals.simple_programs_with_decision_points.medium.q4;
 import java.util.Scanner;
 
 /*
-Write a program that will take in two numbers <tt>a</tt> and <tt>b</tt>, and subtract <tt>b</tt> from <tt>a</tt> only
-if <tt>a</tt> is greater than <tt>b</tt>. Note that the first number is a and the second number is b.
+Write a program that will take in two numbers a and b, and compute a - b only
+if a is greater than b. Note that the first number is a and the second number is b.
 
 Sample Output:
 	Enter the first number: 40
