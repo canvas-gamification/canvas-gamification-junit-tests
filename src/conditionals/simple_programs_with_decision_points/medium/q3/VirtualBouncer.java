@@ -1,4 +1,5 @@
 package conditionals.simple_programs_with_decision_points.medium.q3;
+
 import java.util.Scanner;
 
 /*
