@@ -38,7 +38,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void testWithInput(int hours, int minutes, String message) throws InvalidClauseException {
-        runWithInput((hours + " ") + (minutes + ""), new Clause[]{
+        runWithInput(hours + " " + minutes, new Clause[]{
                 new StringLiteral(message, "message")
         });
 
