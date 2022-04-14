@@ -37,6 +37,10 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctHPMessage(double hpInput, String output) throws InvalidClauseException {
+        String errorMessage = "Ensure that if HP is less than or equal to zero the message \"Not Alive\" is printed";
+        if(hpInput > 0)
+            errorMessage = "Ensure that the correct remaining HP is printed";
+        TestOption.incorrectStructureErrorMessage =  errorMessage;
         runWithInput(hpInput + "", new Clause[]{
                 new StringLiteral(output)
         });
