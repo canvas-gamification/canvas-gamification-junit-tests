@@ -30,15 +30,12 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of(5,5), Arguments.of(-46, 46), Arguments.of(0, 0));
+        return Stream.of(Arguments.of(5, 5, "The absolute value of positive numbers was calculated incorrectly."), Arguments.of(-46, 46, "The absolute value of negative numbers was calculated incorrectly."), Arguments.of(0, 0, "The absolute value of zero was calculated incorrectly."));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(int input, int output) {
-        String error = "The absolute value was calculated incorrectly. ";
-        if(input<0 )
-            error = "Negative values were not handled properly.";
+    void testWithInput(int input, int output, String error) {
         runWithInput(input + "");
         assertEquals(Integer.parseInt(getItemByName("absoluteValue")), output, error);
     }
