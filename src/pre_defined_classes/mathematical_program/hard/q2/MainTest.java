@@ -26,7 +26,7 @@ public class MainTest extends BaseTest {
 
     @Test
     public void mathTest(){
-        assertEquals(getItemByName("days"), "40", "Your calculation for the number of days it takes to infect 1000000 is incorrect");
-        assertEquals(getItemByName("people"), "1000000", "The number of people infected is wrong");
+        assertEquals(getItemByName("days"), "40", "Your calculation for the number of days it takes to infect 1000000 is incorrect.");
+        assertEquals(getItemByName("people"), "1000000", "The number of people infected is wrong.");
     }
 }
