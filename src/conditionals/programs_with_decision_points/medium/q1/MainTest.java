@@ -29,7 +29,8 @@ public class MainTest extends BaseTest {
         LetterBox.main(new String[0]);
     }
 
-    //check lower-case a and z for if statement, then uppercase, then random symbols
+    //turn into three seperate tests
+    //use the new error message idea
     static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of("a", "a is a lowercase letter"), Arguments.of("z", "z is a lowercase letter"), Arguments.of("A", "A is an uppercase letter"), Arguments.of("Z", "Z is an uppercase letter"), Arguments.of("&", "& is neither uppercase not lowercase"), Arguments.of("/", "/ is neither uppercase not lowercase"));
     }
