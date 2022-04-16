@@ -8,9 +8,9 @@ where(theta) is the degree in radians and sec is a mathematical formula that cal
 divided by the length of the adjacent side. Note, the formula to obtain sec2()is : sec2()=1cos2()
 
 Sample Output:
-	The value of tan^2 is: 1
-	The value of sec^2 is: 1
-	Their sum is: 2
+	The value of tan^2 is: 0.5
+	The value of sec^2 is: 0.5
+	Their sum is: 1
 
  */
 
@@ -21,8 +21,9 @@ public class TrigVal {
         double tan2 = Math.pow(Math.tan(theta), 2);
         double cos2 = Math.pow(Math.cos(theta), 2);
         double sec2 = 1 / cos2;
-        System.out.println("The value of tan^2 is: " + tan2);
         System.out.println("The value of sec^2 is: " + sec2);
-        System.out.println("Their sum is: " + (tan2 + sec2));
+        System.out.println("The value of tan^2 is: " + tan2);
+        System.out.println("Their difference is: " + (sec2 - tan2));
     }
 }
+

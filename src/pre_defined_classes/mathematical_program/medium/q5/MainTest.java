@@ -13,14 +13,14 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         return new Clause[]{
-                new StringLiteral("The value of tan\\^2 is: "),
-                new DoubleLiteral("tan2"),
-                new NewLine(),
                 new StringLiteral("The value of sec\\^2 is: "),
                 new DoubleLiteral("sec2"),
                 new NewLine(),
-                new StringLiteral("Their sum is: "),
-                new DoubleLiteral("sum")
+                new StringLiteral("The value of tan\\^2 is: "),
+                new DoubleLiteral("tan2"),
+                new NewLine(),
+                new StringLiteral("Their difference is: "),
+                new DoubleLiteral("difference")
         };
     }
 
@@ -29,9 +29,9 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    public void trigDoubleValueTest(){
-        assertEquals(3.0, Double.parseDouble(getItemByName("tan2")), 0.01,  "Calculated value of tan^2 is incorrect.");
-        assertEquals(4.0, Double.parseDouble(getItemByName("sec2")), 0.01,  "Calculated value of sec^2 is incorrect.");
-        assertEquals(7.0, Double.parseDouble(getItemByName("sum")), 0.01,"Calculated sum of tan^2 + sec^2 is incorrect.");
+    public void correctTrigValues(){
+        assertEquals(4.0, Double.parseDouble(getItemByName("sec2")), 0.001,  "The calculated value of sec^2 is incorrect.");
+        assertEquals(3.0, Double.parseDouble(getItemByName("tan2")), 0.001,  "The calculated value of tan^2 is incorrect.");
+        assertEquals(1.0, Double.parseDouble(getItemByName("difference")), 0.001,"The calculated difference of sec^2 - tan^2 is incorrect.");
     }
 }
