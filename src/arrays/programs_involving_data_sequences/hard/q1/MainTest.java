@@ -1,6 +1,7 @@
 package arrays.programs_involving_data_sequences.hard.q1;
 
 import global.BaseTest;
+import global.tools.TestOption;
 import global.variables.*;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -12,16 +13,18 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest extends BaseTest {
-    int[] inputs = {0, 1, 0, 2, 3, 1, 0, 2, 0};
+    int[] programOutput = {0, 1, 0, 2, 3, 1, 0, 2, 0, 3};
 
     public Clause[] testSentence() {
-        Clause[] output = new Clause[19];
-        for (int x = 0; x < 17; x += 2) {
-            output[x] = new IntegerLiteral(inputs[x / 2]);
-            output[x + 1] = new NewLine();
+        Clause[] clause = new Clause[20];
+        int a = 0;
+        int c = 0;
+        while (a < 10) {
+            clause[c++] = new IntegerLiteral(programOutput[a]);
+            clause[c++] = new NewLine();
+            a++;
         }
-        output[18] = new IntegerLiteral(3);
-        return output;
+        return clause;
     }
 
     public void runMain() {
@@ -44,7 +47,6 @@ public class MainTest extends BaseTest {
 
     @Test
     public void methodOutOfBoundsException() {
-
         try {
             int[] hold = CountAr.countThisPlease(new int[]{10, 10, 10, 9, 2, 3, 4, 5, 1, 7, 5});
             fail("Your program should not count numbers larger than 9");
