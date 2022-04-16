@@ -1,4 +1,4 @@
-package Arrays.Programs_involving_Data_Sequences.Hard.Q1;
+package arrays.programs_involving_data_sequences.hard.q1;
 
 /*
 Write a program that defines (in the main method) an array of positive numbers in the range of 0 and 9 with the following values :

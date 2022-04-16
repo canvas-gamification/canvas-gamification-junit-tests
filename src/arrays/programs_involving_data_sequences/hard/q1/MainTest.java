@@ -1,7 +1,9 @@
-package Arrays.Programs_involving_Data_Sequences.Hard.Q1;
+package arrays.programs_involving_data_sequences.hard.q1;
 
 import global.BaseTest;
 import global.variables.*;
+import global.variables.clauses.IntegerLiteral;
+import global.variables.clauses.NewLine;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
