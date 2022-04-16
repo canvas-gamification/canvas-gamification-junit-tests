@@ -1,4 +1,4 @@
-package Methods.Modular_Programming.Hard.Q1;
+package methods.modular_programming.hard.q1;
 import global.BaseTest;
 import global.tools.TestOption;
 import global.variables.*;
