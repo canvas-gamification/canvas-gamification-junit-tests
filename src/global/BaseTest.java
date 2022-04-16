@@ -18,8 +18,7 @@ import java.util.regex.Matcher;
 import static global.tools.CustomAssertions._assertTrue;
 import static global.tools.CustomAssertions._fail;
 import static global.tools.Logger.parseTestInformation;
-import static global.tools.TestSentenceUtil.injectClauses;
-import static global.tools.TestSentenceUtil.placeHolderCount;
+import static global.tools.TestSentenceUtil.*;
 import static global.utils.RegexUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -75,8 +74,19 @@ public abstract class BaseTest {
                 _fail("There is an issue with the test definition. Please contact an administrator.",
                         "The number of injected clauses is not equal to the number of placeholders in the test sentence");
             }
+            BaseTest.injectedClauses = injectedClauses;
         }
-        BaseTest.injectedClauses = injectedClauses;
+    }
+
+    public void setMultipleInjectedClauses(Clause[][] multipleInjectedClauses) {
+        if (multipleInjectedClauses != null) {
+            if (multipleInjectedClauses.length != placeHolderCount(testSentence())) {
+                // TODO: check if failing here stops errors from invalid TestOptions from being a problem
+                _fail("There is an issue with the test definition. Please contact an administrator.",
+                        "The number of injected clause arrays is not equal to the number of placeholders in the test sentence");
+            }
+            BaseTest.injectedClauses = flattenMultipleInjections(multipleInjectedClauses);
+        }
     }
 
     public Clause[] getInjectedClauses() {
@@ -162,6 +172,16 @@ public abstract class BaseTest {
         outputFollowsCorrectStructure();
     }
 
+    public void runWithInput(String input, Clause[][] multipleInjectedClauses) throws InvalidClauseException {
+        // run with input when you have clauses to inject too
+        refreshOutputStream();
+        setMultipleInjectedClauses(multipleInjectedClauses);
+        Clause[] modifiedTestSentence = expandTestSentence(testSentence(), multipleInjectedClauses);
+        setRegexSentence(injectClauses(modifiedTestSentence, getInjectedClauses()));
+        executeMain(input);
+        outputFollowsCorrectStructure();
+    }
+
     // Default Tests and Setup
     @BeforeAll
     public static void setUpLogger() {
@@ -172,6 +192,7 @@ public abstract class BaseTest {
     public void setUp() throws InvalidClauseException, InvalidTestOptionException {
         setRegexSentence(testSentence());
         TestOption.validate();  // check that test options were set with valid options
+        TestOption.resetIncorrectStructureErrorMessage();
         refreshOutputStream();
 
         if (TestOption.isInputTest) {
@@ -186,7 +207,7 @@ public abstract class BaseTest {
     public void outputFollowsCorrectStructure() {
         String output = getOutput();
         Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
-        String incorrectOutputMessage = "Your code's output did not follow the correct structure/syntax.";
+        String incorrectOutputMessage = TestOption.incorrectStructureErrorMessage;
        _assertTrue(matcher.find(), incorrectOutputMessage, parseTestInformation(output, getRegexSentence(), incorrectOutputMessage));
         //Ensures that the output matches the pattern exactly
         assertEquals(output.substring(matcher.start(), matcher.end()), output, incorrectOutputMessage);
