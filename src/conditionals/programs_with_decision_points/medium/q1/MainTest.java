@@ -29,18 +29,44 @@ public class MainTest extends BaseTest {
         LetterBox.main(new String[0]);
     }
 
-    //turn into three seperate tests
-    //use the new error message idea
-    static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of("a", "a is a lowercase letter"), Arguments.of("z", "z is a lowercase letter"), Arguments.of("A", "A is an uppercase letter"), Arguments.of("Z", "Z is an uppercase letter"), Arguments.of("&", "& is neither uppercase not lowercase"), Arguments.of("/", "/ is neither uppercase not lowercase"));
+    static Stream<Arguments> lowerInputProvider() {
+        return Stream.of(Arguments.of('a'), Arguments.of('z'));
+    }
+
+    static Stream<Arguments> upperInputProvider() {
+        return Stream.of(Arguments.of('A'), Arguments.of('Z'));
+    }
+
+    static Stream<Arguments> neitherInputProvider() {
+        return Stream.of(Arguments.of('&'), Arguments.of('/'));
     }
 
     @ParameterizedTest
-    @MethodSource("inputProvider")
-    void testWithInput(String input, String message) throws InvalidClauseException {
+    @MethodSource("lowerInputProvider")
+    void testWithLowerInput(char input) throws InvalidClauseException {
+        String message = input + " is a lowercase letter";
+        TestOption.incorrectStructureErrorMessage = "Your program did not correctly identify a lower case letter.";
+        runWithInput(String.valueOf(input), new Clause[]{
+                new StringLiteral(message)
+        });
+    }
 
+    @ParameterizedTest
+    @MethodSource("upperInputProvider")
+    void testWithUpperInput(char input) throws InvalidClauseException {
+        String message = input + " is an uppercase letter";
+        TestOption.incorrectStructureErrorMessage = "Your program did not correctly identify an upper case letter.";
+        runWithInput(String.valueOf(input), new Clause[]{
+                new StringLiteral(message)
+        });
+    }
 
-        runWithInput(input, new Clause[]{
+    @ParameterizedTest
+    @MethodSource("neitherInputProvider")
+    void testWithNeitherInput(char input) throws InvalidClauseException {
+        String message = input + " is neither uppercase not lowercase";
+        TestOption.incorrectStructureErrorMessage = "Your program did not correctly identify an input that is neither lower case nor uppercase.";
+        runWithInput(String.valueOf(input), new Clause[]{
                 new StringLiteral(message)
         });
     }
