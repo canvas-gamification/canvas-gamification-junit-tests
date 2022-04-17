@@ -13,8 +13,8 @@ public class DivSeries
       Scanner input = new Scanner( System.in );
       System.out.println( "Enter a number for the upper bound of the series: " );
       int n = input.nextInt(); 
-      int sum  = 0; 
-      int i = 1;
+      double sum  = 0; 
+      double i = 1;
       while( i <= n )
       { 
          sum += 20 / i ;
