@@ -13,8 +13,8 @@ public class SeriesPector
       Scanner input = new Scanner( System.in );
       System.out.println( "Enter a number for the upper bound of the series: " );
       int n = input.nextInt(); 
-      int sum  = 0; 
-      for(int i = 1; i < n; i++) 
+      double sum  = 0; 
+      for(double i = 1.0; i < n; i++) 
          sum += i / ( i + 1 ) ;
       System.out.println("The sum of the series is " + sum ); 
    }
