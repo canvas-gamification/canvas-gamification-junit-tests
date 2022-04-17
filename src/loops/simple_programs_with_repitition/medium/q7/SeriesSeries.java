@@ -19,4 +19,3 @@ public class SeriesSeries
       System.out.println("The sum of the series is " + sum ); 
    }
 }
-
