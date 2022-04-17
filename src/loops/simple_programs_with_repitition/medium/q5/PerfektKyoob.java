@@ -19,7 +19,7 @@ public class PerfektKyoob
 	         result += n % 10 ;
 	         n = n / 10;
 	      }
-	      if(result == (int) Math.pow(nn, 1 / 3.0))
+	      if(nn == Math.pow(result, 3))
 	         System.out.println( nn + " is a Perfect Cube!" );
 	      else
 	         System.out.println( nn + " is NOT a Perfect Cube!" ); 

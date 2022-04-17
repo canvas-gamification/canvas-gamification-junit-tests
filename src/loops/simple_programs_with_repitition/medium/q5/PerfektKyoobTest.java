@@ -35,7 +35,8 @@ public class PerfektKyoobTest extends BaseTest {
             Arguments.of(0, " is a Perfect Cube!"),
             Arguments.of(1, " is a Perfect Cube!"),
             Arguments.of(15, " is NOT a Perfect Cube!"),
-            Arguments.of(456, " is NOT a Perfect Cube!")
+            Arguments.of(456, " is NOT a Perfect Cube!"),
+            Arguments.of(17576, " is a Perfect Cube!")
         );
     }
 
