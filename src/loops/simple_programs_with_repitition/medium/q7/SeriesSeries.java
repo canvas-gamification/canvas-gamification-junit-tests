@@ -2,7 +2,7 @@ package loops.simple_programs_with_repitition.medium.q7;
 
 /*
 Write a Java program to ask the user for a number and 
-calculate the sum of the following series: 12 + 22 + 32 + 42 + … n2
+calculate the sum of the following series: 1^2 + 2^2 + 3^2 + 4^2 + … n^2
 */
 
 import java.util.Scanner;
