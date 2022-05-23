@@ -11,7 +11,7 @@ Distractors:
     double crypt = gen.nextDouble( 100000000 );
     int crypt = gen.next( 90000000 ) + 10000000;
     int crypt = gen.nextInt( 10000000 );
-    int second = gen.nextInt( 9 );
+    int key = gen.nextInt( 9 );
     int encrypt = 1 + gen.nextInt( 10 );
     double encrypt *= crypt;
     int encrypt = gen.nextInt( 10 ) * crypt;
