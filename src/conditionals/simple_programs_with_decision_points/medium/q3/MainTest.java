@@ -10,10 +10,12 @@ import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.opentest4j.AssertionFailedError;
 
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class MainTest extends BaseTest {
     // Parsons
@@ -41,13 +43,17 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void printsCorrectOutputMessage(int input, String output) throws InvalidClauseException {
-        runWithInput(input + "", new Clause[]{
-                new StringLiteral(output, "underAge")
-        });
         String errorMessage = "The output string is incorrect for age 18 or below.";
         if (input >= 19)
             errorMessage = "The output string is incorrect for age 19 or above.";
-        assertEquals(getItemByName("underAge"), output, errorMessage);
+        try {
+            runWithInput(input + "", new Clause[]{
+                    new StringLiteral(output, "underAge")
+            });
+            assertEquals(getItemByName("underAge"), output, errorMessage);
+        } catch (AssertionFailedError e) {
+            fail(errorMessage);
+        }
     }
 
 }
