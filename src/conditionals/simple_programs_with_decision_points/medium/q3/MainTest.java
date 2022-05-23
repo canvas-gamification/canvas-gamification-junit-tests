@@ -1,5 +1,4 @@
 package conditionals.simple_programs_with_decision_points.medium.q3;
-
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
@@ -34,26 +33,30 @@ public class MainTest extends BaseTest {
         VirtualBouncer.main(new String[0]);
     }
 
-    static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of(19, "Step right in sir."), Arguments.of(18, "Whoa there kiddo, it's past your bedtime."),
-                Arguments.of(66, "Step right in sir."), Arguments.of(1, "Whoa there kiddo, it's past your bedtime."),
-                Arguments.of(16, "Whoa there kiddo, it's past your bedtime."), Arguments.of(37, "Step right in sir."));
+    static Stream<Integer> inputProviderUnderAge() {
+        return Stream.of(1, 4, 5, 7, 8, 9, 18, 17, 10, 15);
+    }
+
+    static Stream<Integer> inputProviderOfAge() {
+        return Stream.of(19, 20, 21, 25, 56, 98, 67, 45);
     }
 
     @ParameterizedTest
-    @MethodSource("inputProvider")
-    void printsCorrectOutputMessage(int input, String output) throws InvalidClauseException {
-        String errorMessage = "The output string is incorrect for age 18 or below.";
-        if (input >= 19)
-            errorMessage = "The output string is incorrect for age 19 or above.";
-        try {
-            runWithInput(input + "", new Clause[]{
-                    new StringLiteral(output, "underAge")
-            });
-            assertEquals(getItemByName("underAge"), output, errorMessage);
-        } catch (AssertionFailedError e) {
-            fail(errorMessage);
-        }
+    @MethodSource("inputProviderUnderAge")
+    void worksWithNumbersUnderAge(int input) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program did not correctly identify an under age individual.";
+        runWithInput(input + "", new Clause[]{
+                new StringLiteral("Whoa there kiddo, it's past your bedtime.", "underAge")
+        });
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProviderOfAge")
+    void worksWithNumberOfAge(int input) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program did not correctly identify an individual of legal age.";
+        runWithInput(input + "", new Clause[]{
+                new StringLiteral("Step right in sir.", "underAge")
+        });
     }
 
 }
