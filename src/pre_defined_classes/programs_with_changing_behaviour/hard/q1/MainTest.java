@@ -26,7 +26,7 @@ public class MainTest extends BaseRandomTest {
     }
 
     @Test
-    public void encryptsNumbersCorrectly(){
+    public void encryptsNumbersCorrectly() {
         int crypt = Integer.parseInt(getItemByName("crypt"));
         int key = Integer.parseInt(getItemByName("key"));
         int encrypt = Integer.parseInt(getItemByName("encrypt"));
