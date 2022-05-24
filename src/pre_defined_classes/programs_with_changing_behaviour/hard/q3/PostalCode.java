@@ -33,4 +33,3 @@ public class PostalCode {
         System.out.println("Random Postal Code: " + c1 + n1 + c2 + n2 + c3 + n3);
     }
 }
-

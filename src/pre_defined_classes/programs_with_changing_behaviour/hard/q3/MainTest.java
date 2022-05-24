@@ -2,7 +2,6 @@ package pre_defined_classes.programs_with_changing_behaviour.hard.q3;
 
 import global.BaseRandomTest;
 import global.variables.Clause;
-import global.variables.clauses.NewLine;
 import global.variables.clauses.RandomChar;
 import global.variables.clauses.RandomInteger;
 import global.variables.clauses.StringLiteral;
