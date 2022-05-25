@@ -1,4 +1,4 @@
-package pre_defined_classes.simple_programs_taking_user_input.hard.q1;
+package pre_defined_classes.simple_programs_taking_numeric_user_input.hard.q1;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
