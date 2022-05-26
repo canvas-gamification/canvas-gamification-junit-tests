@@ -17,13 +17,12 @@ public class MainTest extends BaseTest {
     // Parsons
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "Kelowna ";
+        TestOption.defaultInput = "Kelowna";
         return new Clause[]{
                 new StringLiteral("Enter a city name: "),
                 new NewLine(),
                 new StringLiteral("What is the name of the city that is spelt like "),
-                new StringLiteral("Kylywny"),
-                //new PlaceHolder(),
+                new PlaceHolder(),
                 new StringLiteral("\\?")
         };
     }
@@ -33,16 +32,17 @@ public class MainTest extends BaseTest {
     }
 
     public static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of("Kelowna", "Kylywny"), Arguments.of("Medicine Hat", "Mydycyny Hyt"), Arguments.of("Munich", "Mynych"), Arguments.of("Viewhill", "Vyywhyll"));
+        return Stream.of(Arguments.of("Kelowna", "Kylywny"), Arguments.of("Medicine Hat", "Mydycyny Hyt"),
+                Arguments.of("Munich", "Mynych"), Arguments.of("Viewhill", "Vyywhyll"), Arguments.of(" ", " "), Arguments.of(System.lineSeparator(), ""));
     }
 
-//    @ParameterizedTest
-//    @MethodSource("inputProvider")
-//    public void replacesVowelsCorrectly(String city, String city2) throws InvalidClauseException {
-//        TestOption.incorrectStructureErrorMessage = "Your program does not correctly replace all the vowels in the city name";
-//        runWithInput(city, new Clause[]{
-//                new StringLiteral(city2)
-//        });
-//    }
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void replacesVowelsCorrectly(String city, String city2) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly replace all the vowels in the city name.";
+        runWithInput(city, new Clause[]{
+                new StringLiteral(city2)
+        });
+    }
 
 }

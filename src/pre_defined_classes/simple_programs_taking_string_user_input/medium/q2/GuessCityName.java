@@ -6,8 +6,7 @@ display that changed name to see if the user can guess what the city name actual
 Sample Output:
 	Enter a city name:
 	Kelowna
-	What is the name of the city that is spelt like Kylywny
-
+	What is the name of the city that is spelt like Kylywny?
 
  */
 
