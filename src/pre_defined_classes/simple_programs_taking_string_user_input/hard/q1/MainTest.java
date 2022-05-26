@@ -10,9 +10,10 @@ import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class MainTest extends BaseTest {
     public Clause[] testSentence() {
@@ -39,9 +40,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void checksIfLowerCaseCorrectly(String input, boolean isLowerCase) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print if the given string is all lower case.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not print a boolean if the string is all lowercase.";
         runWithInput(input, new Clause[]{
-                new StringLiteral("[true|false|" + input.toLowerCase() + "|" + input.toUpperCase() + "]", "isLowerCase")
+                new StringLiteral("true|false", "isLowerCase")
         });
+        if (Boolean.parseBoolean(getItemByName("isLowerCase")) != isLowerCase)
+            fail("Your program does not print the correct boolean if the given string is all lower case.");
     }
 }
