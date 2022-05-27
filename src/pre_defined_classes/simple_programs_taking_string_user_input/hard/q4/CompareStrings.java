@@ -3,7 +3,7 @@ package pre_defined_classes.simple_programs_taking_string_user_input.hard.q4;
 Plagiarism detection software is used to compare whether two essays or programming assignments are similar enough to
 each other that one could have been a direct copy of the other. We consider a trivial case of plagiarism detection in
 this question. Make a program that takes in two different paragraphs entered by the user and answers true or false to
-the question of if two paragraphs are identical.
+the question of if the two paragraphs are identical.
 
 Sample Output:
 	Enter the first paragraph:
