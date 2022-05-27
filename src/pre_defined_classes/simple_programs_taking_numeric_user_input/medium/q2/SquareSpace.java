@@ -1,8 +1,8 @@
 package pre_defined_classes.simple_programs_taking_numeric_user_input.medium.q2;
 
 /*
-Make a program that takes a number from the user and uses it to calculate the area and perimeter of a square.
-Assume the user enters a valid positive integer.
+Make a program that takes a number from the user and uses it to calculate the area and perimeter of a square. Then,
+print out the area and perimeter. Assume the user enters a valid positive integer.
 
 Sample Output:
 	Enter the length of the side of a square: 5
@@ -23,4 +23,3 @@ public class SquareSpace {
         System.out.println("The perimeter is: " + perimeter);
     }
 }
-
