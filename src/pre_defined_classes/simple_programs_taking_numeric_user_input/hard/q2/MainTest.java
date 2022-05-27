@@ -1,6 +1,7 @@
 package pre_defined_classes.simple_programs_taking_numeric_user_input.hard.q2;
 
 import global.BaseTest;
+import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
@@ -9,10 +10,13 @@ import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
 import java.util.stream.Stream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
+    // Parsons with distractors
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "4";
@@ -34,7 +38,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctlyCalculatesBaggageFee(int numBags, int fee) {
+    public void calculatesBaggageFeeCorrectly(int numBags, int fee) throws InvalidClauseException {
         runWithInput(numBags + System.lineSeparator());
         assertEquals(Integer.parseInt(getItemByName("fee")), fee, "Your program does not correctly calculate the baggage fee.");
     }
