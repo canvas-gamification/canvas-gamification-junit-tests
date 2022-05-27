@@ -10,6 +10,7 @@ import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
 import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
@@ -39,8 +40,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void printsHalfOfInput(String input, String halfInput) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print half of the order";
+    public void printsHalfOfInputCorrectly(String input, String halfInput) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print out half of the order.";
         runWithInput(input, new Clause[]{
                 new StringLiteral(halfInput)
         });
