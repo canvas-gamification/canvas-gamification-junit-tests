@@ -39,7 +39,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void replacesVowelsCorrectly(String word, String changedWord) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly replace all the vowels in a word with e.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly replace all the vowels in a word with 'e'.";
         runWithInput(word, new Clause[]{
                 new StringLiteral(changedWord)
         });
