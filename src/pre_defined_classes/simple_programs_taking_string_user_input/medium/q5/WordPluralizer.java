@@ -1,4 +1,4 @@
-package pre_defined_classes.simple_porgrams_taking_string_user_input.medium.q5;
+package pre_defined_classes.simple_programs_taking_string_user_input.medium.q5;
 /*
 In English, the plural form of a noun often ends in s or es. Make a program that takes a word from the user and prints
 out these common plural forms of that word. Assume the user provides valid input.
