@@ -1,6 +1,7 @@
 package pre_defined_classes.simple_programs_taking_numeric_user_input.medium.q5;
 
 import global.BaseTest;
+import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
@@ -35,14 +36,15 @@ public class MainTest extends BaseTest {
     }
 
     public static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of(4, 2.0), Arguments.of(100, 10.0), Arguments.of(7, 2.6457513110645907), Arguments.of(24, 4.898979485566356));
+        return Stream.of(Arguments.of(4, 2.0), Arguments.of(100, 10.0), Arguments.of(7, 2.6457513110645907),
+                Arguments.of(24, 4.898979485566356), Arguments.of(0, 0.0));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctlyCalculatesSquareRoot(int radicand, Double squareRoot) {
+    public void calculatesSquareRootCorrectly(int radicand, Double squareRoot) throws InvalidClauseException {
         runWithInput(radicand + System.lineSeparator());
-        assertEquals(Integer.parseInt(getItemByName("radicand")), radicand, "Your program does not correctly print the radicand");
-        assertEquals(Double.parseDouble(getItemByName("squareRoot")), squareRoot, "Your program does not correctly calculate the square root of a number");
+        assertEquals(Integer.parseInt(getItemByName("radicand")), radicand, "Your program does not correctly print the radicand.");
+        assertEquals(Double.parseDouble(getItemByName("squareRoot")), squareRoot, 0.00001, "Your program does not correctly calculate the square root of a number.");
     }
 }
