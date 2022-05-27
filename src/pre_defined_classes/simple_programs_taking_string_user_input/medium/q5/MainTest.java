@@ -1,4 +1,4 @@
-package pre_defined_classes.simple_porgrams_taking_string_user_input.medium.q5;
+package pre_defined_classes.simple_programs_taking_string_user_input.medium.q5;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
