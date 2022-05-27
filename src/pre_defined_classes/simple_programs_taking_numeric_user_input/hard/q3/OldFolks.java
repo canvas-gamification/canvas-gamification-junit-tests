@@ -1,6 +1,6 @@
 package pre_defined_classes.simple_programs_taking_numeric_user_input.hard.q3;
 /*
-Write a program that receives the input of three people's age and displays the age that is the oldest by using the max()
+Write a program that receives the input of three people's age and displays the oldest one using the max()
 method. Assume the user only enters non-negative integers.
 
 Sample Output:

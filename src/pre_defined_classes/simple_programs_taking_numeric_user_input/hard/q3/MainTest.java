@@ -1,6 +1,7 @@
 package pre_defined_classes.simple_programs_taking_numeric_user_input.hard.q3;
 
 import global.BaseTest;
+import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
@@ -30,13 +31,14 @@ public class MainTest extends BaseTest {
     }
 
     public static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of(10, 20, 30, 30), Arguments.of(46, 78, 11, 78), Arguments.of(57, 14, 39, 57));
+        return Stream.of(Arguments.of(10, 20, 30, 30), Arguments.of(46, 78, 11, 78), Arguments.of(57, 14, 39, 57),
+                Arguments.of(50,50,50,50));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctlyCalculatesMaximumAge(int n1, int n2, int n3, int max) {
+    public void calculatesMaximumAgeCorrectly(int n1, int n2, int n3, int max) throws InvalidClauseException {
         runWithInput(n1 + System.lineSeparator() + n2 + System.lineSeparator() + n3);
-        assertEquals(Integer.parseInt(getItemByName("max")), max, "Your program does not correctly calculate the maximum age");
+        assertEquals(Integer.parseInt(getItemByName("max")), max, "Your program does not correctly calculate the maximum age.");
     }
 }
