@@ -35,13 +35,13 @@ public class MainTest extends BaseTest {
     }
 
     public static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of("Bob Ross", 3, 4), Arguments.of("vSauce Micheal", 6, 7), Arguments.of("John Snow", 4, 4));
+        return Stream.of(Arguments.of("Bob Ross", 3, 4), Arguments.of("Micheal Smith", 7, 5), Arguments.of("John Snow", 4, 4));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void calculatesNameLengthsCorrectly(String name, int firstNameLength, int surnameLength) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly calculate and print the length of the two names.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly calculate and print the length of the user's first name and last name.";
         runWithInput(name, new Clause[]{
                 new IntegerLiteral(firstNameLength, "firstNameLength"),
                 new IntegerLiteral(surnameLength, "surnameLength")
