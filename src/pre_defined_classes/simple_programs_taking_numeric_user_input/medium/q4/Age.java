@@ -1,7 +1,7 @@
 package pre_defined_classes.simple_programs_taking_numeric_user_input.medium.q4;
 /*
-Make a program that calculates a user's age based on the current year and their year of birth. Assume the user enters a
-valid AD year (integers greater than or equal to 0) and that the current year is greater than the birth year.
+Make a program that calculates a user's age based on the current year and their year of birth. Assume the user enters
+integers that are greater than or equal to 0, and that the current year is greater than or equal to the birth year.
 
 Sample Output:
 	What is the current year?

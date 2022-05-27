@@ -1,6 +1,7 @@
 package pre_defined_classes.simple_programs_taking_numeric_user_input.medium.q4;
 
 import global.BaseTest;
+import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
@@ -9,7 +10,9 @@ import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
 import java.util.stream.Stream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
@@ -39,8 +42,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctlyCalculatesAge(int current, int birthYear, int age){
+    public void correctlyCalculatesAge(int current, int birthYear, int age) throws InvalidClauseException {
         runWithInput(current + System.lineSeparator() + birthYear);
-        assertEquals(Integer.parseInt(getItemByName("age")), age, "Your program does not calculate age correctly.");
+        assertEquals(Integer.parseInt(getItemByName("age")), age, "Your program does not correctly calculate the age of the user.");
     }
 }
