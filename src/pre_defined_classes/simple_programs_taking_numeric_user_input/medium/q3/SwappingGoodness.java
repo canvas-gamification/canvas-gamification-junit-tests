@@ -1,7 +1,7 @@
 package pre_defined_classes.simple_programs_taking_numeric_user_input.medium.q3;
 /*
-Make a program that asks the user for two numbers, stores them as variables, and then swaps the values of those variables.
-Assume the user enters two valid integers.
+Make a program that asks the user for two numbers, stores them as variables, prints the numbers, and then swaps the
+values of those variables. The program should then print out the swapped variables. Assume the user enters two valid integers.
 
 Sample Output:
 	Enter a number: 5
