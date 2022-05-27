@@ -1,7 +1,7 @@
 package pre_defined_classes.simple_programs_taking_string_user_input.hard.q3;
 /*
 Did you know that some languages don't have any vowels or have very few vowels (e.g., 'a' and 'e')? Make a program that
-takes in a word from the user and changes all the vowels (a, e, i, o, u) in the word to 'e' only then displays the
+takes a word from the user and changes all the vowels (a, e, i, o, u) in the word to 'e' and then displays the
 resulting word. Assume the user only inputs lower case letters.
 
 Sample Output:
