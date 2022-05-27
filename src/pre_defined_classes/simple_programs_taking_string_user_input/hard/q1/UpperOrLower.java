@@ -1,7 +1,7 @@
 package pre_defined_classes.simple_programs_taking_string_user_input.hard.q1;
 /*
 Make a program to check if an inputted string is all lower-case. The program should print out true or false if the given
-string is all lower case or not.
+string is all lower case or not. Assume the user provides valid input.
 
 Sample Output:
 	Enter a string:
