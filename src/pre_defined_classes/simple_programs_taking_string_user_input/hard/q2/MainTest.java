@@ -41,7 +41,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void checksEndingCorrectly(String input1, String input2, boolean contains) throws InvalidClauseException {
+    public void checksStringEndingCorrectly(String input1, String input2, boolean contains) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the boolean value if the first string ends with the second string.";
         runWithInput(input1 + System.lineSeparator() + input2, new Clause[]{
                 new StringLiteral(Boolean.toString(contains), "contains")
