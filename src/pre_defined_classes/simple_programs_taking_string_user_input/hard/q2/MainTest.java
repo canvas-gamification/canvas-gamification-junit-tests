@@ -10,6 +10,7 @@ import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
 import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
@@ -32,7 +33,7 @@ public class MainTest extends BaseTest {
         CheckEnding.main(new String[0]);
     }
 
-    public static Stream<Arguments> inputProvider(){
+    public static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of("Imagine Dragons", "Dragons", true), Arguments.of("Imagine Dragons", "Tires", false),
                 Arguments.of(System.lineSeparator(), System.lineSeparator(), true), Arguments.of("Petty Tomfoolery", "potato", false),
                 Arguments.of("The Coffee Monster", "monster", false), Arguments.of("It is time", "time", true));

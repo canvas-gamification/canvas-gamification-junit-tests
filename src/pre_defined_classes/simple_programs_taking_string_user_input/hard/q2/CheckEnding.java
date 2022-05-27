@@ -1,7 +1,7 @@
 package pre_defined_classes.simple_programs_taking_string_user_input.hard.q2;
 /*
-Make a Java program that asks two questions and checks whether your first answer ends with the contents of your second
-answer. The result of the match is displayed as an answer of either true or false to the question of whether the first
+Make a Java program that asks two questions and checks if your first answer ends with the contents of your second
+answer. The result of the match is displayed as an answer of either true or false to the question of if the first
 string ends with the second string. Assume the user enters valid input.
 
 Sample Output:
