@@ -1,6 +1,6 @@
 package pre_defined_classes.simple_programs_taking_string_user_input.medium.q1;
 /*
-Make a program that asks the user for a name and age, then displays a greeting message using the inputted values.
+Make a program that asks the user for a name and age, and then displays a greeting message using the inputted values.
 Assume the user only provides valid input.
 
 Sample Output:
@@ -23,4 +23,3 @@ public class Greetings {
         System.out.println("Hi " + name + ", you are " + age + " years old!");
     }
 }
-

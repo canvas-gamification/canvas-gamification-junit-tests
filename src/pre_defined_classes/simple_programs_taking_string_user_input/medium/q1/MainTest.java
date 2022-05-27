@@ -37,14 +37,14 @@ public class MainTest extends BaseTest {
     }
 
     public static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of("John Doe", 45), Arguments.of("Seth", 20), Arguments.of("Opey", 24),
+        return Stream.of(Arguments.of("John Doe", 45), Arguments.of("Seth", 20), Arguments.of("Amelia Earhart", 0),
                 Arguments.of("Teresa", 21), Arguments.of("Steve Steveson", 157));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void producesCorrectGreeting(String name, int age) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Please make sure your program prints out the correct greeting.";
+    public void producesGreetingCorrectly(String name, int age) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print out the correct greeting.";
         runWithInput(name + System.lineSeparator() + age, new Clause[]{
                 new StringLiteral(name),
                 new IntegerLiteral(age)
