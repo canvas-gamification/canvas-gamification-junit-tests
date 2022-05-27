@@ -33,7 +33,8 @@ public class MainTest extends BaseTest {
 
     public static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of("Kelowna", "Kylywny"), Arguments.of("Medicine Hat", "Mydycyny Hyt"),
-                Arguments.of("Munich", "Mynych"), Arguments.of("Viewhill", "Vyywhyll"), Arguments.of(" ", " "), Arguments.of(System.lineSeparator(), ""));
+                Arguments.of("Munich", "Mynych"), Arguments.of("Viewhill", "Vyywhyll"), Arguments.of(" ", " "),
+                Arguments.of(System.lineSeparator(), ""));
     }
 
     @ParameterizedTest
