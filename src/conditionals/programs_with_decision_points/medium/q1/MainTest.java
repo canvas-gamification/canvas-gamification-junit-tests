@@ -45,7 +45,7 @@ public class MainTest extends BaseTest {
     @MethodSource("lowerInputProvider")
     void testWithLowerInput(char input) throws InvalidClauseException {
         String message = input + " is a lowercase letter";
-        TestOption.incorrectStructureErrorMessage = "Your program did not correctly identify a lower case letter.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify a lower case letter.";
         runWithInput(String.valueOf(input), new Clause[]{
                 new StringLiteral(message)
         });
@@ -55,7 +55,7 @@ public class MainTest extends BaseTest {
     @MethodSource("upperInputProvider")
     void testWithUpperInput(char input) throws InvalidClauseException {
         String message = input + " is an uppercase letter";
-        TestOption.incorrectStructureErrorMessage = "Your program did not correctly identify an upper case letter.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify an upper case letter.";
         runWithInput(String.valueOf(input), new Clause[]{
                 new StringLiteral(message)
         });
@@ -64,8 +64,8 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("neitherInputProvider")
     void testWithNeitherInput(char input) throws InvalidClauseException {
-        String message = input + " is neither uppercase not lowercase";
-        TestOption.incorrectStructureErrorMessage = "Your program did not correctly identify an input that is neither lower case nor uppercase.";
+        String message = input + " is neither uppercase nor lowercase";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify an input that is neither lower case nor uppercase.";
         runWithInput(String.valueOf(input), new Clause[]{
                 new StringLiteral(message)
         });
