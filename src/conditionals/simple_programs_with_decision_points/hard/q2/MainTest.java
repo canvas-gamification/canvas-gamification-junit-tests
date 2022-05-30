@@ -41,8 +41,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProviderAD")
-    public void printsADYearCorrectly(int year, boolean isAD, int yearMinus1) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program is not correctly printing the AD year.";
+    public void printsADMinusOneYearCorrectly(int year, boolean isAD, int yearMinus1) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the AD year minus one.";
         runWithInput(year + " " + isAD, new Clause[]{
                 new StringLiteral(year + " AD - 1 = " + yearMinus1 + " AD")
         });
@@ -50,8 +50,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProviderBC")
-    public void printsBCYearCorrectly(int year, boolean isAD, int yearMinus1) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program is not correctly printing the BC year.";
+    public void printsBCMinusOneYearCorrectly(int year, boolean isAD, int yearMinus1) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the BC year minus one.";
         runWithInput(year + " " + isAD, new Clause[]{
                 new StringLiteral(year + " BC - 1 = " + yearMinus1 + " BC")
         });
