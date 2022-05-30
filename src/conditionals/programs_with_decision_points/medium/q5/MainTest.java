@@ -45,7 +45,7 @@ public class MainTest extends BaseTest {
 
     public static Stream<Arguments> inputProviderInvalidInput() {
         return Stream.of(Arguments.of(45, 845),
-                Arguments.of(5, 7));
+                Arguments.of(5, 7), Arguments.of(-1, 4), Arguments.of(0, 758));
     }
 
     public static Stream<Arguments> inputProviderValidInput() {
@@ -66,7 +66,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProviderInvalidInput")
-    public void printsInvalidInputMessage(int menuItem, int amount) throws InvalidClauseException{
+    public void printsInvalidMenuChoiceMessage(int menuItem, int amount) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print an error message when the user inputs a number which is not on the menu.";
         runWithInput(menuItem + " " + amount, new Clause[]{
                 new IntegerLiteral(0),
