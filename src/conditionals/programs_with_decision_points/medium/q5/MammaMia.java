@@ -1,10 +1,10 @@
 package conditionals.programs_with_decision_points.medium.q5;
 /*
-Write a program that will display a menu to the user and ask the user for their order and how much of the item they
-want, and then display the total amount their order would cost based on the following information: $10 for a Pepperoni
+Write a program that will display a menu to the user and ask the user for their order and how many of the item they
+want. Then display the total amount their order would cost based on the following information: $10 for a Pepperoni
 Pizza, $15 for Spaghetti Alfredo, $8 for a Panna Cotta, and $3 for a can of soda. If the user enters a number
-corresponding to a number on the menu, print “Sorry, we weren't expecting that. Please try again.”. Assume the user
-inputs a non-negative integer.
+corresponding to a number not on the menu, print “Sorry, we weren't expecting that. Please try again.”. Assume the user
+inputs integers, and enters a non-negative integer for the order quantity.
 
 Sample Output:
 	Enter the item you would like based on this list:
@@ -18,6 +18,7 @@ Sample Output:
     That will cost: $50
 
  */
+
 import java.util.Scanner;
 
 public class MammaMia {
