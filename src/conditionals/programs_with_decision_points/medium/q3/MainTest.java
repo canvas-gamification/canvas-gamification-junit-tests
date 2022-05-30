@@ -43,7 +43,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void printNumbersInAscendingOrder(int n1, int n2, int n3, String output) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the integers in the correct order";
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the integers in ascending order.";
         runWithInput(n1 + " " + n2 + " " + n3, new Clause[]{
                 new StringLiteral(output)
         });
