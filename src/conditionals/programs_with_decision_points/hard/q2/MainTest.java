@@ -39,7 +39,7 @@ public class MainTest extends BaseTest {
 
     public static Stream<Arguments> inputProviderValid(){
         return Stream.of(Arguments.of(2.5, 9.5, "+", 12.0), Arguments.of(-8.4, 9.7, "-", -18.1), Arguments.of(47.9, 7, "*", 335.3),
-                Arguments.of(22, 7, "/", 3.142857142857143), Arguments.of(34.95, -96, "*utdhtd", -3355.2));
+                Arguments.of(22, 7, "/", 3.142857142857143), Arguments.of(34.95, -96, "*utdhtd", -3355.2), Arguments.of(-87, 88, "+hellothere", 1));
     }
 
     public static Stream<Arguments> inputProviderInvalid(){
@@ -61,7 +61,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProviderInvalid")
     public void worksWithInvalidOperators(double num1, double num2, String operator, String message) throws InvalidClauseException{
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print out an error message for invalid operations.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print out an error message for an invalid operations.";
         runWithInput(num1 + " " + num2 + " " + operator, new Clause[]{
                 new StringLiteral("Invalid operator!"),
                 new StringLiteral("")
