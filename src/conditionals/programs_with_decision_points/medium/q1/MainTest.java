@@ -13,11 +13,9 @@ import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
     // Parsons
-
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "a";
-
         return new Clause[]{
                 new StringLiteral("Enter a character: "),
                 new NewLine(),
@@ -29,23 +27,23 @@ public class MainTest extends BaseTest {
         LetterBox.main(new String[0]);
     }
 
-    static Stream<Arguments> lowerInputProvider() {
-        return Stream.of(Arguments.of('a'), Arguments.of('z'));
+    static Stream<Character> lowerInputProvider() {
+        return Stream.of('a', 'f', 'z');
     }
 
-    static Stream<Arguments> upperInputProvider() {
-        return Stream.of(Arguments.of('A'), Arguments.of('Z'));
+    static Stream<Character> upperInputProvider() {
+        return Stream.of('A', 'S', 'Z');
     }
 
-    static Stream<Arguments> neitherInputProvider() {
-        return Stream.of(Arguments.of('&'), Arguments.of('/'));
+    static Stream<Character> neitherInputProvider() {
+        return Stream.of('&', '/', '0');
     }
 
     @ParameterizedTest
     @MethodSource("lowerInputProvider")
-    void testWithLowerInput(char input) throws InvalidClauseException {
+    void worksWithLowercaseCharacters(char input) throws InvalidClauseException {
         String message = input + " is a lowercase letter";
-        TestOption.incorrectStructureErrorMessage = "Your program did not correctly identify a lower case letter.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify a lower case letter.";
         runWithInput(String.valueOf(input), new Clause[]{
                 new StringLiteral(message)
         });
@@ -53,9 +51,9 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("upperInputProvider")
-    void testWithUpperInput(char input) throws InvalidClauseException {
+    void worksWithUppercaseCharacters(char input) throws InvalidClauseException {
         String message = input + " is an uppercase letter";
-        TestOption.incorrectStructureErrorMessage = "Your program did not correctly identify an upper case letter.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify an upper case letter.";
         runWithInput(String.valueOf(input), new Clause[]{
                 new StringLiteral(message)
         });
@@ -63,9 +61,9 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("neitherInputProvider")
-    void testWithNeitherInput(char input) throws InvalidClauseException {
-        String message = input + " is neither uppercase not lowercase";
-        TestOption.incorrectStructureErrorMessage = "Your program did not correctly identify an input that is neither lower case nor uppercase.";
+    void worksWithOtherCharacters(char input) throws InvalidClauseException {
+        String message = input + " is neither uppercase nor lowercase";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify an input that is neither lower case nor uppercase.";
         runWithInput(String.valueOf(input), new Clause[]{
                 new StringLiteral(message)
         });
