@@ -8,6 +8,7 @@ import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseRandomTest {
     // Parsons
+    // Random number independence
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("Player One's hand sign is: "),
