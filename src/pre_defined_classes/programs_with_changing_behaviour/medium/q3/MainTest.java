@@ -16,6 +16,6 @@ public class MainTest extends BaseRandomTest {
     }
 
     public void runMain() {
-        Realist8Ball.main(new String[0]);
+        Random8.main(new String[0]);
     }
 }
