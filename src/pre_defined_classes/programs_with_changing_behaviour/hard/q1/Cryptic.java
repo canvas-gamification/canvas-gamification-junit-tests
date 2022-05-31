@@ -19,14 +19,13 @@ Distractors:
  */
 
 import java.util.Random;
-public class Cryptic
-{
-    public static void main( String[] args )
-    {
+
+public class Cryptic {
+    public static void main(String[] args) {
         Random gen = new Random();
-        int crypt = gen.nextInt( 90000000 ) + 10000000;
-        int key =  gen.nextInt( 9 ) + 1;
+        int crypt = gen.nextInt(90000000) + 10000000;
+        int key = gen.nextInt(9) + 1;
         int encrypt = crypt * key;
-        System.out.println( crypt + " has been encrypted using " + key + " into " + encrypt );
+        System.out.println(crypt + " has been encrypted using " + key + " into " + encrypt);
     }
 }
