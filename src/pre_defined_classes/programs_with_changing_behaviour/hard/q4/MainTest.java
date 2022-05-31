@@ -1,6 +1,8 @@
 package pre_defined_classes.programs_with_changing_behaviour.hard.q4;
 
 import global.BaseRandomTest;
+import global.exceptions.InvalidClauseException;
+import global.exceptions.InvalidTestOptionException;
 import global.variables.Clause;
 import global.variables.clauses.RandomInteger;
 import global.variables.clauses.StringLiteral;
@@ -35,14 +37,12 @@ public class MainTest extends BaseRandomTest {
     different random numbers.
      */
     @Test
-    public void generatedNumbersAreIndependent() {
+    public void generatedNumbersAreIndependent() throws InvalidClauseException, InvalidTestOptionException {
         int n1, n2, n3, n4, n5, n6;
         // Keeps track of how many times all digits of the passcode are equal to each other. If more than 10, test fails
         int independentNumbers = 0;
         do {
-            restoreSystemInputOutput();
-            refreshOutputStream();
-            runMain();
+            setUp();
             n1 = Integer.parseInt(getItemByName("n1"));
             n2 = Integer.parseInt(getItemByName("n2"));
             n3 = Integer.parseInt(getItemByName("n3"));
