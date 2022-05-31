@@ -1,11 +1,11 @@
 package pre_defined_classes.programs_with_changing_behaviour.hard.q5;
 /*
-You burn songs onto discs to sell to consumers. You're uncertain as to what song to burn onto the discs, and so you
-don't want to pick any song, because they all sound great to you. Write a Java program that will randomly generate a
-number from  100 000 to 999 999 (inclusive of both values), then perform two operations. First, determine the remainder
-of that random value after dividing that value by 4 (mod 4), to pick what song to burn. Second, divide the random value
+You burn songs onto discs to sell to consumers. You're uncertain as to what song to burn onto the discs, because they
+all sound great to you. Write a Java program that will randomly generate a number from 100,000 to 999,999
+(inclusive of both values), and then perform two operations. First, determine the remainder of that random value after
+dividing that value by 4 (mod 4), to pick what song to burn. Second, divide the random value
 by 4 to determine how many discs to burn that chosen song to. Finally, print the following statement out to the console:
-"You've decided to burn Song #(insert song number here), and you're making (insert number of discs here) CDs"
+"You've decided to burn Song #(insert song number here), and you're making (insert number of discs here) CDs".
 
 Distractors:
     int songChoice = gen.nextInt(4) + 1;
