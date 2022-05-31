@@ -4,15 +4,12 @@ import global.BaseRandomTest;
 import global.variables.Clause;
 import global.variables.clauses.RandomInteger;
 import global.variables.clauses.StringLiteral;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class MainTest extends BaseRandomTest {
     // Parsons with Distractors
-    private static int independentNumbers;      // Keeps track of how many times all digits of the passcode are equal to each other
-
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("Random Passcode: "),
@@ -34,26 +31,17 @@ public class MainTest extends BaseRandomTest {
         PassCode.main(new String[0]);
     }
 
-//    @RepeatedTest(50)
-//    public void generatedNumbersAreIndependentOLD() {           // Independent Numbers Workaround
-//        int n1 = Integer.parseInt(getItemByName("n1"));
-//        int n2 = Integer.parseInt(getItemByName("n2"));
-//        int n3 = Integer.parseInt(getItemByName("n3"));
-//        int n4 = Integer.parseInt(getItemByName("n4"));
-//        int n5 = Integer.parseInt(getItemByName("n5"));
-//        int n6 = Integer.parseInt(getItemByName("n6"));
-//        if (n1 == n2 && n1 == n3 && n1 == n4 && n1 == n5 && n1 == n6) {
-//            independentNumbers++;
-//        }
-//        if (independentNumbers >= 30) {
-//            fail("Make sure your randomly generated numbers are independent (not always equal).");
-//        }
-//    }
-
+    /* Runs until either numbers are not equal or numbers have been equal 10 times to make sure students use
+    different random numbers.
+     */
     @Test
     public void generatedNumbersAreIndependent() {
         int n1, n2, n3, n4, n5, n6;
+        // Keeps track of how many times all digits of the passcode are equal to each other. If more than 10, test fails
+        int independentNumbers = 0;
         do {
+            restoreSystemInputOutput();
+            refreshOutputStream();
             runMain();
             n1 = Integer.parseInt(getItemByName("n1"));
             n2 = Integer.parseInt(getItemByName("n2"));
@@ -62,8 +50,8 @@ public class MainTest extends BaseRandomTest {
             n5 = Integer.parseInt(getItemByName("n5"));
             n6 = Integer.parseInt(getItemByName("n6"));
             independentNumbers++;
-            if (independentNumbers >= 15)
-                fail("Make sure your randomly generated numbers are independent (not always equal).");
+            if (independentNumbers >= 10)
+                fail("Your program does not randomly generated numbers that are independent (not always equal).");
         } while (n1 == n2 && n1 == n3 && n1 == n4 && n1 == n5 && n1 == n6);
     }
 
