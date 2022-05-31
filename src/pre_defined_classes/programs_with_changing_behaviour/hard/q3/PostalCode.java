@@ -1,8 +1,8 @@
 package pre_defined_classes.programs_with_changing_behaviour.hard.q3;
 /*
 Make a program that randomly generates a Canadian postal code in a zone that alternates between an uppercase letter
-which must be from A to F (inclusive) and a numeric digit (e.g., a valid postal code is C5F8A1). Recall that capital
-letters correspond to numbers in the range of 65-90 and that there are 6 possible capital letters for this zone.
+which must be from A to F (inclusive), and a numeric digit (e.g., a valid postal code is C5F8A1). Recall that capital
+letters correspond to numbers in the range of 65-90 and that there are six possible capital letters for use in this zone.
 
 Sample Output:
 	Random Postal Code: A1B2C3
