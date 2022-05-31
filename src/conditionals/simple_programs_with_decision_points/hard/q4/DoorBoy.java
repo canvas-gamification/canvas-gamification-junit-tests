@@ -1,7 +1,7 @@
 package conditionals.simple_programs_with_decision_points.hard.q4;
 
 /*
-Write a program to open the door if it is closed, and close the door if it is open. Use a boolean value to determine the
+Write a program to open a door if it is closed and close the door if it is open. Use a boolean value to determine the
 state of the door, such as true for "open" and false for "closed". Assume the user provides valid input.
 
 Sample Output:

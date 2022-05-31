@@ -28,14 +28,14 @@ public class MainTest extends BaseTest {
         DoorBoy.main(new String[0]);
     }
 
-    public static Stream<Arguments> inputProvider(){
+    public static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of(true, "I will close the door."), Arguments.of(false, "Time to open the door."));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void printsCorrectAction(boolean isOpen, String output) throws InvalidClauseException{
-        TestOption.incorrectStructureErrorMessage = "Your program does print the correct action.";
+    public void printsCorrectAction(boolean isOpen, String output) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does print the correct action based on the entered boolean.";
         runWithInput(String.valueOf(isOpen), new Clause[]{
                 new StringLiteral(output)
         });
