@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static global.utils.RandomUtil.followsUniformDistribution;
+import static global.utils.RandomUtil.*;
 
 public class RandomChar extends Clause implements RandomClause<Character> {
     static Map<Integer, ArrayList<Character>> valueStore = new HashMap<>();
@@ -34,11 +34,14 @@ public class RandomChar extends Clause implements RandomClause<Character> {
         if (valueStore.get(matchGroupNum) == null)
             return false;
         ArrayList<Character> values = valueStore.get(matchGroupNum);
-        ArrayList<Integer> intValues = new ArrayList<>();
-        for (char c : values) {
-            intValues.add((int) c);
+        final int NUM_BINS = getNumBins(lower, upper);
+        int[] observedCounts = new int[NUM_BINS];
+        for (int value : values) {
+            int binNum = assignedBinIndex(value, lower, upper, NUM_BINS);
+            if (binNum == NO_BIN) return false;
+            observedCounts[binNum]++;
         }
-        return followsUniformDistribution(intValues, getLower(), getUpper());
+        return frequenciesAreRandom(observedCounts, NUM_BINS);
     }
 
     public int getLower() {
@@ -56,6 +59,11 @@ public class RandomChar extends Clause implements RandomClause<Character> {
             throw new IndexOutOfBoundsException();
         }
         return matchGroupString.charAt(0);
+    }
+
+    @Override
+    public ArrayList<Character> getValuesForMatchGroup(int matchGroup) {
+        return valueStore.get(matchGroup);
     }
 
     @Override

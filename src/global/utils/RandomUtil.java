@@ -1,5 +1,6 @@
 package global.utils;
 
+import global.tools.Logger;
 import global.variables.*;
 import org.apache.commons.math3.stat.inference.ChiSquareTest;
 
@@ -20,8 +21,9 @@ public class RandomUtil {
      * Returns if the set of values described by the total number of values considered and an array of "bin sizes" is
      * uniform. "Bin counts" refers to the number of values that are placed in each bin. This method assumes that the
      * size (range) of each bin is equal.
-     * @param numValues: Total number of values in the set.
-     * @param binSizes: The number of values that are placed in each equally-sized bin.
+     *
+     * @param numValues:   Total number of values in the set.
+     * @param binSizes:    The number of values that are placed in each equally-sized bin.
      * @param alpha_level: The alpha level specified for the Chi-Squared test
      * @return True if the described set is uniform
      */
@@ -63,5 +65,31 @@ public class RandomUtil {
     public static RandomClause<?> castRandomClause(Clause clause) {
         if (!(clause instanceof RandomClause)) return null;
         return (RandomClause<?>) clause;
+    }
+
+    /**
+     * Determine if a list of frequencies is random
+     *
+     * @param frequencies a list of frequency counts for bins
+     * @return whether or not this array of frequncies describes randomly generated values
+     */
+    public static boolean frequenciesAreRandom(int[] frequencies, int numBins) {
+        // assume that the sum of frquencies in this list == the total number of values generated
+        double expectedFrequency = ArrayUtil.sum(frequencies) / numBins;
+        for (int frequency : frequencies) {
+            // TODO: calculate percentage error based on total values and number of bins
+            if (!valueAlmostEquals(frequency, expectedFrequency, 0.75)) {
+                Logger.logMessage(""+frequency);
+                Logger.logMessage(""+expectedFrequency);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean valueAlmostEquals(double value, double target, double percentageError) {
+        double upperBound = Math.ceil(target + target * percentageError);
+        double lowerBound = Math.floor(target - target * percentageError);
+        return lowerBound <= value && value <= upperBound;
     }
 }
