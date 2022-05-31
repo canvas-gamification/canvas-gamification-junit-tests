@@ -31,14 +31,15 @@ public class MainTest extends BaseTest {
 
     public static Stream<Arguments> inputProviderPalindromes() {
         return Stream.of(Arguments.of(12321, " is a palindrome!"), Arguments.of(999, " is a palindrome!"),
-                Arguments.of(99999, " is a palindrome!"), Arguments.of(94849, " is a palindrome!"), Arguments.of(353, " is a palindrome!"));
+                Arguments.of(99999, " is a palindrome!"), Arguments.of(74847, " is a palindrome!"),
+                Arguments.of(363, " is a palindrome!"));
     }
 
     public static Stream<Arguments> inputProviderNotPalindromes() {
         return Stream.of(Arguments.of(12345, " is NOT a palindrome!"), Arguments.of(12324, " is NOT a palindrome!"),
                 Arguments.of(132, " is NOT a palindrome!"), Arguments.of(877, " is NOT a palindrome!"),
                 Arguments.of(45744, " is NOT a palindrome!"), Arguments.of(100, " is NOT a palindrome!"),
-                Arguments.of(10000, " is NOT a palindrome!"), Arguments.of(99999, " is a palindrome!"));
+                Arguments.of(10000, " is NOT a palindrome!"));
     }
 
     public static Stream<Arguments> inputProviderInvalid() {
@@ -50,7 +51,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProviderPalindromes")
-    public void worksWithPalindromes(int input, String output) throws InvalidClauseException{
+    public void worksWithPalindromes(int input, String output) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify palindromic numbers.";
         runWithInput(String.valueOf(input), new Clause[]{
                 new StringLiteral(input + output)
@@ -59,7 +60,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProviderNotPalindromes")
-    public void worksWithNonPalindromicNumbers(int input, String output) throws InvalidClauseException{
+    public void worksWithNonPalindromicNumbers(int input, String output) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify non-palindromic numbers.";
         runWithInput(String.valueOf(input), new Clause[]{
                 new StringLiteral(input + output)
@@ -68,8 +69,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProviderInvalid")
-    public void worksWithInvalidLengthNumbers(int input, String output) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print an error message for invalid numbers.";
+    public void printsErrorMessageForInvalidNumbers(int input, String output) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for invalid length numbers.";
         runWithInput(String.valueOf(input), new Clause[]{
                 new StringLiteral(output)
         });
