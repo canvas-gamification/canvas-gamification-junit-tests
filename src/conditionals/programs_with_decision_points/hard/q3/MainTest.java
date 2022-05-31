@@ -33,11 +33,11 @@ public class MainTest extends BaseTest {
         SaveTheDate.main(new String[0]);
     }
 
-    public static Stream<Arguments> inputProvider(){
-            return Stream.of(Arguments.of(31, 12, 1000, "Valid Date!"), Arguments.of(1, 1, 9999, "Valid Date!"),
-                    Arguments.of(30, 5, 2022, "Valid Date!"), Arguments.of(0, 2, 8529, "Invalid Day!"), Arguments.of(32, 4, 2028, "Invalid Day!"),
-                    Arguments.of(4, 13, 2025, "Invalid Month!"), Arguments.of(11, 0, 2002, "Invalid Month!"), Arguments.of(4, 4, 999, "Invalid Year!"),
-                    Arguments.of(24, 6, 10000, "Invalid Year!"));
+    public static Stream<Arguments> inputProvider() {
+        return Stream.of(Arguments.of(31, 12, 1000, "Valid Date!"), Arguments.of(1, 1, 9999, "Valid Date!"),
+                Arguments.of(30, 5, 2022, "Valid Date!"), Arguments.of(0, 2, 8529, "Invalid Day!"), Arguments.of(32, 4, 2028, "Invalid Day!"),
+                Arguments.of(4, 13, 2025, "Invalid Month!"), Arguments.of(11, 0, 2002, "Invalid Month!"), Arguments.of(4, 4, 999, "Invalid Year!"),
+                Arguments.of(24, 6, 10000, "Invalid Year!"));
     }
 
     @ParameterizedTest

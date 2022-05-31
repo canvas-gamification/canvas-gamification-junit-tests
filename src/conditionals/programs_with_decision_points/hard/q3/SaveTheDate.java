@@ -1,9 +1,9 @@
 package conditionals.programs_with_decision_points.hard.q3;
 /*
 Write a program that will verify if an entered date is valid. A valid date has anywhere within 1 - 31 days, 1 - 12 months,
-and a year that is later than 1000 but less than 10,000. For simplicity's sake, you don't have to verify that a certain
-month has only a certain number of days. Make sure to print an error message in case the date entered is invalid.
-Assume the user enters integers.
+and a year that is later than 999 but less than 10,000. For simplicity's sake, you don't have to verify that a certain
+month has only a certain number of days. Make sure to print an error message if the date entered is invalid. Assume the
+user enters integers.
 
 Sample Output:
     Enter Day (DD):
@@ -23,6 +23,7 @@ Distractors:
     if( year >= 0 && year <= 9999 )
 
  */
+
 import java.util.Scanner;
 
 public class SaveTheDate {
