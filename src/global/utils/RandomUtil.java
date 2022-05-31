@@ -78,11 +78,7 @@ public class RandomUtil {
         double expectedFrequency = ArrayUtil.sum(frequencies) / numBins;
         for (int frequency : frequencies) {
             // TODO: calculate percentage error based on total values and number of bins
-            if (!valueAlmostEquals(frequency, expectedFrequency, 0.75)) {
-                Logger.logMessage(""+frequency);
-                Logger.logMessage(""+expectedFrequency);
-                return false;
-            }
+            if (!valueAlmostEquals(frequency, expectedFrequency, 0.75)) return false;
         }
         return true;
     }
