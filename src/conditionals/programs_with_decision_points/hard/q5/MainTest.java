@@ -31,14 +31,15 @@ public class MainTest extends BaseTest {
         WeatherIGo.main(new String[0]);
     }
 
-    public static Stream<Arguments> inputProviderValid(){
-        return Stream.of(Arguments.of(0 ,0 ,"Stay Inside!"), Arguments.of(1, 0, "Wear your normal clothes!"),
+    public static Stream<Arguments> inputProviderValid() {
+        return Stream.of(Arguments.of(0, 0, "Stay Inside!"), Arguments.of(1, 0, "Wear your normal clothes!"),
                 Arguments.of(0, 1, "Wear a jacket before leaving!"), Arguments.of(1, 1, "Wear some sunscreen and a pair of sunglasses before leaving!"));
     }
 
-    public static Stream<Arguments> inputProviderInvalid(){
+    public static Stream<Arguments> inputProviderInvalid() {
         return Stream.of(Arguments.of(0, 2, "Invalid input!"), Arguments.of(2, 1, "Invalid input!"),
-                Arguments.of(-1, -1, "Invalid input!"), Arguments.of(-1, 0, "Invalid input!"), Arguments.of(0, -1, "Invalid input!"));
+                Arguments.of(-1, -1, "Invalid input!"), Arguments.of(-1, 0, "Invalid input!"), Arguments.of(0, -1, "Invalid input!"),
+                Arguments.of(50, -47, "Invalid input!"));
     }
 
     @ParameterizedTest
@@ -52,8 +53,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProviderInvalid")
-    public void printsCorrectMessageWithInvalidInput(int sunny, int noon, String userMessage) throws InvalidClauseException{
-        TestOption.incorrectStructureErrorMessage = "Your program does not print an error message when given invalid user input.";
+    public void printsErrorMessageWithInvalidInput(int sunny, int noon, String userMessage) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print an error message when given invalid input.";
         runWithInput(sunny + " " + noon, new Clause[]{
                 new StringLiteral(userMessage)
         });

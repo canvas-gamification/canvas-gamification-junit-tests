@@ -1,9 +1,10 @@
 package conditionals.programs_with_decision_points.hard.q5;
 /*
-Write a program that asks the user some questions about the weather and time, and prints out what the user should do
-next based on the following information: If it is sunny and it is past noon, Wear sunglasses and sunscreen before going
-out. If it is not sunny and it is past noon, wear a jacket before going out. If it is sunny and before noon, then wear
-your normal clothes. In any other case, stay inside. Assume the user provides numeric input.
+Write a program that asks the user some questions about the weather and time. Then, print out what the user should do
+next based on the following information: If it is sunny and past noon, "Wear sunglasses and sunscreen before going
+out!". If it is not sunny and past noon, "Wear a jacket before going out!". If it is sunny and before noon, "Wear
+your normal clothes!". In any other case, "Stay inside!". If the user inputs anything other than 1 or 0, print an error
+message. Assume the user provides numeric input.
 
 Sample Output:
 	Is it sunny outside? ( Enter 1 for yes and 0 for no )
@@ -21,6 +22,7 @@ Distractors:
     else if( sunny == 1 || pastNoon == 0 )
 
  */
+
 import java.util.Scanner;
 
 public class WeatherIGo {
