@@ -18,7 +18,6 @@ public class MainTest extends BaseTest {
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "5 8";
-
         return new Clause[]{
                 new StringLiteral("Enter the first number: "),
                 new NewLine(),

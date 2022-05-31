@@ -1,6 +1,7 @@
 package conditionals.simple_programs_with_decision_points.hard.q7;
 /*
-Write a program that asks for two numbers and prints the minimum of 2 numbers. Assume the user enters integers.
+Write a program that asks the user for two numbers and prints the minimum value of the inputs. If the entered numbers
+are equal, the program should still print out a value. Assume the user enters integers.
 
 Sample Output:
 	Enter the first number:
