@@ -19,6 +19,7 @@ Sample Output:
     That will cost: $50
 
  */
+
 import java.util.Scanner;
 
 public class MammaMia {
