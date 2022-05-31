@@ -7,8 +7,8 @@ value of the die:
     6 - 10: Action barely worked
     11 - 15: Action partially worked
     16 - 20: Action worked perfectly
-Make a program that generates a random integer between 1 and 20 (inclusive of both values) to emulate the rolling of
-20-sided dice and display what that value is so you can check how effective your action is.
+Make a program that generates a random integer between 1 and 20 (inclusive of both values) to emulate the rolling of a
+20-sided die and display what the value rolled is so that you can check the effectiveness of your action.
 
 Sample Output:
     For this action, you rolled: 1
