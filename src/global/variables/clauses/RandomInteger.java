@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static global.utils.RandomUtil.followsUniformDistribution;
+import static global.utils.RandomUtil.*;
 import static global.utils.RegexUtil.orNegative;
 
 public class RandomInteger extends Clause implements RandomClause<Integer> {
     static Map<Integer, ArrayList<Integer>> valueStore = new HashMap<>();
-    private int lower, upper;
+    private final int lower, upper;
 
     public RandomInteger(int lower, int upper) {
         super();
@@ -36,7 +36,14 @@ public class RandomInteger extends Clause implements RandomClause<Integer> {
         if (valueStore.get(matchGroupNum) == null)
             return false;
         ArrayList<Integer> values = valueStore.get(matchGroupNum);
-        return followsUniformDistribution(values, getLower(), getUpper());
+        final int NUM_BINS = getNumBins(lower, upper);
+        int[] observedCounts = new int[NUM_BINS];
+        for (int value : values) {
+            int binNum = assignedBinIndex(value, lower, upper, NUM_BINS);
+            if (binNum == NO_BIN) return false;
+            observedCounts[binNum]++;
+        }
+        return frequenciesAreRandom(observedCounts, NUM_BINS);
     }
 
     public int getUpper() {
@@ -50,6 +57,11 @@ public class RandomInteger extends Clause implements RandomClause<Integer> {
     public Integer convertFromRegexGroup(String matchGroupString) {
         // TODO: try catch
         return Integer.parseInt(matchGroupString);
+    }
+
+    @Override
+    public ArrayList<Integer> getValuesForMatchGroup(int matchGroup) {
+        return valueStore.get(matchGroup);
     }
 
     @Override

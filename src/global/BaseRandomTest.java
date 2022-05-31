@@ -2,6 +2,7 @@ package global;
 
 import global.exceptions.InvalidClauseException;
 import global.exceptions.InvalidTestOptionException;
+import global.tools.Logger;
 import global.variables.Clause;
 import global.variables.RandomClause;
 import org.junit.jupiter.api.MethodOrderer;
@@ -64,8 +65,13 @@ public abstract class BaseRandomTest extends BaseTest {
 
             int mapKey = i + 1;
             // TODO: more info about which value, the way it's bad (out of bounds, within bounds, obviously hardcoded, etc) (?)
-            _assertTrue(randomVariable.validateRandom(mapKey), MESSAGE_INCORRECT_RANDOM,
-                    "Invalid Random Values at " + mapKey);
+            try {
+                _assertTrue(randomVariable.validateRandom(mapKey), MESSAGE_INCORRECT_RANDOM,
+                        "Invalid Random Values at " + mapKey);
+            } catch (Error error) {
+                Logger.logMessage(randomVariable.getValuesForMatchGroup(mapKey).toString());
+                throw error;
+            }
         }
     }
 }
