@@ -1,7 +1,7 @@
 package conditionals.programs_with_decision_points.hard.q1;
 /*
 Write a program that asks the user for the current time, verifies that it is valid, and tells them to go to sleep if it
-is later than 21:30. Make sure to display an error message if they enter invalid times. (Note: Valid Time is anywhere
+is later than 21:30. Make sure to display an error message if they enter an invalid time (Note: Valid Time is anywhere
 between 0 - 23h and 0 - 59m). Assume the user enters integers.
 
 Sample Output:
