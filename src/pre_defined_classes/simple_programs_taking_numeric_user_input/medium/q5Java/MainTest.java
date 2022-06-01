@@ -34,14 +34,14 @@ public class MainTest extends BaseTest {
         MathSquareRoot.main(new String[0]);
     }
 
-    public static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of(4, 2.0), Arguments.of(5,2.23606797749979), Arguments.of(0, 0), Arguments.of(69, 8.306623862918075),
-                Arguments.of(100, 10.0));
+    public static Stream<Arguments> inputProvider() {
+        return Stream.of(Arguments.of(4, 2.0), Arguments.of(5, 2.23606797749979), Arguments.of(0, 0), Arguments.of(69, 8.306623862918075),
+                Arguments.of(100, 10.0), Arguments.of(189456, 435.265436257004));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void calculatesCorrectValueOfRoot(int input, double output){
+    public void calculatesCorrectValueOfRoot(int input, double output) {
         runWithInput(String.valueOf(input));
         assertEquals(Integer.parseInt(getItemByName("radicand")), input, "Your program does not print out the correct value of the radicand.");
         assertEquals(Double.parseDouble(getItemByName("root")), output, "Your program does not correctly calculate square roots.");
