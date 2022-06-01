@@ -34,23 +34,23 @@ public class MainTest extends BaseTest {
         MyBestPal.main(new String[0]);
     }
 
-    static Stream<Integer> inputProvider3DigitPalindromes(){
+    static Stream<Integer> inputProvider3DigitPalindromes() {
         return Stream.of(121, 333, 565, 999);
     }
 
-    static Stream<Integer> inputProvider3DigitNotPalindromes(){
+    static Stream<Integer> inputProvider3DigitNotPalindromes() {
         return Stream.of(100, 221, 998, 567);
     }
 
-    static Stream<Integer> inputProvider5DigitPalindromes(){
+    static Stream<Integer> inputProvider5DigitPalindromes() {
         return Stream.of(12321, 55555, 55655, 74847, 99999);
     }
 
-    static Stream<Integer> inputProvider5DigitNotPalindromes(){
+    static Stream<Integer> inputProvider5DigitNotPalindromes() {
         return Stream.of(12345, 56895, 12724, 55559, 85555, 68976, 10000);
     }
 
-    static Stream<Integer> inputProviderInvalidLengthNumbers(){
+    static Stream<Integer> inputProviderInvalidLengthNumbers() {
         return Stream.of(1, 99, 1000, 100000, 9999, 5614165);
     }
 
@@ -101,7 +101,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProviderInvalidLengthNumbers")
     void printsErrorMessageForInvalidLengthNumbers(int number) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify invalid inputs.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify invalid numeric inputs.";
         runWithInput(String.valueOf(number), new Clause[]{
                 new StringLiteral("Invalid number length!"),
                 new Optional(new StringLiteral(""))

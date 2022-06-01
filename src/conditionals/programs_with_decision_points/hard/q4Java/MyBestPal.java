@@ -2,8 +2,8 @@ package conditionals.programs_with_decision_points.hard.q4Java;
 /*
 Write a program that checks if the 3-digit or 5-digit number entered by the user is a palindrome, i.e. it is the same
 when read forwards or backwards, like 343, or 54645, etc. If the number is a palindrome, print "(insert number) is a palindrome!".
-If not, print "(insert number) is NOT a palindrome!". Make sure to display the error message "Invalid number length!"
-if the number entered is not either 3-digits or 5-digits long. Assume the user inputs a number. Make sure your output
+If not, print "(insert number) is NOT a palindrome!". Your program should also check to make sure the entered number is
+either 3-digits or 5-digits long, and print "Invalid number length!" if not. Assume the user inputs a number. Make sure your output
 matches the example.
 Sample Output:
     Enter an integer:
