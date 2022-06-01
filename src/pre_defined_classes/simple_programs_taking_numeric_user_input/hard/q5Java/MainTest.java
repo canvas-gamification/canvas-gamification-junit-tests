@@ -23,8 +23,10 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "85.4";
         return new Clause[]{
-                new StringLiteral("Enter your grade in percentage: "),
+                new StringLiteral("Enter your grade in percentage:"),
+                new Optional(new StringLiteral(" ")),
                 new Optional(new NewLine()),
+                new PlaceHolder(),
                 new PlaceHolder(),
                 new PlaceHolder()
         };
@@ -34,7 +36,7 @@ public class MainTest extends BaseTest {
         LetterCalculator.main(new String[0]);
     }
 
-    public static Stream<Arguments> inputProvider(){
+    public static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of(85.4, 3.2700000000000005), Arguments.of(67.5, 2.375), Arguments.of(0, -1), Arguments.of(74.268, 2.7134),
                 Arguments.of(100, 4.0), Arguments.of(42.33, 1.1164999999999998));
     }
@@ -44,7 +46,8 @@ public class MainTest extends BaseTest {
     public void calculatesGPACorrectly(double grade, double gpa) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not follow the sample output.";
         runWithInput(String.valueOf(grade), new Clause[]{
-                new StringLiteral("Your GPA is: "),
+                new StringLiteral("Your GPA is:"),
+                new Optional(new StringLiteral(" ")),
                 new DoubleLiteral("gpa")
         });
         assertEquals(Double.parseDouble(getItemByName("gpa")), gpa, 0.001, "Your program does not calculate GPA correctly.");

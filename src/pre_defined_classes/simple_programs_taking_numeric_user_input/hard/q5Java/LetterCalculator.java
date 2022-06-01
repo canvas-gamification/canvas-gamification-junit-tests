@@ -9,6 +9,7 @@ Sample Output:
     Your GPA is 3.25
 
  */
+
 import java.util.Scanner;
 
 public class LetterCalculator {
