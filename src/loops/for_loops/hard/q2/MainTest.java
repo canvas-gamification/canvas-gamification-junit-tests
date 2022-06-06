@@ -1,7 +1,6 @@
 package loops.for_loops.hard.q2;
 
 import global.BaseTest;
-import global.tools.Logger;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
@@ -11,7 +10,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.awt.geom.Arc2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -19,6 +17,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
+    // Parsons
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "1 2 3 4 5 6 7 8 9 10";
