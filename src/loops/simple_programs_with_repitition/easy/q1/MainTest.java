@@ -1,5 +1,6 @@
 package loops.simple_programs_with_repitition.easy.q1;
 
+import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.*;
 import global.variables.clauses.*;
@@ -36,12 +37,20 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void printsSentenceCorrectNumberOfTimes(String sentence, int n){
-
+    void printsSentenceCorrectNumberOfTimes(String sentence, int n) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the input sentence n times.";
+        runWithInput(sentence + System.lineSeparator() + n, sentenceRepetition(sentence, n));
     }
 
-    Clause[][] sentenceRepetition(int n){
-        return null;
+    Clause[][] sentenceRepetition(String sentence, int n){
+        if(n < 1)
+            return new Clause[][]{{new StringLiteral("")}};
+        Clause[][] c = new Clause[1][n * 2];
+        for(int i = 0; i < c[0].length; i+=2){
+            c[0][i] = new StringLiteral(sentence);
+            c[0][i + 1] = new NewLine();
+        }
+        return c;
     }
 
 }
