@@ -1,8 +1,8 @@
 package loops.simple_programs_with_repitition.easy.q1;
 
 /*
-Write a program that will ask the user to input a sentence, and then ask them for a "n", that represents how many times the program should repeat the sentence.
-Then print the entered sentence "n" times.
+Write a program that will ask the user to input a sentence, and then ask them for a "n", that represents how many times
+the program should repeat the sentence. Then, print the entered sentence "n" times.
  Sample Output:
  Enter a sentence: Hello World
  Enter the number of times to repeat the sentence: 3

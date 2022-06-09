@@ -1,35 +1,47 @@
 package loops.simple_programs_with_repitition.easy.q1;
 
+import global.tools.TestOption;
 import global.variables.*;
 import global.variables.clauses.*;
 import global.BaseTest;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-public class MainTest extends BaseTest { 
+import java.util.stream.Stream;
+
+public class MainTest extends BaseTest {
     // Parsons
-    
-    String sentence = "This is an example sentence.";
-    int repetitions = 10;
-
     public Clause[] testSentence() {
-
-        Clause[] output = new Clause[repetitions * 2 + 3];
-
-        output[0] = new StringLiteral("Enter a sentence: ");
-        output[1] = new NewLine();
-        output[2] = new StringLiteral("Enter the number of times to repeat the sentence: ");
-
-        for (int i = 0; i < repetitions; i++){
-            output[i * 2 + 3] = new NewLine();
-            output[i * 2 + 4] = new StringLiteral(sentence);
-        }
-
-        return output;
-        
+        TestOption.isInputTest = true;
+        TestOption.defaultInput = "Hello there" + System.lineSeparator() + 1;
+        return new Clause[]{
+                new StringLiteral("Enter a sentence: "),
+                new NewLine(),
+                new StringLiteral("Enter the number of times to repeat the sentence: "),
+                new NewLine(),
+                new PlaceHolder()
+        };
     }
 
     public void runMain() {
-        provideInput(sentence + System.lineSeparator() + repetitions);
         PunishmentLoop.main(new String[0]);
+    }
+
+    static Stream<Arguments> inputProvider(){
+        return Stream.of(Arguments.of("Hello there.", 10),
+                Arguments.of("So do all who live to see such times, but that is not for them to decide. All we have to decide is what to do with the time that is given to us.", 7),
+                Arguments.of("Among us", 0), Arguments.of("Never gonna give you up.", 1), Arguments.of("This should not work.", -1));
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    void printsSentenceCorrectNumberOfTimes(String sentence, int n){
+
+    }
+
+    Clause[][] sentenceRepetition(int n){
+        return null;
     }
 
 }
