@@ -21,8 +21,8 @@ public class DivSeriesTest extends BaseTest {
         return new Clause[] {
                 new StringLiteral("Enter a number for the upper bound of the series: "),
                 new NewLine(),
-                new StringLiteral("The sum of the series is "),
-                new DoubleLiteral("numberOutput"),
+                new StringLiteral("The sum of the series is: "),
+                new DoubleLiteral("sum"),
         };
     }
 
@@ -33,16 +33,17 @@ public class DivSeriesTest extends BaseTest {
     static Stream<Arguments> inputProvider(){
         return Stream.of(
             Arguments.of(0, 0),
-            Arguments.of(15, 66.4),
-            Arguments.of(456, 134.0),
-            Arguments.of(45646, 226.1)
+            Arguments.of(-11, 0.0),
+            Arguments.of(15, 66.36457986457985),
+            Arguments.of(456, 134.01609129759674),
+            Arguments.of(45646, 226.117957553754)
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(int input, double output) throws InvalidClauseException {
+    void testWithInput(int input, double sum) throws InvalidClauseException {
         runWithInput("" + input);
-        assertEquals(Double.parseDouble(getItemByName("numberOutput")), output, 0.1, "Division series sum value is incorrect.");
+        assertEquals(Double.parseDouble(getItemByName("sum")), sum, 0.00001, "Your program does not correctly calculate the sum of the series.");
     }
 }
