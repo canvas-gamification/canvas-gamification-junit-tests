@@ -19,7 +19,7 @@ public class MainTest extends BaseTest {
         Clause[]c = new Clause[n * 2];
         int x = 1;
         int j = 0;
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= n; i++) {
             StringBuilder sb = new StringBuilder();
             for (int k = 1; k <= i; k++)
                 sb.append(String.valueOf(x++));
