@@ -31,15 +31,15 @@ public class MainTest extends BaseTest {
         Seriesly.main(new String[0]);
     }
 
-    static Stream<Arguments> inputProvider(){
+    static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of(39, 4.2535430389363755), Arguments.of(55783, 11.506449070632035), Arguments.of(0, 0.0),
                 Arguments.of(-483, 0.0), Arguments.of(1, 1.0));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void computesSumOfSeriesCorrectly(int numTerms, double sum){
+    void calculatesSumOfSeriesCorrectly(int numTerms, double sum) {
         runWithInput(numTerms + System.lineSeparator());
-        assertEquals(Double.parseDouble(getItemByName("sum")), sum, 0.0000000001, "Your program does not correctly compute the sum of the series up to n terms.");
+        assertEquals(Double.parseDouble(getItemByName("sum")), sum, 0.0000000001, "Your program does not correctly calculate the sum of the series up to n terms.");
     }
 }

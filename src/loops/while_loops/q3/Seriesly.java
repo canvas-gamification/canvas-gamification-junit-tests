@@ -17,7 +17,6 @@ Distractors:
     while(int i = 1; i <= n; i--);
     while( i < n )
     while( i < n );
-
  */
 
 import java.util.Scanner;
