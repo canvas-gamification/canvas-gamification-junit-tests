@@ -18,12 +18,12 @@ public class MainTest extends BaseTest {
     }
 
     public void runMain() {
-            SliceOfPi.main(new String[0]);
+        SliceOfPi.main(new String[0]);
     }
 
     @Test
-    void computesPiApproximationCorrectly(){
+    void computesPiApproximationCorrectly() {
         assertEquals(Double.parseDouble(getItemByName("pi")), 3.1416926435905346, 0.0000000000000001,
-                "Your program does not correctly compute the approximation of pi using the series given in the question.");
+                "Your program does not correctly compute the approximation of pi using the series and the n given in the question.");
     }
 }
