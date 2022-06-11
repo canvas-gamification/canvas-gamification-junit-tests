@@ -1,12 +1,13 @@
 package loops.nested_loops.hard.q1;
 /*
-Write a program that asks the user to input a number n, and then prints all prime numbers from 3 to n (inclusive).
-Assume the user provides valid input.
+Write a program that asks the user to input a number n and then prints all prime numbers from 3 to n (inclusive).
+Assume the user provides a valid input.
 Sample Output:
     Enter a number:
     30
     3 5 7 11 13 17 19 23 29
  */
+
 import java.util.Scanner;
 
 public class PrimeTime {

@@ -33,20 +33,26 @@ public class MainTest extends BaseTest {
     static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of(30, new int[]{3, 5, 7, 11, 13, 17, 19, 23, 29}), Arguments.of(3, new int[]{3}),
                 Arguments.of(29, new int[]{3, 5, 7, 11, 13, 17, 19, 23, 29}, Arguments.of(1, new int[]{})),
-                Arguments.of(100, new int[]{3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97}));
+                Arguments.of(100, new int[]{3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97}),
+                Arguments.of(-1, new int[]{}));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
     void printsPrimeNumbersCorrectly(int n, int[] primes) throws InvalidClauseException {
-        int j = 0;
-        Clause[][] c = new Clause[1][primes.length * 2];
-        for(int i = 0; i < c[0].length; i+=2){
-            c[0][i] = new IntegerLiteral(primes[j]);
-            c[0][i + 1] = new StringLiteral(" ");
-            j++;
-        }
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly calculate and print the primes from 3 to n.";
+        int j = 0;
+        Clause[][] c;
+        if (n < 0)
+            c = new Clause[][]{{new StringLiteral("")}};
+        else {
+            c = new Clause[1][primes.length * 2];
+            for (int i = 0; i < c[0].length; i += 2) {
+                c[0][i] = new IntegerLiteral(primes[j]);
+                c[0][i + 1] = new StringLiteral(" ");
+                j++;
+            }
+        }
         runWithInput(String.valueOf(n), c);
     }
 }
