@@ -1,4 +1,4 @@
-package loops.while_loops.q3;
+package loops.while_loops.hard.q3;
 /*
 Write a program that will ask the user for a number n and find the sum of the following series, using a while loop, up
 to n terms: 1 + ½ + ⅓ + ¼ + ⅕ + … + 1 / n. Assume the user inputs an integer. If the user does not input a positive

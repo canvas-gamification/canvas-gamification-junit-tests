@@ -29,26 +29,31 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Integer> inputProvider() {
-        return Stream.of(5, 10, 4, 1);
+        return Stream.of(5, 10, 4, 1, 0, -11);
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
     void printsPatternCorrectly(int n) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the specified pattern correctly.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the specified pattern.";
         runWithInput(String.valueOf(n), pattern(n));
     }
 
     Clause[][] pattern(int n) {
-        Clause[][] c = new Clause[1][n * 2];
-        int k = 0;
-        for (int i = 1; i <= n; i++) {
-            StringBuilder s = new StringBuilder();
-            for (int j = 1; j <= i; j++)
-                s.append(j).append(" ");
-            c[0][k] = new StringLiteral(s.toString());
-            c[0][k + 1] = new NewLine();
-            k += 2;
+        Clause[][] c;
+        if (n < 0)
+            c = new Clause[][]{{new StringLiteral("")}};
+        else {
+            c = new Clause[1][n * 2];
+            int k = 0;
+            for (int i = 1; i <= n; i++) {
+                StringBuilder s = new StringBuilder();
+                for (int j = 1; j <= i; j++)
+                    s.append(j).append(" ");
+                c[0][k] = new StringLiteral(s.toString());
+                c[0][k + 1] = new NewLine();
+                k += 2;
+            }
         }
         return c;
     }

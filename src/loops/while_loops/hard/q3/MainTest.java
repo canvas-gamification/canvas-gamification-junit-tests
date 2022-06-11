@@ -1,4 +1,4 @@
-package loops.while_loops.q3;
+package loops.while_loops.hard.q3;
 
 import global.BaseTest;
 import global.tools.TestOption;
