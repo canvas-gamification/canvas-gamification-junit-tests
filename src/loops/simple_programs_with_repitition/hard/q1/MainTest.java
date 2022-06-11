@@ -33,17 +33,17 @@ public class MainTest extends BaseTest {
         ArmsAreStrong.main(new String[0]);
     }
 
-    static Stream<Integer> inputProviderArmstrongNumbers(){
+    static Stream<Integer> inputProviderArmstrongNumbers() {
         return Stream.of(1, 371, 8208, 9, 54748, 9800817, 88593477, 146511208, 0);
     }
 
-    static Stream<Integer> inputProviderNonArmstrongNumbers(){
+    static Stream<Integer> inputProviderNonArmstrongNumbers() {
         return Stream.of(56, 8347, 83462, 923856, 64229649);
     }
 
     @ParameterizedTest
     @MethodSource("inputProviderArmstrongNumbers")
-    void identifiesArmstrongNumbersCorrectly(int number) throws InvalidClauseException{
+    void identifiesArmstrongNumbersCorrectly(int number) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify Armstrong Numbers.";
         runWithInput(String.valueOf(number), new Clause[]{
                 new IntegerLiteral(number, "number"),

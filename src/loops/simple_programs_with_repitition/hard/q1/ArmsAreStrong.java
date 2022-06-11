@@ -1,16 +1,17 @@
 package loops.simple_programs_with_repitition.hard.q1;
 /*
-Write a program that asks the user for a number and determines if it is an "Armstrong Number", i.e the sum of its own
-digits raised to the power of the number of digits is equal to the number itself. (Eg: 8208 = 8^4 + 2^4 + 0^4 + 8^4).
-If it is an Amstrong number, print “(input number here) is an Armstrong Number!”, otherwise print “(input number here) is
-NOT an Armstrong Number!”.Assume the user provides a valid integer which is greater than or equal to 0.
-Hint: You need one loop to check how many digits are in the number, and another to check whether it is an Armstrong
-number. Make sure your output matches the sample.
+Write a program that asks the user for a number and determines if it is an "Armstrong Number". A number is an Armstrong
+number if the sum of its own digits raised to the power of the number of digits is equal to the number itself.
+(Eg: 8208 = 8^4 + 2^4 + 0^4 + 8^4). If the number is an Armstrong number, print “(input number here) is an Armstrong
+Number!”, otherwise, print “(input number here) is NOT an Armstrong Number!”. Assume the user provides a valid integer
+greater than or equal to 0. Hint: You need one loop to check how many digits are in the number and another to check
+whether it is an Armstrong number. Make sure your output matches the sample.
 Sample Output:
     Enter a number:
     8208
     8208 is an Armstrong Number!
  */
+
 import java.util.Scanner;
 
 public class ArmsAreStrong {
