@@ -1,6 +1,6 @@
 package loops.while_loops.hard.q1;
 /*
-Write a program that will print numbers from 0 to -100 (inclusive), using a while loop.
+Write a program that will print the numbers from 0 to -100 (inclusive) using a while loop.
 
 Distractors:
     while(i >= -100 );
