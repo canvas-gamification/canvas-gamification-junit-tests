@@ -7,6 +7,7 @@ import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseTest {
     // Java
+    // Hardcoding
     public Clause[] testSentence() {
         return cascadingPatternClause(5);
     }
