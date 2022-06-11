@@ -10,6 +10,7 @@ Sample Output:
 		// Repeat until the user enters 10 numbers
 		Sum = 10.0 Average = 1.0
  */
+
 import java.util.Scanner;
 
 public class SumAverageProgram {
