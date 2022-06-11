@@ -1,12 +1,10 @@
 package loops.nested_loops.hard.q2;
 
 import global.BaseTest;
-import global.exceptions.InvalidClauseException;
+
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
-import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
-import org.junit.jupiter.api.Test;
 
 public class MainTest extends BaseTest {
     // Parsons
@@ -18,7 +16,7 @@ public class MainTest extends BaseTest {
         RepeatTheRepeat.main(new String[0]);
     }
 
-    private Clause[] repeatPatternClause(int n){
+    private Clause[] repeatPatternClause(int n) {
         Clause[] c = new Clause[n * 2];
         int x = 0;
         for (int i = 0; i < n; i++) {

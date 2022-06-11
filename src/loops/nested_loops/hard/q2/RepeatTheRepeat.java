@@ -1,7 +1,7 @@
 package loops.nested_loops.hard.q2;
 /*
 Print the following pattern for n = 4, where n is the number of lines and the numbers per line, using nested loops.
-Sample Output:
+Sample Output (n = 4) :
     1 2 3 4
     1 2 3 4
     1 2 3 4
