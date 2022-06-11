@@ -1,9 +1,9 @@
 package loops.simple_programs_with_repitition.hard.q2;
 /*
-Write a program that will convert a given word "Java Latin", which is done by only keeping the characters at
-even-numbered places, and adding "ava" at the end of the word (Eg. "Sheep" becomes "Sepava"). The program should ask the
-user to "Enter a word to be converted:", and then print what the word is in Java Latin.  Assume that indexing
-starts at 0, which is an even number.
+Write a program that will convert a word into "Java Latin", which is done by only keeping the characters at even-numbered
+places and adding "ava" at the end of the word. For example, "Sheep" becomes "Sepava". The program should prompt the
+user to "Enter a word to be converted:" and then print what the word is in Java Latin. Assume that indexing starts at 0,
+which is an even number, and the user enters a string. Ensure that your output matches the example.
 Sample Output
     Enter a word to be converted:
     Sheep

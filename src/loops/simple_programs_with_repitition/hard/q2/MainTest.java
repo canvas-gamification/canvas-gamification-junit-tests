@@ -31,15 +31,14 @@ public class MainTest extends BaseTest {
         Jvaiava.main(new String[0]);
     }
 
-    static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of("Sheep", "Sepava"), Arguments.of("Latin", "Ltnava"),
-                Arguments.of("Java", "Jvava"), Arguments.of("leute", "lueava"), Arguments.of("0", "0ava"),
-                Arguments.of("test", "tsava"));
+    static Stream<Arguments> inputProvider() {
+        return Stream.of(Arguments.of("Sheep", "Sepava"), Arguments.of("Latin", "Ltnava"), Arguments.of("leute", "lueava"),
+                Arguments.of("0", "0ava"), Arguments.of("Pneumonoultramicroscopicsilicovolcanoconiosis", "Pemnutairsoislcvlaooissava"));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void convertsWordsCorrectly(String inputWord, String wordTranslation) throws InvalidClauseException {
+    void convertsWordsToJavaLatinCorrectly(String inputWord, String wordTranslation) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly convert the input word to Java Latin.";
         runWithInput(inputWord, new Clause[]{
                 new StringLiteral(inputWord + " in Java Latin is " + wordTranslation)
