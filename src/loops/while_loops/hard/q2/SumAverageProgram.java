@@ -1,6 +1,6 @@
 package loops.while_loops.hard.q2;
 /*
-Write a program that will ask the user for 10 numbers and print their sum and average, using a while loop.
+Write a program that will ask the user for 10 numbers and print their sum and average using a while loop.
 
 Sample Output:
     Enter a number: 1
