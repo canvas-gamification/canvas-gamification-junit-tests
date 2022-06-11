@@ -39,6 +39,6 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void calculatesSeriesSumCorrectly(int input, double sum) {
         runWithInput(input + " ");
-        assertEquals(Double.parseDouble(getItemByName("sum")), sum, 0.00001, "Your program does computer the sum of the series correctly.");
+        assertEquals(Double.parseDouble(getItemByName("sum")), sum, 0.000001, "Your program does not correctly calculate the sum of the series.");
     }
 }
