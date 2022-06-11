@@ -1,7 +1,7 @@
 package loops.for_loops.hard.q1;
 
 /*
-Write a program using a for loop that will print numbers from 0 to -100 (inclusive).
+Write a program using a for loop that will print the numbers from 0 to -100 (inclusive).
 
 Distractors:
     for(int i = 0 ; i > -100; i--);
