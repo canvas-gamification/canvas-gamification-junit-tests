@@ -29,7 +29,7 @@ public class MainTest extends BaseTest {
     void calculatesAbsoluteValueCorrectly() {
         try {
             Method m = AbsoluteMethod.class.getMethod("absCalc", double.class);
-            double absolute = (double) m.invoke(new AbsoluteMethod(), new Object[]{-200.56});
+            double absolute = (double) m.invoke(null, new Object[]{-200.56});
             assertEquals(absolute, 200.56, 0.00000001,
                     "Your method does not correctly calculate the absolute value of a number.");
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
