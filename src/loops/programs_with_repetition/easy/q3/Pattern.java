@@ -1,7 +1,8 @@
 package loops.programs_with_repetition.easy.q3;
+
 /*
-Write a program to print the following pattern using nested loops for n = 5, where n is the number of lines long the
-pattern is.
+Write a program to print the following pattern using nested loops for n = 5, where n is the number of rows in the
+pattern.
 Sample Output (for n = 5):
  *****
   ****

@@ -15,13 +15,15 @@ public class MainTest extends BaseTest {
         Pattern.main(new String[0]);
     }
 
-    static Clause[] starPatternClause(int n){
+    static Clause[] starPatternClause(int n) {
         Clause[] c = new Clause[n * 2];
         int j = 0;
         for (int i = 0; i < n; i++) {
             StringBuilder sb = new StringBuilder();
-            sb.append(" ".repeat(i + 1));
-            sb.append("\\*".repeat(5 - i));
+            for (int k = 0; k <= i; k++)
+                sb.append(" ");
+            for (int k = 1; k <= n - i; k++)
+                sb.append("\\*");
             c[j] = new StringLiteral(sb.toString());
             c[j + 1] = new NewLine();
             j += 2;
