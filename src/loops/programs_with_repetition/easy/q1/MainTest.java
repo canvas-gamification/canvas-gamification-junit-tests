@@ -15,7 +15,7 @@ public class MainTest extends BaseTest {
         PityPattern.main(new String[0]);
     }
 
-    Clause[] clausePattern(int n){
+    Clause[] clausePattern(int n) {
         Clause[] c = new Clause[n * 2];
         int j = 0;
         for (int i = 1; i <= n; i++) {
