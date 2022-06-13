@@ -15,8 +15,8 @@ public class MainTest extends BaseTest {
         PatteringDown.main(new String[0]);
     }
 
-    static Clause[] patternClause(int n){
-        Clause[]c = new Clause[n * 2];
+    static Clause[] patternClause(int n) {
+        Clause[] c = new Clause[n * 2];
         int x = 1;
         int j = 0;
         for (int i = 1; i <= n; i++) {

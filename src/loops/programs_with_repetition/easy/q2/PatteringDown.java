@@ -1,4 +1,5 @@
 package loops.programs_with_repetition.easy.q2;
+
 /*
 Write a program to print the following pattern using nested loops for n = 5, where n is the number of lines:
 1
@@ -17,4 +18,3 @@ public class PatteringDown {
         }
     }
 }
-
