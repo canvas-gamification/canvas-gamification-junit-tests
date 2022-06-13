@@ -32,7 +32,7 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Integer> inputProvider() {
-        return Stream.of(5, 10, 0, -1, 15);
+        return Stream.of(5, 0, -1, 14);
     }
 
     @ParameterizedTest

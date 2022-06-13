@@ -1,10 +1,13 @@
 package loops.programs_with_repetition.hard.q2;
 /*
 Write a java program using nested loops that asks the user for a number 'N' and prints the following pattern up to 'N'
-lines. Assume the user enters an integer, and that your output matches the sample. Note how every line after the first
-one is obtained by replacing every occurrence of "A" in the previous line with "BA" and every occurrence of "B" in the
-previous line with "AA", use this to your advantage when designing this nested-loops solution.
+lines (inclusive). Assume the user enters an integer. Note how every line after the first one is obtained by replacing every
+occurrence of "A" in the previous line with "BA" and every occurrence of "B" in the previous line with "AA", use this to
+your advantage when designing this nested-loops solution. If the user enters a number less than one, the program should
+not print anything. Ensure that your output matches the sample.
 Sample Output:
+    Enter the number of lines:
+    N
     A
     BA
     AABA
@@ -13,6 +16,7 @@ Sample Output:
     …
     N Lines
  */
+
 import java.util.Scanner;
 
 public class Replication {
