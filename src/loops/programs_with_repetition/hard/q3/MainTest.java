@@ -47,8 +47,12 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of(369, new ArrayList<>(Arrays.asList(369, 396, 639, 693, 936, 963))),
-                Arguments.of(724, new ArrayList<>(Arrays.asList(724, 742, 472, 427, 247, 274))));
+        return Stream.of(
+                Arguments.of(369, new ArrayList<>(Arrays.asList(369, 396, 639, 693, 936, 963))),
+                Arguments.of(724, new ArrayList<>(Arrays.asList(724, 742, 472, 427, 247, 274))),
+                Arguments.of(472, new ArrayList<>(Arrays.asList(724, 742, 472, 427, 247, 274))),
+                Arguments.of(581, new ArrayList<>(Arrays.asList(581, 518, 851, 815, 158, 185)))
+        );
     }
 
     @ParameterizedTest

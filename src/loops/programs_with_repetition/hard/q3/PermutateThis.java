@@ -14,6 +14,7 @@ Sample Output:
     936
     963
  */
+
 import java.util.Scanner;
 
 public class PermutateThis {
