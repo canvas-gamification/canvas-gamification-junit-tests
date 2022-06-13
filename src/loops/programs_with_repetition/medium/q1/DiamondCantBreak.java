@@ -1,7 +1,7 @@
 package loops.programs_with_repetition.medium.q1;
 
 /*
-Write a program to print the following pattern using nested loops, where n = the number of asterisks on the middle line.
+Write a program to print the following pattern using nested loops for n = 5, where n = the number of asterisks on the middle line.
 Sample Output (for n = 5):
     *
    **
@@ -13,6 +13,7 @@ Sample Output (for n = 5):
    **
     *
  */
+
 public class DiamondCantBreak {
     public static void main(String[] args) {
         for (int i = 1; i <= 5; i++) {
@@ -31,4 +32,3 @@ public class DiamondCantBreak {
         }
     }
 }
-
