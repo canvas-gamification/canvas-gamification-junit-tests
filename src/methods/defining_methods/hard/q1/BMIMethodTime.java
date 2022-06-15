@@ -1,10 +1,17 @@
 package methods.defining_methods.hard.q1;
 /*
-Write a Java Program that asks the user for a double value indicating their height (in metres) and an integer indicating
-their weight (in kg) and calculates their BMI. Create a method called bmiCalc that takes the height and weight and
+Write a Java Program that asks the user for a double value indicating their height as a double (in metres) and an integer
+indicating their weight (in kg) and calculates their BMI. Create a method called "bmiCalc" that takes the height and weight
 parameters and returns their BMI. Make sure to check whether the parameters passed into the method are positive numbers
-(greater than zero), otherwise return 0. Note: Use printf to ensure the printed BMI value has at most 2 decimals.
-Ensure that your output matches the sample.
+(greater than zero), otherwise return 0. The main method should print out "Your BMI is: (value)", with value being the number
+ returned by bmiCalc(). Use printf to ensure the printed BMI value has at most 2 decimals. Ensure that your output
+ matches the sample.
+Sample Output:
+    Enter your height in metres:
+    1.75
+    Enter your weight in kg:
+    65
+    Your BMI is: 21.22
  */
 
 import java.util.Scanner;
