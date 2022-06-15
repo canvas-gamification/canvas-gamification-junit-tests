@@ -1,9 +1,5 @@
 package methods.method_overloading.hard.q1;
 
-import global.BaseTest;
-import global.variables.Clause;
-import global.variables.clauses.StringLiteral;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -38,8 +34,8 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("oneStringInputProvider")
-    void methodReturnsLengthOfOneString(String s, int length) {
-        String failMessage = "Your program does not have a method which return the length of a single string.";
+    void correctStringLengthMethodForOneString(String s, int length) {
+        String failMessage = "Your program does not have a method which returns the length of a single string.";
         int result = (int) invokeIfMethodExists(OneToThree.class, "stringLength", failMessage,
                 new Object[]{s}, String.class);
         assertEquals(result, length, "Your method does not correctly calculate the length of a single string.");
@@ -47,8 +43,8 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("twoStringInputProvider")
-    void methodReturnsLengthOfTwoStrings(String s1, String s2, int length) {
-        String failMessage = "Your program does not have a method which return the length of two strings added together.";
+    void correctStringLengthMethodForTwoStrings(String s1, String s2, int length) {
+        String failMessage = "Your program does not have a method which returns the length of two strings added together.";
         int result = (int) invokeIfMethodExists(OneToThree.class, "stringLength", failMessage,
                 new Object[]{s1, s2}, String.class, String.class);
         assertEquals(result, length, "Your method does not correctly calculate the length of two strings added together.");
@@ -56,8 +52,8 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("threeStringInputProvider")
-    void methodReturnsLengthOfThreeStrings(String s1, String s2, String s3, int length) {
-        String failMessage = "Your program does not have a method which return the length of three strings added together.";
+    void correctStringLengthMethodForThreeStrings(String s1, String s2, String s3, int length) {
+        String failMessage = "Your program does not have a method which returns the length of three strings added together.";
         int result = (int) invokeIfMethodExists(OneToThree.class, "stringLength", failMessage,
                 new Object[]{s1, s2, s3}, String.class, String.class, String.class);
         assertEquals(result, length, "Your method does not correctly calculate the length of three strings added together.");
