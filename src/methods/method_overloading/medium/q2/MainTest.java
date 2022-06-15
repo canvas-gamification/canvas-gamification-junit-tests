@@ -16,6 +16,7 @@ public class MainTest extends BaseTest {
     // Parsons
     final double a = 5.5;
     final int b = 5;
+
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The greater value is: "),
@@ -28,31 +29,26 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    void methodsCalculateMaxCorrectly() {
-        Object[] results1 = invokeIfMethodExists(LargerOfVars.class, "max", new Object[]{a, b}, double.class, int.class);
-        if(!(boolean) results1[0])
-            fail("Your program does not have a method which calculates the maximum of a double and integer.");
-        double output1 = (double) results1[1];
-        assertEquals(output1, a, 0.001, "Your method does not correctly calculate the maximum of a double and an integer.");
-        Object[] results2 = invokeIfMethodExists(LargerOfVars.class, "max", new Object[]{b, a}, int.class, double.class);
-        if(!(boolean) results2[0])
-            fail("Your program does not have a method which calculates the maximum of an integer and a double.");
-        double output2 = (double) results2[1];
-        assertEquals(output2, a, 0.001, "Your method does not correctly calculate the maximum of an integer and a double.");
+    void correctlyOverloadedMaxMethod1() {
+        String failMessage = "Your program does not have a method which calculates the maximum of a double and integer.";
+        double result = (double) invokeIfMethodExists(LargerOfVars.class, "max", failMessage, new Object[]{a, b}, double.class, int.class);
+        assertEquals(result, a, 0.001, "Your method does not correctly calculate the maximum of a double and an integer.");
     }
 
-    public static Object[] invokeIfMethodExists(Class<?> methodClass, String methodName, Object[] arguments, Class<?>... methodArgumentTypes) {
-        Object[] obj = new Object[2];
+    @Test
+    void correctlyOverloadedMaxMethod2() {
+        String failMessage = "Your program does not have a method which calculates the maximum of an integer and a double.";
+        double result = (double) invokeIfMethodExists(LargerOfVars.class, "max", failMessage, new Object[]{b, a}, int.class, double.class);
+        assertEquals(result, a, 0.001, "Your method does not correctly calculate the maximum of an integer and a double.");
+    }
+
+    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, String failMessage, Object[] arguments, Class<?>... methodArgumentTypes) {
         try {
             Method m = methodClass.getMethod(methodName, methodArgumentTypes);
-            Object result = m.invoke(null, arguments);
-            obj[0] = true;
-            obj[1] = result;
+            return m.invoke(null, arguments);
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-            obj[0] = false;
-            obj[1] = null;
-            return obj;
+            fail(failMessage);
+            return null;
         }
-        return obj;
     }
 }
