@@ -1,4 +1,5 @@
 package methods.defining_methods.medium.q1;
+
 /*
 Write a Java Program that calculates the value of an integer raised to the power of another integer. The variables
 should already be declared and initialized in the main method. Write a method that accepts both integer values as input
