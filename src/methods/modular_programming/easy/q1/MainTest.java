@@ -45,13 +45,28 @@ public class MainTest extends BaseTest {
                 Arguments.of(-0.0001, "Invalid height input!"));
     }
 
-    @ParameterizedTest
-    @MethodSource("inputProvider")
-    void printsCorrectOutput(double height, String message) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not output the correct message based on the height input.";
-        runWithInput(String.valueOf(height), new Clause[]{
-                new StringLiteral(message)
-        });
+    static Stream<Double> inputProviderDouble(){
+        return Stream.of(170.0, 168.7, -37.00, 11.00, 87.345, -13.67);
     }
 
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    void correctHeightCheckerMethod(double height, String message) throws InvalidClauseException {
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProviderDouble")
+    void correctUserInputMethod(){
+
+    }
+
+    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, String failMessage, Object[] arguments, Class<?>... methodArgumentTypes) {
+        try {
+            Method m = methodClass.getMethod(methodName, methodArgumentTypes);
+            return m.invoke(null, arguments);
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            fail(failMessage);
+            return null;
+        }
+    }
 }
