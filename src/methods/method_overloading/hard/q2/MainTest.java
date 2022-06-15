@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest extends BaseTest {
+    // Java
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "Hello, how are you doing?\n39";
@@ -46,7 +47,7 @@ public class MainTest extends BaseTest {
                 Arguments.of("Method overloading is the best!", -11, 31));
     }
 
-    static Stream<Arguments> inputProviderStringAndInt(){
+    static Stream<Arguments> inputProviderStringAndInt() {
         return Stream.of(Arguments.of("Hello, how are you doing?", 39, 64),
                 Arguments.of("Hello there. General Kenobi, you are a bold one.", 0, 48),
                 Arguments.of("Time will not slow down when something unpleasant lies ahead.", -59, 2));
@@ -54,25 +55,29 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProviderString")
-    void methodCalculatesLengthOfStringCorrectly(String message, int n, int stringLength) {
-        runWithInput(String.join(System.lineSeparator(), message, String.valueOf(n)));
+    void correctStringLengthMethod(String message, int n, int stringLength) {
         String failMessage = "Your program does not have a method for calculating the length of a string.";
         int result = (int) invokeIfMethodExists(Overload101.class, "stringLength", failMessage, new Object[]{message}, String.class);
         assertEquals(result, stringLength, "Your method does not correctly calculate the length of a string.");
-        assertEquals(Integer.parseInt(getItemByName("length1")), stringLength, "Your program does not correctly output the length of a string.");
     }
 
     @ParameterizedTest
     @MethodSource("inputProviderStringAndInt")
-    void methodCalculatesLengthOfStringCorrectlyAndInt(String message, int n, int stringLength) {
-        runWithInput(String.join(System.lineSeparator(), message, String.valueOf(n)));
+    void correctStringLengthMethodWithInteger(String message, int n, int stringLength) {
         String failMessage = "Your program does not have a method for calculating the length of a string plus an integer.";
         int result = (int) invokeIfMethodExists(Overload101.class, "stringLength", failMessage, new Object[]{message, n}, String.class, int.class);
         assertEquals(result, stringLength, "Your method does not correctly calculate the length of a string plus an integer.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProviderStringAndInt")
+    void printsOutputCorrectly(String message, int n, int stringLength) {
+        runWithInput(String.join(System.lineSeparator(), message, String.valueOf(n)));
+        assertEquals(Integer.parseInt(getItemByName("length1")), stringLength - n, "Your program does not correctly output the length of a string.");
         assertEquals(Integer.parseInt(getItemByName("length2")), stringLength, "Your program does not correctly output the length of a string plus an integer.");
     }
 
-    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, String failMessage, Object[] arguments, Class<?> ... methodArgumentTypes) {
+    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, String failMessage, Object[] arguments, Class<?>... methodArgumentTypes) {
         try {
             Method m = methodClass.getMethod(methodName, methodArgumentTypes);
             return m.invoke(null, arguments);
