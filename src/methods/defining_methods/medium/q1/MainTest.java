@@ -26,14 +26,20 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    void calculatesPowerCorrectly() {
+    void correctPowerCalcMethod() {
+        String failMessage = "Your program does not contain a method to calculate the power of one integer raised to another.";
+        double result = (double) invokeIfMethodExists(RaiseToPower.class, "powerCalc", failMessage, new Object[]{5, 10}, int.class, int.class);
+        assertEquals(result, 9765625.0, 0.0000001,
+                "Your method does not correctly calculate the value of one integer raised to the power of another.");
+    }
+
+    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, String failMessage, Object[] arguments, Class<?>... methodArgumentTypes) {
         try {
-            Method m = RaiseToPower.class.getMethod("powerCalc", int.class, int.class);
-            double result = (double) m.invoke(new RaiseToPower(), new Object[]{5, 10});
-            assertEquals(result, 9765625.0, 0.0000001,
-                    "Your method does not correctly calculate the value of one integer raised to the power of another.");
+            Method m = methodClass.getMethod(methodName, methodArgumentTypes);
+            return m.invoke(null, arguments);
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-            fail("Your program does not contain a method to calculate the power of one integer raised to another.");
+            fail(failMessage);
+            return null;
         }
     }
 }
