@@ -43,22 +43,28 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void calculatesPowerCorrectly(int base, int exponent, double result) {
+    void printsCorrectOutput(int base, int exponent, double result) {
         runWithInput(String.join(" ", String.valueOf(base), String.valueOf(exponent)));
-        // Check if output is correct
         assertEquals(Double.parseDouble(getItemByName("power")), result, 0.00001,
                 "Your program does not correctly output the first value raised to the second value.");
-        // Check if method is created and computes the right answer
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    void correctMathsExpMethod(int base, int exponent, double result) {
+        String failMessage = "Your program does not have a method for calculating the value of one integer raised to the power of another.";
+        double output = (double) invokeIfMethodExists(GotThePower.class, "mathsExp", failMessage, new Object[]{base, exponent}, int.class, int.class);
+        assertEquals(output, result, 0.0001, "Your method does not correctly calculate the first integer raised to the power of the second.");
+    }
+
+    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, String failMessage, Object[] arguments, Class<?>... methodArgumentTypes) {
         try {
-            Method m = GotThePower.class.getMethod("mathsExp", int.class, int.class);
-            double d = (double) m.invoke(new GotThePower(), new Object[]{
-                    base,
-                    exponent
-            });
-            assertEquals(d, result,
-                    "Your method does not correctly calculate the first value raised to the second value.");
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            fail("Your program does not have a method to calculate the first value raised to the second value.");
+            Method m = methodClass.getMethod(methodName, methodArgumentTypes);
+            return m.invoke(null, arguments);
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            fail(failMessage);
+            return null;
         }
     }
+
 }
