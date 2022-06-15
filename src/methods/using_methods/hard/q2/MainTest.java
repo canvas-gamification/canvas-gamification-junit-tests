@@ -41,19 +41,27 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void calculatesAngleCorrectly(int degrees, double radians) {
+    void printsCorrectOutput(int degrees, double radians) {
         runWithInput(String.valueOf(degrees));
         assertEquals(Double.parseDouble(getItemByName("angle")), radians, 0.00000000001,
                 "Your program does not correctly convert an angle from degrees to radians.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    void correctDegreeCalcMethod(int degrees, double radians) {
+        String failMessage = "Your program does not have a method for converting an angle from degrees to radians.";
+        double result = (double) invokeIfMethodExists(Angles.class, "degreeCalc", failMessage, new Object[]{degrees}, int.class);
+        assertEquals(result, radians, 0.00000000001, "Your method does not correctly convert an angle from degrees to radians.");
+    }
+
+    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, String failMessage, Object[] arguments, Class<?>... methodArgumentTypes) {
         try {
-            Method m = Angles.class.getMethod("degreeCalc", int.class);
-            double result = (double) m.invoke(new Angles(), new Object[]{degrees});
-            assertEquals(result, radians, 0.00000000001,
-                    "Your method does not correctly convert an angle from degrees to radians.");
-        } catch (NoSuchMethodException e) {
-            fail("Your program does not have a method for converting an angle from degrees to radians.");
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            fail("Your program is not named correctly.");
+            Method m = methodClass.getMethod(methodName, methodArgumentTypes);
+            return m.invoke(null, arguments);
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            fail(failMessage);
+            return null;
         }
     }
 }

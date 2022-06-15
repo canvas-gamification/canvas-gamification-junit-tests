@@ -1,13 +1,14 @@
 package methods.using_methods.hard.q2;
 /*
-Write a Java Program that asks a user for an angle in degrees, and make a method that takes that value as an input
-parameter and returns that angle in radians.
+Write a Java Program that asks the user for an angle in degrees, and make a method that takes that value as an input
+parameter and returns that angle in radians. The program should then print out this angle.
 Sample Output
 	Please enter the angle in degrees:
     180
     The angle in radians is: 3.141592653589793
 
  */
+
 import java.util.Scanner;
 
 public class Angles {
