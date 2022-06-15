@@ -14,9 +14,14 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class MainTest extends BaseTest {
     // Parsons
+
+    final int a = 5;
+    final int b = 45;
+    final int c = 16;
+
     public Clause[] testSentence() {
         return new Clause[]{
-                new StringLiteral("The sum of both integers is: "),
+                new StringLiteral("The output of both sum methods is: "),
                 new IntegerLiteral("sum1"),
                 new StringLiteral(" and "),
                 new IntegerLiteral("sum2")
@@ -28,31 +33,26 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    void methodsCalculateSumCorrectly() {
-        Object[] results1 = invokeIfMethodExists(OverloadSum.class, "sum", new Object[]{5, 45}, int.class, int.class);
-        if(!(boolean)results1[0])
-            fail("Your program does not have a method for computing the sum of two integers.");
-        int sum1 = (int)results1[1];
-        assertEquals(sum1, 50, "Your method does not correctly calculate the sum of two integers.");
-        Object[] results2 = invokeIfMethodExists(OverloadSum.class, "sum", new Object[]{5, 45, 16}, int.class, int.class, int.class);
-        if(!(boolean)results2[0])
-            fail("Your program does not have a method for computing the sum of three integers.");
-        int sum2 = (int)results2[1];
-        assertEquals(sum2, 66, "Your method does not correctly calculate the sum of three integers.");
+    void correctTwoIntegerSumMethod() {
+        String failMessage = "Your program does not have a method for computing the sum of two integers.";
+        int result = (int) invokeIfMethodExists(OverloadSum.class, "sum", failMessage, new Object[]{a, b}, int.class, int.class);
+        assertEquals(result, 50, "Your method does not correctly calculate the sum of two integers.");
     }
 
-    public static Object[] invokeIfMethodExists(Class<?> methodClass, String methodName, Object[] arguments, Class<?>... methodArgumentTypes) {
-        Object[] obj = new Object[2];
+    @Test
+    void correctThreeIntegerSumMethod() {
+        String failMessage = "Your program does not have a method for computing the sum of three integers.";
+        int result = (int) invokeIfMethodExists(OverloadSum.class, "sum", failMessage, new Object[]{a, b, c}, int.class, int.class, int.class);
+        assertEquals(result, 66, "Your method does not correctly calculate the sum of three integers.");
+    }
+
+    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, String failMessage, Object[] arguments, Class<?>... methodArgumentTypes) {
         try {
             Method m = methodClass.getMethod(methodName, methodArgumentTypes);
-            Object result = m.invoke(null, arguments);
-            obj[0] = true;
-            obj[1] = result;
+            return m.invoke(null, arguments);
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-            obj[0] = false;
-            obj[1] = null;
-            return obj;
+            fail(failMessage);
+            return null;
         }
-        return obj;
     }
 }
