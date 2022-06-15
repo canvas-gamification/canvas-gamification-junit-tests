@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class MainTest extends BaseTest {
+    // Java
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "5.0";
@@ -41,52 +42,52 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProviderArea() {
-        return Stream.of(Arguments.of(5, 78.54), Arguments.of(0, 0.0), Arguments.of(-45.96, 0.0),
-                Arguments.of(429.83, 580421.27));
+        return Stream.of(Arguments.of(5, 78.53981633974483), Arguments.of(0, 0.0), Arguments.of(-45.96, 0.0),
+                Arguments.of(429.83, 580421.2715948255));
     }
 
     static Stream<Arguments> inputProviderCircumference() {
-        return Stream.of(Arguments.of(5, 31.42), Arguments.of(0, 0.0), Arguments.of(-45.96, 0.0),
-                Arguments.of(429.83, 2700.70));
+        return Stream.of(Arguments.of(5, 31.41592653589793), Arguments.of(0, 0.0), Arguments.of(-45.96, 0.0),
+                Arguments.of(429.83, 2700.7015405850016));
+    }
+
+    static Stream<Arguments> inputProviderOutputTest() {
+        return Stream.of(Arguments.of(5, 78.54, 31.42), Arguments.of(0, 0.0, 0.0), Arguments.of(-45.96, 0.0, 0.0),
+                Arguments.of(429.83, 580421.27, 2700.70));
     }
 
     @ParameterizedTest
     @MethodSource("inputProviderArea")
-    void calculatesAreaCorrectly(double radius, double area) {
-        runWithInput(String.valueOf(radius));
-        Object[] results = invokeIfMethodExists(RadOfCircle.class, "areaCalc", new Object[]{radius}, double.class);
-        if (!(boolean) results[0])
-            fail("Your program does not have a method for calculating the area of a circle.");
-        double output = (double) results[1];
-        assertEquals(output, area, 0.01, "Your method does not correctly calculate the area of a circle.");
-        assertEquals(Double.parseDouble(getItemByName("area")), area, 0.01, "Your program does not correctly output the area of a circle.");
+    void correctAreaCalcMethod(double radius, double area) {
+        String failMessage = "Your program does not have a method for calculating the area of a circle.";
+        double result = (double) invokeIfMethodExists(RadOfCircle.class, "areaCalc", failMessage, new Object[]{radius}, double.class);
+        assertEquals(result, area, 0.000001, "Your method does not correctly calculate the area of a circle.");
     }
 
     @ParameterizedTest
     @MethodSource("inputProviderCircumference")
-    void calculatesCircumferenceCorrectly(double radius, double circumference) {
+    void correctCircCalcMethod(double radius, double circumference) {
+        String failMessage = "Your program does not have a method for calculating the circumference of a circle.";
+        double result = (double) invokeIfMethodExists(RadOfCircle.class, "circCalc", failMessage, new Object[]{radius}, double.class);
+        assertEquals(result, circumference, 0.000001, "Your method does not correctly calculate the circumference of a circle.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProviderOutputTest")
+    void printsCorrectOutput(double radius, double area, double circumference) {
         runWithInput(String.valueOf(radius));
-        Object[] results = invokeIfMethodExists(RadOfCircle.class, "circCalc", new Object[]{radius}, double.class);
-        if (!(boolean) results[0])
-            fail("Your program does not have a method for calculating the circumference of a circle.");
-        double output = (double) results[1];
-        assertEquals(output, circumference, 0.01, "Your method does not correctly calculate the circumference of a circle.");
+        assertEquals(Double.parseDouble(getItemByName("area")), area, 0.01, "Your program does not correctly output the area of a circle.");
         assertEquals(Double.parseDouble(getItemByName("circumference")), circumference, 0.01, "Your program does not correctly output the circumference of a circle.");
     }
 
-    public static Object[] invokeIfMethodExists(Class<?> methodClass, String methodName, Object[] arguments, Class<?>... methodArgumentTypes) {
-        Object[] obj = new Object[2];
+    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, String failMessage, Object[] arguments, Class<?>... methodArgumentTypes) {
         try {
             Method m = methodClass.getMethod(methodName, methodArgumentTypes);
-            Object result = m.invoke(null, arguments);
-            obj[0] = true;
-            obj[1] = result;
+            return m.invoke(null, arguments);
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-            obj[0] = false;
-            obj[1] = null;
-            return obj;
+            fail(failMessage);
+            return null;
         }
-        return obj;
     }
 
 }
