@@ -26,14 +26,19 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    void calculatesAbsoluteValueCorrectly() {
+    void correctAbsCalcMethod() {
+        String failMessage = "Your program does not have a method for calculating the absolute value of an input number.";
+        double result = (double) invokeIfMethodExists(AbsoluteMethod.class, "absCalc", failMessage, new Object[]{-200.56}, double.class);
+        assertEquals(result, 200.56, 0.00000001, "Your method does not correctly calculate the absolute value of a number.");
+    }
+
+    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, String failMessage, Object[] arguments, Class<?>... methodArgumentTypes) {
         try {
-            Method m = AbsoluteMethod.class.getMethod("absCalc", double.class);
-            double absolute = (double) m.invoke(null, new Object[]{-200.56});
-            assertEquals(absolute, 200.56, 0.00000001,
-                    "Your method does not correctly calculate the absolute value of a number.");
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            fail("Your program does not have a method for calculating the absolute value of an input number.");
+            Method m = methodClass.getMethod(methodName, methodArgumentTypes);
+            return m.invoke(null, arguments);
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            fail(failMessage);
+            return null;
         }
     }
 }
