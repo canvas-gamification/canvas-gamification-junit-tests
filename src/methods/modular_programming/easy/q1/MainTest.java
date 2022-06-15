@@ -2,6 +2,7 @@ package methods.modular_programming.easy.q1;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
+import global.exceptions.InvalidTestOptionException;
 import global.tools.Logger;
 import global.tools.TestOption;
 import global.variables.Clause;
@@ -51,7 +52,12 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctHeightCheckerMethod(double height, String message) throws InvalidClauseException {
+    void correctHeightCheckerMethod(double height, String message) throws InvalidClauseException, InvalidTestOptionException {
+        String failMessage = "Your program does not have a method to print a message about an input height.";
+        setUp();
+        invokeIfMethodExists(AverageHeight.class, "heightChecker", failMessage, new Object[]{height}, double.class);
+
+        // assertEquals(output, message, "Your program does not output the correct message based on the input height.");
     }
 
     @ParameterizedTest
