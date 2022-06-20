@@ -14,6 +14,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Scanner;
@@ -53,11 +55,13 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctHeightCheckerMethod(double height, String message) throws InvalidClauseException, InvalidTestOptionException {
+        // Add print catching from methods to framework (byte array stream)
         String failMessage = "Your program does not have a method to print a message about an input height.";
-        setUp();
+        ByteArrayOutputStream test = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(test));
         invokeIfMethodExists(AverageHeight.class, "heightChecker", failMessage, new Object[]{height}, double.class);
-
-        // assertEquals(output, message, "Your program does not output the correct message based on the input height.");
+        String s = test.toString().trim();
+        assertEquals(s, message, "Your program does not output the correct message based on the input height.");
     }
 
     @ParameterizedTest
