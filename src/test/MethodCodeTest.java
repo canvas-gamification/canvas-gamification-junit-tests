@@ -1,14 +1,16 @@
 package test;
 
 import global.BaseTest;
-import global.annotations.MethodTest;
+import global.exceptions.InvalidClauseException;
+import global.tools.TestOption;
 import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
@@ -16,8 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MethodCodeTest extends BaseTest {
     public Clause[] testSentence() {
+        TestOption.isInputTest = true;
+        TestOption.defaultInput = "Hello there";
         return new Clause[]{
-                new StringLiteral("Hello there"),
+                new StringLiteral("This is the main method"),
                 new NewLine(),
                 new StringLiteral("Print something"),
                 new NewLine(),
@@ -29,21 +33,30 @@ public class MethodCodeTest extends BaseTest {
         MethodCode.main(new String[0]);
     }
 
-    static Stream<Arguments> testInput(){
-        return Stream.of();
+    static Stream<String> inputProvider(){
+        return Stream.of("Git gud", "Dance until you are dead");
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    void worksWithOtherStuff(String input) throws InvalidClauseException {
+        runWithInput(input, new Clause[]{
+                new StringLiteral(input)
+        });
     }
 
     @Test
-    @MethodTest
-    void test() {
-        MethodUtil.invokeIfMethodExists(MethodCode.class, "printSomething", "Your method does not work", null, null);
+    void testOutput(){
+        MethodUtil.invokeIfMethodExists(MethodCode.class, "printSomething", "Fail", null, null);
         String s = MethodUtil.getMethodOutput();
-        assertEquals(s, "Print something", "Output does not match");
+        assertEquals(s, "Print something", "Failed at assert");
     }
 
     @Test
     void testWithInput(){
-        MethodUtil.invokeIfMethodExists(MethodCode.class, "printThis", "Your method is big bad", null, null, "this" );
-        assertEquals(MethodUtil.getMethodOutput(), "this", "rip me");
+        provideInput("print this");
+        MethodUtil.invokeIfMethodExists(MethodCode.class, "printThis", "Fail", null, null);
+        String s = MethodUtil.getMethodOutput();
+        assertEquals(s, "print this", "Failed at assert");
     }
 }
