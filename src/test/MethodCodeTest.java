@@ -59,4 +59,11 @@ public class MethodCodeTest extends BaseTest {
         String s = MethodUtil.getMethodOutput();
         assertEquals(s, "print this", "Failed at assert");
     }
+
+    @Test
+    void checkGetMethodOutput(){
+        double f = (double) MethodUtil.invokeIfMethodExists(MethodCode.class, "max", "Invoke failed", new Object[]{5, 9}, int.class, int.class);
+        String s = MethodUtil.getMethodOutput();
+        assertEquals(f, 9.0, "Assert failed");
+    }
 }

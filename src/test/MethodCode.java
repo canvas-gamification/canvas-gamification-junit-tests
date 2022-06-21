@@ -9,6 +9,7 @@ public class MethodCode {
         System.out.println("This is the main method");
         printSomething();
         printThis();
+        double z = max(5, 0);
     }
 
     public static void printSomething(){
@@ -20,4 +21,9 @@ public class MethodCode {
         String s = input.nextLine();
         System.out.println(s);
     }
+
+    public static double max(int x, int y){
+        return Math.max(x, y);
+    }
+
 }

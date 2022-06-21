@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class MethodUtil {
     private static ByteArrayOutputStream methodOutput;
 
-    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, String failMessage, Object[] arguments, Class<?>[] methodArgumentTypes){
+    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, String failMessage, Object[] arguments, Class<?> ... methodArgumentTypes){
         setUpOutput();
             try {
                 Method testMethodInvoke = methodClass.getMethod(methodName, methodArgumentTypes);
