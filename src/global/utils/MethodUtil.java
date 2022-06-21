@@ -11,7 +11,7 @@ public class MethodUtil {
     private static ByteArrayOutputStream methodOutput;
 
     public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, String failMessage, Object[] arguments, Class<?> ... methodArgumentTypes){
-        setUpOutput();
+        setUpMethodOutput();
             try {
                 Method testMethodInvoke = methodClass.getMethod(methodName, methodArgumentTypes);
                 return testMethodInvoke.invoke(null, arguments);
@@ -21,7 +21,7 @@ public class MethodUtil {
             }
     }
 
-    public static void setUpOutput(){
+    private static void setUpMethodOutput(){
         methodOutput = new ByteArrayOutputStream();
         System.setOut(new PrintStream(methodOutput));
     }
