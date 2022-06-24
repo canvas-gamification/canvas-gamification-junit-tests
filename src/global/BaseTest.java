@@ -192,7 +192,7 @@ public abstract class BaseTest {
     public void setUp() throws InvalidClauseException, InvalidTestOptionException {
         setRegexSentence(testSentence());
         TestOption.validate();  // check that test options were set with valid options
-        TestOption.resetIncorrectStructureErrorMessage();
+        TestOption.reset();
         refreshOutputStream();
 
         if (TestOption.isInputTest) {
