@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest {
     // Parsons with distractors
-    static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of(new String[]{"How" , "Do" , "You", "Do", "Fellow", "Kids"}, "K", "Kids"),
+    static Stream<Arguments> inputProvider() {
+        return Stream.of(Arguments.of(new String[]{"How", "Do", "You", "Do", "Fellow", "Kids"}, "K", "Kids"),
                 Arguments.of(new String[]{}, " ", "/"),
                 Arguments.of(new String[]{"Hello", "There", "How", "Are", "You"}, "H", "Hello"),
                 Arguments.of(new String[]{"Perry", "the", "Platypus"}, "T", "/"),
@@ -21,7 +21,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void returnsCorrectStringFromArray(String [] input, char element, String match){
+    void correctFindItMethod(String[] input, char element, String match) {
         String output = (String) MethodUtil.invokeIfMethodExists(FindIt.class, "findIt", new Object[]{input, element},
                 String[].class, char.class);
         assertEquals(match, output, "Your method does not return the correct element.");
