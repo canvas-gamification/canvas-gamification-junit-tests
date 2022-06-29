@@ -16,6 +16,7 @@ public class MainTest {
                 Arguments.of(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0}, new int[]{0, 0, 0, 0, 0}),
                 Arguments.of(new int[]{23, 57, 1, 57, 8, 4, 8, 1, -2246, 9478, 245, 258, 986, 333392, 48372, 1584},
                         new int[]{23, 1, 8, 8, -2246, 245, 986, 48372}),
+                Arguments.of(new int[]{11, 12, -24, 124, -12, 12, 124, 754, -124}, new int[]{11, -24, -12, 124, -124}),
                 Arguments.of(new int[]{}, new int[]{})
         );
     }
@@ -24,7 +25,7 @@ public class MainTest {
     @MethodSource("inputProvider")
     public void createsEvenArrayCorrectly(int[] input, int[] output) {
         int[] result = (int[]) MethodUtil.invokeIfMethodExists(OnlyEven.class, "onlyEven", new Object[]{input}, int[].class);
-        assertArrayEquals(output, result, "Your method does not correctly create an array using only the even numbered indices.");
+        assertArrayEquals(output, result, "Your method does not correctly create an array using only the even numbered indices of an input array.");
     }
 
 }

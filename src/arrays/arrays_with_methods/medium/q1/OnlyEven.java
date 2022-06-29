@@ -1,9 +1,9 @@
 package arrays.arrays_with_methods.medium.q1;
 /*
-Make a method called onlyEven that takes an integer array as input, creates a new array that consists of the elements in the even
-indices of the original array and returns this new array as output. For example, if the original array is
-[2, 4, 6, 9, 21, 17], the method returns [2, 6, 21] because those are the elements at indices 0, 2, and 4. Assume that
-0 is an even index.
+Create a method called onlyEven that takes an integer array as input and creates a new array that consists of the
+elements in the even indices of the original array. This method should also return this new array. For example, if the
+original array is [2, 4, 6, 9, 21, 17], the method returns [2, 6, 21] because those are the elements at indices 0, 2,
+and 4. Assume that 0 is an even index.
  */
 
 public class OnlyEven {
