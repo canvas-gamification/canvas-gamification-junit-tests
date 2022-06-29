@@ -1,8 +1,9 @@
 package arrays.arrays_with_methods.hard.q4;
+
 /*
 Write a method called isAscending that takes an array of type double and returns true if the elements of the array are
 in ascending order (smallest to largest) and false otherwise. Assume that if two elements are adjacent and equal they
-are in the correct order.
+are in ascending order.
  */
 public class NumbersAscend {
     public static boolean isAscending(double[] arr) {
