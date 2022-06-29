@@ -14,7 +14,8 @@ public class MainTest {
     static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of(new int[]{3, 6, 9}, new int[]{3, 6, 9, 3, 6, 9}),
                 Arguments.of(new int[]{}, new int[]{}),
-                Arguments.of(new int[]{0, 2, -11, 39, 44, 224532}, new int[]{0, 2, -11, 39, 44, 224532, 0, 2, -11, 39, 44, 224532}));
+                Arguments.of(new int[]{0, 224532, -11, 39, 44, 2}, new int[]{0, 224532, -11, 39, 44, 2, 0, 224532, -11, 39, 44, 2}),
+                Arguments.of(new int[]{11, 454, 12, 45521, -6, 7093, 593, 325, 5947, -2355}, new int[]{11, 454, 12, 45521, -6, 7093, 593, 325, 5947, -2355, 11, 454, 12, 45521, -6, 7093, 593, 325, 5947, -2355}));
     }
 
     @ParameterizedTest

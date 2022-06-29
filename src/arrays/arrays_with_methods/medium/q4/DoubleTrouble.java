@@ -1,7 +1,7 @@
 package arrays.arrays_with_methods.medium.q4;
 
 /*
-Create a method called DoubleTrouble that takes an integer array as input and returns a new array that is twice that
+Create a method called DoubleTrouble that takes an integer array as input and returns a new integer array that is twice that
 size with the elements copied over twice. For example, suppose the method is given [ 2, 4, 1 ], then it will return
 [ 2, 4, 1, 2, 4, 1 ].
 
