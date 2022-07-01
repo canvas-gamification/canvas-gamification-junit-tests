@@ -1,43 +1,48 @@
 package pre_defined_classes.simple_programs_taking_numeric_user_input.hard.q6;
 
 import global.BaseTest;
+import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.Clause;
-import global.variables.clauses.DoubleLiteral;
-import global.variables.clauses.NewLine;
-import global.variables.clauses.StringLiteral;
+import global.variables.clauses.*;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    //Parson's Problems with Distractors
+    //Parson's with Distractors
     public Clause[] testSentence(){
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "5 16 0.12";
+        TestOption.defaultInput = "12345 54321";
         return new Clause[]{
-                new StringLiteral("How many hours have you worked?"),
+                new StringLiteral("Enter a US zip code: "),
                 new NewLine(),
-                new StringLiteral("What is your hourly wage?"),
+                new StringLiteral("Re-enter the US zip code: "),
                 new NewLine(),
-                new StringLiteral("What is the tax rate? (Enter 0.12 for 12%)"),
-                new NewLine(),
-                new StringLiteral("Pay Amount: "),
-                new DoubleLiteral("pay"),
-                new StringLiteral("Tax Amount: "),
-                new DoubleLiteral("tax"),
-                new StringLiteral("Net Earnings: "),
-                new DoubleLiteral("net")
+                new StringLiteral("The first zip code is: "),
+                new PlaceHolder(),
+                new StringLiteral(", and the second zip is: "),
+                new PlaceHolder()
         };
     }
 
-    public void runMain() {PayrollTax.main(new String[0]);}
+    public void runMain() {ZipcodeValidator.main(new String[0]);}
 
-    @Test
-    void calculateIncomeWithTaxCorrectly(){
-        runWithInput("5 16 0.12");
-        assertEquals(Double.parseDouble(getItemByName("pay")), 80.0);
-        assertEquals(Double.parseDouble(getItemByName("tax")), 9.6);
-        assertEquals(Double.parseDouble(getItemByName("net")), 70.4);
+    public static Stream<Arguments> inputProvider() {
+        return Stream.of(Arguments.of("12345", "54321"), Arguments.of("123", "123"), Arguments.of("01234", "01234"));
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    void validZipcodeValidator(String zipCode, String zipCodeSecond) throws InvalidClauseException {
+        runWithInput( zipCode + " "+ zipCodeSecond, new Clause[]{
+                new StringLiteral(zipCode),
+                new StringLiteral(zipCodeSecond)
+                });
     }
 }
