@@ -9,6 +9,15 @@ A Piper Saratoga is a hobby plane with six seats that has a capacity to hold 120
 
 Sample output:
     How much do all the travellers weigh?
+    376
+    How much does the gas weigh for the return flight?
+    700
+    How much luggage are you bringing and what does it weigh?
+    150
+    You can bring back 324.0 pounds of souvenirs!
+
+    //huh?
+    How much do all the travellers weigh?
     510
     How much does the gas weigh for the return flight?
     800

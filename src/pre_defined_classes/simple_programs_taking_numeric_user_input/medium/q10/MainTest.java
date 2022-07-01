@@ -12,11 +12,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class MainTest extends BaseTest {
     //Parson
     public Clause[] testSentence(){
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "510 400 3 45";
+        TestOption.defaultInput = "510 800 300 -10";
         return new Clause[]{
                 new StringLiteral("How much do all the travellers weigh?"),
                 new NewLine(),
@@ -25,7 +27,7 @@ public class MainTest extends BaseTest {
                 new StringLiteral("How much luggage are you bringing and what does it weigh?"),
                 new NewLine(),
                 new StringLiteral("You can bring back "),
-                new DoubleLiteral("gift"),
+                new DoubleLiteral("souvenir"),
                 new StringLiteral(" pounds of souvenirs!")
         };
     }
@@ -33,14 +35,16 @@ public class MainTest extends BaseTest {
     public void runMain(){ PiperSaratoga.main(new String[0]);}
 
     static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of(510, 800, 300));
+        return Stream.of(Arguments.of(376, 700, 150, 324.0), Arguments.of(510, 800, 300, -10.0));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void calculateAvailableSouvenirsPounds(double people, double gas, double bags ){
-        runWithInput(people + System.lineSeparator() + gas + System.lineSeparator() + bags);
+    public void calculateAvailableSouvenirsPounds(double people, double gas, double bags, double souvenir ){
 
+//        runWithInput(people + System.lineSeparator() + gas + System.lineSeparator() + bags);
+        runWithInput(people + " "+ gas + " " + bags);
+        assertEquals(Double.parseDouble(getItemByName("souvenir")), souvenir);
 
     }
 }
