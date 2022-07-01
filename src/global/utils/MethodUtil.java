@@ -37,6 +37,6 @@ public class MethodUtil {
     }
 
     public static String getMethodOutput() {
-        return methodOutput.toString().trim();
+        return methodOutput.toString();
     }
 }

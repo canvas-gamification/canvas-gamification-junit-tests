@@ -58,6 +58,7 @@ public class MethodCodeTest extends BaseTest {
         TestOption.invalidMethodMessage = "Fail";
         MethodUtil.invokeIfMethodExists(MethodCode.class, "printThis");
         String s = MethodUtil.getMethodOutput();
+        getOutput();
         assertEquals(s, "print this", "Failed at assert");
     }
 
@@ -69,8 +70,14 @@ public class MethodCodeTest extends BaseTest {
         assertEquals(f, 9.0, "Assert failed");
     }
 
+//    @Test
+//    void testIfTestOptionResets(){
+//        MethodUtil.invokeIfMethodExists(MethodCode.class, "ThisMethod");
+//    }
+
     @Test
-    void testIfTestOptionResets(){
-        MethodUtil.invokeIfMethodExists(MethodCode.class, "ThisMethod");
+    void arrayErrorMessageTesting(){
+        int output = (int) MethodUtil.invokeIfMethodExists(MethodCode.class, "sum", new Object[]{new int[]{1, 2, 3, 4, 5}}, int[].class);
+        assertEquals(15, output, "Failed at assert");
     }
 }
