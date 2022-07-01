@@ -20,7 +20,8 @@ import static global.tools.CustomAssertions._fail;
 import static global.tools.Logger.parseTestInformation;
 import static global.tools.TestSentenceUtil.*;
 import static global.utils.RegexUtil.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public abstract class BaseTest {
