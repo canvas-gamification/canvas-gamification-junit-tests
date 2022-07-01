@@ -22,7 +22,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctSelectiveSumMethod(int[] input, int n, int sum) {
+    void correctSelectiveSumMethod(int[] input, int n, int sum) throws Throwable{
         int output = (int) MethodUtil.invokeIfMethodExists(SumTimes.class, "selectiveSum", new Object[]{input, n},
                 int[].class, int.class);
         assertEquals(sum, output, "Your method does not correctly calculate the sum of the values in an array greater than or equal to a given number.");

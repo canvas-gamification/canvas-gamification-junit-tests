@@ -24,7 +24,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctWhoIsLongerMethod(int[] a, int[] b, int[] longer) {
+    void correctWhoIsLongerMethod(int[] a, int[] b, int[] longer) throws Throwable{
         int[] output = (int[]) MethodUtil.invokeIfMethodExists(Longer.class, "whoIsLonger",
                 new Object[]{a, b}, int[].class, int[].class);
         assertArrayEquals(longer, output, "Your method does not return the longer array.");

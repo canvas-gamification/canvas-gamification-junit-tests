@@ -20,7 +20,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctDoubleTroubleMethod(int[] input, int[] result) {
+    void correctDoubleTroubleMethod(int[] input, int[] result) throws Throwable{
         int[] output = (int[]) MethodUtil.invokeIfMethodExists(DoubleTrouble.class, "doubleTrouble", new Object[]{input},
                 int[].class);
         assertArrayEquals(result, output, "Your method does not return an array with the elements copied twice.");

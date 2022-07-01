@@ -23,7 +23,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctIsAscendingMethod(double[] input, boolean isAscending) {
+    void correctIsAscendingMethod(double[] input, boolean isAscending) throws Throwable{
         boolean output = (boolean) MethodUtil.invokeIfMethodExists(NumbersAscend.class, "isAscending",
                 new Object[]{input}, double[].class);
         assertEquals(isAscending, output,
