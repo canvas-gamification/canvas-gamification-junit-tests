@@ -23,7 +23,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void createsEvenArrayCorrectly(int[] input, int[] output) {
+    public void createsEvenArrayCorrectly(int[] input, int[] output) throws Throwable{
         int[] result = (int[]) MethodUtil.invokeIfMethodExists(OnlyEven.class, "onlyEven", new Object[]{input}, int[].class);
         assertArrayEquals(output, result, "Your method does not correctly create an array using only the even numbered indices of an input array.");
     }
