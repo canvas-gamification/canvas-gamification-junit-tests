@@ -1,0 +1,58 @@
+package pre_defined_classes.simple_programs_taking_string_user_input.medium.q6;
+
+import global.BaseTest;
+import global.exceptions.InvalidClauseException;
+import global.tools.TestOption;
+import global.variables.Clause;
+import global.variables.clauses.NewLine;
+import global.variables.clauses.PlaceHolder;
+import global.variables.clauses.StringLiteral;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.Base64;
+import java.util.stream.Stream;
+
+public class MainTest extends BaseTest {
+    // Parsons
+    public Clause[] testSentence() {
+        TestOption.isInputTest = true;
+        TestOption.defaultInput = "I think so.";
+        return new Clause[]{
+                new StringLiteral("Enter any sentence: "),
+                new NewLine(),
+                new StringLiteral("Does the sentence contain any spaces? "),
+                new NewLine(),
+                new PlaceHolder(),
+        };
+    }
+
+    public void runMain() { HasSpace.main(new String[0]);}
+
+    static Stream<String> stringWithSpace() {
+        return Stream.of("I think so.", "(stu#:123 456)");
+    }
+
+    static Stream<String> stringWithNoSpace() {
+        return Stream.of("abc.", "1234");
+    }
+
+    @ParameterizedTest
+    @MethodSource("stringWithSpace")
+    void printsTrue(String sentence) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print true when there is/are space(s) in the inputted sentence.";
+        runWithInput(sentence, new Clause[]{
+                new StringLiteral("true")
+        });
+    }
+
+    @ParameterizedTest
+    @MethodSource("stringWithSpace")
+    void printsFalse(String sentence) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print false when there is/are space(s) in the inputted sentence.";
+        runWithInput(sentence, new Clause[]{
+                new StringLiteral("false"),
+        });
+    }
+}
