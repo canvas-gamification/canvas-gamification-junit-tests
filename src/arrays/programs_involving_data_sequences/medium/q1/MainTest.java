@@ -26,7 +26,8 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> methodInputProvider(){
         return Stream.of(Arguments.of(new int[]{2, 4, 6, 0, 1}, "24601"), Arguments.of(new int[]{}, ""),
-                Arguments.of(new int[]{-11, 12, 37, 11, 0, 0, 0, -39, 345}, "-11123711000-39345"));
+                Arguments.of(new int[]{-11, 12, 37, 11, 0, 0, 0, -39, 345}, "-11123711000-39345"),
+                Arguments.of(new int[]{1}, "1"));
     }
 
     @ParameterizedTest
