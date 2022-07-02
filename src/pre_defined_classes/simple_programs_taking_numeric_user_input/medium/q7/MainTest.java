@@ -28,7 +28,7 @@ public class MainTest extends BaseTest {
                 new StringLiteral("Enter your score: "),
                 new NewLine(),
                 new StringLiteral("Your goal is "),
-//                new IntegerLiteral("goal"),
+                new IntegerLiteral("goal"),
                 new StringLiteral(". Keep up the good work!")
         };
     }
@@ -41,8 +41,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void num(int input) throws InvalidClauseException{
+    public void correctlyPrintsRandomAbsValue(int input) throws InvalidClauseException{
         runWithInput(input + " ");
-
     }
 }
