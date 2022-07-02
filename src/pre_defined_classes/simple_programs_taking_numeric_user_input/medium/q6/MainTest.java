@@ -22,7 +22,7 @@ public class MainTest extends BaseRandomTest {
                 new NewLine(),
                 new PlaceHolder(),
                 new StringLiteral("You are "),
-                new RandomInteger(1, 100),
+                new RandomInteger(0, 101),
                 new StringLiteral(" percent correct")
         };
     }

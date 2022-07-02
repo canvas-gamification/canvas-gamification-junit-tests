@@ -20,7 +20,7 @@ public class Intelligence {
         Random gen = new Random();
         System.out.println( "Are computers smarter than humans? (0 for no, 1 for yes): " );
         int answer = input.nextInt();
-        int pct = gen.nextInt( 100 );
+        int pct = gen.nextInt( 101 );
         if( answer == 0 )
             System.out.print( "No? You are " + pct + " percent correct" );
         if( answer == 1 )
