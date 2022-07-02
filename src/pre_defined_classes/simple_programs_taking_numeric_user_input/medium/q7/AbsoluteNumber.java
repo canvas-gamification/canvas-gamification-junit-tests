@@ -1,8 +1,8 @@
 package pre_defined_classes.simple_programs_taking_numeric_user_input.medium.q7;
 
 /*
-Make a program that asks the user for a score, takes the absolute value of it, multiplies that by a random number,
- and displays the product as the user's goal.
+Make a program that asks the user for a score, takes the absolute value of it,
+multiplies that by a random number, and displays the product as the user's goal.
 
 Sample output:
 Enter your score:
