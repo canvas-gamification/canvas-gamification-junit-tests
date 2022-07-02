@@ -22,7 +22,7 @@ public class AbsoluteNumber {
         int number = in.nextInt();
         number = Math.abs( number );
         number = number * gen.nextInt( 10 );
-        System.out.print( "Your goal is " +  number + ". Keep up the good work!" );
+        System.out.println( "Your goal is " +  number + ". Keep up the good work!" );
     }
 
 }
