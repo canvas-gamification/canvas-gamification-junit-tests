@@ -22,7 +22,7 @@ public class MainTest extends BaseRandomTest {
                 new NewLine(),
                 new PlaceHolder(),
                 new StringLiteral("You are "),
-                new PlaceHolder(),
+                new RandomInteger(1, 100),
                 new StringLiteral(" percent correct")
         };
     }
@@ -32,24 +32,18 @@ public class MainTest extends BaseRandomTest {
     }
 
     @Test
-    public void disbelieveComputer() throws InvalidClauseException {
+    public void doNotThinksComputerAreSmarter() throws InvalidClauseException {
         String message = "No\\? ";
         runWithInput(String.valueOf(0), new Clause[]{
-                new StringLiteral(message),
-                new RandomInteger(0, 100)
+                new StringLiteral(message)
         });
     }
 
     @Test
-    public void believeComputer() throws InvalidClauseException {
+    public void thinksComputerAreSmarter() throws InvalidClauseException {
         String message = "Yes\\? ";
         runWithInput(String.valueOf(1), new Clause[]{
-                new StringLiteral(message),
-                new RandomInteger(0, 100)
+                new StringLiteral(message)
         });
-
-
     }
-
-
 }
