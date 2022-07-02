@@ -8,6 +8,7 @@ Sample output:
 Enter your score:
 -5
 Your goal is 45. Keep up the good work!
+
  */
 
 import java.util.Random;
