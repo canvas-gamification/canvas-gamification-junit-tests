@@ -11,6 +11,7 @@ Sample Output:
     How many classes did you attend?
     19
     You've attended 79% of the classes. You need 75% to pass.
+
  */
 
 import java.util.Scanner;
@@ -23,7 +24,7 @@ public class Attendance {
         System.out.println("How many classes did you attend?");
         int attendedClasses = input.nextInt();
         int percentage = attendedClasses * 100 / numClasses;
-        System.out.print("You've attended " + percentage + "% of the classes. You need 75% to pass.");
+        System.out.println("You've attended " + percentage + "% of the classes. You need 75% to pass.");
 
     }
 }

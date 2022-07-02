@@ -6,7 +6,6 @@ import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
-import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -16,20 +15,11 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/*
-Sample Output:
-    How many classes were there?
-    24
-    How many classes did you attend?
-    19
-    You've attended 79% of the classes. You need 75% to pass.
- */
-
 public class MainTest extends BaseTest {
     // Parsons
     public Clause[] testSentence(){
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "24 24";
+        TestOption.defaultInput = "24 24 ";
         return new Clause[]{
                 new StringLiteral("How many classes were there?"),
                 new NewLine(),
@@ -43,25 +33,14 @@ public class MainTest extends BaseTest {
     public void runMain(){Attendance.main(new String[0]);}
 
     public static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of(24, 24), Arguments.of(24, 19), Arguments.of(24, 6));
+        return Stream.of(Arguments.of(24, 24), Arguments.of(24, 19, 79), Arguments.of(24, 6, 25)
+        , Arguments.of(11, 0, 0), Arguments.of(6, 1, 16));
     }
 
-    /*
-Sample Output:
-    How many classes were there?
-    24
-    How many classes did you attend?
-    19
-    You've attended 79% of the classes. You need 75% to pass.
- */
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void nam(int numClasses, int attendedClasses) throws InvalidClauseException {
-
-        int percentage = attendedClasses * 100 / numClasses;
-
-        runWithInput(numClasses + " " + attendedClasses);
-        assertEquals(Integer.parseInt(getItemByName("percentage")),percentage);
-
+    public void calculateAttendanceCorrectly(int numClasses, int attendedClasses, int percentage) throws InvalidClauseException {
+        runWithInput(numClasses + " " + attendedClasses + " ");
+        assertEquals(Integer.parseInt(getItemByName("percentage")), percentage, "Your program does not correctly attendance percentage.");
     }
 }
