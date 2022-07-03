@@ -2,8 +2,9 @@ package pre_defined_classes.simple_programs_taking_numeric_user_input.medium.q8;
 
 /*
 At the University of Fake Columbia, a student will not be allowed to write the final exam if the student's attendance
-is less than 75%. Make a program that prompts the user to enter the total number of classes held and the total number
-of classes attended, then prints out the percentage of classes the user attended.
+is less than 75%. Make a program that calculates the attendance percentage and notifies the user if they are failing
+the course. To do that the program prompts the user to enter the total number of classes held and the total number of
+classes attended, then prints out the percentage of classes the user attended.
 
 Sample Output:
     How many classes were there?
