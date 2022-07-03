@@ -8,6 +8,7 @@ import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -26,31 +27,26 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "678";
         return new Clause[]{
-                new StringLiteral( "What is the 3 digit plate number?" ),
+                new StringLiteral( "What is the 3 digit plate number\\?" ),
                 new NewLine(),
-                new StringLiteral( "The reverse number is: "),
+                new StringLiteral( "The reverse number is\\: "),
                 new IntegerLiteral("reversePlate")
         };
     }
 
     public void runMain() {ReversePlate.main(new String[0]);}
 
-    public static Stream<Integer> inputProvider2(){
-        return Stream.of(678, 102, 345);
+    public static Stream<Arguments> inputProvider2(){
+        return Stream.of(Arguments.of(678, 876), Arguments.of(102, 201), Arguments.of(345, 543),
+                Arguments.of(8, 800), Arguments.of(370, 73) //sus
+                //Arguments.of(370, (int)073) //FIXME: error because any integer starting with 0 will be interpreted as base oct in java
+        );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider2")
-    public void nm(int plate) throws InvalidClauseException {
-
-        int num1 = plate / 100;
-        plate = plate % 100;
-        int num2 = plate / 10;
-        int num3 = plate % 10;
-        int reversePlate = num3 * 100 + num2 * 10 + num1;
-
+    public void reversedPlatedCorrectly(int plate, int reversePlate) throws InvalidClauseException {
         runWithInput(plate + System.lineSeparator());
         assertEquals(Integer.parseInt(getItemByName("reversePlate")), reversePlate, "Incorrect reverse plate.");
     }
-
 }
