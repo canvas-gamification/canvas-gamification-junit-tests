@@ -35,7 +35,7 @@ public class OddOrEven {
         System.out.println( "Enter an integer:" );
         int number = input.nextInt();
         int remainder = number % 2;
-        System.out.print( "The remainder value is: " + remainder );
+        System.out.println( "The remainder value is: " + remainder );
     }
 
 }
