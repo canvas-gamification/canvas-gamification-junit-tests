@@ -18,7 +18,7 @@ public class MainTest extends BaseTest {
     //Parson's with Distractors
     public Clause[] testSentence(){
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "12345 54321";
+        TestOption.defaultInput = "12345" + System.lineSeparator() + "54321" + System.lineSeparator();
         return new Clause[]{
                 new StringLiteral("Enter a US zip code: "),
                 new NewLine(),
@@ -39,8 +39,9 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void validZipcodeValidator(String zipCode, String zipCodeSecond) throws InvalidClauseException {
-        runWithInput( zipCode + " "+ zipCodeSecond, new Clause[]{
+    public void validZipcodeValidator(String zipCode, String zipCodeSecond) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program did not correctly printed the zip codes.";
+        runWithInput( zipCode + System.lineSeparator() + zipCodeSecond + System.lineSeparator(), new Clause[]{
                 new StringLiteral(zipCode),
                 new StringLiteral(zipCodeSecond)
                 });
