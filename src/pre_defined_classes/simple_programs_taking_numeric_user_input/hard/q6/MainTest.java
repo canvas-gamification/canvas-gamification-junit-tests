@@ -34,7 +34,9 @@ public class MainTest extends BaseTest {
     public void runMain() {ZipcodeValidator.main(new String[0]);}
 
     public static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of("12345", "54321"), Arguments.of("123", "123"), Arguments.of("01234", "01234"));
+        return Stream.of(Arguments.of("12345", "54321"), Arguments.of("123", "123"), Arguments.of("01234", "01234")
+                , Arguments.of("35004", "35004"), Arguments.of("85001", "85001")
+        );
     }
 
     @ParameterizedTest
