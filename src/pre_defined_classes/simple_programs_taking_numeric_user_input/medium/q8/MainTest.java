@@ -21,19 +21,19 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "24 24 ";
         return new Clause[]{
-                new StringLiteral("How many classes were there?"),
+                new StringLiteral("How many classes were there\\?"),
                 new NewLine(),
-                new StringLiteral("How many classes did you attend?"),
+                new StringLiteral("How many classes did you attend\\?"),
                 new NewLine(),
                 new StringLiteral("You've attended "),
                 new IntegerLiteral("percentage"),
-                new StringLiteral( "% of the classes. You need 75% to pass."),
+                new StringLiteral( "\\% of the classes\\. You need 75\\% to pass."),
         };
     }
     public void runMain(){Attendance.main(new String[0]);}
 
     public static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of(24, 24), Arguments.of(24, 19, 79), Arguments.of(24, 6, 25)
+        return Stream.of(Arguments.of(24, 24, 100), Arguments.of(24, 19, 79), Arguments.of(24, 6, 25)
         , Arguments.of(11, 0, 0), Arguments.of(6, 1, 16));
     }
 
