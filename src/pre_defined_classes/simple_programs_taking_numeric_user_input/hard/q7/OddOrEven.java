@@ -28,6 +28,7 @@ Sample output:
     Enter an integer:
     0
     The remainder value is: 0
+
  */
 
 import java.util.Scanner;
