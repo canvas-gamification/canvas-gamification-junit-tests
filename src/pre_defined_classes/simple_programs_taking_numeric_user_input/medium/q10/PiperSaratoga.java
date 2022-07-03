@@ -12,7 +12,7 @@ Sample output:
     376
     How much does the gas weigh for the return flight?
     700
-    How much luggage are you bringing and what does it weigh?
+    What is the total weight of luggage from all travelers?
     150
     You can bring back 324.0 pounds of souvenirs!
 
@@ -21,7 +21,7 @@ Sample output:
     510
     How much does the gas weigh for the return flight?
     800
-    How much luggage are you bringing and what does it weigh?
+    What is the total weight of luggage from all travelers?
     300
     You can bring back -10.0 pounds of souvenirs!
 
@@ -30,7 +30,7 @@ Sample output:
     1200
     How much does the gas weigh for the return flight?
     1200
-    How much luggage are you bringing and what does it weigh?
+    What is the total weight of luggage from all travelers?
     12 1200
     You can bring back -612.0 pounds of souvenirs!
  */
