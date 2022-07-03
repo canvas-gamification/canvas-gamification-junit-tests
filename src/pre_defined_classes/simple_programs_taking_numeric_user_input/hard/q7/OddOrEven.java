@@ -8,18 +8,22 @@ Sample output:
     Enter an integer:
     78
     The remainder value is: 0
+
 Sample output:
     Enter an integer:
     77
     The remainder value is: 1
+
 Sample output:
     Enter an integer:
     -1
     The remainder value is: -1
+
 Sample output:
     Enter an integer:
     -2
     The remainder value is: 0
+
 Sample output:
     Enter an integer:
     0
