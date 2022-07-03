@@ -2,10 +2,10 @@ package pre_defined_classes.simple_programs_taking_numeric_user_input.hard.q9;
 
 /*
 A Math teacher is looking to create a program to teach his students about exponents.
-Recall that bnis the same as b multiplied by itself n times.
+Recall that b^n is the same as b multiplied by itself n times.
 In this form, b is referred to as the base and n is the exponent.
 Make a simple calculator program that asks the user for a base and an exponent, calculates the answer,
- and displays the result.
+ and displays the result. Assuming both a and b are in decimal form not fraction.
 
 Sample output:
 Enter a base:
@@ -26,6 +26,18 @@ Enter an exponent:
 2
 -3 to the power of 2 is 9.0
 
+Enter a base:
+2.97
+Enter an exponent:
+2
+2.97 to the power of 2.0 is 8.820900000000002
+
+Enter a base:
+4
+Enter an exponent:
+0.5
+4.0 to the power of 0.5 is 2.0
+
  */
 
 import java.util.Scanner;
@@ -35,11 +47,11 @@ public class MathPowerUp {
     {
         Scanner input = new Scanner( System.in );
         System.out.println( "Enter a base:" );
-        int base = input.nextInt();
+        double base = input.nextDouble();
         System.out.println( "Enter an exponent:" );
-        int exponent = input.nextInt();
+        double exponent = input.nextDouble();
         double result = Math.pow( base, exponent );
-        System.out.print( base + " to the power of " + exponent + " is " + result );
+        System.out.println( base + " to the power of " + exponent + " is " + result );
     }
 
 }
