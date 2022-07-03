@@ -22,13 +22,14 @@ Sample Output:
     123
     The first zip code is: 123, and the second zip is: 123
 
-    //the data type of the input should be String type instead
     Enter a US zip code:
     01234
     Re-enter the US zip code:
     01234
     The first zip code is: 1234, and the second zip is: 1234
-    >> okay changed
+    //the data type of the input should be String type instead
+    >> okay changed to .nextLine(). Actually, nah, if I changed to a string question, this question should be under pre_defined_classes-simple_programs_taking_string_user_input
+    >> I changed ZipcodeValidator.java & MainTest.java (take string input). The google doc is still takes int input just in case.
  */
 
 public class ZipcodeValidator{
@@ -39,7 +40,6 @@ public class ZipcodeValidator{
             String zipCode = input.nextLine();
             System.out.println( "Re-enter the US zip code: " );
             String zipCodeSecond = input.nextLine();
-            System.out.print( "The first zip code is: " + zipCode + ", and the second zip is: " + zipCodeSecond );
-
+            System.out.println( "The first zip code is: " + zipCode + ", and the second zip is: " + zipCodeSecond );
         }
 }
