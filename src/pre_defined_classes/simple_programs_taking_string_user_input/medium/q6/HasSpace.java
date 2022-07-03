@@ -32,7 +32,7 @@ public class HasSpace {
         System.out.println( "Enter any sentence: " );
         String response = input.nextLine();
         System.out.println( "Does the sentence contain any spaces? " );
-        System.out.print( response.contains( " " ) );
+        System.out.println( response.contains( " " ) );
     }
 
 }
