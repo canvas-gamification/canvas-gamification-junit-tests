@@ -35,12 +35,15 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of(1200, 6, 1560.0));
+
+        return Stream.of(Arguments.of(1200, 6, 1560.0), Arguments.of(70000, 1, 73500.0), Arguments.of(73500, 2, 80850.0)
+                , Arguments.of(0, 2, 0.0), Arguments.of(120000, 5, 150000.0)
+        );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void calculatesGPACorrectly(double salary, int years, double newSalary) throws InvalidClauseException {
+    void calculateNewSalaryCorrectly(double salary, int years, double newSalary) throws InvalidClauseException {
         runWithInput(salary + " " + years);
         assertEquals(Double.parseDouble(getItemByName("newSalary")), newSalary);
     }
