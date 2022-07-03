@@ -11,6 +11,7 @@ Sample output:
     Please enter a website URL:
     https://www.canada.ca
     Is this a Canadian website? true
+
 Sample output:
     Please enter a website URL:
     https://www.gouvernement.fr
