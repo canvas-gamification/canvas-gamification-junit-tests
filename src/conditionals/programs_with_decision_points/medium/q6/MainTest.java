@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
+  // Parsons
   public Clause[] testSentence() {
     TestOption.isInputTest = true;
     TestOption.defaultInput = "w";
@@ -31,31 +32,31 @@ public class MainTest extends BaseTest {
 
   static Stream<Arguments> inputProviderInvalidInput() {
     return Stream.of(
-      Arguments.of("b", "Invalid Input!"),
-      Arguments.of("c", "Invalid Input!"),
-      Arguments.of("e", "Invalid Input!"),
-      Arguments.of("f", "Invalid Input!"),
-      Arguments.of("g", "Invalid Input!"),
-      Arguments.of("h", "Invalid Input!"),
-      Arguments.of("i", "Invalid Input!"),
-      Arguments.of("j", "Invalid Input!"),
-      Arguments.of("k", "Invalid Input!"),
-      Arguments.of("l", "Invalid Input!"),
-      Arguments.of("m", "Invalid Input!"),
-      Arguments.of("n", "Invalid Input!"),
-      Arguments.of("o", "Invalid Input!"),
-      Arguments.of("p", "Invalid Input!"),
-      Arguments.of("q", "Invalid Input!"),
-      Arguments.of("r", "Invalid Input!"),
-      Arguments.of("t", "Invalid Input!"),
-      Arguments.of("u", "Invalid Input!"),
-      Arguments.of("v", "Invalid Input!"),
-      Arguments.of("x", "Invalid Input!"),
-      Arguments.of("y", "Invalid Input!"),
-      Arguments.of("z", "Invalid Input!"),
-      Arguments.of("A", "Invalid Input!"),
-      Arguments.of("\\", "Invalid Input!")
-    );
+        Arguments.of("b", "Invalid Input!"),
+        Arguments.of("c", "Invalid Input!"),
+        Arguments.of("e", "Invalid Input!"),
+        Arguments.of("f", "Invalid Input!"),
+        Arguments.of("g", "Invalid Input!"),
+        Arguments.of("h", "Invalid Input!"),
+        Arguments.of("i", "Invalid Input!"),
+        Arguments.of("j", "Invalid Input!"),
+        Arguments.of("k", "Invalid Input!"),
+        Arguments.of("l", "Invalid Input!"),
+        Arguments.of("m", "Invalid Input!"),
+        Arguments.of("n", "Invalid Input!"),
+        Arguments.of("o", "Invalid Input!"),
+        Arguments.of("p", "Invalid Input!"),
+        Arguments.of("q", "Invalid Input!"),
+        Arguments.of("r", "Invalid Input!"),
+        Arguments.of("t", "Invalid Input!"),
+        Arguments.of("u", "Invalid Input!"),
+        Arguments.of("v", "Invalid Input!"),
+        Arguments.of("x", "Invalid Input!"),
+        Arguments.of("y", "Invalid Input!"),
+        Arguments.of("z", "Invalid Input!"),
+        Arguments.of("A", "Invalid Input!"),
+        Arguments.of("\\", "Invalid Input!"),
+        Arguments.of("1", "Invalid Input!"));
   }
 
   static Stream<Arguments> inputProviderValidInput() {
@@ -63,9 +64,7 @@ public class MainTest extends BaseTest {
         Arguments.of("a", "Move Left"),
         Arguments.of("d", "Move Right"),
         Arguments.of("s", "Crouch"),
-        Arguments.of("w", "Jump"),
-        Arguments.of("we", "Jump")
-    );
+        Arguments.of("w", "Jump"));
   }
 
   @ParameterizedTest
@@ -79,7 +78,7 @@ public class MainTest extends BaseTest {
 
   @ParameterizedTest
   @MethodSource("inputProviderInvalidInput")
-  void printsErrorMessage(String direction) throws InvalidClauseException {
+  void printsErrorMessageForInvalidInput(String direction) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program prints an error message when user inputs a character that is not a direction.";
     runWithInput(direction, new Clause[] {
         new StringLiteral("Invalid Input!")

@@ -1,10 +1,10 @@
 package conditionals.programs_with_decision_points.medium.q6;
 
 /*
-Write a program that takes a directional input from the user, either 'w', 'a', 's', or 'd' and
-prints out a message depending on their input. The program should print "Jump" when the user enters
-'w', "Crouch" when the user enters 's', "Move Left" when they enter 'a', and "Move Right" if they
-enter 'd'. Also make sure to print out an error message in case the user enters invalid input.
+Write a program that takes only one lowercase character as a directional input from the user, either 'w', 'a', 's', or 'd'
+and prints out a message depending on their input. The program should print "Jump" when the user enters 'w', "Crouch"
+when the user enters 's', "Move Left" when they enter 'a', and "Move Right" if they enter 'd'. Also make sure to print
+out an error message in case the user enters invalid input.
 
 Sample Output:
   Enter w, a, s, or d :
