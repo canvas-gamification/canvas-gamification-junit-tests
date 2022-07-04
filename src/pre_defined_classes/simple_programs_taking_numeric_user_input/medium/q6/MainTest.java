@@ -12,18 +12,20 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class MainTest extends BaseRandomTest {
     // Parsons
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "0";
         return new Clause[]{
-                new StringLiteral("Are computers smarter than humans\\? \\(0 for no, 1 for yes\\)\\: "),
+                new StringLiteral("Do you think computers are smarted than humans \\(0 for no, 1 for yes\\)\\?"),
                 new NewLine(),
-                new PlaceHolder(),
-                new StringLiteral("You are "),
+                new IntegerLiteral("input"),
+                new StringLiteral(" is "),
                 new RandomInteger(0, 101),
-                new StringLiteral(" percent correct")
+                new StringLiteral("\\% correct\\.")
         };
     }
 
@@ -33,17 +35,15 @@ public class MainTest extends BaseRandomTest {
 
     @Test
     public void doNotThinksComputerAreSmarter() throws InvalidClauseException {
-        String message = "No\\? ";
-        runWithInput(String.valueOf(0), new Clause[]{
-                new StringLiteral(message)
-        });
+        runWithInput(String.valueOf(0));
+        assertEquals(Integer.parseInt(getItemByName("input")), 0,
+                "Your program does not correctly print the percentage based on an answer No.");
     }
 
     @Test
     public void thinksComputerAreSmarter() throws InvalidClauseException {
-        String message = "Yes\\? ";
-        runWithInput(String.valueOf(1), new Clause[]{
-                new StringLiteral(message)
-        });
+        runWithInput(String.valueOf(1));
+        assertEquals(Integer.parseInt(getItemByName("input")), 1,
+                "Your program does not correctly print the percentage based on an answer Yes.");
     }
 }
