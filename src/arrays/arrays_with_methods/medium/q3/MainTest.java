@@ -21,7 +21,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctFindItMethod(String[] input, char element, String match) {
+    void correctFindItMethod(String[] input, char element, String match) throws Throwable{
         String output = (String) MethodUtil.invokeIfMethodExists(FindIt.class, "findIt", new Object[]{input, element},
                 String[].class, char.class);
         assertEquals(match, output, "Your method does not return the correct element.");
