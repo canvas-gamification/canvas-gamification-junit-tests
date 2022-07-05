@@ -1,6 +1,7 @@
 package pre_defined_classes.simple_programs_taking_numeric_user_input.medium.q10;
 
 import global.BaseTest;
+import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
@@ -18,33 +19,30 @@ public class MainTest extends BaseTest {
     //Parson
     public Clause[] testSentence(){
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "510 800 300 ";
+        TestOption.defaultInput = "510 800 -110.0 ";
         return new Clause[]{
-                new StringLiteral("How much do all the travellers weigh\\?"),
+                new StringLiteral("How much do all the travellers weigh in pounds\\?"),
                 new NewLine(),
-                new StringLiteral("How much does the gas weigh for the return flight\\?"),
+                new StringLiteral("How much does the gas weigh for the return flight in pounds\\?"),
                 new NewLine(),
-                new StringLiteral("What is the total weight of luggage from all travelers\\?"),
-                new NewLine(),
-                new StringLiteral("You can bring back "),
-                new DoubleLiteral("souvenir"),
-                new StringLiteral(" pounds of souvenirs\\!")
+                new StringLiteral("You can have "),
+                new DoubleLiteral("luggage"),
+                new StringLiteral(" pounds of luggage in total\\.")
         };
     }
 
     public void runMain(){ PiperSaratoga.main(new String[0]);}
 
     static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of(510, 800, 300, -10.0), Arguments.of(376, 700, 150, 324.0)
-                , Arguments.of(210, 100, 500, 440.0), Arguments.of(0, 700, 800, 50.0)
-                , Arguments.of(330, 222, 5, 754.0)
+        return Stream.of(Arguments.of(510, 800, -110.0), Arguments.of(376, 700, 124.0),  Arguments.of(210, 100, 890.0),
+                Arguments.of(0, 900, 300.0)
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void calculateAvailableSouvenirsPounds(double people, double gas, double bags, double souvenir ){
-        runWithInput(people + " "+ gas + " " + bags);
-        assertEquals(Double.parseDouble(getItemByName("souvenir")), souvenir, "Incorrect printing out the allowed pounds of souvenirs.");
+    public void calculateAvailableSouvenirsPounds(double people, double gas, double luggage ) throws InvalidClauseException {
+        runWithInput(people + " "+ gas);
+        assertEquals(Double.parseDouble(getItemByName("luggage")), luggage, "Incorrect printing out the allowed pounds of luggage.");
     }
 }

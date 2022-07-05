@@ -2,37 +2,24 @@ package pre_defined_classes.simple_programs_taking_numeric_user_input.medium.q10
 
 /*
 A Piper Saratoga is a hobby plane with six seats that has a capacity to hold 1200 pounds on a flight.
- Make a program that helps this plane's pilot determine how much luggage can be brought on the return flight from
- a vacation. The program needs to consider the weight of the travellers, the weight of the gas needed for the return
- flight, and the total weight of the luggage from all travelers for the trip. Finally, the program will display the weight allowable for
- bringing souvenirs home on the return flight.
+Make a program that helps this plane's pilot determine how much luggage can be brought on the return flight from
+a vacation. The program needs to consider the weight of the travellers and the weight of the gas needed for the return
+flight to determine the total weight of the luggage from all travelers for the return flight.
+Assuming users only enter valid inputs, meaning that the weight of the travellers must be >= 0 and that gas must be > 0.
 
 Sample output:
-    How much do all the travellers weigh?
+    How much do all the travellers weigh in pounds?
     376
-    How much does the gas weigh for the return flight?
+    How much does the gas weigh for the return flight in pounds?
     700
-    What is the total weight of luggage from all travelers?
-    150
-    You can bring back 324.0 pounds of souvenirs!
+    You can board with and check in 124.0 pounds of luggage in total.
 
-    //huh?
-    How much do all the travellers weigh?
+    How much do all the travellers weigh in pounds?
     510
-    How much does the gas weigh for the return flight?
+    How much does the gas weigh for the return flight in pounds?
     800
-    What is the total weight of luggage from all travelers?
-    300
-    You can bring back -10.0 pounds of souvenirs!
+    You can board with and check in -110.0 pounds of luggage in total.
 
-    //huh?
-    How much do all the travellers weigh?
-    1200
-    How much does the gas weigh for the return flight?
-    1200
-    What is the total weight of luggage from all travelers?
-    12 1200
-    You can bring back -612.0 pounds of souvenirs!
  */
 
 import java.util.Scanner;
@@ -42,15 +29,12 @@ public class PiperSaratoga {
     {
         final int MAX_CAPACITY = 1200;
         Scanner scan = new Scanner( System.in );
-        System.out.println( "How much do all the travellers weigh?" );
+        System.out.println( "How much do all the travellers weigh in pounds?" );
         double people = scan.nextDouble();
-        System.out.println( "How much does the gas weigh for the return flight?" );
+        System.out.println( "How much does the gas weigh for the return flight in pounds?" );
         double gas = scan.nextDouble();
-        gas = gas / 2;
-        System.out.println( "What is the total weight of luggage from all travelers?" );
-        double bags = scan.nextDouble();
-        double gifts = MAX_CAPACITY - people - gas - bags;
-        System.out.print( "You can bring back " + gifts + " pounds of souvenirs!" );
+        double luggage = MAX_CAPACITY - people - gas;
+        System.out.println( "You can have " + luggage + " pounds of luggage in total." );
     }
 
 }
