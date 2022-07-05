@@ -11,7 +11,7 @@ following pattern:
  */
 public class StarryNight {
     public static void main(String[] args) {
-        int[] arr = {0, 0, 0, 1};
+        int[] arr = {1, 3, 5, 7, 9};
         printArrayPattern(arr);
     }
 

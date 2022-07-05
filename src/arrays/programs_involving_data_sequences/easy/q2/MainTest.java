@@ -6,7 +6,6 @@ import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -40,18 +39,28 @@ public class MainTest extends BaseTest {
         return c;
     }
 
-    static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of(new int[]{4, 9, 0, 1, 3},
-                        "****" + System.lineSeparator() + "*********" + System.lineSeparator() + System.lineSeparator() + "*" + System.lineSeparator() + "***"),
-                Arguments.of(new int[]{0, 0, 0, 1},"" + System.lineSeparator() + "" + System.lineSeparator() + "" + System.lineSeparator() + "*"));
+    static Stream<int[]> inputProvider() {
+        return Stream.of(new int[]{4, 9, 0, 1, 3},
+                new int[]{0, 0, 0, 1},
+                new int[]{4, 11, 3, 9, -1, 0, 3, 112},
+                new int[]{});
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctPrintArrayPatternMethod(int[] input, String pattern) {
+    void correctPrintArrayPatternMethod(int[] input) throws Throwable {
         MethodUtil.invokeIfMethodExists(StarryNight.class, "printArrayPattern", new Object[]{input}, int[].class);
         String output = MethodUtil.getMethodOutput();
-        assertEquals(pattern, output, "Your method does not correctly print the pattern based on the input array.");
+        assertEquals(pattern(input), output, "Your method does not correctly print the pattern based on the input array.");
+    }
+
+    private String pattern(int[] arr) {
+        StringBuilder sb = new StringBuilder();
+        for (int k : arr) {
+            sb.append("*".repeat(Math.max(0, k)));
+            sb.append(System.lineSeparator());
+        }
+        return sb.toString();
     }
 
 }
