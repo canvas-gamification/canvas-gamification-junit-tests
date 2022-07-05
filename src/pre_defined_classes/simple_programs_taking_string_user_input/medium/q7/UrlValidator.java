@@ -1,11 +1,11 @@
 package pre_defined_classes.simple_programs_taking_string_user_input.medium.q7;
 
 /*
-A website address typically begins with <tt>www.</tt> and ends in <tt>.ca</tt>, <tt>.com</tt>, <tt>.edu</tt>,
+A website address typically begins with www. and ends in .ca, .com, .edu,
 among others. Originally, the ending of the address signifies the type of website it is.
-For example, the ending <tt>.ca</tt> is used to designate Canadian websites (although Canadian websites do not have
-to use this ending at all). Make a program that answers <tt>true</tt> or <tt>false</tt> to the question of whether
-the inputted address is a Canadian website.
+For example, the ending .ca is used to designate Canadian websites (although Canadian websites do not have
+to use this ending at all). Make a program that answers true or false to the question of whether
+the inputted address is a Canadian website. Assume the user will enter a valid URL.
 
 Sample output:
     Please enter a website URL:
