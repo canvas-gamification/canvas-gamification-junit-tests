@@ -38,7 +38,7 @@ public class MainTest extends BaseTest {
 
     public static Stream<Arguments> inputProvider2(){
         return Stream.of(Arguments.of(678, "876"), Arguments.of(102, "201"), Arguments.of(345, "543"),
-                Arguments.of(8, "800"), Arguments.of(370, "73") //still sus
+                Arguments.of(8, "800"), Arguments.of(370, "73")
                 //Arguments.of(370, (int)073) //FIXME: error because any integer starting with 0 will be interpreted as base oct in java
         );
     }

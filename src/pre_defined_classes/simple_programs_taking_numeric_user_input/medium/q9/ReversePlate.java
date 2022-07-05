@@ -4,7 +4,9 @@ package pre_defined_classes.simple_programs_taking_numeric_user_input.medium.q9;
 Traffic speed cameras are used to catch drivers who speed. One of the issues with this system is that it reads the plate
  numbers backwards. For simplicity, suppose that all the plates are 3 digits long.
  Make a program to reverse an inputted plate number.
- Assuming all user inputs are valid numbers, meaning that all 3 digits are either positive or zero.
+ Assuming all user inputs are valid, meaning that all 3 digits are either positive or zero
+ and that all 3 digits are entered ( plate 008 should have the 2 zero enter too. 8 is not a valid plate.)
+
 
 Sample output:
     What is the 3 digit plate number?
