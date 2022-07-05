@@ -27,7 +27,7 @@ public class MainTest extends BaseTest {
                 new NewLine(),
                 new StringLiteral("You've attended "),
                 new IntegerLiteral("percentage"),
-                new StringLiteral( "\\% of the classes\\. You need 75\\% to pass."),
+                new StringLiteral( "\\% of the classes and you need 75\\% to write the final exam\\."),
         };
     }
     public void runMain(){Attendance.main(new String[0]);}

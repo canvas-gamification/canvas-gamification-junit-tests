@@ -5,13 +5,14 @@ At the University of Fake Columbia, a student will not be allowed to write the f
 is less than 75%. Make a program that calculates the attendance percentage and notifies the user if they are failing
 the course. To do that the program prompts the user to enter the total number of classes held and the total number of
 classes attended, then prints out the percentage of classes the user attended.
+Assuming all user inputs are valid ( total number of class must be > 0 ).
 
 Sample Output:
     How many classes were there?
     24
     How many classes did you attend?
     19
-    You've attended 79% of the classes. You need 75% to pass.
+    You've attended 79% of the classes and you need 75% to write the final exam.
 
  */
 
@@ -25,7 +26,6 @@ public class Attendance {
         System.out.println("How many classes did you attend?");
         int attendedClasses = input.nextInt();
         int percentage = attendedClasses * 100 / numClasses;
-        System.out.println("You've attended " + percentage + "% of the classes. You need 75% to pass.");
-
+        System.out.println("You've attended " + percentage + "% of the classes and you need 75% to write the final exam.");
     }
 }
