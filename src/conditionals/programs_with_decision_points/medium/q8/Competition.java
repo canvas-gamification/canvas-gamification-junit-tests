@@ -3,7 +3,8 @@ package conditionals.programs_with_decision_points.medium.q8;
 /*
  * Write a program that will ask the user for their placement and print out an "award" based on their placement, 
  * using the following information: 1st place gets a "Gold Trophy", 2nd place gets a "Silver Trophy", 3rd place 
- * gets a "Bronze Trophy" and everything below that receives a "Consolation Goodie Bag".
+ * gets a "Bronze Trophy" and everything below that receives a "Consolation Goodie Bag". The program should print
+ * "Invalid Input!" if the user enters an invalid input.
  * 
  * Sample output:
  *  Which place did you finish? (Ex. 1, 2, 3, etc): 

@@ -53,7 +53,6 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputProviderValidInput")
   public void printsCorrectPrize(int place, String prize) throws InvalidClauseException {
-    System.out.println("place: " + place);
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct prize for the given place.";
     runWithInput(place + "", new Clause[] {
         new StringLiteral(prize),
@@ -65,7 +64,7 @@ public class MainTest extends BaseTest {
   @MethodSource("inputProviderInvalid")
   public void printsErrorMessageForInvalidPlace(int place) throws InvalidClauseException {
     System.out.println("place: " + place);
-    TestOption.incorrectStructureErrorMessage = "Your program does not print the error message for the invalid place.";
+    TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for the invalid place.";
     runWithInput(place + "", new Clause[] {
         new StringLiteral("Invalid Input!"),
         new NewLine(),
