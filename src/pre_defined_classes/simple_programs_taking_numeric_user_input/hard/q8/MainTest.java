@@ -35,7 +35,7 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of(4, 2.0), Arguments.of(5, 2.23606797749979),
-                Arguments.of(0, 0.0), Arguments.of(100, 10)
+                Arguments.of(0, 0.0), Arguments.of(12.25, 3.5)
         );
     }
 
@@ -43,6 +43,7 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void calculatesSqrtCorrectly(double input, double sqrt) throws InvalidClauseException {
         runWithInput(input + " ");
-        assertEquals(Double.parseDouble(getItemByName("sqrt")), sqrt, 0.00001,"Incorrectly calculated the square root of the input.");
+        assertEquals(Double.parseDouble(getItemByName("sqrt")), sqrt, 0.00001,
+                "Your program does not correctly calculate the square root of the input.");
     }
 }

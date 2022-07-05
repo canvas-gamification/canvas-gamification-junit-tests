@@ -37,6 +37,6 @@ public class FeelingSophisticated {
         System.out.println( "Enter a number:" );
         double inputVal = input.nextDouble();
         double sqrt = Math.sqrt( inputVal );
-        System.out.println( "The square root value of the given number is:" + sqrt );
+        System.out.println( "The square root value of the given number is: " + sqrt );
     }
 }
