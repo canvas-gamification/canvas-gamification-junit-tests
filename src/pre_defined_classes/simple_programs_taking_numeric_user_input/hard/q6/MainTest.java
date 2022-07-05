@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    //Parson's with Distractors
+    // Parson's with Distractors
     public Clause[] testSentence(){
         TestOption.isInputTest = true;
         TestOption.defaultInput = "12345" + System.lineSeparator() + "54321" + System.lineSeparator();
@@ -26,7 +26,7 @@ public class MainTest extends BaseTest {
                 new NewLine(),
                 new StringLiteral("The first zip code is: "),
                 new PlaceHolder(),
-                new StringLiteral(", and the second zip is: "),
+                new StringLiteral(", and the second zip code is: "),
                 new PlaceHolder()
         };
     }

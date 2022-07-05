@@ -40,6 +40,6 @@ public class ZipcodeValidator{
             String zipCode = input.nextLine();
             System.out.println( "Re-enter the US zip code: " );
             String zipCodeSecond = input.nextLine();
-            System.out.println( "The first zip code is: " + zipCode + ", and the second zip is: " + zipCodeSecond );
+            System.out.println( "The first zip code is: " + zipCode + ", and the second zip code is: " + zipCodeSecond );
         }
 }
