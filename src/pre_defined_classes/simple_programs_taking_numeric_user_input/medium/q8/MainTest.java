@@ -33,14 +33,16 @@ public class MainTest extends BaseTest {
     public void runMain(){Attendance.main(new String[0]);}
 
     public static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of(24, 24, 100), Arguments.of(24, 19, 79), Arguments.of(24, 6, 25)
-        , Arguments.of(11, 0, 0), Arguments.of(6, 1, 16));
+        return Stream.of(Arguments.of(24, 24, 100), Arguments.of(24, 19, 79), Arguments.of(6, 1, 16),
+                Arguments.of(11, 0, 0), Arguments.of(6, 1, 16), Arguments.of(1, 6, 600),
+                Arguments.of(-24, 24, -100), Arguments.of(24, -24, -100)
+        );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void calculateAttendanceCorrectly(int numClasses, int attendedClasses, int percentage) throws InvalidClauseException {
         runWithInput(numClasses + " " + attendedClasses + " ");
-        assertEquals(Integer.parseInt(getItemByName("percentage")), percentage, "Your program does not correctly attendance percentage.");
+        assertEquals(Integer.parseInt(getItemByName("percentage")), percentage, "Your program does not correctly calculate attendance percentage.");
     }
 }
