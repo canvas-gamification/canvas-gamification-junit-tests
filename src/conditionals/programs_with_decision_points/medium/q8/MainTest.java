@@ -39,13 +39,15 @@ public class MainTest extends BaseTest {
         Arguments.of(2, "You won the Silver Trophy!"),
         Arguments.of(3, "You won the Bronze Trophy!"),
         Arguments.of(4, "You won the Consolation Goodie Bag!"),
-        Arguments.of(5, "You won the Consolation Goodie Bag!"));
+        Arguments.of(5, "You won the Consolation Goodie Bag!"),
+        Arguments.of(10000, "You won the Consolation Goodie Bag!"));
   }
 
   static Stream<Arguments> inputProviderInvalid() {
     return Stream.of(
         Arguments.of(0),
-        Arguments.of(-1));
+        Arguments.of(-1),
+        Arguments.of(-20000));
   }
 
   @ParameterizedTest
