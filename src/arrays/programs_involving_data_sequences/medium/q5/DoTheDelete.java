@@ -21,6 +21,7 @@ Distractors:
  */
 
 import java.util.Scanner;
+
 // 1, 3, 5, 7, 9, 7
 public class DoTheDelete {
     public static void main(String[] args) {
@@ -30,12 +31,12 @@ public class DoTheDelete {
         if (length >= 0) {
             int[] arr = new int[length];
             System.out.println("Enter numbers for array: ");
-            for(int i = 0; i < arr.length; i++){
+            for (int i = 0; i < arr.length; i++) {
                 arr[i] = input.nextInt();
             }
             System.out.println("Enter the number to be replaced: ");
             int replace = input.nextInt();
-            deleteThis(arr, replace);
+            int index = deleteThis(arr, replace);
             for (int i = 0; i < arr.length; i++) {
                 System.out.print(arr[i] + " ");
             }
