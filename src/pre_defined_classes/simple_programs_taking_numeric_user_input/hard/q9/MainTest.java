@@ -5,7 +5,6 @@ import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
-import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -39,8 +38,9 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of(2, 5, 32.0), Arguments.of(0, 0, 1.0), Arguments.of(-3, 2, 9.0)
-                ,Arguments.of(2.97, 2, 8.820900000000002) , Arguments.of(4, 0.5, 2.0)
+        return Stream.of(Arguments.of(2, 5, 32.0), Arguments.of(0, 0, 1.0),
+                Arguments.of(-3, 2, 9.0), Arguments.of(-3, 5, -243.0),
+                Arguments.of(4, -3, 0.015625)
         );
     }
 
@@ -49,7 +49,7 @@ public class MainTest extends BaseTest {
     void calculatesPowerCorrectly(double base, double exponent, double result) throws InvalidClauseException {
         runWithInput(base + " "+ exponent );
         assertEquals(Double.parseDouble(getItemByName("result")), result, 0.00001,
-                "Incorrect output for the calculation of power.");
+                "Your program does not correctly calculate the power given the base number and the exponent number.");
     }
 
 
