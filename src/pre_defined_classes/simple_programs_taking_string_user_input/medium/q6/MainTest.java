@@ -35,13 +35,17 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<String> stringWithNoSpace() {
-        return Stream.of("abc.", "1234", "EmptyStringDoesNotWork", "b");
+
+        return Stream.of("abc.", "1234", "EmptyStringDoesNotWork", "b",
+                System.lineSeparator()
+        );
     }
 
     @ParameterizedTest
     @MethodSource("stringWithSpace")
     public void correctlyDetectSpace(String sentence) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print true when there is/are space(s) in the inputted sentence.";
+        TestOption.incorrectStructureErrorMessage =
+                "Your program does not correctly print true when there is a space in the inputted sentence.";
         runWithInput(sentence, new Clause[]{
                 new StringLiteral("true")
         });
@@ -50,7 +54,8 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("stringWithNoSpace")
     public void correctlyDetectNoSpace(String sentence) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print false when there is/are space(s) in the inputted sentence.";
+        TestOption.incorrectStructureErrorMessage =
+                "Your program does not correctly print false when there is a space in the inputted sentence.";
         runWithInput(sentence, new Clause[]{
                 new StringLiteral("false"),
         });
