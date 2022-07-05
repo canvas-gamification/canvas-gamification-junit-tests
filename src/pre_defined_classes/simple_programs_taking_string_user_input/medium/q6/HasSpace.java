@@ -11,16 +11,10 @@ Sample output:
     true
 Sample output:
     Enter any sentence:
-    (stu#:123 456)
-    Does the sentence contain any spaces?
-    true
-Sample output:
-    Enter any sentence:
     abc.
     Does the sentence contain any spaces?
     false
 
-   question: sometime boolean gets printed out as True instead of true? Should take that into consider...?
  */
 
 import java.util.Scanner;
