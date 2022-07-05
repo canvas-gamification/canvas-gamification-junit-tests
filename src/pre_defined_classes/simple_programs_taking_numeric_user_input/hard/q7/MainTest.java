@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    //Parsons with distractors
+    // Parsons with distractors
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "78 ";
@@ -40,6 +40,6 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     public void determineOddOrEvenCorrectly(int num, double remainder) throws InvalidClauseException {
         runWithInput(num + System.lineSeparator());
-        assertEquals(Integer.parseInt(getItemByName("remainder")), remainder);
+        assertEquals(Integer.parseInt(getItemByName("remainder")), remainder, "Your program does not correctly calculate if a number is odd or even");
     }
 }
