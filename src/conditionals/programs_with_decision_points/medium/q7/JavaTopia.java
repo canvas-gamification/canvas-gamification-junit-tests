@@ -8,14 +8,10 @@ package conditionals.programs_with_decision_points.medium.q7;
  * those that start with "22" belong to "Memory Front", and those that start with "24" belong to "RAM Ranch."
  * Anything else is outside the territory of Javatopia. Make sure to verify that the ZIP code is exactly 5-digits long.
  * 
- * Example output:
+ * Sample output:
  *   Enter a Javatopia ZIP code:
  *   12345
  *   That ZIP code belongs to String Avenue
- * 
- *   Enter a Javatopia ZIP code:
- *   00999
- *   This ZIP code does not belong to Javatopia
  */
 
 import java.util.Scanner;

@@ -45,16 +45,20 @@ public class MainTest extends BaseTest {
         Arguments.of(23123),
         Arguments.of(29123),
         Arguments.of(92123),
+        Arguments.of(99999),
         Arguments.of(18123));
   }
 
   public static Stream<Arguments> inputProviderInvalidInput() {
     return Stream.of(
+        Arguments.of(-12345),
         Arguments.of(01235),
         Arguments.of(1),
         Arguments.of(12),
         Arguments.of(123),
         Arguments.of(1234),
+        Arguments.of(9999),
+        Arguments.of(100000),
         Arguments.of(123456));
   }
 
@@ -73,8 +77,8 @@ public class MainTest extends BaseTest {
   public void printsErrorMessageForOutsideTerritoryAreas(int zipCode) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct error message for the ZIP codes outside of Javatopia.";
     runWithInput(zipCode + "", new Clause[] {
-      new StringLiteral("This ZIP code does not belong to Javatopia"),
-      new NewLine(),
+        new StringLiteral("This ZIP code does not belong to Javatopia"),
+        new NewLine(),
     });
   }
 
