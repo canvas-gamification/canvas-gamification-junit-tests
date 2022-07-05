@@ -20,6 +20,12 @@ Sample output:
     0
     The square root value of the given number is:0.0
 
+Distractors:
+    int inputVal = input.nextDouble();
+    double sqrt = inputVal * inputVal;
+    double sqrt = inputVal / inputVal;
+    int sqrt = Math.sqrt( inputVal );
+    System.out.println( "The square root value of the given number is:" + inputVal );
  */
 
 import java.util.Scanner;
