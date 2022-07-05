@@ -8,6 +8,7 @@ import global.variables.Clause;
 import global.variables.clauses.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -33,17 +34,13 @@ public class MainTest extends BaseRandomTest {
         Intelligence.main(new String[0]);
     }
 
-    @Test
-    public void doNotThinksComputerAreSmarter() throws InvalidClauseException {
-        runWithInput(String.valueOf(0));
-        assertEquals(Integer.parseInt(getItemByName("input")), 0,
-                "Your program does not correctly print the percentage based on an answer No.");
-    }
+    public static Stream<Integer> inputProvider(){ return Stream.of (0, 1);}
 
-    @Test
-    public void thinksComputerAreSmarter() throws InvalidClauseException {
-        runWithInput(String.valueOf(1));
-        assertEquals(Integer.parseInt(getItemByName("input")), 1,
-                "Your program does not correctly print the percentage based on an answer Yes.");
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void printsCorrectOutput(int input) throws InvalidClauseException {
+        runWithInput(String.valueOf(input));
+        assertEquals(Integer.parseInt(getItemByName("input")), input,
+                "Your program does not correctly print the percentage based on the answer.");
     }
 }
