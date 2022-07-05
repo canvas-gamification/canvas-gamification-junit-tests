@@ -30,6 +30,19 @@ Sample Output:
     //the data type of the input should be String type instead
     >> okay changed to .nextLine(). Actually, nah, if I changed to a string question, this question should be under pre_defined_classes-simple_programs_taking_string_user_input
     >> I changed ZipcodeValidator.java & MainTest.java (take string input). The google doc is still takes int input just in case.
+
+Distractors:
+    double zipCode = input.nextInt();
+    double zipCode = input.nextDouble();
+    boolean zipCode = input.nextLine();
+    String zipCode = input.nextLine(); //this currently passes
+    char zipCode = input.nextLine();
+
+    double zipCodeSecond = input.nextInt();
+    double zipCodeSecond = input.nextDouble();
+    String zipCodeSecond = input.nextLine(); //this currently passes
+    boolean zipCodeSecond = input.nextLine();
+    char zipCodeSecond = input.nextLine();
  */
 
 public class ZipcodeValidator{
