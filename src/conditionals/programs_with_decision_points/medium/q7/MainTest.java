@@ -27,7 +27,6 @@ public class MainTest extends BaseTest {
     };
   }
 
-  @Override
   public void runMain() {
     JavaTopia.main(new String[0]);
   }
@@ -46,6 +45,7 @@ public class MainTest extends BaseTest {
         Arguments.of(29123),
         Arguments.of(92123),
         Arguments.of(99999),
+        Arguments.of(10000),
         Arguments.of(18123));
   }
 
@@ -74,7 +74,7 @@ public class MainTest extends BaseTest {
 
   @ParameterizedTest
   @MethodSource("inputProviderOutsideTerritoryInput")
-  public void printsErrorMessageForOutsideTerritoryAreas(int zipCode) throws InvalidClauseException {
+  public void printsErrorMessageForAreasOutsideTerriotry(int zipCode) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct error message for the ZIP codes outside of Javatopia.";
     runWithInput(zipCode + "", new Clause[] {
         new StringLiteral("This ZIP code does not belong to Javatopia"),
