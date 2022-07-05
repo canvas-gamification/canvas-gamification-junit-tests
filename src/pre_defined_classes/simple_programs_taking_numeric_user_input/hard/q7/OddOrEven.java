@@ -9,26 +9,12 @@ Sample output:
     78
     The remainder value is: 0
 
-Sample output:
-    Enter an integer:
-    77
-    The remainder value is: 1
-
-Sample output:
-    Enter an integer:
-    -1
-    The remainder value is: -1
-
-Sample output:
-    Enter an integer:
-    -2
-    The remainder value is: 0
-
-Sample output:
-    Enter an integer:
-    0
-    The remainder value is: 0
-
+Distractors:
+    double number = input.nextInt();
+    int remainder = number !% 2;
+    char remainder = number % 2;
+    String remainder = number % 2;
+    int remainder = number == 2;
  */
 
 import java.util.Scanner;
