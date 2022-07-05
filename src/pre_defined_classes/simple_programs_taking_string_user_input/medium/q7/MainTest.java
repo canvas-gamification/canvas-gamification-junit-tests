@@ -37,8 +37,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("canadianWebsite")
-    public void correctlyDetectCanadaWebsites(String caUrl) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print true when a url ends with .ca";
+    public void correctlyDetectsCanadaWebsites(String caUrl) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print true when the URL is a Canadian website.";
         runWithInput(caUrl, new Clause[]{
                 new StringLiteral("true"),
         });
@@ -46,8 +46,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("noneCanadianWebsite")
-    public void correctlyDetectNoneCanadaWebsites(String notCaUrl) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print false when a url does not end with .ca";
+    public void correctlyDetectsNoneCanadaWebsites(String notCaUrl) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print false when the URL is not a Canadian website.";
         runWithInput(notCaUrl, new Clause[]{
                 new StringLiteral("false"),
         });
