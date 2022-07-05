@@ -14,29 +14,21 @@ Enter an exponent:
 5
 2 to the power of 5 is 32.0
 
-Enter a base:
-0
-Enter an exponent:
-0
-0 to the power of 0 is 1.0
-
-Enter a base:
--3
-Enter an exponent:
-2
--3 to the power of 2 is 9.0
-
-Enter a base:
-2.97
-Enter an exponent:
-2
-2.97 to the power of 2.0 is 8.820900000000002
-
-Enter a base:
-4
-Enter an exponent:
-0.5
-4.0 to the power of 0.5 is 2.0
+Distractors:
+    import java.lang.Scanner;
+    double base = input.nextInt();
+    double exponent = input.nextInt();
+    String base = input.next();
+    String exponent = input.nextLine();
+    double result = Math.pow( exponent, base );
+    double result = Math.base( exponent, base );
+    double result = Math.exp( base, exponent );
+    int result = Math.pow( base, exponent );
+    int result = Math.exp( base, exponent );
+    int base;
+    int exponent;
+    int base, exponent, result;
+    double base, exponent, result;
 
  */
 
