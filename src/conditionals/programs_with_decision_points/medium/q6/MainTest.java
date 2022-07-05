@@ -59,6 +59,7 @@ public class MainTest extends BaseTest {
         Arguments.of("D", "Invalid Input!"),
         Arguments.of("W", "Invalid Input!"),
         Arguments.of("\\", "Invalid Input!"),
+        Arguments.of("?", "Invalid Input!"),
         Arguments.of("1", "Invalid Input!"));
   }
 
@@ -82,7 +83,7 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputProviderInvalidInput")
   void printsErrorMessageForInvalidInput(String direction) throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program prints an error message when user inputs an invalid character.";
+    TestOption.incorrectStructureErrorMessage = "Your program does not print an error message when user inputs an invalid character.";
     runWithInput(direction, new Clause[] {
         new StringLiteral("Invalid Input!")
     });
