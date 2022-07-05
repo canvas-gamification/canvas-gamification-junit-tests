@@ -4,8 +4,8 @@ import global.BaseTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.Clause;
-import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
+import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -22,7 +22,7 @@ Sample output:
     The reverse number is: 876
  */
 public class MainTest extends BaseTest {
-    //Parson
+    // Parson
     public Clause[] testSentence(){
         TestOption.isInputTest = true;
         TestOption.defaultInput = "678";
@@ -30,23 +30,25 @@ public class MainTest extends BaseTest {
                 new StringLiteral( "What is the 3 digit plate number\\?" ),
                 new NewLine(),
                 new StringLiteral( "The reverse number is\\: "),
-                new IntegerLiteral("reversePlate")
+                new PlaceHolder()
         };
     }
 
     public void runMain() {ReversePlate.main(new String[0]);}
 
     public static Stream<Arguments> inputProvider2(){
-        return Stream.of(Arguments.of(678, 876), Arguments.of(102, 201), Arguments.of(345, 543),
-                Arguments.of(8, 800), Arguments.of(370, 73) //sus
+        return Stream.of(Arguments.of(678, "876"), Arguments.of(102, "201"), Arguments.of(345, "543"),
+                Arguments.of(8, "800"), Arguments.of(370, "73") //still sus
                 //Arguments.of(370, (int)073) //FIXME: error because any integer starting with 0 will be interpreted as base oct in java
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider2")
-    public void reversedPlatedCorrectly(int plate, int reversePlate) throws InvalidClauseException {
-        runWithInput(plate + System.lineSeparator());
-        assertEquals(Integer.parseInt(getItemByName("reversePlate")), reversePlate, "Incorrect reverse plate.");
+    public void reversedPlatedCorrectly(int plate, String reversePlate) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Incorrect reverse plate.";
+        runWithInput(plate + " ", new Clause[]{
+                new StringLiteral(reversePlate)
+        });
     }
 }
