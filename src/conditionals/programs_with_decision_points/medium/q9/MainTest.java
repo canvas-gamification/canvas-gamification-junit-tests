@@ -16,7 +16,6 @@ import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseTest {
   // Parsons
-  @Override
   public Clause[] testSentence() {
     TestOption.isInputTest = true;
     TestOption.defaultInput = "1944";
@@ -28,7 +27,6 @@ public class MainTest extends BaseTest {
     };
   }
 
-  @Override
   public void runMain() {
     GenerationGap.main(new String[0]);
   }
@@ -55,7 +53,7 @@ public class MainTest extends BaseTest {
 
   static Stream<Arguments> inputProviderInvalidInput() {
     return Stream.of(
-        Arguments.of(1899),
+        Arguments.of(1900),
         Arguments.of(-1000),
         Arguments.of(0),
         Arguments.of(-2020),
@@ -65,6 +63,7 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputProviderValidInput")
   public void printsCorrectGeneration(int year, String generation) throws InvalidClauseException {
+    TestOption.incorrectStructureErrorMessage = "Your program does not correctly print a correct generation for the given year.";
     runWithInput(year + "", new Clause[] {
         new StringLiteral(generation),
         new NewLine(),
@@ -73,7 +72,8 @@ public class MainTest extends BaseTest {
 
   @ParameterizedTest
   @MethodSource("inputProviderInvalidInput")
-  public void printsErrorMessageWithInvalidYear(int year) throws InvalidClauseException {
+  public void printsErrorMessageWithInvalidInput(int year) throws InvalidClauseException {
+    TestOption.incorrectStructureErrorMessage = "Your program does not print an error message when given an invalid input.";
     runWithInput(year + "", new Clause[] {
         new StringLiteral("Invalid Input!"),
         new NewLine(),
