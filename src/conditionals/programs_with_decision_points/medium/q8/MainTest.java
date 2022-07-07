@@ -16,7 +16,6 @@ import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseTest {
   // Parsons
-  @Override
   public Clause[] testSentence() {
     TestOption.isInputTest = true;
     TestOption.defaultInput = "1";
@@ -28,7 +27,6 @@ public class MainTest extends BaseTest {
     };
   }
 
-  @Override
   public void runMain() {
     Competition.main(new String[0]);
   }
@@ -63,7 +61,6 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputProviderInvalid")
   public void printsErrorMessageForInvalidPlace(int place) throws InvalidClauseException {
-    System.out.println("place: " + place);
     TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for the invalid place.";
     runWithInput(place + "", new Clause[] {
         new StringLiteral("Invalid Input!"),
