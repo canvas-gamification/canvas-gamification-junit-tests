@@ -38,7 +38,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void determineOddOrEvenCorrectly(int num, double remainder) throws InvalidClauseException {
+    public void determinesOddOrEvenCorrectly(int num, double remainder) throws InvalidClauseException {
         runWithInput(num + System.lineSeparator());
         assertEquals(Integer.parseInt(getItemByName("remainder")), remainder, "Your program does not correctly calculate if a number is odd or even");
     }
