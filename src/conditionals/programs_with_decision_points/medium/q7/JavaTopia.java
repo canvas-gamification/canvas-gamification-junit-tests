@@ -1,12 +1,13 @@
 package conditionals.programs_with_decision_points.medium.q7;
 
 /*
- * In the imaginary land of "Javatopia", the first two numbers of the 5-digit ZIP code determine
+ * In the imaginary land of "Javatopia", the first two digits of the 5-digit ZIP code determine
  * which district a certain address falls under. Write a java program to accept a 5-digit Javatopia ZIP code,
  * extract the first 2 digits and display which district it belongs to based on the following information:
  * ZIP codes that start with "12" belong to "String Avenue", ones that start with "14" belong to "Character County",
  * those that start with "22" belong to "Memory Front", and those that start with "24" belong to "RAM Ranch."
  * Anything else is outside the territory of Javatopia. Make sure to verify that the ZIP code is exactly 5-digits long.
+ * Assuming the user always provides an integer.
  * 
  * Sample output:
  *   Enter a Javatopia ZIP code:

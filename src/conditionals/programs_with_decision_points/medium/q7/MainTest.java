@@ -85,7 +85,7 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputProviderInvalidInput")
   public void printsErrorMessageForInvalidInputs(int zipCode) throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct error message for the invalid ZIP codes.";
+    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct error message for invalid ZIP codes.";
     runWithInput(zipCode + "", new Clause[] {
         new StringLiteral("Invalid Input!"),
         new NewLine(),
