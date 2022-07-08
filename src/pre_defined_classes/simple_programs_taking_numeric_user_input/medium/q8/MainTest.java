@@ -41,7 +41,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void calculateAttendanceCorrectly(int numClasses, int attendedClasses, int percentage) throws InvalidClauseException {
+    public void calculatesAttendanceCorrectly(int numClasses, int attendedClasses, int percentage) throws InvalidClauseException {
         runWithInput(numClasses + " " + attendedClasses + " ");
         assertEquals(Integer.parseInt(getItemByName("percentage")), percentage, "Your program does not correctly calculate attendance percentage.");
     }
