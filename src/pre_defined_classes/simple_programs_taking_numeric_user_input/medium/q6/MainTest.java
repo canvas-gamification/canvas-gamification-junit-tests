@@ -41,6 +41,6 @@ public class MainTest extends BaseRandomTest {
     public void printsCorrectOutput(int input) throws InvalidClauseException {
         runWithInput(String.valueOf(input));
         assertEquals(Integer.parseInt(getItemByName("input")), input,
-                "Your program does not correctly print the percentage based on the answer.");
+                "Your program does not correctly print the percentage based on the input provided.");
     }
 }
