@@ -40,6 +40,7 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     public void determinesOddOrEvenCorrectly(int num, double remainder) throws InvalidClauseException {
         runWithInput(num + System.lineSeparator());
-        assertEquals(Integer.parseInt(getItemByName("remainder")), remainder, "Your program does not correctly calculate if a number is odd or even");
+        assertEquals(Integer.parseInt(getItemByName("remainder")), remainder,
+                "Your program does not correctly calculate if a number is odd or even.");
     }
 }
