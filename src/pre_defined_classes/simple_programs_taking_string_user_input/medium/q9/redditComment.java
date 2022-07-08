@@ -7,8 +7,8 @@ website. Make a program that reads in a user's comment and convert it to lowerca
 
 Sample output:
 Enter your comment:
-BBC news is reporting abc
-Your lowercase comment is: bbc news is reporting abc
+BBC news is reporting about the weather.
+Your lowercase comment is: bbc news is reporting about weather.
 
  */
 
