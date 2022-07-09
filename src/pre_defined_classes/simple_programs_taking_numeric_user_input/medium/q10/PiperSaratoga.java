@@ -14,12 +14,6 @@ Sample output:
     700
     You can board with and check in 124.0 pounds of luggage in total.
 
-    How much do all the travellers weigh in pounds?
-    510
-    How much does the gas weigh for the return flight in pounds?
-    800
-    You can board with and check in -110.0 pounds of luggage in total.
-
  */
 
 import java.util.Scanner;
