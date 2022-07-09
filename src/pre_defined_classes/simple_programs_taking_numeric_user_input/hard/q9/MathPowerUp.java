@@ -5,7 +5,7 @@ A Math teacher is looking to create a program to teach his students about expone
 Recall that b^n is the same as b multiplied by itself n times.
 In this form, b is referred to as the base and n is the exponent.
 Make a simple calculator program that asks the user for a base and an exponent, calculates the answer,
- and displays the result. Assume both a and b are in decimal form not fraction.
+ and displays the result. Assume a and b are in decimal form not fraction.
 
 Sample output:
 Enter a base:
