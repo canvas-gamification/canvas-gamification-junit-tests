@@ -2,10 +2,9 @@ package pre_defined_classes.simple_programs_taking_numeric_user_input.medium.q9;
 
 /*
 Traffic speed cameras are used to catch drivers who speed. One of the issues with this system is that it reads the plate
- numbers backwards. For simplicity, suppose that all the plates are 3 digits long.
- Make a program to reverse an inputted plate number.
- Assuming all user inputs are valid, meaning that all 3 digits are either positive or zero
- and that all 3 digits are entered ( plate 008 should have the 2 zero enter too. 8 is not a valid plate.)
+numbers backwards. For simplicity, suppose that all the plates are 3 digits long.
+Make a program to reverse an inputted plate number.
+Assuming all users enter exactly 3 digits from 1 to 9 (Zeros are not allowed).
 
 
 Sample output:
@@ -27,7 +26,7 @@ public class ReversePlate {
         plateNum = plateNum % 100;
         int num2 = plateNum / 10;
         int num3 = plateNum % 10;
-        String reversePlate = "" + (num3 * 100 + num2 * 10 + num1);
+        String reversePlate = "" + num3 * 100 + num2 * 10 + num1 ;
         System.out.print( "The reverse number is: " + reversePlate );
     }
 
