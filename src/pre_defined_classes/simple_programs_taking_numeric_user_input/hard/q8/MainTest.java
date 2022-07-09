@@ -22,9 +22,9 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "4 ";
         return new Clause[]{
-                new StringLiteral("Enter a number\\:" ),
+                new StringLiteral("Enter a number\\: " ),
                 new NewLine(),
-                new StringLiteral("The square root value of the given number is\\:"),
+                new StringLiteral("The square root value of the given number is\\: "),
                 new DoubleLiteral("sqrt")
         };
     }
@@ -41,7 +41,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void calculatesSqrtCorrectly(double input, double sqrt) throws InvalidClauseException {
+    void calculatesSquareRootCorrectly(double input, double sqrt) throws InvalidClauseException {
         runWithInput(input + " ");
         assertEquals(Double.parseDouble(getItemByName("sqrt")), sqrt, 0.00001,
                 "Your program does not correctly calculate the square root of the input.");
