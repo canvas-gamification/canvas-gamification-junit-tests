@@ -5,14 +5,12 @@ import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.*;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Parson's with Distractors
@@ -34,7 +32,7 @@ public class MainTest extends BaseTest {
     public void runMain() {ZipcodeValidator.main(new String[0]);}
 
     public static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of("12345", "54321"), Arguments.of("123", "123"), Arguments.of("01234", "01234")
+        return Stream.of(Arguments.of("12345", "54321"), Arguments.of("123", "123")
                 , Arguments.of("35004", "35004"), Arguments.of("85001", "85001")
         );
     }
