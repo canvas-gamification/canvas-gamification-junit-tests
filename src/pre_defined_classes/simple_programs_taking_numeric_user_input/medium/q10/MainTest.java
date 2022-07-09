@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    //Parson
+    // Parson
     public Clause[] testSentence(){
         TestOption.isInputTest = true;
         TestOption.defaultInput = "510 800 -110.0 ";
@@ -41,8 +41,9 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void calculateAvailableSouvenirsPounds(double people, double gas, double luggage ) throws InvalidClauseException {
+    public void calculateAvailableLuggagePounds(double people, double gas, double luggage ) throws InvalidClauseException {
         runWithInput(people + " "+ gas);
-        assertEquals(Double.parseDouble(getItemByName("luggage")), luggage, "Incorrect printing out the allowed pounds of luggage.");
+        assertEquals(Double.parseDouble(getItemByName("luggage")), luggage,
+                "Your program does not print the allowed pounds of luggage correctly.");
     }
 }
