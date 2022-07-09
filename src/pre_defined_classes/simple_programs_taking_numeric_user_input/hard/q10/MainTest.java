@@ -46,7 +46,7 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void calculateNewSalaryCorrectly(double salary, double years, double newSalary) throws InvalidClauseException {
         runWithInput(salary + " " + years);
-        assertEquals(Double.parseDouble(getItemByName("newSalary")), newSalary,
+        assertEquals(Double.parseDouble(getItemByName("newSalary")), newSalary, 0.001,
                 "Your program does not correctly calculate the new salary after raise.");
     }
 }
