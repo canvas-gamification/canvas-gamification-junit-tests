@@ -40,8 +40,8 @@ public class MainTest extends BaseTest {
     static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of(2, 5, 32.0), Arguments.of(0, 0, 1.0),
                 Arguments.of(-3, 2, 9.0), Arguments.of(-3, 5, -243.0),
-                Arguments.of(4, -3, 0.015625)
-        );
+                Arguments.of(4, -3, 0.015625), Arguments.of(3.5, 2, 12.25), Arguments.of(3, 2.5, 15.5884572681)
+                );
     }
 
     @ParameterizedTest
