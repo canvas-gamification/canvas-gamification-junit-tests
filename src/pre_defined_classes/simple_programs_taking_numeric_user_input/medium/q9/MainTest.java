@@ -13,14 +13,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-/*
-Sample output:
-    What is the 3 digit plate number?
-    678
-    The reverse number is: 876
- */
 public class MainTest extends BaseTest {
     // Parson
     public Clause[] testSentence(){
@@ -37,8 +29,8 @@ public class MainTest extends BaseTest {
     public void runMain() {ReversePlate.main(new String[0]);}
 
     public static Stream<Arguments> inputProvider2(){
-        return Stream.of(Arguments.of(678, "876"), Arguments.of(102, "201"), Arguments.of(345, "543"),
-                Arguments.of(8, "800"), Arguments.of(370, "73")
+        return Stream.of(Arguments.of(678, "876"), Arguments.of(102, "201"), Arguments.of(345, "543")
+                //Arguments.of(8, "800"), Arguments.of(370, "73") //add assumptions to the question, so we don't have to deal with this
                 //Arguments.of(370, (int)073) //FIXME: error because any integer starting with 0 will be interpreted as base oct in java
         );
     }
@@ -46,7 +38,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider2")
     public void reversedPlatedCorrectly(int plate, String reversePlate) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Incorrect reverse plate.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the reversed plate correctly.";
         runWithInput(plate + " ", new Clause[]{
                 new StringLiteral(reversePlate)
         });
