@@ -36,10 +36,10 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void printsCommentsInLowerCaseCorrectly(String input) throws InvalidClauseException {
-        String lowered = input.toLowerCase();
+    public void printsCommentsInLowerCaseCorrectly(String comment) throws InvalidClauseException {
+        String lowered = comment.toLowerCase();
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly prints the comment in lower case.";
-        runWithInput(input, new Clause[]{
+        runWithInput(comment, new Clause[]{
                 new StringLiteral(lowered)
         });
     }
