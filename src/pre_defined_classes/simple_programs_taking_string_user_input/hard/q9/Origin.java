@@ -9,17 +9,7 @@ Sample output:
 Please enter your last name:
 Silvester
 Is the person from Portugal? true
-Is the person a son of a famous person? false
-
-Please enter your last name:
-Jackson
-Is the person from Portugal? false
-Is the person a son of a famous person? true
-
-Please enter your last name:
-smith
-Is the person from Portugal? false
-Is the person a son of a famous person? false
+ "Does the person's name contain his/her parent's name? false
 
 Distractors:
 Scanner input = new Scanner(System.out);
