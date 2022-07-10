@@ -9,11 +9,6 @@ Sample output:
     I think so.
     Does the sentence contain any spaces?
     true
-Sample output:
-    Enter any sentence:
-    abc.
-    Does the sentence contain any spaces?
-    false
 
  */
 
