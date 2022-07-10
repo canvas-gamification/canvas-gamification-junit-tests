@@ -28,14 +28,12 @@ public class MainTeset extends BaseTest {
     public void runMain(){ Palindrome.main(new String[0]);}
 
     public static Stream<String> palindrome() {
-        return Stream.of("LOL");
+
+        return Stream.of("LOL", "121");
     }
 
     public static Stream<String> nonPalindrome() {
-        return Stream.of("abc",
-                "123", "MoreThan3Letter"
-                //System.lineSeparator() will break the test >> added clarification to the question
-        );
+        return Stream.of("abc", "123", "MoreThan3Letter");
     }
 
     @ParameterizedTest
