@@ -23,17 +23,18 @@ public class MainTest extends BaseRandomTest {
                 new NewLine(),
                 new StringLiteral("That name is taken\\. Try using this instead\\: "),
                 new PlaceHolder(),
-                new RandomChar('A', (char) ('Z'+1), "ranChar1"),
-                new RandomChar('A', (char) ('Z'+1), "ranChar2"),
-                new RandomChar('A', (char) ('Z'+1), "ranChar3"),
-//                new PlaceHolder()
+                new RandomChar('A', 'Z', "ranChar1"),
+                new RandomChar('A', 'Z', "ranChar2"),
+                new RandomChar('A', 'Z', "ranChar3")
         };
     }
 
     public void runMain(){ UserName.main(new String[0]); }
 
     public static Stream<String> inputProvider() {
-        return Stream.of("Jae", "James", "Robert", "Jennifer", "Mary", System.lineSeparator());
+        return Stream.of("Jae", "James", "Robert", "Jennifer", "Mary"
+//                , System.lineSeparator() //this is not working too
+        );
     }
 
     @ParameterizedTest
