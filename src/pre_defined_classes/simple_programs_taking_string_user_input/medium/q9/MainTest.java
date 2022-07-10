@@ -28,16 +28,19 @@ public class MainTest extends BaseTest {
     public void runMain() { redditComment.main(new String[0]);}
 
     public static Stream<String> inputProvider() {
-        return Stream.of("BBC news is reporting the weather.");
+
+        return Stream.of("BBC news is reporting the weather.", "ABC."
+                , System.lineSeparator()
+        );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void printsCommentsInLowerCase(String input) throws InvalidClauseException {
+    public void printsCommentsInLowerCaseCorrectly(String input) throws InvalidClauseException {
         String lowered = input.toLowerCase();
-        TestOption.incorrectStructureErrorMessage = " ";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly prints the comment in lower case.";
         runWithInput(input, new Clause[]{
-                new StringLiteral(lowered, "pluralS")
+                new StringLiteral(lowered)
         });
     }
 }
