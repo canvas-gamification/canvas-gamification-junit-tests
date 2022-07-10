@@ -45,7 +45,7 @@ public class MainTest extends BaseTest {
     @MethodSource("stringWithSpace")
     public void correctlyDetectSpace(String sentence) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage =
-                "Your program does not correctly print true when there is a space in the inputted sentence.";
+                "Your program does not print the correct output when the string contains a space.";
         runWithInput(sentence, new Clause[]{
                 new StringLiteral("true")
         });
@@ -55,7 +55,7 @@ public class MainTest extends BaseTest {
     @MethodSource("stringWithNoSpace")
     public void correctlyDetectNoSpace(String sentence) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage =
-                "Your program does not correctly print false when there is a space in the inputted sentence.";
+                "Your program does not print the correct output when the string does not contains a space.";
         runWithInput(sentence, new Clause[]{
                 new StringLiteral("false"),
         });
