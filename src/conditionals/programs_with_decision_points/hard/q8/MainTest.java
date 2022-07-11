@@ -21,7 +21,6 @@ public class MainTest extends BaseTest {
     return new Clause[] {
         new StringLiteral("How many points did you score\\?"),
         new NewLine(),
-        new PlaceHolder(),
         new PlaceHolder()
     };
   }
@@ -58,8 +57,7 @@ public class MainTest extends BaseTest {
   public void printsCorrectMessageWithValidInput(int score, String prize) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct prize for the given score.";
     runWithInput(score + " ", new Clause[] {
-        new StringLiteral(prize),
-        new NewLine(),
+        new StringLiteral(prize)
     });
   }
 
@@ -68,8 +66,7 @@ public class MainTest extends BaseTest {
   public void printsErrorMessageWithInvalidInput(int score) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print an error message when given invalid score.";
     runWithInput(score + " ", new Clause[] {
-        new StringLiteral("Invalid Input!"),
-        new NewLine(),
+        new StringLiteral("Invalid Input!")
     });
   }
 }
