@@ -10,7 +10,7 @@ public class MainTest  extends BaseRandomTest {
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("Nice! You scored "),
-                new RandomInteger(1, 21, "maxScore"),
+                new RandomInteger(1, 21, "maxScore"), //produce error becuz we are printing the max. Not all the bins are filled, so there's error.
                 new StringLiteral(" points this game!")
         };
     }
