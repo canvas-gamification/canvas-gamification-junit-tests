@@ -19,10 +19,9 @@ public class MainTest extends BaseTest {
     TestOption.isInputTest = true;
     TestOption.defaultInput = "1 1";
     return new Clause[] {
-        new StringLiteral("Is it sunny outside\\? \\( Enter 1 for yes and 0 for no \\)"),
+        new StringLiteral("How many points did you score\\?"),
         new NewLine(),
-        new StringLiteral("Is it past noon\\? \\( Enter 1 for yes and 0 for no \\)"),
-        new NewLine(),
+        new PlaceHolder(),
         new PlaceHolder()
     };
   }
@@ -32,35 +31,45 @@ public class MainTest extends BaseTest {
   }
 
   public static Stream<Arguments> inputProviderValid() {
-    return Stream.of(Arguments.of(0, 0, "Stay Inside!"), Arguments.of(1, 0, "Wear your normal clothes!"),
-        Arguments.of(0, 1, "Wear a jacket before leaving!"),
-        Arguments.of(1, 1, "Wear some sunscreen and a pair of sunglasses before leaving!"));
+    return Stream.of(
+        Arguments.of("10000", "You won a gold prize!"),
+        Arguments.of("5000", "You won a gold prize!"),
+        Arguments.of("4999", "You won a silver prize!"),
+        Arguments.of("4000", "You won a silver prize!"),
+        Arguments.of("2500", "You won a silver prize!"),
+        Arguments.of("2499", "You won a bronze prize!"),
+        Arguments.of("1999", "You won a bronze prize!"),
+        Arguments.of("1000", "You won a bronze prize!"),
+        Arguments.of("999", "Sorry, you didn't win any prize."),
+        Arguments.of("500", "Sorry, you didn't win any prize."),
+        Arguments.of("0", "Sorry, you didn't win any prize."));
   }
 
   public static Stream<Arguments> inputProviderInvalid() {
-    return Stream.of(Arguments.of(0, 2, "Invalid input!"), Arguments.of(2, 1, "Invalid input!"),
-        Arguments.of(-1, -1, "Invalid input!"), Arguments.of(-1, 0, "Invalid input!"),
-        Arguments.of(0, -1, "Invalid input!"),
-        Arguments.of(50, -47, "Invalid input!"));
+    return Stream.of(
+        Arguments.of("-1"),
+        Arguments.of("-100"),
+        Arguments.of("-1000"),
+        Arguments.of("-10000"));
   }
 
   @ParameterizedTest
   @MethodSource("inputProviderValid")
-  public void printsCorrectMessageWithValidInput(int sunny, int noon, String userMessage)
-      throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct user action when given valid input.";
-    runWithInput(sunny + " " + noon, new Clause[] {
-        new StringLiteral(userMessage)
+  public void printsCorrectMessageWithValidInput(int score, String prize) throws InvalidClauseException {
+    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct prize for the given score.";
+    runWithInput(score + " ", new Clause[] {
+        new StringLiteral(prize),
+        new NewLine(),
     });
   }
 
   @ParameterizedTest
   @MethodSource("inputProviderInvalid")
-  public void printsErrorMessageWithInvalidInput(int sunny, int noon, String userMessage)
-      throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not print an error message when given invalid input.";
-    runWithInput(sunny + " " + noon, new Clause[] {
-        new StringLiteral(userMessage)
+  public void printsErrorMessageWithInvalidInput(int score) throws InvalidClauseException {
+    TestOption.incorrectStructureErrorMessage = "Your program does not print an error message when given invalid score.";
+    runWithInput(score + " ", new Clause[] {
+        new StringLiteral("Invalid Input!"),
+        new NewLine(),
     });
   }
 }
