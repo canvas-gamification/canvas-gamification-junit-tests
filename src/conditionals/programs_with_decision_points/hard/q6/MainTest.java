@@ -22,7 +22,6 @@ public class MainTest extends BaseTest {
     return new Clause[] {
         new StringLiteral("Which year are you in\\? \\(1, 2 ,3, or 4\\) \\?"),
         new NewLine(),
-        new PlaceHolder(),
         new PlaceHolder()
     };
   }
@@ -53,8 +52,7 @@ public class MainTest extends BaseTest {
   public void printsCorrectUniversityStatusWithValidInput(int year, String universityStatus) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct university status for the given year.";
     runWithInput(year + "", new Clause[]{
-      new StringLiteral(universityStatus),
-      new NewLine()
+      new StringLiteral(universityStatus)
     });
   }
 
@@ -63,8 +61,7 @@ public class MainTest extends BaseTest {
   public void printsErrorMessageFor(int invalidYear) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the error message for the invalid year.";
     runWithInput(invalidYear + "", new Clause[]{
-      new StringLiteral("Invalid Input!"),
-      new NewLine()
+      new StringLiteral("Invalid Input!")
     });
   }
 }
