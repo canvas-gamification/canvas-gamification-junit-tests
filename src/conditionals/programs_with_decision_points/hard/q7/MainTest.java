@@ -22,7 +22,6 @@ public class MainTest extends BaseTest {
     return new Clause[] {
         new StringLiteral("How many people are in your area\\?"),
         new NewLine(),
-        new PlaceHolder(),
         new PlaceHolder()
     };
   }
@@ -55,8 +54,7 @@ public class MainTest extends BaseTest {
   public void printsCorrectRiskLevelWithValidInput(int population, String riskLevel) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct risk level with the given valid input.";
     runWithInput(population + "", new Clause[] {
-        new StringLiteral(riskLevel),
-        new NewLine(),
+        new StringLiteral(riskLevel)
     });
   }
 
@@ -65,8 +63,7 @@ public class MainTest extends BaseTest {
   public void printsErrorMessageWithInvalidInput(int population) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the error message for the invalid input.";
     runWithInput(population + "", new Clause[] {
-        new StringLiteral("Invalid Input!"),
-        new NewLine(),
+        new StringLiteral("Invalid Input!")
     });
   }
 }
