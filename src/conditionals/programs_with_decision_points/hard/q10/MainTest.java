@@ -2,7 +2,6 @@ package conditionals.programs_with_decision_points.hard.q10;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
-import global.tools.Logger;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
@@ -54,10 +53,8 @@ public class MainTest extends BaseTest {
 
   @ParameterizedTest
   @MethodSource("inputProviderValid")
-  public void printsCorrectMessageWithValidInput(double cost, int isGoodService, String totalCost)
-      throws InvalidClauseException {
+  public void printsCorrectMessageWithValidInput(double cost, int isGoodService, String totalCost) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct dinner cost for the given input.";
-
     runWithInput(cost + " " + isGoodService, new Clause[] {
         new StringLiteral(totalCost)
     });
@@ -65,8 +62,7 @@ public class MainTest extends BaseTest {
 
   @ParameterizedTest
   @MethodSource("inputProviderInvalid")
-  public void printsErrorMessageWithInvalidInput(double cost, int isGoodService)
-      throws InvalidClauseException {
+  public void printsErrorMessageWithInvalidInput(double cost, int isGoodService) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print an error message when given invalid input.";
     runWithInput(cost + " " + isGoodService, new Clause[] {
         new StringLiteral("Unknown inputs")
