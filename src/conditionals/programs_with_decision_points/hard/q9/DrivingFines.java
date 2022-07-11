@@ -13,6 +13,7 @@ package conditionals.programs_with_decision_points.hard.q9;
  *    10
  *    Were you in a school zone? (Enter 1 for True, and 0 for False)
  *    1
+ *    Your fine is $100!
  * 
  * Distractors:
  *    boolean speed = input.nextInt();
@@ -33,7 +34,7 @@ public class DrivingFines {
     int speed = input.nextInt();
     System.out.println("Were you in a school zone? (Enter 1 for True, and 0 for False)");
     int temp = input.nextInt();
-    if (temp != 1 || temp != 0) {
+    if (temp != 1 && temp != 0) {
       System.out.println("Unknown inputs");
     } else if (speed > 50) {
       if (temp == 1)

@@ -25,7 +25,6 @@ public class MainTest extends BaseTest {
         new StringLiteral("Were you in a school zone\\? \\(Enter 1 for True, and 0 for False\\)"),
         new NewLine(),
         new PlaceHolder(),
-        new PlaceHolder(),
     };
   }
 
@@ -76,7 +75,6 @@ public class MainTest extends BaseTest {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct fee for the given speed.";
     runWithInput(speed + " " + isSchoolZone, new Clause[] {
         new StringLiteral(fee),
-        new NewLine(),
     });
   }
 
@@ -86,7 +84,6 @@ public class MainTest extends BaseTest {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct fee for the given speed.";
     runWithInput(speed + " " + isSchoolZone, new Clause[] {
         new StringLiteral("Unknown inputs"),
-        new NewLine(),
     });
   }
 }
