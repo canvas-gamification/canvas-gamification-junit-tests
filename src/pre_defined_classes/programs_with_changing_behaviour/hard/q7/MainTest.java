@@ -4,7 +4,6 @@ import global.BaseRandomTest;
 import global.variables.Clause;
 import global.variables.clauses.RandomInteger;
 import global.variables.clauses.StringLiteral;
-import pre_defined_classes.programs_with_changing_behaviour.hard.q5.ShuffleTime;
 
 public class MainTest extends BaseRandomTest {
     // Parsons with Distractors
