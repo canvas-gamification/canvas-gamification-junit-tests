@@ -29,13 +29,13 @@ public class MainTest extends BaseTest {
 
     public void runMain() {CounterChar.main(new String[0]);}
 
-    static Stream<Arguments> inputProvider(){
+    static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of("    ", 0), Arguments.of("hello world", 10), Arguments.of("You Know ThAt MOST OTHER character counters Count spaceS", 48), Arguments.of("10",2));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void countsCorrectly(String in, int num){
+    void countsCorrectly(String in, int num) {
         runWithInput(in);
         assertEquals(Integer.parseInt(getItemByName("number")), num, "Your program is not correctly counting the number of characters.");
     }
