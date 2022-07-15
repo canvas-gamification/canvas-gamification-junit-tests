@@ -13,8 +13,6 @@ package loops.programs_with_repetition.medium.q5;
  *    * * *
  *    * *
  *    *
-*
-
  */
 
 public class ThatWay {
