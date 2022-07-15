@@ -8,24 +8,26 @@ import global.variables.clauses.StringLiteral;
 public class MainTest extends BaseTest {
   // Java
   public Clause[] testSentence() {
-    return trianglePatternClause(5);
+    return hourGlassPatternClause(5);
   }
 
   public void runMain() {
-    ThatWay.main(new String[0]);
+    OurGlass.main(new String[0]);
   }
 
-  Clause[] trianglePatternClause(int n) {
+  Clause[] hourGlassPatternClause(int n) {
     Clause[] c = new Clause[n * 4 - 2];
     int index = 0;
-    for (int i = 1; i <= n; ++i) {
+    for (int i = n; i >= 1; --i) {
       StringBuilder sb = new StringBuilder();
+      sb.append(" ".repeat(n - i));
       sb.append("\\* ".repeat(i));
       c[index++] = new StringLiteral(sb.toString());
       c[index++] = new NewLine();
     }
-    for (int i = n - 1; i >= 1; --i) {
+    for (int i = 2; i <= n; ++i) {
       StringBuilder sb = new StringBuilder();
+      sb.append(" ".repeat(n - i));
       sb.append("\\* ".repeat(i));
       c[index++] = new StringLiteral(sb.toString());
       c[index++] = new NewLine();
