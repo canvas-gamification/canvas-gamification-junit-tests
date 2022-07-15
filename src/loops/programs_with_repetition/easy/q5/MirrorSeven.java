@@ -1,5 +1,15 @@
 package loops.programs_with_repetition.easy.q5;
 
+/*
+ * Write a program to keep asking the user to enter a number until they enter a palindrome number that is also
+ * divisible by 7 (i.e. it can be read the same forwards and backwards)
+ * 
+ * Sample output:
+ *    Enter an integer: 
+ *    777
+ *    Entered a palindrome that is divisible by 7. Ending Program.
+ */
+
 import java.util.Scanner;
 
 public class MirrorSeven {
