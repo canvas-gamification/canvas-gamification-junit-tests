@@ -23,7 +23,6 @@ public class MainTest extends BaseTest {
         new StringLiteral("Which place did you finish\\? \\(Ex. 1, 2, 3, etc\\)\\:"),
         new NewLine(),
         new PlaceHolder(),
-        new PlaceHolder(),
     };
   }
 
@@ -53,8 +52,7 @@ public class MainTest extends BaseTest {
   public void printsCorrectPrize(int place, String prize) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct prize for the given place.";
     runWithInput(place + "", new Clause[] {
-        new StringLiteral(prize),
-        new NewLine(),
+        new StringLiteral(prize)
     });
   }
 
@@ -63,8 +61,7 @@ public class MainTest extends BaseTest {
   public void printsErrorMessageForInvalidPlace(int place) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for the invalid place.";
     runWithInput(place + "", new Clause[] {
-        new StringLiteral("Invalid Input!"),
-        new NewLine(),
+        new StringLiteral("Invalid Input!")
     });
   }
 }
