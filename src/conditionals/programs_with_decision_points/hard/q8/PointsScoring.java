@@ -4,8 +4,8 @@ package conditionals.programs_with_decision_points.hard.q8;
  * Write a Java Program that asks a player for their score, and prints out the prize that a player wins in a game
  * depending on their score. If the player scores 5000 points or above, they win a gold prize. If the player scores
  * between 2500 - 4999 points, they win a silver prize. If the player scores between 1000 - 2499 points, they win a
- * bronze prize. If they score below 1000 points, they don't win any prize. Make sure to print out an error message if 
- * the player enters an invalid score.
+ * bronze prize. If they score below 1000 points, they don't win any prize. Make sure to check if the score is greater
+ * than or equal to 0, and print out an error message if it is not.
  * 
  * Sample output:
  *    How many points did you score?

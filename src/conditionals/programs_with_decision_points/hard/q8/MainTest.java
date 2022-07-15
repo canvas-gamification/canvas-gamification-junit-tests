@@ -17,7 +17,7 @@ public class MainTest extends BaseTest {
   // Parsons with distractors
   public Clause[] testSentence() {
     TestOption.isInputTest = true;
-    TestOption.defaultInput = "1 1";
+    TestOption.defaultInput = "500";
     return new Clause[] {
         new StringLiteral("How many points did you score\\?"),
         new NewLine(),
