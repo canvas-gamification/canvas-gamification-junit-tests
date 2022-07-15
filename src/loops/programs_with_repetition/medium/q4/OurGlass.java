@@ -13,8 +13,6 @@ package loops.programs_with_repetition.medium.q4;
  *      * * *
  *     * * * *
  *    * * * * *
-*
-
  */
 
 public class OurGlass {
