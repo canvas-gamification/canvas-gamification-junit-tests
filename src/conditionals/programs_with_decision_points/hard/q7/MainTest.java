@@ -33,13 +33,13 @@ public class MainTest extends BaseTest {
   static Stream<Arguments> inputProviderValid() {
     return Stream.of(
         Arguments.of(1, "Low Risk"),
-        Arguments.of(100, "Low Risk"),
+        Arguments.of(489, "Low Risk"),
         Arguments.of(999, "Low Risk"),
         Arguments.of(1000, "Moderate Risk"),
-        Arguments.of(5000, "Moderate Risk"),
+        Arguments.of(5678, "Moderate Risk"),
         Arguments.of(9999, "Moderate Risk"),
         Arguments.of(10000, "High Risk"),
-        Arguments.of(20000, "High Risk"),
+        Arguments.of(234908, "High Risk"),
         Arguments.of(1000000, "High Risk"));
   }
 
