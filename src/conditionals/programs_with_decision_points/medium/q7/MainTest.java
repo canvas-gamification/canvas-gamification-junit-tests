@@ -20,9 +20,8 @@ public class MainTest extends BaseTest {
     TestOption.isInputTest = true;
     TestOption.defaultInput = "12345";
     return new Clause[] {
-        new StringLiteral("Enter a Javatopia ZIP code:"),
+        new StringLiteral("Enter a Javatopia ZIP code\\:"),
         new NewLine(),
-        new PlaceHolder(),
         new PlaceHolder(),
     };
   }
@@ -68,7 +67,6 @@ public class MainTest extends BaseTest {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct area in Javatopia for the given ZIP code.";
     runWithInput(zipCode + "", new Clause[] {
         new StringLiteral(area),
-        new NewLine(),
     });
   }
 
@@ -78,7 +76,6 @@ public class MainTest extends BaseTest {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct error message for the ZIP codes outside of Javatopia.";
     runWithInput(zipCode + "", new Clause[] {
         new StringLiteral("This ZIP code does not belong to Javatopia"),
-        new NewLine(),
     });
   }
 
@@ -88,7 +85,6 @@ public class MainTest extends BaseTest {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct error message for invalid ZIP codes.";
     runWithInput(zipCode + "", new Clause[] {
         new StringLiteral("Invalid Input!"),
-        new NewLine(),
     });
   }
 }
