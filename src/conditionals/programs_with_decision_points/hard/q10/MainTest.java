@@ -21,7 +21,7 @@ public class MainTest extends BaseTest {
     return new Clause[] {
         new StringLiteral("How much was the food\\?"),
         new NewLine(),
-        new StringLiteral("Was the service great\\? \\(Enter 1 for Yes, and 0 for No\\)"),
+        new StringLiteral("Was the service good\\? \\(Enter 1 for Yes, and 0 for No\\)"),
         new NewLine(),
         new PlaceHolder()
     };
