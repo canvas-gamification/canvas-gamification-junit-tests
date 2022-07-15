@@ -22,8 +22,7 @@ public class MainTest extends BaseTest {
     return new Clause[] {
         new StringLiteral("Enter your birth year :"),
         new NewLine(),
-        new PlaceHolder(),
-        new PlaceHolder(),
+        new PlaceHolder()
     };
   }
 
@@ -63,10 +62,9 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputProviderValidInput")
   public void printsCorrectGeneration(int year, String generation) throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not correctly print a correct generation for the given year.";
+    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct generation for the given year.";
     runWithInput(year + "", new Clause[] {
-        new StringLiteral(generation),
-        new NewLine(),
+        new StringLiteral(generation)
     });
   }
 
@@ -75,8 +73,7 @@ public class MainTest extends BaseTest {
   public void printsErrorMessageWithInvalidInput(int year) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print an error message when given an invalid input.";
     runWithInput(year + "", new Clause[] {
-        new StringLiteral("Invalid Input!"),
-        new NewLine(),
+        new StringLiteral("Invalid Input!")
     });
   }
 

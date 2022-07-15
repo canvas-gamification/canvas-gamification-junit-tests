@@ -4,7 +4,8 @@ package conditionals.programs_with_decision_points.medium.q9;
  * Write a program that will ask the user their birth year, verify that it is above 1900, and display the generation
  * they belong to based on the following information: "Baby Boomers" are born between 1944 and 1964, "Gen X" is born
  * between 1965 and 1979, "Millennials" are born between 1980 and 1994, and "Gen Z" is born between 1995 and 2015.
- * Anyone else is "Uncategorized." 
+ * Anyone else born before 1944 and after 2016 should be labelled as "Uncategorized". Otherwise, the program should
+ * display "Invalid Input!".
  * 
  * Sample output:
  *   Enter your birth year : 1944
