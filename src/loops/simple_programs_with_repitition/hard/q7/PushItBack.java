@@ -1,9 +1,14 @@
 package loops.simple_programs_with_repitition.hard.q7;
 
 /*
-Write a java program that takes a string from the user and moves all of the numbers to the end of the string.
+Write a java program called PushItBack that takes a string from the user and moves all of the numbers to the end of the string.
 Eg: "12Hello90Bye5" becomes "HelloBye12905".
 ( Hint: Use two strings and join them together after splitting the string )
+
+Sample Output:
+	Enter a sentence:
+	12Hellow90Bye5
+	Result String: HelloBye12905
  */
 
 import java.util.Scanner;
