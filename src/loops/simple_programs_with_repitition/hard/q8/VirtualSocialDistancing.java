@@ -19,13 +19,14 @@ public class VirtualSocialDistancing
         System.out.println( "Enter a sentence: " );
         String sentence = input.next();
         String result = "" ;
-        for(int i = 0; i < sentence.length(); i++)
+        result += sentence.charAt(0);
+        for(int i = 1; i < sentence.length(); i++)
         {
             if( Character.isUpperCase( sentence.charAt(i) ) )
                 result += " ";
             result += sentence.charAt( i );
         }
-        System.out.println( "Socially Distanced String:" + result );
+        System.out.println( "Socially Distanced String: " + result );
     }
 }
 
