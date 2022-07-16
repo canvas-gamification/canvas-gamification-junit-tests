@@ -2,8 +2,13 @@ package loops.simple_programs_with_repitition.hard.q8;
 
 /*
 Write a program that will accept a string from the user that doesn't have spaces and then add spaces between the words
-and store it in a separate string. Assume that the first letter of every word is a capital letter, and there are no
-words that are only capital letters other than I, and A. Eg: "TodayIsANewDay" becomes "Today Is A New Day"
+and store it in a separate string. Assume that the first letter of every word is a capital letter.
+Eg: "TodayIsANewDay" becomes "Today Is A New Day"
+
+	Sample Output:
+	Enter a sentence:
+	TodayIsANewDay
+	Socially Distanced String: Today Is A New Day
 */
 import java.util.Scanner;
 public class VirtualSocialDistancing
@@ -20,7 +25,7 @@ public class VirtualSocialDistancing
                 result += " ";
             result += sentence.charAt( i );
         }
-        System.out.println( "Socially Distanced String: " + result );
+        System.out.println( "Socially Distanced String:" + result );
     }
 }
 
