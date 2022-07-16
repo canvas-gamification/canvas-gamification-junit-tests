@@ -34,8 +34,7 @@ public class MainTest extends BaseRandomTest {
     }
 
     public static Stream<String> inputProvider() {
-        return Stream.of("Jae", "James", "Robert", "Jennifer", "Mary", " "
-        );
+        return Stream.of("Jae", "James", "Robert", "Jennifer", "Mary", " ");
     }
 
     @ParameterizedTest
