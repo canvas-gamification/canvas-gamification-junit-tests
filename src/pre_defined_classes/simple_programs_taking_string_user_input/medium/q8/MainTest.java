@@ -29,11 +29,12 @@ public class MainTest extends BaseRandomTest {
         };
     }
 
-    public void runMain(){ UserName.main(new String[0]); }
+    public void runMain() {
+        UserName.main(new String[0]);
+    }
 
     public static Stream<String> inputProvider() {
-        return Stream.of("Jae", "James", "Robert", "Jennifer", "Mary"
-//                , System.lineSeparator() //this is not working too
+        return Stream.of("Jae", "James", "Robert", "Jennifer", "Mary", " "
         );
     }
 
