@@ -16,6 +16,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Random;
 import java.util.stream.Stream;
 
+import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
@@ -39,27 +40,30 @@ public class MainTest extends BaseTest {
         FindThatNumber.main(new String[0]);
     }
 
-    private String randomIntegerInput(){
+    private String randomIntegerInput() {
         Random r = new Random();
         return (r.nextInt(10) + " ").repeat(inputLength);
     }
 
-    static Stream<Arguments> methodInputProvider(){
+    static Stream<Arguments> methodInputProvider() {
         return Stream.of(Arguments.of(new int[]{1, 4, 100, 11, -45, 7, -3, 0, 9, 4, -12, 0, 4}, 4, 12));
     }
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void correctFindTheLastMethod(int[] arr, int search, int index) throws Throwable {
-        int outputIndex = (int) MethodUtil.invokeIfMethodExists(FindThatNumber.class, "findTheLast",
+        Object outputIndex = MethodUtil.invokeIfMethodExists(
+                FindThatNumber.class,
+                "findTheLast",
                 new Object[]{arr, search}, int[].class, int.class);
-        assertEquals(index, outputIndex, "Your method does not find the last occurrence ofa number in an array.");
+        _assertEquals(index, outputIndex, "Your method does not find the last occurrence of a number in an array.");
+
         String methodConsoleOutput = MethodUtil.getMethodOutput();
         assertEquals("", methodConsoleOutput, "Your method should not have any printed output.");
     }
 
     @Test
-    void printsCorrectOutput(){
+    void printsCorrectOutput() {
         String input = randomIntegerInput();
         runWithInput();
     }
