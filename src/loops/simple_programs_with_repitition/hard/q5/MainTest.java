@@ -1,11 +1,17 @@
 package loops.simple_programs_with_repitition.hard.q5;
 
 import global.BaseTest;
+import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
     // Java
@@ -20,4 +26,17 @@ public class MainTest extends BaseTest {
     }
 
     public void runMain(){ NowThatsPerfect.main(new String[0]); }
+
+    static Stream<Arguments> inputProvider(){
+        return Stream.of(Arguments.of("6", "6 is a Perfect Number!"), Arguments.of("7", "7 is NOT a Perfect Number!"), Arguments.of("-3", "-3 is NOT a Perfect Number!"), Arguments.of("0", "0 is a Perfect Number!"), Arguments.of("33550336", "33550336 is a Perfect Number!"));
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    void discoversPerfectNumberCorrectly(String in, String place) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Either you have not correctly identified Perfect Numbers or your formatting is incorrect. Please refer to the sample provided.";
+        runWithInput(in, new Clause[]{
+                new StringLiteral(place)
+        });
+    }
 }
