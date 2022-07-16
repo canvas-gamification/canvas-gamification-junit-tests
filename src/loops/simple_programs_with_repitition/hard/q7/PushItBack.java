@@ -7,7 +7,7 @@ Eg: "12Hello90Bye5" becomes "HelloBye12905".
 
 Sample Output:
 	Enter a sentence:
-	12Hellow90Bye5
+	12Hello90Bye5
 	Result String: HelloBye12905
  */
 
