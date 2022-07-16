@@ -4,6 +4,11 @@ package loops.programs_with_repetition.hard.q4;
 Write a program that accepts a sentence from the user and prints the sentence after reversing every other word,
 starting from the first word, using nested loops. Assume that every word is separated by a single space " ",
 and there are no consecutive spaces.
+
+Sample Output:
+Enter a sentence:
+Which wrist watch is a Swiss wrist watch
+hcihW wrist hctaw is a Swiss tsirw watch
  */
 
 import java.util.Scanner;
