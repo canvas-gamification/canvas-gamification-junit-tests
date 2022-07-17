@@ -1,14 +1,11 @@
 package pre_defined_classes.simple_programs_taking_numeric_user_input.medium.q6;
 
 import global.BaseRandomTest;
-import global.BaseTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.*;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
