@@ -5,7 +5,7 @@ At the University of Fake Columbia, a student will not be allowed to write the f
 is less than 75%. Make a program that calculates the attendance percentage and notifies the user if they are failing
 the course. To do that the program prompts the user to enter the total number of classes held and the total number of
 classes attended, then prints out the percentage of classes the user attended.
-Assume all user inputs are valid ( total number of class must be > 0 ).
+Assume all user inputs valid (total number of classes must be greater than 0).
 
 Sample Output:
     How many classes were there?
