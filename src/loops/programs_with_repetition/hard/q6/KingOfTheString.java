@@ -2,7 +2,7 @@ package loops.programs_with_repetition.hard.q6;
 
 /*
 Write a program named KingOfTheString that will ask the user for a sentence and then display the most common character in the given sentence.
-You can ignore the case of the characters in the sentence.
+You can ignore the case of the characters in the sentence. When you print the most common character print it in lower case.
 
 Sample Output:
 Enter a sentence:
