@@ -26,7 +26,7 @@ public class ReversePlate {
         plateNum = plateNum % 100;
         int num2 = plateNum / 10;
         int num3 = plateNum % 10;
-        String reversePlate = "" + num3 * 100 + num2 * 10 + num1 ;
+        int reversePlate = num3 * 100 + num2 * 10 + num1 ;
         System.out.print( "The reverse number is: " + reversePlate );
     }
 
