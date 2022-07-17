@@ -12,7 +12,9 @@ public class MainTest extends BaseTest {
     public Clause[] testSentence(){
         TestOption.isInputTest = false;
         return new Clause[]{
-                new StringLiteral("Approximation of sin(3.14) using n = "),
+                new StringLiteral("Approximation of sin\\("),
+                new DoubleLiteral("x"),
+                new StringLiteral("\\) using n = "),
                 new IntegerLiteral("num"),
                 new StringLiteral(" is "),
                 new DoubleLiteral("approx")
