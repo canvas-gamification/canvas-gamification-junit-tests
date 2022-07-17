@@ -4,8 +4,9 @@ package conditionals.programs_with_decision_points.hard.q10;
  * Write a Java program that determines the cost of dining at a restaurant depending on the quality of service.
  * The program should prompt the user about the cost of the food and if the service is good. If the service was
  * good, then the user tips 20%. If the service was okay, then the user only tips 15%. The cost of dinner should
- * be round to the nearest integer. If the cost of food is less than 0, the program should print "Invalid Input!"
- * to the user.
+ * be round to the nearest integer. To decide if the service whether the service is good, the user should enter
+ * 1 for Yes, and 0 for No. If the cost of food is less than 0, the program should print "Invalid Input!" to the
+ * user.
  * 
  * Sample output:
  *    How much was the food?
@@ -33,7 +34,7 @@ public class DinnerCost {
       System.out.println("Was the service good? (Enter 1 for Yes, and 0 for No)");
       int temp = input.nextInt();
       if ((temp != 1 && temp != 0) || costOfFood < 0) {
-         System.out.println("Unknown inputs");
+         System.out.println("Invalid Input!");
       } else {
          if (temp == 1) {
             costOfFood = costOfFood * 1.2;

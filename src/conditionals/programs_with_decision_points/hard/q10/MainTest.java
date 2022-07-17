@@ -4,6 +4,7 @@ import global.BaseTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.Clause;
+import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
@@ -33,12 +34,12 @@ public class MainTest extends BaseTest {
 
   public static Stream<Arguments> inputProviderValid() {
     return Stream.of(
-        Arguments.of(100, 1, "For dinner, you will pay 120 dollars."),
-        Arguments.of(100, 0, "For dinner, you will pay 115 dollars."),
-        Arguments.of(420.420, 1, "For dinner, you will pay 505 dollars."),
-        Arguments.of(420.420, 0, "For dinner, you will pay 483 dollars."),
-        Arguments.of(0, 1, "For dinner, you will pay 0 dollars."),
-        Arguments.of(0, 0, "For dinner, you will pay 0 dollars."));
+        Arguments.of(100, 1, 120),
+        Arguments.of(100, 0, 115),
+        Arguments.of(420.420, 1, 505),
+        Arguments.of(420.420, 0, 483),
+        Arguments.of(0, 1, 0),
+        Arguments.of(0, 0, 0));
   }
 
   public static Stream<Arguments> inputProviderInvalid() {
@@ -53,11 +54,13 @@ public class MainTest extends BaseTest {
 
   @ParameterizedTest
   @MethodSource("inputProviderValid")
-  public void printsCorrectMessageWithValidInput(double cost, int isGoodService, String totalCost) throws InvalidClauseException {
+  public void printsCorrectMessageWithValidInput(double cost, int isGoodService, int totalCost) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct dinner cost for the given input.";
-    runWithInput(cost + " " + isGoodService, new Clause[] {
-        new StringLiteral(totalCost)
-    });
+    runWithInput(cost + " " + isGoodService, new Clause[][] {{
+        new StringLiteral("For dinner, you will pay "),
+        new IntegerLiteral(totalCost),
+        new StringLiteral(" dollars.")
+    }});
   }
 
   @ParameterizedTest
@@ -65,7 +68,7 @@ public class MainTest extends BaseTest {
   public void printsErrorMessageWithInvalidInput(double cost, int isGoodService) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print an error message when given invalid input.";
     runWithInput(cost + " " + isGoodService, new Clause[] {
-        new StringLiteral("Unknown inputs")
+        new StringLiteral("Invalid Input!")
     });
   }
 }
