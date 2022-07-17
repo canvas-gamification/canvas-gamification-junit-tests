@@ -24,7 +24,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctSmallestDiffMethod(int[] input, int difference) {
+    void correctSmallestDiffMethod(int[] input, int difference) throws Throwable{
         int output = (int) MethodUtil.invokeIfMethodExists(SmallestDifference.class, "smallestDiff", new Object[]{input},
                 int[].class);
         assertEquals(difference, output, "Your method does not correctly calculate the smallest difference between the items in an array.");
