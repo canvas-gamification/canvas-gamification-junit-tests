@@ -9,8 +9,6 @@ Sample Output:
 Enter a number:
 5
 5 is NOT a Perfect Number!
-
-Note: Add an extra space after the colon in the output prompting the user.
  */
 
 import java.util.Scanner;

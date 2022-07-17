@@ -7,6 +7,7 @@ import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -19,7 +20,8 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "6";
         return new Clause[]{
-                new StringLiteral("Enter a number: "),
+                new StringLiteral("Enter a number:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new PlaceHolder()
         };
