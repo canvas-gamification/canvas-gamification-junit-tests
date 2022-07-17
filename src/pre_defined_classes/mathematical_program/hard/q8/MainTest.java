@@ -21,7 +21,7 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    public void testMath(){
+    public void calculatesTermInSequenceCorrectly(){
         assertEquals(2.44140625E-4, Double.parseDouble(getItemByName("7thTerm")), 0.00001, "Your program does not correctly calculate the required term in the given sequence.");
     }
 
