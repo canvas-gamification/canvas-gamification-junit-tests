@@ -18,11 +18,11 @@ public class MainTest extends BaseTest {
   // Parsons with distractors
   public Clause[] testSentence() {
     TestOption.isInputTest = true;
-    TestOption.defaultInput = "10 True";
+    TestOption.defaultInput = "10 true";
     return new Clause[] {
         new StringLiteral("How fast were you above the speed limit\\?"),
         new NewLine(),
-        new StringLiteral("Were you in a school zone\\? \\(Enter True or False\\)"),
+        new StringLiteral("Were you in a school zone\\? \\(Enter true or false\\)"),
         new NewLine(),
         new PlaceHolder(),
     };
@@ -34,35 +34,35 @@ public class MainTest extends BaseTest {
 
   static Stream<Arguments> inputValidProvider() {
     return Stream.of(
-        Arguments.of(1, "False", "Your fine is \\$50!"),
-        Arguments.of(5, "False", "Your fine is \\$50!"),
-        Arguments.of(10, "False", "Your fine is \\$50!"),
-        Arguments.of(11, "False", "Your fine is \\$75!"),
-        Arguments.of(15, "False", "Your fine is \\$75!"),
-        Arguments.of(30, "False", "Your fine is \\$75!"),
-        Arguments.of(31, "False", "Your fine is \\$100!"),
-        Arguments.of(40, "False", "Your fine is \\$100!"),
-        Arguments.of(50, "False", "Your fine is \\$100!"),
-        Arguments.of(51, "False", "Your fine is \\$150!"),
-        Arguments.of(100, "False", "Your fine is \\$150!"),
-        Arguments.of(1, "True", "Your fine is \\$100!"),
-        Arguments.of(5, "True", "Your fine is \\$100!"),
-        Arguments.of(10, "True", "Your fine is \\$100!"),
-        Arguments.of(11, "True", "Your fine is \\$150!"),
-        Arguments.of(15, "True", "Your fine is \\$150!"),
-        Arguments.of(30, "True", "Your fine is \\$150!"),
-        Arguments.of(31, "True", "Your fine is \\$200!"),
-        Arguments.of(40, "True", "Your fine is \\$200!"),
-        Arguments.of(50, "True", "Your fine is \\$200!"),
-        Arguments.of(51, "True", "Your fine is \\$300!"),
-        Arguments.of(100, "True", "Your fine is \\$300!"));
+        Arguments.of(1, "false", "Your fine is \\$50!"),
+        Arguments.of(5, "false", "Your fine is \\$50!"),
+        Arguments.of(10, "false", "Your fine is \\$50!"),
+        Arguments.of(11, "false", "Your fine is \\$75!"),
+        Arguments.of(15, "false", "Your fine is \\$75!"),
+        Arguments.of(30, "false", "Your fine is \\$75!"),
+        Arguments.of(31, "false", "Your fine is \\$100!"),
+        Arguments.of(40, "false", "Your fine is \\$100!"),
+        Arguments.of(50, "false", "Your fine is \\$100!"),
+        Arguments.of(51, "false", "Your fine is \\$150!"),
+        Arguments.of(100, "false", "Your fine is \\$150!"),
+        Arguments.of(1, "true", "Your fine is \\$100!"),
+        Arguments.of(5, "true", "Your fine is \\$100!"),
+        Arguments.of(10, "true", "Your fine is \\$100!"),
+        Arguments.of(11, "true", "Your fine is \\$150!"),
+        Arguments.of(15, "true", "Your fine is \\$150!"),
+        Arguments.of(30, "true", "Your fine is \\$150!"),
+        Arguments.of(31, "true", "Your fine is \\$200!"),
+        Arguments.of(40, "true", "Your fine is \\$200!"),
+        Arguments.of(50, "true", "Your fine is \\$200!"),
+        Arguments.of(51, "true", "Your fine is \\$300!"),
+        Arguments.of(100, "true", "Your fine is \\$300!"));
   }
 
   static Stream<Arguments> inputInvalidProvider() {
     return Stream.of(
-        Arguments.of(0, "False"),
-        Arguments.of(-1, "False"),
-        Arguments.of(-100, "False"));
+        Arguments.of(0, "false"),
+        Arguments.of(-1, "false"),
+        Arguments.of(-100, "false"));
   }
 
   @ParameterizedTest
@@ -77,7 +77,7 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputInvalidProvider")
   public void printsErrorMessageForInvalidSpeed(int speed, String isSchoolZone) throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not print the error message for invalid input.";
+    TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for an invalid input.";
     runWithInput(speed + " " + isSchoolZone, new Clause[] {
         new StringLiteral("Invalid Input!"),
     });
