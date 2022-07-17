@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 
 public class MainTest extends BaseTest {
-    // Parson's with Distractors
+    // Parsons with distractors
     public Clause[] testSentence(){
         TestOption.isInputTest = true;
         TestOption.defaultInput = "12345" + System.lineSeparator() + "54321" + System.lineSeparator();
@@ -30,20 +30,26 @@ public class MainTest extends BaseTest {
     }
 
     public void runMain() {ZipcodeValidator.main(new String[0]);}
+//
+//    public static Stream<Arguments> inputProvider() {
+//        return Stream.of(Arguments.of("12345", "54321"), Arguments.of("123", "123")
+//                , Arguments.of("35004", "35004"), Arguments.of("85001", "85001")
+//        );
+//    }
 
     public static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of("12345", "54321"), Arguments.of("123", "123")
-                , Arguments.of("35004", "35004"), Arguments.of("85001", "85001")
+    return Stream.of(Arguments.of(12345, 54321), Arguments.of(123, 123)
+                , Arguments.of(35004, 35004), Arguments.of(85001, 85001)
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void validZipcodeValidator(String zipCode, String zipCodeSecond) throws InvalidClauseException {
+    public void validZipcodeValidator(int zipCode, int zipCodeSecond) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program did not correctly printed the zip codes.";
         runWithInput( zipCode + System.lineSeparator() + zipCodeSecond + System.lineSeparator(), new Clause[]{
-                new StringLiteral(zipCode),
-                new StringLiteral(zipCodeSecond)
+                new IntegerLiteral(zipCode),
+                new IntegerLiteral(zipCodeSecond)
                 });
     }
 }
