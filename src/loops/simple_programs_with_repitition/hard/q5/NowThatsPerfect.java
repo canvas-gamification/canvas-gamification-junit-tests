@@ -2,8 +2,8 @@ package loops.simple_programs_with_repitition.hard.q5;
 
 /*
 Write a program with the class name "NowThatsPerfect" to accept a number from the user and determine whether it is a "Perfect" number.
-(Hint: A perfect number is one whose factors sum up to equal the given number.
-Eg. 6 has factors of 1, 2, and 3, whose sum is 6, so it is a perfect number)
+A perfect number is one whose factors sum up to equal the given number.
+Eg. 6 has factors of 1, 2, and 3, whose sum is 6, so it is a perfect number.
 
 Sample Output:
 Enter a number:
