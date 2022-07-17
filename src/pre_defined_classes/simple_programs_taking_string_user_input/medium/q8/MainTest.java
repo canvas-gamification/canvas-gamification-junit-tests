@@ -23,9 +23,9 @@ public class MainTest extends BaseRandomTest {
                 new NewLine(),
                 new StringLiteral("That name is taken\\. Try using this instead\\: "),
                 new PlaceHolder(),
-                new RandomChar('A', 'Z', "ranChar1"),
-                new RandomChar('A', 'Z', "ranChar2"),
-                new RandomChar('A', 'Z', "ranChar3")
+                new RandomChar('A', 'Z', "ranChar1", true),
+                new RandomChar('A', 'Z', "ranChar2", true),
+                new RandomChar('A', 'Z', "ranChar3",true)
         };
     }
 
