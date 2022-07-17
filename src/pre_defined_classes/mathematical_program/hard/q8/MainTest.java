@@ -12,8 +12,7 @@ public class MainTest extends BaseTest {
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The 7th term in the geometric sequence is: "),
-                new DoubleLiteral("7thTerm"),
-                new StringLiteral("E-4")
+                new DoubleLiteral("7thTerm")
         };
     }
 
