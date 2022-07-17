@@ -25,7 +25,7 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain() { FactOrIal.main(new String[0]); }
+    public void runMain() { Factorial.main(new String[0]); }
 
     static Stream<Arguments> inputProvider(){
         return Stream.of(Arguments.of(0, 0, 3), Arguments.of(10, 3628800, 3), Arguments.of(5, 120, 3), Arguments.of(1, 1, 3), Arguments.of(12, 479001600, 3), Arguments.of(-6, -1, 1));

@@ -6,7 +6,7 @@ Do so by using a while loop. If the number is negative, print out "Invalid input
 ( Hint: n factorial or n! = n x (n - 1) x (n - 2) x … x 2 x 1 )
  */
 import java.util.Scanner;
-public class FactOrIal
+public class Factorial
 {
     public static void main( String[] args ) {
         Scanner input = new Scanner(System.in);
