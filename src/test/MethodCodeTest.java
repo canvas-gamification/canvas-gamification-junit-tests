@@ -46,24 +46,38 @@ public class MethodCodeTest extends BaseTest {
     }
 
     @Test
-    void testOutput(){
-        MethodUtil.invokeIfMethodExists(MethodCode.class, "printSomething", "Fail", null, null);
+    void testOutput() throws Throwable {
+        MethodUtil.invokeIfMethodExists(MethodCode.class, "printSomething");
         String s = MethodUtil.getMethodOutput();
-        assertEquals(s, "Print something", "Failed at assert");
+        assertEquals(s, "Print something" + System.lineSeparator(), "Failed at assert");
     }
 
     @Test
-    void testWithInput(){
+    void testWithInput() throws Throwable {
         provideInput("print this");
-        MethodUtil.invokeIfMethodExists(MethodCode.class, "printThis", "Fail", null, null);
+        TestOption.invalidMethodMessage = "Fail";
+        MethodUtil.invokeIfMethodExists(MethodCode.class, "printThis");
         String s = MethodUtil.getMethodOutput();
-        assertEquals(s, "print this", "Failed at assert");
+        getOutput();
+        assertEquals("print this" + System.lineSeparator(), s, "Failed at assert");
     }
 
     @Test
-    void checkGetMethodOutput(){
-        double f = (double) MethodUtil.invokeIfMethodExists(MethodCode.class, "max", "Invoke failed", new Object[]{5, 9}, int.class, int.class);
+    void checkGetMethodOutput() throws Throwable {
+        TestOption.invalidMethodMessage = "Invoke failed";
+        double f = (double) MethodUtil.invokeIfMethodExists(MethodCode.class, "max", new Object[]{5, 9}, int.class, int.class);
         String s = MethodUtil.getMethodOutput();
         assertEquals(f, 9.0, "Assert failed");
+    }
+
+//    @Test
+//    void testIfTestOptionResets(){
+//        MethodUtil.invokeIfMethodExists(MethodCode.class, "ThisMethod");
+//    }
+
+    @Test
+    void arrayErrorMessageTesting() throws Throwable {
+        int output = (int) MethodUtil.invokeIfMethodExists(MethodCode.class, "sum", new Object[]{new int[]{1, 2, 3, 4, 5}}, int[].class);
+        assertEquals(15, output, "Failed at assert");
     }
 }
