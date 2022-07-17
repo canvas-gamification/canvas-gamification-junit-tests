@@ -34,7 +34,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void discoversPerfectNumberCorrectly(String in, String place) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Either you have not correctly identified Perfect Numbers or your formatting is incorrect. Please refer to the sample provided.";
+        TestOption.incorrectStructureErrorMessage = "Your program has not correctly identified Perfect Numbers.";
         runWithInput(in, new Clause[]{
                 new StringLiteral(place)
         });
