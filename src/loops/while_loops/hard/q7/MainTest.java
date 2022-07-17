@@ -8,7 +8,6 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -43,14 +42,6 @@ public class MainTest extends BaseTest {
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly reverse the input.";
         runWithInput(in, new Clause[]{
                 new StringLiteral(reverse)
-        });
-    }
-
-    @Test
-    public void readsWholeSentence() throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not reverse the whole sentence.";
-        runWithInput("ii ii", new Clause[]{
-                new StringLiteral("ii ii")
         });
     }
 }
