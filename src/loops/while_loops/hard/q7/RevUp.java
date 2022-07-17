@@ -5,7 +5,7 @@ Write a program that will ask the user for a sentence and prints the sentence in
 
 import java.util.Scanner;
 
-public class RevUp {
+public class ReverseSentence{
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter a sentence: ");
