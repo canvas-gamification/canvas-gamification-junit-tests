@@ -21,7 +21,6 @@ public class MainTest extends BaseTest {
         TestOption.defaultInput = "slide to the left, take it back now y'all, cha cha real smooth";
         return new Clause[]{
                 new StringLiteral("Enter a sentence:"),
-                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("Reversed Sentence: "),
                 new PlaceHolder()
