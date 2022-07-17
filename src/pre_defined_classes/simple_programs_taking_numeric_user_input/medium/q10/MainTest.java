@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    // Parson
+    // Parsons
     public Clause[] testSentence(){
         TestOption.isInputTest = true;
         TestOption.defaultInput = "510 800 -110.0 ";
