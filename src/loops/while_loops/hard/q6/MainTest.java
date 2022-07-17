@@ -40,8 +40,8 @@ public class MainTest extends BaseTest {
             place[0][1] = new StringLiteral("! = ");
             place[0][2] = new IntegerLiteral("factorial");
             runWithInput(in + System.lineSeparator(), place);
-            assertEquals(Integer.parseInt(getItemByName("number")), in, "Your program does not output the same number that was input");
-            assertEquals(Integer.parseInt(getItemByName("factorial")), factorial, "Your program does not correctly calculate the factorial");
+            assertEquals(Integer.parseInt(getItemByName("number")), in, "Your program does not output the input number in the final output.");
+            assertEquals(Integer.parseInt(getItemByName("factorial")), factorial, "Your program does not correctly calculate the factorial.");
         }
         else{
             TestOption.incorrectStructureErrorMessage = "Your program does not identify an invalid input.";
