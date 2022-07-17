@@ -20,7 +20,7 @@ public class MainTest extends BaseTest {
     TestOption.isInputTest = true;
     TestOption.defaultInput = "1";
     return new Clause[] {
-        new StringLiteral("Which year are you in\\? \\(1, 2 ,3, or 4\\) \\?"),
+        new StringLiteral("Which year are you in\\? \\(1, 2 , 3, or 4\\) \\?"),
         new NewLine(),
         new PlaceHolder()
     };
@@ -51,8 +51,8 @@ public class MainTest extends BaseTest {
   @MethodSource("inputProviderValid")
   public void printsCorrectUniversityStatusWithValidInput(int year, String universityStatus) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct university status for the given year.";
-    runWithInput(year + "", new Clause[]{
-      new StringLiteral(universityStatus)
+    runWithInput(year + "", new Clause[] {
+        new StringLiteral(universityStatus)
     });
   }
 
@@ -60,8 +60,8 @@ public class MainTest extends BaseTest {
   @MethodSource("inputProviderInvalid")
   public void printsErrorMessageFor(int invalidYear) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for invalid input.";
-    runWithInput(invalidYear + "", new Clause[]{
-      new StringLiteral("Invalid Input!")
+    runWithInput(invalidYear + "", new Clause[] {
+        new StringLiteral("Invalid Input!")
     });
   }
 }
