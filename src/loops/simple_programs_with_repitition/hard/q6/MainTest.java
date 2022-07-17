@@ -31,7 +31,7 @@ public class MainTest extends BaseTest {
     public void runMain(){QueryStr.main(new String[0]);}
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of(" hello darkness  my old friend ", "%20%hello%20%darkness%20%%20%my%20%old%20%friend%20%"), Arguments.of("I'mAtAPayphone", "I'mAtAPayphone"), Arguments.of("   ", "%20%%20%%20%"));
+        return Stream.of(Arguments.of(" hello darkness  my old friend ", "%20%hello%20%darkness%20%%20%my%20%old%20%friend%20%"), Arguments.of("I'mAtAPayphone", "I'mAtAPayphone"), Arguments.of("   ", "%20%%20%%20%"), Arguments.of(System.lineSeparator(), ""));
     }
 
     @ParameterizedTest
