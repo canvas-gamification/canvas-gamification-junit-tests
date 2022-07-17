@@ -6,6 +6,7 @@ import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,7 +21,8 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "There once was a ship that put to sea";
         return new Clause[]{
-                new StringLiteral("Enter a sentence: "),
+                new StringLiteral("Enter a sentence:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("Total number of Characters in the sentence: "),
                 new IntegerLiteral("number")
