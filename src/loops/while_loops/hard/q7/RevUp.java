@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class RevUp {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter a sentence");
+        System.out.println("Enter a sentence: ");
         String sentence = input.nextLine();
         String result = "";
         int i = sentence.length() - 1;
