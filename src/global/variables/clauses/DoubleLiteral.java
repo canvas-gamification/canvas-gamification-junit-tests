@@ -64,6 +64,9 @@ public class DoubleLiteral extends Clause {
     @Override
     public String getRegex() {
         // This matches any double value as long as it has 1 or more digits in the number part and the decimal part
-        return "(-?\\d+\\.\\d+)";
+        return "([-+]?[0-9]+\\.[0-9]+(?:[eE][-+]?[0-9]+)?)";
+        // Complex regex to match all doubles (modified slightly), but taken from:
+        //  https://stackoverflow.com/questions/3681242/java-how-to-parse-double-from-regex
+        //  regex101 for debugging: https://regex101.com/r/kXemIa/1
     }
 }
