@@ -15,10 +15,10 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    //Parsons
+    // Parsons
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "39";
+        TestOption.defaultInput = "There once was a ship that put to sea";
         return new Clause[]{
                 new StringLiteral("Enter a sentence"),
                 new NewLine(),
