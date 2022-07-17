@@ -15,10 +15,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
-    //Parsons
+    // Parsons
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "39";
+        TestOption.defaultInput = "slide to the left, take it back now y'all, cha cha real smooth";
         return new Clause[]{
                 new StringLiteral("Enter a sentence"),
                 new NewLine(),
