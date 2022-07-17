@@ -20,7 +20,7 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "There once was a ship that put to sea";
         return new Clause[]{
-                new StringLiteral("Enter a sentence"),
+                new StringLiteral("Enter a sentence: "),
                 new NewLine(),
                 new StringLiteral("Total number of Characters in the sentence: "),
                 new IntegerLiteral("number")
