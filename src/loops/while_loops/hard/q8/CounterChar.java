@@ -2,7 +2,7 @@ package loops.while_loops.hard.q8;
 
 /*
 Write a program that asks the user for a sentence and then counts the number of characters in the sentence using a while loop.
-(Hint: Space/' ' is not considered a character)
+For this program, Space/' ' is not considered a character.
  */
 
 import java.util.Scanner;
