@@ -2,8 +2,8 @@ package conditionals.programs_with_decision_points.hard.q7;
 
 /*
  * Write a program that asks the user to enter the number of people present in a certain area, and display the
- * approximate risk of infection based on the following information: Less than 1000 people is "Low Risk", Between
- * 1000 and 10000 people is "Moderate Risk", above 10000 people is "High Risk." Make sure to display an error
+ * approximate risk of disease transmission based on the following information: Less than 1000 people is "Low Risk",
+ * Between 1000 and 10000 people is "Moderate Risk", above 10000 people is "High Risk." Make sure to display an error
  * message if the user provides an invalid input.
  * 
  * Sample Output:
