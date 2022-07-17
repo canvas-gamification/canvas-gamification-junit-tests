@@ -3,6 +3,11 @@ package loops.programs_with_repetition.hard.q6;
 /*
 Write a program named KingOfTheString that will ask the user for a sentence and then display the most common character in the given sentence.
 You can ignore the case of the characters in the sentence.
+
+Sample Output:
+Enter a sentence:
+Hello Tallulah like the lovely weather?
+l 8
  */
 
 import java.util.Scanner;
@@ -13,7 +18,7 @@ public class KingOfTheString
         Scanner input = new Scanner( System.in );
         System.out.println( "Enter a sentence: " );
         String sent = input.nextLine();
-        sent.toLowerCase();
+        sent = sent.toLowerCase();
         char maxc = ' ';
         int maxn = 0;
         for(int i = 0; i < sent.length(); i++)
