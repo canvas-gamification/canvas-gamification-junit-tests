@@ -29,7 +29,7 @@ public class MainTest extends BaseTest {
     }
 
     public void runMain() {
-        RevUp.main(new String[0]);
+        ReverseSentence.main(new String[0]);
     }
 
     public static Stream<Arguments> inputProvider(){
