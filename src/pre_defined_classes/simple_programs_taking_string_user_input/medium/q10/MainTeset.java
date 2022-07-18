@@ -16,7 +16,7 @@ public class MainTeset extends BaseTest {
     // Parsons
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "123";
+        TestOption.defaultInput = "eye";
         return new Clause[]{
                 new StringLiteral("Enter your word\\:"),
                 new NewLine(),
@@ -29,7 +29,9 @@ public class MainTeset extends BaseTest {
 
     public static Stream<String> palindrome() {
 
-        return Stream.of("LOL", "121");
+        return Stream.of("LOL", "121", "mom"
+                ,"wow", "nun", "eye", "huh"
+        );
     }
 
     public static Stream<String> nonPalindrome() {

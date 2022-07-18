@@ -3,15 +3,15 @@ package pre_defined_classes.simple_programs_taking_string_user_input.medium.q10;
 /*
 A palindrome is a word that is the same when read either forwards or backwards, such as “eye”, “mom”, and “noon”.
 Make a program that takes a 3-letter word from the user and answers true or false to the question of whether the word
-is a palindrome or not. Assuming all users enter valid inputs, meaning that the input has to be exactly 3 letters.
+is a palindrome or not. Assume all inputs are exactly 3 letters and all in lower case.
 
 Sample output:
 Enter your word:
-123
+jam
 Is the given word a palindrome? false
 
 Enter your word:
-LOL
+lol
 Is the given word a palindrome? true
 
  */
