@@ -37,8 +37,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctlySeparatedString(String in, String seperated) throws InvalidClauseException{
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly separate a string between capital letters.";
+    void correctlySeparatesString(String in, String seperated) throws InvalidClauseException{
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly separate a string by capital letters.";
         runWithInput(in, new Clause[]{
                 new StringLiteral(seperated)
         });
@@ -46,7 +46,7 @@ public class MainTest extends BaseTest {
 
     @Test
     void grabbedCorrectInput() throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Make sure to only grab input without pre-existing spaces.";
+        TestOption.incorrectStructureErrorMessage = "Your program should only accept input without any spaces.";
         runWithInput("What Happens Here?", new Clause[]{
                 new StringLiteral("What")
         });

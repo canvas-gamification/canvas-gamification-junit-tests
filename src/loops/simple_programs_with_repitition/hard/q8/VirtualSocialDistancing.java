@@ -1,8 +1,8 @@
 package loops.simple_programs_with_repitition.hard.q8;
 
 /*
-Write a program that will accept a string from the user that doesn't have spaces and then add spaces between the words
-and store it in a separate string. Assume that the first letter of every word is a capital letter.
+Write a program that will accept a string from the user that doesn't have any spaces and then add spaces between the words
+and stores it in a separate string. Assume that the first letter of every word is a capital letter.
 Eg: "TodayIsANewDay" becomes "Today Is A New Day"
 
 	Sample Output:
