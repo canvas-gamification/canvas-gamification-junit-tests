@@ -29,16 +29,16 @@ public class MainTest extends BaseTest {
 
     public static Stream<String> inputProvider() {
 
-        return Stream.of("BBC news is reporting the weather.", "ABC."
+        return Stream.of("BBC news is reporting the weather.", "ABC.", "thIs iS how I wOUld Do it mAybE"
                 , System.lineSeparator()
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void printsCommentsInLowerCaseCorrectly(String comment) throws InvalidClauseException {
+    public void convertsStringToLowerCaseCorrectly(String comment) throws InvalidClauseException {
         String lowered = comment.toLowerCase();
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly prints the comment in lower case.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly convert the comment to lower case.";
         runWithInput(comment, new Clause[]{
                 new StringLiteral(lowered)
         });
