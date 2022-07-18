@@ -29,8 +29,8 @@ public class MainTest extends BaseTest {
 
     public void runMain(){TryAngleButBothWaysAKAPyramid.main(new String[0]);}
 
-    static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of(5), Arguments.of(1), Arguments.of(0), Arguments.of(10));
+    static Stream<Integer> inputProvider(){
+        return Stream.of(5, 1, 0, 10);
     }
 
     @ParameterizedTest
