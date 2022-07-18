@@ -22,7 +22,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctIsItDivisibleMethod(int[] input, boolean isDivisible) {
+    void correctIsItDivisibleMethod(int[] input, boolean isDivisible) throws Throwable{
         boolean output = (boolean) MethodUtil.invokeIfMethodExists(DivideThis.class, "isItDivisible", new Object[]{input},
                 int[].class);
         assertEquals(isDivisible, output, "Your method does not correctly calculate if all the elements of an array are divisible by 4.");
