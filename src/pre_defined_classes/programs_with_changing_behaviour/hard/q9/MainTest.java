@@ -10,7 +10,7 @@ public class MainTest extends BaseRandomTest {
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("Your new position is: "),
-                new RandomInteger(47, 58+1, "playerPosition")
+                new RandomInteger(48, 58+1, "playerPosition")
         };
     }
 
