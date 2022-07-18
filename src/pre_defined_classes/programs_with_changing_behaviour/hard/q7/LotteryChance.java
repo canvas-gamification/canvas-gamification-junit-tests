@@ -9,7 +9,7 @@ between 10000 and 999999 (inclusive of both values). Make a Java program that de
 at winning the lottery and displays that as a percentage.
 
 Sample output:
-Your chance of winning is: 0.0
+Your chance of winning is: 8.619073578876375E-4
 
 Distractors:
 int totalParticipants = 10000+ gen.nextInt( 999999 );
@@ -30,7 +30,7 @@ public class LotteryChance {
         int yourTickets = 4;
         Random gen = new Random();
         int totalParticipants = 10000+ gen.nextInt( 990000 );
-        double chanceOfWinning = yourTickets/totalParticipants;
+        double chanceOfWinning = (double) yourTickets/totalParticipants;
         chanceOfWinning = chanceOfWinning * 100;
         System.out.println( "Your chance of winning is: " + chanceOfWinning );
     }
