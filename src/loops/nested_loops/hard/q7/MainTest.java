@@ -8,6 +8,7 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -36,6 +37,13 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void constructPatternCorrectly(int n) throws InvalidClauseException {
         runWithInput(String.valueOf(n), clauseBuilder(n));
+    }
+
+    @Test
+    void identifiesInvalidInput() throws InvalidClauseException{
+        runWithInput("-49", new Clause[]{
+                new StringLiteral("Invalid input!")
+        });
     }
 
     Clause[] clauseBuilder(int n){
