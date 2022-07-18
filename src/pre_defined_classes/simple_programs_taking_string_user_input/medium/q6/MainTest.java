@@ -43,7 +43,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("stringWithSpace")
-    public void correctlyDetectSpace(String sentence) throws InvalidClauseException {
+    public void correctlyDetectsSpace(String sentence) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage =
                 "Your program does not print the correct output when the string contains a space.";
         runWithInput(sentence, new Clause[]{
@@ -53,7 +53,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("stringWithNoSpace")
-    public void correctlyDetectNoSpace(String sentence) throws InvalidClauseException {
+    public void correctlyDetectsNoSpace(String sentence) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage =
                 "Your program does not print the correct output when the string does not contains a space.";
         runWithInput(sentence, new Clause[]{
