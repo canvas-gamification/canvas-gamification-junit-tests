@@ -1,7 +1,7 @@
 package pre_defined_classes.simple_programs_taking_string_user_input.hard.q6;
 
 /*
-Emailing is the most popular asynchronous communication tool in the 20th century so far. Suppose all UBC emails must
+Emailing is the most popular asynchronous communication tool in the 21th century so far. Suppose all UBC emails must
 end with @ubc.ca. Make a program that takes in a user's email address and answers true or false depending on whether
 it is a UBC address.
 

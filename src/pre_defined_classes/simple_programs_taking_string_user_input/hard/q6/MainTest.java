@@ -39,9 +39,9 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("UBCEmail")
-    public void checksUBCEmail(String input) throws InvalidClauseException {
+    public void identifiesUBCEmailCorrectly(String input) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage =
-                "Your program does not print the output correctly when the input is an UBC email.";
+                "Your program does not print the correct output when the input is an UBC email.";
         runWithInput(input, new Clause[]{
                 new StringLiteral("true")
         });
@@ -49,7 +49,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("nonUBCEmail")
-    public void checksNonUBCEmail(String input) throws InvalidClauseException {
+    public void identifiesNonUBCEmailCorrectly(String input) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage =
                 "Your program does not print the output correctly when the input is not an UBC email.";
         runWithInput(input, new Clause[]{
