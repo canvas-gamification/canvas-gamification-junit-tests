@@ -49,7 +49,7 @@ public class MainTeset extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("nonPalindrome")
-    public void identifiesNonePalindromesCorrectly (String input) throws InvalidClauseException {
+    public void identifiesNonPalindromesCorrectly (String input) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify non-palindromic words.";
         runWithInput(input, new Clause[]{
                 new StringLiteral("false"),
