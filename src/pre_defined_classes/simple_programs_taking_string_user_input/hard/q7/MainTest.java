@@ -49,7 +49,7 @@ public class MainTest extends BaseTest {
     @MethodSource("nonCVStructure")
     public void identifiesNonCVStructures(String input) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage =
-                "Your program does not print the output correctly when the input is not a CV structure.";
+                "Your program does not print the output correctly when the input is not in CV structure.";
         runWithInput(input, new Clause[]{
                 new StringLiteral("false")
         });
