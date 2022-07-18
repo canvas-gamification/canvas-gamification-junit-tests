@@ -32,14 +32,14 @@ public class MainTest extends BaseTest {
     }
 
     public static Stream<String> nonCVStructure() {
-        return Stream.of("bb", "by","aa", "12");
+        return Stream.of("bb", "by","aa", "12", "ab");
     }
 
     @ParameterizedTest
     @MethodSource("CVStructure")
-    public void checksStringIsCVStructure(String input) throws InvalidClauseException {
+    public void identifiesCVStructure(String input) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage =
-                "Your program does not print the output correctly when the input is in CV structure.";
+                "Your program does not print the output correctly when the input is a CV structure.";
         runWithInput(input, new Clause[]{
                 new StringLiteral("true")
         });
@@ -47,9 +47,9 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("nonCVStructure")
-    public void checksStringIsNotCVStructure(String input) throws InvalidClauseException {
+    public void identifiesNonCVStructures(String input) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage =
-                "Your program does not print the output correctly when the input is not in CV structure.";
+                "Your program does not print the output correctly when the input is not a CV structure.";
         runWithInput(input, new Clause[]{
                 new StringLiteral("false")
         });
