@@ -17,9 +17,9 @@ public class MainTest extends BaseTest {
     // Parsons with distractors
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "The French Dip with mushrooms, a side of fries, and gravy please.";
+        TestOption.defaultInput = "France ";
         return new Clause[]{
-                new StringLiteral("Please enter favourite country:"),
+                new StringLiteral("Please enter a country: "),
                 new NewLine(),
                 new PlaceHolder()
         };
@@ -36,9 +36,9 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void printsFlippedCountryNameCorrectly(String originalName, String flippedName) throws InvalidClauseException {
+    public void changesCountryNameCorrectly (String originalName, String flippedName) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage =
-                "Your program does not correctly print the flipped country name.";
+                "Your program does not correctly flip the country name.";
         runWithInput(originalName, new Clause[]{
                 new StringLiteral(flippedName)
         });

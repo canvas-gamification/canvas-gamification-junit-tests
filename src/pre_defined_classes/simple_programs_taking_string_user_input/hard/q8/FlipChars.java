@@ -2,10 +2,10 @@ package pre_defined_classes.simple_programs_taking_string_user_input.hard.q8;
 
 /*
 Create a program that takes a country name and returns it with its first and last characters swapped.
-Assume all countries have at least 2 letter in their names.
+Assume all countries have at least two letters in their names.
 
 Sample output:
-Please enter favourite country:
+Please enter a country:
 Canada
 aanadC
 
@@ -27,7 +27,7 @@ public class FlipChars {
     public static void main( String[] args )
     {
         Scanner input = new Scanner( System.in );
-        System.out.println( "Please enter favourite country:" );
+        System.out.println( "Please enter a country: " );
         String word = input.nextLine();
         char first = word.charAt( 0 );
         char last = word.charAt( word.length()-1 );
