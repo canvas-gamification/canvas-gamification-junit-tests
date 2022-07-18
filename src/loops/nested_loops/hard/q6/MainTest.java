@@ -36,6 +36,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void printsPyramidCorrectly(int n) throws InvalidClauseException {
+
+        runWithInput(String.valueOf(n), clauseBuilder(n));
+    }
+
+    Clause[][] clauseBuilder(int n){
         Clause[][] place = new Clause[1][n*3];
         int count = 0;
         for(int x = 0; x <n; x++){
@@ -52,6 +57,6 @@ public class MainTest extends BaseTest {
             place[0][count++] = new StringLiteral(s.toString());
             place[0][count++] = new NewLine();
         }
-        runWithInput(String.valueOf(n), place);
+        return place;
     }
 }
