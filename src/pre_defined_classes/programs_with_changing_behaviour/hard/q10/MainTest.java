@@ -11,13 +11,13 @@ public class MainTest  extends BaseRandomTest {
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The first paper is: "),
-                new RandomInteger(0, 20, "firstPaper"),
+                new RandomInteger(0, 21, "firstPaper"),
                 new NewLine(),
                 new StringLiteral("The second paper is: "),
-                new RandomInteger(0, 20, "secondPaper"),
+                new RandomInteger(0, 21, "secondPaper"),
                 new NewLine(),
                 new StringLiteral("The third paper is: "),
-                new RandomInteger(0, 20, "thirdPaper"),
+                new RandomInteger(0, 21, "thirdPaper"),
                 new NewLine()
         };
     }
