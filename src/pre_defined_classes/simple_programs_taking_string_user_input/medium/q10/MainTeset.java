@@ -40,8 +40,8 @@ public class MainTeset extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("palindrome")
-    public void checksStringIsPalindrome(String input) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not checks if the input is a palindrome or not.";
+    public void identifiesPalindromesCorrectly (String input) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify palindromes.";
         runWithInput(input, new Clause[]{
                 new StringLiteral("true"),
         });
@@ -49,8 +49,8 @@ public class MainTeset extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("nonPalindrome")
-    public void checksStringIsNotPalindrome(String input) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not checks if the input is a palindrome or not.";
+    public void identifiesNonePalindromesCorrectly (String input) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify non-palindromic words.";
         runWithInput(input, new Clause[]{
                 new StringLiteral("false"),
         });
