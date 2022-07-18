@@ -29,7 +29,7 @@ public class MainTest extends BaseTest {
     public void runMain(){PrimeOrdial.main(new String[0]);}
 
     static Stream<int[]> inputProvider(){
-        return Stream.of(new int[]{4, 10, 8, 100, 20, 7}, new int[]{6, 8, 1087}, new int[]{851, 4, 23}, new int[]{-5, -8, -7, -110, 3}, new int[]{0, 3});
+        return Stream.of(new int[]{4, 10, 8, 100, 20, 7}, new int[]{6, 8, 1087}, new int[]{851, 4, 23}, new int[]{-5, -8, -7, -110, 3}, new int[]{0, 3}, new int[]{3});
     }
 
     @ParameterizedTest
