@@ -9,12 +9,8 @@ Write a program to ask the use for n ("Enter number of lines: "), and print the 
        543212345
          … 1 ...
 n …   ...  1 … …  n
-
+If a negative integer is input print "Invalid input!".
  */
-
-import global.exceptions.InvalidClauseException;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Scanner;
 public class TryAngleButBothWaysAKAPyramid
@@ -24,15 +20,18 @@ public class TryAngleButBothWaysAKAPyramid
         Scanner input = new Scanner( System.in );
         System.out.println("Enter number of lines: ");
         int n = input.nextInt();
-        for(int i = 1; i <= n; i++)
-        {
-            for(int j = n - i ; j >= 1; j--)
-                System.out.print( " " );
-            for(int k = i; k >= 1; k--)
-                System.out.print( k );
-            for(int l = 2; l <= i; l++)
-                System.out.print( l );
-            System.out.println();
+        if(n <0)
+            System.out.println("Invalid input!");
+        else {
+            for (int i = 1; i <= n; i++) {
+                for (int j = n - i; j >= 1; j--)
+                    System.out.print(" ");
+                for (int k = i; k >= 1; k--)
+                    System.out.print(k);
+                for (int l = 2; l <= i; l++)
+                    System.out.print(l);
+                System.out.println();
+            }
         }
     }
 }

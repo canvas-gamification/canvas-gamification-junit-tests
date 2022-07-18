@@ -8,8 +8,8 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -30,13 +30,12 @@ public class MainTest extends BaseTest {
     public void runMain(){TryAngleButBothWaysAKAPyramid.main(new String[0]);}
 
     static Stream<Integer> inputProvider(){
-        return Stream.of(5, 1, 0, 10);
+        return Stream.of(5, 1, 0, 10, 42);
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
     void printsPyramidCorrectly(int n) throws InvalidClauseException {
-
         runWithInput(String.valueOf(n), clauseBuilder(n));
     }
 
@@ -58,5 +57,13 @@ public class MainTest extends BaseTest {
             place[0][count++] = new NewLine();
         }
         return place;
+    }
+
+    @Test
+    void identifiesInvalidInput() throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify invalid input";
+        runWithInput("-7", new Clause[]{
+                new StringLiteral("Invalid input!")
+        });
     }
 }
