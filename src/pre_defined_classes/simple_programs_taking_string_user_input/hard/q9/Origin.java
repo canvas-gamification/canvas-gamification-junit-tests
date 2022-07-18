@@ -9,7 +9,7 @@ Sample output:
 Please enter your last name:
 Silvester
 Is the person from Portugal? true
- "Does the person's name contain his/her parent's name? false
+"Does the person's name contain his/her parent's name? false
 
 Distractors:
 Scanner input = new Scanner(System.out);

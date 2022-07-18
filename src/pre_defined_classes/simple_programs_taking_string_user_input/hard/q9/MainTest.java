@@ -22,6 +22,7 @@ public class MainTest extends BaseTest {
                 new NewLine(),
                 new StringLiteral("Is the person from Portugal\\? "),
                 new PlaceHolder(),
+                new NewLine(),
                 new StringLiteral("Does the person\\'s name contain his\\/her parent\\'s name\\? "),
                 new PlaceHolder()
         };
