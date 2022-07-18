@@ -36,7 +36,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void printsPasswordWeaknessCorrectly(String passward, String bln) throws InvalidClauseException {
+    public void identifiesPasswordWeaknessCorrectly(String passward, String bln) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage =
                 "Your program does not correctly print if the password entered is weak.";
         runWithInput(passward, new Clause[]{
