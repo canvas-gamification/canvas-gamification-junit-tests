@@ -32,7 +32,7 @@ public class MainTest extends BaseTest {
     public void runMain() {CounterChar.main(new String[0]);}
 
     static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of("    ", 0), Arguments.of("hello world", 10), Arguments.of("You Know ThAt MOST OTHER character counters Count spaceS", 48), Arguments.of("10",2));
+        return Stream.of(Arguments.of("    ", 0), Arguments.of("hello world", 10), Arguments.of("You Know ThAt MOST OTHER character counters Count spaceS", 48), Arguments.of("10",2), Arguments.of("!~!", 3));
     }
 
     @ParameterizedTest
