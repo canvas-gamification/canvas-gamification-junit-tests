@@ -3,7 +3,7 @@ package pre_defined_classes.simple_programs_taking_numeric_user_input.hard.q8;
 /*
 Sometimes it's just fun to be able to determine the square root of any given number.
 Make a program that asks the user for a numeric value, then determines its square root and prints it out.
-Assuming all user inputs are valid, which means that inputs can only be real numbers larger or equal to 0.
+Assume all user inputs are valid, which means that inputs can only be real numbers larger or equal to 0.
 
 Sample output:
     Enter a number:
