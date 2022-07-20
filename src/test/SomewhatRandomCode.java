@@ -4,17 +4,9 @@ import java.util.Random;
 
 public class SomewhatRandomCode {
     public static void main(String[] args) {
-        Random gen = new Random();
+        Random r = new Random();
         System.out.println("This is a test.");
-
-        int val1 = gen.nextInt(5);
-        int char2 = gen.nextInt(18) + 65;
-
-        System.out.println(val1);
-        System.out.println((char) char2);
-
-        double dbl1 = gen.nextDouble() * 10 + 5;
-
-        System.out.println(dbl1);
+       // System.out.println(r.nextDouble(1251689519848456516516654645.25));
+        System.out.println(r.nextDouble(12.0/10000000000000000054895562.36));
     }
 }
