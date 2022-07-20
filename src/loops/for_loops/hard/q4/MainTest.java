@@ -15,16 +15,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
-
+    // Parsons
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "10";
         return new Clause[]{
                 new StringLiteral("Enter a number: "),
-                new NewLine(),
-                new StringLiteral("Factors of "),
-                new IntegerLiteral(),
-                new StringLiteral(" are: "),
                 new NewLine(),
                 new PlaceHolder()
         };
@@ -34,17 +30,34 @@ public class MainTest extends BaseTest {
         FactorThis.main(new String[0]);
     }
 
-    static Stream<Arguments> inputProvider(){
+    static Stream<Arguments> validInputProvider() {
         return Stream.of(Arguments.of(10, "1 2 5 10 "), Arguments.of(67, "1 67 "), Arguments.of(32, "1 2 4 8 16 32 "),
                 Arguments.of(1375, "1 5 11 25 55 125 275 1375 "), Arguments.of(0, ""));
     }
 
+    static Stream<Integer> invalidInputProvider() {
+        return Stream.of(-1, -2, -357);
+    }
+
     @ParameterizedTest
-    @MethodSource("inputProvider")
+    @MethodSource("validInputProvider")
     void printsFactorsOfInputNumber(int input, String s) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not calculate and print the factors of a number correctly.";
-        runWithInput(input + " ", new Clause[]{
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly calculate and print the factors of a number.";
+        runWithInput(input + " ", new Clause[][]{{
+                new StringLiteral("Factors of "),
+                new IntegerLiteral(),
+                new StringLiteral(" are: "),
+                new NewLine(),
                 new StringLiteral(s)
+        }});
+    }
+
+    @ParameterizedTest
+    @MethodSource("invalidInputProvider")
+    void printsErrorMessageForInvalidInput(int input) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for invalid input.";
+        runWithInput(input + "", new Clause[]{
+                new StringLiteral("Invalid input!")
         });
     }
 }
