@@ -1,4 +1,5 @@
 package loops.for_loops.hard.q5;
+
 /*
 Write a program that will print the first 10 numbers in the fibonacci sequence. The nth term in the fibonacci
 series is obtained by adding the previous two terms together. Assume the sequence starts with 0 and 1, so the next term
@@ -13,8 +14,9 @@ public class FiboWhat {
         System.out.print("Fibonacci Sequence: 0, 1, ");
         for (int i = 0; i < 8; i++) {
             System.out.print((n1 + n2) + ", ");
+            int temp = n1;
             n1 = n2;
-            n2 = n1 + n2;
+            n2 = temp + n2;
         }
     }
 }
