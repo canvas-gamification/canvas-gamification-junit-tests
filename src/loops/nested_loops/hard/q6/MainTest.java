@@ -59,10 +59,13 @@ public class MainTest extends BaseTest {
         return place;
     }
 
-    @Test
-    void identifiesInvalidInput() throws InvalidClauseException {
+    static Stream<String> invalidInputProvider(){return Stream.of("-1", "-7", "-7634");}
+
+    @ParameterizedTest
+    @MethodSource("invalidInputProvider")
+    void identifiesInvalidInput(String n) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify invalid input";
-        runWithInput("-7", new Clause[]{
+        runWithInput(n, new Clause[]{
                 new StringLiteral("Invalid input!")
         });
     }

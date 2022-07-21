@@ -20,7 +20,7 @@ public class TryAngleButBothWaysAKAPyramid
         Scanner input = new Scanner( System.in );
         System.out.println("Enter number of lines: ");
         int n = input.nextInt();
-        if(n <0)
+        if(n < 0)
             System.out.println("Invalid input!");
         else {
             for (int i = 1; i <= n; i++) {
