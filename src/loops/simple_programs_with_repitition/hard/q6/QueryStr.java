@@ -8,7 +8,7 @@ Use a single-layered loop to write this program.
 
 	Sample Output:
 	Enter a sentence:
-	 Hello There
+	Hello There
 	The new query string is: %20%Hello%20%There%20%
  */
 

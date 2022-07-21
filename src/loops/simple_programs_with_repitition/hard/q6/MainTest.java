@@ -37,7 +37,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctlyReplacesSpaces(String in, String replaced) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly replace all spaces with %20%.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly generate the query string.";
         runWithInput(in, new Clause[]{
                 new StringLiteral(replaced)
         });
