@@ -32,7 +32,7 @@ public class MainTest extends BaseTest {
     public void runMain(){VirtualSocialDistancing.main(new String[0]);}
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of("ByTalos", "By Talos"), Arguments.of("SCREAM", "S C R E A M"), Arguments.of("nothing", "nothing"), Arguments.of("W3lpIDone", "W3lp I Done"));
+        return Stream.of(Arguments.of("ByTalos", "By Talos"), Arguments.of("SCREAM", "S C R E A M"), Arguments.of("nothing", "nothing"), Arguments.of("W3lpIDone", "W3lp I Done"), Arguments.of("Mu~ch!Excitement!ManyWow!", "Mu~ch! Excitement! Many Wow!"));
     }
 
     @ParameterizedTest
@@ -45,7 +45,7 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    void grabbedCorrectInput() throws InvalidClauseException {
+    void readsInputCorrectly() throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program should only accept input without any spaces.";
         runWithInput("What Happens Here?", new Clause[]{
                 new StringLiteral("What")
