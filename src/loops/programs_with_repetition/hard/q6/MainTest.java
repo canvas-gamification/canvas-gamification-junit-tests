@@ -34,7 +34,7 @@ public class MainTest extends BaseTest {
     public void runMain(){KingOfTheString.main(new String[0]);}
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of("Hello Tallulah like the lovely weather", "l", "8"), Arguments.of("IIii aaa", "i", "4"), Arguments.of(" ", " ", "1"), Arguments.of("!!!! dumdundundun !!!!!!", "!", "10"));
+        return Stream.of(Arguments.of("Hello Tallulah like the lovely weather", "l", "8"), Arguments.of("IIii aaa", "i", "4"), Arguments.of(" ", " ", "1"), Arguments.of("!!!! dumdundundun !!!!!!", "!", "10"), Arguments.of("Donot shakea lobster's hand ifyou meetit onthe street", "t", "7"));
     }
 
     @ParameterizedTest
