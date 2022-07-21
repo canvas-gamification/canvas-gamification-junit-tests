@@ -33,7 +33,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void printsPatternCorrectly(Integer n) throws InvalidClauseException {
+    void printsMultiplicationTableCorrectly(Integer n) throws InvalidClauseException {
         runWithInput(String.valueOf(n), clauseBuilder(n));
     }
 
