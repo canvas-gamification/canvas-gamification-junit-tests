@@ -8,7 +8,6 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -49,24 +48,39 @@ public class MainTest extends BaseTest {
         });
     }
 
-    Clause[] clauseBuilder(int n){
-        Clause[] place = new Clause[1];
+    Clause[][] clauseBuilder(int n){
+        Clause[][] place = new Clause[1][n*3];
         StringBuilder s = new StringBuilder();
+        int count = 0;
         if(n > 0) {
-            s.append("1".repeat(n));
-            s.append(System.lineSeparator());
-        }
-        for(int x = 0; x < n-2; x ++){
+            s.append("1 ".repeat(n-1));
             s.append("1");
-            s.append(" ".repeat(n-2));
-            s.append("1");
-            s.append(System.lineSeparator());
+            place[0][count++] = new StringLiteral(s.toString());
+            place[0][count++] = new Optional(new StringLiteral(" "));
+            place[0][count++] = new NewLine();
         }
+
+        if(n > 2) {
+            s = new StringBuilder();
+            s.append("1");
+            s.append(" ".repeat(n - 2));
+            s.append("1");
+
+            for (int x = 0; x < n - 2; x++) {
+                place[0][count++] = new StringLiteral(s.toString());
+                place[0][count++] = new Optional(new StringLiteral(" "));
+                place[0][count++] = new NewLine();
+            }
+        }
+
+        s= new StringBuilder();
         if(n > 1) {
-            s.append("1".repeat(n));
-            s.append(System.lineSeparator());
+            s.append("1 ".repeat(n-1));
+            s.append("1");
+            place[0][count++] = new StringLiteral(s.toString());
+            place[0][count] = new Optional(new StringLiteral(" "));
         }
-        place[0] = new StringLiteral(s.toString());
+
         return place;
     }
 }
