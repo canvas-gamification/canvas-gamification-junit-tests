@@ -38,13 +38,13 @@ public class MainTest extends BaseTest {
 
         return Stream.of(Arguments.of(1200, 6, 1560.0), Arguments.of(70000, 1, 73500.0),
                 Arguments.of(0, 2, 0.0), Arguments.of(120000, 0, 120000.0),
-                Arguments.of(73500.125, 2, 80850.1375), Arguments.of(1000, 2.5, 1125.0)
+                Arguments.of(73500.125, 2, 80850.1375)
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void calculateNewSalaryCorrectly(double salary, double years, double newSalary) throws InvalidClauseException {
+    void calculateNewSalaryCorrectly(double salary, int years, double newSalary) throws InvalidClauseException {
         runWithInput(salary + " " + years);
         assertEquals(Double.parseDouble(getItemByName("newSalary")), newSalary, 0.001,
                 "Your program does not correctly calculate the increased salary amount.");

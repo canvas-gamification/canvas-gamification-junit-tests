@@ -30,7 +30,7 @@ public class NewSalaryCalculator {
         System.out.println( "Enter your salary: " );
         double salary = input.nextDouble();
         System.out.println( "Enter years of service:" );
-        double years = input.nextDouble();
+        int years = input.nextInt();
         double bonus = 0.05 * years * salary;
         salary = salary + bonus;
         System.out.println( "Your increased salary is " + salary );
