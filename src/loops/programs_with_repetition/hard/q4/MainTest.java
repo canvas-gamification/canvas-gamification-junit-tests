@@ -39,7 +39,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void reversesEveryOtherCorrectly(String in, String reversed) throws InvalidClauseException {
+    void reversesEveryOtherWord(String in, String reversed) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly reverse every other word.";
         runWithInput(in, new Clause[]{
                 new StringLiteral(reversed)
