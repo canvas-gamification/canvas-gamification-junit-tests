@@ -3,7 +3,7 @@ package pre_defined_classes.simple_programs_taking_string_user_input.medium.q8;
 /*
 When you create a new account on a website, you get to choose your desired username. If it is not available, some
 suggestions will be made. Make a program that asks for your desired username and then suggests an alternative username
-by adding three random letters from A to Z (including both ends) to the original desired username. Assume all usernames
+by adding three random letters from A to Z (inclusive) to the original desired username. Assume all usernames
 must have at least 1 character.
 
 Sample solution:
