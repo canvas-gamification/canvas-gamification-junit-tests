@@ -37,7 +37,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void countsCorrectly(String in, int num) {
+    void countsCharactersInStringCorrectly(String in, int num) {
         runWithInput(in);
         assertEquals(Integer.parseInt(getItemByName("number")), num, "Your program is not correctly counting the number of characters.");
     }
