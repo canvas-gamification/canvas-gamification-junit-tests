@@ -43,7 +43,7 @@ public class MainTest extends BaseTest {
 
   @ParameterizedTest
   @MethodSource("inputProviderValid")
-  public void printsCorrectArrow(int width, Clause[][] arrow) throws InvalidClauseException {
+  public void printsArrowPatternCorrectly(int width, Clause[][] arrow) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct arrow with the given width.";
     runWithInput(width + "", arrow);
   }
