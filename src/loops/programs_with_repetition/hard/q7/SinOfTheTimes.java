@@ -1,21 +1,24 @@
 package loops.programs_with_repetition.hard.q7;
 
 /*
-Write a program called SinOfTheTimes that will calculate an approximation of sin(x) from n = 0 until n = 10, with x = 3.14,
+Write a program called SinOfTheTimes that will calculate an approximation of sin(x) from n = 0 until n = 5, with x = 3.14,
 using the following series ( n! symbolises factorials, where n! = n (n - 1)( n - 2 )...(1) ):
 x - ( x^3 / 3! ) + ( x^5 / 5! ) - ( x^7 / 7! ) + … + ((-1)^n x^(2n + 1))/( 2n + 1)!
 
 Sample Output:
-	Approximation of sin(3.14) using n = 10 is …
+	Approximation of sin(3.14) using n = 5 is …
  */
+import java.util.Scanner;
 
 public class SinOfTheTimes
 {
     public static void main( String[] args )
     {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter a number to approximate: ");
+        double x = input.nextDouble();
         double sum = 0;
-        double x = 3.14;
-        for(int n = 0; n <= 10; n++)
+        for(int n = 0; n <= 5; n++)
         {
             int fact = 1;
             int c = 1;
@@ -26,6 +29,6 @@ public class SinOfTheTimes
             }
             sum += Math.pow( -1, n ) * ( Math.pow( x, ( ( 2 * n ) + 1 ) ) / fact);
         }
-        System.out.println( "Approximation of sin(" + x + ") using n = 10 is " + sum );
+        System.out.println( "Approximation of sin(" + x + ") using n = 5 is " + sum );
     }
 }
