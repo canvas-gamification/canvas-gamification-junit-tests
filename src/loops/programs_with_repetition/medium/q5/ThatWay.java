@@ -2,7 +2,7 @@ package loops.programs_with_repetition.medium.q5;
 
 /*
  * Write a program to print an arrow using the char “*” with nested loops and a positive integer n representing the width of the arrow.
- * If the user enters a negative integer or 0, the program should print an error message.
+ *The program should prompt the user to enter the arrow's width; if the user enters a negative integer or 0, the program should print an error message.
  * 
  *    Sample output: 
  *    How wide is your arrow?
