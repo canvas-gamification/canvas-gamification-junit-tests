@@ -7,7 +7,6 @@ package conditionals.programs_with_decision_points.hard.q9;
  * is driving 31 - 50 km/h above the speed limit, their fine is $100. If a person is driving 51 km/h or more above the
  * speed limit, their fine is $150. If a person is in a school zone, then their fine is doubled. When asking if the
  * person was speeding in a school zone, enter whether "true" or "false". Make sure to print “Invalid Input!” if the entered speed is less than 1. 
- * input is invalid.
  * 
  * Sample Output:
  *    How fast were you above the speed limit?
