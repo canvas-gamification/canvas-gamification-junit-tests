@@ -43,7 +43,7 @@ public class MainTest extends BaseTest {
 
   @ParameterizedTest
   @MethodSource("inputProviderValid")
-  public void printsCorrectHourglass(int width, Clause[][] hourglass) throws InvalidClauseException {
+  public void printsHourglassPatternCorrectly(int width, Clause[][] hourglass) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print a correct hourglass with the given width.";
     runWithInput(width + "", hourglass);
   }
