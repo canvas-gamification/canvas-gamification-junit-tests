@@ -45,8 +45,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void validZipcodeValidator(int zipCode, int zipCodeSecond) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program did not correctly printed the zip codes.";
+    public void printsZipCodesCorrectly(int zipCode, int zipCodeSecond) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program did not correctly print the zip codes.";
         runWithInput( zipCode + System.lineSeparator() + zipCodeSecond + System.lineSeparator(), new Clause[]{
                 new IntegerLiteral(zipCode),
                 new IntegerLiteral(zipCodeSecond)
