@@ -2,9 +2,8 @@ package pre_defined_classes.simple_programs_taking_numeric_user_input.medium.q9;
 
 /*
 Traffic speed cameras are used to catch drivers who speed. One of the issues with this system is that it reads the plate
-numbers backwards. For simplicity, suppose that all the plates are 3 digits long.
-Make a program to reverse an inputted plate number.
-Assuming all users enter exactly 3 digits from 1 to 9 (Zeros are not allowed).
+numbers backwards. For simplicity, suppose that all the plates are 3 digits long. Make a program to reverse an inputted
+plate number. Assume all users enter exactly 3 digits from 1 to 9 (Zeros are not allowed).
 
 
 Sample output:
