@@ -54,7 +54,7 @@ public class MainTest extends BaseTest {
 
   @ParameterizedTest
   @MethodSource("inputProviderValid")
-  public void printsCorrectMessageWithValidInput(double cost, int isGoodService, int totalCost) throws InvalidClauseException {
+  public void calculatesCorrectDinnerCost(double cost, int isGoodService, int totalCost) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct dinner cost for the given input.";
     runWithInput(cost + " " + isGoodService, new Clause[][] {{
         new StringLiteral("For dinner, you will pay "),
