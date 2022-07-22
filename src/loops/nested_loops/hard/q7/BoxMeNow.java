@@ -6,10 +6,10 @@ input. If the input is less than zero print “Invalid input!”.
 Sample Output for n =  4:
 Enter number of lines:
 4
-1111
-1  1
-1  1
-1111
+1 1 1 1
+1     1
+1     1
+1 1 1 1
 
  */
 
