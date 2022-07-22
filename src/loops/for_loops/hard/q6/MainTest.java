@@ -48,7 +48,7 @@ public class MainTest extends BaseTest {
 
   @ParameterizedTest
   @MethodSource("inputProviderValid")
-  public void printsCorrectFactorial(int n, int factorial) throws InvalidClauseException {
+  public void calculatesFactorialCorrectly(int n, int factorial) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print out the correct factorial of the given input.";
     runWithInput(n + "", new Clause[][] { {
         new IntegerLiteral(n),
