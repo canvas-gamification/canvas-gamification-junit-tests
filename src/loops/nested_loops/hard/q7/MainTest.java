@@ -39,9 +39,12 @@ public class MainTest extends BaseTest {
         runWithInput(String.valueOf(n), clauseBuilder(n));
     }
 
-    @Test
-    void identifiesInvalidInput() throws InvalidClauseException{
-        runWithInput("-49", new Clause[]{
+    static Stream<Integer> invalidInputProvider(){return Stream.of(-1, -47, -300);}
+
+    @ParameterizedTest
+    @MethodSource("invalidInputProvider")
+    void identifiesInvalidInput(int in) throws InvalidClauseException{
+        runWithInput(String.valueOf(in), new Clause[]{
                 new StringLiteral("Invalid input!")
         });
     }
