@@ -73,7 +73,7 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputProviderOutsideTerritoryInput")
   public void printsErrorMessageForAreasOutsideTerriotry(int zipCode) throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not print an correct error message for the ZIP codes outside of Javatopia.";
+    TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for the ZIP codes outside of Javatopia.";
     runWithInput(zipCode + "", new Clause[] {
         new StringLiteral("This ZIP code does not belong to Javatopia"),
     });
