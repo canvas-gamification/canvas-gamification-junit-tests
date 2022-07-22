@@ -2,8 +2,8 @@ package pre_defined_classes.simple_programs_taking_numeric_user_input.hard.q10;
 /*
 A company called HappyWorkLife has decided to give everybody a raise with an increase of 5% for each year of
 their service. The raise is only given to those who have worked at least a year or more,
-and the raise is calculated annually. Make a program that asks the user for the salary and the number of years worked
-at the company, then display the increased salary amount. Assume the user enters non-negative double values.
+and the raise is calculated annually. Make a program that asks the user for the salary (as a double) and the number of
+years worked at the company (as an integer), then display the increased salary amount. Assume the user enters non-negative values.
 
 Sample output:
 Enter your salary:
