@@ -41,7 +41,7 @@ public class MainTest extends BaseTest {
     @MethodSource("UBCEmail")
     public void identifiesUBCEmailCorrectly(String input) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage =
-                "Your program does not print the correct output when the input is an UBC email.";
+                "Your program does not print the correct output when the input is a UBC email.";
         runWithInput(input, new Clause[]{
                 new StringLiteral("true")
         });
@@ -51,7 +51,7 @@ public class MainTest extends BaseTest {
     @MethodSource("nonUBCEmail")
     public void identifiesNonUBCEmailCorrectly(String input) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage =
-                "Your program does not print the output correctly when the input is not an UBC email.";
+                "Your program does not print the output correctly when the input is not a UBC email.";
         runWithInput(input, new Clause[]{
                 new StringLiteral("false")
         });
