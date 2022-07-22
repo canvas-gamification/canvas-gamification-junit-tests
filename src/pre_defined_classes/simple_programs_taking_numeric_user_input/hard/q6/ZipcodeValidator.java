@@ -5,7 +5,7 @@ import java.util.Scanner;
 /*
 An online e-commerce website uses zip codes to determine the rate of the shipment. Prior to doing so, it validates the
 zip code by asking the user to re-submit the same zip code and double confirm the zip-code. Make a program that asks
-the user to enter a zip code and confirm it, then display out both zip codes back to the user.
+the user to enter a zip code and confirms it, then displays both zip codes back to the user.
 Note that American zip codes consist of 5 digits. Assume the provider will not ship to zip codes that start with 0,
 so users should not enter zip codes that start with 0.
 
