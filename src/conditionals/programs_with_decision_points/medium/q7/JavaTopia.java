@@ -7,7 +7,7 @@ package conditionals.programs_with_decision_points.medium.q7;
  * ZIP codes that start with "12" belong to "String Avenue", ones that start with "14" belong to "Character County",
  * those that start with "22" belong to "Memory Front", and those that start with "24" belong to "RAM Ranch."
  * Anything else is outside the territory of Javatopia, the program should print "This ZIP code does not belong
- * to Javatopia". Make sure to verify that the ZIP code is exactly 5-digits long. Assuming the user always provides
+ * to Javatopia". Make sure to verify that the ZIP code is exactly 5-digits long, and print an error message if it is not. Assuming the user always provides
  * an integer with no leading zero.
  * 
  * Sample output:
