@@ -1,9 +1,9 @@
 package loops.nested_loops.hard.q7;
 
 /*
-Write a program called BoxMeNow to ask the use for n, and print the following pattern using nested loops based on their
-input. If the input is less than zero print “Invalid input!”.
-Sample Output for n =  4:
+Write a program called BoxMeNow to ask the user for an n, and print the following pattern using nested loops,
+with the n being the side length of the box (the number of 1’s per side). If the input is less than zero print “Invalid input!”.
+
 Enter number of lines:
 4
 1 1 1 1
