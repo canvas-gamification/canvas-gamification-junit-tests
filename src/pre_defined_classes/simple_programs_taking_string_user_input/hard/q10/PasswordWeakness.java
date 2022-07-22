@@ -1,12 +1,12 @@
 package pre_defined_classes.simple_programs_taking_string_user_input.hard.q10;
 
 /*
-Passwords are one of the most important things that everyone in the digital world has to take care of. Some of the most
-popular passwords that are easily guessed by hackers contain the word "password" or the numbers "1234". Make a program
-that asks the user to enter a password, then checks if the password is strong or not. For this question, a password is
-weak if it can be easily guessed based on the criteria above (this means it contains the two parameters above).
-The program will print true or false depending on whether the inputted password is weak. Assume users always enter a
-password with at least 4 characters.
+Password security is one of the most important things in the digital world we live in.
+Make a program that asks the user to enter a password to determine the strength of it (either strong or weak).
+The program will print true if the inputted password is weak. Visa versa.
+A password is weak if it can be easily guessed because it contains commonly used character combinations.
+For this question, a password is weak if it contains either the word "password" or the numbers "1234".
+Assume inputted passwords do not contain whitespaces.
 
 
 Sample output:
@@ -16,7 +16,7 @@ Is the password too weak? true
 
 Distractors:
 pass = input.nextChar();
-pass = input.next();
+pass = input.nextLine();
 String hasWord, hasNums, isWeak;
 System.out.print( "Please enter a password" );
 System.out.println( "Is the password too weak? " + isWeak );
@@ -35,7 +35,7 @@ public class PasswordWeakness {
     {
         Scanner input = new Scanner( System.in );
         System.out.println( "Please enter a password: " );
-        String pass = input.nextLine();
+        String pass = input.next();
         pass = pass.toLowerCase();
         boolean hasWord = pass.contains( "password" );
         boolean hasNums = pass.contains( "1234" );
