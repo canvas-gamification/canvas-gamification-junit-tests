@@ -6,6 +6,8 @@ from n = 0 until n = 5 using the following series ( n! symbolises factorials, wh
 x - ( x^3 / 3! ) + ( x^5 / 5! ) - ( x^7 / 7! ) + … + ((-1)^n x^(2n + 1))/( 2n + 1)!
 
 Sample Output:
+    Enter a number to approximate:
+    3.14
 	Approximation of sin(3.14) using n = 5 is …
  */
 import java.util.Scanner;
