@@ -53,7 +53,7 @@ public class MainTest extends BaseTest {
     runWithInput(n + "", new Clause[][] { {
         new IntegerLiteral(n),
         new StringLiteral("\\! \\= "),
-        new IntegerLiteral("factorial"),
+        new IntegerLiteral(factorial),
     } });
   }
 
