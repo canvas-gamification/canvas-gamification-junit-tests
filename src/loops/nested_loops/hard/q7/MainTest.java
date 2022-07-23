@@ -43,6 +43,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("invalidInputProvider")
     void identifiesInvalidInput(int in) throws InvalidClauseException{
+        TestOption.incorrectStructureErrorMessage = "Your program does not identify invalid input.";
         runWithInput(String.valueOf(in), new Clause[]{
                 new StringLiteral("Invalid input!")
         });
