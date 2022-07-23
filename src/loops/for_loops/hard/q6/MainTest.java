@@ -60,7 +60,7 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputProviderInvalid")
   public void printsErrorForInvalidInput(int n) throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not print out the error message for invalid input.";
+    TestOption.incorrectStructureErrorMessage = "Your program does not print out an error message for invalid input.";
     runWithInput(n + "", new Clause[] {
         new StringLiteral("Invalid Input!"),
     });
