@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
-    // Parson
+    // Parsons
     public Clause[] testSentence(){
         TestOption.isInputTest = true;
         TestOption.defaultInput = "678";
