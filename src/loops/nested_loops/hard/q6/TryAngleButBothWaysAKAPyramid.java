@@ -11,6 +11,13 @@ nested loops based on their input:
          … 1 ...
 n …   ...  1 … …  n
 If a negative integer is input print "Invalid input!".
+
+Sample output:
+Enter number of lines:
+3
+   1
+  212
+ 32123
  */
 
 import java.util.Scanner;
