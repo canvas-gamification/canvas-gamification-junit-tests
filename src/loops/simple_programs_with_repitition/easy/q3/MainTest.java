@@ -34,7 +34,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void printsMultiplicationTableCorrectly(Integer n) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the table correctly.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the multiplication table correctly.";
         runWithInput(String.valueOf(n), clauseBuilder(n));
     }
 
