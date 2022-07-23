@@ -35,7 +35,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void loopsUntilItEncountersAPrime(int[] n) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly loop until it reaches a prime number.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly loop until it receives a prime number as input.";
         StringBuilder s = new StringBuilder();
         for (int x : n) {
             s.append(x).append(" ");
