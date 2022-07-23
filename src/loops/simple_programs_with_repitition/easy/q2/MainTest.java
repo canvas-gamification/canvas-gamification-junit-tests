@@ -33,7 +33,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void loopsUntilSpecifiedNumbersAreEntered(int[] n) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not loop until 1, 2, 3, or 4 is entered.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not loop until a valid is entered.";
         StringBuilder s = new StringBuilder();
         for(int x : n){
             s.append(x).append(" ");
