@@ -8,7 +8,7 @@ x - ( x^3 / 3! ) + ( x^5 / 5! ) - ( x^7 / 7! ) + … + ((-1)^n x^(2n + 1))/( 2n 
 Sample Output:
     Enter a number to approximate:
     3.14
-	Approximation of sin(3.14) using n = 10 is …
+    Approximation of sin(3.14) using n = 10 is x
  */
 import java.util.Scanner;
 
