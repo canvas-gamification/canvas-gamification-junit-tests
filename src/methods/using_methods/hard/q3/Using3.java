@@ -1,8 +1,8 @@
 package methods.using_methods.hard.q3;
 
 /*
-Write a Java Program that asks users for their favourite number, and then write a method that takes that value
-as an input parameter and determines if the number is even or odd. If a number is even, the method should return
+Write a Java Program that asks users for their favourite number, and then write a method called evenOrOdd that takes
+that integer as an input parameter and determines if the number is even or odd. If a number is even, the method should return
 a string calling it even, and if the number is odd, the method should return a string calling it odd.
  */
 
