@@ -42,7 +42,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctApproximationCalculated(double in, String approx){
+    void calculatesApproximationCorrectly(double in, String approx){
         runWithInput(String.valueOf(in));
         assertEquals(approx, getItemByName("approx"), "Your approximation of sin(x) is incorrect.");
     }
