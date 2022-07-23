@@ -1,8 +1,8 @@
 package loops.programs_with_repetition.hard.q7;
 
 /*
-Write a program called SinOfTheTimes that will calculate an approximation of sin(x) from n = 0 until n = 5, with x = 3.14,
-using the following series ( n! symbolises factorials, where n! = n (n - 1)( n - 2 )...(1) ):
+Write a program called SinOfTheTimes that will take an input x and use it to calculate an approximation of sin(x)
+from n = 0 until n = 5 using the following series ( n! symbolises factorials, where n! = n (n - 1)( n - 2 )...(1) ):
 x - ( x^3 / 3! ) + ( x^5 / 5! ) - ( x^7 / 7! ) + … + ((-1)^n x^(2n + 1))/( 2n + 1)!
 
 Sample Output:
