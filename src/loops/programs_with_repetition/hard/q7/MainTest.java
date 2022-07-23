@@ -44,6 +44,6 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void correctApproximationCalculated(double in, String approx){
         runWithInput(String.valueOf(in));
-        assertEquals(approx, getItemByName("approx"), "Your approximation is incorrect.");
+        assertEquals(approx, getItemByName("approx"), "Your approximation of sin(x) is incorrect.");
     }
 }
