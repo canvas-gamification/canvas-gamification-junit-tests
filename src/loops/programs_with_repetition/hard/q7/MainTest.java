@@ -28,7 +28,7 @@ public class MainTest extends BaseTest {
                 new StringLiteral("Approximation of sin\\("),
                 new DoubleLiteral("x"),
                 new StringLiteral("\\) using n = "),
-                new IntegerLiteral(5),
+                new IntegerLiteral(10),
                 new StringLiteral(" is "),
                 new DoubleLiteral("approx")
         };
@@ -37,13 +37,13 @@ public class MainTest extends BaseTest {
     public void runMain(){SinOfTheTimes.main(new String[0]);}
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of(2.56, 0.5493238572698834), Arguments.of(1.07, 0.8772005038897845), Arguments.of(4.2, -0.8902956949274152));
+        return Stream.of(Arguments.of(2.56, "0.5493554364272203"), Arguments.of(1.07, "0.8772005042746817"), Arguments.of(4.2, "-0.8715757642927082"), Arguments.of(24, "1.052000954450763E9"));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctApproximationCalculated(double in, double approx){
+    void correctApproximationCalculated(double in, String approx){
         runWithInput(String.valueOf(in));
-        assertEquals(String.valueOf(approx), getItemByName("approx"), "Your approximation is incorrect.");
+        assertEquals(approx, getItemByName("approx"), "Your approximation is incorrect.");
     }
 }
