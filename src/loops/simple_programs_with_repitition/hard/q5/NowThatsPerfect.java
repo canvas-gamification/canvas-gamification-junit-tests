@@ -21,7 +21,7 @@ public class NowThatsPerfect
         System.out.println( "Enter a number: " );
         int n = input.nextInt();
         int nn = n;
-        int result  = -1;
+        int result  = 999;
         int i = 1;
         while( i < n )
         {
