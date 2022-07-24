@@ -10,12 +10,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static global.tools.CustomAssertions.assertWithinRange;
-import static global.utils.RandomUtil.describesUniform;
+import static global.utils.RandomUtil.frequenciesAreRandom;
 import static global.utils.RegexUtil.orNegative;
 
 public class RandomDouble extends Clause implements RandomClause<Double> {
     static Map<Integer, ArrayList<Double>> valueStore = new HashMap<>();
-    private double lower, upper;
+    private final double lower, upper;
     private int precision = 16;  // max double precision
 
     public RandomDouble(double lower, double upper) {
@@ -62,21 +62,22 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
         if (valueStore.get(matchGroupNum) == null)
             return false;
         ArrayList<Double> values = valueStore.get(matchGroupNum);
-
         final int numBins = RandomDouble.getNumBins(lower, upper);
 
-        long[] observedCounts = new long[numBins];
+        int[] observedCounts = new int[numBins];
         for (double value : values) {
             int binNum = RandomDouble.assignedBinIndex(value, lower, upper, numBins);
             if (binNum == RandomUtil.NO_BIN) return false;
             observedCounts[binNum]++;
         }
 
-        return describesUniform(values.size(), observedCounts, RandomUtil.ALPHA_LEVEL);
+        return frequenciesAreRandom(observedCounts, numBins);
     }
 
     private static int getNumBins(double lower, double upper) {
-        return 50;  // TODO: do properly
+        int upperCeil = (int) (upper + 1);
+        int lowerFloor = (int) lower;
+        return RandomUtil.getNumBins(lowerFloor, upperCeil); // TODO: do properly
     }
 
     private static int assignedBinIndex(double value, double lower, double upper, int numBins) {
@@ -101,6 +102,11 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
     public Double convertFromRegexGroup(String matchGroupString) {
         // TODO: try catch
         return Double.parseDouble(matchGroupString);
+    }
+
+    @Override
+    public ArrayList<Double> getValuesForMatchGroup(int matchGroup) {
+        return valueStore.get(matchGroup);
     }
 
     @Override
