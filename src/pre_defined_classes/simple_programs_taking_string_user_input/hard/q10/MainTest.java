@@ -48,7 +48,7 @@ public class MainTest extends BaseTest {
 
     @Test
     public void ignoresInputAfterWhitespace() throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program should not accept passwords with whitespace.";
+        TestOption.incorrectStructureErrorMessage = "Your program should ignore input after whitespaces.";
         runWithInput("test 12345", new Clause[]{
                 new StringLiteral("false")
         });
