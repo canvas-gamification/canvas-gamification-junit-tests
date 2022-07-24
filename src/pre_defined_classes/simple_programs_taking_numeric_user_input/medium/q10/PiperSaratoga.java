@@ -5,7 +5,7 @@ A Piper Saratoga is a hobby plane with six seats that has a capacity to hold 120
 Make a program that helps this plane's pilot determine how much luggage can be brought on the return flight from
 a vacation. The program needs to consider the weight of the travellers and the weight of the gas needed for the return
 flight to determine the total weight allowance for luggage on the return flight.
-Assuming users only enter valid inputs, meaning that the weight of the travellers must be >= 0 and that gas must be > 0.
+Assume the user only enters valid inputs, meaning that the weight of the travellers must be >= 0 and that gas must be > 0.
 
 Sample output:
     How much do all the travellers weigh in pounds?
