@@ -1,8 +1,8 @@
-package loops.simple_programs_with_repitition.medium.q4;
+package loops.simple_programs_with_repetition.medium.q4;
 
 /*
-Write a Java program to ask the user for a number and 
-calculate the sum of the following series: 1/ n + 2/ n + 3/ n + 4/ n + 5/ n + 6/ n + … (n - 1)/ n
+Write a Java program to ask the user for a number and calculate the sum of the following series:
+1/ n + 2/ n + 3/ n + 4/ n + 5/ n + 6/ n + … (n - 1)/ n. If a negative value is entered, the sum of the series should be 0.
 */
 
 import java.util.Scanner;
