@@ -35,7 +35,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void constructPatternCorrectly(int n) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the box correctly.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the box pattern correctly.";
         runWithInput(String.valueOf(n), clauseBuilder(n));
     }
 
