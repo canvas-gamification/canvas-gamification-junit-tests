@@ -42,7 +42,7 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     public void printsZipCodesCorrectly(int zipCode, int zipCodeSecond) throws InvalidClauseException {
         runWithInput(zipCode + System.lineSeparator() + zipCodeSecond);
-        assertEquals(Integer.parseInt(getItemByName("zipCode")),zipCode, "Your program did not correctly print the zip codes.");
+        assertEquals(Integer.parseInt(getItemByName("zipCode")),zipCode, "Your program did not correctly print the zip code.");
         assertEquals(Integer.parseInt(getItemByName("zipCodeSecond")),zipCodeSecond, "Your program did not correctly print the zip codes.");
     }
 }
