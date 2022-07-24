@@ -36,7 +36,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void printsPyramidCorrectly(int n) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program printed the pattern incorrectly.";
+        TestOption.incorrectStructureErrorMessage = "Your does not correctly print the triangle pattern.";
         runWithInput(String.valueOf(n), clauseBuilder(n));
     }
 
