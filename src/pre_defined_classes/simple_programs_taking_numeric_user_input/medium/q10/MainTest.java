@@ -41,7 +41,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void calculateAvailableLuggagePounds(double people, double gas, double luggage ) throws InvalidClauseException {
+    public void calculatesAvailableLuggageWeightCorrectly(double people, double gas, double luggage ) throws InvalidClauseException {
         runWithInput(people + " "+ gas);
         assertEquals(Double.parseDouble(getItemByName("luggage")), luggage, 0.0001,
                 "Your program does not calculate the allowed pounds of luggage correctly.");
