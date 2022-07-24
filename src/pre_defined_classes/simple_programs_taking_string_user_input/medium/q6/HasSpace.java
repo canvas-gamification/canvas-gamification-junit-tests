@@ -1,7 +1,7 @@
 package pre_defined_classes.simple_programs_taking_string_user_input.medium.q6;
 
 /*
-Languages that you and I speak are written in a way that uses whitespace to separate one word from one another.
+Languages that you and I speak are written in a way that uses whitespace to separate words from one another.
 Make a program that answers true or false to the question of whether the inputted sentence has at least 1 space in it.
 
 Sample output:
