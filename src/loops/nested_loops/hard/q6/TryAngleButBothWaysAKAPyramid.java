@@ -1,7 +1,7 @@
 package loops.nested_loops.hard.q6;
 
 /*
-Write a program to ask the user for n ("Enter number of lines: "), and print the following pyramid pattern using
+Write a program to ask the user for an n ("Enter number of lines: "), and print the following pyramid pattern using
 nested loops based on their input:
            1
           212
