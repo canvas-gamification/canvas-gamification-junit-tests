@@ -3,7 +3,7 @@ package pre_defined_classes.simple_programs_taking_string_user_input.hard.q10;
 /*
 Password security is one of the most important things in the digital world we live in.
 Make a program that asks the user to enter a password to determine the strength of it (either strong or weak).
-The program will print true if the inputted password is weak. Visa versa.
+The program will print true if the inputted password is weak and false if it is strong. 
 A password is weak if it can be easily guessed because it contains commonly used character combinations.
 For this question, a password is weak if it contains either the word "password" or the numbers "1234".
 Assume inputted passwords do not contain whitespaces.
