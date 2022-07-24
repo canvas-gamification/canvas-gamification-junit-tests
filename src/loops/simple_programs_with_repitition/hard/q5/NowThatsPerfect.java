@@ -21,10 +21,12 @@ public class NowThatsPerfect
         System.out.println( "Enter a number: " );
         int n = input.nextInt();
         int nn = n;
-        int result  = 0;
+        int result  = -1;
         int i = 1;
         while( i < n )
         {
+            if(i == 1)
+                result = 0;
             if( n % i == 0 )
                 result += i;
             i++;
