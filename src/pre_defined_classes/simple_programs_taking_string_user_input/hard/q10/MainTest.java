@@ -7,6 +7,7 @@ import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -30,7 +31,8 @@ public class MainTest extends BaseTest {
 
     public static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of("1234abc", "true"), Arguments.of("abc_password", "true"),
-                Arguments.of("abc_Password", "true"), Arguments.of("ABCDE", "false")
+                Arguments.of("abc_Password", "true"), Arguments.of("ABCDE", "false"),
+                Arguments.of("1234GoodPassword", "true")
                 );
     }
 
@@ -41,6 +43,14 @@ public class MainTest extends BaseTest {
                 "Your program does not correctly print if the password entered is weak.";
         runWithInput(passward, new Clause[]{
                 new StringLiteral(bln)
+        });
+    }
+
+    @Test
+    public void ignoresInputAfterWhitespace() throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program should not accept passwords with whitespace.";
+        runWithInput("test 12345", new Clause[]{
+                new StringLiteral("false")
         });
     }
 }
