@@ -1,5 +1,4 @@
 package pre_defined_classes.programs_with_changing_behaviour.hard.q2;
-import java.util.Random;
 
 /*
 Make a program that will generate a random <strong>8 digit</strong> number and encrypt it by dividing it by a second
@@ -7,6 +6,7 @@ random <strong>1-digit</strong> number. At the end of the program, print out the
 Sample Output: 68056441 has been encrypted using 5 into 13611288
  */
 
+import java.util.Random;
 public class DeCryptic {
     public static void main( String[] args )
     {
