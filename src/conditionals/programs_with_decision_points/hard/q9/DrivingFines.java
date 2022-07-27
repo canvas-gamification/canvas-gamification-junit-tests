@@ -34,27 +34,24 @@ public class DrivingFines {
     int speed = input.nextInt();
     System.out.println("Were you in a school zone? (Enter true or false)");
     boolean isInSchoolZone = input.nextBoolean();
-    if (speed > 50) {
-      if (isInSchoolZone)
-        System.out.println("Your fine is $300!");
-      else
-        System.out.println("Your fine is $150!");
-    } else if (speed > 30 && speed <= 50) {
-      if (isInSchoolZone)
-        System.out.println("Your fine is $200!");
-      else
-        System.out.println("Your fine is $100!");
-    } else if (speed > 10 && speed <= 30) {
-      if (isInSchoolZone)
-        System.out.println("Your fine is $150!");
-      else
-        System.out.println("Your fine is $75!");
-    } else if (speed > 0 && speed <= 10) {
-      if (isInSchoolZone)
-        System.out.println("Your fine is $100!");
-      else
-        System.out.println("Your fine is $50!");
-    } else
+    int fine;
+    if (speed > 50)
+        fine = 150;
+    else if (speed > 30 && speed <= 50)
+        fine = 100;
+    else if (speed > 10 && speed <= 30)
+        fine = 75;
+    else if (speed > 0 && speed <= 10)
+        fine = 50;
+    else
+        fine = 0;
+
+    if(isInSchoolZone)
+      fine *= 2;
+
+    if(fine == 0)
       System.out.println("Invalid Input!");
+    else
+      System.out.println("Your fine is $" + fine + "!");
   }
 }
