@@ -73,7 +73,7 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputProviderValidOneInput")
   public void printsCorrectMessageWhenHasOneInput(int number) throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message when entering a palindrome that is divisible by 7.";
+    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message when a palindrome that is divisible by 7 is entered.";
     runWithInput(number + "", new Clause[] {
         new StringLiteral("Entered a palindrome that is divisible by 7. Ending Program."),
     });
