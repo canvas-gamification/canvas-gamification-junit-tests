@@ -22,7 +22,7 @@ public class MainTest extends BaseTest {
   // Java
   public Clause[] testSentence() {
     TestOption.isInputTest = true;
-    TestOption.defaultInput = "777";
+    TestOption.defaultInput = "123 123321 787 777";
     return new Clause[] {
         new StringLiteral("Enter an integer\\: "),
         new NewLine(),

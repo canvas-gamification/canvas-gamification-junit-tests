@@ -6,6 +6,12 @@ package loops.programs_with_repetition.easy.q5;
  * 
  * Sample output:
  *    Enter an integer: 
+ *    123
+ *    Enter an integer:
+ *    123321
+ *    Enter an integer:
+ *    787
+ *    Enter an integer:
  *    777
  *    Entered a palindrome that is divisible by 7. Ending Program.
  */
