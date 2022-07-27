@@ -1,4 +1,4 @@
-package loops.simple_programs_with_repetition.medium.q8;
+package loops.simple_programs_with_repetition.hard.q9;
 
 /*
 Write a Java program that asks for a binary number as input and converts it to decimal. To convert a binary number to decimal, each digit must be

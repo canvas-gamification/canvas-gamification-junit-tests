@@ -1,4 +1,4 @@
-package loops.simple_programs_with_repetition.medium.q8;
+package loops.simple_programs_with_repetition.hard.q9;
 
 import global.variables.*;
 import global.variables.clauses.*;
