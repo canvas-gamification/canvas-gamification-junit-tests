@@ -2,7 +2,7 @@ package loops.programs_with_repetition.medium.q4;
 
 /*
  * Write a program to print an hourglass using the char “*” with nested loops and a positive integer n representing the width of the hourglass.
- * If the user enters a negative integer or 0, the program should print the error message "Invalid Input!".
+ * If the user enters a negative integer or 0, the program should print the error message "Invalid input!".
  *
  * Sample output:
  *    How wide is your hourglass?
