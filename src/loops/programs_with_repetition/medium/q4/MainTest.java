@@ -52,7 +52,7 @@ public class MainTest extends BaseTest {
   @MethodSource("inputProviderInvalid")
   public void printsErrorMessageForInvalidInput(int width) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for an invalid width.";
-    runWithInput(width + "", new Clause[] { new StringLiteral("Invalid Input!") });
+    runWithInput(width + "", new Clause[] { new StringLiteral("Invalid input!") });
   }
 
   static Clause[][] hourGlassPatternClause(int n) {
