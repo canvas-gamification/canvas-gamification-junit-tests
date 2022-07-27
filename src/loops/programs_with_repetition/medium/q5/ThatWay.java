@@ -28,7 +28,7 @@ public class ThatWay {
         System.out.println("How wide is your arrow?");
         int n = inp.nextInt();
         if (n <= 0) {
-            System.out.println("Invalid Input!");
+            System.out.println("Invalid input!");
             return;
         }
         for (int i = 0; i < n; i++) {
