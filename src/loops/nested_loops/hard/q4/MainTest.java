@@ -63,7 +63,7 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Integer> invalidInputProvider(){
-        return Stream.of(-1, -2, -344);
+        return Stream.of(-1, -2, -344, 10, 11, 4532);
     }
 
     @ParameterizedTest
