@@ -3,8 +3,6 @@ package loops.simple_programs_with_repetition.medium.q5;
 import global.variables.*;
 import global.variables.clauses.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,7 +12,7 @@ import global.BaseTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 
-public class PerfektKyoobTest extends BaseTest {
+public class MainTest extends BaseTest {
     // Parsons
 
     public Clause[] testSentence() {
