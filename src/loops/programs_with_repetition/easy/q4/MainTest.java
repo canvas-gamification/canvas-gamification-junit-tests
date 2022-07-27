@@ -2,7 +2,6 @@ package loops.programs_with_repetition.easy.q4;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,7 +20,7 @@ public class MainTest extends BaseTest {
   // Java
   public Clause[] testSentence() {
     TestOption.isInputTest = true;
-    TestOption.defaultInput = "2";
+    TestOption.defaultInput = "1 6 50 2";
     return new Clause[] {
         new StringLiteral("Enter an integer\\: "),
         new NewLine(),

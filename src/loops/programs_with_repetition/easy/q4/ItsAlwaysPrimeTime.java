@@ -5,6 +5,12 @@ package loops.programs_with_repetition.easy.q4;
  * 
  * Sample output:
  *    Enter an integer:
+ *    1
+ *    Enter an integer:
+ *    6
+ *    Enter an integer:
+ *    50
+ *    Enter an integer:
  *    2
  *    Entered a prime number that is less than 50. Ending Program.
  */
