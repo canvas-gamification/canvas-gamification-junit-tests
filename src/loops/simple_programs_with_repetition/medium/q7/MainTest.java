@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.stream.Stream;
 
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -16,12 +17,12 @@ import global.tools.TestOption;
 
 public class MainTest extends BaseTest {
     // Java
-
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "10";
         return new Clause[]{
-                new StringLiteral("Enter a number for the upper bound of the series: "),
+                new StringLiteral("Enter a number for the upper bound of the series:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new PlaceHolder()
         };
