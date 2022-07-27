@@ -46,6 +46,7 @@ public class MainTest extends BaseTest {
         Arguments.of(new ArrayList<Integer>(Arrays.asList(15, -1, -9, -10, -11, -12, 28, 21, 99, 19))),
         Arguments.of(new ArrayList<Integer>(Arrays.asList(1, 41))),
         Arguments.of(new ArrayList<Integer>(Arrays.asList(50, 41))),
+        Arguments.of(new ArrayList<Integer>(Arrays.asList(51, 53, 41))),
         Arguments.of(new ArrayList<Integer>(Arrays.asList(-1, 2))),
         Arguments.of(new ArrayList<Integer>(Arrays.asList(39, 20, 1010, 16, -5, 31))),
         Arguments.of(new ArrayList<Integer>(Arrays.asList(15, -1, -9, -10, -11, -12, 28, 21, 99, 19))),
