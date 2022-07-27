@@ -62,7 +62,7 @@ public class MainTest extends BaseTest {
     @MethodSource("invalidInputProvider")
     void printsErrorMessageForInvalidInput(int input) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for invalid inputs.";
-        runWithInput(input + "", new Clause[]{
+        runWithInput(String.valueOf(input), new Clause[]{
                 new StringLiteral("Invalid input!")
         });
     }

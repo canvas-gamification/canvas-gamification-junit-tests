@@ -6,7 +6,7 @@ inputs an integer. If the user inputs a number less than 0, the program should p
 Sample Output:
     Enter a number:
     10
-    Factors of 10 are :
+    The factors of 10 are:
     1 2 5 10
  */
 
