@@ -1,4 +1,4 @@
-package loops.nested_loops.q5;
+package loops.nested_loops.hard.q5;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
@@ -17,7 +17,7 @@ public class MainTest extends BaseTest {
     // Java
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "1";
+        TestOption.defaultInput = "5";
         return new Clause[]{
                 new StringLiteral("Enter the number of lines:"),
                 new Optional(new StringLiteral(" ")),
@@ -30,20 +30,31 @@ public class MainTest extends BaseTest {
         TryAngleButReflected.main(new String[0]);
     }
 
-    static Stream<Integer> inputProvider(){
-        return Stream.of(0, 1, 8, 49, -1);
+    static Stream<Integer> validInputProvider() {
+        return Stream.of(0, 1, 8, 76);
+    }
+
+    static Stream<Integer> invalidInputProvider() {
+        return Stream.of(-1, -2, -10, -12643);
     }
 
     @ParameterizedTest
-    @MethodSource("inputProvider")
-    void printsPatternCorrectly(int n) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the pattern based on the integer input n.";
+    @MethodSource("validInputProvider")
+    void printsTrianglePatternCorrectly(int n) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the pattern based on the input n.";
         runWithInput(String.valueOf(n), pattern(n));
     }
 
-    static Clause[][] pattern(int n){
-        if(n <= 0)
-            return new Clause[][]{{new StringLiteral("")}};
+    @ParameterizedTest
+    @MethodSource("invalidInputProvider")
+    void printsErrorMessageForInvalidInput(int input) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for invalid input.";
+        runWithInput(String.valueOf(input), new Clause[]{
+                new StringLiteral("Invalid input!")
+        });
+    }
+
+    private static Clause[][] pattern(int n) {
         Clause[][] c = new Clause[1][n * 2];
         int k = 0;
         for (int i = 1; i <= n; i++) {
