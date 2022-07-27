@@ -82,7 +82,7 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputProviderValidMultipleInputs")
   public void printsCorrectMessageWithMultipleInputs(ArrayList<Integer> inputs) throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message when entering a palindrome that is divisible by 7.";
+    TestOption.incorrectStructureErrorMessage = "Your program does not keep looping until a valid input is recieved.";
     Clause[][] outputStrings = getMirrorSevenOutput(inputs);
     String formatedInput = inputs.stream().map(Object::toString).collect(Collectors.joining(" "));
     runWithInput(formatedInput, outputStrings);
