@@ -32,6 +32,8 @@ public class MainTest extends BaseTest {
 
   static Stream<Arguments> inputProviderValid() {
     return Stream.of(
+        Arguments.of(90, arrowPatternClause(90)),
+        Arguments.of(60, arrowPatternClause(60)),
         Arguments.of(10, arrowPatternClause(10)),
         Arguments.of(5, arrowPatternClause(5)),
         Arguments.of(1, new Clause[][] { { new StringLiteral("\\* "), new NewLine() } }));
