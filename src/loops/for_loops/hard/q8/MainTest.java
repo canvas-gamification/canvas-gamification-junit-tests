@@ -21,7 +21,7 @@ public class MainTest extends BaseTest {
     TestOption.isInputTest = true;
     TestOption.defaultInput = "Hello World!";
     return new Clause[] {
-        new StringLiteral("Enter a sentence"),
+        new StringLiteral("Enter a sentence:"),
         new NewLine(),
         new PlaceHolder(),
     };
@@ -44,7 +44,7 @@ public class MainTest extends BaseTest {
   public void printsCorrectNumberOfCharacters(String sentence, int numChar) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct number of characters in the given sentence.";
     runWithInput(sentence, new Clause[][] { {
-        new StringLiteral("Total number of Characters in the sentence: "),
+        new StringLiteral("Total number of characters in the sentence: "),
         new IntegerLiteral(numChar),
     } });
   }
