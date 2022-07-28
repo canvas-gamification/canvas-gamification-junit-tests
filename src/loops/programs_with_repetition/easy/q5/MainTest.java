@@ -1,7 +1,6 @@
 package loops.programs_with_repetition.easy.q5;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -11,7 +10,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
-import global.tools.Logger;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
@@ -59,10 +57,14 @@ public class MainTest extends BaseTest {
       for (int j = 0; j < numWrongs; j++) {
         int wrong;
         do {
-          wrong = (int) (Math.random() * 10000);
+          int negativeSign = Math.random() > .5 ? 1 : -1;
+          wrong = (int)  (Math.random() * 10000);
+          wrong *= negativeSign;
         } while (contains(validNums, wrong));
         input.add(wrong);
       }
+      // random generate 1 and -1
+      // int negativeSign = Math.random() > .5 ? 1 : -1;
       input.add(validNums[(int) (Math.random() * validNums.length)]);
       inputs = Stream.concat(inputs, Stream.of(Arguments.of(input)));
     }

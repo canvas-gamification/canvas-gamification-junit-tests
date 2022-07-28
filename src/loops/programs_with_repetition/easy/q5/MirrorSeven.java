@@ -1,7 +1,7 @@
 package loops.programs_with_repetition.easy.q5;
 
 /*
- * Write a program to keep asking the user to enter a number until they enter a palindrome number that is also
+ * Write a program to keep asking the user to enter a number until they enter a positive palindrome number that is also
  * divisible by 7 (i.e. it can be read the same forwards and backwards). Once it receives a valid integer, the program should print the message 
  * "Entered a palindrome that is divisible by 7. Ending Program.".
  * Sample output:
