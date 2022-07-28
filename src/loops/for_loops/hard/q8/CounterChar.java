@@ -3,7 +3,7 @@ package loops.for_loops.hard.q8;
 import java.util.Scanner;
 /*
  * Write a program that asks the user for a sentence and then counts the number of characters in the sentence.
- * (Hint: Space is not considered a character)
+ * In this program, spaces are not considered characters. 
  * 
  * Sample Output:
  *    Enter a sentence:
