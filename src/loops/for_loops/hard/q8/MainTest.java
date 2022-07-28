@@ -42,7 +42,7 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputProvider")
   public void countsNumberOfCharactersCorrectly(String sentence, int numChar) throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct number of characters in the input sentence.";
+    TestOption.incorrectStructureErrorMessage = "Your program does correctly count the number of characters in the input sentence.";
     runWithInput(sentence, new Clause[][] { {
         new StringLiteral("Total number of characters in the sentence: "),
         new IntegerLiteral(numChar),
