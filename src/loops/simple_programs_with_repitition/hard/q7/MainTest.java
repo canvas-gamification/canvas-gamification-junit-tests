@@ -31,7 +31,7 @@ public class MainTest extends BaseTest {
     public void runMain(){PushItBack.main(new String[0]);}
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of("H3ll0W0r1d", "HllWrd3001"), Arguments.of("752!~3", "!~7523"), Arguments.of("Heyo M1st3r Tw1st3r", "Heyo Mstr Twstr1313"), Arguments.of(System.lineSeparator(), "") );
+        return Stream.of(Arguments.of("H3ll0W0r1d", "HllWrd3001"), Arguments.of("752!~3", "!~7523"), Arguments.of("Heyo M1st3r Tw1st3r", "Heyo Mstr Twstr1313"), Arguments.of(System.lineSeparator(), ""), Arguments.of("Only words", "Only words"), Arguments.of("07", "07") );
     }
 
     @ParameterizedTest
