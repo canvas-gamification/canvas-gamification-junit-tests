@@ -1,7 +1,7 @@
 package loops.for_loops.hard.q7;
 
 /*
- * Write a program that will ask the user for a sentence and prints the sentence in reverse. 
+ * Write a program that will ask the user for a sentence and print the sentence in reverse. 
  * Sample output:
  *    Enter a sentence: 
  *    Hello World
