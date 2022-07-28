@@ -1,14 +1,15 @@
-package methods.modular_programming.easy.q1;
+package methods.modular_programs.easy.q1;
 /*
 Write a Java Program that asks users for their height, then prints out if the user is above the average height in Canada
 or not (The average height in Canada is 168.7 cm). Write two methods to complete this, one method that asks the user for
 their height, and another method that determines and prints the user's classification. If the user provides an invalid
-height, the “heightChecker” method should print an error message.
+height (one that is less than 0), the “heightChecker” method should print the error message "Invalid input!".
 Sample Output:
     Please enter your height in cm:
     179.38
     You're above the average height in Canada!
  */
+
 import java.util.Scanner;
 
 public class AverageHeight {
