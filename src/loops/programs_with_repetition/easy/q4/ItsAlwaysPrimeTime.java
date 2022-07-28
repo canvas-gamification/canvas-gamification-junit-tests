@@ -1,7 +1,7 @@
 package loops.programs_with_repetition.easy.q4;
 
 /*
- * Write a program to keep asking the user to enter a number until they enter a prime number that is lesser than 50. Make sure your output matches the sample. 
+ * Write a program to keep asking the user to enter a number until they enter a prime number that is less than 50. Make sure your output matches the sample. 
  * Note that prime numbers should not be negative. 
  * Sample output:
  *    Enter an integer:
