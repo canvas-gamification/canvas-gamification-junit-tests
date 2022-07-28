@@ -18,7 +18,7 @@ import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseTest {
-    // Java
+    // Parsons
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "1 6 50 2";
