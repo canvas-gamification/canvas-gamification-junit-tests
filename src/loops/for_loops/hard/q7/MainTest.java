@@ -41,7 +41,7 @@ public class MainTest extends BaseTest {
 
   @ParameterizedTest
   @MethodSource("inputProvider")
-  public void printsReversedSentence(String input, String reversed) throws InvalidClauseException {
+  public void reversesSentenceCorrectly(String input, String reversed) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not correctly reverse and print the input sentence.";
     runWithInput(input, new Clause[] {
         new StringLiteral("Reversed Sentence: " + reversed)
