@@ -78,7 +78,7 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("allPrimeInputs")
   public void printsCorrectMessageWithOneInput(int input) throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not stop when it enters a prime number that is less than 50.";
+    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message when a valid input is entered.";
     runWithInput(String.valueOf(input), new Clause[] {
         new StringLiteral("Entered a prime number that is less than 50. Ending Program. "),
     });
