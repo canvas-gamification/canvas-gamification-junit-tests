@@ -27,7 +27,7 @@ public class AverageHeight {
 
     public static void heightChecker(double height) {
         if (height < 0)
-            System.out.println("Invalid height input!");
+            System.out.println("Invalid input!");
         else if (height > 168.7)
             System.out.println("You're above the average height in Canada!");
         else
