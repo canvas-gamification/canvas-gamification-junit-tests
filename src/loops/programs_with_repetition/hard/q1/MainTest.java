@@ -42,7 +42,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("validInputProvider")
     void printsCascadingPatternCorrectly(int input) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the cascading pattern correctly";
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the cascading pattern correctly.";
         runWithInput(String.valueOf(input), clauseBuilder(input));
     }
 
