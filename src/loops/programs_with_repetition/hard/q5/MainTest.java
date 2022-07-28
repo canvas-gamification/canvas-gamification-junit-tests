@@ -14,6 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,10 +27,6 @@ public class MainTest extends BaseTest {
         return new Clause[]{
                 new StringLiteral("Enter a number:"),
                 new NewLine(),
-                new StringLiteral("Factors of "),
-                new IntegerLiteral("number"),
-                new StringLiteral(" that are prime numbers are:"),
-                new NewLine(),
                 new PlaceHolder()
         };
     }
@@ -38,21 +35,47 @@ public class MainTest extends BaseTest {
         PrimeFactor.main(new String[0]);
     }
 
-    static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of(36, new ArrayList<>(Arrays.asList(2, 3))));
+    static Stream<Arguments> validInputProvider() {
+        return Stream.of(
+                Arguments.of(36, new int[]{2, 3}),
+                Arguments.of(0, new int[]{}),
+                Arguments.of(1, new int[]{}),
+                Arguments.of(2, new int[]{2}),
+                Arguments.of(1486823910, new int[]{2, 3, 5, 11, 13, 17, 19, 29, 37}),
+                Arguments.of(108, new int[]{2, 3})
+        );
+    }
+
+    static Stream<Integer> invalidInputProvider() {
+        return Stream.of(-1, -2, -10, -1256);
     }
 
     @ParameterizedTest
-    @MethodSource("inputProvider")
-    void printsPrimeFactorsCorrectly(int number, ArrayList<Integer> factors) throws InvalidClauseException {
-        Clause [][] otherName = new Clause[1][factors.size() * 2];
-        int j = 0;
-        for(int i = 0; i < otherName[0].length; i+= 2){
-            otherName[0][i] = new IntegerLiteral(factors.get(j), "any");
-            otherName[0][i + 1] = new StringLiteral(" ");
-            j++;
+    @MethodSource("validInputProvider")
+    void identifiesPrimeFactorsCorrectly(int number, int[] list) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify and print the prime factors of a number.";
+        runWithInput(String.valueOf(number), clauseBuilder(number, list));
+    }
+
+    @ParameterizedTest
+    @MethodSource("invalidInputProvider")
+    void printsErrorMessageForInvalidInput(int input) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for invalid input.";
+        runWithInput(String.valueOf(input), new Clause[]{
+                new StringLiteral("Invalid input!")
+        });
+    }
+
+    private static Clause[][] clauseBuilder(int number, int[] list) {
+        Clause[][] c = new Clause[1][list.length * 2 + 3];
+        c[0][0] = new StringLiteral("Factors of ");
+        c[0][1] = new IntegerLiteral(number);
+        c[0][2] = new StringLiteral(" that are prime numbers are: ");
+        int index = 3;
+        for (int item : list) {
+            c[0][index++] = new IntegerLiteral(item);
+            c[0][index++] = new StringLiteral(" ");
         }
-        runWithInput(String.valueOf(number), otherName);
-        assertEquals(Integer.parseInt(getItemByName("number")), number, "Fail message");
+        return c;
     }
 }
