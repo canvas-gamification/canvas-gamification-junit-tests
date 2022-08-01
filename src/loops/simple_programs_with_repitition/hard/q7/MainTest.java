@@ -37,7 +37,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void movesNumbersToEndOfString(String in, String moved) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program did not move all numbers to the end of the string.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not move all the numbers to the end of the string.";
         runWithInput(in, new Clause[]{
                 new StringLiteral(moved)
         });
