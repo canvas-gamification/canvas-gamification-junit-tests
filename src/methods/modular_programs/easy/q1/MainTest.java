@@ -66,7 +66,7 @@ public class MainTest extends BaseTest {
         MethodUtil.invokeIfMethodExists(AverageHeight.class, "heightChecker", new Object[]{height},
                 double.class);
         String output = MethodUtil.getMethodOutput();
-        assertEquals(message, output, "Your heightChecker() method does not print the correct message base on the input height.");
+        assertEquals(message, output, "Your heightChecker method does not print the correct message base on the input height.");
     }
 
     @ParameterizedTest
@@ -74,7 +74,7 @@ public class MainTest extends BaseTest {
     void correctUserInputMethod(double input) throws Throwable {
         provideInput(String.valueOf(input));
         Object output = MethodUtil.invokeIfMethodExists(AverageHeight.class, "userInput");
-        CustomAssertions._assertEquals(input, output, "Your userInput() method does not correctly get input from the user.");
+        CustomAssertions._assertEquals(input, output, "Your userInput method does not correctly get input from the user.");
     }
 
     @ParameterizedTest
