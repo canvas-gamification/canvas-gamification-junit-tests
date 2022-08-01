@@ -16,6 +16,11 @@ public class CustomAssertions {
         assertEquals(expected, actual, userMessage);
     }
 
+    public static void _assertEquals(Object expected, Object actual, double delta, String userMessage) {
+        _assertSameTypes(expected, actual);
+        assertEquals((double) expected, (double) actual, delta, userMessage);
+    }
+
     public static void _assertSameTypes(Object expected, Object actual) {
         String message = String.join(" ",
                 "Received",
