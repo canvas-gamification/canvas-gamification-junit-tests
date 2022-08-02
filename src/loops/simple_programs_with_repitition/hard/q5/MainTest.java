@@ -30,7 +30,7 @@ public class MainTest extends BaseTest {
     public void runMain(){ NowThatsPerfect.main(new String[0]); }
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of("6", "6 is a Perfect Number!"), Arguments.of("7", "7 is NOT a Perfect Number!"), Arguments.of("-3", "-3 is NOT a Perfect Number!"), Arguments.of("0", "0 is NOT a Perfect Number!"), Arguments.of("33550336", "33550336 is a Perfect Number!", Arguments.of("546", "546 is NOT a Perfect Number!"), Arguments.of("8128", "8128 is a Perfect Number!"), Arguments.of("-6", "-6 is NOT a Perfect Number!")));
+        return Stream.of(Arguments.of("-6", "-6 is NOT a Perfect Number!"), Arguments.of("546", "546 is NOT a Perfect Number!"), Arguments.of("8128", "8128 is a Perfect Number!"), Arguments.of("1", "1 is NOT a Perfect Number!"), Arguments.of("6", "6 is a Perfect Number!"), Arguments.of("7", "7 is NOT a Perfect Number!"), Arguments.of("-3", "-3 is NOT a Perfect Number!"), Arguments.of("0", "0 is NOT a Perfect Number!"), Arguments.of("33550336", "33550336 is a Perfect Number!"));
     }
 
     @ParameterizedTest
