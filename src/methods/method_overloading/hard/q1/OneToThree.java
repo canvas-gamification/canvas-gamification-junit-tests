@@ -3,7 +3,8 @@ package methods.method_overloading.hard.q1;
 /*
 Create a Java class with a static method called "stringLength" that returns an integer. Overload this method twice so
 that it can take either one string, two strings, or three strings. Return the length of the string when there is just
-one input, and the length of all the input strings added together otherwise. You do not need a main method.
+one input, and the length of all the input strings added together otherwise. You do not need a main method, and the
+program should not have any printed output.
  */
 public class OneToThree {
     public static int stringLength(String a) {
