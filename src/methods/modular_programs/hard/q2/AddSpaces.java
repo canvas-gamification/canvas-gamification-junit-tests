@@ -4,7 +4,7 @@ Write a program that will accept a string from the user that doesn't have spaces
 that accepts a string as a parameter and will add spaces between the words and store it in a separate string. The method
 should return that string, which will then be printed in the main method. Assume that the first letter of every word is
 a capital letter. If an empty string is passed your method, it should return an empty string. Note that your string
-should not have extra spaces at the beginning or end of the string (Example: "Today Is A New Day").
+should not have any extra spaces at the beginning or end of the string (Example: "Today Is A New Day").
 
 Sample Output:
     Enter a sentence:
