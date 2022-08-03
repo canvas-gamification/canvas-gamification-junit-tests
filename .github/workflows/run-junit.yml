@@ -24,4 +24,3 @@ jobs:
         if: always()
         with:
           files: "reports/**/*.xml"
-  
