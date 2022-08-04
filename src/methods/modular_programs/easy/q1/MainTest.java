@@ -55,8 +55,8 @@ public class MainTest extends BaseTest {
         Random r = new Random();
         return Stream.of(
                 Arguments.of(-0.001, "Invalid input!"),
-                Arguments.of(r.nextDouble(168.7), "You're below the average height in Canada!"),
-                Arguments.of(r.nextDouble(50) + 169, "You're above the average height in Canada!")
+                Arguments.of(r.nextDouble()*168.7, "You're below the average height in Canada!"),
+                Arguments.of(r.nextDouble()*50 + 169, "You're above the average height in Canada!")
         );
     }
 
