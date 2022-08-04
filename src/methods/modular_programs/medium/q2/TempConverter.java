@@ -1,7 +1,8 @@
 package methods.modular_programs.medium.q2;
 /*
-Write a Java Program that asks users for the temperature in Fahrenheit, and then write a method called tempConversion
-that converts it into Celsius. The conversion from Fahrenheit to Celsius is Celsius = (Fahrenheit - 32) * (5/9)
+Write a Java Program that asks the user for the temperature in Fahrenheit, and then write a method called tempConversion
+that converts it into Celsius. After the conversion, print the temperature in the main method. The conversion from
+Fahrenheit to Celsius is Celsius = (Fahrenheit - 32) * (5/9).
 
 Sample Output:
     Enter the temperature in Fahrenheit:
@@ -29,6 +30,6 @@ public class TempConverter {
     }
 
     public static double tempConversion(double fahrenheit) {
-        return (fahrenheit - 32) * (5.0/9);
+        return (fahrenheit - 32) * (5.0 / 9);
     }
 }

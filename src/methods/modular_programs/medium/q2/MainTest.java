@@ -45,7 +45,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctTempConverterMethod(double fahrenheit, double celsius ) throws Throwable {
+    void correctTempConversionMethod(double fahrenheit, double celsius) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(TempConverter.class, "tempConversion",
                 new Object[]{fahrenheit}, double.class);
         CustomAssertions._assertEquals(celsius, output, 0.00000001, "Your tempConverter method does not correctly convert the temperature.");
