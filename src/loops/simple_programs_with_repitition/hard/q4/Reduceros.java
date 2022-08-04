@@ -18,7 +18,7 @@ public class Reduceros {
         System.out.println("Enter a number: ");
         int n = input.nextInt();
         int nn = n;
-        while (n > 10) {
+        while (n >= 10) {
             String s = String.valueOf(n);
             n = 0;
             for (int x = 0; x < s.length(); x++) {

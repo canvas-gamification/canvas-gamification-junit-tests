@@ -1,6 +1,7 @@
 package loops.simple_programs_with_repitition.hard.q4;
 
 import global.BaseTest;
+import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -16,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MainTest extends BaseTest {
     //Java
     public Clause[] testSentence() {
+        TestOption.isInputTest = true;
+        TestOption.defaultInput = "6";
         return new Clause[]{
                 new StringLiteral("Enter a number: "),
                 new NewLine(),
