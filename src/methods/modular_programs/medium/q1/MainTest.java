@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
+    // Parsons with distractors
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The sum of the absolute value of the variables is "),

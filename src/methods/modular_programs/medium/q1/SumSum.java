@@ -1,7 +1,9 @@
 package methods.modular_programs.medium.q1;
+
 /*
 Write a Java Program that takes five initialized and declared integer variables, and using a method called sumAbsolute,
-takes all five variables and returns the sum of the absolute value of all the variables.
+takes all five variables and returns the sum of the absolute value of all the variables. The main method should then print
+out this sum.
 
 Sample Output:
     The sum of the absolute value of the variables is x
@@ -9,6 +11,11 @@ Sample Output:
 Distractors:
     return a+b+c+d+e;
     public int sumAbsolute(int a, int b, int c, int e, int d)
+    int v = abs(a);
+    int w = abs(b);
+    int x = abs(c);
+    int y = abs(d);
+    int z = abs(e);
 
  */
 public class SumSum {
