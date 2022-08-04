@@ -3,6 +3,7 @@ package methods.using_methods.hard.q7;
 /*
 Write a Java Program called VolumeOfCube that asks users for the length of a side of a cube,
 then write a method called cubeVolume that accepts that value as an input parameter and returns the volume of the cube.
+If the given side length is negative, return -1.
 
 Sample output:
 Please enter the length of a side:
@@ -22,6 +23,9 @@ public class VolumeOfCube
     }
     public static double cubeVolume(double a)
     {
-        return a*a*a;
+        if(a < 0)
+            return -1;
+        else
+            return a*a*a;
     }
 }
