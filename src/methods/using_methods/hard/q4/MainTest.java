@@ -31,21 +31,32 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){Using4.main(new String[0]);}
+    public void runMain(){HowOld.main(new String[0]);}
 
     static Stream<Arguments> ageCalcInputProvider(){
-        return Stream.of(Arguments.of(9, 0, 9), Arguments.of(2031, 2000, 31), Arguments.of(1734, 1562, 172), Arguments.of(2019, 2020, -1));
+        return Stream.of(Arguments.of(9, 0, 9), Arguments.of(2031, 2000, 31), Arguments.of(1734, 1562, 172));
+    }
+
+    static Stream<Arguments> ageCalcInvalidInputProvider(){
+        return Stream.of(Arguments.of(2019, 2020), Arguments.of(2017, 2020), Arguments.of(1999, 2078));
     }
 
     static Stream<Arguments> mainMethodInputProvider(){
-        return Stream.of(Arguments.of("2022 1998", 24), Arguments.of("2001 1925", 76));
+        return Stream.of(Arguments.of("2022 1998", 24), Arguments.of("2001 1925", 76), Arguments.of("2015 2022", -1));
     }
 
     @ParameterizedTest
     @MethodSource("ageCalcInputProvider")
     void correctAgeCalcMethod(int curr, int old, int age) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(Using4.class, "ageCalc", new Object[]{curr, old}, int.class, int.class);
+        Object output = MethodUtil.invokeIfMethodExists(HowOld.class, "ageCalc", new Object[]{curr, old}, int.class, int.class);
         CustomAssertions._assertEquals(age, output, "Your ageCalc method does not properly calculate age.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("ageCalcInvalidInputProvider")
+    void correctAgeCalcInvalidInputMethod(int tooOld, int tooNew) throws Throwable {
+        Object output = MethodUtil.invokeIfMethodExists(HowOld.class, "ageCalc", new Object[]{tooOld, tooNew}, int.class, int.class);
+        CustomAssertions._assertEquals(-1, output, "Your ageCalc method does not correctly identify invalid input.");
     }
 
     @ParameterizedTest
