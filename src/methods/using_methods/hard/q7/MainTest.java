@@ -29,7 +29,7 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){Using7.main(new String[0]);}
+    public void runMain(){VolumeOfCube.main(new String[0]);}
 
     static Stream<Arguments> cubeVolumeInputProvider(){
         return Stream.of(Arguments.of(0, 0.0), Arguments.of(1, 1.0), Arguments.of(25.5, 16581.375), Arguments.of(5945.8, 2.1019911829991202E11), Arguments.of(-6, -216.0), Arguments.of(0.34, 0.03930400000000001));
@@ -42,7 +42,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("cubeVolumeInputProvider")
     void correctCubeVolumeMethod(double in, double vol) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(Using7.class, "cubeVolume", new Object[]{in}, double.class);
+        Object output = MethodUtil.invokeIfMethodExists(VolumeOfCube.class, "cubeVolume", new Object[]{in}, double.class);
         CustomAssertions._assertEquals(vol, output, 0.001, "Your cubeVolume method does not correctly calculate the volume for the given cube length.");
     }
 
