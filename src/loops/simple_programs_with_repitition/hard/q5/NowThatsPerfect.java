@@ -4,7 +4,7 @@ package loops.simple_programs_with_repitition.hard.q5;
 Write a program with the class name "NowThatsPerfect" to accept a number from the user and determine whether it is a "Perfect" number.
 If it is a perfect number print: "x is a Perfect Number!" otherwise print: "x is NOT a Perfect Number!".
 A perfect number is one whose factors sum up to equal the given number.
-Eg. 6 has factors of 1, 2, and 3, whose sum is 6, so it is a perfect number.
+Eg. 6 has factors of 1, 2, and 3, whose sum is 6, so it is a perfect number. Ensure your output matches the sample. 
 
 Sample Output:
 Enter a number:
