@@ -1,10 +1,11 @@
 package methods.modular_programs.hard.q2;
 /*
-Write a program that will accept a string from the user that doesn't have spaces and send it to a method called "addSpace"
-that accepts a string as a parameter and will add spaces between the words and store it in a separate string. The method
-should return that string, which will then be printed in the main method. Assume that the first letter of every word is
-a capital letter. If an empty string is passed your method, it should return an empty string. Note that your string
-should not have any extra spaces at the beginning or end of the string (Example: "Today Is A New Day").
+Write a program that will accept a string from the user that doesn't have any spaces and send it to a method called
+addSpace that accepts a string as a parameter and will add spaces between the words. The method should store this in a
+new string and return it. Your program should print the spaced string in the main method ("The string with spaces is: x.").
+Assume that the first letter of every word is a capital letter. If an empty string is passed to your method, it should
+return an empty string. Note that your string should not have any extra spaces at the beginning or end
+(example: "Today Is A New Day"). Ensure that your output matches the sample.
 
 Sample Output:
     Enter a sentence:

@@ -37,7 +37,7 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> addSpaceInputProvider() {
         return Stream.of(
-                Arguments.of("IUsedToBeAnAdventurerLikeYouButThenITookAnArrowToTheKnee", "I Used To Be An Adventurer Like You But Then I Took An Arrow To The Knee"),
+                Arguments.of("IUsedToBeAnAdventurerLikeYouButThenITookAnArrowToTheKnee!", "I Used To Be An Adventurer Like You But Then I Took An Arrow To The Knee!"),
                 Arguments.of("It'sFunToStayAtTheYMCA", "It's Fun To Stay At The Y M C A"),
                 Arguments.of("YouDrankWine369", "You Drank Wine369"),
                 Arguments.of("thisisatest", "thisisatest"),
