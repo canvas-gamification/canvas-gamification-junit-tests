@@ -3,7 +3,7 @@ package methods.using_methods.hard.q3;
 /*
 Write a Java Program that asks users for their favourite number, and then write a method called evenOrOdd that takes
 that integer as an input parameter and determines if the number is even or odd. If a number is even, the method should return
-a string calling it even, and if the number is odd, the method should return a string calling it odd.
+a string calling it even, and if the number is odd, the method should return a string calling it odd. This should then be printed in the main method. 
 
 Sample output:
 Please enter your favourite number:
