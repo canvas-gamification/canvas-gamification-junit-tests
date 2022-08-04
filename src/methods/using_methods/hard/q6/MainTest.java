@@ -31,21 +31,33 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){Using6.main(new String[0]);}
+    public void runMain(){
+        VolumeOfSphere.main(new String[0]);}
 
     static Stream<Arguments> sphereVolumeInputProvider(){
-        return Stream.of(Arguments.of(0, 0.0), Arguments.of(1, 4.1887902047863905), Arguments.of(-5, -523.5987755982989), Arguments.of(10000, 4.1887902047863906E12), Arguments.of(125, 8181230.868723419), Arguments.of(23.6, 55058.53078200475));
+        return Stream.of(Arguments.of(0, 0.0), Arguments.of(1, 4.1887902047863905), Arguments.of(10000, 4.1887902047863906E12), Arguments.of(125, 8181230.868723419), Arguments.of(23.6, 55058.53078200475));
+    }
+
+    static Stream<Double> sphereVolumeInvalidInputProvider(){
+        return Stream.of(-5.0, -1.0, -13.9);
     }
 
     static Stream<Arguments> mainMethodInputProvider(){
-        return Stream.of(Arguments.of("2.67", 79.73011553070754), Arguments.of("89.999", 3053526.272818271), Arguments.of("2571.67", 7.124170834478906E10));
+        return Stream.of(Arguments.of("2.67", 79.73011553070754), Arguments.of("89.999", 3053526.272818271), Arguments.of("2571.67", 7.124170834478906E10), Arguments.of("-134.2", -1.0));
     }
 
     @ParameterizedTest
     @MethodSource("sphereVolumeInputProvider")
     void correctSphereVolumeMethod(double in, double vol) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(Using6.class, "sphereVolume", new Object[]{in}, double.class);
-        CustomAssertions._assertEquals(vol, output, 0.000001, "Your program does not calculate volume correctly.");
+        Object output = MethodUtil.invokeIfMethodExists(VolumeOfSphere.class, "sphereVolume", new Object[]{in}, double.class);
+        CustomAssertions._assertEquals(vol, output, 0.000001, "Your method sphereVolume does not calculate volume correctly.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("sphereVolumeInvalidInputProvider")
+    void correctSphereVolumeInvalidInputMethod(double in) throws Throwable {
+        Object output = MethodUtil.invokeIfMethodExists(VolumeOfSphere.class, "sphereVolume", new Object[]{in}, double.class);
+        CustomAssertions._assertEquals(-1.0, output, "Your method sphereVolume does not correctly identify invalid input.");
     }
 
     @ParameterizedTest
