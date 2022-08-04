@@ -31,11 +31,11 @@ public class MainTest extends BaseTest {
     public void runMain(){Standing.main(new String[0]);}
 
     static Stream<Arguments> designationCalcInputProvider(){
-        return Stream.of(Arguments.of(1, "freshmen"), Arguments.of(2, "sophomore"), Arguments.of(3, "junior"), Arguments.of(4, "senior"));
+        return Stream.of(Arguments.of(1, "freshmen"), Arguments.of(2, "sophomore"), Arguments.of(3, "junior"), Arguments.of(4, "senior"), Arguments.of(5, "senior"), Arguments.of(10, "senior"));
     }
 
     static Stream<Arguments> designationCalcInvalidInputProvider(){
-        return Stream.of(Arguments.of(-1, "unknown year"), Arguments.of(5, "unknown year"));
+        return Stream.of(Arguments.of(-1, "unknown year"), Arguments.of(-23, "unknown year"));
     }
 
     static Stream<Arguments> mainMethodInputProvider(){

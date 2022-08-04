@@ -31,7 +31,7 @@ public class Standing
             return "sophomore";
         else if (a==3)
             return "junior";
-        else if (a==4)
+        else if (a>=4)
             return "senior";
         else
             return "unknown year";
