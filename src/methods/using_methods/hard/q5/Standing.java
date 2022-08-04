@@ -1,9 +1,9 @@
 package methods.using_methods.hard.q5;
 
 /*
-Write a Java Program called Standing that asks users what year they are in university.
-Write a method called designationCalc that accepts that integer as an input parameter and returns a string designating
-the word equivalent to the year number. If the user is in their first year, they're freshmen,
+In University your standing is designated by which numeric year you are in. Write a Java Program called Standing that
+asks users what year they are in university. Then, write a method called designationCalc that accepts that integer
+as an input parameter and returns a string designating the user's standing. If the user is in their first year, they're freshmen,
 if the user is in their second year, they're a sophomore, if the user is in their third year, they're a junior,
 and if the user is in their fourth year or above, they're a senior. If the user is not one of these options, the year is unknown.
 
