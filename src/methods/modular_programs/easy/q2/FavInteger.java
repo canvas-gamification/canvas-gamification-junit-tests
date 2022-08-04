@@ -1,10 +1,9 @@
 package methods.modular_programs.easy.q2;
 /*
-Write a Java Program that asks users for their favourite integer. Then, take that number and do two things with that
-number. First, determine if the number is even or odd. Do this by writing a method called isEven that returns a boolean
-value (true if it is even, and false if it is not). Second, create a method called multiply which multiplies the number
-by 𝛑, and return that value. The main method should print if the number is even or odd, and what the number multiplied
-by 𝛑 is.
+Write a Java Program that asks the user for their favourite integer. Then take that number and do two things with it.
+First, determine if the number is even or odd. Do this by writing a method called isEven that returns a boolean value
+(true if it is even, and false if it is not). Second, create a method called multiply that multiplies the number by 𝛑
+and returns that value. The main method should print if the number is even or odd and what the number multiplied by 𝛑 is.
 
 Sample Output:
     Please enter your favourite integer:

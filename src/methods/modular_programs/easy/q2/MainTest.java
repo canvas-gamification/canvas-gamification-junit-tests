@@ -40,7 +40,7 @@ public class MainTest extends BaseTest {
     static Stream<Arguments> isEvenInputProvider() {
         return Stream.of(
                 Arguments.of(0, true), Arguments.of(2, true), Arguments.of(-1, false), Arguments.of(1, false),
-                Arguments.of(39, false), Arguments.of(105, false), Arguments.of(-768, true)
+                Arguments.of(39, false), Arguments.of(105, false), Arguments.of(-768, true), Arguments.of(-333, false)
         );
     }
 
