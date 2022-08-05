@@ -1,4 +1,4 @@
-package loops.simple_programs_with_repitition.hard.q7;
+package loops.simple_programs_with_repetition.hard.q5;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
@@ -18,28 +18,27 @@ public class MainTest extends BaseTest {
     // Java
     public Clause[] testSentence(){
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "3bBak3rStr33t";
+        TestOption.defaultInput = "6";
         return new Clause[]{
-                new StringLiteral("Enter a sentence:"),
+                new StringLiteral("Enter a number:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("Result String: "),
                 new PlaceHolder()
         };
     }
 
-    public void runMain(){PushItBack.main(new String[0]);}
+    public void runMain(){ NowThatsPerfect.main(new String[0]); }
 
     static Stream<Arguments> inputProvider(){
-        return Stream.of(Arguments.of("H3ll0W0r1d", "HllWrd3001"), Arguments.of("752!~3", "!~7523"), Arguments.of("Heyo M1st3r Tw1st3r", "Heyo Mstr Twstr1313"), Arguments.of(System.lineSeparator(), ""), Arguments.of("Only words", "Only words"), Arguments.of("07", "07") );
+        return Stream.of(Arguments.of("-6", "-6 is NOT a Perfect Number!"), Arguments.of("546", "546 is NOT a Perfect Number!"), Arguments.of("8128", "8128 is a Perfect Number!"), Arguments.of("1", "1 is NOT a Perfect Number!"), Arguments.of("6", "6 is a Perfect Number!"), Arguments.of("7", "7 is NOT a Perfect Number!"), Arguments.of("-3", "-3 is NOT a Perfect Number!"), Arguments.of("0", "0 is NOT a Perfect Number!"), Arguments.of("33550336", "33550336 is a Perfect Number!"));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void movesNumbersToEndOfString(String in, String moved) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not move all the numbers to the end of the string.";
+    void identifiesPerfectNumbersCorrectly(String in, String place) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify perfect numbers.";
         runWithInput(in, new Clause[]{
-                new StringLiteral(moved)
+                new StringLiteral(place)
         });
     }
 }
