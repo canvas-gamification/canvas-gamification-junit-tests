@@ -28,30 +28,26 @@ package conditionals.programs_with_decision_points.hard.q9;
 import java.util.Scanner;
 
 public class DrivingFines {
-  public static void main(String[] args) {
-    Scanner input = new Scanner(System.in);
-    System.out.println("How fast were you above the speed limit?");
-    int speed = input.nextInt();
-    System.out.println("Were you in a school zone? (Enter true or false)");
-    boolean isInSchoolZone = input.nextBoolean();
-    int fine;
-    if (speed > 50)
-        fine = 150;
-    else if (speed > 30 && speed <= 50)
-        fine = 100;
-    else if (speed > 10 && speed <= 30)
-        fine = 75;
-    else if (speed > 0 && speed <= 10)
-        fine = 50;
-    else
-        fine = 0;
-
-    if(isInSchoolZone)
-      fine *= 2;
-
-    if(fine == 0)
-      System.out.println("Invalid Input!");
-    else
-      System.out.println("Your fine is $" + fine + "!");
-  }
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("How fast were you above the speed limit?");
+        int speed = input.nextInt();
+        System.out.println("Were you in a school zone? (Enter true or false)");
+        boolean isInSchoolZone = input.nextBoolean();
+        int fine = 0;
+        if (speed > 50)
+            fine = 150;
+        else if (speed > 30 && speed <= 50)
+            fine = 100;
+        else if (speed > 10 && speed <= 30)
+            fine = 75;
+        else if (speed > 0 && speed <= 10)
+            fine = 50;
+        if(isInSchoolZone)
+            fine *= 2;
+        if(fine == 0)
+            System.out.println("Invalid Input!");
+        else
+            System.out.println("Your fine is $" + fine + "!");
+    }
 }
