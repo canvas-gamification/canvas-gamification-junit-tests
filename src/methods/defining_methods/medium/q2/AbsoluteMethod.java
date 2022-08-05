@@ -1,7 +1,9 @@
 package methods.defining_methods.medium.q2;
 /*
-Write a Java Program that calculates the absolute value of an already declared and initialized variable. Write a method
-that accepts that input value and returns the absolute value.
+Write a Java Program that calculates the absolute value of an already declared and initialized variable. The program
+should have a method called absCalc that accepts a double and returns the absolute value of that number. Use this
+method to compute the absolute value and print the answer in the main method.
+
 Sample Output:
     The absolute value of the declared variable is: 5.0
  */
