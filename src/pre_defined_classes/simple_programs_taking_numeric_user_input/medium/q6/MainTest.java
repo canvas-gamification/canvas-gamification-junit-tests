@@ -31,7 +31,9 @@ public class MainTest extends BaseRandomTest {
         Intelligence.main(new String[0]);
     }
 
-    public static Stream<Integer> inputProvider(){ return Stream.of (0, 1);}
+    public static Stream<Integer> inputProvider() {
+        return Stream.of(0, 1);
+    }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
