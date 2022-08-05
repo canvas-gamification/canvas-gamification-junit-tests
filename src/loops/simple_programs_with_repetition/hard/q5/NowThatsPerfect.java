@@ -1,4 +1,4 @@
-package loops.simple_programs_with_repitition.hard.q5;
+package loops.simple_programs_with_repetition.hard.q5;
 
 /*
 Write a program with the class name "NowThatsPerfect" to accept a number from the user and determine whether it is a "Perfect" number.
