@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-    //Java
+    // Java
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "6";
