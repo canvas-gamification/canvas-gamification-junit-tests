@@ -1,10 +1,10 @@
 package methods.using_methods.hard.q4;
 
 /*
-Write a Java Program called HowOld that asks users for the current year and for the year that they were born in.
-Then, write a method called ageCalc that accepts both values as input parameters, checks that both years are positive
- and that the current year is greater than or equal to the year the user was born and returns the age of the user.
- If not, return -1.
+Write a Java Program called HowOld that asks users for the current year and the year they were born.
+Then, write a method called ageCalc that accepts both values as input parameters and calculates and returns the user's age.
+This method should check that both years are positive and that the current year is greater than or equal to the year
+the user was born. If not, return -1.
 
 Sample output:
 Please enter the current year:
