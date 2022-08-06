@@ -38,7 +38,7 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> ageCalcInvalidInputProvider(){
-        return Stream.of(Arguments.of(2019, 2020), Arguments.of(2017, 2020), Arguments.of(1999, 2078));
+        return Stream.of(Arguments.of(2019, 2020), Arguments.of(2017, 2020), Arguments.of(1999, 2078), Arguments.of(145, -743));
     }
 
     static Stream<Arguments> mainMethodInputProvider(){
@@ -63,6 +63,6 @@ public class MainTest extends BaseTest {
     @MethodSource("mainMethodInputProvider")
     void printsOutputCorrectly(String in, int age){
         runWithInput(in);
-        assertEquals(String.valueOf(age), getItemByName("age"), "Your program does not display the correct age.");
+        assertEquals(age, Integer.parseInt(getItemByName("age")), "Your program does not display the correct age.");
     }
 }
