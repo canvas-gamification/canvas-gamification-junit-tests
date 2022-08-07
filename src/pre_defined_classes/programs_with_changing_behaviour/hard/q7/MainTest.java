@@ -15,8 +15,8 @@ public class MainTest extends BaseRandomTest {
                 new IntegerLiteral(4, "tickets"),
                 new StringLiteral(" tickets\\."),
                 new NewLine(),
-                new StringLiteral("The number of participants in the lottery is: "),
-                new RandomInteger(10000, 1000000, "participants"),
+                new StringLiteral("The number of tickets in the lottery is: "),
+                new RandomInteger(10000, 1000000, "totalTickets"),
                 new StringLiteral("\\."),
                 new NewLine(),
                 new StringLiteral("Your chance of winning is: "),
@@ -31,7 +31,7 @@ public class MainTest extends BaseRandomTest {
 
     @RepeatedTest(10)
     void calculatesWinChanceCorrectly() {
-        double chance = 4.0 / Double.parseDouble(getItemByName("participants")) * 100.00;
-        assertEquals(chance, Double.parseDouble(getItemByName("winChance")), 0.0000000000001, "Your program does not correctly calculate the chance of you winning the lottery.");
+        double chance = 4.0 / Double.parseDouble(getItemByName("totalTickets")) * 100.00;
+        assertEquals(chance, Double.parseDouble(getItemByName("winChance")), 0.0000000000001, "Your program does not correctly calculate the chances of you winning the lottery.");
     }
 }
