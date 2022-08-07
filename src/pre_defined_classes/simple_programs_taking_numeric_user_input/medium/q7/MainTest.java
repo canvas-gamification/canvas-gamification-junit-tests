@@ -18,7 +18,7 @@ public class MainTest extends BaseRandomTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "-5";
         return new Clause[]{
-                new StringLiteral("Enter your score between \\-10 and 10 \\(both ends included\\)\\: "),
+                new StringLiteral("Enter your score between \\-10 and 10 \\(inclusive\\)\\: "),
                 new NewLine(),
                 new StringLiteral("Your score modifier is: "),
                 new RandomInteger(1, 11, "modifier"),
