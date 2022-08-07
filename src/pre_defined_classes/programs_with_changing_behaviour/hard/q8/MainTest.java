@@ -11,7 +11,7 @@ import org.junit.jupiter.api.RepeatedTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseRandomTest {
-    // Parsons with Distractors
+    // Parsons with distractors
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The first die rolled is a "),
@@ -35,6 +35,6 @@ public class MainTest extends BaseRandomTest {
     @RepeatedTest(10)
     void calculatesSumOfDiceCorrectly() {
         int diceSum = Integer.parseInt(getItemByName("firstDie")) + Integer.parseInt(getItemByName("secondDie"));
-        assertEquals(diceSum, Integer.parseInt(getItemByName("sumOfDice")));
+        assertEquals(diceSum, Integer.parseInt(getItemByName("sumOfDice")), "Your program does not correctly sum the rolls of the dice.");
     }
 }
