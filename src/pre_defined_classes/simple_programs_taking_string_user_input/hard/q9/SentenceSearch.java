@@ -18,11 +18,11 @@ string name = input.next();
 {
 }
 System.in.println( "Does the sentence contain the word computer? " );
-containsScience = sentence,endsWith("science");
+containsScience = sentence.endsWith("science");
 boolean containsScience, containsComputer;
 containsScience = sentence.contains("science");
 containsComputer = sentence.contains("computer");
-containsComputer = sentence.startsWith("computer")
+containsComputer = sentence.startsWith("computer");
 
  */
 
