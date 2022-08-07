@@ -1,7 +1,6 @@
 package global.tools;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomAssertions {
     // Underscore indicates a custom assertion is being used
@@ -10,6 +9,27 @@ public class CustomAssertions {
             Logger.logMessage(devMessage);
         }
         assertTrue(condition, userMessage);
+    }
+
+    public static void _assertEquals(Object expected, Object actual, String userMessage) {
+        _assertSameTypes(expected, actual);
+        assertEquals(expected, actual, userMessage);
+    }
+
+    public static void _assertEquals(Object expected, Object actual, double delta, String userMessage) {
+        _assertSameTypes(expected, actual);
+        assertEquals((double) expected, (double) actual, delta, userMessage);
+    }
+
+    public static void _assertSameTypes(Object expected, Object actual) {
+        String message = String.join(" ",
+                "Received",
+                TypeMatcher.simplifyPrimitiveTypeName(actual.getClass().getCanonicalName()),
+                "type, but expected",
+                TypeMatcher.simplifyPrimitiveTypeName(expected.getClass().getCanonicalName()),
+                "type."
+        );
+        assertSame(expected.getClass().getCanonicalName(), actual.getClass().getCanonicalName(), message);
     }
 
     public static void _fail(String userMessage, String devMessage) {
