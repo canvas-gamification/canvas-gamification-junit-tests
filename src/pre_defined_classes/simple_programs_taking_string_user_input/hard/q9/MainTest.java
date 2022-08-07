@@ -8,6 +8,7 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -16,34 +17,40 @@ public class MainTest extends BaseTest {
     // Parsons with distractors
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "silvester ";
+        TestOption.defaultInput = "Hello world";
         return new Clause[]{
-                new StringLiteral("Please enter your last name\\:"),
+                new StringLiteral("Please enter a sentence: "),
                 new NewLine(),
-                new StringLiteral("Is the person from Portugal\\? "),
+                new StringLiteral("Does the sentence contain the word computer\\? "),
                 new PlaceHolder(),
                 new NewLine(),
-                new StringLiteral("Does the person\\'s name contain his\\/her parent\\'s name\\? "),
+                new StringLiteral("Does the sentence contain the word science\\? "),
                 new PlaceHolder()
         };
     }
 
-    public void runMain(){Origin.main(new String[0]);}
+    public void runMain() {
+        SentenceSearch.main(new String[0]);
+    }
 
-    public static Stream<String> inputProvider() {
-        return Stream.of("silvester", "jackson", "smith", "silson");
+    public static Stream<Arguments> inputProvider() {
+        return Stream.of(
+                Arguments.of("Hello, how are you?", false, false),
+                Arguments.of("Computer science is my favourite.", true, true),
+                Arguments.of("It is science Sunday today.", false, true),
+                Arguments.of("I bought a new computer yesterday.", true, false),
+                Arguments.of("Guess what time it is?", false, false),
+                Arguments.of("On Tuesdays, my only courses are Computer Science and Mathematics.", true, true)
+        );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void determinesOriginByLastName (String name) throws InvalidClauseException {
-        boolean isPortugese = name.startsWith( "sil" );
-        boolean isSon = name.endsWith( "son" );
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print if the user is " +
-                "originated from Portugal or has parent's name in the user's name.";
-        runWithInput(name, new Clause[]{
-                new StringLiteral(String.valueOf(isPortugese)),
-                new StringLiteral(String.valueOf(isSon))
+    public void searchesStringCorrectly(String sentence, boolean contains1, boolean contains2) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly detect if the input sentence contains the words computer or science.";
+        runWithInput(sentence, new Clause[]{
+                new StringLiteral(String.valueOf(contains1)),
+                new StringLiteral(String.valueOf(contains2))
         });
     }
 }
