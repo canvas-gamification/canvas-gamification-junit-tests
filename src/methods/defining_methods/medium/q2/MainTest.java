@@ -1,16 +1,19 @@
 package methods.defining_methods.medium.q2;
 
 import global.BaseTest;
+import global.tools.CustomAssertions;
+import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class MainTest extends BaseTest {
     // Parsons
@@ -25,20 +28,26 @@ public class MainTest extends BaseTest {
         AbsoluteMethod.main(new String[0]);
     }
 
-    @Test
-    void correctAbsCalcMethod() {
-        String failMessage = "Your program does not have a method for calculating the absolute value of an input number.";
-        double result = (double) invokeIfMethodExists(AbsoluteMethod.class, "absCalc", failMessage, new Object[]{-200.56}, double.class);
-        assertEquals(result, 200.56, 0.00000001, "Your method does not correctly calculate the absolute value of a number.");
+    static Stream<Arguments> absCalcInputProvider() {
+        return Stream.of(
+                Arguments.of(-541.321584, 541.321584),
+                Arguments.of(9856438.21647425545, 9856438.21647425545),
+                Arguments.of(0.0, 0.0)
+        );
     }
 
-    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, String failMessage, Object[] arguments, Class<?>... methodArgumentTypes) {
-        try {
-            Method m = methodClass.getMethod(methodName, methodArgumentTypes);
-            return m.invoke(null, arguments);
-        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-            fail(failMessage);
-            return null;
-        }
+    @ParameterizedTest
+    @MethodSource("absCalcInputProvider")
+    void correctAbsCalcMethod(double input, double absoluteValue) throws Throwable {
+        Object output = MethodUtil.invokeIfMethodExists(AbsoluteMethod.class, "absCalc",
+                new Object[]{input}, double.class);
+        CustomAssertions._assertEquals(absoluteValue, output, 0.0000000001,
+                "Your method does not correctly calculate the absolute value of a number.");
+    }
+
+    @Test
+    void printsCorrectOutput() {
+        assertEquals(200.56, Double.parseDouble(getItemByName("absoluteValue")), 0.0000000001,
+                "Your program does not correctly calculate and print the absolute value of the declared variable.");
     }
 }
