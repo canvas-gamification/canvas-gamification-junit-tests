@@ -18,4 +18,11 @@ public class ArrayUtilTesting {
             sum += arr[i];
         return sum;
     }
+
+    public static int[] half(int[] arr){
+        int[] half = new int[arr.length / 2];
+        for (int i = 0; i < half.length; i++)
+            half[i] = arr[i];
+        return half;
+    }
 }

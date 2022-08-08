@@ -1,5 +1,7 @@
 package global.tools;
 
+import java.lang.reflect.Array;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomAssertions {
@@ -19,6 +21,19 @@ public class CustomAssertions {
     public static void _assertEquals(Object expected, Object actual, double delta, String userMessage) {
         _assertSameTypes(expected, actual);
         assertEquals((double) expected, (double) actual, delta, userMessage);
+    }
+
+    public static void _arrayAssertEquals(Object expected, Object actual, String userMessage) {
+        _assertSameTypes(expected, actual);
+        int expectedLength = Array.getLength(expected);
+        int actualLength = Array.getLength(actual);
+        Object[] expectedArray = new Object[expectedLength];
+        Object[] actualArray = new Object[actualLength];
+        for (int i = 0; i < expectedLength; i++)
+            expectedArray[i] = Array.get(expected, i);
+        for (int i = 0; i < actualLength; i++)
+            actualArray[i] = Array.get(actual, i);
+        assertArrayEquals(expectedArray, actualArray, userMessage);
     }
 
     public static void _assertSameTypes(Object expected, Object actual) {
