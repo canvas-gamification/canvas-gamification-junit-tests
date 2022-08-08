@@ -20,7 +20,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctUpByOneMethod(int[] input, int[] incremented) {
+    void correctUpByOneMethod(int[] input, int[] incremented) throws Throwable{
         int[] output = (int[]) MethodUtil.invokeIfMethodExists(IncrementThis.class, "upByOne", new Object[]{input},
                 int[].class);
         assertArrayEquals(incremented, output, "Your method does not correctly increment all the values in an array.");

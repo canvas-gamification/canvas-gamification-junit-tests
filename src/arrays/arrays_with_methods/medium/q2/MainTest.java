@@ -20,7 +20,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctHighestMethod(double[] input1, double[] input2, double[] higher) {
+    void correctHighestMethod(double[] input1, double[] input2, double[] higher) throws Throwable{
         double[] output = (double[]) MethodUtil.invokeIfMethodExists(HighestArray.class, "highest", new Object[]{input1, input2},
                 double[].class, double[].class);
         assertArrayEquals(higher, output, "Your method does not return the array with the greatest number in it.");

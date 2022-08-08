@@ -1,6 +1,6 @@
 package methods.using_methods.hard.q1;
 /*
-Write a Java Program that asks the user for two integers. Then, the program will pass those two numbers into a method
+Write a Java Program that asks the user for two integers. Then, the program will pass those two integers into a method
 called mathsExp that determines the value of the first number raised to the second number and returns that value. The
 program should then print this output.
 Sample Output:
