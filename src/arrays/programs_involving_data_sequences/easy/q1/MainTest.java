@@ -1,17 +1,19 @@
-package arrays.arrays_with_methods.programs_involving_data_sequences.easy.q1;
+package arrays.programs_involving_data_sequences.easy.q1;
 
 import global.BaseTest;
+import global.exceptions.InvalidClauseException;
+import global.tools.CustomAssertions;
+import global.tools.TestOption;
 import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Parsons
@@ -34,9 +36,17 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void calculatesAverageCharCorrectly(char[] input, char average) {
-        char result = (char) MethodUtil.invokeIfMethodExists(AverageChar.class, "averageChar", new Object[]{input},
+    void correctAverageCharMethod(char[] input, char average) throws Throwable {
+        Object result = MethodUtil.invokeIfMethodExists(AverageChar.class, "averageChar", new Object[]{input},
                 char[].class);
-        assertEquals(average, result, "Your method does not correctly computer the average character from a character array.");
+        CustomAssertions._assertEquals(average, result, "Your averageChar method does not correctly computer the average character from a character array.");
+    }
+
+    @Test
+    void printsOutputCorrectly() throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly compute and print the average character for the given array.";
+        runWithInput("", new Clause[]{
+                new StringLiteral("i")
+        });
     }
 }
