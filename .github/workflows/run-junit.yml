@@ -16,13 +16,11 @@ jobs:
       - name: Cache Build Directory
         uses: actions/cache@v1
         with:
-          paths:
-            - ~/bin
+          paths: ~/bin
           key: ${{ runner.os }}-build-cache
           restore-keys:
             - ${{ runner.os }}-build-cache
-          restore-paths:
-            - ~/bin
+          restore-paths: ~/bin
 
       - name: Build Tests
         run: |
