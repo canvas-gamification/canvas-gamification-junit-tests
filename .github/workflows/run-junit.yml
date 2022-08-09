@@ -14,6 +14,7 @@ jobs:
           java-version: '16.0.1'
       - name: Build and Test
         run: |
+          [[ -d bin ]] || mkdir bin
           javac -d bin -sourcepath src --classpath "lib/*" $(find -name *.java)
           java --classpath "bin:lib/*" org.junit.runner.JUnitCore --scan-class-path
       - name: Publish Test Results
