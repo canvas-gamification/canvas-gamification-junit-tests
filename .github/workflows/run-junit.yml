@@ -13,10 +13,11 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '16.0.1'
-      - name: Build and Run Tests
-        
+      - name: Build Tests
         run: |
-          javac -d bin -cp "lib/*:." -sourcepath src ./src/**/**/*.java &&
+          javac -d bin -cp "lib/*:." -sourcepath src ./src/**/**/*.java
+      - name: Run Tests
+        run: |
           java -jar lib/junit-platform-console-standalone-1.9.0-M1.jar --class-path bin --scan-class-path --fail-if-no-tests
         # execute your tests generating test results
       - name: Publish Test Results
