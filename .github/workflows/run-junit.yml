@@ -20,6 +20,8 @@ jobs:
           java -jar lib/junit-platform-console-standalone-1.9.0.jar --class-path bin --scan-class-path --fail-if-no-tests --reports-dir reports
   
   publish-report:
+    needs:
+      - build
     name: Publish Report
     runs-on: ubuntu-latest
     steps:
