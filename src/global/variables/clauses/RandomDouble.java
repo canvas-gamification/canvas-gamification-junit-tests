@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.awaitility.Awaitility;
+import org.awaitility.Durations;
+
 import static global.tools.CustomAssertions.assertWithinRange;
 import static global.utils.RandomUtil.frequenciesAreRandom;
 import static global.utils.RegexUtil.orNegative;
@@ -59,6 +62,7 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
     }
 
     public boolean validateRandom(int matchGroupNum) {
+        Awaitility.await().pollDelay(Durations.TWO_HUNDRED_MILLISECONDS).until(() -> true);
         if (valueStore.get(matchGroupNum) == null)
             return false;
         ArrayList<Double> values = valueStore.get(matchGroupNum);

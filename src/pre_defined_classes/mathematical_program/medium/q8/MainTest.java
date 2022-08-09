@@ -27,7 +27,7 @@ public class MainTest extends BaseTest {
 
     @Test
     public void magnitudeTest() {
-        assertEquals(10.05, Double.parseDouble(getItemByName("magnitude")), 0.001, "The calculated magnitude value is incorrect.");
+        assertEquals(10.05, Double.parseDouble(getItemByName("magnitude")), 0.005, "The calculated magnitude value is incorrect.");
     }
 
 }

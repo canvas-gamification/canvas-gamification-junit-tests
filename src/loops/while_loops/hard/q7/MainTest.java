@@ -2,12 +2,12 @@ package loops.while_loops.hard.q7;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
+import global.tools.Logger;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
-import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,7 +20,7 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "slide to the left, take it back now y'all, cha cha real smooth";
         return new Clause[]{
-                new StringLiteral("Enter a sentence:"),
+                new StringLiteral("Enter a sentence: "),
                 new NewLine(),
                 new StringLiteral("Reversed Sentence: "),
                 new PlaceHolder()
@@ -39,6 +39,7 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     public void reversesSentenceCorrectly(String in, String reverse) throws InvalidClauseException{
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly reverse the input.";
+        Logger.logMessage("Reversing the sentence: " + in + '\n');
         runWithInput(in, new Clause[]{
                 new StringLiteral(reverse)
         });

@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.awaitility.Awaitility;
+import org.awaitility.Durations;
+
 import static global.utils.RandomUtil.*;
 
 public class RandomChar extends Clause implements RandomClause<Character> {
@@ -45,6 +48,8 @@ public class RandomChar extends Clause implements RandomClause<Character> {
     }
 
     public boolean validateRandom(int matchGroupNum) {
+        Awaitility.await().pollDelay(Durations.TWO_HUNDRED_MILLISECONDS).until(() -> true);
+
         if (valueStore.get(matchGroupNum) == null)
             return false;
         ArrayList<Character> values = valueStore.get(matchGroupNum);
