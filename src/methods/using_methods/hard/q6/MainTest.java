@@ -18,8 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Parsons
-
-    @Override
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "9.7";
@@ -35,11 +33,7 @@ public class MainTest extends BaseTest {
         VolumeOfSphere.main(new String[0]);}
 
     static Stream<Arguments> sphereVolumeInputProvider(){
-        return Stream.of(Arguments.of(0, 0.0), Arguments.of(1, 4.1887902047863905), Arguments.of(10000, 4.1887902047863906E12), Arguments.of(125, 8181230.868723419), Arguments.of(23.6, 55058.53078200475));
-    }
-
-    static Stream<Double> sphereVolumeInvalidInputProvider(){
-        return Stream.of(-5.0, -1.0, -13.9);
+        return Stream.of(Arguments.of(0, 0.0), Arguments.of(-5.0, -1.0), Arguments.of(-1.0, -1.0), Arguments.of(-13.9, -1.0), Arguments.of(1, 4.1887902047863905), Arguments.of(10000, 4.1887902047863906E12), Arguments.of(125, 8181230.868723419), Arguments.of(23.6, 55058.53078200475));
     }
 
     static Stream<Arguments> mainMethodInputProvider(){
@@ -51,13 +45,6 @@ public class MainTest extends BaseTest {
     void correctSphereVolumeMethod(double in, double vol) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(VolumeOfSphere.class, "sphereVolume", new Object[]{in}, double.class);
         CustomAssertions._assertEquals(vol, output, 0.000001, "Your method sphereVolume does not calculate volume correctly.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("sphereVolumeInvalidInputProvider")
-    void correctSphereVolumeInvalidInputMethod(double in) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(VolumeOfSphere.class, "sphereVolume", new Object[]{in}, double.class);
-        CustomAssertions._assertEquals(-1.0, output, "Your method sphereVolume does not correctly identify invalid input.");
     }
 
     @ParameterizedTest
