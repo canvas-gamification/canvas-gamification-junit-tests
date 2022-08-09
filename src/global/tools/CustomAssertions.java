@@ -26,7 +26,7 @@ public class CustomAssertions {
             fail("Error with test definition: a custom assert was used with the wrong type.");
     }
 
-    public static void _arrayAssertEquals(Object expected, Object actual, String userMessage) {
+    public static void _assertArrayEquals(Object expected, Object actual, String userMessage) {
         _assertSameTypes(expected, actual);
         if (expected.getClass().isArray()) {
             int expectedLength = Array.getLength(expected);
