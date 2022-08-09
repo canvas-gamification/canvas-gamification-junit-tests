@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: '11'
+          java-version: '16.0.1'
       - name: Build and Run Tests
         run: |
           javac -d bin -cp "lib/*:." -sourcepath src ./src/**/**/*.java
