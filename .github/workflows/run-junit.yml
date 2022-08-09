@@ -16,7 +16,7 @@ jobs:
         run: |
           [[ -d bin ]] || mkdir bin
           javac -d bin -sourcepath src --classpath "lib/*" $(find -name *.java)
-          java --classpath "bin:lib/*" org.junit.runner.JUnitCore --scan-class-path
+          java --class-path bin org.junit.runner.JUnitCore --scan-class-path
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
