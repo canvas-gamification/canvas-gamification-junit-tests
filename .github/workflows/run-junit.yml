@@ -15,6 +15,7 @@ jobs:
       - name: Build Tests
         run: |
           javac -d bin -cp "lib/*:." -sourcepath src ./src/**/**/*.java
+          ls -la bin
           
       - name: Run Tests
         run: |
