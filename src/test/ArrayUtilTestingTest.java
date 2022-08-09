@@ -1,12 +1,16 @@
 package test;
 
 import global.BaseTest;
+import global.tools.CustomAssertions;
+import global.tools.Logger;
 import global.tools.TestOption;
 import global.utils.ArrayUtil;
+import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -45,5 +49,22 @@ public class ArrayUtilTestingTest extends BaseTest {
     void correctSumMethod(int[] input) {
         runWithInput(ArrayUtil.intArrayToInput(input));
         assertEquals(ArrayUtil.sum(input), Integer.parseInt(getItemByName("sum")), "Your sum method does not correctly calculate the sum of the integer array.");
+    }
+
+    @Test
+    void correctHalfMethod() throws Throwable {
+        int[] input = new int[]{1, 2, 3, 4, 5};
+        Object output = MethodUtil.invokeIfMethodExists(ArrayUtilTesting.class, "half",
+                new Object[]{input}, int[].class);
+        CustomAssertions._arrayAssertEquals(new int[]{1, 2}, output, "Failed");
+    }
+
+    @Test
+    void failsWithIncorrectType() throws Throwable {
+        int test1 = 6;
+        int test2 = 6;
+        Object in1 = test1;
+        Object in2 = test2;
+        CustomAssertions._arrayAssertEquals(in1, in2, "Failed");
     }
 }
