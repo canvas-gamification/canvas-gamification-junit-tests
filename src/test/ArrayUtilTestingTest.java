@@ -56,15 +56,15 @@ public class ArrayUtilTestingTest extends BaseTest {
         int[] input = new int[]{1, 2, 3, 4, 5};
         Object output = MethodUtil.invokeIfMethodExists(ArrayUtilTesting.class, "half",
                 new Object[]{input}, int[].class);
-        CustomAssertions._arrayAssertEquals(new int[]{1, 2}, output, "Failed");
+        CustomAssertions._assertArrayEquals(new int[]{1, 2}, output, "Failed");
     }
 
     @Test
     void failsWithIncorrectType() throws Throwable {
-        int test1 = 6;
-        int test2 = 6;
+        int[] test1 = new int[]{6};
+        int[] test2 = new int[]{6};
         Object in1 = test1;
         Object in2 = test2;
-        CustomAssertions._arrayAssertEquals(in1, in2, "Failed");
+        CustomAssertions._assertArrayEquals(in1, in2, "Failed");
     }
 }
