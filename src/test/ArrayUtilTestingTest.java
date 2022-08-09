@@ -58,4 +58,13 @@ public class ArrayUtilTestingTest extends BaseTest {
                 new Object[]{input}, int[].class);
         CustomAssertions._arrayAssertEquals(new int[]{1, 2}, output, "Failed");
     }
+
+    @Test
+    void failsWithIncorrectType() throws Throwable {
+        int test1 = 6;
+        int test2 = 6;
+        Object in1 = test1;
+        Object in2 = test2;
+        CustomAssertions._arrayAssertEquals(in1, in2, "Failed");
+    }
 }
