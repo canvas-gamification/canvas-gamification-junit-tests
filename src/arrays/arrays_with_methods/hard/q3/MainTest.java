@@ -1,13 +1,12 @@
 package arrays.arrays_with_methods.hard.q3;
 
+import global.tools.CustomAssertions;
 import global.utils.MethodUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest {
     // Java
@@ -22,9 +21,9 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctSelectiveSumMethod(int[] input, int n, int sum) {
-        int output = (int) MethodUtil.invokeIfMethodExists(SumTimes.class, "selectiveSum", new Object[]{input, n},
+    void correctSelectiveSumMethod(int[] input, int n, int sum) throws Throwable {
+        Object output = MethodUtil.invokeIfMethodExists(SumTimes.class, "selectiveSum", new Object[]{input, n},
                 int[].class, int.class);
-        assertEquals(sum, output, "Your method does not correctly calculate the sum of the values in an array greater than or equal to a given number.");
+        CustomAssertions._assertEquals(sum, output, "Your method does not correctly calculate the sum of the values in an array greater than or equal to a given number.");
     }
 }

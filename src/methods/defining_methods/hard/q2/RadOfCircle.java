@@ -2,9 +2,12 @@ package methods.defining_methods.hard.q2;
 /*
 Write a Java Program that asks the user for the radius of a circle as a double and then determines the area and
 circumference of the circle. Create two methods, one for the area called areaCalc, and one for the circumference called
-circCalc. Make sure the methods check if the parameter passed in is greater than 0, and return 0 if it is not. The
-main method of the program should also output the calculated area and circumference to two decimal places using printf.
-Ensure that your output matches the sample.
+circCalc, each of which should accept a double value as a parameter for the radius of a circle. The formula for the area
+of a circle is area = pi * radius^2 and the formula for the circumference of a circle is circumference = 2 * pi * radius.
+Make sure the methods check if the parameter passed in is greater than 0, and return 0 if it is not. The main method of
+the program should also output the calculated area and circumference to two decimal places using printf. Ensure that your
+output matches the sample.
+
 Sample Output:
     Enter the radius of the circle:
     5

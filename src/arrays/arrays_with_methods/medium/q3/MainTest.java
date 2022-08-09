@@ -1,13 +1,12 @@
 package arrays.arrays_with_methods.medium.q3;
 
+import global.tools.CustomAssertions;
 import global.utils.MethodUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest {
     // Parsons with distractors
@@ -21,9 +20,9 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctFindItMethod(String[] input, char element, String match) {
-        String output = (String) MethodUtil.invokeIfMethodExists(FindIt.class, "findIt", new Object[]{input, element},
+    void correctFindItMethod(String[] input, char element, String match) throws Throwable {
+        Object output = MethodUtil.invokeIfMethodExists(FindIt.class, "findIt", new Object[]{input, element},
                 String[].class, char.class);
-        assertEquals(match, output, "Your method does not return the correct element.");
+        CustomAssertions._assertEquals(match, output, "Your method does not return the correct element.");
     }
 }
