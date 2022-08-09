@@ -14,6 +14,7 @@ jobs:
           java-version: '16.0.1'
       - name: Build Tests
         run: |
+          mkdir -p bin
           javac -d bin -cp "lib/*:." -sourcepath src ./src/**/**/*.java
           ls -la bin
           
