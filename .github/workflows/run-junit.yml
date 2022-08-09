@@ -12,11 +12,10 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: '16.0.1'
-          jdk: true
       - name: Build and Test
         run: |
-          javac -d bin -sourcepath src -cp "lib/*" $(find -name *.java)
-          java -cp "bin:lib/*" org.junit.runner.JUnitCore --scan-class-path
+          javac -d bin -sourcepath src --classpath "lib/*" $(find -name *.java)
+          java --classpath "bin:lib/*" org.junit.runner.JUnitCore --scan-class-path
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
