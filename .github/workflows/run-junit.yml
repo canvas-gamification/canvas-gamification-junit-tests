@@ -14,13 +14,10 @@ jobs:
           java-version: '16.0.1'
       - name: Build Tests
         run: |
-          mkdir -p bin
           javac -d bin -cp "lib/*:." -sourcepath src ./src/**/**/*.java
-          ls -la bin
           
       - name: Run Tests
         run: |
-          ls -la bin
           java -jar lib/junit-platform-console-standalone-1.9.0.jar --class-path bin --scan-class-path --fail-if-no-tests
         # execute your tests generating test results
       - name: Publish Test Results
