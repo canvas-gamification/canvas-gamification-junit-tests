@@ -20,7 +20,7 @@ jobs:
           
       - name: Run Tests
         run: |
-          java -jar lib/junit-platform-console-standalone-1.9.0.jar --class-path bin --scan-class-path --fail-if-no-tests -cp $GITHUB_WORKSPACE/bin
+          java -jar lib/junit-platform-console-standalone-1.9.0.jar --class-path bin --fail-if-no-tests -cp $GITHUB_WORKSPACE/bin
         # execute your tests generating test results
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
