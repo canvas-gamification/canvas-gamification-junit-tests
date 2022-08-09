@@ -15,9 +15,8 @@ jobs:
 
       - name: Build Tests
         run: |
-          javac -d bin -cp "lib/*:." -sourcepath src ./src/**/**/*.java
           mkdir -p $GITHUB_WORKSPACE/bin
-          cp -r bin/* $GITHUB_WORKSPACE/bin
+          javac -d $GITHUB_WORKSPACE/bin -cp "lib/*:." -sourcepath src ./src/**/**/*.java
           
       - name: Run Tests
         run: |
