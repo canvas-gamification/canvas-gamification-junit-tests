@@ -12,16 +12,6 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: '16.0.1'
-
-      - name: Cache Build Directory
-        uses: actions/cache@v1
-        with:
-          paths: ~/bin
-          key: ${{ runner.os }}-build-cache
-          restore-keys:
-            - ${{ runner.os }}-build-cache
-          restore-paths: ~/bin
-
       - name: Build Tests
         run: |
           javac -d bin -cp "lib/*:." -sourcepath src ./src/**/**/*.java
