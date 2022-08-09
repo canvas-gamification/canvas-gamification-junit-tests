@@ -6,8 +6,6 @@ import global.tools.Logger;
 import global.variables.Clause;
 import global.variables.RandomClause;
 
-import org.awaitility.Awaitility;
-import org.awaitility.Durations;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
