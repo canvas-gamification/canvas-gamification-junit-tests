@@ -1,14 +1,15 @@
 package arrays.programs_involving_data_sequences.easy.q3;
 
 /*
-Make a program that calls a method named nextPlease that takes an array of people's first names as input and
-removes the first name and shifts the remaining names to mimic a queue. Specifically, the method removes the
-first name from the array, shifts the remaining names one spot earlier (so the second element moves to the first, the
-third element moves to second, etc.), and makes the last name an empty string. The method should then print which name
-was removed. Finally, the method returns the shifted array as the output, with the new first element being printed.
-If the method input array is empty, the method should return an array of length one which contains the String
-"The queue is empty.".
+Make a program that calls a method named next please that takes an array of people's first names as input, removes the
+first name, and shifts those remaining to mimic a queue. Specifically, the method removes the first name from the array,
+shifts the remaining items one spot earlier (so the second element moves to the first, the third element moves to the
+second, etc.), and makes the last name an empty string. The method should print the name removed from the queue and
+return the shifted array. Print the first element of the returned array in the main method. If the input array is empty,
+the method should return an array of length one which contains the String "The queue is empty.".
+
  */
+
 public class StringyMovement {
     public static void main(String[] args) {
         String[] names = {"Travis", "Laura", "Liam", "Matthew", "Sam", "Marisha"};
