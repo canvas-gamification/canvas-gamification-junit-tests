@@ -54,7 +54,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("ageCalcInvalidInputProvider")
-    void correctAgeCalcInvalidInputMethod(int tooOld, int tooNew) throws Throwable {
+    void ageCalcIdentifiesInvalidInput(int tooOld, int tooNew) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(HowOld.class, "ageCalc", new Object[]{tooOld, tooNew}, int.class, int.class);
         CustomAssertions._assertEquals(-1, output, "Your ageCalc method does not correctly identify invalid input.");
     }
