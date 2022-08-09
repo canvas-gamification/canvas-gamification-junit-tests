@@ -17,9 +17,9 @@ jobs:
           [[ -d bin ]] || mkdir bin
           [[ -d reports ]] || mkdir reports
           javac -d bin -sourcepath src -cp "lib/*" $(find -name *.java)
-          java -jar lib/junit-platform-console-standalone-1.9.0.jar --class-path bin --scan-class-path --fail-if-no-tests --output-to reports/junit-report.xml
+          java -jar lib/junit-platform-console-standalone-1.9.0.jar --class-path bin --scan-class-path --fail-if-no-tests --reports-dir reports
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
-          files: "reports/*.xml"
+          files: "reports/**/*.xml"
