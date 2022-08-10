@@ -20,7 +20,7 @@ public class MainTest extends BaseTest {
     // Parsons
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "39";
+        TestOption.defaultInput = "It is very late";
         return new Clause[]{
                 new StringLiteral("Please enter a sentence: "),
                 new NewLine(),
