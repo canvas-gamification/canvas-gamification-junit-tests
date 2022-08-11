@@ -1,13 +1,12 @@
 package arrays.arrays_with_methods.medium.q4;
 
+import global.tools.CustomAssertions;
 import global.utils.MethodUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class MainTest {
     // Parsons
@@ -21,8 +20,8 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctDoubleTroubleMethod(int[] input, int[] result) throws Throwable{
-        int[] output = (int[]) MethodUtil.invokeIfMethodExists(DoubleTrouble.class, "doubleTrouble", new Object[]{input},
+        Object output = MethodUtil.invokeIfMethodExists(DoubleTrouble.class, "doubleTrouble", new Object[]{input},
                 int[].class);
-        assertArrayEquals(result, output, "Your method does not return an array with the elements copied twice.");
+        CustomAssertions._assertArrayEquals(result, output, "Your method does not return an array with the elements copied twice.");
     }
 }
