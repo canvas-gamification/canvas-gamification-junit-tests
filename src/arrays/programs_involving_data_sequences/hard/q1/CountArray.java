@@ -1,12 +1,12 @@
 package arrays.programs_involving_data_sequences.hard.q1;
 
 /*
-Write a program that prompts the user to enter an array of positive numbers in the range of 0 and 100  with length 14.
-This program will also have a method called countThisPlease() that takes the array and integer as input and counts the
-number of items in it which are below the pivot, equal to the pivot, and above the pivot. Assume for this question the pivot
-is equal to 45, but your method should be generalized to handle all cases. The values calculate in the method should be
-returned as a new array of length 3, in the order numbers below, numbers equal to, and then numbers above the pivot.
-Finally, the main method should print out this array, with one element on each line. Ensure your output matches the sample.
+Write a program that prompts the user to enter an array of positive integers with length 14. This program will also have
+a method called countThisPlease() that takes the array and integer as input and counts the number of items in it which
+are below the pivot, equal to the pivot, and above the pivot. Assume for this question the pivot is equal to 45, but
+your method should be generalized to handle all cases. The values calculated in the method should be returned as a new
+array of length 3, in the order numbers below, numbers equal to, and then numbers above the pivot. Finally, the main
+method should print out this array, with one element on each line. Ensure your output matches the sample.
 
 Sample Output:
     Please enter n numbers:
