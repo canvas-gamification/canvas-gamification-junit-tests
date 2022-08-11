@@ -43,7 +43,7 @@ public class MainTest extends BaseTest {
     @MethodSource("tempCalcInputProvider")
     void correctTempCalcMethod(double in, double con) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(Celverter.class, "tempCalc", new Object[]{in}, double.class);
-        CustomAssertions._assertEquals(con, output, 0.01, "Your method tempCalc does not correctly calculate the temperature in Fahrenheit.");
+        CustomAssertions._assertEquals(con, output, 0.01, "Your tempCalc method does not correctly convert the temperature to Fahrenheit.");
     }
 
     @ParameterizedTest
