@@ -52,6 +52,6 @@ public class MainTest extends BaseTest {
     @MethodSource("mainMethodInputProvider")
     void printsOutputCorrectly(String in, double vol){
         runWithInput(in);
-        assertEquals(vol, Double.parseDouble(getItemByName("volume")), 0.00001, "Your program does not display the correct volume.");
+        assertEquals(vol, Double.parseDouble(getItemByName("volume")), 0.00001, "Your program does not print the correct volume.");
     }
 }
