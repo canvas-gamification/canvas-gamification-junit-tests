@@ -28,8 +28,7 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
-        Using3.main(new String[0]);}
+    public void runMain(){Using3.main(new String[0]);}
 
     static Stream<Arguments> evenOrOddInputProvider(){
         return Stream.of(Arguments.of(0, "even"), Arguments.of(1, "odd"), Arguments.of(2, "even"), Arguments.of(-1, "odd"), Arguments.of(157932, "even"), Arguments.of(732461, "odd"), Arguments.of(-2220, "even"));
