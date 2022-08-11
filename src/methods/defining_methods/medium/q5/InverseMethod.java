@@ -1,9 +1,8 @@
 package methods.defining_methods.medium.q5;
 
 /*
-Write a Java Program that takes a boolean variable and inverses the value of the variable
-(i.e. if the value of the variable is true, make it false, and vice. versa.). Write a Java Method that accepts the
-boolean variable and returns a boolean value.
+Write a Java Program that takes a boolean variable and inverts the value (if the value is true, make it false, and vice. versa.).
+Write a Java Method that accepts the boolean variable and returns a boolean value.
 Sample output:
 Enter a boolean:
 false
