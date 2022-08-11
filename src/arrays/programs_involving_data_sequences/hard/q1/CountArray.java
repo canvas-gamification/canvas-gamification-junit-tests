@@ -2,14 +2,14 @@ package arrays.programs_involving_data_sequences.hard.q1;
 
 /*
 Write a program that prompts the user to enter an array of positive integers with length 14. This program will also have
-a method called countThisPlease() that takes the array and integer as input and counts the number of items in it which
-are below the pivot, equal to the pivot, and above the pivot. Assume for this question the pivot is equal to 45, but
+a method called countThisPlease() that takes the array and integer as parameters (in that order) and counts the number of
+items in it which are below the pivot, equal to the pivot, and above the pivot. Assume for this question the pivot is equal to 45, but
 your method should be generalized to handle all cases. The values calculated in the method should be returned as a new
 array of length 3, in the order numbers below, numbers equal to, and then numbers above the pivot. Finally, the main
 method should print out this array, with one element on each line. Ensure your output matches the sample.
 
 Sample Output:
-    Please enter n numbers:
+    Please enter 14 numbers:
     1
     11
     49
@@ -20,14 +20,15 @@ Sample Output:
     The number of numbers above 45 is z
 
  */
+
 import java.util.Scanner;
 
 public class CountArray {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        int [] arr = new int[14];
+        int[] arr = new int[14];
         System.out.println("Please enter 14 numbers:");
-        for(int i = 0; i < 14; i++)
+        for (int i = 0; i < 14; i++)
             arr[i] = input.nextInt();
         int[] arrCount = countThisPlease(arr, 45);
         System.out.printf("The number of numbers below %d is: %d\n", 45, arrCount[0]);
@@ -39,10 +40,10 @@ public class CountArray {
         int above = 0;
         int equal = 0;
         int below = 0;
-        for(int i = 0; i < nums.length; i++){
-            if(nums[i] < pivot)
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] < pivot)
                 below++;
-            else if(nums[i] == pivot)
+            else if (nums[i] == pivot)
                 equal++;
             else
                 above++;

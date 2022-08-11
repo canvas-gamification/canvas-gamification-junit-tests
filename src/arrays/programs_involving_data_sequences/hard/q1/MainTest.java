@@ -3,7 +3,6 @@ package arrays.programs_involving_data_sequences.hard.q1;
 import global.BaseTest;
 
 import global.tools.CustomAssertions;
-import global.tools.Logger;
 import global.tools.TestOption;
 import global.utils.ArrayUtil;
 import global.utils.MethodUtil;
@@ -12,7 +11,6 @@ import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
-import methods.method_overloading.hard.q1.OneToThree;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,7 +18,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -71,9 +68,9 @@ public class MainTest extends BaseTest {
     void correctCountThisPleaseMethod(int[] input, int pivot, int[] result) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(CountArray.class, "countThisPlease",
                 new Object[]{input, pivot}, int[].class, int.class);
-        CustomAssertions._assertArrayEquals(result, output, "Your method does not correctly count the all the number below, equal to, and above the pivot.");
+        CustomAssertions._assertArrayEquals(result, output, "Your countThisPlease method does not correctly count the all the number below, equal to, and above the pivot.");
         String consoleOutput = MethodUtil.getMethodOutput();
-        assertEquals("", consoleOutput, "Your method should not have console output.");
+        assertEquals("", consoleOutput, "Your countThisPlease method should not have console output.");
     }
 
     @ParameterizedTest
@@ -86,10 +83,10 @@ public class MainTest extends BaseTest {
         assertEquals(Integer.parseInt(getItemByName("above")), count[2], "Your output for the numbers above the pivot is incorrect.");
     }
 
-    private static int[] count(int[] arr){
+    private static int[] count(int[] arr) {
         int less = Arrays.stream(arr).boxed().mapToInt((a) -> a < pivot ? 1 : 0).sum();
         int equal = Arrays.stream(arr).boxed().mapToInt((a) -> a == pivot ? 1 : 0).sum();
-        int greater = Arrays.stream(arr).boxed().mapToInt((a) ->  a > pivot? 1 : 0).sum();
+        int greater = Arrays.stream(arr).boxed().mapToInt((a) -> a > pivot ? 1 : 0).sum();
         return new int[]{less, equal, greater};
     }
 
