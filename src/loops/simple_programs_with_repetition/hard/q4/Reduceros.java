@@ -3,6 +3,7 @@ package loops.simple_programs_with_repetition.hard.q4;
 /*
 Write a program to display a "single-digit reduction" of a number taken from the user by adding up its digits until
 a single-digit number is obtained. Eg. 567 becomes 5 + 6 + 7 = 18 = 1 + 8 => 9). Ensure your output matches the sample.
+If the input number is less than zero print: xxx's single number reduction is invalid!
 
 Sample Output:
 Enter a number:
@@ -28,7 +29,12 @@ Enter a number:
 //                n += Integer.parseInt(String.valueOf(s.charAt(x)));
 //            }
 //        }
-//        System.out.println(nn + "'s single number reduction is " + n);
+//        String result;
+//        if(n < 0)
+//           result = "invalid!";
+//        else
+//           result = String.valueOf(n);
+//        System.out.println(nn + "'s single number reduction is " + result);
 //    }
 //}
 
@@ -36,29 +42,31 @@ Enter a number:
 import java.util.Scanner;
 public class Reduceros
 {
-   public static void main( String[] args )
-   {
-      Scanner input = new Scanner( System.in );
-      System.out.println( "Enter a number: " );
+   public static void main( String[] args ) {
+      Scanner input = new Scanner(System.in);
+      System.out.println("Enter a number: ");
       int n = input.nextInt();
       int nn = n;
-      int result  = 0;
-      while( true )
-      {
-         result += n % 10;
-         n = n / 10;
-         if( n <= 0 )
-         {
-            if( result >= 10 )
-            {
-               n = result;
-               result = 0;
-               continue;
+      int result = 0;
+      String res;
+      if (n < 0) {
+         res = "invalid!";
+      } else {
+         while (true) {
+            result += n % 10;
+            n = n / 10;
+            if (n <= 0) {
+               if (result >= 10) {
+                  n = result;
+                  result = 0;
+                  continue;
+               }
+               break;
             }
-            break;
          }
+         res = String.valueOf(result);
       }
-      System.out.println( nn + "'s single number reduction is " + result );
+      System.out.println(nn + "'s single number reduction is " + res);
    }
 }
 
