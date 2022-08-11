@@ -1,25 +1,15 @@
 package arrays.programs_involving_data_sequences.medium.q5;
 
 /*
-Make a program that asks the user to input an array length, and then the numbers for that array. If the entered length
-is less than one, the program should print "Invalid array length!". After getting the array, the program should ask the
-user for a number in the array to be replaced, and then the program should call a method named deleteThis that takes as
-input the array and number to be replaced. The method tries to find the number in the array, and if found, the value in
-the array is set to 0 and the method stores the index where that value was found. Note that there could be multiple
-numbers in the array matching the target. In that case, the method returns the index of the last match. If none of the
-numbers in the array match the target number, then the method returns -1 instead. The main method should then print out
-the array.
+Make a program that calls a method named deleteThis that takes an array of integers and another target integer as
+parameters. The method tries to find and replace the target number in the array with 0. Note that there could be
+multiple numbers in the array matching the target. In that case, the method should replace all with 0. Also, the method
+should return the index of the number it replaces, and if it replaces multiple, it should return the last index. Then,
+the program should print out the returned index and the array with the replaced values.
 
 Sample Output:
-    Enter the desired array length:
-    3
-    Enter the numbers for the array:
-    1
-    2
-    1
-    Enter the number to be replaced:
-    1
-    0 2 0
+    The number at index 5 was replaced.
+    The array is now: 1 3 5 0 9 0
 
 Distractors:
     return = num;
@@ -37,27 +27,14 @@ Distractors:
     return arr;
  */
 
-import java.util.Scanner;
-
 public class DoTheDeletion {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter the desired array length: ");
-        int length = input.nextInt();
-        if (length > 0) {
-            int[] arr = new int[length];
-            System.out.println("Enter the numbers for the array: ");
-            for (int i = 0; i < arr.length; i++) {
-                arr[i] = input.nextInt();
-            }
-            System.out.println("Enter the number to be replaced: ");
-            int replace = input.nextInt();
-            int index = deleteThis(arr, replace);
-            for (int i = 0; i < arr.length; i++) {
-                System.out.print(arr[i] + " ");
-            }
-        } else {
-            System.out.println("Invalid array length!");
+        int[] arr = {1, 3, 5, 7, 9, 7};
+        int index = deleteThis(arr, 7);
+        System.out.println("The number at index " + index + " was replaced.");
+        System.out.print("The array is now: ");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
         }
     }
 
