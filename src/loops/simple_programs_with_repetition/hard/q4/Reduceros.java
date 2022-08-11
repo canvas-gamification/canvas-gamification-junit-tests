@@ -10,6 +10,9 @@ Enter a number:
 567's single number reduction is 9
  */
 
+//Commented out code is an alternate solution. The code that is not commented out is the original and was deemed unlikely
+//for the students to get so another solution was written up.
+
 //import java.util.Scanner;
 //
 //public class Reduceros {
