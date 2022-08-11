@@ -32,7 +32,7 @@ public class MainTest extends BaseTest {
     public void runMain(){VolumeOfCube.main(new String[0]);}
 
     static Stream<Arguments> cubeVolumeInputProvider(){
-        return Stream.of(Arguments.of(0, 0.0), Arguments.of(1, 1.0), Arguments.of(-1.0, -1.0), Arguments.of(-6.0, -1.0), Arguments.of(-23.8, -1.0), Arguments.of(25.5, 16581.375), Arguments.of(5945.8, 2.1019911829991202E11), Arguments.of(0.34, 0.03930400000000001));
+        return Stream.of(Arguments.of(0, 0.0), Arguments.of(1, 1.0), Arguments.of(-1.0, -1.0), Arguments.of(-6.0, -1.0), Arguments.of(-23.8, -1.0), Arguments.of(25.5, 16581.375), Arguments.of(5945.8, 2.1019911829991202E11), Arguments.of(0.34, 0.039304));
     }
 
     static Stream<Arguments> mainMethodInputProvider(){
@@ -43,13 +43,13 @@ public class MainTest extends BaseTest {
     @MethodSource("cubeVolumeInputProvider")
     void correctCubeVolumeMethod(double in, double vol) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(VolumeOfCube.class, "cubeVolume", new Object[]{in}, double.class);
-        CustomAssertions._assertEquals(vol, output, 0.001, "Your cubeVolume method does not correctly calculate the volume for the given cube length.");
+        CustomAssertions._assertEquals(vol, output, 0.00001, "Your cubeVolume method does not correctly calculate the volume for the given length.");
     }
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
     void printsOutputCorrectly(String in, double vol){
         runWithInput(in);
-        assertEquals(vol, Double.parseDouble(getItemByName("volume")), 0.001, "Your program does not print the correct message for the given side length.");
+        assertEquals(vol, Double.parseDouble(getItemByName("volume")), 0.00001, "Your program does not correctly calculate and print the volume of a cube.");
     }
 }
