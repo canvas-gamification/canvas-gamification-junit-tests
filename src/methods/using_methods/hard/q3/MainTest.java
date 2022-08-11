@@ -28,7 +28,8 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){FavouriteNumber.main(new String[0]);}
+    public void runMain(){
+        Using3.main(new String[0]);}
 
     static Stream<Arguments> evenOrOddInputProvider(){
         return Stream.of(Arguments.of(0, "even"), Arguments.of(1, "odd"), Arguments.of(2, "even"), Arguments.of(-1, "odd"), Arguments.of(157932, "even"), Arguments.of(732461, "odd"), Arguments.of(-2220, "even"));
@@ -41,7 +42,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("evenOrOddInputProvider")
     void correctEvenOrOddMethod(int in, String expected) throws Throwable{
-        Object output = MethodUtil.invokeIfMethodExists(FavouriteNumber.class, "evenOrOdd", new Object[]{in}, int.class);
+        Object output = MethodUtil.invokeIfMethodExists(Using3.class, "evenOrOdd", new Object[]{in}, int.class);
         CustomAssertions._assertEquals(expected, output, "Your evenOrOdd method does not correctly identify even or odd numbers.");
     }
 
