@@ -22,7 +22,7 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "19";
         return new Clause[]{
-                new StringLiteral("What is the current temperature in Celsius:"),
+                new StringLiteral("What is the current temperature in Celsius\\?"),
                 new NewLine(),
                 new StringLiteral("The current temperature in Fahrenheit is "),
                 new DoubleLiteral("converted")

@@ -16,7 +16,7 @@ public class Celverter
     public static void main( String[] args )
     {
         Scanner input = new Scanner(System.in);
-        System.out.println("What is the current temperature in Celsius:");
+        System.out.println("What is the current temperature in Celsius?");
         double currentTemp= input.nextDouble();
         System.out.println("The current temperature in Fahrenheit is " + tempCalc(currentTemp));
     }
