@@ -1,4 +1,5 @@
 package arrays.programs_involving_data_sequences.medium.q1;
+
 /*
 Make a program that calls a method called intoStrings that takes an integer array as input and returns a String that
 results from concatenating all the integers together. For example, the input of [1,2,3,4,5,6] will result in an output
@@ -10,10 +11,10 @@ Distractors:
     String s;
     return nums;
     return;
-    public void String intoStrings( int [] nums )
-    public static void intoStrings( int [] nums )
-    public static String intoStrings( int nums )
-    public static int[] intoStrings( int [] nums )
+    public void String intoString( int [] nums )
+    public static void intoString( int [] nums )
+    public static String intoString( int nums )
+    public static int[] intoString( int [] nums )
 
  */
 public class Stringify {
@@ -30,4 +31,3 @@ public class Stringify {
         return s;
     }
 }
-
