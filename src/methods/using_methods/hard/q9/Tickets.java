@@ -2,11 +2,11 @@ package methods.using_methods.hard.q9;
 
 /*
 Write a Java Program called Tickets that asks users the number of people getting a ticket for a trip.
-Normally, if 2 or less people are getting tickets, the cost is $5 per person. If the number of people getting tickets
-is 3-5 people, then the cost is $4.5 per person. If the number of people getting tickets is 6-10 people,
-then the cost is $4 per person. If the number of people getting tickets is 11 or more, then the cost is $3 per person.
-Write a Java Method called tripCostCalc that accepts the number of people as an input parameter and returns the
-total cost of the tickets.
+Your program should have a method called tripCostCalc that accepts the number of people as an input parameter and
+returns the total cost of the tickets. If the number of tickets is less than 0, print 0. For two or fewer,
+the cost of tickets is $5.00 per person; for 3-5 people, the price is $4.50 per person; for 6-10 people,
+the price is $4.00 per person; for 11 or more people, the price is $3.00 per person.
+Finally, print the total cost of the trip.
  */
 
 import java.util.Scanner;
@@ -15,7 +15,7 @@ public class Tickets
     public static void main( String[] args )
     {
         Scanner input = new Scanner(System.in);
-        System.out.println("How many people are going on the trip:");
+        System.out.println("How many people are going on the trip?");
         int numPeople = input.nextInt();
         System.out.println("The total cost of the trip is " + tripCostCalc(numPeople));
     }

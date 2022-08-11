@@ -22,7 +22,7 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "7";
         return new Clause[]{
-                new StringLiteral("How many people are going on the trip:"),
+                new StringLiteral("How many people are going on the trip\\?"),
                 new NewLine(),
                 new StringLiteral("The total cost of the trip is "),
                 new DoubleLiteral("price")
