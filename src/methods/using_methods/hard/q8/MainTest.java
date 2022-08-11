@@ -32,7 +32,7 @@ public class MainTest extends BaseTest {
     public void runMain(){Celverter.main(new String[0]);}
 
     static Stream<Arguments> tempCalcInputProvider(){
-        return Stream.of(Arguments.of(0, 32.0), Arguments.of(20.7, 69.25999999999999), Arguments.of(45.3, 113.53999999999999), Arguments.of(2.2, 35.96), Arguments.of(-11, 12.2), Arguments.of(-24.9, -12.82));
+        return Stream.of(Arguments.of(0, 32.0), Arguments.of(20.7, 69.25999999999999), Arguments.of(45.3, 113.53999999999999), Arguments.of(2.2, 35.96), Arguments.of(-11, 12.2), Arguments.of(-24.9, -12.82), Arguments.of(-40, -40.0));
     }
 
     static Stream<Arguments> mainMethodInputProvider(){
