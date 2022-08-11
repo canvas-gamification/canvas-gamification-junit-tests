@@ -51,6 +51,6 @@ public class MainTest extends BaseTest {
     @MethodSource("mainMethodInputProvider")
     void printsCorrectOutput(String in, double vol){
         runWithInput(in);
-        assertEquals(vol, Double.parseDouble(getItemByName("volume")), 0.000001, "Your program does not correctly output the volume for the given radius");
+        assertEquals(vol, Double.parseDouble(getItemByName("volume")), 0.000001, "Your program does not correctly output the volume for the given radius.");
     }
 }
