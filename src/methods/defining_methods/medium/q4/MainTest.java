@@ -43,7 +43,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("volumeCylinderInputProvider")
-    void correctVolumeCylinderInputProvider(double h, double r, double vol) throws Throwable {
+    void correctVolumeCylinderMethod(double h, double r, double vol) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(CylinderTime.class, "volumeCylinder", new Object[]{h, r}, double.class, double.class);
         CustomAssertions._assertEquals(vol, output, 0.00001, "Your volumeCylinder method does not correctly calculate the volume.");
     }
