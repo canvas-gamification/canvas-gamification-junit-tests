@@ -1,8 +1,25 @@
 package arrays.programs_involving_data_sequences.medium.q3;
 /*
 Make a program that takes up to 10 integers from the user. All of these numbers will get stored in an
-array and then printed. If the user wishes to enter fewer than 10 numbers, the user can enter -1 to exit the program,
-which results in the program printing only the user entered numbers from the array.
+array and then printed. If the user wishes to enter fewer than 10 numbers, the user can enter -1 to exit the program.
+The program should only print the numbers the user entered for the array.
+
+Sample Output:
+    Enter a value to insert into the array ( -1 to exit ):
+    1
+    Enter a value to insert into the array ( -1 to exit ):
+    2
+    Enter a value to insert into the array ( -1 to exit ):
+    3
+    Enter a value to insert into the array ( -1 to exit ):
+    4
+    Enter a value to insert into the array ( -1 to exit ):
+    5
+    Enter a value to insert into the array ( -1 to exit ):
+    6
+    Enter a value to insert into the array ( -1 to exit ):
+    -1
+    1 2 3 4 5 6
 
 Distractors:
     if( userValue >= - 1 )
