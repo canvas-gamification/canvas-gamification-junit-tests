@@ -20,7 +20,7 @@ public class CustomAssertions {
 
     public static void _assertEquals(Object expected, Object actual, double delta, String userMessage) {
         _assertSameTypes(expected, actual);
-        if (expected.getClass().isInstance(Double.class))
+        if (expected instanceof Double)
             assertEquals((double) expected, (double) actual, delta, userMessage);
         else
             fail("Error with test definition: a custom assert was used with the wrong type.");
