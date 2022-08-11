@@ -2,7 +2,7 @@ package methods.defining_methods.medium.q4;
 
 /*
 Write a Java Program that asks users for the height and radius of a cylinder. Then, using a method called volumeCylinder,
-determine the volume of the cylinder.
+determine the volume of the cylinder. If the user inputs a height or radius less than 0, return -1.
 
 Sample output:
 Please enter the height of the cylinder:
@@ -26,6 +26,9 @@ public class CylinderTime
     }
     public static double volumeCylinder(double radius, double height)
     {
-        return Math.PI*radius*radius*height;
+        if(radius < 0 || height < 0)
+            return -1;
+        else
+            return Math.PI*radius*radius*height;
     }
 }
