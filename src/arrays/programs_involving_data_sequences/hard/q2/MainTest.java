@@ -53,28 +53,15 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> mainMethodInputProvider(){
-        return Stream.of(Arguments.of("2 3 4", "Valid"),
-                Arguments.of("5 6 8", "Not Valid"),
-                Arguments.of("7 7 7", "Valid"),
-                Arguments.of("6 6 8", "Not Valid"),
-                Arguments.of("3 5 6", "Not Valid"),
-                Arguments.of("1 2 3 4", "Not Valid"),
-                Arguments.of("8 8 8 8", "Not Valid"),
-                Arguments.of("4 5 5 7", "Not Valid"),
-                Arguments.of("7 7 7 3", "Not Valid"),
-                Arguments.of("5 6 7 8 9", "Not Valid"),
-                Arguments.of("1 2 3 4 6", "Not Valid"),
-                Arguments.of("4 4 4 4 4", "Not Valid"),
-                Arguments.of("1 2 3 6 7", "Not Valid"),
-                Arguments.of("1 4 7 2 9", "Not Valid"),
-                Arguments.of("2 5 7 8 9", "Not Valid"),
-                Arguments.of("3 3 3 4 4", "Not Valid"));
+        return Stream.of(
+                Arguments.of("10 2 3 4 6 1 2 4 9 6", "Valid")
+        );
     }
 
     @ParameterizedTest
     @MethodSource("validMeldInputProvider")
     void correctValidMeldMethod(int[] input, boolean isMeld) throws Throwable {
-        boolean output = (boolean) MethodUtil.invokeIfMethodExists(MyJong.class, "validMeld",
+        Object output = MethodUtil.invokeIfMethodExists(MyJong.class, "containsValidMeld",
                 new Object[]{input}, int[].class);
         assertEquals(isMeld, output, "Your method does not identify valid melds.");
         String consoleOutput = MethodUtil.getMethodOutput();
