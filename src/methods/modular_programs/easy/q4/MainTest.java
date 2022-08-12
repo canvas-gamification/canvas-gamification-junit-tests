@@ -42,7 +42,7 @@ public class MainTest extends BaseTest {
     public void runMain(){ReturnChange.main(new String[0]);}
 
     static Stream<Arguments> valueAfterCalcInputProvider(){
-        return Stream.of(Arguments.of(3.1, 0.1), Arguments.of(67.2175396, 0.2175396), Arguments.of(0.34, 0.34), Arguments.of(0.0, 0.0), Arguments.of(-12.523, -0.523));
+        return Stream.of(Arguments.of(3.1, 0.1), Arguments.of(67.2175396, 0.2175396), Arguments.of(0.34, 0.34), Arguments.of(0.0, 0.0), Arguments.of(-12.523, -0.523), Arguments.of(0.1, 0.1), Arguments.of(-0.1, -0.1));
     }
 
     static Stream<Arguments> mainMethodInputProvider(){
