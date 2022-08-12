@@ -1,4 +1,4 @@
-package arrays.arrays_with_methods.hard.q1;
+package arrays.arrays_with_methods.hard.q1; 
 
 import global.utils.MethodUtil;
 import org.junit.jupiter.params.ParameterizedTest;

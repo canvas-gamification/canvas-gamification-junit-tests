@@ -5,6 +5,7 @@ import global.exceptions.InvalidTestOptionException;
 import global.tools.Logger;
 import global.variables.Clause;
 import global.variables.RandomClause;
+
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,8 @@ public abstract class BaseRandomTest extends BaseTest {
 
     @Test
     @Order(1)
-    public void randomNumbersAreCorrectlyGenerated() throws InvalidClauseException, InvalidTestOptionException {
+    public void randomNumbersAreCorrectlyGenerated() throws InvalidClauseException, InvalidTestOptionException, InterruptedException {
+        Thread.sleep(1000);
         for (int repetitionCount = 1; repetitionCount <= NUM_RUNS; repetitionCount++) {
             setUp();
             String output = getOutput();
