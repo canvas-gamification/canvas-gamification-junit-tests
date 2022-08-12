@@ -2,7 +2,8 @@ package methods.modular_programs.easy.q4;
 
 /*
 Write a Java Program that takes three double variables from the user, then write a method to return the number values
-after the decimal point. (e.g. if the double number is 14.5673, return 0.5673).
+after the decimal point. (e.g. if the double number is 14.5673, return 0.5673). If the variables are negative, return
+the negative decimal values.
 Sample output:
 Enter the first number:
 34.123
@@ -33,7 +34,10 @@ public class ReturnChange
     }
     public static double valueAfterCalc(double a)
     {
-        return a - Math.floor(a);
+        if(a < 0)
+            return (a - Math.ceil(a));
+        else
+            return a - Math.floor(a);
     }
 }
 
