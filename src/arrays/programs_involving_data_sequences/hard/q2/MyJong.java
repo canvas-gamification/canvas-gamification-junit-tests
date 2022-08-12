@@ -25,6 +25,7 @@ Sample Output:
     3
     Valid
  */
+
 import java.util.Scanner;
 
 public class MyJong {
@@ -32,7 +33,7 @@ public class MyJong {
         Scanner input = new Scanner(System.in);
         System.out.println("Please enter the 10 tile set:");
         int[] arr = new int[10];
-        for(int i = 0; i < arr.length; i++)
+        for (int i = 0; i < arr.length; i++)
             arr[i] = input.nextInt();
         if (containsValidMeld(arr))
             System.out.println("Valid");
@@ -41,7 +42,7 @@ public class MyJong {
     }
 
     public static boolean containsValidMeld(int[] arr) {
-        for(int i = 0; i < arr.length - 2; i ++) {
+        for (int i = 0; i < arr.length - 2; i++) {
             if (arr[i] == arr[i + 1] && arr[i + 1] == arr[i + 2])
                 return true;
             if (Math.abs(arr[i] - arr[i + 1]) == 1 && Math.abs(arr[i + 1] - arr[i + 2]) == 1)
