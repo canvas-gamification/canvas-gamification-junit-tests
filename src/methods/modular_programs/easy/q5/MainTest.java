@@ -20,7 +20,7 @@ public class MainTest extends BaseTest {
     // Parsons
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "39";
+        TestOption.defaultInput = "135.2";
         return new Clause[]{
                 new StringLiteral("Please enter your height in cm: "),
                 new NewLine(),
