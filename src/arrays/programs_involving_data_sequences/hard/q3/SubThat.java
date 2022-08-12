@@ -1,12 +1,32 @@
 package arrays.programs_involving_data_sequences.hard.q3;
 /*
 Write a program that calls a method called subCharacterString( char[] letters, int start, int end ) that takes as input
-a character array and two indexes to that array. The method will then copy the characters starting from the first index (inclusive)
-all the way to the characters ending at the second index (exclusive) into a String and return it as output. If the indices provided
-are invalid (e.g., if they exceed the length of the character array or if the second index is less than or equal to the first index),
-then the method returns an empty string. Your method should be general enough to work with any length of array.
-The main method should prompt the user to enter an array of length 10, a starting index, and an ending index, which are
-sent to subCharacterString. Print the resulting string in the main method.
+a character array and two indexes to that array. The method will then copy the characters starting from the first index
+(inclusive) to the second index (exclusive) into a String and return it as output. If the indices provided are invalid
+(e.g., if they exceed the length of the character array or if the second index is less than or equal to the first index),
+then the method returns an empty string. Your method should be general enough to work with any array length. The main
+method should prompt the user to enter an array of length 10, a starting index, and an ending index, which is sent to
+subCharacterString. Print the resulting string in the main method.
+
+Sample Output:
+    Enter the character array:
+    a
+    b
+    c
+    d
+    e
+    f
+    g
+    h
+    i
+    ...
+    x
+    Enter the starting index:
+    5
+    Enter the ending index:
+    7
+    Your string is:
+    fg
  */
 
 import java.util.Scanner;

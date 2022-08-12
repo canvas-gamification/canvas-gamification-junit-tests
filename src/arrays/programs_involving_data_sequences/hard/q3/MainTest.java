@@ -2,12 +2,15 @@ package arrays.programs_involving_data_sequences.hard.q3;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
+import global.tools.CustomAssertions;
 import global.tools.TestOption;
+import global.utils.ArrayUtil;
 import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -25,10 +28,13 @@ public class MainTest extends BaseTest {
         TestOption.defaultInput = randomCharInputGenerator(numChars) + "2 " + "7 ";
         return new Clause[]{
                 new StringLiteral("Enter the character array:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("Enter the starting index:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("Enter the ending index:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("Your string is:"),
                 new NewLine(),
@@ -61,19 +67,21 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> mainMethodInputProvider() {
         Random r = new Random();
-        return Stream.of(Arguments.of(randomCharInputGenerator(numChars), numChars / 2, numChars),
-                Arguments.of(randomCharInputGenerator(numChars), 0, numChars),
-                Arguments.of(randomCharInputGenerator(numChars), numChars - 1, numChars + 1),
-                Arguments.of(randomCharInputGenerator(numChars), -1, 5),
-                Arguments.of(randomCharInputGenerator(numChars), r.nextInt(numChars), r.nextInt(numChars)));
+        return Stream.of(
+                Arguments.of(ArrayUtil.charArrayToInput(ArrayUtil.generateRandomCharArray('a', (char) ('z' + 1), numChars)), numChars / 2, numChars),
+                Arguments.of(ArrayUtil.charArrayToInput(ArrayUtil.generateRandomCharArray('a', (char) ('z' + 1), numChars)), 0, numChars),
+                Arguments.of(ArrayUtil.charArrayToInput(ArrayUtil.generateRandomCharArray('a', (char) ('z' + 1), numChars)), numChars - 1, numChars + 1),
+                Arguments.of(ArrayUtil.charArrayToInput(ArrayUtil.generateRandomCharArray('a', (char) ('z' + 1), numChars)), 6, 5),
+                Arguments.of(ArrayUtil.charArrayToInput(ArrayUtil.generateRandomCharArray('a', (char) ('z' + 1), numChars)), -1, 5),
+                Arguments.of(ArrayUtil.charArrayToInput(ArrayUtil.generateRandomCharArray('a', (char) ('z' + 1), numChars)), r.nextInt(numChars), r.nextInt(numChars)));
     }
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void correctSubCharacterStringMethod(char[] input, int start, int end, String subString) throws Throwable {
-        String methodOutput = (String) MethodUtil.invokeIfMethodExists(SubThat.class, "subCharacterString",
+        Object output = MethodUtil.invokeIfMethodExists(SubThat.class, "subCharacterString",
                 new Object[]{input, start, end}, char[].class, int.class, int.class);
-        assertEquals(subString, methodOutput, "Your method does not generate the correct substring based on the inputs provided.");
+        CustomAssertions._assertEquals(subString, output, "Your method does not generate the correct substring based on the inputs provided.");
         String consoleOutput = MethodUtil.getMethodOutput();
         assertEquals("", consoleOutput, "Your method should not print anything to the console.");
     }
