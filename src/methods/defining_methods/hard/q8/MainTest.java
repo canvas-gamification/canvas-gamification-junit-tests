@@ -1,72 +1,68 @@
 package methods.defining_methods.hard.q8;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import global.BaseTest;
 import global.tools.CustomAssertions;
+import global.tools.TestOption;
 import global.utils.MethodUtil;
 import global.variables.Clause;
+import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 
 public class MainTest extends BaseTest {
   // Java
   public Clause[] testSentence() {
+    TestOption.isInputTest = true;
+    TestOption.defaultInput = "100";
     return new Clause[] {
-        new StringLiteral("The data type associated with 14 is: "),
-        new StringLiteral("int", "intNumber"),
+        new StringLiteral("Enter the cost of rent per month:"),
+        new Optional(new StringLiteral(" ")),
         new NewLine(),
-        new StringLiteral("The data type associated with 61.34 is: "),
-        new StringLiteral("double", "doubleNumber"),
+        new StringLiteral("The total cost of rent per year is \\$"),
+        new DoubleLiteral("rentYearly")
     };
-  }
+  };
 
   public void runMain() {
-    Overload8.main(new String[0]);
+    RentMethod.main(new String[0]);
   }
 
-  static Stream<Integer> inputIntegerProvider() {
-    return Stream.of(-1000, -5, -1, 0, 1, 7, 121, 4444);
-  }
-
-  static Stream<Double> inputDoubleProvider() {
-    return Stream.of(-1000.11, -5.123, -1.0, 0.7, 1.0001, 7.8989, 121.1, 4444.4444444);
-  }
-
-  @ParameterizedTest
-  @MethodSource("inputIntegerProvider")
-  void correctPrintTypeIntegerMethod(int intNumber) throws Throwable {
-    String errorMessage = "Your method \"printType()\" for integer does not print the correct type.";
-    Object output = MethodUtil.invokeIfMethodExists(Overload8.class, "printType", new Object[] { intNumber },
-        int.class);
-    CustomAssertions._assertEquals(output, "int", errorMessage);
+  static Stream<Arguments> rentPricesProvider() {
+    return Stream.of(
+        Arguments.of(100.0, 1200.0),
+        Arguments.of(200.0, 2400.0),
+        Arguments.of(500.0, 6000.0),
+        Arguments.of(600.0, 7200.0),
+        Arguments.of(700.0, 8400.0),
+        Arguments.of(1000.0, 12000.0),
+        Arguments.of(321.344, 3856.128),
+        Arguments.of(1.1, 13.2));
   }
 
   @ParameterizedTest
-  @MethodSource("inputDoubleProvider")
-  void correctPrintTypeDoubleMethod(double doubleNumber) throws Throwable {
-    String errorMessage = "Your method \"printType()\" for integer does not print the correct type.";
-    Object output = MethodUtil.invokeIfMethodExists(Overload8.class, "printType", new Object[] { doubleNumber },
+  @MethodSource("rentPricesProvider")
+  void correctCalculatesRent(double rentMonthly, double rentYearly) throws Throwable {
+    String errorMsg = "Your method \"rentCalcYear()\" does not calculate the yearly rent correctly.";
+    Object output = MethodUtil.invokeIfMethodExists(RentMethod.class, "rentCalcYear", new Object[] { rentMonthly },
         double.class);
-    CustomAssertions._assertEquals(output, "double", errorMessage);
+    CustomAssertions._assertEquals(output, rentYearly, 0.01, errorMsg);
   }
 
-  @Test
-  void printsCorrectOutput() {
-    String errorMessageInteger = "Your program does not print the correct output for integer.";
-    String errorMessageDouble = "Your program does not print the correct output for integer.";
-    String intNumberType = getItemByName("intNumber");
-    String doubleNumberType = getItemByName("doubleNumber");
+  @ParameterizedTest
+  @MethodSource("rentPricesProvider")
+  void printsCorrectYearlyRent(double rentMonthly, double rentYearly) {
+    String errorMsg = "Your program does not print the correct yearly rent.";
+    runWithInput(rentMonthly + "");
+    assertEquals(Double.parseDouble(getItemByName("rentYearly")), rentYearly, 0.001, errorMsg);
 
-    assertEquals(intNumberType, "int", errorMessageInteger);
-    assertEquals(doubleNumberType, "double", errorMessageDouble);
   }
 }
