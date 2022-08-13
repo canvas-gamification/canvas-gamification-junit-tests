@@ -16,6 +16,11 @@ public class RandomUtil {
      */
     public static final int NO_BIN = -1;
     public static final double ALPHA_LEVEL = 0.12;
+    /**
+     * This constant is the ratio of bin frequencies that must be within the range for the group of bin frequencies to be
+     * considered to represent a random set
+     */
+    public static final double ACCEPTANCE_RATE = 0.90;
 
     /**
      * Returns if the set of values described by the total number of values considered and an array of "bin sizes" is
@@ -75,12 +80,14 @@ public class RandomUtil {
      */
     public static boolean frequenciesAreRandom(int[] frequencies, int numBins) {
         // assume that the sum of frquencies in this list == the total number of values generated
-        double expectedFrequency = ArrayUtil.sum(frequencies) / numBins;
+        double expectedFrequency = ArrayUtil.sum(frequencies) * 1.0 / numBins;
+        int count = 0;
         for (int frequency : frequencies) {
             // TODO: calculate percentage error based on total values and number of bins
-            if (!valueAlmostEquals(frequency, expectedFrequency, 0.75)) return false;
+            if (valueAlmostEquals(frequency, expectedFrequency, 0.50))
+                count++;
         }
-        return true;
+        return (count * 1.0) / numBins >= ACCEPTANCE_RATE;
     }
 
     public static boolean valueAlmostEquals(double value, double target, double percentageError) {
