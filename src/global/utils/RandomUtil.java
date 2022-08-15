@@ -1,6 +1,5 @@
 package global.utils;
 
-import global.tools.Logger;
 import global.variables.*;
 import org.apache.commons.math3.stat.inference.ChiSquareTest;
 
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static global.tools.CustomAssertions.assertWithinRange;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RandomUtil {
     /*
@@ -76,17 +74,19 @@ public class RandomUtil {
      * Determine if a list of frequencies is random
      *
      * @param frequencies a list of frequency counts for bins
-     * @return whether or not this array of frequncies describes randomly generated values
+     * @return whether this array of frequencies describes randomly generated values
      */
     public static boolean frequenciesAreRandom(int[] frequencies, int numBins) {
-        // assume that the sum of frquencies in this list == the total number of values generated
+        // assume that the sum of frequencies in this list == the total number of values generated
         double expectedFrequency = ArrayUtil.sum(frequencies) * 1.0 / numBins;
         int count = 0;
         for (int frequency : frequencies) {
             // TODO: calculate percentage error based on total values and number of bins
+            // Checks if each bin is within 50% of the expected value
             if (valueAlmostEquals(frequency, expectedFrequency, 0.50))
                 count++;
         }
+        // If the number of bins which pass the randomness check is above the acceptance rate, the numbers are considered random
         return (count * 1.0) / numBins >= ACCEPTANCE_RATE;
     }
 
