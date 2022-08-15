@@ -1,6 +1,13 @@
 package global.utils;
 
+import java.nio.CharBuffer;
+import java.util.Arrays;
 import java.util.Random;
+
+/*
+TODO: Merge array, ascending number array taking a start number, an optional step, and a length, array multiplier, increment by x,
+TODO: replicate array (given a number, make an array of that element),
+ */
 
 public class ArrayUtil {
     private static final String[] wordBank = new String[]{
@@ -13,21 +20,13 @@ public class ArrayUtil {
     };
 
     public static int[] generateRandomIntArray(int lower, int upper, int length) {
-        int[] randomArr = new int[length];
         Random r = new Random();
-        int range = upper - lower;
-        for (int i = 0; i < randomArr.length; i++)
-            randomArr[i] = r.nextInt(range) + lower;
-        return randomArr;
+        return r.ints(length, lower, upper).toArray();
     }
 
     public static double[] generateRandomDoubleArray(double lower, double upper, int length) {
-        double[] randomArr = new double[length];
         Random r = new Random();
-        double range = upper - lower;
-        for (int i = 0; i < randomArr.length; i++)
-            randomArr[i] = r.nextDouble() * range + lower;
-        return randomArr;
+        return r.doubles(length, lower, upper).toArray();
     }
 
     public static char[] generateRandomCharArray(char lower, char upper, int length) {
@@ -48,43 +47,38 @@ public class ArrayUtil {
     }
 
     public static int sum(int[] arr) {
-        int sum = 0;
-        for (int item : arr)
-            sum += item;
-        return sum;
+        return Arrays.stream(arr).boxed().mapToInt(Integer::intValue).sum();
     }
 
     public static double sum(double[] arr) {
-        double sum = 0;
-        for (double value : arr) sum += value;
-        return sum;
+        return Arrays.stream(arr).boxed().mapToDouble(Double::doubleValue).sum();
     }
 
     public static String intArrayToInput(int[] arr) {
         StringBuilder sb = new StringBuilder();
-        for (int item : arr)
-            sb.append(item).append(" ");
+        Arrays.stream(arr).forEach((s) -> sb.append(s).append(" "));
         return sb.toString();
     }
 
     public static String doubleArrayToInput(double[] arr) {
         StringBuilder sb = new StringBuilder();
-        for (double item : arr)
-            sb.append(item).append(" ");
+        Arrays.stream(arr).forEach((s) -> sb.append(s).append(" "));
         return sb.toString();
     }
 
     public static String charArrayToInput(char[] arr) {
         StringBuilder sb = new StringBuilder();
-        for (char item : arr)
-            sb.append(item).append(" ");
+        CharBuffer.wrap(arr).chars().forEach((c) -> sb.append((char) c).append(" "));
         return sb.toString();
     }
 
-    public static String stringArrayToInput(String[] arr){
+    public static String stringArrayToInput(String[] arr) {
         StringBuilder sb = new StringBuilder();
-        for (String item : arr)
-            sb.append(item).append(" ");
+        Arrays.stream(arr).forEach((s) -> sb.append(s).append(" "));
         return sb.toString();
+    }
+
+    public static int[] increment(int[] arr, int increment) {
+        return Arrays.stream(arr).map(number -> (number + increment)).toArray();
     }
 }
