@@ -1,9 +1,13 @@
 package methods.modular_programs.hard.q1;
+
 import global.BaseTest;
+import global.exceptions.InvalidClauseException;
+import global.tools.CustomAssertions;
 import global.tools.TestOption;
+import global.utils.MethodUtil;
 import global.variables.*;
 import global.variables.clauses.*;
-import org.junit.jupiter.api.Test;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,16 +16,17 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MainTest extends BaseTest{
-
+public class MainTest extends BaseTest {
+    // Java
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "5";
 
         return new Clause[]{
-                new StringLiteral("Enter a number"),
+                new StringLiteral("Enter a number:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("true"),
+                new PlaceHolder()
         };
     }
 
@@ -29,27 +34,48 @@ public class MainTest extends BaseTest{
         RightPrime.main(new String[]{});
     }
 
-    @Test
-    public void notPrimeAfterTruncationsTest(){
-        assertFalse(RightPrime.isRightPrime(1277), "Your program does not check the prime after multiple truncations");
+    static Stream<Arguments> rightPrimeInputProvider() {
+        return Stream.of(
+                Arguments.of(3, true),
+                Arguments.of(67, false),
+                Arguments.of(345, false),
+                Arguments.of(37337999, true),
+                Arguments.of(577489664, false),
+                Arguments.of(0, false),
+                Arguments.of(-1, false),
+                Arguments.of(-4428, false),
+                Arguments.of(-29399999, false)
+        );
     }
 
-    @Test
-    public void largePrimeTest() {
-        assertTrue(RightPrime.isRightPrime(59393), "Your program does not handle large right truncatable primes");
-    }
-
-    static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of(3, true), Arguments.of(67, false), Arguments.of(345, false));
+    static Stream<Arguments> mainMethodInputProvider() {
+        return Stream.of(
+                Arguments.of(5, true),
+                Arguments.of(0, false),
+                Arguments.of(-1, false),
+                Arguments.of(-23333, false),
+                Arguments.of(23333, true),
+                Arguments.of(233993, true),
+                Arguments.of(1789576, false)
+        );
     }
 
     @ParameterizedTest
-    @MethodSource("inputProvider")
-    public void variousInputsTest(int inputs, boolean results){
-        boolean b = RightPrime.isRightPrime(inputs);
-        if(results)
-            assertTrue(b, "Your method isRightPrime returned 'false' for an integer that is indeed a right-truncate-prime");
-        else
-            assertFalse(b, "Your method isRightPrime returned 'true' for an integer that is not a right-truncate-prime");
+    @MethodSource("rightPrimeInputProvider")
+    public void correctRightPrimeMethod(int input, boolean isRightPrime) throws Throwable {
+        Object output = MethodUtil.invokeIfMethodExists(RightPrime.class, "isRightPrime", new Object[]{input},
+                int.class);
+        CustomAssertions._assertEquals(isRightPrime, output, "Your isRightPrime method does not correctly identify if a number is a right-truncatable prime.");
+        String methodConsoleOutput = MethodUtil.getMethodOutput();
+        assertEquals("", methodConsoleOutput, "Your isRightPrime method should not have any console output.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("mainMethodInputProvider")
+    void printsCorrectOutput(int input, boolean isRightPrime) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct output for it the input number is a right-truncatable prime.";
+        runWithInput(String.valueOf(input), new Clause[]{
+                new StringLiteral(String.valueOf(isRightPrime))
+        });
     }
 }

@@ -1,4 +1,4 @@
-package loops.simple_programs_with_repitition.hard.q7;
+package loops.simple_programs_with_repetition.hard.q7;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;

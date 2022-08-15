@@ -77,7 +77,9 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
     private static int getNumBins(double lower, double upper) {
         int upperCeil = (int) (upper + 1);
         int lowerFloor = (int) lower;
-        return RandomUtil.getNumBins(lowerFloor, upperCeil); // TODO: do properly
+        // Ensures that there will be at least 10 bins
+        return (upperCeil - lowerFloor <= 10) ? RandomUtil.getNumBins(0, 10) :
+                RandomUtil.getNumBins(lowerFloor, upperCeil); // TODO: do properly
     }
 
     private static int assignedBinIndex(double value, double lower, double upper, int numBins) {

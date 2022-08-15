@@ -1,4 +1,4 @@
-package loops.simple_programs_with_repitition.hard.q7;
+package loops.simple_programs_with_repetition.hard.q7;
 
 /*
 Write a java program called PushItBack that takes a string from the user and moves all of the numbers to the end of the string.

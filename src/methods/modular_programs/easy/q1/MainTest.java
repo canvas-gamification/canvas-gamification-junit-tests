@@ -24,7 +24,7 @@ public class MainTest extends BaseTest {
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "170.0";
-        return new Clause[]{
+        return new Clause[] {
                 new StringLiteral("Please enter your height in cm: "),
                 new NewLine(),
                 new PlaceHolder()
@@ -43,8 +43,7 @@ public class MainTest extends BaseTest {
                 Arguments.of(-37, "Invalid input!" + System.lineSeparator()),
                 Arguments.of(149.23716, "You're below the average height in Canada!" + System.lineSeparator()),
                 Arguments.of(-0.0001, "Invalid input!" + System.lineSeparator()),
-                Arguments.of(0, "You're below the average height in Canada!" + System.lineSeparator())
-        );
+                Arguments.of(0, "You're below the average height in Canada!" + System.lineSeparator()));
     }
 
     static Stream<Double> userInputInputProvider() {
@@ -55,18 +54,18 @@ public class MainTest extends BaseTest {
         Random r = new Random();
         return Stream.of(
                 Arguments.of(-0.001, "Invalid input!"),
-                Arguments.of(r.nextDouble()* 168.7, "You're below the average height in Canada!"),
-                Arguments.of(r.nextDouble() * 50 + 169, "You're above the average height in Canada!")
-        );
+                Arguments.of(r.nextDouble() * 168.7, "You're below the average height in Canada!"),
+                Arguments.of((r.nextDouble() * 50) + 169, "You're above the average height in Canada!"));
     }
 
     @ParameterizedTest
     @MethodSource("heightCheckerInputProvider")
     void correctHeightCheckerMethod(double height, String message) throws Throwable {
-        MethodUtil.invokeIfMethodExists(AverageHeight.class, "heightChecker", new Object[]{height},
+        MethodUtil.invokeIfMethodExists(AverageHeight.class, "heightChecker", new Object[] { height },
                 double.class);
         String output = MethodUtil.getMethodOutput();
-        assertEquals(message, output, "Your heightChecker method does not print the correct message base on the input height.");
+        assertEquals(message, output,
+                "Your heightChecker method does not print the correct message base on the input height.");
     }
 
     @ParameterizedTest
@@ -74,14 +73,15 @@ public class MainTest extends BaseTest {
     void correctUserInputMethod(double input) throws Throwable {
         provideInput(String.valueOf(input));
         Object output = MethodUtil.invokeIfMethodExists(AverageHeight.class, "userInput");
-        CustomAssertions._assertEquals(input, output, "Your userInput method does not correctly get input from the user.");
+        CustomAssertions._assertEquals(input, output,
+                "Your userInput method does not correctly get input from the user.");
     }
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
     void printsOutputCorrectly(double height, String message) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message based on the input height.";
-        runWithInput(String.valueOf(height), new Clause[]{
+        runWithInput(String.valueOf(height), new Clause[] {
                 new StringLiteral(message)
         });
     }

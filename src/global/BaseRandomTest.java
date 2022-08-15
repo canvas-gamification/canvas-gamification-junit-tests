@@ -20,7 +20,7 @@ import static global.utils.RegexUtil.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public abstract class BaseRandomTest extends BaseTest {
-    final static int NUM_RUNS = 500;  // TODO: this could be generated based on ranges
+    final static int NUM_RUNS = 1000;  // TODO: this could be generated based on ranges
     final static String MESSAGE_INCORRECT_RANDOM = "You do not seem to be properly generating random values.";
 
     @Test
