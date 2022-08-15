@@ -16,6 +16,9 @@ public class ArrayUtilTesting {
         System.out.println(ArrayUtil.sum(new double[]{1.0, 2.5, 3.7, 4.3, 5.9}));
         System.out.println(ArrayUtil.charArrayToInput(new char[]{'A', 'B', 'C', 'D'}));
         System.out.println(ArrayUtil.charArrayToInput(ArrayUtil.generateRandomCharArray('A', 'F', 10)));
+        System.out.println(ArrayUtil.intArrayToInput(ArrayUtil.generateAscendingArray(5, 10)));
+        System.out.println(ArrayUtil.doubleArrayToInput(ArrayUtil.generateAscendingArray(5.9, 9, 1.5)));
+        System.out.println(ArrayUtil.charArrayToInput(ArrayUtil.merge(new char[]{'A', 'B', 'C'}, new char[]{'X', 'Y', 'Z'})));
     }
 
     public static int sum(int[] arr) {
