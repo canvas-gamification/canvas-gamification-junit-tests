@@ -44,7 +44,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void printsOutputCorrectly(boolean b, String s) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not display the correct boolean.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct boolean.";
         runWithInput(String.valueOf(b), new Clause[]{
                 new StringLiteral(s)
         });
