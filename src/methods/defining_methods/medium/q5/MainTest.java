@@ -28,9 +28,11 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){InverseMethod.main(new String[0]);}
+    public void runMain() {
+        InverseMethod.main(new String[0]);
+    }
 
-    static Stream<Arguments> inputProvider(){
+    static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of(true, "false"), Arguments.of(false, "true"));
     }
 
