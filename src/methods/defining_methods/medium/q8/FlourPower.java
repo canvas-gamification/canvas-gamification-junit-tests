@@ -8,7 +8,7 @@ flour. If either weight or cost is less than 0, return -1.
 Sample output:
     Please enter the weight of the flour:
     4.4
-    Please enter the cost:
+    Please enter the price if the flour:
     8
     The cost per kg of the flour is: 1.8181818181818181
 
@@ -21,7 +21,7 @@ public class FlourPower {
         Scanner input = new Scanner(System.in);
         System.out.println("Please enter the weight of the flour: ");
         double weightFlour = input.nextDouble();
-        System.out.println("Please enter the cost: ");
+        System.out.println("Please enter the price if the flour: ");
         double costFlour = input.nextDouble();
         System.out.println("The cost per kg of the flour is: " + costPerCalc(weightFlour, costFlour));
     }

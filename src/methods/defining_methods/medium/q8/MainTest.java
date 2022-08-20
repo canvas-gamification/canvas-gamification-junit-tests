@@ -24,7 +24,7 @@ public class MainTest extends BaseTest {
         return new Clause[]{
                 new StringLiteral("Please enter the weight of the flour: "),
                 new NewLine(),
-                new StringLiteral("Please enter the cost: "),
+                new StringLiteral("Please enter the price if the flour: "),
                 new NewLine(),
                 new StringLiteral("The cost per kg of the flour is: "),
                 new DoubleLiteral("price")
