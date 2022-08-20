@@ -39,7 +39,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void calculatesReductionCorrectly(String in, String reduced) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not calculate the reduction properly.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not calculate the single-digit reduction properly.";
         runWithInput(in, new Clause[]{
                 new StringLiteral(reduced)
         });
