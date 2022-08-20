@@ -3,7 +3,7 @@ package methods.using_methods.hard.q8;
 /*
 Write a Java Program called Celverter that asks users for the current temperature in Celsius,
 then write a method called tempCalc that accepts that value as an input parameter and returns the temperature in Fahrenheit.
-
+The program should print the converted temperature. 
 Sample output:
 What is the current temperature in Celsius
 19
