@@ -43,6 +43,6 @@ public class MainTest extends BaseTest {
         runWithInput(in, new Clause[]{
                 new StringLiteral(reduced)
         });
-        assertEquals(getItemByName("number"), in, "Your program does not output the same number that was input as per the sample output.");
+        assertEquals(getItemByName("number"), in, "Your program does not print the correct output.");
     }
 }
