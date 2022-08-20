@@ -38,7 +38,7 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void correctInverseCalcMethod(boolean b, String s) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(InverseMethod.class, "inverseCalc", new Object[]{b}, boolean.class);
-        CustomAssertions._assertEquals(!b, output, "Your inverseCalc method does not return the opposite boolean.");
+        CustomAssertions._assertEquals(!b, output, "Your inverseCalc method does not invert the input boolean.");
     }
 
     @ParameterizedTest
