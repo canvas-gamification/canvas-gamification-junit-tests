@@ -2,7 +2,7 @@ package methods.defining_methods.medium.q5;
 
 /*
 Write a Java Program that takes a boolean variable and inverts the value (if the value is true, make it false, and vice. versa.).
-Write a Java Method that accepts the boolean variable and returns a boolean value.
+Then, create a method called inverseCalc that accepts a boolean variable and inverts it, returning that value. 
 Sample output:
 Enter a boolean:
 false
