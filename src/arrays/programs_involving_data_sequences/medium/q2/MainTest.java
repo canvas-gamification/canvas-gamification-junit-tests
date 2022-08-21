@@ -37,7 +37,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void correctCharzIIStringMethod(String word, char[] letters) throws Throwable {
-        String result = word + ArrayUtil.charArrayToInput(letters).replaceAll(" ", "");
+        String result = word + ArrayUtil.arrayToInput(letters).replaceAll(" ", "");
         Object output = MethodUtil.invokeIfMethodExists(WordleBuilder.class, "charzIIString",
                 new Object[]{word, letters}, String.class, char[].class);
         CustomAssertions._assertEquals(result, output, "Your charzIIString method does not correctly combine the input word and char array.");

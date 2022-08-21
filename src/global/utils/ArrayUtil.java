@@ -1,12 +1,10 @@
 package global.utils;
 
-import java.lang.reflect.Array;
 import java.nio.CharBuffer;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /*
 TODO: Merge array, ascending number array taking a start number, an optional step, and a length, array multiplier, increment by x,
@@ -58,25 +56,25 @@ public class ArrayUtil {
         return Arrays.stream(arr).boxed().mapToDouble(Double::doubleValue).sum();
     }
 
-    public static String intArrayToInput(int[] arr) {
+    public static String arrayToInput(int[] arr) {
         StringBuilder sb = new StringBuilder();
         Arrays.stream(arr).forEach((s) -> sb.append(s).append(" "));
         return sb.toString();
     }
 
-    public static String doubleArrayToInput(double[] arr) {
+    public static String arrayToInput(double[] arr) {
         StringBuilder sb = new StringBuilder();
         Arrays.stream(arr).forEach((s) -> sb.append(s).append(" "));
         return sb.toString();
     }
 
-    public static String charArrayToInput(char[] arr) {
+    public static String arrayToInput(char[] arr) {
         StringBuilder sb = new StringBuilder();
         CharBuffer.wrap(arr).chars().forEach((c) -> sb.append((char) c).append(" "));
         return sb.toString();
     }
 
-    public static String stringArrayToInput(String[] arr) {
+    public static String arrayToInput(String[] arr) {
         StringBuilder sb = new StringBuilder();
         Arrays.stream(arr).forEach((s) -> sb.append(s).append(" "));
         return sb.toString();
@@ -90,47 +88,47 @@ public class ArrayUtil {
         return Arrays.stream(arr).map(number -> (number + increment)).toArray();
     }
 
-    public static int[] generateAscendingArray(int start, int length){
+    public static int[] generateAscendingArray(int start, int length) {
         return IntStream.iterate(start, (i) -> i + 1).limit(length).toArray();
     }
 
-    public static int[] generateAscendingArray(int start, int length, int step){
+    public static int[] generateAscendingArray(int start, int length, int step) {
         return IntStream.iterate(start, (i) -> i + step).limit(length).toArray();
     }
 
-    public static double[] generateAscendingArray(double start, int length){
+    public static double[] generateAscendingArray(double start, int length) {
         return DoubleStream.iterate(start, (i) -> i + 1).limit(length).toArray();
     }
 
-    public static double[] generateAscendingArray(double start, int length, double step){
+    public static double[] generateAscendingArray(double start, int length, double step) {
         return DoubleStream.iterate(start, (i) -> i + step).limit(length).toArray();
     }
 
-    public static int[] multiplyArray(int[] arr, int multiply){
+    public static int[] multiplyArray(int[] arr, int multiply) {
         return Arrays.stream(arr).map((i) -> i * multiply).toArray();
     }
 
-    public static double[] multiplyArray(double[] arr, double multiply){
+    public static double[] multiplyArray(double[] arr, double multiply) {
         return Arrays.stream(arr).map((i) -> i * multiply).toArray();
     }
 
-    public static int[] replicateArray(int[] arr, int number, int length){
+    public static int[] replicateArray(int[] arr, int number, int length) {
         return IntStream.iterate(number, (i) -> i).limit(length).toArray();
     }
 
-    public static double[] replicateArray(double[] arr, double number, int length){
+    public static double[] replicateArray(double[] arr, double number, int length) {
         return DoubleStream.iterate(number, (i) -> i).limit(length).toArray();
     }
 
-    public static int[] merge(int[] firstArray, int[] secondArray){
+    public static int[] merge(int[] firstArray, int[] secondArray) {
         return IntStream.concat(Arrays.stream(firstArray), Arrays.stream(secondArray)).toArray();
     }
 
-    public static double[] merge(double[] firstArray, double[] secondArray){
+    public static double[] merge(double[] firstArray, double[] secondArray) {
         return DoubleStream.concat(Arrays.stream(firstArray), Arrays.stream(secondArray)).toArray();
     }
 
-    public static char[] merge(char[] firstArray, char[] secondArray){
+    public static char[] merge(char[] firstArray, char[] secondArray) {
         return CharBuffer.wrap(firstArray).append(CharBuffer.wrap(secondArray)).array();
     }
 

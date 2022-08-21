@@ -76,7 +76,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
     void printCorrectOutput(int[] arr) {
-        runWithInput(ArrayUtil.intArrayToInput(arr));
+        runWithInput(ArrayUtil.arrayToInput(arr));
         int[] count = count(arr);
         assertEquals(Integer.parseInt(getItemByName("below")), count[0], "Your output for the numbers below the pivot is incorrect.");
         assertEquals(Integer.parseInt(getItemByName("equal")), count[1], "Your output for the numbers equal to the pivot is incorrect.");
