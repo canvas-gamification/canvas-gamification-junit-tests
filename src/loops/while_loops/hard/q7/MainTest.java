@@ -20,7 +20,7 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "slide to the left, take it back now y'all, cha cha real smooth";
         return new Clause[]{
-                new StringLiteral("Enter a sentence:"),
+                new StringLiteral("Enter a sentence: "),
                 new NewLine(),
                 new StringLiteral("Reversed Sentence: "),
                 new PlaceHolder()
