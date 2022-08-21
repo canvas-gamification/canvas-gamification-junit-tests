@@ -10,7 +10,7 @@ return zero.
 
 public class SmallestDifference {
     public static int smallestDiff(int[] arr) {
-        if(arr.length == 0 || arr.length == 1)
+        if (arr.length == 0 || arr.length == 1)
             return 0;
         int smallDiff = Math.abs(arr[1] - arr[0]);
         for (int i = 0; i < arr.length - 1; i++) {
