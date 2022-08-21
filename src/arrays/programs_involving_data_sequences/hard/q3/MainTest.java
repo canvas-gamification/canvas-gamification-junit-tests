@@ -21,11 +21,15 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
+    // Java
+    /**
+     * The number of characters the student's code should take as input
+     */
     private static final int numChars = 10;
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = randomCharInputGenerator(numChars) + "2 " + "7 ";
+        TestOption.defaultInput = ArrayUtil.arrayToInput(ArrayUtil.generateRandomArray('a', 'z', numChars)) + "2 " + "7 ";
         return new Clause[]{
                 new StringLiteral("Enter the character array:"),
                 new Optional(new StringLiteral(" ")),
@@ -46,34 +50,30 @@ public class MainTest extends BaseTest {
         SubThat.main(new String[0]);
     }
 
-    private static String randomCharInputGenerator(int length) {
-        StringBuilder sb = new StringBuilder();
-        Random r = new Random();
-        for (int i = 0; i < length; i++) {
-            sb.append((char) (r.nextInt(26) + 97));
-            sb.append(" ");
-        }
-        return sb.toString();
-    }
-
     static Stream<Arguments> methodInputProvider() {
-        return Stream.of(Arguments.of(new char[]{'a', 'p', 'p', 'l', 'e', 'i', 's', 'b', 'a', 'd'}, 0, 4, "appl"),
+        return Stream.of(
+                Arguments.of(new char[]{'a', 'p', 'p', 'l', 'e', 'i', 's', 'b', 'a', 'd'}, 0, 4, "appl"),
                 Arguments.of(new char[]{'h', 'f', 'j', 'z', 'w'}, 0, 8, ""),
                 Arguments.of(new char[]{}, 0, 4, ""),
                 Arguments.of(new char[]{'a', 'z', 'x', 'w', 'q', 's', 'p', 'e', 'f', 'e', 'e', 'g', 'k', 'z', 'a', 'e'}, 5, 4, ""),
                 Arguments.of(new char[]{'a', 'b', 'c', 'd', 'z', 'g', 'l'}, 4, 4, ""),
-                Arguments.of(new char[]{'f', 'd', 'z', 'q', 'e', 't', 'y', 'p', 'e', 'z', 'w', 'z', 'm', 'n'}, 7, 14, "pezwzmn"));
+                Arguments.of(new char[]{'f', 'd', 'z', 'q', 'e', 't', 'y', 'p', 'e', 'z', 'w', 'z', 'm', 'n'}, 7, 14, "pezwzmn"),
+                Arguments.of(ArrayUtil.generateRandomArray('a', 'z', 39), -1, 3, ""),
+                Arguments.of(ArrayUtil.generateRandomArray('a', 'q', 18), 4, -1, ""),
+                Arguments.of(ArrayUtil.generateRandomArray('a', 'x', 27), -13, -2, "")
+        );
     }
 
     static Stream<Arguments> mainMethodInputProvider() {
         Random r = new Random();
         return Stream.of(
-                Arguments.of(ArrayUtil.charArrayToInput(ArrayUtil.generateRandomCharArray('a', (char) ('z' + 1), numChars)), numChars / 2, numChars),
-                Arguments.of(ArrayUtil.charArrayToInput(ArrayUtil.generateRandomCharArray('a', (char) ('z' + 1), numChars)), 0, numChars),
-                Arguments.of(ArrayUtil.charArrayToInput(ArrayUtil.generateRandomCharArray('a', (char) ('z' + 1), numChars)), numChars - 1, numChars + 1),
-                Arguments.of(ArrayUtil.charArrayToInput(ArrayUtil.generateRandomCharArray('a', (char) ('z' + 1), numChars)), 6, 5),
-                Arguments.of(ArrayUtil.charArrayToInput(ArrayUtil.generateRandomCharArray('a', (char) ('z' + 1), numChars)), -1, 5),
-                Arguments.of(ArrayUtil.charArrayToInput(ArrayUtil.generateRandomCharArray('a', (char) ('z' + 1), numChars)), r.nextInt(numChars), r.nextInt(numChars)));
+                Arguments.of(ArrayUtil.arrayToInput(ArrayUtil.generateRandomArray('a', (char) ('z' + 1), numChars)), numChars / 2, numChars),
+                Arguments.of(ArrayUtil.arrayToInput(ArrayUtil.generateRandomArray('a', (char) ('z' + 1), numChars)), 0, numChars),
+                Arguments.of(ArrayUtil.arrayToInput(ArrayUtil.generateRandomArray('a', (char) ('z' + 1), numChars)), numChars - 1, numChars + 1),
+                Arguments.of(ArrayUtil.arrayToInput(ArrayUtil.generateRandomArray('a', 'z', numChars)), numChars - 1, numChars),
+                Arguments.of(ArrayUtil.arrayToInput(ArrayUtil.generateRandomArray('a', (char) ('z' + 1), numChars)), 6, 5),
+                Arguments.of(ArrayUtil.arrayToInput(ArrayUtil.generateRandomArray('a', (char) ('z' + 1), numChars)), -1, 5),
+                Arguments.of(ArrayUtil.arrayToInput(ArrayUtil.generateRandomArray('a', (char) ('z' + 1), numChars)), r.nextInt(numChars), r.nextInt(numChars)));
     }
 
     @ParameterizedTest
@@ -81,9 +81,9 @@ public class MainTest extends BaseTest {
     void correctSubCharacterStringMethod(char[] input, int start, int end, String subString) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(SubThat.class, "subCharacterString",
                 new Object[]{input, start, end}, char[].class, int.class, int.class);
-        CustomAssertions._assertEquals(subString, output, "Your method does not generate the correct substring based on the inputs provided.");
+        CustomAssertions._assertEquals(subString, output, "Your SubCharacterString method does not generate the correct substring based on the inputs provided.");
         String consoleOutput = MethodUtil.getMethodOutput();
-        assertEquals("", consoleOutput, "Your method should not print anything to the console.");
+        assertEquals("", consoleOutput, "Your SubCharacterString method should not print anything to the console.");
     }
 
     @ParameterizedTest

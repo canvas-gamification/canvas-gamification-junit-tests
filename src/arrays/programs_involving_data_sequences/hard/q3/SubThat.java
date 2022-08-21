@@ -1,12 +1,13 @@
 package arrays.programs_involving_data_sequences.hard.q3;
 /*
 Write a program that calls a method called subCharacterString( char[] letters, int start, int end ) that takes as input
-a character array and two indexes to that array. The method will then copy the characters starting from the first index
-(inclusive) to the second index (exclusive) into a String and return it as output. If the indices provided are invalid
-(e.g., if they exceed the length of the character array or if the second index is less than or equal to the first index),
-then the method returns an empty string. Your method should be general enough to work with any array length. The main
-method should prompt the user to enter an array of length 10, a starting index, and an ending index, which is sent to
-subCharacterString. Print the resulting string in the main method.
+a character array and two indices to that array. The method will then copy the characters from the first index
+(inclusive) to the second index (exclusive) into a string and return it as output. If the indices provided are invalid
+(e.g., if they exceed the length of the character array, are negative, or if the second index is less than or equal to
+the first index), then the method returns an empty string. Your method should be general enough to work with any array
+length. The main method should prompt the user to enter an array of length 10, a starting index, and an ending index,
+which is sent to subCharacterString. Print "Your string is: " followed by the result from calling subCharacterString in
+the main method. Assume that all characters entered are lowercase letters.
 
 Sample Output:
     Enter the character array:
