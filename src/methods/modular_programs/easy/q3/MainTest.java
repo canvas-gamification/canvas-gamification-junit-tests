@@ -9,6 +9,7 @@ import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,8 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MainTest extends BaseTest {
     // Parsons
     public Clause[] testSentence() {
-        TestOption.isInputTest = true;
-        TestOption.defaultInput = "5 2 34";
+        TestOption.isInputTest = false;
         return new Clause[]{
                 new StringLiteral("The average of the three integers is "),
                 new DoubleLiteral("avg"),
@@ -31,18 +31,16 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){MeanNMedian.main(new String[0]);}
+    public void runMain() {
+        MeanNMedian.main(new String[0]);
+    }
 
-    static Stream<Arguments> averageCalcInputProvider(){
+    static Stream<Arguments> averageCalcInputProvider() {
         return Stream.of(Arguments.of(5, 12, 1, 6.0), Arguments.of(13, 26, 340, 126.33333333333333), Arguments.of(52143, 7045, 41394, 33527.333333333336), Arguments.of(-34, 16, -93, -37.0));
     }
 
-    static Stream<Arguments> medianCalcInputProvider(){
+    static Stream<Arguments> medianCalcInputProvider() {
         return Stream.of(Arguments.of(1, 7, 5, 5), Arguments.of(10, 3, -2, 3), Arguments.of(8, 4, 23, 8));
-    }
-
-    static Stream<Arguments> mainMethodInputProvider(){
-        return Stream.of(Arguments.of("5 12 1", 6.0, 5), Arguments.of("45 3 182", 76.66666666666667, 45), Arguments.of("-4 -13 -2", -6.333333333333333, -4));
     }
 
     @ParameterizedTest
@@ -59,11 +57,9 @@ public class MainTest extends BaseTest {
         CustomAssertions._assertEquals(median, output, "Your medianCalc method does not correctly identify the median.");
     }
 
-    @ParameterizedTest
-    @MethodSource("mainMethodInputProvider")
-    void printsOutputCorrectly(String in, double avg, int median){
-        runWithInput(in);
-        assertEquals(avg, Double.parseDouble(getItemByName("avg")), 0.1, "Your program does not correctly print the average.");
-        assertEquals(median, Integer.parseInt(getItemByName("median")), "Your program does not correctly print the median.");
+    @Test
+    void printsOutputCorrectly() {
+        assertEquals(13.666666666666666, Double.parseDouble(getItemByName("avg")), 0.1, "Your program does not correctly print the average.");
+        assertEquals(5, Integer.parseInt(getItemByName("median")), "Your program does not correctly print the median.");
     }
 }
