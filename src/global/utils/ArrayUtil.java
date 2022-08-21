@@ -3,13 +3,9 @@ package global.utils;
 import java.nio.CharBuffer;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
-
-/*
-TODO: Merge array, ascending number array taking a start number, an optional step, and a length, array multiplier, increment by x,
-TODO: replicate array (given a number, make an array of that element),
- */
 
 public class ArrayUtil {
     private static final String[] wordBank = new String[]{
@@ -21,23 +17,19 @@ public class ArrayUtil {
             "of", "the", "dawn", "born", "of", "the", "maiden"
     };
 
-    public static int[] generateRandomIntArray(int lower, int upper, int length) {
+    public static int[] generateRandomArray(int lower, int upper, int length) {
         Random r = new Random();
         return r.ints(length, lower, upper).toArray();
     }
 
-    public static double[] generateRandomDoubleArray(double lower, double upper, int length) {
+    public static double[] generateRandomArray(double lower, double upper, int length) {
         Random r = new Random();
         return r.doubles(length, lower, upper).toArray();
     }
 
-    public static char[] generateRandomCharArray(char lower, char upper, int length) {
-        char[] randomArr = new char[length];
+    public static char[] generateRandomArray(char lower, char upper, int length) {
         Random r = new Random();
-        int range = upper - lower;
-        for (int i = 0; i < randomArr.length; i++)
-            randomArr[i] = (char) (r.nextInt(range) + lower);
-        return randomArr;
+        return r.ints(length, lower, upper).mapToObj(Character::toString).collect(Collectors.joining()).toCharArray();
     }
 
     public static String[] generateRandomWordArray(int length) {
@@ -54,6 +46,10 @@ public class ArrayUtil {
 
     public static double sum(double[] arr) {
         return Arrays.stream(arr).boxed().mapToDouble(Double::doubleValue).sum();
+    }
+
+    public static int sum(char[] arr) {
+        return CharBuffer.wrap(arr).chars().boxed().mapToInt(Integer::intValue).sum();
     }
 
     public static String arrayToInput(int[] arr) {
@@ -84,8 +80,13 @@ public class ArrayUtil {
         return Arrays.stream(arr).map(number -> (number + increment)).toArray();
     }
 
-    public static double[] increment(double[] arr, int increment) {
+    public static double[] increment(double[] arr, double increment) {
         return Arrays.stream(arr).map(number -> (number + increment)).toArray();
+    }
+
+    public static char[] increment(char[] arr, int increment) {
+        return CharBuffer.wrap(arr).chars().map(i -> (i + increment)).mapToObj(Character::toString).
+                collect(Collectors.joining()).toCharArray();
     }
 
     public static int[] generateAscendingArray(int start, int length) {
@@ -104,20 +105,35 @@ public class ArrayUtil {
         return DoubleStream.iterate(start, (i) -> i + step).limit(length).toArray();
     }
 
-    public static int[] multiplyArray(int[] arr, int multiply) {
+    public static char[] generateAscendingArray(char start, int length) {
+        return IntStream.iterate(start, (i) -> i + 1).limit(length).mapToObj(Character::toString).
+                collect(Collectors.joining()).toCharArray();
+    }
+
+    public static char[] generateAscendingArray(char start, int length, int step) {
+        return IntStream.iterate(start, (i) -> i + step).limit(length).mapToObj(Character::toString).
+                collect(Collectors.joining()).toCharArray();
+    }
+
+    public static int[] multiply(int[] arr, int multiply) {
         return Arrays.stream(arr).map((i) -> i * multiply).toArray();
     }
 
-    public static double[] multiplyArray(double[] arr, double multiply) {
+    public static double[] multiply(double[] arr, double multiply) {
         return Arrays.stream(arr).map((i) -> i * multiply).toArray();
     }
 
-    public static int[] replicateArray(int[] arr, int number, int length) {
+    public static int[] replicateArray(int number, int length) {
         return IntStream.iterate(number, (i) -> i).limit(length).toArray();
     }
 
-    public static double[] replicateArray(double[] arr, double number, int length) {
+    public static double[] replicateArray(double number, int length) {
         return DoubleStream.iterate(number, (i) -> i).limit(length).toArray();
+    }
+
+    public static char[] replicateArray(char character, int length) {
+        return IntStream.iterate(character, (i) -> i).limit(length).
+                mapToObj(Character::toString).collect(Collectors.joining()).toCharArray();
     }
 
     public static int[] merge(int[] firstArray, int[] secondArray) {
@@ -129,7 +145,8 @@ public class ArrayUtil {
     }
 
     public static char[] merge(char[] firstArray, char[] secondArray) {
-        return CharBuffer.wrap(firstArray).append(CharBuffer.wrap(secondArray)).array();
+        return IntStream.concat(CharBuffer.wrap(firstArray).chars(), CharBuffer.wrap(secondArray).chars()).
+                mapToObj(Character::toString).collect(Collectors.joining()).toCharArray();
     }
 
 }

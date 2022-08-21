@@ -29,7 +29,7 @@ public class MainTest extends BaseTest {
                 new int[]{},
                 new int[]{-11, 12, 37, 11, 0, 0, 0, -39, 345},
                 new int[]{1},
-                ArrayUtil.generateRandomIntArray(-537, 364, 49)
+                ArrayUtil.generateRandomArray(-537, 364, 49)
         );
     }
 

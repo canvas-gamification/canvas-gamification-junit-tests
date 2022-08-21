@@ -49,8 +49,8 @@ public class MainTest extends BaseTest {
 
     static Stream<int[]> mainMethodInputProvider() {
         return Stream.of(
-                ArrayUtil.generateRandomIntArray(0, 100, 14),
-                ArrayUtil.generateRandomIntArray(40, 60, 14)
+                ArrayUtil.generateRandomArray(0, 100, 14),
+                ArrayUtil.generateRandomArray(40, 60, 14)
         );
     }
 
