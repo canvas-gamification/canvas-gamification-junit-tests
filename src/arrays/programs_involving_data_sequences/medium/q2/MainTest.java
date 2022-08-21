@@ -30,14 +30,14 @@ public class MainTest extends BaseTest {
                 Arguments.of("", new char[]{}),
                 Arguments.of("", new char[]{'e', 'l', 'y', 'z', 'q', '?'}),
                 Arguments.of("Yikes", new char[]{}),
-                Arguments.of("RandomAt", ArrayUtil.generateRandomCharArray('a', (char) ('z' + 1), 39))
+                Arguments.of("RandomAt", ArrayUtil.generateRandomArray('a', (char) ('z' + 1), 39))
         );
     }
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void correctCharzIIStringMethod(String word, char[] letters) throws Throwable {
-        String result = word + ArrayUtil.charArrayToInput(letters).replaceAll(" ", "");
+        String result = word + ArrayUtil.arrayToInput(letters).replaceAll(" ", "");
         Object output = MethodUtil.invokeIfMethodExists(WordleBuilder.class, "charzIIString",
                 new Object[]{word, letters}, String.class, char[].class);
         CustomAssertions._assertEquals(result, output, "Your charzIIString method does not correctly combine the input word and char array.");
