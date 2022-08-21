@@ -35,13 +35,13 @@ public class MyJong {
         int[] arr = new int[10];
         for (int i = 0; i < arr.length; i++)
             arr[i] = input.nextInt();
-        if (containsValidMeld(arr))
+        if (validMeld(arr))
             System.out.println("Valid");
         else
             System.out.println("Not Valid");
     }
 
-    public static boolean containsValidMeld(int[] arr) {
+    public static boolean validMeld(int[] arr) {
         for (int i = 0; i < arr.length - 2; i++) {
             if (arr[i] == arr[i + 1] && arr[i + 1] == arr[i + 2])
                 return true;
