@@ -3,13 +3,13 @@ package arrays.programs_involving_data_sequences.hard.q2;
 In the tile-based game Mahjong, players compete to see who has the best combinations in a 10-tile set. One of these
 combinations is called a meld, which are groups of three, four, or five tiles. To be a valid meld, the tiles must have
 identical numbers {2, 2, 2}, or be a run of successive numbers {2, 3, 4}. Write a program where the main method prompts
-the user to input a 10-tile set and then calls a method named validMeld that takes an array as input and returns true if
-the array contains a valid 3-tile meld and false otherwise. Your program should print "Valid" if the method returns true
-and "Not valid" if it returns false.
+the user to input a 10-tile set as an integer array and then calls a method named validMeld that takes the array as input
+and returns true if the array contains a valid 3-tile meld and false otherwise. Your program should print "Valid" if the
+method returns true and "Not valid" if it returns false.
 
 The method checks if a meld of identical numbers exists or if a meld of consecutive numbers exists. In the latter case,
 you can assume that the input array will be in ascending order (smallest to largest). Note that your method should be
-general enough to handle an input array of any length.
+general enough to handle an input array of any length. Assume that the tiles are positive integers.
 
 Sample Output:
     Please enter the 10 tile set:
