@@ -1,0 +1,31 @@
+name: build
+on:
+  pull_request:
+
+jobs:
+  build:
+    name: Build and Run Tests
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v1
+
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "16.0.1"
+
+      - name: Build and Test
+        run: |
+          [[ -d bin ]] || mkdir bin
+          [[ -d reports ]] || mkdir reports
+          python scripts/run_tests.py
+
+      - name: Publish Unit Test Results
+        if: always()
+        uses: docker://ghcr.io/enricomi/publish-unit-test-result-action:v1.9
+        with:
+          github_token: ${{ github.token }}
+          files: ./reports/**/*.xml
+          check_name: Unit Test Results
+          comment_on_pr: true

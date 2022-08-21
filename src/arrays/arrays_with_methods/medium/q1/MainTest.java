@@ -1,13 +1,12 @@
 package arrays.arrays_with_methods.medium.q1;
 
+import global.tools.CustomAssertions;
 import global.utils.MethodUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class MainTest {
     // Parsons
@@ -23,9 +22,9 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void createsEvenArrayCorrectly(int[] input, int[] output) throws Throwable{
-        int[] result = (int[]) MethodUtil.invokeIfMethodExists(OnlyEven.class, "onlyEven", new Object[]{input}, int[].class);
-        assertArrayEquals(output, result, "Your method does not correctly create an array using only the even numbered indices of an input array.");
+    public void createsEvenArrayCorrectly(int[] input, int[] output) throws Throwable {
+        Object result = MethodUtil.invokeIfMethodExists(OnlyEven.class, "onlyEven", new Object[]{input}, int[].class);
+        CustomAssertions._assertArrayEquals(output, result, "Your method does not correctly create an array using only the even numbered indices of an input array.");
     }
 
 }

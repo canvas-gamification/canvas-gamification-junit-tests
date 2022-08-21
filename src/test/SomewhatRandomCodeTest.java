@@ -14,6 +14,14 @@ public class SomewhatRandomCodeTest extends BaseRandomTest {
                 new RandomChar('A', (char)('A'+18)),
                 new NewLine(),
                 new RandomDouble(5, 15),
+                new NewLine(),
+                new RandomInteger(49, 2006),
+                new NewLine(),
+                new RandomDouble(1.567, 2.5981),
+                new NewLine(),
+                new RandomDouble(0, 10000),
+                new NewLine(),
+                new RandomInteger(34, 61)
         };
     }
 
