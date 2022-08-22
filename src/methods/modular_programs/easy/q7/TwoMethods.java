@@ -14,25 +14,24 @@ The value of the greater variable converted from degrees to radians is 0.3132866
  */
 
 import java.util.Scanner;
-public class TwoMethods
-{
-    public static void main( String[] args )
-    {
+
+public class TwoMethods {
+    public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter the first number: ");
         double a = input.nextDouble();
         System.out.println("Enter the second number: ");
         double b = input.nextDouble();
-        System.out.println("The value of the first variable raised to the second variable is " + raisedCalc(a,b));
-        System.out.println("The value of the greater variable converted from degrees to radians is " + degreeCalc(a,b));
+        System.out.println("The value of the first variable raised to the second variable is " + raisedCalc(a, b));
+        System.out.println("The value of the greater variable converted from degrees to radians is " + degreeCalc(a, b));
     }
-    public static double raisedCalc(double a, double b)
-    {
-        return Math.pow(a,b);
+
+    public static double raisedCalc(double a, double b) {
+        return Math.pow(a, b);
     }
-    public static double degreeCalc(double a, double b)
-    {
-        if (a>b)
+
+    public static double degreeCalc(double a, double b) {
+        if (a > b)
             return Math.toRadians(a);
         else
             return Math.toRadians(b);

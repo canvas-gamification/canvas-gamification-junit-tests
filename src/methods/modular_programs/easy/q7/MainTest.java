@@ -34,17 +34,19 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){TwoMethods.main(new String[0]);}
+    public void runMain() {
+        TwoMethods.main(new String[0]);
+    }
 
-    static Stream<Arguments> raisedCalcInputProvider(){
+    static Stream<Arguments> raisedCalcInputProvider() {
         return Stream.of(Arguments.of(2, 4, 16.0), Arguments.of(3, 3, 27.0), Arguments.of(8.3, 11.2, 1.966412537842738E10), Arguments.of(-7.2, 3, -373.24800000000005), Arguments.of(-3.6, 4, 167.9616), Arguments.of(5.67, -9.6, 5.8291151506320536E-8));
     }
 
-    static Stream<Arguments> degreeCalcInputProvider(){
+    static Stream<Arguments> degreeCalcInputProvider() {
         return Stream.of(Arguments.of(2, 4, 0.06981317007977318), Arguments.of(3, 3, 0.05235987755982989), Arguments.of(8.3, 11.2, 0.1954768762233649), Arguments.of(-7.2, 3, 0.05235987755982989), Arguments.of(-3.6, 4, 0.06981317007977318), Arguments.of(5.67, -9.6, 0.09896016858807849));
     }
 
-    static Stream<Arguments> mainMethodInputProvider(){
+    static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(Arguments.of("4 5", 1024.0, 0.08726646259971647), Arguments.of("5.7 2.3", 54.76614451050491, 0.09948376736367678), Arguments.of("6.1 -4.7", 2.0368065149446233E-4, 0.1064650843716541));
     }
 
@@ -64,7 +66,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
-    void printsOutputCorrectly(String in, double raised, double radians){
+    void printsOutputCorrectly(String in, double raised, double radians) {
         runWithInput(in);
         assertEquals(raised, Double.parseDouble(getItemByName("raised")), 0.001, "Your program does not properly display the raised value.");
         assertEquals(radians, Double.parseDouble(getItemByName("radians")), 0.001, "Your program does not properly display the converted radians.");
