@@ -1,4 +1,4 @@
-package arrays.program_involving_data_sequences.hard.q4;
+package arrays.programs_involving_data_sequences.hard.q4;
 /*
 Write a program that calls a method named getRest(String[] words, int index) that takes as input an array of strings
 and an index. The getRest method should return a new string array containing the strings from the original array
