@@ -28,14 +28,16 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){Century.main(new String[0]);}
-
-    static Stream<Arguments> centuryCalcInputProvider(){
-        return Stream.of(Arguments.of(2000, "21st Century"), Arguments.of(2001, "21st Century"), Arguments.of(2022, "21st Century"), Arguments.of(1999, "20th Century"), Arguments.of(1998, "20th Century"), Arguments.of(1934, "20th Century"), Arguments.of(1900, "20th Century"), Arguments.of(1899, "Invalid user Year"), Arguments.of(1898, "Invalid user Year"), Arguments.of(567, "Invalid user Year"), Arguments.of(-5, "Invalid user Year"));
+    public void runMain() {
+        Century.main(new String[0]);
     }
 
-    static Stream<Arguments> mainMethodInputProvider(){
-        return Stream.of(Arguments.of("2022", "21st Century"), Arguments.of("1950", "20th Century"), Arguments.of("1265", "Invalid user Year"));
+    static Stream<Arguments> centuryCalcInputProvider() {
+        return Stream.of(Arguments.of(2000, "21st Century"), Arguments.of(2001, "21st Century"), Arguments.of(2022, "21st Century"), Arguments.of(1999, "20th Century"), Arguments.of(1998, "20th Century"), Arguments.of(1934, "20th Century"), Arguments.of(1900, "20th Century"), Arguments.of(1899, "19th Century"), Arguments.of(1898, "19th Century"), Arguments.of(1800, "19th Century"), Arguments.of(1799, "18th Century"), Arguments.of(1798, "18th Century"), Arguments.of(1700, "18th Century"), Arguments.of(1699, "17th Century"), Arguments.of(1698, "17th Century"), Arguments.of(1600, "17th Century"), Arguments.of(1599, "16th Century"), Arguments.of(1598, "16th Century"), Arguments.of(1500, "16th Century"), Arguments.of(1499, "Unknown Century"), Arguments.of(1498, "Unknown Century"), Arguments.of(567, "Unknown Century"), Arguments.of(-5, "Unknown Century"));
+    }
+
+    static Stream<Arguments> mainMethodInputProvider() {
+        return Stream.of(Arguments.of("2022", "21st Century"), Arguments.of("1950", "20th Century"), Arguments.of("1830", "19th Century"), Arguments.of("1782", "18th Century"), Arguments.of("1634", "17th Century"), Arguments.of("1555", "16th Century"), Arguments.of("1265", "Unknown Century"));
     }
 
     @ParameterizedTest

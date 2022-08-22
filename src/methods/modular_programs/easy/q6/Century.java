@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Century {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Please enter the year you were born in:");
+        System.out.println("Please enter the year you were born in: ");
         int userYear = input.nextInt();
         System.out.println("You're from the " + centuryCalc(userYear));
     }
