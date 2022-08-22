@@ -1,4 +1,4 @@
-package arrays.program_involving_data_sequences.hard.q4;
+package arrays.programs_involving_data_sequences.hard.q4;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
