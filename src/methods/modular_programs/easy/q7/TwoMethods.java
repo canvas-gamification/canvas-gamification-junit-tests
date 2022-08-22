@@ -1,9 +1,9 @@
 package methods.modular_programs.easy.q7;
 
 /*
-Write a Java Program that asks the user for two double variables and performs two instructions with them,
-using two separate methods. Firstly, take the first variable and raise it to the second variable. Secondly,
-take the greater double variable and convert that angle from degrees to radians.
+Write a Java Program that asks the user for two double variables and performs two instructions with them, using two
+methods. Firstly, take the first variable and raise it to the second variable. Secondly, find the larger double variable
+and convert that double to radians (assuming it is in degrees).
 Sample output:
 Enter the first number:
 5.23
