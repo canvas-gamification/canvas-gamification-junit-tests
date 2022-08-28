@@ -25,7 +25,7 @@ public class RandomUtil {
      * is greater than the target + target * PERCENTAGE_ERROR or is less than the target - target * PERCENTAGE_ERROR,
      * the bin falls outside the allowed range.
      */
-    public static final double PERCENTAGE_ERROR = 0.35;
+    public static final double PERCENTAGE_ERROR = 0.25;
 
     /**
      * Returns if the set of values described by the total number of values considered and an array of "bin sizes" is
@@ -61,14 +61,22 @@ public class RandomUtil {
 
     public static int getNumBins(int lower, int upper) {
         int range = upper - lower;
-        return Math.min(range, 50);
+        int binNumber = 10;
+        while(range % binNumber != 0) {
+            binNumber++;
+            if(binNumber == 50) {
+                binNumber = 10;
+                break;
+            }
+        }
+        return Math.min(range, binNumber);
     }
 
     public static int assignedBinIndex(int value, int lower, int upper, int numBins) {
         int range = upper - lower;
-        double gap = (double) range / numBins;
+        double gap = (range * 1.0) / numBins;
         assertWithinRange(value, lower, upper, "One or more of your randomly generated numbers fall outside of the required range.");
-        int binNumber = (int) ((value - lower) / gap);
+        int binNumber = (int) Math.floor((value - lower) / gap);
         return (binNumber <= numBins) ? binNumber : NO_BIN;
     }
 
