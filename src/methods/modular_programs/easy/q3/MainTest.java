@@ -2,7 +2,6 @@ package methods.modular_programs.easy.q3;
 
 import global.BaseTest;
 import global.tools.CustomAssertions;
-import global.tools.TestOption;
 import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
