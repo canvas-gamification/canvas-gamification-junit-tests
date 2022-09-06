@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MainTest extends BaseTest {
     // Parsons
     public Clause[] testSentence() {
-        TestOption.isInputTest = false;
         return new Clause[]{
                 new StringLiteral("The values after the decimal point for the first variable are "),
                 new DoubleLiteral("first"),
@@ -38,20 +37,27 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> valueAfterCalcInputProvider() {
-        return Stream.of(Arguments.of(3.1, 0.1), Arguments.of(67.2175396, 0.2175396), Arguments.of(0.34, 0.34), Arguments.of(0.0, 0.0), Arguments.of(-12.523, -0.523), Arguments.of(0.1, 0.1), Arguments.of(-0.1, -0.1));
+        return Stream.of(
+                Arguments.of(3.1, 0.1),
+                Arguments.of(67.2175396, 0.2175396),
+                Arguments.of(0.34, 0.34),
+                Arguments.of(0.0, 0.0),
+                Arguments.of(-12.523, -0.523),
+                Arguments.of(0.1, 0.1),
+                Arguments.of(-0.1, -0.1));
     }
 
     @ParameterizedTest
     @MethodSource("valueAfterCalcInputProvider")
     void correctValueAfterCalcMethod(double in, double decimals) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(ReturnChange.class, "valueAfterCalc", new Object[]{in}, double.class);
-        CustomAssertions._assertEquals(decimals, output, 0.1, "Your valueAfterCalc method does not correctly calculate the decimal values.");
+        CustomAssertions._assertEquals(decimals, output, 0.00001, "Your valueAfterCalc method does not correctly extract the numbers after the decimal.");
     }
 
     @Test
     void printsOutputCorrectly() {
-        assertEquals(0.123, Double.parseDouble(getItemByName("first")), 0.1, "Your program does not correctly display the first set of values.");
-        assertEquals(-0.24, Double.parseDouble(getItemByName("second")), 0.1, "Your program does not correctly display the second set of values.");
-        assertEquals(0.79, Double.parseDouble(getItemByName("third")), 0.1, "Your program does not correctly display the third set of values.");
+        assertEquals(0.123, Double.parseDouble(getItemByName("first")), 0.00001, "Your program does not correctly display the first set of values.");
+        assertEquals(-0.24, Double.parseDouble(getItemByName("second")), 0.00001, "Your program does not correctly display the second set of values.");
+        assertEquals(0.79, Double.parseDouble(getItemByName("third")), 0.00001, "Your program does not correctly display the third set of values.");
     }
 }

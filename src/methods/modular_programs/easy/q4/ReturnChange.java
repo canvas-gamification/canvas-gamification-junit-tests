@@ -1,9 +1,9 @@
 package methods.modular_programs.easy.q4;
 
 /*
-Write a Java Program that initializes three double variables and passes them to a method to return the number values
-after the decimal point. (e.g. if the double number is 14.5673, return 0.5673). If the variables are negative, return
-the negative decimal values.
+Write a Java Program that initializes three double variables and passes them to a method called valueAfterCalc to
+return the number values after the decimal point. (e.g. if the  number is 14.5673, return 0.5673). If the variables are
+negative, the returned value should be negative.
 Sample output:
 The values after the decimal point for the first variable are 0.12300000000000111
 The values after the decimal point for the second variable are -0.2400000000000002
