@@ -3,7 +3,8 @@ package methods.modular_programs.easy.q3;
 /*
 Write a program that takes three initialized and declared integer variables and determines their mean and median.
 Note that the mean is the average of the three numbers and that the median is the middle number when the numbers are
-sorted from least to greatest. The program should have separate methods for computing both of these values.
+sorted from least to greatest. The program should have separate methods for computing both of these values, one called
+averageCalc and the other called medianCalc.
 Sample output:
 The average of the three integers is 13.0
 The median of the three integers is 5
