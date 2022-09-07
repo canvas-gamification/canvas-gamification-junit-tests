@@ -71,7 +71,7 @@ public class MainTest extends BaseTest {
 
   @ParameterizedTest
   @MethodSource("inputProvider")
-  public void printsCorrectDinnerCost(double costOfFood, String service, double totalCost)
+  public void printsCorrectDinnerCost(double costOfFood, char service, double totalCost)
       throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct total cost of dinner for the given input.";
     double delta = 0.001;
