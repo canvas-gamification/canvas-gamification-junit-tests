@@ -62,13 +62,8 @@ public class RandomUtil {
     public static int getNumBins(int lower, int upper) {
         int range = upper - lower;
         int binNumber = 10;
-        while(range % binNumber != 0) {
+        while (range % binNumber != 0 && binNumber < 51)
             binNumber++;
-            if(binNumber == 50) {
-                binNumber = 10;
-                break;
-            }
-        }
         return Math.min(range, binNumber);
     }
 
