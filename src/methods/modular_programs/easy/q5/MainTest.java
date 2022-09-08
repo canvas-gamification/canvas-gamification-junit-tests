@@ -42,7 +42,8 @@ public class MainTest extends BaseTest {
                 Arguments.of(-0.1, -1.0),
                 Arguments.of(-45, -1.0),
                 Arguments.of(0, 0.0),
-                Arguments.of(3629, 119.0617));
+                Arguments.of(3629, 119.0617),
+                Arguments.of(782541, 25673.9173));
     }
 
     static Stream<Arguments> mainMethodInputProvider() {
@@ -57,13 +58,13 @@ public class MainTest extends BaseTest {
     @MethodSource("heightConversionInputProvider")
     void correctHeightConversionMethod(double in, double feet) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(HeightInFeet.class, "heightConversion", new Object[]{in}, double.class);
-        CustomAssertions._assertEquals(feet, output, 0.1, "Your heightConversion method does not correctly convert from centimetres to feet.");
+        CustomAssertions._assertEquals(feet, output, 0.005, "Your heightConversion method does not correctly convert from centimetres to feet.");
     }
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
     void printsOutputCorrectly(String in, double feet) {
         runWithInput(in);
-        assertEquals(feet, Double.parseDouble(getItemByName("feet")), 0.05, "Your program does not correctly output the height in feet.");
+        assertEquals(feet, Double.parseDouble(getItemByName("feet")), 0.0001, "Your program does not correctly output the height in feet.");
     }
 }

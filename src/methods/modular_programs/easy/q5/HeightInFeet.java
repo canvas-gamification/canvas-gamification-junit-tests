@@ -23,6 +23,6 @@ public class HeightInFeet {
         if (a < 0)
             return -1.0;
         else
-            return a * (0.0328);
+            return a/30.48;
     }
 }
