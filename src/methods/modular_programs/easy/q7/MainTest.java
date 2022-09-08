@@ -39,11 +39,23 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> raisedCalcInputProvider() {
-        return Stream.of(Arguments.of(2, 4, 16.0), Arguments.of(3, 3, 27.0), Arguments.of(8.3, 11.2, 1.966412537842738E10), Arguments.of(-7.2, 3, -373.24800000000005), Arguments.of(-3.6, 4, 167.9616), Arguments.of(5.67, -9.6, 5.8291151506320536E-8));
+        return Stream.of(
+                Arguments.of(2, 4, 16.0),
+                Arguments.of(3, 3, 27.0),
+                Arguments.of(8.3, 11.2, 1.966412537842738E10),
+                Arguments.of(-7.2, 3, -373.24800000000005),
+                Arguments.of(-3.6, 4, 167.9616),
+                Arguments.of(5.67, -9.6, 5.8291151506320536E-8));
     }
 
     static Stream<Arguments> degreeCalcInputProvider() {
-        return Stream.of(Arguments.of(2, 4, 0.06981317007977318), Arguments.of(3, 3, 0.05235987755982989), Arguments.of(8.3, 11.2, 0.1954768762233649), Arguments.of(-7.2, 3, 0.05235987755982989), Arguments.of(-3.6, 4, 0.06981317007977318), Arguments.of(5.67, -9.6, 0.09896016858807849));
+        return Stream.of(
+                Arguments.of(2, 4, 0.06981317007977318),
+                Arguments.of(3, 3, 0.05235987755982989),
+                Arguments.of(8.3, 11.2, 0.1954768762233649),
+                Arguments.of(-7.2, 3, 0.05235987755982989),
+                Arguments.of(-3.6, 4, 0.06981317007977318),
+                Arguments.of(5.67, -9.6, 0.09896016858807849));
     }
 
     static Stream<Arguments> mainMethodInputProvider() {
