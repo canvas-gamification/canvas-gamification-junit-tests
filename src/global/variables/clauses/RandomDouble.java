@@ -18,6 +18,11 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
     private final double lower, upper;
     private int precision = 16;  // max double precision
 
+    /**
+     * This constant is equal to the minimum number of bins for random checking with RandomDouble
+     */
+    private static final int MIN_BINS = 10;
+
     public RandomDouble(double lower, double upper) {
         super();
         this.lower = lower;
@@ -78,7 +83,7 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
         int upperCeil = (int) (upper + 1);
         int lowerFloor = (int) lower;
         // Ensures that there will be at least 10 bins
-        return (upperCeil - lowerFloor <= 10) ? RandomUtil.getNumBins(0, 10) :
+        return (upperCeil - lowerFloor <= MIN_BINS) ? RandomUtil.getNumBins(0, 10) :
                 RandomUtil.getNumBins(lowerFloor, upperCeil); // TODO: do properly
     }
 
