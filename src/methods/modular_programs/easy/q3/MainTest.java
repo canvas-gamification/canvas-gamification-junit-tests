@@ -33,26 +33,29 @@ public class MainTest extends BaseTest {
         MeanNMedian.main(new String[0]);
     }
 
-    static Stream<Arguments> averageCalcInputProvider() {
+    static Stream<Arguments> meanCalcInputProvider() {
         return Stream.of(
                 Arguments.of(5, 12, 1, 6.0),
                 Arguments.of(13, 26, 340, 126.33333333333333),
                 Arguments.of(52143, 7045, 41394, 33527.333333333336),
-                Arguments.of(-34, 16, -93, -37.0));
+                Arguments.of(-34, 16, -93, -37.0),
+                Arguments.of(5, 27, 0, 10.666666666666666));
     }
 
     static Stream<Arguments> medianCalcInputProvider() {
         return Stream.of(
                 Arguments.of(1, 7, 5, 5),
                 Arguments.of(10, 3, -2, 3),
-                Arguments.of(8, 4, 23, 8));
+                Arguments.of(8, 4, 23, 8),
+                Arguments.of(5, 27, 0, 5),
+                Arguments.of(-10, -13, 2, -10));
     }
 
     @ParameterizedTest
-    @MethodSource("averageCalcInputProvider")
+    @MethodSource("meanCalcInputProvider")
     void correctAverageCalcMethod(int a, int b, int c, double avg) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(MeanNMedian.class, "averageCalc", new Object[]{a, b, c}, int.class, int.class, int.class);
-        CustomAssertions._assertEquals(avg, output, 0.00001, "Your averageCalc method does not correctly calculate the average.");
+        Object output = MethodUtil.invokeIfMethodExists(MeanNMedian.class, "meanCalc", new Object[]{a, b, c}, int.class, int.class, int.class);
+        CustomAssertions._assertEquals(avg, output, 0.00001, "Your meanCalc method does not correctly calculate the average.");
     }
 
     @ParameterizedTest
