@@ -45,17 +45,23 @@ public class MainTest extends BaseTest {
                 Arguments.of(8.3, 11.2, 1.966412537842738E10),
                 Arguments.of(-7.2, 3, -373.24800000000005),
                 Arguments.of(-3.6, 4, 167.9616),
-                Arguments.of(5.67, -9.6, 5.8291151506320536E-8));
+                Arguments.of(5.67, -9.6, 5.8291151506320536E-8),
+                Arguments.of(23, 0, 1.0),
+                Arguments.of(0, 25, 0.0),
+                Arguments.of(0, 0, 1.0));
     }
 
     static Stream<Arguments> degreeCalcInputProvider() {
         return Stream.of(
-                Arguments.of(2, 4, 0.06981317007977318),
+                Arguments.of(4, 2, 0.06981317007977318),
                 Arguments.of(3, 3, 0.05235987755982989),
                 Arguments.of(8.3, 11.2, 0.1954768762233649),
                 Arguments.of(-7.2, 3, 0.05235987755982989),
                 Arguments.of(-3.6, 4, 0.06981317007977318),
-                Arguments.of(5.67, -9.6, 0.09896016858807849));
+                Arguments.of(5.67, -9.6, 0.09896016858807849),
+                Arguments.of(25, 0, 0.4363323129985824),
+                Arguments.of(0, 13, 0.22689280275926285),
+                Arguments.of(0, 0, 0.0));
     }
 
     static Stream<Arguments> mainMethodInputProvider() {
