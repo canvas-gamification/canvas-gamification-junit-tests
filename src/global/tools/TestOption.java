@@ -7,6 +7,8 @@ public class TestOption {
     public static String defaultInput = null;
     public static String incorrectStructureErrorMessage = null;
     public static String invalidMethodMessage = null;
+    public static String defaultMethodConsoleOutput = "";
+    public static String incorrectMethodConsoleOutputMessage = null;
 
     public static void validate() throws InvalidTestOptionException {
         // TODO: catch these errors somewhere and make sure they are only logged to the devs and not returned to the user.
@@ -23,6 +25,8 @@ public class TestOption {
     public static void reset() {
         // This method resets all TestOptions which are test specific and could change every test
         TestOption.incorrectStructureErrorMessage = "Your code's output did not follow the correct structure/syntax.";
+        TestOption.incorrectMethodConsoleOutputMessage = "Your method did not print the correct console output.";
         TestOption.invalidMethodMessage = null;
+        TestOption.defaultMethodConsoleOutput = "";
     }
 }

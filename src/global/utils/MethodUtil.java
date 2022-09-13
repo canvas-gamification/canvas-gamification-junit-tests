@@ -9,6 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class MethodUtil {
@@ -18,7 +19,9 @@ public class MethodUtil {
         setUpMethodOutput();
         try {
             Method testMethodInvoke = methodClass.getMethod(methodName, methodArgumentTypes);
-            return testMethodInvoke.invoke(null, arguments);
+            Object methodOutput =  testMethodInvoke.invoke(null, arguments);
+            assertEquals(TestOption.defaultMethodConsoleOutput , getMethodOutput(), TestOption.incorrectMethodConsoleOutputMessage);
+            return methodOutput;
         } catch (NoSuchMethodException | IllegalAccessException e) {
             fail(Objects.requireNonNullElseGet(
                     TestOption.invalidMethodMessage,
