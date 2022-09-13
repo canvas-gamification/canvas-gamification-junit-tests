@@ -1,8 +1,9 @@
 package methods.modular_programs.easy.q5;
 
 /*
-Write a program that asks users for their height in cm, then converts it to feet. Create a method called
-heightConversion to do this, which should return the value in feet, or -1 of the entered height is less than zero.
+Write a program that asks users for their height in cm, then converts it to feet by dividing the centimeters by 30.48.
+Create a method called heightConversion to do this, which should return the value in feet, or -1 of the entered height
+is less than zero.
 Sample output:
 Please enter your height in cm:
 138
