@@ -74,7 +74,7 @@ public class MainTest extends BaseTest {
     @MethodSource("centuryCalcInputProvider")
     void correctCenturyCalcMethod(int in, String century) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(Century.class, "centuryCalc", new Object[]{in}, int.class);
-        CustomAssertions._assertEquals(century, output, "Your centuryCalc method does not return the right century.");
+        CustomAssertions._assertEquals(century, output, "Your centuryCalc method does not return the correct century.");
     }
 
     @ParameterizedTest

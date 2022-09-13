@@ -1,9 +1,9 @@
 package methods.modular_programs.easy.q6;
 
 /*
-Write a Java Program that asks users for the year they were born, then returns what century that year is in. The program
-should have a method called centuryCalc to determine this, which works for any century from the 1500's to 2000's. If the
-input is in any other century, return "Unknown Century".
+Write a Java Program that asks users for the year they were born, then prints the century the individual was born.
+The program should have a method called centuryCalc, which determines the century and works for any century from the
+1500’s (16th Century) to the 2000's (21st Century). If the input is in any other century, return "Unknown Century".
 Sample output:
 Please enter the year you were born in:
 2002
