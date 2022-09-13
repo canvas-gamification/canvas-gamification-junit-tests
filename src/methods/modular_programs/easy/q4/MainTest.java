@@ -50,13 +50,13 @@ public class MainTest extends BaseTest {
     @MethodSource("valueAfterCalcInputProvider")
     void correctValueAfterCalcMethod(double in, double decimals) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(ReturnChange.class, "valueAfterCalc", new Object[]{in}, double.class);
-        CustomAssertions._assertEquals(decimals, output, 0.00001, "Your valueAfterCalc method does not correctly extract the numbers after the decimal.");
+        CustomAssertions._assertEquals(decimals, output, 0.0000000001, "Your valueAfterCalc method does not correctly extract the numbers after the decimal.");
     }
 
     @Test
     void printsOutputCorrectly() {
-        assertEquals(0.123, Double.parseDouble(getItemByName("first")), 0.00001, "Your program does not correctly display the first set of values.");
-        assertEquals(-0.24, Double.parseDouble(getItemByName("second")), 0.00001, "Your program does not correctly display the second set of values.");
-        assertEquals(0.79, Double.parseDouble(getItemByName("third")), 0.00001, "Your program does not correctly display the third set of values.");
+        assertEquals(0.123, Double.parseDouble(getItemByName("first")), 0.00001, "Your program does not correctly display the first number's decimals.");
+        assertEquals(-0.24, Double.parseDouble(getItemByName("second")), 0.00001, "Your program does not correctly display the second number's decimals.");
+        assertEquals(0.79, Double.parseDouble(getItemByName("third")), 0.00001, "Your program does not correctly display the third number's decimals.");
     }
 }
