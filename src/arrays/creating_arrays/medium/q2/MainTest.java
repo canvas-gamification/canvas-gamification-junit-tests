@@ -12,7 +12,7 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         RandomNum.main(new String[0]);
     }
 }
