@@ -18,8 +18,7 @@ public class RandomNum
             arr[index] = (char) i;
             index++;
         }
-        for (int j = 0; j < 25; j++)
+        for (int j = 0; j < 26; j++)
             System.out.print( arr[j] + ", " );
-        System.out.print(arr[25]);
     }
 }
