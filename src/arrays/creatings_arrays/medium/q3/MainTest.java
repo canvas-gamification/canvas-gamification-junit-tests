@@ -13,14 +13,14 @@ public class MainTest extends BaseTest {
         return clauseBuilder();
     }
 
-    public void runMain(){
+    public void runMain() {
         RandomNum.main(new String[0]);
     }
 
     public Clause[] clauseBuilder() {
         Clause[] c = new Clause[length * 2 - 1];
         int count = 0;
-        for(int x = 0; x < length-1; x++){
+        for (int x = 0; x < length - 1; x++) {
             c[count++] = new RandomInteger(0, 10);
             c[count++] = new NewLine();
         }
