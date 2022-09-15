@@ -9,9 +9,19 @@ public class SomewhatRandomCodeTest extends BaseRandomTest {
         return new Clause[]{
                 new StringLiteral("This is a test."),
                 new NewLine(),
-//                new RandomDouble(0, 1251689519848456516516654645.25),
-//                new NewLine(),
-                new RandomDouble(0, 12/10000000000000000054895562.36),
+                new RandomInteger(0, 5),
+                new NewLine(),
+                new RandomChar('A', (char)('A'+18)),
+                new NewLine(),
+                new RandomDouble(5, 15),
+                new NewLine(),
+                new RandomInteger(49, 2006),
+                new NewLine(),
+                new RandomDouble(1.567, 2.5981),
+                new NewLine(),
+                new RandomDouble(0, 10000),
+                new NewLine(),
+                new RandomInteger(34, 61)
         };
     }
 

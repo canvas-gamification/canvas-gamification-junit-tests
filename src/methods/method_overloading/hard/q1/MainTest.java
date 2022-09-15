@@ -1,19 +1,17 @@
 package methods.method_overloading.hard.q1;
 
+import global.tools.CustomAssertions;
+import global.utils.MethodUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class MainTest {
     // Java
-
     static Stream<Arguments> oneStringInputProvider() {
         return Stream.of(Arguments.of("Hello, how are you doing", 24),
                 Arguments.of("", 0), Arguments.of("This is a test string to determine if your method works, or else.", 65));
@@ -34,38 +32,31 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("oneStringInputProvider")
-    void correctStringLengthMethodForOneString(String s, int length) {
-        String failMessage = "Your program does not have a method which returns the length of a single string.";
-        int result = (int) invokeIfMethodExists(OneToThree.class, "stringLength", failMessage,
+    void correctStringLengthMethodForOneString(String s, int length) throws Throwable {
+        Object output = MethodUtil.invokeIfMethodExists(OneToThree.class, "stringLength",
                 new Object[]{s}, String.class);
-        assertEquals(result, length, "Your method does not correctly calculate the length of a single string.");
+        CustomAssertions._assertEquals(length, output, "Your stringLength method does not correctly calculate the length of a single string.");
+        String consoleOutput = MethodUtil.getMethodOutput();
+        assertEquals("", consoleOutput, "Your stringLength method should not have any console output.");
     }
 
     @ParameterizedTest
     @MethodSource("twoStringInputProvider")
-    void correctStringLengthMethodForTwoStrings(String s1, String s2, int length) {
-        String failMessage = "Your program does not have a method which returns the length of two strings added together.";
-        int result = (int) invokeIfMethodExists(OneToThree.class, "stringLength", failMessage,
+    void correctStringLengthMethodForTwoStrings(String s1, String s2, int length) throws Throwable {
+        Object output = MethodUtil.invokeIfMethodExists(OneToThree.class, "stringLength",
                 new Object[]{s1, s2}, String.class, String.class);
-        assertEquals(result, length, "Your method does not correctly calculate the length of two strings added together.");
+        CustomAssertions._assertEquals(length, output, "Your stringLength method does not correctly calculate the length of two strings added together.");
+        String consoleOutput = MethodUtil.getMethodOutput();
+        assertEquals("", consoleOutput, "Your stringLength method should not have any console output.");
     }
 
     @ParameterizedTest
     @MethodSource("threeStringInputProvider")
-    void correctStringLengthMethodForThreeStrings(String s1, String s2, String s3, int length) {
-        String failMessage = "Your program does not have a method which returns the length of three strings added together.";
-        int result = (int) invokeIfMethodExists(OneToThree.class, "stringLength", failMessage,
+    void correctStringLengthMethodForThreeStrings(String s1, String s2, String s3, int length) throws Throwable {
+        Object result = MethodUtil.invokeIfMethodExists(OneToThree.class, "stringLength",
                 new Object[]{s1, s2, s3}, String.class, String.class, String.class);
-        assertEquals(result, length, "Your method does not correctly calculate the length of three strings added together.");
-    }
-
-    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, String failMessage, Object[] arguments, Class<?>... methodArgumentTypes) {
-        try {
-            Method m = methodClass.getMethod(methodName, methodArgumentTypes);
-            return m.invoke(null, arguments);
-        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-            fail(failMessage);
-            return null;
-        }
+        CustomAssertions._assertEquals(result, length, "Your stringLength method does not correctly calculate the length of three strings added together.");
+        String consoleOutput = MethodUtil.getMethodOutput();
+        assertEquals("", consoleOutput, "Your stringLength method should not have any console output.");
     }
 }
