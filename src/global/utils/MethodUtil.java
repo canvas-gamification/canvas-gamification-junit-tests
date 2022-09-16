@@ -20,7 +20,7 @@ public class MethodUtil {
         try {
             Method testMethodInvoke = methodClass.getMethod(methodName, methodArgumentTypes);
             Object methodOutput =  testMethodInvoke.invoke(null, arguments);
-            assertEquals(TestOption.defaultMethodConsoleOutput , getMethodOutput(), TestOption.incorrectMethodConsoleOutputMessage);
+            assertEquals(TestOption.defaultMethodConsoleOutput, getMethodOutput(), TestOption.incorrectMethodConsoleOutputMessage);
             return methodOutput;
         } catch (NoSuchMethodException | IllegalAccessException e) {
             fail(Objects.requireNonNullElseGet(
