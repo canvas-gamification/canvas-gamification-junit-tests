@@ -1,14 +1,13 @@
 package arrays.creating_arrays.hard.q1;
 
 import global.BaseTest;
-import global.tools.CustomAssertions;
+import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.utils.MethodUtil;
 import global.variables.Clause;
-import global.variables.clauses.NewLine;
-import global.variables.clauses.PlaceHolder;
-import global.variables.clauses.StringLiteral;
+import global.variables.clauses.*;
 import global.variables.wrappers.Optional;
+import org.junit.jupiter.api.condition.EnabledIf;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -18,6 +17,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest extends BaseTest {
     // Java
+
+    private boolean correctStructure = false;
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "5";
@@ -48,14 +50,14 @@ public class MainTest extends BaseTest {
     @MethodSource("createRandomArrayInputProvider")
     public void correctCreateRandomArrayMethod(int in) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(RandomArray.class, "createRandomArray", new Object[]{in}, int.class);
-        assertTrue(output != null, "Your createRandomArray method does not return anything.");
+        assertNotNull(output, "Your createRandomArray method does not return anything.");
         boolean b = output.getClass().isArray();
         assertTrue(b, "Your createRandomArray method does not return an array.");
         try{
             int[] arr = (int[]) output;
             boolean allInts = true;
             for(int x: arr){
-                if(x > in)
+                if(x >= in)
                     allInts= false;
             }
             assertTrue(allInts, "Your createRandomArray method generates numbers larger than the size of the array.");
@@ -66,5 +68,46 @@ public class MainTest extends BaseTest {
 
     }
 
+    @ParameterizedTest
+    @MethodSource("mainMethodInputProvider")
+    public void correctMainMethodOutput(int in) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not follow the structure in the sample output.";
+        runWithInput(String.valueOf(in), clauseBuilder(in));
+        correctStructure = true;
+    }
+
+    @EnabledIf("getCorrectStructure")
+    @ParameterizedTest
+    @MethodSource("mainMethodInputProvider")
+    public void correctRandomization(int in) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly randomize the array values.";
+        runWithInput(String.valueOf(in), randomClauseBuilder(in));
+    }
+
+    Clause[][] clauseBuilder(int x){
+        Clause[][] c = new Clause[1][x*2-1];
+        int count = 0;
+        for(int i = 0; i < x-1; i++){
+            c[0][count++] = new IntegerLiteral();
+            c[0][count++] = new NewLine();
+        }
+        c[0][count] = new IntegerLiteral();
+        return c;
+    }
+
+    Clause[][] randomClauseBuilder(int x){
+        Clause[][] c = new Clause[1][x*2-1];
+        int count = 0;
+        for(int i = 0; i < x-1; i++){
+            c[0][count++] = new RandomInteger(0, x);
+            c[0][count++] = new NewLine();
+        }
+        c[0][count] = new RandomInteger(0, x);
+        return c;
+    }
+
+    boolean getCorrectStructure(){
+        return correctStructure;
+    }
 
 }
