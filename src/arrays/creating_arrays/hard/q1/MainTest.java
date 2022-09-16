@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MainTest extends BaseTest {
     // Java
 
-    private boolean correctStructure = false;
+    private static boolean correctStructure = false;
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
@@ -85,7 +85,17 @@ public class MainTest extends BaseTest {
     }
 
     Clause[][] clauseBuilder(int x){
-        Clause[][] c = new Clause[1][x*2-1];
+        int length = x*2-1;
+        if(x <= 0) {
+            Clause[][] c = new Clause[1][1];
+            c[0][0]= new NewLine();
+            return c;
+        }
+        if(x == 1) {
+            length = 1;
+        }
+            Clause[][] c = new Clause[1][length];
+
         int count = 0;
         for(int i = 0; i < x-1; i++){
             c[0][count++] = new IntegerLiteral();
@@ -96,7 +106,16 @@ public class MainTest extends BaseTest {
     }
 
     Clause[][] randomClauseBuilder(int x){
-        Clause[][] c = new Clause[1][x*2-1];
+        int length = x*2-1;
+        if(x <= 0) {
+            Clause[][] c = new Clause[1][1];
+            c[0][0]= new NewLine();
+            return c;
+        }
+        if(x == 1) {
+            length = 1;
+        }
+        Clause[][] c = new Clause[1][length];
         int count = 0;
         for(int i = 0; i < x-1; i++){
             c[0][count++] = new RandomInteger(0, x);
@@ -106,7 +125,7 @@ public class MainTest extends BaseTest {
         return c;
     }
 
-    boolean getCorrectStructure(){
+    public static boolean getCorrectStructure(){
         return correctStructure;
     }
 
