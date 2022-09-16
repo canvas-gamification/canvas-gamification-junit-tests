@@ -128,5 +128,4 @@ public class MainTest extends BaseTest {
     public static boolean getCorrectStructure(){
         return correctStructure;
     }
-
 }
