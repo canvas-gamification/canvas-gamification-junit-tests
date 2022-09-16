@@ -19,6 +19,7 @@ public class MainTest extends BaseTest {
     // Java
 
     private static boolean correctStructure = false;
+    private static final int maxSizeIncrement = 1;
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
@@ -34,15 +35,15 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         RandomArray.main(new String[0]);
     }
 
-    public static Stream<Integer> createRandomArrayInputProvider(){
+    public static Stream<Integer> createRandomArrayInputProvider() {
         return Stream.of(0, 1, 2, 3, 5, 10, 50, 100);
     }
 
-    public static Stream<Integer> mainMethodInputProvider(){
+    public static Stream<Integer> mainMethodInputProvider() {
         return Stream.of(0, 1, 5, 60);
     }
 
@@ -53,16 +54,15 @@ public class MainTest extends BaseTest {
         assertNotNull(output, "Your createRandomArray method does not return anything.");
         boolean b = output.getClass().isArray();
         assertTrue(b, "Your createRandomArray method does not return an array.");
-        try{
+        try {
             int[] arr = (int[]) output;
             boolean allInts = true;
-            for(int x: arr){
-                if(x >= in)
-                    allInts= false;
+            for (int x : arr) {
+                if (x >= in + maxSizeIncrement)
+                    allInts = false;
             }
             assertTrue(allInts, "Your createRandomArray method generates numbers larger than the size of the array.");
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             fail("Your createRandomArray method does not return an array of integers.");
         }
 
@@ -84,20 +84,21 @@ public class MainTest extends BaseTest {
         runWithInput(String.valueOf(in), randomClauseBuilder(in));
     }
 
-    Clause[][] clauseBuilder(int x){
-        int length = x*2-1;
-        if(x <= 0) {
+    Clause[][] clauseBuilder(int x) {
+        x += maxSizeIncrement;
+        int length = x * 2 - 1;
+        if (x <= 0) {
             Clause[][] c = new Clause[1][1];
-            c[0][0]= new NewLine();
+            c[0][0] = new NewLine();
             return c;
         }
-        if(x == 1) {
+        if (x == 1) {
             length = 1;
         }
-            Clause[][] c = new Clause[1][length];
+        Clause[][] c = new Clause[1][length];
 
         int count = 0;
-        for(int i = 0; i < x-1; i++){
+        for (int i = 0; i < x - 1; i++) {
             c[0][count++] = new IntegerLiteral();
             c[0][count++] = new NewLine();
         }
@@ -105,19 +106,20 @@ public class MainTest extends BaseTest {
         return c;
     }
 
-    Clause[][] randomClauseBuilder(int x){
-        int length = x*2-1;
-        if(x <= 0) {
+    Clause[][] randomClauseBuilder(int x) {
+        x += maxSizeIncrement;
+        int length = x * 2 - 1;
+        if (x <= 0) {
             Clause[][] c = new Clause[1][1];
-            c[0][0]= new NewLine();
+            c[0][0] = new NewLine();
             return c;
         }
-        if(x == 1) {
+        if (x == 1) {
             length = 1;
         }
         Clause[][] c = new Clause[1][length];
         int count = 0;
-        for(int i = 0; i < x-1; i++){
+        for (int i = 0; i < x - 1; i++) {
             c[0][count++] = new RandomInteger(0, x);
             c[0][count++] = new NewLine();
         }
@@ -125,7 +127,7 @@ public class MainTest extends BaseTest {
         return c;
     }
 
-    public static boolean getCorrectStructure(){
+    public static boolean getCorrectStructure() {
         return correctStructure;
     }
 }
