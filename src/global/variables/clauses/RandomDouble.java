@@ -118,6 +118,8 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
 
     @Override
     public String getRegex() {
+        // TODO: Change to just check that the regex is valid
+        // TODO: Double check that the binNumber assigning checks the range properly
         int lowSplit = RegexUtil.getSplitDecimal(lower)[0];
         int highSplit = RegexUtil.getSplitDecimal(upper)[0];
         String regexContent = RegexUtil.getRegexInt(lowSplit, highSplit);
