@@ -19,7 +19,7 @@ public class MainTest extends BaseTest {
     // Java
 
     private static boolean correctStructure = false;
-    private static final int maxSizeIncrement = 1;
+    private static final int maxSizeIncrement = 0;
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
