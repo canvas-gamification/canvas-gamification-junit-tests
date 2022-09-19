@@ -3,6 +3,14 @@ package arrays.creating_arrays.hard.q3;
 /*
 Write a program that asks the user for 5 integers, and stores those values into an array and prints the array, with
 each value on a new line, back to the user.
+Sample output:
+Enter 5 integers:
+374 5 5482 76 -16
+374
+5
+5482
+76
+-16
  */
 
 import java.util.Scanner;
