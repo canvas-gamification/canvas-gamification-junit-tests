@@ -36,11 +36,11 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         StoringInts.main(new String[0]);
     }
 
-    static Stream<Arguments> mainMethodInputProvider(){
+    static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(
                 Arguments.of("25 32 102 7362 4738", 25, 32, 102, 7362, 4738),
                 Arguments.of("-45 -217 -2 -93 -12963", -45, -217, -2, -93, -12963),
@@ -51,7 +51,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
-    void printsOutputCorrectly(String in, int one, int two, int three, int four, int five){
+    void printsOutputCorrectly(String in, int one, int two, int three, int four, int five) {
         runWithInput(in);
         assertEquals(String.valueOf(one), getItemByName("one"), "Your program does not print the first input value");
         assertEquals(String.valueOf(two), getItemByName("two"), "Your program does not print the second input value");
