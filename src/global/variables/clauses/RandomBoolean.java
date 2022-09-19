@@ -6,10 +6,11 @@ import global.variables.RandomClause;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static global.utils.RandomUtil.frequenciesAreRandom;
 
-public class RandomBoolean extends Clause implements RandomClause<Integer> {
+public class RandomBoolean extends Clause implements RandomClause<Boolean> {
     static Map<Integer, ArrayList<Integer>> valueStore = new HashMap<>();
     private final double percentageTrue;
 
@@ -36,8 +37,9 @@ public class RandomBoolean extends Clause implements RandomClause<Integer> {
     }
 
     public void trackValue(int matchGroupNum, String matchGroupValue) {
+        // Note that the input boolean values are mapped to an Integer ArrayList with true = 1 and false = 0
         valueStore.computeIfAbsent(matchGroupNum, k -> new ArrayList<>());
-        (valueStore.get(matchGroupNum)).add(convertFromRegexGroup(matchGroupValue));
+        (valueStore.get(matchGroupNum)).add(convertFromRegexGroup(matchGroupValue) ? 1 : 0);
     }
 
     public boolean validateRandom(int matchGroupNum) {
@@ -48,15 +50,16 @@ public class RandomBoolean extends Clause implements RandomClause<Integer> {
         for (int value : values) {
             observedCounts[value]++;
         }
-        return frequenciesAreRandom(observedCounts, NUM_BINS);
+        return frequenciesAreRandom(observedCounts, percentageTrue);
     }
 
-    public Integer convertFromRegexGroup(String matchGroupString) {
-        return Boolean.parseBoolean(matchGroupString) ? 1 : 0;
+    public Boolean convertFromRegexGroup(String matchGroupString) {
+        return Boolean.parseBoolean(matchGroupString);
     }
 
-    public ArrayList<Integer> getValuesForMatchGroup(int matchGroup) {
-        return valueStore.get(matchGroup);
+    public ArrayList<Boolean> getValuesForMatchGroup(int matchGroup) {
+        // Maps Integer ArrayList back to the input boolean values to be displayed in the event of an error
+        return valueStore.get(matchGroup).stream().map(e -> (e == 1) ).collect( Collectors.toCollection( ArrayList::new ) );
     }
 
     public String getRegex() {

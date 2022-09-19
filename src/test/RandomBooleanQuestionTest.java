@@ -10,7 +10,9 @@ public class RandomBooleanQuestionTest extends BaseRandomTest {
         return new Clause[]{
                 new RandomBoolean(),
                 new NewLine(),
-                new RandomBoolean()
+                new RandomBoolean(0.01),
+                new NewLine(),
+                new RandomBoolean(4.0/5.0)
         };
     }
 

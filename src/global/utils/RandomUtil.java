@@ -1,5 +1,6 @@
 package global.utils;
 
+import global.tools.Logger;
 import global.variables.*;
 import org.apache.commons.math3.stat.inference.ChiSquareTest;
 
@@ -106,9 +107,19 @@ public class RandomUtil {
         return (count * 1.0) / numBins >= ACCEPTANCE_RATE;
     }
 
+    public static boolean frequenciesAreRandom(int[] frequencies, double percentageTrue) {
+        // assume that the sum of frequencies in this list == the total number of values generated
+        Logger.logMessage(Arrays.toString(frequencies));
+        double expectedTrueFrequency = ArrayUtil.sum(frequencies) * percentageTrue;
+        Logger.logMessage(String.valueOf(expectedTrueFrequency));
+        double errorAmount = PERCENTAGE_ERROR + (percentageTrue < 0.1 ? 0.05 : -0.05);
+        return valueAlmostEquals(frequencies[1], expectedTrueFrequency, errorAmount);
+    }
+
     public static boolean valueAlmostEquals(double value, double target, double percentageError) {
         double upperBound = Math.ceil(target + target * percentageError);
         double lowerBound = Math.floor(target - target * percentageError);
+        Logger.logMessage(String.format("Lower: %f Upper: %f", lowerBound, upperBound));
         return lowerBound <= value && value <= upperBound;
     }
 }
