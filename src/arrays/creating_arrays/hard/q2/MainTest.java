@@ -50,11 +50,11 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         RevdArray.main(new String[0]);
     }
 
-    static Stream<Arguments> reverseInputProvider(){
+    static Stream<Arguments> reverseInputProvider() {
         return Stream.of(
                 Arguments.of(0, 0),
                 Arguments.of(1, 1),
@@ -67,7 +67,7 @@ public class MainTest extends BaseTest {
         );
     }
 
-    static Stream<Arguments> mainMethodInputProvider(){
+    static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(
                 Arguments.of("0 55 64 13 7356", 0, 55, 46, 31, 6537),
                 Arguments.of("319 404 257 123 666", 913, 404, 752, 321, 666),
@@ -84,7 +84,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
-    void printsOutputCorrectly(String in, int one, int two, int three, int four, int five){
+    void printsOutputCorrectly(String in, int one, int two, int three, int four, int five) {
         runWithInput(in);
         assertEquals(String.valueOf(one), getItemByName("one"), "Your program does not correctly reverse the first number");
         assertEquals(String.valueOf(two), getItemByName("two"), "Your program does not correctly reverse the second number");

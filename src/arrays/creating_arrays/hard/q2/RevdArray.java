@@ -25,6 +25,7 @@ Enter a number to add to the array:
  */
 
 import java.util.Scanner;
+
 public class RevdArray {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -33,7 +34,7 @@ public class RevdArray {
             System.out.println("Enter a number to add to the array: ");
             arr[i] = reverse(input.nextInt());
         }
-        for(int i = 0; i < arr.length; i++)
+        for (int i = 0; i < arr.length; i++)
             System.out.println(arr[i]);
     }
 
