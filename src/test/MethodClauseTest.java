@@ -5,14 +5,15 @@ import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.utils.MethodUtil;
 import global.variables.Clause;
-import global.variables.clauses.DoubleLiteral;
-import global.variables.clauses.IntegerLiteral;
-import global.variables.clauses.StringLiteral;
+import global.variables.clauses.*;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MethodClauseTest extends BaseTest {
 
@@ -20,9 +21,9 @@ public class MethodClauseTest extends BaseTest {
         return new Clause[]{
                 new StringLiteral("The sum of two numbers is: "),
                 new IntegerLiteral("sum"),
-//                new NewLine(),
-//                new StringLiteral("The area is "),
-//                new DoubleLiteral("area")
+                new NewLine(),
+                new StringLiteral("The area is "),
+                new DoubleLiteral("area")
         };
     }
 
@@ -45,7 +46,7 @@ public class MethodClauseTest extends BaseTest {
         );
     }
 
-    static Stream<Arguments> areaCalcInputProvider(){
+    static Stream<Arguments> areaCalcInputProvider() {
         return Stream.of(
                 Arguments.of(4.5, 3.9, 17.55),
                 Arguments.of(3, 5, 15.0)
@@ -76,9 +77,24 @@ public class MethodClauseTest extends BaseTest {
                 new StringLiteral("The area is "),
                 new DoubleLiteral("area")
         };
-        TestOption.incorrectMethodStructureErrorMessage = "Your areaCalc method does not correctly print out the area.";
+        //TestOption.incorrectMethodStructureErrorMessage = "Your areaCalc method does not correctly print out the area.";
         Object output = MethodUtil.invokeIfMethodExists(MethodClause.class, "areaCalc", new Object[]{x, y},
                 double.class, double.class);
         CustomAssertions._assertEquals(area, output, "Your area method does not correctly calculate area.");
+    }
+
+    @Test
+    void testTestMethod() throws Throwable {
+        TestOption.methodTestSentence = new Clause[]{
+                new IntegerLiteral("integer"),
+                new NewLine(),
+                new StringLiteral("Hello world"),
+                new NewLine(),
+                new DoubleLiteral(34, 35, "double")
+        };
+        Object output = MethodUtil.invokeIfMethodExists(MethodClause.class, "testMethod");
+        assertEquals(35, Integer.parseInt(MethodUtil.getMethodItemByName("integer")), "ints were different");
+        assertEquals(34.124, Double.parseDouble(MethodUtil.getMethodItemByName("double")), "double diff");
+        CustomAssertions._assertEquals(69, output, "method output incorrect");
     }
 }
