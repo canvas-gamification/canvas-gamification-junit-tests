@@ -75,9 +75,9 @@ public class MethodCodeTest extends BaseTest {
 //        MethodUtil.invokeIfMethodExists(MethodCode.class, "ThisMethod");
 //    }
 
-    @Test
-    void arrayErrorMessageTesting() throws Throwable {
-        int output = (int) MethodUtil.invokeIfMethodExists(MethodCode.class, "sum", new Object[]{new int[]{1, 2, 3, 4, 5}}, int[].class);
-        assertEquals(15, output, "Failed at assert");
-    }
+//    @Test
+//    void arrayErrorMessageTesting() throws Throwable {
+//        int output = (int) MethodUtil.invokeIfMethodExists(MethodCode.class, "sum", new Object[]{new int[]{1, 2, 3, 4, 5}}, int[].class);
+//        assertEquals(15, output, "Failed at assert");
+//    }
 }
