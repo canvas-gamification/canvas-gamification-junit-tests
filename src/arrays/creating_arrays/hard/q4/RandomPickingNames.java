@@ -13,6 +13,8 @@ Emilio
 At index 1: Will
  */
 
+import global.tools.Logger;
+
 import java.util.Scanner;
 public class RandomPickingNames
 {
@@ -26,5 +28,8 @@ public class RandomPickingNames
         }
         int randInt = (int) (Math.random()*5);
         System.out.println("At index " + randInt + ": " + sent[randInt]);
+//
+        Logger.logMessage(String.valueOf(randInt));
+        Logger.logMessage(sent[randInt]);
     }
 }
