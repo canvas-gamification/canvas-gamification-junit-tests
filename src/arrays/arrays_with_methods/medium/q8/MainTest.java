@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 public class MainTest {
     // Parsons
-    static Stream<Arguments> inputProvider(){
+    static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of(0, 's', new char[][]{}),
                 Arguments.of(1, '@', new char[][]{{'@'}}),
@@ -20,7 +20,7 @@ public class MainTest {
                         {' ', ' ', ' ', ' ', '9'},
                         {' ', ' ', ' ', '9', '9'},
                         {' ', ' ', '9', '9', '9'},
-                        {' ', '9', '9', '9', '9'}   ,
+                        {' ', '9', '9', '9', '9'},
                         {'9', '9', '9', '9', '9'}
                 }),
                 Arguments.of(10, '*', new char[][]{
