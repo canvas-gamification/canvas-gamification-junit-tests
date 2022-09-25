@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 public class MainTest {
     // Parsons with distractors
-    static Stream<Arguments> inputProvider(){
+    static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of(new char[]{'s', 'h', 'c', 'l', 'o', 'p'}, "ujenqr"),
                 Arguments.of(new char[]{'f', 'c', 'j', 'n'}, "help"),
