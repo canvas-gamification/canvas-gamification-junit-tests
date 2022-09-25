@@ -1,9 +1,9 @@
 package test;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
-import global.tools.TestOption;
-import global.utils.MethodUtil;
+import global.tools.Logger;
 import global.variables.Clause;
 import global.variables.clauses.*;
 import org.junit.jupiter.api.Test;
@@ -56,45 +56,48 @@ public class MethodClauseTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("printInputProvider")
     void correctPrintMethod(String s) throws Throwable {
-        TestOption.methodTestSentence = new Clause[]{
-                new StringLiteral(s)
-        };
-        MethodUtil.invokeIfMethodExists(MethodClause.class, "print", new Object[]{s}, String.class);
+        MethodTest m = new MethodTest(MethodClause.class, "print", new Object[]{s}, new Class[]{String.class},
+                new Clause[]{new StringLiteral(s)});
+        m.invokeIfMethodExists();
     }
 
     @ParameterizedTest
     @MethodSource("addInputProvider")
     void correctAddMethod(int x, int y, int z) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(MethodClause.class, "add", new Object[]{x, y},
-                int.class, int.class);
+        MethodTest m = new MethodTest(MethodClause.class, "add", new Object[]{x, y},
+                new Class[]{int.class, int.class});
+        Object output = m.invokeIfMethodExists();
         CustomAssertions._assertEquals(z, output, "Your add method does not correctly add two numbers.");
     }
 
     @ParameterizedTest
     @MethodSource("areaCalcInputProvider")
     void correctAreaMethod(double x, double y, double area) throws Throwable {
-        TestOption.methodTestSentence = new Clause[]{
+        MethodTest m = new MethodTest(MethodClause.class, "areaCalc", new Object[]{x, y},
+                new Class[]{double.class, double.class}, new Clause[]{
                 new StringLiteral("The area is "),
                 new DoubleLiteral("area")
-        };
+        });
         //TestOption.incorrectMethodStructureErrorMessage = "Your areaCalc method does not correctly print out the area.";
-        Object output = MethodUtil.invokeIfMethodExists(MethodClause.class, "areaCalc", new Object[]{x, y},
-                double.class, double.class);
+        Object output = m.invokeIfMethodExists();
         CustomAssertions._assertEquals(area, output, "Your area method does not correctly calculate area.");
     }
 
     @Test
     void testTestMethod() throws Throwable {
-        TestOption.methodTestSentence = new Clause[]{
+        Clause[] c = new Clause[]{
                 new IntegerLiteral("integer"),
                 new NewLine(),
                 new StringLiteral("Hello world"),
                 new NewLine(),
-                new DoubleLiteral(34, 35, "double")
+                new DoubleLiteral(30, 35, "double")
         };
-        Object output = MethodUtil.invokeIfMethodExists(MethodClause.class, "testMethod");
-        assertEquals(35, Integer.parseInt(MethodUtil.getMethodItemByName("integer")), "ints were different");
-        assertEquals(34.124, Double.parseDouble(MethodUtil.getMethodItemByName("double")), "double diff");
+        MethodTest m = new MethodTest(MethodClause.class, "testMethod", c, "Your double value is outside the range.");
+        m.setMethodNotFoundErrorMessage("Test ");
+        Object output = m.invokeIfMethodExists();
+        Logger.logMessage(m.getMethodOutput());
+        assertEquals(35, Integer.parseInt(m.getMethodItemByName("integer")), "ints were different");
+        assertEquals(34.124, Double.parseDouble(m.getMethodItemByName("double")), "double diff");
         CustomAssertions._assertEquals(69, output, "method output incorrect");
     }
 }

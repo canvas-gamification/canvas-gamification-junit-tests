@@ -9,26 +9,26 @@ public class MethodClause {
         areaCalc(4, 5);
     }
 
-    public static void print(String s){
+    public static void print(String s) {
         System.out.println(s);
     }
 
-    public static int add(int x, int y){
+    public static int add(int x, int y) {
         return x + y;
     }
 
-    public static double areaCalc(double x, double y){
+    public static double areaCalc(double x, double y) {
         double area = x * y;
         System.out.println("The area is 38.96");
         return area;
     }
 
-    public static void printRandom(){
+    public static void printRandom() {
         Random r = new Random();
         System.out.println(r.nextInt(100));
     }
 
-    public static int testMethod(){
+    public static int testMethod() {
         System.out.println(35);
         System.out.println("Hello world");
         System.out.println(34.124);
