@@ -50,23 +50,23 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> inputProvider(){
         return Stream.of(
-                Arguments.of("Obi-wan \n Darth Revan \n Ashoka \n Luke \n Jaba the Hutt", 0),
-                Arguments.of("Toph \n Geralt \n Yennefer of Vengerberg \n Jaskier \n Uncle Iroh", 1),
-                Arguments.of("Spike \n Jack Sparrow \n Kenshin \n Vash \n Alphonse", 2),
+                Arguments.of("Obi\\-wan\nDarth Revan\nAshoka\nLuke\nJaba the Hutt", 0),
+                Arguments.of("Toph\nGeralt\nYennefer of Vengerberg\nJaskier\nUncle Iroh", 1),
+                Arguments.of("Spike\nJack Sparrow\nKenshin\nVash\nAlphonse", 2),
                 Arguments.of(" \n \n \n \n ", 3),
-                Arguments.of("single \n word \n test \n input \n stuff", 4),
-                Arguments.of("Li77y \n d@rl1ng \n gr00t \n Bu55y \n M\\*x", 5)
+                Arguments.of("single\nword\ntest\ninput\nstuff", 4),
+                Arguments.of("Li77y\nd@rl1ng\ngr00t\nBu55y\nM\\*x", 5)
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
     void picksRandomNameCorrectly(String in, int c) throws InvalidClauseException {
-//        runWithInput(in, new Clause[]{
-//                new StringLiteral(s[c][Integer.parseInt(getItemByName("index"))])
-//        });
+        runWithInput(in, new Clause[]{
+                new StringLiteral(s[c][Integer.parseInt(getItemByName("index"))])
+        });
 //
-        runWithInput(in);
-        Logger.logMessage(getItemByName("index"));
+//        runWithInput(in);
+//        Logger.logMessage(getItemByName("index"));
     }
 }

@@ -29,7 +29,7 @@ public class RandomPickingNames
         int randInt = (int) (Math.random()*5);
         System.out.println("At index " + randInt + ": " + sent[randInt]);
 //
-        Logger.logMessage(String.valueOf(randInt));
-        Logger.logMessage(sent[randInt]);
+//        Logger.logMessage(String.valueOf(randInt));
+//        Logger.logMessage(sent[randInt]);
     }
 }
