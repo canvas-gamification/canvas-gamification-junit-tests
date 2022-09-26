@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 public class MainTest {
     // Java
-    static Stream<Arguments> inputProvider(){
+    static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of(new int[]{}, new int[]{}, true),
                 Arguments.of(new int[]{1, 2, 3, 5, 4}, new int[]{1, 2, 3, 4, 5}, false),
