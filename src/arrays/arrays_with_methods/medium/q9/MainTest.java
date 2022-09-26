@@ -40,11 +40,11 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         TwoDAndThatsAFact.main(new String[0]);
     }
 
-    static Stream<Arguments> factInputProvider(){
+    static Stream<Arguments> factInputProvider() {
         return Stream.of(
                 Arguments.of(1, 1),
                 Arguments.of(2, 2),
