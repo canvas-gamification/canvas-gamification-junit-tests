@@ -25,7 +25,7 @@ public class MainTest {
     @MethodSource("inputProvider")
     void correctSmallAndLargeMethod(int[] arr, int[] sizes) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(OppositeEnds.class, "smallAndLarge", new Object[]{arr}, int[].class);
-        CustomAssertions._assertEquals(Arrays.toString(sizes), Arrays.toString((int[]) output), "Your smallAndLarge method does not return an array of the largest" +
+        CustomAssertions._assertArrayEquals(sizes, (int[]) output, "Your smallAndLarge method does not return an array of the largest" +
                 " and smallest element");
     }
 }
