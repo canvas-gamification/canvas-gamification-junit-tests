@@ -18,20 +18,24 @@ public class MethodClause {
     }
 
     public static double areaCalc(double x, double y) {
+        /*
+            This method is an example of where the return value and the console output are different. With how methodTest
+            handles testing, these values can be tested independently of each other, so that the incorrect printed value
+            does not fail the test on the return value.
+         */
         double area = x * y;
         System.out.println("The area is 38.96");
         return area;
     }
 
-    public static void printRandom() {
-        Random r = new Random();
-        System.out.println(r.nextInt(100));
-    }
-
     public static int testMethod() {
+        /*
+            If you look at the corresponding test, this method demonstrates how MethodTest can independently test the
+            returned value and printed output.
+         */
         System.out.println(35);
         System.out.println("Hello world");
         System.out.println(34.124);
-        return 69;
+        return 70;
     }
 }
