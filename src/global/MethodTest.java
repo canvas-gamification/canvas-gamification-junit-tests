@@ -25,17 +25,16 @@ public class MethodTest {
     private ByteArrayOutputStream methodOutput;
     private final Class<?> methodClass;
     private final String methodName;
-    private final Object[] arguments;
-    private final Class<?>[] methodArgumentTypes;
+    private Object[] arguments;
+    private Class<?>[] methodArgumentTypes;
     private final Clause[] methodTestSentence;
     private String methodNotFoundErrorMessage;
     private String incorrectMethodStructureErrorMessage;
 
-    public MethodTest(Class<?> methodClass, String methodName, Object[] arguments, Class<?>[] methodArgumentTypes) {
+    public MethodTest(Class<?> methodClass, String methodName, Object[][] arguments) {
         this.methodClass = methodClass;
         this.methodName = methodName;
-        this.arguments = arguments;
-        this.methodArgumentTypes = methodArgumentTypes;
+        setArguments(arguments);
         this.methodTestSentence = null;
         this.incorrectMethodStructureErrorMessage = "Your " + methodName + " method's output did not follow the correct structure/syntax";
         setMethodOutput();
@@ -51,11 +50,10 @@ public class MethodTest {
         setMethodOutput();
     }
 
-    public MethodTest(Class<?> methodClass, String methodName, Object[] arguments, Class<?>[] methodArgumentTypes, Clause[] methodTestSentence) {
+    public MethodTest(Class<?> methodClass, String methodName, Object[][] arguments, Clause[] methodTestSentence) {
         this.methodClass = methodClass;
         this.methodName = methodName;
-        this.arguments = arguments;
-        this.methodArgumentTypes = methodArgumentTypes;
+        setArguments(arguments);
         this.methodTestSentence = methodTestSentence;
         this.incorrectMethodStructureErrorMessage = "Your " + methodName + " method's output did not follow the correct structure/syntax";
         setMethodOutput();
@@ -71,11 +69,10 @@ public class MethodTest {
         setMethodOutput();
     }
 
-    public MethodTest(Class<?> methodClass, String methodName, Object[] arguments, Class<?>[] methodArgumentTypes, String incorrectMethodStructureErrorMessage) {
+    public MethodTest(Class<?> methodClass, String methodName, Object[][] arguments, String incorrectMethodStructureErrorMessage) {
         this.methodClass = methodClass;
         this.methodName = methodName;
-        this.arguments = arguments;
-        this.methodArgumentTypes = methodArgumentTypes;
+        setArguments(arguments);
         this.methodTestSentence = null;
         this.incorrectMethodStructureErrorMessage = incorrectMethodStructureErrorMessage;
         setMethodOutput();
@@ -91,11 +88,10 @@ public class MethodTest {
         setMethodOutput();
     }
 
-    public MethodTest(Class<?> methodClass, String methodName, Object[] arguments, Class<?>[] methodArgumentTypes, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) {
+    public MethodTest(Class<?> methodClass, String methodName, Object[][] arguments, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) {
         this.methodClass = methodClass;
         this.methodName = methodName;
-        this.arguments = arguments;
-        this.methodArgumentTypes = methodArgumentTypes;
+        setArguments(arguments);
         this.methodTestSentence = methodTestSentence;
         this.incorrectMethodStructureErrorMessage = incorrectMethodStructureErrorMessage;
         setMethodOutput();
@@ -111,7 +107,7 @@ public class MethodTest {
         setMethodOutput();
     }
 
-    public Object invokeIfMethodExists() throws Throwable {
+    public Object callMethod() throws Throwable {
         try {
             Method testMethodInvoke = methodClass.getMethod(methodName, methodArgumentTypes);
             Object output = testMethodInvoke.invoke(null, arguments);
@@ -204,6 +200,22 @@ public class MethodTest {
 
     public String getMethodOutput() {
         return methodOutput.toString();
+    }
+
+    public void setArguments(Object[][] arguments) {
+        Object[] args = new Object[arguments.length];
+        Class<?>[] argsClass = new Class[arguments.length];
+        for (int i = 0; i < arguments.length; i++) {
+            if (arguments[i][1] instanceof Class<?>) {
+                args[i] = arguments[i][0];
+                argsClass[i] = (Class<?>) arguments[i][1];
+            } else {
+                _fail("Error with test definition: please contact an administrator",
+                        "Error with test definition: index [1] of the arguments array must contain a class type.");
+            }
+        }
+        this.arguments = args;
+        this.methodArgumentTypes = argsClass;
     }
 
     public String getMethodItemAtIndex(int index) {
