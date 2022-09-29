@@ -54,6 +54,12 @@ public class MainTest extends BaseTest {
         );
     }
 
+    static Stream<Arguments> mainMethodInputProvider(){
+        return Stream.of(
+                Arguments.of("")
+        );
+    }
+
     @ParameterizedTest
     @MethodSource("powerNInputProvider")
     void correctPowerNMethod(int[] given, int[] expected) throws Throwable {
