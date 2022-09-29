@@ -2,13 +2,9 @@ package arrays.creating_arrays.hard.q4;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
-import global.tools.Logger;
 import global.tools.TestOption;
 import global.variables.Clause;
-import global.variables.clauses.IntegerLiteral;
-import global.variables.clauses.NewLine;
-import global.variables.clauses.PlaceHolder;
-import global.variables.clauses.StringLiteral;
+import global.variables.clauses.*;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,7 +16,7 @@ public class MainTest extends BaseTest {
     // Java
 
     String[][] s = {
-            {"Obi-wan", "Darth Revan", "Ashoka", "Luke", "Jaba the Hutt"},
+            {"Obi\\-wan", "Darth Revan", "Ashoka", "Luke", "Jaba the Hutt"},
             {"Toph", "Geralt", "Yennefer of Vengerberg", "Jaskier", "Uncle Iroh"},
             {"Spike", "Jack Sparrow", "Kenshin", "Vash", "Alphonse"},
             {" ", " ", " ", " ", " "},
@@ -36,7 +32,7 @@ public class MainTest extends BaseTest {
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("At index "),
-                new IntegerLiteral("index"),
+                new RandomInteger(0, 5, "index"),
                 new StringLiteral(": "),
                 new PlaceHolder()
         };
