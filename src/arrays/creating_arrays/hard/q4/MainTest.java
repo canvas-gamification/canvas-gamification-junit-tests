@@ -48,6 +48,7 @@ public class MainTest extends BaseTest {
         RandomPickingNames.main(new String[0]);
     }
 
+    //ints are the index to get the names from the 2d string array at the top
     static Stream<Arguments> inputProvider(){
         return Stream.of(
                 Arguments.of("Obi\\-wan\nDarth Revan\nAshoka\nLuke\nJaba the Hutt", 0),
@@ -61,12 +62,9 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void picksRandomNameCorrectly(String in, int c) throws InvalidClauseException {
+    void picksRandomNameCorrectly(String in, int c) {
         runWithInput(in, new Clause[]{
-                new StringLiteral(s[c][Integer.parseInt(getItemByName("index"))])
+                new StringLiteral((?:s[c][0]|s[c][1]|s[c][2]|s[c][3]|s[c][4]))
         });
-//
-//        runWithInput(in);
-//        Logger.logMessage(getItemByName("index"));
     }
 }
