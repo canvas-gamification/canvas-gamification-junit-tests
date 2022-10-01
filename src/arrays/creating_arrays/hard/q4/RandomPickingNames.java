@@ -14,17 +14,16 @@ At index 1: Will
  */
 
 import java.util.Scanner;
-public class RandomPickingNames
-{
-    public static void main( String [] args )
-    {
-        Scanner input = new Scanner( System.in );
+
+public class RandomPickingNames {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
         System.out.println("Enter 5 names: ");
         String[] sent = new String[5];
-        for( int i = 0; i < sent.length; i++ ) {
+        for (int i = 0; i < sent.length; i++) {
             sent[i] = input.nextLine();
         }
-        int randInt = (int) (Math.random()*5);
+        int randInt = (int) (Math.random() * 5);
         System.out.println("At index " + randInt + ": " + sent[randInt]);
     }
 }
