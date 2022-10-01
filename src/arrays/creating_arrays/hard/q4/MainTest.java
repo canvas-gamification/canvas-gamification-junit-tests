@@ -26,6 +26,15 @@ public class MainTest extends BaseTest {
             {"Li77y", "d@rl1ng", "gr00t", "Bu55y", "M\\*x"}
     };
 
+    String[][] sForEquals = {
+            {"Obi-wan", "Darth Revan", "Ashoka", "Luke", "Jaba the Hutt"},
+            {"Toph", "Geralt", "Yennefer of Vengerberg", "Jaskier", "Uncle Iroh"},
+            {"Spike", "Jack Sparrow", "Kenshin", "Vash", "Alphonse"},
+            {" ", " ", " ", " ", " "},
+            {"single", "word", "test", "input", "stuff"},
+            {"Li77y", "d@rl1ng", "gr00t", "Bu55y", "M*x"}
+    };
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "Seth \n Liam \n Teresa \n Paige \n Hannah";
@@ -64,6 +73,6 @@ public class MainTest extends BaseTest {
                 new StringLiteral(reg, "name")
         });
 
-        assertEquals(s[c][Integer.parseInt(getItemByName("index"))], getItemByName("name"), "Your program does not print the correct name for the randomized index.");
+        assertEquals(sForEquals[c][Integer.parseInt(getItemByName("index"))], getItemByName("name"), "Your program does not print the correct name for the randomized index.");
     }
 }
