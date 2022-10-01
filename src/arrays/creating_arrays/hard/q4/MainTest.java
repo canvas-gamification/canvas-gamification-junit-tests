@@ -12,6 +12,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class MainTest extends BaseTest {
     // Java
 
@@ -61,5 +63,7 @@ public class MainTest extends BaseTest {
         runWithInput(in, new Clause[]{
                 new StringLiteral(reg, "name")
         });
+
+        assertEquals(s[c][Integer.parseInt(getItemByName("index"))], getItemByName("name"), "Your program does not print the correct name for the randomized index.");
     }
 }
