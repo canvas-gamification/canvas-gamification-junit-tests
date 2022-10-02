@@ -2,7 +2,9 @@ package arrays.arrays_with_methods.hard.q10;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
+import global.tools.CustomAssertions;
 import global.tools.TestOption;
+import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -32,6 +34,17 @@ public class MainTest extends BaseTest {
         ArrayofDigits.main(new String[0]);
     }
 
+    static Stream<Arguments> digitIntInputProvider(){
+        return Stream.of(
+                Arguments.of(100000000, 45),
+                Arguments.of(-89, 89),
+                Arguments.of(2, 2),
+                Arguments.of(473, 0),
+                Arguments.of(0, 37),
+                Arguments.of(1942, 1000)
+        );
+    }
+
     static Stream<Arguments> mainMethodInputProvider(){
         return Stream.of(
                 Arguments.of("5 2", 5, 2),
@@ -39,6 +52,18 @@ public class MainTest extends BaseTest {
                 Arguments.of("-82 3", -82, 3),
                 Arguments.of("7 0", 7, 0)
         );
+    }
+
+    @ParameterizedTest
+    @MethodSource("digitIntInputProvider")
+    void correctDigitIntMethod(int a, int b) throws Throwable {
+        Object output = MethodUtil.invokeIfMethodExists(ArrayofDigits.class, "digitInt", new Object[]{a, b}, int.class, int.class);
+
+        int[] arr = new int[b];
+        for(int x = 0; x < b; x ++)
+            arr[x] = a;
+
+        CustomAssertions._assertArrayEquals(arr, output, "Your digitInt method does not return an array of the specified integers to the specified length.");
     }
 
     @ParameterizedTest
