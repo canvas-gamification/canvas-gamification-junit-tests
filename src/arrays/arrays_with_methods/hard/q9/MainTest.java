@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class MainTest extends BaseTest {
@@ -38,25 +39,27 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         ArrayofDigits.main(new String[0]);
     }
 
-    static Stream<Arguments> powerNInputProvider(){
+    static Stream<Arguments> powerNInputProvider() {
         return Stream.of(
                 Arguments.of(new int[]{0, 0, 0, 0, 0}, new int[]{0, 0, 0, 0, 0}),
                 Arguments.of(new int[]{1, 1, 1, 1, 1}, new int[]{1, 1, 1, 1, 1}),
                 Arguments.of(new int[]{1, 2, 3, 4, 5}, new int[]{1, 4, 9, 16, 25}),
-                Arguments.of(new int[]{ 6, 7, 8, 9, 10}, new int[]{36, 49, 64, 81, 100}),
+                Arguments.of(new int[]{6, 7, 8, 9, 10}, new int[]{36, 49, 64, 81, 100}),
                 Arguments.of(new int[]{2128, 73, 29, 18236, 273}, new int[]{4528384, 5329, 841, 332551696, 74529}),
                 Arguments.of(new int[]{-5, -23, -78, -1542, -18}, new int[]{25, 529, 6084, 2377764, 324}),
                 Arguments.of(new int[]{-46, 2, 98, -37413, -8701}, new int[]{2116, 4, 9604, 1399732569, 75707401})
         );
     }
 
-    static Stream<Arguments> mainMethodInputProvider(){
+    static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(
-                Arguments.of("")
+                Arguments.of("6 78 32 19 5", 36, 6084, 1024, 361, 25),
+                Arguments.of("-25 638 24624 483 -1", 625, 407044, 606341376, 233289, 1),
+                Arguments.of("2 2 17 649 34827", 4, 4, 289, 421201, 1212919929)
         );
     }
 
@@ -66,5 +69,16 @@ public class MainTest extends BaseTest {
         Object output = MethodUtil.invokeIfMethodExists(ArrayofDigits.class, "powerN", new Object[]{given}, int[].class);
         assertNull(output, "Your powerN method should not have a return variable.");
         CustomAssertions._assertArrayEquals(expected, given, "Your method does not square the values in the given array.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("mainMethodInputProvider")
+    void correctMainMethodOutput(String in, int one, int two, int three, int four, int five) {
+        runWithInput(in);
+        assertEquals(one, Integer.parseInt(getItemByName("first")), "Your program does not square the first number.");
+        assertEquals(two, Integer.parseInt(getItemByName("second")), "Your program does not square the first number.");
+        assertEquals(three, Integer.parseInt(getItemByName("third")), "Your program does not square the first number.");
+        assertEquals(four, Integer.parseInt(getItemByName("fourth")), "Your program does not square the first number.");
+        assertEquals(five, Integer.parseInt(getItemByName("fifth")), "Your program does not square the first number.");
     }
 }

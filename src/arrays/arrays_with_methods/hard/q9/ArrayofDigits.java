@@ -17,22 +17,21 @@ Enter 5 integers:
  */
 
 import java.util.Scanner;
-public class ArrayofDigits
-{
-    public static void main( String [] args )
-    {
-        Scanner input = new Scanner( System.in );
+
+public class ArrayofDigits {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
         System.out.println("Enter 5 integers: ");
         int[] sent = new int[5];
-        for( int i = 0; i < sent.length; i++ )
+        for (int i = 0; i < sent.length; i++)
             sent[i] = input.nextInt();
-        powerN( sent );
-        for( int i = 0; i < sent.length; i++ )
+        powerN(sent);
+        for (int i = 0; i < sent.length; i++)
             System.out.println(sent[i]);
     }
-    public static void powerN(int[] arr)
-    {
-        for( int i = 0; i < arr.length; i++ )
+
+    public static void powerN(int[] arr) {
+        for (int i = 0; i < arr.length; i++)
             arr[i] = (int) Math.pow(arr[i], 2);
     }
 }
