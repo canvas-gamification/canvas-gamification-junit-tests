@@ -1,8 +1,8 @@
 package arrays.arrays_with_methods.hard.q9;
 
 /*
-Write a Java program that asks the user to enter 5 integers to be stored in an integer array. Next, define a method
-that takes an integer array, computes the 2nd power of each element, and does not return any output. Back in the main
+Write a Java program that asks the user to enter 5 integers to be stored in an integer array. Next, define a method called
+powerN that takes an integer array, computes the 2nd power of each element, and does not return any output. Back in the main
 method of the program, call this method with the array consisting of the user inputted values, then display each element
 in the array after calling the method.
 
