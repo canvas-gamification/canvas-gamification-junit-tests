@@ -30,11 +30,11 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         ArrayofDigits.main(new String[0]);
     }
 
-    static Stream<Arguments> digitIntInputProvider(){
+    static Stream<Arguments> digitIntInputProvider() {
         return Stream.of(
                 Arguments.of(100000000, 45),
                 Arguments.of(-89, 89),
@@ -45,7 +45,7 @@ public class MainTest extends BaseTest {
         );
     }
 
-    static Stream<Arguments> mainMethodInputProvider(){
+    static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(
                 Arguments.of("5 2", 5, 2),
                 Arguments.of("999999 100", 999999, 100),
@@ -60,7 +60,7 @@ public class MainTest extends BaseTest {
         Object output = MethodUtil.invokeIfMethodExists(ArrayofDigits.class, "digitInt", new Object[]{a, b}, int.class, int.class);
 
         int[] arr = new int[b];
-        for(int x = 0; x < b; x ++)
+        for (int x = 0; x < b; x++)
             arr[x] = a;
 
         CustomAssertions._assertArrayEquals(arr, output, "Your digitInt method does not return an array of the specified integers to the specified length.");
@@ -69,9 +69,9 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
     void correctMainMethodOutput(String in, int a, int b) throws InvalidClauseException {
-        Clause[][] c = new Clause[1][b*2];
+        Clause[][] c = new Clause[1][b * 2];
         int count = 0;
-        for(int x = 0; x < b; x ++){
+        for (int x = 0; x < b; x++) {
             c[0][count++] = new IntegerLiteral(a);
             c[0][count++] = new NewLine();
         }
