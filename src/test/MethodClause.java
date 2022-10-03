@@ -1,41 +1,47 @@
 package test;
 
-import java.util.Random;
+import java.util.Scanner;
 
 public class MethodClause {
     public static void main(String[] args) {
-        int z = add(3, 7);
-        print("The sum of two numbers is: " + z);
-        areaCalc(4, 5);
+        System.out.println("This is the main method.");
+        int x = 5;
+        int y = return15();
+        int sum = sum(x, y);
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter a double: ");
+        double d = input.nextDouble();
+        double area = area(d, sum);
+        printMessage("The area of the rectangle is: " + area);
     }
 
-    public static void print(String s) {
-        System.out.println(s);
-    }
-
-    public static int add(int x, int y) {
-        return x + y;
-    }
-
-    public static double areaCalc(double x, double y) {
+    public static int sum(int x, int y){
         /*
-            This method is an example of where the return value and the console output are different. With how methodTest
-            handles testing, these values can be tested independently of each other, so that the incorrect printed value
-            does not fail the test on the return value.
+            This method calculates the sum of two integers, and prints out both those integers and what the sum is.
+            Using method test, the value which is returned and the value which is printed in the output can be tested
+            independently of each other and of the main method.
          */
-        double area = x * y;
-        System.out.println("The area is 38.96");
-        return area;
+        int sum = x + y;
+        System.out.printf("The sum of %d and %d is %d\n", x, y, sum);
+        return sum;
     }
 
-    public static int testMethod() {
+    public static double area(double x, double y){
         /*
-            If you look at the corresponding test, this method demonstrates how MethodTest can independently test the
-            returned value and printed output.
+            This method prints a message and calculates the area of a rectangle. The message and output can be tested
+            independently using MethodTest.
          */
-        System.out.println(35);
-        System.out.println("Hello world");
-        System.out.println(34.124);
-        return 70;
+        System.out.println("Calculating the area of a rectangle: ");
+        return x * y;
+    }
+
+    public static void printMessage(String message){
+        // This method prints whatever is passed in the String message parameter, and can be tested using MethodTest
+        System.out.println(message);
+    }
+
+    public static int return15(){
+        // This method returns the number 15
+        return 15;
     }
 }
