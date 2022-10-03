@@ -27,7 +27,7 @@ public class ArrayOfFacts {
         int[] arr = new int[n];
         for (int i = 0; i < n; i++)
             arr[i] = factorial(i + 1);
-        for(int i = 0; i < arr.length; i++)
+        for (int i = 0; i < arr.length; i++)
             System.out.println(arr[i]);
     }
 

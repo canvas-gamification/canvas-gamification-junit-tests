@@ -30,14 +30,14 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         ArrayOfFacts.main(new String[0]);
     }
 
     @RepeatedTest(15)
     void correctFactorialMethod(RepetitionInfo repetitionInfo) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(ArrayOfFacts.class, "factorial", new Object[]{repetitionInfo.getCurrentRepetition()}, int.class);
-        CustomAssertions._assertEquals(factorials[repetitionInfo.getCurrentRepetition()-1], output, "Your factorial method does not return the correct factorial value.");
+        CustomAssertions._assertEquals(factorials[repetitionInfo.getCurrentRepetition() - 1], output, "Your factorial method does not return the correct factorial value.");
     }
 
     @RepeatedTest(15)
@@ -45,10 +45,10 @@ public class MainTest extends BaseTest {
         int[] values = new int[repetitionInfo.getCurrentRepetition()];
         System.arraycopy(factorials, 0, values, 0, repetitionInfo.getCurrentRepetition());
 
-        Clause[][] c = new Clause[1][values.length*2];
+        Clause[][] c = new Clause[1][values.length * 2];
         int count = 0;
 
-        for(int x = 0; x < values.length; x++){
+        for (int x = 0; x < values.length; x++) {
             c[0][count++] = new IntegerLiteral(values[x]);
             c[0][count++] = new NewLine();
         }
