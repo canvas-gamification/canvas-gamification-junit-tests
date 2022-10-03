@@ -21,21 +21,20 @@ w
  */
 
 import java.util.Scanner;
-public class ArrayofLetters
-{
-    public static void main( String [] args )
-    {
-        Scanner input = new Scanner( System.in );
+
+public class ArrayofLetters {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
         System.out.println("Enter a sentence: ");
         String[] userSentence = input.nextLine().split(" ");
         char[] sent = charFinder(userSentence);
-        for( int i = 0; i < sent.length; i++ )
+        for (int i = 0; i < sent.length; i++)
             System.out.println(sent[i]);
     }
-    public static char[] charFinder(String[] input)
-    {
+
+    public static char[] charFinder(String[] input) {
         char[] arr = new char[input.length];
-        for( int i = 0; i < arr.length; i++ )
+        for (int i = 0; i < arr.length; i++)
             arr[i] = input[i].charAt(0);
         return arr;
     }

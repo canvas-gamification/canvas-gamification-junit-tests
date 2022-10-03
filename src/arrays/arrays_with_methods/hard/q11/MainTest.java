@@ -29,11 +29,11 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         ArrayofLetters.main(new String[0]);
     }
 
-    static Stream<Arguments> charFinderInputProvider(){
+    static Stream<Arguments> charFinderInputProvider() {
         return Stream.of(
                 Arguments.of(new String[]{"Hello", "World"}, new char[]{'H', 'W'}),
                 Arguments.of(new String[]{"Don't", "Shut", "Down", "On", "me", "Now"}, new char[]{'D', 'S', 'D', 'O', 'm', 'N'}),
@@ -47,7 +47,7 @@ public class MainTest extends BaseTest {
         );
     }
 
-    static Stream<Arguments> mainMethodInputProvider(){
+    static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(
                 Arguments.of("nOt Case sEnSitive PleaSE", new String[]{"n", "C", "s", "P"}),
                 Arguments.of("741 518 3", new String[]{"7", "5", "3"}),
@@ -67,10 +67,10 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
     void correctMainMethodOutput(String in, String[] out) throws InvalidClauseException {
-        Clause[][] c = new Clause[1][out.length*2];
+        Clause[][] c = new Clause[1][out.length * 2];
         int count = 0;
 
-        for(int x = 0; x < out.length; x++){
+        for (int x = 0; x < out.length; x++) {
             c[0][count++] = new StringLiteral(out[x]);
             c[0][count++] = new NewLine();
         }
