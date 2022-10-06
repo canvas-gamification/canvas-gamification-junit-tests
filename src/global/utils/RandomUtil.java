@@ -108,11 +108,11 @@ public class RandomUtil {
     }
 
     public static boolean frequenciesAreRandom(int[] frequencies, double percentageTrue) {
-        // assume that the sum of frequencies in this list == the total number of values generated
-        Logger.logMessage(Arrays.toString(frequencies));
+        // This function is used exclusively for testing boolean randomness as the percentage error value is lower
+        // than what is in the normal function and only one bin needs to be tested
         double expectedTrueFrequency = ArrayUtil.sum(frequencies) * percentageTrue;
-        Logger.logMessage(String.valueOf(expectedTrueFrequency));
-        double errorAmount = PERCENTAGE_ERROR + (percentageTrue < 0.1 ? 0.05 : -0.05);
+        // Bins should be within 10% of the target frequency
+        double errorAmount = 0.10;
         return valueAlmostEquals(frequencies[1], expectedTrueFrequency, errorAmount);
     }
 
