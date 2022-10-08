@@ -28,6 +28,12 @@ public class RandomUtil {
     public static final double PERCENTAGE_ERROR = 0.25;
 
     /**
+     * This constant is the maximum number of bins which will be used when determining if something is randomly
+     * distributed.
+     */
+    public static final int MAX_BINS = 20;
+
+    /**
      * Returns if the set of values described by the total number of values considered and an array of "bin sizes" is
      * uniform. "Bin counts" refers to the number of values that are placed in each bin. This method assumes that the
      * size (range) of each bin is equal.
@@ -62,7 +68,7 @@ public class RandomUtil {
     public static int getNumBins(int lower, int upper) {
         int range = upper - lower;
         int binNumber = 10;
-        while (range % binNumber != 0 && binNumber < 51)
+        while (range % binNumber != 0 && binNumber < MAX_BINS)
             binNumber++;
         return Math.min(range, binNumber);
     }
