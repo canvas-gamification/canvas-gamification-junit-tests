@@ -18,7 +18,7 @@ public class MainTest {
                 Arguments.of(new int[]{5, 8, -1}, new int[]{9, 1, 1}),
                 Arguments.of(new int[]{}, new int[]{}),
                 Arguments.of(new int[]{5, 213, 12, -21, 254}, new int[]{34525, 12, 52}),
-                Arguments.of(ArrayUtil.generateRandomIntArray(0, 10000, 30), ArrayUtil.generateRandomIntArray(0, 4, 31))
+                Arguments.of(ArrayUtil.generateRandomArray(0, 10000, 30), ArrayUtil.generateRandomArray(0, 4, 31))
         );
     }
 
