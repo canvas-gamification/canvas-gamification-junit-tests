@@ -118,9 +118,6 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
 
     @Override
     public String getRegex() {
-        int lowSplit = RegexUtil.getSplitDecimal(lower)[0];
-        int highSplit = RegexUtil.getSplitDecimal(upper)[0];
-        String regexContent = RegexUtil.getRegexInt(lowSplit, highSplit);
-        return "(" + orNegative(regexContent + "\\.\\d+") + ")";
+        return "([-+]?[0-9]+\\.[0-9]+(?:[eE][-+]?[0-9]+)?)";
     }
 }
