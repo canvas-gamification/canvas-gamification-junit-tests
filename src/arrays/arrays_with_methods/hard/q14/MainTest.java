@@ -35,7 +35,7 @@ public class MainTest extends BaseTest {
             1.4901161193847656E-8, 3.725290298461914E-9, 9.313225746154785E-10, 2.3283064365386963E-10, 5.820766091346741E-11,
             1.4551915228366852E-11, 3.637978807091713E-12};
 
-    public Clause[] testSentence(){
+    public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "40";
         return new Clause[]{
@@ -51,15 +51,15 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         GeometricSequence.main(new String[0]);
     }
 
     @RepeatedTest(20)
     void correctGeometricSequenceMethod(RepetitionInfo repetitionInfo) throws Throwable {
         double[] expected = new double[repetitionInfo.getCurrentRepetition()];
-        for(int x = 0; x < expected.length; x++){
-            expected[x] = rOneOverTwo[x]*a;
+        for (int x = 0; x < expected.length; x++) {
+            expected[x] = rOneOverTwo[x] * a;
         }
         Object[][] arguments = {
                 {repetitionInfo.getCurrentRepetition(), int.class}
@@ -71,10 +71,10 @@ public class MainTest extends BaseTest {
 
     @RepeatedTest(20)
     void correctMainMethodOutput(RepetitionInfo repetitionInfo) throws InvalidClauseException {
-        Clause[][] c = new Clause[1][repetitionInfo.getCurrentRepetition()*2];
+        Clause[][] c = new Clause[1][repetitionInfo.getCurrentRepetition() * 2];
         int count = 0;
 
-        for(int x = 0; x < repetitionInfo.getCurrentRepetition(); x++){
+        for (int x = 0; x < repetitionInfo.getCurrentRepetition(); x++) {
             c[0][count++] = new DoubleLiteral(String.valueOf(x));
             c[0][count++] = new StringLiteral(" ");
         }
@@ -83,8 +83,8 @@ public class MainTest extends BaseTest {
 
         assertEquals(repetitionInfo.getCurrentRepetition(), Integer.parseInt(getItemByName("repetitions")), "Your number of repetitions don't match the input value.");
 
-        for(int x = 0; x < repetitionInfo.getCurrentRepetition(); x++){
-            assertEquals(rOneOverTwo[x]*a, Double.parseDouble(getItemByName(String.valueOf(x))), "Your program does not print the correct numbers in the sequence.");
+        for (int x = 0; x < repetitionInfo.getCurrentRepetition(); x++) {
+            assertEquals(rOneOverTwo[x] * a, Double.parseDouble(getItemByName(String.valueOf(x))), "Your program does not print the correct numbers in the sequence.");
         }
     }
 }
