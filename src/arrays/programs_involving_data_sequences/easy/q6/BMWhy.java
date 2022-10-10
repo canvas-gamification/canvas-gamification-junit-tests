@@ -18,13 +18,13 @@ public class BMWhy {
         double weight = 0;
         double[] bmiList = new double[10];
         for (int i = 0; i < bmiList.length; i++) {
-            System.out.println(" Enter Height " + (i + 1) + ": ");
+            System.out.println("Enter Height " + (i + 1) + ": ");
             height = input.nextDouble();
-            System.out.println(" Enter Weight " + (i + 1) + ": ");
+            System.out.println("Enter Weight " + (i + 1) + ": ");
             weight = input.nextDouble();
             bmiList[i] = calculateBMI(height, weight);
         }
         for (int i = 0; i < bmiList.length; i++)
-            System.out.println(" BMI " + (i + 1) + ": " + bmiList[i]);
+            System.out.println("BMI " + (i + 1) + ": " + bmiList[i]);
     }
 }
