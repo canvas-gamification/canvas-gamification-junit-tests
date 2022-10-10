@@ -86,7 +86,7 @@ public class MainTest extends BaseTest {
         runWithInput(s.toString());
 
         for (int x = 0; x < size; x++) {
-            assertEquals(bmis[x], Double.parseDouble(getItemByName(String.valueOf(x + 1))), "Your program calculate BMI " + (x + 1) + " correctly.");
+            assertEquals(bmis[x], Double.parseDouble(getItemByName(String.valueOf(x + 1))), 0.00000001, "Your program calculate BMI " + (x + 1) + " correctly.");
         }
     }
 
