@@ -6,19 +6,17 @@ smallest element in the array. You can assume the numbers in the array are in th
 print the smallest element.
  */
 
-public class WhereIsIt
-{
-    public static void main( String [] args )
-    {
-        int [] arr = {71,3,95,67,99};
+public class WhereIsIt {
+    public static void main(String[] args) {
+        int[] arr = {71, 3, 95, 67, 99};
         int min = smallestFinder(arr);
         System.out.println(min);
     }
-    public static int smallestFinder( int[] input )
-    {
+
+    public static int smallestFinder(int[] input) {
         int smallest = 101;
-        for (int i = 0;i <input.length;i++)
-            if (smallest>input[i])
+        for (int i = 0; i < input.length; i++)
+            if (smallest > input[i])
                 smallest = input[i];
         return smallest;
     }

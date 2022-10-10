@@ -23,15 +23,15 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         WhereIsIt.main(new String[0]);
     }
 
-    static Stream<int[]> smallestFinderInputProvider(){
+    static Stream<int[]> smallestFinderInputProvider() {
         return Stream.of(
                 new int[]{1, 2, 3, 4, 5, 6},
                 new int[]{7, 10, 0, 3},
-                new int[]{upperBound-1, upperBound-2, upperBound-1, 78, 99, 98, 82},
+                new int[]{upperBound - 1, upperBound - 2, upperBound - 1, 78, 99, 98, 82},
                 new int[]{},
                 ArrayUtil.generateRandomArray(0, upperBound, 20),
                 ArrayUtil.generateRandomArray(0, upperBound, 2),
@@ -53,12 +53,12 @@ public class MainTest extends BaseTest {
         assertEquals(small, output, "Your smallestFinder method does not correctly identify the smallest element.");
     }
 
-    int getSmallestElement(int[] arr){
-        if(arr.length == 0)
+    int getSmallestElement(int[] arr) {
+        if (arr.length == 0)
             return upperBound;
         int small = arr[0];
-        for(int x = 1; x < arr.length; x++){
-            if(small > arr[x])
+        for (int x = 1; x < arr.length; x++) {
+            if (small > arr[x])
                 small = arr[x];
         }
         return small;
