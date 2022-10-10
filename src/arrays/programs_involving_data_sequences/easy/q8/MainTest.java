@@ -46,6 +46,7 @@ public class MainTest extends BaseTest {
         );
     }
 
+    //hey self, you're gonna need to use the method print stuff and figure out what the longest element is and maybe what the length of each element is. Maybe with an array of ints and the largest one, get the index for an check it against the index of supercalli with .indexOf instead of .asList in the assert below
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctLengthFinderMethod(String[] arr, int size){
