@@ -29,11 +29,11 @@ public class MainTest extends BaseTest {
         return clauseBuilder();
     }
 
-    public void runMain(){
+    public void runMain() {
         BMWhy.main(new String[0]);
     }
 
-    static Stream<Arguments> calculateBMIInputProvider(){
+    static Stream<Arguments> calculateBMIInputProvider() {
         return Stream.of(
                 Arguments.of(1, 1, 1.0),
                 Arguments.of(1678653.5, 78.5632, 2.7880274413278936E-11),
@@ -47,11 +47,11 @@ public class MainTest extends BaseTest {
         );
     }
 
-    static Stream<double[]> mainMethodInputProvider(){
+    static Stream<double[]> mainMethodInputProvider() {
         return Stream.of(
-                ArrayUtil.generateRandomArray(30.0, 200.0, size*2),
-                ArrayUtil.generateRandomArray(30.0, 200.0, size*2),
-                ArrayUtil.generateRandomArray(30.0, 200.0, size*2)
+                ArrayUtil.generateRandomArray(30.0, 200.0, size * 2),
+                ArrayUtil.generateRandomArray(30.0, 200.0, size * 2),
+                ArrayUtil.generateRandomArray(30.0, 200.0, size * 2)
         );
     }
 
@@ -69,45 +69,45 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
-    void correctMainMethodOutput(double[] values){
+    void correctMainMethodOutput(double[] values) {
         double[] bmis = new double[size];
         int count = 0;
-        for(int x = 0; x < size; x ++){
-            bmis[x] = values[count+1]/Math.pow(values[count], 2);
+        for (int x = 0; x < size; x++) {
+            bmis[x] = values[count + 1] / Math.pow(values[count], 2);
             count += 2;
         }
 
         StringBuilder s = new StringBuilder();
-        for(int x = 0; x < size*2; x++){
+        for (int x = 0; x < size * 2; x++) {
             s.append(values[x]);
             s.append(" ");
         }
 
         runWithInput(s.toString());
 
-        for(int x = 0; x < size; x++){
-            assertEquals(bmis[x], Double.parseDouble(getItemByName(String.valueOf(x+1))), "Your program calculate BMI " + (x+1) + " correctly.");
+        for (int x = 0; x < size; x++) {
+            assertEquals(bmis[x], Double.parseDouble(getItemByName(String.valueOf(x + 1))), "Your program calculate BMI " + (x + 1) + " correctly.");
         }
     }
 
-    public Clause[] clauseBuilder(){
-        Clause[] c = new Clause[size*7];
+    public Clause[] clauseBuilder() {
+        Clause[] c = new Clause[size * 7];
         int count = 1;
 
-        for(int x = 0; x < size*4; x += 4){
+        for (int x = 0; x < size * 4; x += 4) {
             c[x] = new StringLiteral("Enter Height " + count + ": ");
-            c[x+1] = new NewLine();
-            c[x+2] = new StringLiteral("Enter Weight " + count + ": ");
-            c[x+3] = new NewLine();
+            c[x + 1] = new NewLine();
+            c[x + 2] = new StringLiteral("Enter Weight " + count + ": ");
+            c[x + 3] = new NewLine();
             count++;
         }
 
         count = 1;
 
-        for(int x = size*4; x < size*7; x += 3){
+        for (int x = size * 4; x < size * 7; x += 3) {
             c[x] = new StringLiteral("BMI " + count + ": ");
-            c[x+1] = new DoubleLiteral(String.valueOf(count));
-            c[x+2] = new NewLine();
+            c[x + 1] = new DoubleLiteral(String.valueOf(count));
+            c[x + 2] = new NewLine();
             count++;
         }
 
