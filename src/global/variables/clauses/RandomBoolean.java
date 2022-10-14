@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static global.tools.CustomAssertions._fail;
 import static global.utils.RandomUtil.frequenciesAreRandom;
 
 public class RandomBoolean extends Clause implements RandomClause<Boolean> {
