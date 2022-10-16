@@ -1,7 +1,7 @@
 package global.tools;
 
 public class TypeMatcher {
-    static String simplifyPrimitiveTypeName(String canonicalTypeName) {
+    public static String simplifyPrimitiveTypeName(String canonicalTypeName) {
         if (canonicalTypeName.startsWith("java.lang.")) {
             String typeName = canonicalTypeName.split("java\\.lang\\.")[1];
             switch (typeName) {

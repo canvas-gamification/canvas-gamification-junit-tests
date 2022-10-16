@@ -1,12 +1,14 @@
 package global;
 
 import global.exceptions.InvalidClauseException;
+import global.tools.TypeMatcher;
 import global.variables.Clause;
 import global.variables.RandomClause;
 import global.variables.clauses.PlaceHolder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashSet;
@@ -30,6 +32,10 @@ public class MethodTest {
     private final Clause[] methodTestSentence;
     private String methodNotFoundErrorMessage;
     private String incorrectMethodStructureErrorMessage;
+    final static int NUM_RUNS = 1000;
+    final static String MESSAGE_INCORRECT_RANDOM = "You do not seem to be properly generating random values.";
+
+    // TODO: Solve mapKey problem
 
     public MethodTest(Class<?> methodClass, String methodName, Object[][] arguments) {
         this.methodClass = methodClass;
@@ -249,5 +255,37 @@ public class MethodTest {
                     "The specified group ('" + name + "') doesn't exist");
         }
         return "";
+    }
+
+    public void checkRandom(RandomClause<?> randomClause) throws Throwable {
+        generateValues(randomClause);
+        _assertTrue(randomClause.validateRandom(randomClause.getMapKey() + 1), MESSAGE_INCORRECT_RANDOM,
+                "Invalid Random Values.");
+        randomClause.incrementMapKey();
+    }
+
+    private void generateValues(RandomClause<?> randomClause) throws Throwable {
+        for (int i = 0; i < NUM_RUNS; i++) {
+            Object output = this.callMethod();
+            boolean isArray = output.getClass().isArray();
+            int length = isArray ? Array.getLength(output) : 1;
+            for (int j = 0; j < length; j++) {
+                Object item = isArray ? Array.get(output, j) : output;
+                if (item.getClass().equals(randomClause.getPrimitiveClass())) {
+                    randomClause.trackValue(randomClause.getMapKey() + 1, String.valueOf(item));
+                } else {
+                    String userMessage = String.join(" ",
+                            "Received",
+                            TypeMatcher.simplifyPrimitiveTypeName(item.getClass().getCanonicalName()),
+                            " type, but expected ",
+                            TypeMatcher.simplifyPrimitiveTypeName(randomClause.getPrimitiveClass().getCanonicalName()),
+                            " type from method ",
+                            methodName,
+                            "."
+                    );
+                    _fail(userMessage, "The user returned the wrong type for method " + methodName + ".");
+                }
+            }
+        }
     }
 }

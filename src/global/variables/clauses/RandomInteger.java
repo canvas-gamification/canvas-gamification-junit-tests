@@ -5,6 +5,7 @@ import global.variables.Clause;
 import global.variables.RandomClause;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +15,8 @@ import static global.utils.RegexUtil.orNegative;
 public class RandomInteger extends Clause implements RandomClause<Integer> {
     static Map<Integer, ArrayList<Integer>> valueStore = new HashMap<>();
     private final int lower, upper;
+    public final Class<Integer> primitiveClass = Integer.class;
+    public static int mapKey;
 
     public RandomInteger(int lower, int upper) {
         super();
@@ -64,9 +67,21 @@ public class RandomInteger extends Clause implements RandomClause<Integer> {
         return valueStore.get(matchGroup);
     }
 
+    public Class<Integer> getPrimitiveClass() {
+        return primitiveClass;
+    }
+
     @Override
     public String getRegex() {
         String regexContent = RegexUtil.getRegexInt(getLower(), getUpper());
         return "(" + orNegative(regexContent) + ")";
+    }
+
+    public int getMapKey(){
+        return mapKey;
+    }
+
+    public void incrementMapKey(){
+        mapKey++;
     }
 }

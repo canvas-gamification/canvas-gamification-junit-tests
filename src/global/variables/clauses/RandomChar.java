@@ -4,6 +4,7 @@ import global.variables.Clause;
 import global.variables.RandomClause;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +14,8 @@ public class RandomChar extends Clause implements RandomClause<Character> {
     static Map<Integer, ArrayList<Character>> valueStore = new HashMap<>();
     public int lower, upper;
     public boolean inclusiveUpper = false;
+    public final Class<Character> primitiveClass = Character.class;
+    public static int mapKey;
 
     // Soft deprecated - always favour using inclusiveUpper = true when possible
     public RandomChar(char lower, char upper) {
@@ -95,5 +98,17 @@ public class RandomChar extends Clause implements RandomClause<Character> {
     public String getRegex() {
         String regex = "[" + (char) getLower() + "-" + getCorrectedUpper() + "]";
         return "(" + regex + ")";
+    }
+
+    public Class<Character> getPrimitiveClass(){
+        return primitiveClass;
+    }
+
+    public int getMapKey(){
+        return mapKey;
+    }
+
+    public void incrementMapKey(){
+        mapKey++;
     }
 }

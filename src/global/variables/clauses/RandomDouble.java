@@ -17,6 +17,9 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
     static Map<Integer, ArrayList<Double>> valueStore = new HashMap<>();
     private final double lower, upper;
     private int precision = 16;  // max double precision
+    public final Class<Double> primitiveClass = Double.class;
+    public static final int NUM_BINS = 20;
+    public static int mapKey;
 
     /**
      * This constant is equal to the minimum number of bins for random checking with RandomDouble
@@ -76,7 +79,7 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
             observedCounts[binNum]++;
         }
 
-        return frequenciesAreRandom(observedCounts, numBins);
+        return frequenciesAreRandom(observedCounts, NUM_BINS);
     }
 
     private static int getNumBins(double lower, double upper) {
@@ -111,13 +114,23 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
         return Double.parseDouble(matchGroupString);
     }
 
-    @Override
     public ArrayList<Double> getValuesForMatchGroup(int matchGroup) {
         return valueStore.get(matchGroup);
     }
 
-    @Override
+    public Class<Double> getPrimitiveClass() {
+        return primitiveClass;
+    }
+
     public String getRegex() {
         return "([-+]?[0-9]+\\.[0-9]+(?:[eE][-+]?[0-9]+)?)";
+    }
+
+    public int getMapKey(){
+        return mapKey;
+    }
+
+    public void incrementMapKey(){
+        mapKey++;
     }
 }
