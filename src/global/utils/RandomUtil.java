@@ -31,7 +31,7 @@ public class RandomUtil {
      * This constant is the maximum number of bins which will be used when determining if something is randomly
      * distributed.
      */
-    public static final int MAX_BINS = 20;
+    public static final int MAX_BINS = 31;
 
     /**
      * Returns if the set of values described by the total number of values considered and an array of "bin sizes" is
@@ -67,10 +67,21 @@ public class RandomUtil {
 
     public static int getNumBins(int lower, int upper) {
         int range = upper - lower;
-        int binNumber = 10;
-        while (range % binNumber != 0 && binNumber < MAX_BINS)
+        int binNumber = 5;
+        int greatestDivisor = 1;
+        boolean hasDivisor = false;
+        while(binNumber <= MAX_BINS){
+            if(range % binNumber == 0) {
+                greatestDivisor = binNumber;
+                hasDivisor = true;
+            }
             binNumber++;
-        return Math.min(range, binNumber);
+        }
+        if(hasDivisor) {
+            return Math.min(range, greatestDivisor);
+        } else {
+            return Math.min(range, 20);
+        }
     }
 
     public static int assignedBinIndex(int value, int lower, int upper, int numBins) {

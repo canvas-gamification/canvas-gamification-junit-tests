@@ -16,6 +16,7 @@ import static global.utils.RegexUtil.orNegative;
 public class RandomDouble extends Clause implements RandomClause<Double> {
     static Map<Integer, ArrayList<Double>> valueStore = new HashMap<>();
     private final double lower, upper;
+    public static final int NUM_BINS = 20;
     private int precision = 16;  // max double precision
 
     /**
@@ -67,31 +68,22 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
         if (valueStore.get(matchGroupNum) == null)
             return false;
         ArrayList<Double> values = valueStore.get(matchGroupNum);
-        final int numBins = RandomDouble.getNumBins(lower, upper);
 
-        int[] observedCounts = new int[numBins];
+        int[] observedCounts = new int[NUM_BINS];
         for (double value : values) {
-            int binNum = RandomDouble.assignedBinIndex(value, lower, upper, numBins);
+            int binNum = RandomDouble.assignedBinIndex(value, lower, upper);
             if (binNum == RandomUtil.NO_BIN) return false;
             observedCounts[binNum]++;
         }
 
-        return frequenciesAreRandom(observedCounts, numBins);
+        return frequenciesAreRandom(observedCounts, NUM_BINS);
     }
 
-    private static int getNumBins(double lower, double upper) {
-        int upperCeil = (int) (upper + 1);
-        int lowerFloor = (int) lower;
-        // Ensures that there will be at least 10 bins
-        return (upperCeil - lowerFloor <= MIN_BINS) ? RandomUtil.getNumBins(0, 10) :
-                RandomUtil.getNumBins(lowerFloor, upperCeil); // TODO: do properly
-    }
-
-    private static int assignedBinIndex(double value, double lower, double upper, int numBins) {
-        double gap = (upper - lower) / numBins;
+    private static int assignedBinIndex(double value, double lower, double upper) {
+        double gap = (upper - lower) / NUM_BINS;
         assertWithinRange(value, lower, upper, "One or more of your randomly generated numbers fall outside of the required range.");
         int binNumber = (int) ((value - lower) / gap);
-        return (binNumber <= numBins) ? binNumber : RandomUtil.NO_BIN;
+        return (binNumber <= NUM_BINS) ? binNumber : RandomUtil.NO_BIN;
     }
 
     public double getLower() {
