@@ -1,7 +1,6 @@
 package global.variables.clauses;
 
 import global.utils.RandomUtil;
-import global.utils.RegexUtil;
 import global.variables.Clause;
 import global.variables.RandomClause;
 
@@ -11,14 +10,12 @@ import java.util.Map;
 
 import static global.tools.CustomAssertions.assertWithinRange;
 import static global.utils.RandomUtil.frequenciesAreRandom;
-import static global.utils.RegexUtil.orNegative;
 
 public class RandomDouble extends Clause implements RandomClause<Double> {
     static Map<Integer, ArrayList<Double>> valueStore = new HashMap<>();
     private final double lower, upper;
     private int precision = 16;  // max double precision
     public final Class<Double> primitiveClass = Double.class;
-    public static final int NUM_BINS = 20;
     public static int mapKey;
 
     /**
@@ -79,7 +76,7 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
             observedCounts[binNum]++;
         }
 
-        return frequenciesAreRandom(observedCounts, NUM_BINS);
+        return frequenciesAreRandom(observedCounts, numBins);
     }
 
     private static int getNumBins(double lower, double upper) {
@@ -126,11 +123,11 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
         return "([-+]?[0-9]+\\.[0-9]+(?:[eE][-+]?[0-9]+)?)";
     }
 
-    public int getMapKey(){
+    public int getMapKey() {
         return mapKey;
     }
 
-    public void incrementMapKey(){
+    public void incrementMapKey() {
         mapKey++;
     }
 }
