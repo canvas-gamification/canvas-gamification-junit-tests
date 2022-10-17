@@ -1,5 +1,10 @@
 package arrays.programs_involving_data_sequences.easy.q8;
 
+/*
+Make a Java method that takes a String array of random words as input, and prints out the length of each word in the
+array. In this method, find the longest word and replace it with "Supercalifragilisticexpialidocious".
+ */
+
 public class SuperCali
 {
     public static void main( String [] args )

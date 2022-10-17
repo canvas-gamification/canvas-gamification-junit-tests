@@ -1,6 +1,8 @@
 package arrays.programs_involving_data_sequences.easy.q8;
 
 import global.BaseTest;
+import global.MethodTest;
+import global.tools.Logger;
 import global.utils.ArrayUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
@@ -12,6 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
@@ -28,13 +31,11 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         SuperCali.main(new String[0]);
     }
 
-    //what if two words have the same length
-
-    static Stream<Arguments> inputProvider(){
+    static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of(ArrayUtil.generateRandomWordArray(5), 5),
                 Arguments.of(ArrayUtil.generateRandomWordArray(10), 10),
@@ -42,15 +43,56 @@ public class MainTest extends BaseTest {
                 Arguments.of(ArrayUtil.generateRandomWordArray(7), 7),
                 Arguments.of(ArrayUtil.generateRandomWordArray(20), 20),
                 Arguments.of(ArrayUtil.generateRandomWordArray(50), 50),
-                Arguments.of(ArrayUtil.generateRandomWordArray(100), 100)
+                Arguments.of(ArrayUtil.generateRandomWordArray(100), 100),
+                Arguments.of(new String[]{"word", "dress", "longest", "also", "longest"}, 5)
         );
     }
 
-    //hey self, you're gonna need to use the method print stuff and figure out what the longest element is and maybe what the length of each element is. Maybe with an array of ints and the largest one, get the index for an check it against the index of supercalli with .indexOf instead of .asList in the assert below
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctLengthFinderMethod(String[] arr, int size){
-        assertTrue(Arrays.asList(arr).contains("Supercalifragilisticexpialidocious"), "Your method does not substitue one element for the specified word.");
+    void correctLengthFinderMethod(String[] arr, int size) throws Throwable {
+        Clause[] methodSentence = clauseBuilder(size);
+
+        Object[][] arguments = {
+                {arr, String[].class}
+        };
+
+        int indexOf = -1;
+        int longest = -1;
+        for(int x = 0; x <size; x++){
+            if( arr[x].length() > longest )
+            {
+                longest = arr[x].length();
+                indexOf = x;
+            }
+        }
+
+        MethodTest m = new MethodTest(SuperCali.class, "lengthFinder", arguments, methodSentence);
+        m.callMethod();
+
+        for(int x = 0; x<size; x++){
+            if(x == indexOf){
+                assertEquals(longest, Integer.parseInt(m.getMethodItemByName("num "+x)), "Your method does not print the correct word lengths.");
+                continue;
+            }
+
+            assertEquals(arr[x].length(), Integer.parseInt(m.getMethodItemByName("num "+x)), "Your method does not print the correct word lengths.");
+        }
+
+        assertTrue(Arrays.asList(arr).contains("Supercalifragilisticexpialidocious"), "Your method does not substitute one element for the specified word.");
+        assertEquals("Supercalifragilisticexpialidocious", arr[indexOf], "Your method does not replace the longest word with Supercalifragilisticexpialidocious.");
+    }
+
+    public Clause[] clauseBuilder(int size) {
+        Clause[] c = new Clause[size * 2];
+        int count =0;
+
+        for (int x = 0; x < size; x++) {
+            c[count++] = new IntegerLiteral("num " + x);
+            c[count++] = new NewLine();
+        }
+
+        return c;
     }
 
 }
