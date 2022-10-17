@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
-
+    //Parsons with distractors
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
@@ -36,15 +36,16 @@ public class MainTest extends BaseTest {
     public void runMain() {
         Bonus.main(new String[0]);
     }
+
     @ParameterizedTest
     @MethodSource("calculatesGradeCorrectlyInputProvider")
-    public void calculatesGradeCorrectly(int x, double y, double answer){
+    public void calculatesGradeCorrectly(int x, double y, double answer) {
         runWithInput(x + " " + y);
-        assertEquals(answer,Double.parseDouble(getItemByName("ans")), "You did not correctly calculate the" +
+        assertEquals(answer, Double.parseDouble(getItemByName("ans")), "You did not correctly calculate the" +
                 " score of the student's grade.");
     }
 
-    public static Stream<Arguments> calculatesGradeCorrectlyInputProvider(){
+    public static Stream<Arguments> calculatesGradeCorrectlyInputProvider() {
         return Stream.of(
                 Arguments.of(10, 7.0, 80.0),
                 Arguments.of(80, 35.8, 54.75),
