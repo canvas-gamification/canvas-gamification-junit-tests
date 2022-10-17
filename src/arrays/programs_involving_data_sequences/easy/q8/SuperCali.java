@@ -19,8 +19,7 @@ public class SuperCali
         for (int i = 0;i <input.length;i++)
         {
             String word = input[i];
-            if( word.length() > longest )
-            {
+            if (word.length() > longest) {
                 longest = word.length();
                 pos = i;
             }

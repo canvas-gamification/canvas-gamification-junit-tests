@@ -2,7 +2,6 @@ package arrays.programs_involving_data_sequences.easy.q8;
 
 import global.BaseTest;
 import global.MethodTest;
-import global.tools.Logger;
 import global.utils.ArrayUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
@@ -59,9 +58,8 @@ public class MainTest extends BaseTest {
 
         int indexOf = -1;
         int longest = -1;
-        for(int x = 0; x <size; x++){
-            if( arr[x].length() > longest )
-            {
+        for (int x = 0; x < size; x++) {
+            if (arr[x].length() > longest) {
                 longest = arr[x].length();
                 indexOf = x;
             }
@@ -70,13 +68,13 @@ public class MainTest extends BaseTest {
         MethodTest m = new MethodTest(SuperCali.class, "lengthFinder", arguments, methodSentence);
         m.callMethod();
 
-        for(int x = 0; x<size; x++){
-            if(x == indexOf){
-                assertEquals(longest, Integer.parseInt(m.getMethodItemByName("num "+x)), "Your method does not print the correct word lengths.");
+        for (int x = 0; x < size; x++) {
+            if (x == indexOf) {
+                assertEquals(longest, Integer.parseInt(m.getMethodItemByName("num " + x)), "Your method does not print the correct word lengths.");
                 continue;
             }
 
-            assertEquals(arr[x].length(), Integer.parseInt(m.getMethodItemByName("num "+x)), "Your method does not print the correct word lengths.");
+            assertEquals(arr[x].length(), Integer.parseInt(m.getMethodItemByName("num " + x)), "Your method does not print the correct word lengths.");
         }
 
         assertTrue(Arrays.asList(arr).contains("Supercalifragilisticexpialidocious"), "Your method does not substitute one element for the specified word.");
@@ -85,7 +83,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] clauseBuilder(int size) {
         Clause[] c = new Clause[size * 2];
-        int count =0;
+        int count = 0;
 
         for (int x = 0; x < size; x++) {
             c[count++] = new IntegerLiteral("num " + x);
