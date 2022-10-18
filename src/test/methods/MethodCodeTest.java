@@ -1,4 +1,4 @@
-package test;
+package test.methods;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
@@ -11,6 +11,7 @@ import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import test.methods.MethodCode;
 
 import java.util.stream.Stream;
 
