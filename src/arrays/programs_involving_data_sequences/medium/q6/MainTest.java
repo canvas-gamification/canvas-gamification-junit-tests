@@ -1,12 +1,17 @@
 package arrays.programs_involving_data_sequences.medium.q6;
 
 import global.BaseTest;
+import global.MethodTest;
+import global.tools.CustomAssertions;
+import global.tools.Logger;
 import global.utils.ArrayUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
-import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
@@ -35,9 +40,76 @@ public class MainTest extends BaseTest {
         MultiThing.main(new String[0]);
     }
 
-    static Stream<Arguments> multiplierInputProvider(){
+    static Stream<int[]> multiplierInputProvider(){
         return Stream.of(
-                Arguments.of(ArrayUtil.generateRandomArray(0, 100, 20))
+                ArrayUtil.generateRandomArray(0, 100, 20),
+                ArrayUtil.generateRandomArray(-30, -1, 10),
+                ArrayUtil.generateRandomArray(-60, 60, 25),
+                ArrayUtil.generateRandomArray(0, 40, 250),
+                ArrayUtil.generateRandomArray(500, 2000, 25),
+                ArrayUtil.generateRandomArray(1, 10, 5)
         );
+    }
+
+    @ParameterizedTest
+    @MethodSource("multiplierInputProvider")
+    void correctMultiplierInputProvider(int[] arr) throws Throwable {
+        Object[][] arguments = {
+                {arr, int[].class}
+        };
+        MethodTest m = new MethodTest(MultiThing.class, "multiplier", arguments);
+
+        Object output = m.callMethod();
+        int[] whoops = (int[])(output);
+
+        Logger.logMessage(Arrays.toString(arr));
+        Logger.logMessage(Arrays.toString(arrayAnswer(arr)));
+        Logger.logMessage(Arrays.toString(whoops));
+
+        CustomAssertions._assertArrayEquals(arrayAnswer(arr), output, "Your multiplier method does not correctly alter the given array.");
+
+    }
+    @ParameterizedTest
+    @MethodSource("multiplierInputProvider")
+    void correctMultiplierInputProvider2(int[] arr) throws Throwable {
+        Object[][] arguments = {
+                {arr, int[].class}
+        };
+        MethodTest m = new MethodTest(MultiThing.class, "multiplier", arguments);
+
+        Object output = m.callMethod();
+
+        CustomAssertions._assertArrayEquals(arr, output, "Your multiplier method does not correctly alter the given array.");
+
+    }
+
+    @ParameterizedTest
+    @MethodSource("multiplierInputProvider")
+    void correctMultiplierInputProvider3(int[] arr) throws Throwable {
+        Object[][] arguments = {
+                {arr, int[].class}
+        };
+        MethodTest m = new MethodTest(MultiThing.class, "multiplier", arguments);
+
+        int[] expected = arrayAnswer(arr);
+
+        Object output = m.callMethod();
+
+        CustomAssertions._assertArrayEquals(expected, output, "Your multiplier method does not correctly alter the given array.");
+
+    }
+
+
+    public static int[] arrayAnswer(int [] input)
+    {
+        for (int i = 0; i < input.length; i++)
+        {
+            if (input[i]%2 == 0)
+                input[i] = input[i] / 2;
+            else
+                input[i] = input[i]*2;
+        }
+        Logger.logMessage(Arrays.toString(input));
+        return input;
     }
 }
