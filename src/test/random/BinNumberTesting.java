@@ -1,16 +1,27 @@
 package test.random;
 
-import java.util.Arrays;
+import static global.utils.ArrayUtil.generateAscendingArray;
 
 public class BinNumberTesting {
     public static void main(String[] args) {
-        String[] arr = new String[10];
-        for (int i = 65; i < 91; i++){
-            arr[(int)Math.floor((i - 65) / 2.6)]  = "";
+        int[] k = generateAscendingArray(1, 200);
+        for (int item : k)
+            getNumBins(item);
+    }
+
+    public static void getNumBins(int range) {
+        if (range < 21) {
+            System.out.println(range + " : " + range);
+            return;
         }
-        for (int i = 65; i < 91; i++){
-            arr[(int)Math.floor((i - 65) / 2.6)]  += ((char) i) + " ";
+        int binNumber = 20;
+        while (binNumber > 1) {
+            if ((range + 1) % binNumber < 3 || range > (10 * binNumber)) {
+                System.out.println(range + " : " + binNumber);
+                return;
+            }
+            binNumber--;
         }
-        System.out.println(Arrays.toString(arr));
+        System.out.println(range + " : No Bin Number");
     }
 }

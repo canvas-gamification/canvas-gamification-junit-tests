@@ -1,5 +1,6 @@
 package global.utils;
 
+import global.tools.Logger;
 import global.variables.*;
 import org.apache.commons.math3.stat.inference.ChiSquareTest;
 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static global.tools.CustomAssertions.assertWithinRange;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class RandomUtil {
     /*
@@ -67,21 +69,15 @@ public class RandomUtil {
 
     public static int getNumBins(int lower, int upper) {
         int range = upper - lower;
-        int binNumber = 5;
-        int greatestDivisor = 1;
-        boolean hasDivisor = false;
-        while(binNumber <= MAX_BINS){
-            if(range % binNumber == 0) {
-                greatestDivisor = binNumber;
-                hasDivisor = true;
-            }
-            binNumber++;
+        if (range < 21)
+            return range;
+        int binNumber = 20;
+        while(binNumber > 1){
+            if((range + 1) % binNumber < 3 || range > (10 * binNumber))
+                return binNumber;
+            binNumber--;
         }
-        if(hasDivisor) {
-            return Math.min(range, greatestDivisor);
-        } else {
-            return Math.min(range, 20);
-        }
+        return 0;
     }
 
     public static int assignedBinIndex(int value, int lower, int upper, int numBins) {
@@ -106,6 +102,7 @@ public class RandomUtil {
     public static boolean frequenciesAreRandom(int[] frequencies, int numBins) {
         // assume that the sum of frequencies in this list == the total number of values generated
         double expectedFrequency = ArrayUtil.sum(frequencies) * 1.0 / numBins;
+        Logger.logMessage(Arrays.toString(frequencies));
         int count = 0;
         for (int frequency : frequencies) {
             // TODO: calculate percentage error based on total values and number of bins
@@ -114,6 +111,7 @@ public class RandomUtil {
                 count++;
         }
         // If the number of bins which pass the randomness check is above the acceptance rate, the numbers are considered random
+        Logger.logMessage(String.valueOf((count * 1.0) / numBins));
         return (count * 1.0) / numBins >= ACCEPTANCE_RATE;
     }
 
