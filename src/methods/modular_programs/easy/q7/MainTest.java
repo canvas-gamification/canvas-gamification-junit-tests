@@ -1,9 +1,9 @@
 package methods.modular_programs.easy.q7;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.NewLine;
@@ -71,14 +71,24 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("raisedCalcInputProvider")
     void correctRaisedCalcMethod(double base, double exponent, double raised) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(TwoMethods.class, "raisedCalc", new Object[]{base, exponent}, double.class, double.class);
+        Object[][] arguments = {
+                {base, double.class},
+                {exponent, double.class}
+        };
+        MethodTest m = new MethodTest(TwoMethods.class, "raisedCalc", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(raised, output, 0.001, "Your raisedCalc method does not correctly calculate the first variable raised to the second.");
     }
 
     @ParameterizedTest
     @MethodSource("degreeCalcInputProvider")
     void correctDegreeCalcMethod(double first, double second, double radians) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(TwoMethods.class, "degreeCalc", new Object[]{first, second}, double.class, double.class);
+        Object[][] arguments = {
+                {first, double.class},
+                {second, double.class}
+        };
+        MethodTest m = new MethodTest(TwoMethods.class, "degreeCalc", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(radians, output, 0.001, "Your degreeCalc method does not correctly convert the larger number to radians.");
     }
 
