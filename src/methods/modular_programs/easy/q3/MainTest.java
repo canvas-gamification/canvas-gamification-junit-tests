@@ -1,8 +1,8 @@
 package methods.modular_programs.easy.q3;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.IntegerLiteral;
@@ -54,14 +54,26 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("meanCalcInputProvider")
     void correctAverageCalcMethod(int a, int b, int c, double avg) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(MeanNMedian.class, "meanCalc", new Object[]{a, b, c}, int.class, int.class, int.class);
+        Object[][] arguments = {
+                {a, int.class},
+                {b, int.class},
+                {c, int.class}
+        };
+        MethodTest m = new MethodTest(MeanNMedian.class, "meanCalc", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(avg, output, 0.00001, "Your meanCalc method does not correctly calculate the average.");
     }
 
     @ParameterizedTest
     @MethodSource("medianCalcInputProvider")
     void correctMedianCalcMethod(int a, int b, int c, int median) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(MeanNMedian.class, "medianCalc", new Object[]{a, b, c}, int.class, int.class, int.class);
+        Object[][] arguments = {
+                {a, int.class},
+                {b, int.class},
+                {c, int.class}
+        };
+        MethodTest m = new MethodTest(MeanNMedian.class, "medianCalc", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(median, output, "Your medianCalc method does not correctly identify the median.");
     }
 
