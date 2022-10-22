@@ -4,10 +4,8 @@ import global.BaseTest;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
-import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -49,7 +47,8 @@ public class MainTest extends BaseTest {
         return Stream.of(
                 Arguments.of(10, 7.0, 80.0),
                 Arguments.of(80, 35.8, 54.75),
-                Arguments.of(5, 53.84, 1086.8)
+                Arguments.of(5, 53.84, 1086.8),
+                Arguments.of(2, 0, 10)
         );
     }
 }

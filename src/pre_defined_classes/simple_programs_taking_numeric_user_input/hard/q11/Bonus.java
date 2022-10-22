@@ -1,9 +1,9 @@
 package pre_defined_classes.simple_programs_taking_numeric_user_input.hard.q11;
 /*
-Your professor has decided to give everyone in the class a bonus 10% on an exam! Write a java program that asks the
-user for how many marks the exam is out of (as an integer) and how many marks they received (as a double). Then,
-calculate their new score with the bonus, and print this new score with a formatted string to round the percentage to
-two decimal places.
+Your professor has decided to give everyone in the class a bonus of 10% on an exam! Write a java program asking the
+user how many marks the exam is out of (as an integer) and the grade they received (as a double). Then, calculate their
+new score with the bonus, and print this new score with a formatted string to round the percentage to two decimal
+places.
 
         Sample Output:
         Enter how many marks the exam is out of:
@@ -21,6 +21,7 @@ Import java.util.scanner
 */
 
 import java.util.Scanner;
+
 public class Bonus {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
