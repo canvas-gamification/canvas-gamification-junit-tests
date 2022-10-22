@@ -1,10 +1,10 @@
 package methods.modular_programs.easy.q6;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
@@ -73,7 +73,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("centuryCalcInputProvider")
     void correctCenturyCalcMethod(int in, String century) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(Century.class, "centuryCalc", new Object[]{in}, int.class);
+        Object[][] arguments = {
+                {in, int.class}
+        };
+        MethodTest m = new MethodTest(Century.class, "centuryCalc", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(century, output, "Your centuryCalc method does not return the correct century.");
     }
 
