@@ -1,8 +1,8 @@
 package methods.modular_programs.easy.q4;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.NewLine;
@@ -49,7 +49,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("valueAfterCalcInputProvider")
     void correctValueAfterCalcMethod(double in, double decimals) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(ReturnChange.class, "valueAfterCalc", new Object[]{in}, double.class);
+        Object[][] arguments = {
+                {in, double.class}
+        };
+        MethodTest m = new MethodTest(ReturnChange.class, "valueAfterCalc", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(decimals, output, 0.0000000001, "Your valueAfterCalc method does not correctly extract the numbers after the decimal.");
     }
 
