@@ -5,9 +5,10 @@ Write a program that takes three initialized and declared integer variables and 
 Note that the mean is the average of the three numbers and that the median is the middle number when the numbers are
 sorted from least to greatest. The program should have separate methods for computing both of these values, one called
 meanCalc and the other called medianCalc.Finally, the program should output the median and mean in the main method.
+
 Sample output:
-The average of the three integers is 13.0
-The median of the three integers is 5
+    The average of the three integers is 13.0
+    The median of the three integers is 5
  */
 
 public class MeanNMedian {
