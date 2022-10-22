@@ -1,9 +1,9 @@
 package methods.modular_programs.easy.q5;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.NewLine;
@@ -57,7 +57,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("heightConversionInputProvider")
     void correctHeightConversionMethod(double in, double feet) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(HeightInFeet.class, "heightConversion", new Object[]{in}, double.class);
+        Object[][] arguments = {
+                {in, double.class}
+        };
+        MethodTest m = new MethodTest(HeightInFeet.class, "heightConversion", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(feet, output, 0.005, "Your heightConversion method does not correctly convert from centimetres to feet.");
     }
 
