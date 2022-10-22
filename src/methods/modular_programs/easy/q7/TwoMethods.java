@@ -5,13 +5,14 @@ Write a Java Program that asks the user for two double variables and performs tw
 methods. Firstly, take the first variable and raise it to the second variable using a method called raisedCalc.
 Secondly, find the larger double variable and convert that double to radians (assuming it is in degrees) using a method
 called degreeCalc.
+
 Sample output:
-Enter the first number:
-5.23
-Enter the second number:
-17.95
-The value of the first variable raised to the second variable is 7.890514371332084E12
-The value of the greater variable converted from degrees to radians is 0.31328660073298215
+    Enter the first number:
+    5.23
+    Enter the second number:
+    17.95
+    The value of the first variable raised to the second variable is 7.890514371332084E12
+    The value of the greater variable converted from degrees to radians is 0.31328660073298215
  */
 
 import java.util.Scanner;
