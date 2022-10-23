@@ -1,9 +1,10 @@
 package arrays.creating_arrays.hard.q1;
 
 /*
-Write a Java program that asks the user for the number of elements it will store and uses a method called
-createRandomArray() to create a new integer array and initializes the array with random numbers from 0 to the number
-that was entered. The main method should then print out the numbers in the array.
+Write a Java program that asks the user to enter a length for an array and then calls a method named createRandomArray()
+to generate this array. The method should accept an integer for the length and create a new array of that size. Then, it
+should initialize the array with random numbers from 0 (inclusive) to the passed length (exclusive). Return this array
+and print the output in the main method.
 
 Sample output:
     Enter the size of the array:
