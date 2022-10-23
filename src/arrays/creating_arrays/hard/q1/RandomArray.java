@@ -4,15 +4,16 @@ package arrays.creating_arrays.hard.q1;
 Write a Java program that asks the user for the number of elements it will store and uses a method called
 createRandomArray() to create a new integer array and initializes the array with random numbers from 0 to the number
 that was entered. The main method should then print out the numbers in the array.
+
 Sample output:
-Enter the size of the array:
-5
-Printing out numbers in your array:
-0
-2
-3
-1
-2
+    Enter the size of the array:
+    5
+    Printing out numbers in your array:
+    0
+    2
+    3
+    1
+    2
  */
 
 import java.util.Scanner;
