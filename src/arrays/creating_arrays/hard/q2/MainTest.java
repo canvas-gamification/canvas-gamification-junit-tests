@@ -1,9 +1,9 @@
 package arrays.creating_arrays.hard.q2;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -79,7 +79,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("reverseInputProvider")
     void correctReverseMethod(int in, int ans) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(RevdArray.class, "reverse", new Object[]{in}, int.class);
+        Object[][] arguments = {
+                {in, int.class}
+        };
+        MethodTest m = new MethodTest(RevdArray.class, "reverse", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(ans, output, "Your reverse method does not correctly reverse the given number.");
     }
 
