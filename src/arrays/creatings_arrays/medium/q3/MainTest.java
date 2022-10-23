@@ -7,6 +7,7 @@ import global.variables.clauses.RandomInteger;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     private static final int length = 100;
 
     public Clause[] testSentence() {
