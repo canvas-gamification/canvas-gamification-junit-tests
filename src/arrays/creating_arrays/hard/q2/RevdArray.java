@@ -1,10 +1,9 @@
 package arrays.creating_arrays.hard.q2;
 
 /*
-Write a program that will ask the user for 5 numbers and initialize an integer array with the reverse of each number.
-For example, if the user enters 432 as the 5th number, then the 5th array element will be 234. Assume only positive
-numbers will be input.
-To simplify your code, make sure you create a method called reverse() that takes a single integer as input and returns
+Write a program asking the user for five numbers and initialize an integer array with the reverse of each number. For
+example, if the user enters 432 as the 5th number, then the 5th array element will be 234. Assume only positive numbers
+will be input. To simplify your code, create a method called reverse() that takes a single integer as input and returns
 an integer in a reversed format as output.
 
 Sample output:
