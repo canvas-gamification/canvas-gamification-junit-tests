@@ -91,10 +91,10 @@ public class MainTest extends BaseTest {
     @MethodSource("mainMethodInputProvider")
     void printsOutputCorrectly(String in, int one, int two, int three, int four, int five) {
         runWithInput(in);
-        assertEquals(String.valueOf(one), getItemByName("one"), "Your program does not correctly reverse the first number");
-        assertEquals(String.valueOf(two), getItemByName("two"), "Your program does not correctly reverse the second number");
-        assertEquals(String.valueOf(three), getItemByName("three"), "Your program does not correctly reverse the third number");
-        assertEquals(String.valueOf(four), getItemByName("four"), "Your program does not correctly reverse the fourth number");
-        assertEquals(String.valueOf(five), getItemByName("five"), "Your program does not correctly reverse the fifth number");
+        assertEquals(one, Integer.parseInt(getItemByName("one")), "Your program does not correctly reverse the first number");
+        assertEquals(two, Integer.parseInt(getItemByName("two")), "Your program does not correctly reverse the second number");
+        assertEquals(three, Integer.parseInt(getItemByName("three")), "Your program does not correctly reverse the third number");
+        assertEquals(four, Integer.parseInt(getItemByName("four")), "Your program does not correctly reverse the fourth number");
+        assertEquals(five, Integer.parseInt(getItemByName("five")), "Your program does not correctly reverse the fifth number");
     }
 }
