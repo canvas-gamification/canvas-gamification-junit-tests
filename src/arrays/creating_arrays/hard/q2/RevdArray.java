@@ -6,22 +6,23 @@ For example, if the user enters 432 as the 5th number, then the 5th array elemen
 numbers will be input.
 To simplify your code, make sure you create a method called reverse() that takes a single integer as input and returns
 an integer in a reversed format as output.
+
 Sample output:
-Enter a number to add to the array:
-34
-Enter a number to add to the array:
-678
-Enter a number to add to the array:
-1
-Enter a number to add to the array:
-23
-Enter a number to add to the array:
-18525
-43
-876
-1
-32
-52581
+    Enter a number to add to the array:
+    34
+    Enter a number to add to the array:
+    678
+    Enter a number to add to the array:
+    1
+    Enter a number to add to the array:
+    23
+    Enter a number to add to the array:
+    18525
+    43
+    876
+    1
+    32
+    52581
  */
 
 import java.util.Scanner;
