@@ -57,15 +57,17 @@ public class MainTest extends BaseTest {
         }
         assertArrayEquals(ex, ans);
     }
+
     static Stream<Arguments> methodInputProvider() {
         return Stream.of(
-                Arguments.of(new int[]{3, 4, 6, 21, 48, 42, 89, 2, 0, 91, 33}, new int[] {33, 3, 4, 6, 21, 48, 42, 89, 2, 0, 91}),
-                Arguments.of(new int[]{0, 1}, new int[] {1, 0}),
-                Arguments.of(new int[]{1}, new int[] {1}),
-                Arguments.of(new int[]{0, 0}, new int[] {0, 0})
+                Arguments.of(new int[]{3, 4, 6, 21, 48, 42, 89, 2, 0, 91, 33}, new int[]{33, 3, 4, 6, 21, 48, 42, 89, 2, 0, 91}),
+                Arguments.of(new int[]{0, 1}, new int[]{1, 0}),
+                Arguments.of(new int[]{1}, new int[]{1}),
+                Arguments.of(new int[]{0, 0}, new int[]{0, 0})
 
         );
     }
+
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void LilToDaRightMethodTest(int[] input, int[] ans) throws Throwable {
