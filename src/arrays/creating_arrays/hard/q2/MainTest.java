@@ -4,6 +4,7 @@ import global.BaseTest;
 import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
+import global.utils.ArrayUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -20,35 +21,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MainTest extends BaseTest {
     // Java
 
+    final static int num = 5;
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "39 67 123 5 21";
-        return new Clause[]{
-                new StringLiteral("Enter a number to add to the array:"),
-                new Optional(new StringLiteral(" ")),
-                new NewLine(),
-                new StringLiteral("Enter a number to add to the array:"),
-                new Optional(new StringLiteral(" ")),
-                new NewLine(),
-                new StringLiteral("Enter a number to add to the array:"),
-                new Optional(new StringLiteral(" ")),
-                new NewLine(),
-                new StringLiteral("Enter a number to add to the array:"),
-                new Optional(new StringLiteral(" ")),
-                new NewLine(),
-                new StringLiteral("Enter a number to add to the array:"),
-                new Optional(new StringLiteral(" ")),
-                new NewLine(),
-                new IntegerLiteral("one"),
-                new NewLine(),
-                new IntegerLiteral("two"),
-                new NewLine(),
-                new IntegerLiteral("three"),
-                new NewLine(),
-                new IntegerLiteral("four"),
-                new NewLine(),
-                new IntegerLiteral("five")
-        };
+        TestOption.defaultInput = ArrayUtil.arrayToInput(ArrayUtil.generateRandomArray(5, 200, num));
+        return clauseBuilder();
     }
 
     public void runMain() {
@@ -96,5 +74,22 @@ public class MainTest extends BaseTest {
         assertEquals(three, Integer.parseInt(getItemByName("three")), "Your program does not correctly reverse the third number");
         assertEquals(four, Integer.parseInt(getItemByName("four")), "Your program does not correctly reverse the fourth number");
         assertEquals(five, Integer.parseInt(getItemByName("five")), "Your program does not correctly reverse the fifth number");
+    }
+
+    public Clause[] clauseBuilder(){
+        Clause[] c = new Clause[num*5];
+        int count = 0;
+
+        for(int x = 0; x < num; x++){
+            c[count++] = new StringLiteral("Enter a number to add to the array:");
+            c[count++] = new Optional(new StringLiteral(" "));
+            c[count++] = new NewLine();
+        }
+        for(int x = 0; x < num; x++){
+            c[count++] = new IntegerLiteral("num" + x);
+            c[count++] = new NewLine();
+        }
+
+        return c;
     }
 }
