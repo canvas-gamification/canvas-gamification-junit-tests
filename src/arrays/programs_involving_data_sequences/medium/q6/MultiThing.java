@@ -19,23 +19,20 @@ input = input / 2;
 }
  */
 
-public class MultiThing
-{
-    public static void main( String [] args )
-    {
-        int [] arr = {1,3,5,7,9, 44, 88, 24};
-        for(int num:multiplier(arr)){
+public class MultiThing {
+    public static void main(String[] args) {
+        int[] arr = {1, 3, 5, 7, 9, 44, 88, 24};
+        for (int num : multiplier(arr)) {
             System.out.println(num);
         }
     }
-    public static int[] multiplier(int [] input)
-    {
-        for (int i = 0; i < input.length; i++)
-        {
-            if (input[i]%2 == 0)
+
+    public static int[] multiplier(int[] input) {
+        for (int i = 0; i < input.length; i++) {
+            if (input[i] % 2 == 0)
                 input[i] = input[i] / 2;
             else
-                input[i] = input[i]*2;
+                input[i] = input[i] * 2;
         }
         return input;
     }

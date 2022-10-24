@@ -35,11 +35,11 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         MultiThing.main(new String[0]);
     }
 
-    static Stream<int[]> multiplierInputProvider(){
+    static Stream<int[]> multiplierInputProvider() {
         return Stream.of(
                 ArrayUtil.generateRandomArray(0, 100, 20),
                 ArrayUtil.generateRandomArray(-30, -1, 10),
@@ -67,14 +67,12 @@ public class MainTest extends BaseTest {
     }
 
 
-    public static int[] arrayAnswer(int [] input)
-    {
-        for (int i = 0; i < input.length; i++)
-        {
-            if (input[i]%2 == 0)
+    public static int[] arrayAnswer(int[] input) {
+        for (int i = 0; i < input.length; i++) {
+            if (input[i] % 2 == 0)
                 input[i] = input[i] / 2;
             else
-                input[i] = input[i]*2;
+                input[i] = input[i] * 2;
         }
 
         return input;
