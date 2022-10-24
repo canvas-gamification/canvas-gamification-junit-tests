@@ -4,7 +4,8 @@ package arrays.programs_involving_data_sequences.medium.q7;
 Make a Java program that calls a method that takes an array of words as input. Go through all the words and find the
 longest word in the array. Take the longest word and duplicate it as many times as the length of the word. For example,
 suppose the longest word is "cars" that is 4 characters long. Then the newly constructed word would be duplicate "cars"
-4 times to get "carscarscarscars". This newly constructed word is then returned as output.
+4 times to get "carscarscarscars". This newly constructed word is then returned as output which is printed in the main
+method.
 
 Distractors:
     return longestWord;
@@ -23,7 +24,7 @@ public class DupeDupeDupeDupe
     public static void main( String [] args )
     {
         String[] arr = {"left","right","ending","homecoming", "longing"};
-        stringRepeater(arr);
+        System.out.println(stringRepeater(arr));
     }
     public static String stringRepeater(String [] words)
     {
