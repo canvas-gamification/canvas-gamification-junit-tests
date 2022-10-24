@@ -3,7 +3,6 @@ package arrays.programs_involving_data_sequences.medium.q6;
 import global.BaseTest;
 import global.MethodTest;
 import global.tools.CustomAssertions;
-import global.tools.Logger;
 import global.utils.ArrayUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
@@ -54,24 +53,8 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("multiplierInputProvider")
     void correctMultiplierInputProvider(int[] arr) throws Throwable {
-        Object[][] arguments = {
-                {arr, int[].class}
-        };
-        MethodTest m = new MethodTest(MultiThing.class, "multiplier", arguments);
+        int[] expected = Arrays.copyOf(arr, arr.length);
 
-        Object output = m.callMethod();
-        int[] whoops = (int[])(output);
-
-        Logger.logMessage(Arrays.toString(arr));
-        Logger.logMessage(Arrays.toString(arrayAnswer(arr)));
-        Logger.logMessage(Arrays.toString(whoops));
-
-        CustomAssertions._assertArrayEquals(arrayAnswer(arr), output, "Your multiplier method does not correctly alter the given array.");
-
-    }
-    @ParameterizedTest
-    @MethodSource("multiplierInputProvider")
-    void correctMultiplierInputProvider2(int[] arr) throws Throwable {
         Object[][] arguments = {
                 {arr, int[].class}
         };
@@ -79,23 +62,7 @@ public class MainTest extends BaseTest {
 
         Object output = m.callMethod();
 
-        CustomAssertions._assertArrayEquals(arr, output, "Your multiplier method does not correctly alter the given array.");
-
-    }
-
-    @ParameterizedTest
-    @MethodSource("multiplierInputProvider")
-    void correctMultiplierInputProvider3(int[] arr) throws Throwable {
-        Object[][] arguments = {
-                {arr, int[].class}
-        };
-        MethodTest m = new MethodTest(MultiThing.class, "multiplier", arguments);
-
-        int[] expected = arrayAnswer(arr);
-
-        Object output = m.callMethod();
-
-        CustomAssertions._assertArrayEquals(expected, output, "Your multiplier method does not correctly alter the given array.");
+        CustomAssertions._assertArrayEquals(arrayAnswer(expected), output, "Your multiplier method does not correctly alter the given array.");
 
     }
 
@@ -109,7 +76,7 @@ public class MainTest extends BaseTest {
             else
                 input[i] = input[i]*2;
         }
-        Logger.logMessage(Arrays.toString(input));
+
         return input;
     }
 }
