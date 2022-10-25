@@ -19,23 +19,19 @@ Distractors:
     newWord = longestWord*len;
  */
 
-public class DupeDupeDupeDupe
-{
-    public static void main( String [] args )
-    {
-        String[] arr = {"left","right","ending","homecoming", "longing"};
+public class DupeDupeDupeDupe {
+    public static void main(String[] args) {
+        String[] arr = {"left", "right", "ending", "homecoming", "longing"};
         System.out.println(stringRepeater(arr));
     }
-    public static String stringRepeater(String [] words)
-    {
+
+    public static String stringRepeater(String[] words) {
         int greatestLength = 0;
         String longestWord = "";
         String newWord = "";
-        for (int i = 0; i < words.length; i++)
-        {
+        for (int i = 0; i < words.length; i++) {
             int len = words[i].length();
-            if ( len > greatestLength)
-            {
+            if (len > greatestLength) {
                 greatestLength = len;
                 longestWord = words[i];
             }

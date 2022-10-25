@@ -26,7 +26,7 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> inputProvider() {
         return Stream.of(
-                Arguments.of((Object)ArrayUtil.generateRandomWordArray(7)),
+                Arguments.of((Object) ArrayUtil.generateRandomWordArray(7)),
                 Arguments.of((Object) ArrayUtil.generateRandomWordArray(10)),
                 Arguments.of((Object) ArrayUtil.generateRandomWordArray(14)),
                 Arguments.of((Object) ArrayUtil.generateRandomWordArray(48)),
