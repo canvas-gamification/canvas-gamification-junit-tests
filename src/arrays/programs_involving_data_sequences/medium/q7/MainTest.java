@@ -7,6 +7,7 @@ import global.utils.ArrayUtil;
 import global.variables.Clause;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -19,18 +20,18 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         DupeDupeDupeDupe.main(new String[0]);
     }
 
-    static Stream<String[]> inputProvider(){
+    static Stream<Arguments> inputProvider() {
         return Stream.of(
-                ArrayUtil.generateRandomWordArray(7),
-                ArrayUtil.generateRandomWordArray(10),
-                ArrayUtil.generateRandomWordArray(14),
-                ArrayUtil.generateRandomWordArray(48),
-                ArrayUtil.generateRandomWordArray(200),
-                ArrayUtil.generateRandomWordArray(1000)
+                Arguments.of((Object)ArrayUtil.generateRandomWordArray(7)),
+                Arguments.of((Object) ArrayUtil.generateRandomWordArray(10)),
+                Arguments.of((Object) ArrayUtil.generateRandomWordArray(14)),
+                Arguments.of((Object) ArrayUtil.generateRandomWordArray(48)),
+                Arguments.of((Object) ArrayUtil.generateRandomWordArray(200)),
+                Arguments.of((Object) ArrayUtil.generateRandomWordArray(1000))
         );
     }
 
@@ -45,14 +46,11 @@ public class MainTest extends BaseTest {
         CustomAssertions._assertEquals(getSolution(in), output, "Your stringRepeater method does not return a string with enough repetitions of the longest word.");
     }
 
-    public static String getSolution(String [] words)
-    {
+    public static String getSolution(String[] words) {
         int greatestLength = 0;
         String newWord = "";
-        for (int i = 0; i < words.length; i++)
-        {
-            if ( words[i].length() > words[greatestLength].length())
-            {
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].length() > words[greatestLength].length()) {
                 greatestLength = i;
             }
         }
