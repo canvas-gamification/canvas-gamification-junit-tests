@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -19,6 +20,7 @@ import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 
 public class MainTest extends BaseTest {
+
   // Java
   public Clause[] testSentence() {
     TestOption.isInputTest = true;
@@ -51,9 +53,12 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("rentPricesProvider")
   void correctCalculatesRent(double rentMonthly, double rentYearly) throws Throwable {
-    String errorMsg = "Your method \"rentCalcYear()\" does not calculate the yearly rent correctly.";
-    Object output = MethodUtil.invokeIfMethodExists(RentMethod.class, "rentCalcYear", new Object[] { rentMonthly },
-        double.class);
+    Object[][] arguments = {
+            {rentMonthly, double.class}
+    };
+    MethodTest m = new MethodTest(RentMethod.class, "rentCalcYear", arguments);
+    Object output = m.callMethod();
+    String errorMsg = "Your rentCalcYear() method does not calculate the yearly rent correctly.";
     CustomAssertions._assertEquals(output, rentYearly, 0.01, errorMsg);
   }
 
