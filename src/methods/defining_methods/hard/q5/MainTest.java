@@ -2,6 +2,7 @@ package methods.defining_methods.hard.q5;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -10,7 +11,6 @@ import global.BaseTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
@@ -36,9 +36,12 @@ public class MainTest extends BaseTest {
 
   static Stream<Arguments> inputProvider() {
     return Stream.of(
+            Arguments.of("Chicken Little", -100, "You've watched Chicken Little no times!"),
+        Arguments.of("Cloudy with a chance of meatballs", -1, "You've watched Cloudy with a chance of meatballs no times!"),
+        Arguments.of("Legally Blonde", 0, "You've watched Legally Blonde no times!"),
         Arguments.of("The Matrix", 1, "You've watched The Matrix a few times!"),
         Arguments.of("Alien", 2, "You've watched Alien a few times!"),
-        Arguments.of("Spiderman\\: into the Spiderverse", 5, "You've watched Spiderman\\: into the Spiderverse a few times!"),
+        Arguments.of("The Grand Budapest Hotel", 5, "You've watched The Grand Budapest Hotel a few times!"),
         Arguments.of("Hot Fuzz", 6, "You've watched Hot Fuzz a lot of times!"),
         Arguments.of("Nausicaa and the valley of the wind", 8, "You've watched Nausicaa and the valley of the wind a lot of times!"),
         Arguments.of("Pacific Rim", 10, "You've watched Pacific Rim a lot of times!"),
@@ -50,17 +53,20 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputProvider")
   void correctMethodMovieCounter(String movieName, int timeWatched, String exclaimatory) throws Throwable {
-    String errorMesasge = "Your method \"movieCounter()\" does not return the correct exclaimatory message.";
-    Object output = MethodUtil.invokeIfMethodExists(FavMovie.class, "movieCounter",
-        new Object[] { movieName, timeWatched }, String.class, int.class);
+    Object[][] arguments = {
+            {movieName, String.class},
+            {timeWatched, int.class}
+    };
+    MethodTest m = new MethodTest(FavMovie.class, "movieCounter", arguments);
+    Object output = m.callMethod();
+    String errorMesasge = "Your movieCounter() method does not return the correct message.";
     CustomAssertions._assertEquals(output, exclaimatory, errorMesasge);
   }
 
   @ParameterizedTest
   @MethodSource("inputProvider")
   void printsCorrectOutput(String movieName, int timeWatched, String exclaimatory) throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct exclaimatory message for the movie "
-        + movieName + ".";
+    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message for the movie.";
     runWithInput(movieName + "\n" + timeWatched, new Clause[] {
         new StringLiteral(exclaimatory),
     });
