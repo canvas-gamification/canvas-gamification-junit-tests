@@ -2,7 +2,7 @@ package methods.defining_methods.hard.q4;
 
 /*
 Write a Java Program that asks the user for two integers, then prints out the greater of the two integers. Write a method
-called greaterNum that accepts two integers as parameters and returns the greater of the two.
+called greaterNum that accepts two integers as parameters and returns the greater of the two to be printed in the main method.
 
 Sample Output:
   Enter the first number: 5
