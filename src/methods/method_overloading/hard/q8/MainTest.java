@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import global.BaseTest;
@@ -30,7 +29,7 @@ public class MainTest extends BaseTest {
   }
 
   public void runMain() {
-    Overload8.main(new String[0]);
+    FindDataType.main(new String[0]);
   }
 
   static Stream<Integer> inputIntegerProvider() {
@@ -45,7 +44,7 @@ public class MainTest extends BaseTest {
   @MethodSource("inputIntegerProvider")
   void correctPrintTypeIntegerMethod(int intNumber) throws Throwable {
     String errorMessage = "Your method \"printType()\" for integer does not print the correct type.";
-    Object output = MethodUtil.invokeIfMethodExists(Overload8.class, "printType", new Object[] { intNumber },
+    Object output = MethodUtil.invokeIfMethodExists(FindDataType.class, "printType", new Object[] { intNumber },
         int.class);
     CustomAssertions._assertEquals(output, "int", errorMessage);
   }
@@ -54,7 +53,7 @@ public class MainTest extends BaseTest {
   @MethodSource("inputDoubleProvider")
   void correctPrintTypeDoubleMethod(double doubleNumber) throws Throwable {
     String errorMessage = "Your method \"printType()\" for integer does not print the correct type.";
-    Object output = MethodUtil.invokeIfMethodExists(Overload8.class, "printType", new Object[] { doubleNumber },
+    Object output = MethodUtil.invokeIfMethodExists(FindDataType.class, "printType", new Object[] { doubleNumber },
         double.class);
     CustomAssertions._assertEquals(output, "double", errorMessage);
   }
