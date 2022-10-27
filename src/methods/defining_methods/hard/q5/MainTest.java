@@ -37,14 +37,14 @@ public class MainTest extends BaseTest {
   static Stream<Arguments> inputProvider() {
     return Stream.of(
         Arguments.of("The Matrix", 1, "You've watched The Matrix a few times!"),
-        Arguments.of("The Matrix", 2, "You've watched The Matrix a few times!"),
-        Arguments.of("The Matrix", 5, "You've watched The Matrix a few times!"),
-        Arguments.of("The Matrix", 6, "You've watched The Matrix a lot of times!"),
-        Arguments.of("The Matrix", 8, "You've watched The Matrix a lot of times!"),
-        Arguments.of("The Matrix", 10, "You've watched The Matrix a lot of times!"),
-        Arguments.of("The Matrix", 11, "You've watched The Matrix so many times! Wow!"),
-        Arguments.of("The Matrix", 81, "You've watched The Matrix so many times! Wow!"),
-        Arguments.of("The Matrix", 200, "You've watched The Matrix so many times! Wow!"));
+        Arguments.of("Alien", 2, "You've watched Alien a few times!"),
+        Arguments.of("Spiderman\\: into the Spiderverse", 5, "You've watched Spiderman\\: into the Spiderverse a few times!"),
+        Arguments.of("Hot Fuzz", 6, "You've watched Hot Fuzz a lot of times!"),
+        Arguments.of("Nausicaa and the valley of the wind", 8, "You've watched Nausicaa and the valley of the wind a lot of times!"),
+        Arguments.of("Pacific Rim", 10, "You've watched Pacific Rim a lot of times!"),
+        Arguments.of("Kung Fury", 11, "You've watched Kung Fury so many times! Wow!"),
+        Arguments.of("Se7en", 81, "You've watched Se7en so many times! Wow!"),
+        Arguments.of("The Last Unicorn", 200, "You've watched The Last Unicorn so many times! Wow!"));
   }
 
   @ParameterizedTest
