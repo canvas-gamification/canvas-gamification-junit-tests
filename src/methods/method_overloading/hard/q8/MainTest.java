@@ -23,10 +23,10 @@ public class MainTest extends BaseTest {
   public Clause[] testSentence() {
     return new Clause[] {
         new StringLiteral("The data type associated with 14 is: "),
-        new StringLiteral("int", "intNumber"),
+        new StringLiteral("int"),
         new NewLine(),
         new StringLiteral("The data type associated with 61.34 is: "),
-        new StringLiteral("double", "doubleNumber"),
+        new StringLiteral("double"),
     };
   }
 
@@ -64,16 +64,5 @@ public class MainTest extends BaseTest {
     Object output = m.callMethod();
     String errorMessage = "Your printType() method for double does not print the correct type.";
     CustomAssertions._assertEquals(output, "double", errorMessage);
-  }
-
-  @Test
-  void printsCorrectOutput() {
-    String errorMessageInteger = "Your program does not print the correct output for integer.";
-    String errorMessageDouble = "Your program does not print the correct output for double.";
-    String intNumberType = getItemByName("intNumber");
-    String doubleNumberType = getItemByName("doubleNumber");
-
-    assertEquals("int", intNumberType, errorMessageInteger);
-    assertEquals("double", doubleNumberType, errorMessageDouble);
   }
 }
