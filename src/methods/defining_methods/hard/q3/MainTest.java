@@ -2,6 +2,7 @@ package methods.defining_methods.hard.q3;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -46,8 +47,12 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("innerAnglesInputProvider")
   void correctInnerAnglesMethod(int a, int innerAngles) throws Throwable {
-    String errorMessage = "Your \"innerAngles()\" method does not correctly calculated the inner angles of a polygon with " + a + " sides.";
-    Object output = MethodUtil.invokeIfMethodExists(Polygo.class, "innerAngles", new Object[]{a}, int.class);
+    Object[][] arguments = {
+            {a, int.class}
+    };
+    MethodTest m = new MethodTest(Polygo.class, "innerAngles", arguments);
+    Object output = m.callMethod();
+    String errorMessage = "Your innerAngles() method does not correctly calculated the inner angles of a polygon.";
     CustomAssertions._assertEquals(innerAngles, output, errorMessage);
   }
 
