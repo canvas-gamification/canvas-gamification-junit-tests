@@ -29,14 +29,14 @@ public class MainTest extends BaseTest {
                 new int[]{},
                 new int[]{-11, 12, 37, 11, 0, 0, 0, -39, 345},
                 new int[]{1},
-                ArrayUtil.generateRandomIntArray(-537, 364, 49)
+                ArrayUtil.generateRandomArray(-537, 364, 49)
         );
     }
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void correctIntoStringMethod(int[] input) throws Throwable {
-        String result = ArrayUtil.intArrayToInput(input).replaceAll(" ", "");
+        String result = ArrayUtil.arrayToInput(input).replaceAll(" ", "");
         Object output = MethodUtil.invokeIfMethodExists(Stringify.class, "intoString", new Object[]{input}, int[].class);
         CustomAssertions._assertEquals(result, output, "Your intoString method does not correctly convert the integers in the array into a String.");
     }
