@@ -8,13 +8,13 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import global.BaseTest;
-import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
-import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
   // Java
@@ -25,7 +25,8 @@ public class MainTest extends BaseTest {
     return new Clause[] {
         new StringLiteral("Enter the first number: "),
         new StringLiteral("Enter the second number: "),
-        new PlaceHolder(),
+            new StringLiteral("The greater number is "),
+            new IntegerLiteral("number")
     };
   }
 
@@ -63,11 +64,8 @@ public class MainTest extends BaseTest {
 
   @ParameterizedTest
   @MethodSource("correctInputProvider")
-  void printsCorrectGreaterNum(int a, int b, int greater) throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct greater number.";
-    runWithInput(a + " " + b, new Clause[][] { {
-        new StringLiteral("The greater number is "),
-        new IntegerLiteral(greater),
-    } });
+  void printsCorrectGreaterNum(int a, int b, int greater) {
+    runWithInput(a + " " + b);
+    assertEquals(greater, Integer.parseInt(getItemByName("number")), "Your program does not print the greater number.");
   }
 }
