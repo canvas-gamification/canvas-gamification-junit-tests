@@ -14,10 +14,10 @@ public class MainTest {
 
     static Stream<int[]> inputProvider() {
         return Stream.of(
-                multiply(ArrayUtil.generateRandomIntArray(-100, 100, 20)),
-                ArrayUtil.generateRandomIntArray(-50, 50, 25),
-                ArrayUtil.generateRandomIntArray(-150, 12385, 25),
-                multiply(ArrayUtil.generateRandomIntArray(-753, 30983, 35)),
+                multiply(ArrayUtil.generateRandomArray(-100, 100, 20)),
+                ArrayUtil.generateRandomArray(-50, 50, 25),
+                ArrayUtil.generateRandomArray(-150, 12385, 25),
+                multiply(ArrayUtil.generateRandomArray(-753, 30983, 35)),
                 new int[]{0, 0, 0, 0}
         );
     }
