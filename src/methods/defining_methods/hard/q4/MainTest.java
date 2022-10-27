@@ -2,6 +2,7 @@ package methods.defining_methods.hard.q4;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -10,7 +11,6 @@ import global.BaseTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.PlaceHolder;
@@ -18,6 +18,7 @@ import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseTest {
   // Java
+
   public Clause[] testSentence() {
     TestOption.isInputTest = true;
     TestOption.defaultInput = "5 10";
@@ -50,10 +51,14 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("correctInputProvider")
   void correctGreaterNumMethod(int a, int b, int greater) throws Throwable {
-    String errorMessage = "Your method \"greaterNum()\" does not return the greater number.";
-    Object output = MethodUtil.invokeIfMethodExists(GreaterThan.class, "greaterNum",
-        new Object[] { a, b }, int.class, int.class);
-    CustomAssertions._assertEquals(output, greater, errorMessage);
+    Object[][] arguments = {
+            {a, int.class},
+            {b, int.class}
+    };
+    MethodTest m = new MethodTest(GreaterThan.class, "greaterNum", arguments);
+    Object output = m.callMethod();
+    String errorMessage = "Your greaterNum() method does not return the greater number.";
+    CustomAssertions._assertEquals(greater, output, errorMessage);
   }
 
   @ParameterizedTest
