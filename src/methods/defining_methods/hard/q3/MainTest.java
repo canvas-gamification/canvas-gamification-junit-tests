@@ -19,51 +19,51 @@ import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseTest {
-  // Java
-  public Clause[] testSentence() {
-    TestOption.isInputTest = true;
-    TestOption.defaultInput = "8";
+    // Java
 
-    return new Clause[]{
-      new StringLiteral("Enter the number of sides on the polygon:"),
-      new NewLine(),
-      new PlaceHolder()
-    };
-  }
+    public Clause[] testSentence() {
+        TestOption.isInputTest = true;
+        TestOption.defaultInput = "8";
 
-  public void runMain() {
-    Polygo.main(new String[0]);
-  }
+        return new Clause[]{
+                new StringLiteral("Enter the number of sides on the polygon:"),
+                new NewLine(),
+                new PlaceHolder()
+        };
+    }
 
-  static Stream<Arguments> innerAnglesInputProvider() {
-    return Stream.of(
-      Arguments.of(8, 1080),
-      Arguments.of(3, 180),
-      Arguments.of(100, 17640),
-      Arguments.of(10000, 1799640)
-    );
-  }
+    public void runMain() {
+        Polygo.main(new String[0]);
+    }
 
-  @ParameterizedTest
-  @MethodSource("innerAnglesInputProvider")
-  void correctInnerAnglesMethod(int a, int innerAngles) throws Throwable {
-    Object[][] arguments = {
-            {a, int.class}
-    };
-    MethodTest m = new MethodTest(Polygo.class, "innerAngles", arguments);
-    Object output = m.callMethod();
-    String errorMessage = "Your innerAngles() method does not correctly calculated the inner angles of a polygon.";
-    CustomAssertions._assertEquals(innerAngles, output, errorMessage);
-  }
+    static Stream<Arguments> innerAnglesInputProvider() {
+        return Stream.of(
+                Arguments.of(8, 1080),
+                Arguments.of(3, 180),
+                Arguments.of(100, 17640),
+                Arguments.of(10000, 1799640)
+        );
+    }
 
-  @ParameterizedTest
-  @MethodSource("innerAnglesInputProvider")
-  void printsOutputCorrectly(int a, int innerAngles) throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not correctly calculate and print the inner angles of a polygon with " + a + " sides.";
-    runWithInput(a + "", new Clause[][]{{
-      new StringLiteral("The sum of interior angles of the polygon is\\: "),
-      new IntegerLiteral(innerAngles)
-    }});
-  }
+    @ParameterizedTest
+    @MethodSource("innerAnglesInputProvider")
+    void correctInnerAnglesMethod(int a, int innerAngles) throws Throwable {
+        Object[][] arguments = {
+                {a, int.class}
+        };
+        MethodTest m = new MethodTest(Polygo.class, "innerAngles", arguments);
+        Object output = m.callMethod();
+        String errorMessage = "Your innerAngles() method does not correctly calculated the inner angles of a polygon.";
+        CustomAssertions._assertEquals(innerAngles, output, errorMessage);
+    }
 
+    @ParameterizedTest
+    @MethodSource("innerAnglesInputProvider")
+    void printsOutputCorrectly(int a, int innerAngles) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly calculate and print the inner angles of a polygon.";
+        runWithInput(a + "", new Clause[][]{{
+                new StringLiteral("The sum of interior angles of the polygon is\\: "),
+                new IntegerLiteral(innerAngles)
+        }});
+    }
 }

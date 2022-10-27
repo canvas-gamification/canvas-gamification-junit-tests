@@ -16,16 +16,16 @@ Sample output:
 import java.util.Scanner;
 
 public class Polygo {
-  public static void main(String[] args) {
-    Scanner input = new Scanner(System.in);
-    System.out.println("Enter the number of sides on the polygon:");
-    int countSides = input.nextInt();
-    System.out.println("The sum of interior angles of the polygon is: " + innerAngles(countSides));
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter the number of sides on the polygon:");
+        int countSides = input.nextInt();
+        System.out.println("The sum of interior angles of the polygon is: " + innerAngles(countSides));
 
-  }
+    }
 
-  public static int innerAngles(int a) {
-    int x = (a - 2) * 180;
-    return x;
-  }
+    public static int innerAngles(int a) {
+        int x = (a - 2) * 180;
+        return x;
+    }
 }
