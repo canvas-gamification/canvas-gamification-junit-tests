@@ -1,4 +1,4 @@
-package methods.defining_methods.hard.q8;
+package methods.method_overloading.hard.q8;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

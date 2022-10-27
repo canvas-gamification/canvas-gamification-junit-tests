@@ -1,4 +1,4 @@
-package methods.defining_methods.hard.q8;
+package methods.method_overloading.hard.q8;
 
 /**
  * [J] Write a Java Program that passes in a number and prints out a message
