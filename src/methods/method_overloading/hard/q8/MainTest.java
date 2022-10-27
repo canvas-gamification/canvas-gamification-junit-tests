@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -18,6 +19,7 @@ import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseTest {
   // Java
+
   public Clause[] testSentence() {
     return new Clause[] {
         new StringLiteral("The data type associated with 14 is: "),
@@ -43,29 +45,35 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputIntegerProvider")
   void correctPrintTypeIntegerMethod(int intNumber) throws Throwable {
-    String errorMessage = "Your method \"printType()\" for integer does not print the correct type.";
-    Object output = MethodUtil.invokeIfMethodExists(FindDataType.class, "printType", new Object[] { intNumber },
-        int.class);
-    CustomAssertions._assertEquals(output, "int", errorMessage);
+    Object[][] arguments = {
+            {intNumber, int.class}
+    };
+    MethodTest m = new MethodTest(FindDataType.class, "printType", arguments);
+    Object output = m.callMethod();
+    String errorMessage = "Your printType() method for integer does not print the correct type.";
+    CustomAssertions._assertEquals("int", output, errorMessage);
   }
 
   @ParameterizedTest
   @MethodSource("inputDoubleProvider")
   void correctPrintTypeDoubleMethod(double doubleNumber) throws Throwable {
-    String errorMessage = "Your method \"printType()\" for integer does not print the correct type.";
-    Object output = MethodUtil.invokeIfMethodExists(FindDataType.class, "printType", new Object[] { doubleNumber },
-        double.class);
+    Object[][] arguments = {
+            {doubleNumber, double.class}
+    };
+    MethodTest m = new MethodTest(FindDataType.class, "printType", arguments);
+    Object output = m.callMethod();
+    String errorMessage = "Your printType() method for double does not print the correct type.";
     CustomAssertions._assertEquals(output, "double", errorMessage);
   }
 
   @Test
   void printsCorrectOutput() {
     String errorMessageInteger = "Your program does not print the correct output for integer.";
-    String errorMessageDouble = "Your program does not print the correct output for integer.";
+    String errorMessageDouble = "Your program does not print the correct output for double.";
     String intNumberType = getItemByName("intNumber");
     String doubleNumberType = getItemByName("doubleNumber");
 
-    assertEquals(intNumberType, "int", errorMessageInteger);
-    assertEquals(doubleNumberType, "double", errorMessageDouble);
+    assertEquals("int", intNumberType, errorMessageInteger);
+    assertEquals("double", doubleNumberType, errorMessageDouble);
   }
 }
