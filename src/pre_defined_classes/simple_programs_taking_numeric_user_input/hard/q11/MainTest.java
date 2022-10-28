@@ -47,8 +47,10 @@ public class MainTest extends BaseTest {
         return Stream.of(
                 Arguments.of(10, 7.0, 80.0),
                 Arguments.of(80, 35.8, 54.75),
-                Arguments.of(5, 53.84, 1086.8),
-                Arguments.of(2, 0, 10)
+                Arguments.of(100, 100, 110),
+                Arguments.of(2, 0, 10),
+                Arguments.of(5, 4.9, 108)
+
         );
     }
 }
