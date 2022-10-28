@@ -23,6 +23,9 @@ public class IntegerMulter {
     }
 
     public static int multiply1000(int a) {
-        return a * 1000;
+        if (a >= 0 && a <= 10)
+            return a * 1000;
+        else
+            return -1;
     }
 }
