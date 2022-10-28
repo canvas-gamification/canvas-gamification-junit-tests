@@ -3,8 +3,7 @@ package pre_defined_classes.simple_programs_taking_numeric_user_input.hard.q11;
 Your professor has decided to give everyone in the class a bonus of 10% on an exam! Write a java program asking the
 user how many marks the exam is out of (as an integer) and the grade they received (as a double). Then, calculate their
 new score with the bonus, and print this new score with a formatted string to round the percentage to two decimal
-places. Assume the user will provide valid positive numbers as inputs such that the grade will be less or equal
-than the total marks.
+places. Assume the user will provide valid input, and that the score will be less than or equal to the total marks.
 
 Sample Output:
     Enter how many marks the exam is out of:

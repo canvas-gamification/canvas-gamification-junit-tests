@@ -39,8 +39,8 @@ public class MainTest extends BaseTest {
     @MethodSource("calculatesGradeCorrectlyInputProvider")
     public void calculatesGradeCorrectly(int x, double y, double answer) {
         runWithInput(x + " " + y);
-        assertEquals(answer, Double.parseDouble(getItemByName("ans")), "You did not correctly calculate the" +
-                " score of the student's grade.");
+        assertEquals(answer, Double.parseDouble(getItemByName("ans")),
+                "You did not correctly calculate the student's grade with the bonus.");
     }
 
     public static Stream<Arguments> calculatesGradeCorrectlyInputProvider() {
