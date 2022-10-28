@@ -1,9 +1,10 @@
 package loops.for_loops.hard.q9;
 /*
 Write a java program that determines if two integers have a common divisor which is greater than 1. The program should
-ask the user to input two numbers, tries to find if they have a common divisor greater than 1, and prints true if they
-do and false if they do not. Assume that the first number entered is larger than the second.
-    Sample Output:
+ask the user to input two numbers, try finding if they have a common divisor greater than 1, and prints true if they do
+and false if they do not. Assume that the first number entered is larger than the second.
+
+Sample Output:
     Enter two integers:
     67
     9

@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "67 9";
@@ -29,38 +30,26 @@ public class MainTest extends BaseTest {
         CommonDivisors.main(new String[0]);
     }
 
-    static Stream<Arguments> TrueInputProvider() {
+    static Stream<Arguments> InputProvider() {
         return Stream.of(
-                Arguments.of("10", "4"),
-                Arguments.of("6", "3"),
-                Arguments.of("150", "75"),
-                Arguments.of("9", "999999"),
-                Arguments.of("99999", "9"));
+                Arguments.of(10, 4, "true"),
+                Arguments.of(6, 3, "true"),
+                Arguments.of(150, 75, "true"),
+                Arguments.of(99999, 9, "true"),
+                Arguments.of(10, 3, "false"),
+                Arguments.of(131, 15, "false"),
+                Arguments.of(21, 2, "false"),
+                Arguments.of(2, 1, "false"),
+                Arguments.of(99999, 7, "false"));
     }
 
     @ParameterizedTest
-    @MethodSource("TrueInputProvider")
-    void testWithTrueInput(String s1, String s2) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program did not display the correct answer";
+    @MethodSource("InputProvider")
+    void testingTheOutput(int s1, int s2, String ans) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage =
+                "Your program does not correctly identify if the two input integers have a common divisor greater than one.";
         runWithInput(s1 + " " + s2, new Clause[]{
-                new StringLiteral("true")});
+                new StringLiteral(ans)});
     }
 
-    static Stream<Arguments> FalseInputProvider() {
-        return Stream.of(
-                Arguments.of("10", "3"),
-                Arguments.of("131", "15"),
-                Arguments.of("21", "2"),
-                Arguments.of("1", "2"),
-                Arguments.of("7", "99999"),
-                Arguments.of("99999", "7"));
-    }
-
-    @ParameterizedTest
-    @MethodSource("FalseInputProvider")
-    void testWithFalseInput(String s1, String s2) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program did not display the correct answer";
-        runWithInput(s1 + " " + s2, new Clause[]{
-                new StringLiteral("false")});
-    }
 }
