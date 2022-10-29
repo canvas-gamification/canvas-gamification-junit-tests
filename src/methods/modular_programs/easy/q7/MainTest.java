@@ -66,7 +66,11 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> mainMethodInputProvider() {
-        return Stream.of(Arguments.of("4 5", 1024.0, 0.08726646259971647), Arguments.of("5.7 2.3", 54.76614451050491, 0.09948376736367678), Arguments.of("6.1 -4.7", 2.0368065149446233E-4, 0.1064650843716541));
+        return Stream.of(
+                Arguments.of("4 5", 1024.0, 0.08726646259971647),
+                Arguments.of("5.7 2.3", 54.76614451050491, 0.09948376736367678),
+                Arguments.of("6.1 -4.7", 2.0368065149446233E-4, 0.1064650843716541)
+        );
     }
 
     @ParameterizedTest
