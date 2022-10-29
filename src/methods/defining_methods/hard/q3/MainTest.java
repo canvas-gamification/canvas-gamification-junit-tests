@@ -41,7 +41,10 @@ public class MainTest extends BaseTest {
                 Arguments.of(8, 1080),
                 Arguments.of(3, 180),
                 Arguments.of(100, 17640),
-                Arguments.of(10000, 1799640)
+                Arguments.of(10000, 1799640),
+                Arguments.of(2, -1),
+                Arguments.of(0, -1),
+                Arguments.of(-50, -1)
         );
     }
 
