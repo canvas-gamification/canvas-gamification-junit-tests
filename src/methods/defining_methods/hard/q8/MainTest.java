@@ -42,10 +42,10 @@ public class MainTest extends BaseTest {
     static Stream<Arguments> rentPricesProvider() {
         return Stream.of(
                 Arguments.of(100.0, 1200.0),
-                Arguments.of(200.0, 2400.0),
-                Arguments.of(500.0, 6000.0),
-                Arguments.of(600.0, 7200.0),
-                Arguments.of(700.0, 8400.0),
+                Arguments.of(200.2435, 2402.922),
+                Arguments.of(500.1, 6001.2),
+                Arguments.of(600.5, 7206.0),
+                Arguments.of(700.99, 8411.88),
                 Arguments.of(1000.0, 12000.0),
                 Arguments.of(321.344, 3856.128),
                 Arguments.of(1.1, 13.2),
@@ -61,7 +61,7 @@ public class MainTest extends BaseTest {
         MethodTest m = new MethodTest(RentMethod.class, "rentCalc", arguments);
         Object output = m.callMethod();
         String errorMsg = "Your rentCalc() method does not calculate the yearly rent correctly.";
-        CustomAssertions._assertEquals(output, rentYearly, 0.01, errorMsg);
+        CustomAssertions._assertEquals(output, rentYearly, 0.00001, errorMsg);
     }
 
     @ParameterizedTest
@@ -69,7 +69,7 @@ public class MainTest extends BaseTest {
     void printsCorrectYearlyRent(double rentMonthly, double rentYearly) {
         String errorMsg = "Your program does not print the correct yearly rent.";
         runWithInput(rentMonthly + "");
-        assertEquals(Double.parseDouble(getItemByName("rentYearly")), rentYearly, 0.001, errorMsg);
+        assertEquals(Double.parseDouble(getItemByName("rentYearly")), rentYearly, 0.00001, errorMsg);
 
     }
 }
