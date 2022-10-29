@@ -49,7 +49,7 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("coursesInputProvider")
   void methodCreditsCalcCorrect(int courses, int credits) throws Throwable {
-    String errorMsg = "Your method \"creditsCalc()\" does not correctly calculate the number of credits";
+    String errorMsg = "Your creditsCalc() method does not correctly calculate the number of credits.";
     Object output = MethodUtil.invokeIfMethodExists(NumCoursesMethod.class, "creditsCalc", new Object[] { courses },
         int.class);
     CustomAssertions._assertEquals(output, credits, errorMsg);
@@ -58,7 +58,7 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("coursesInputProvider")
   void printsCorrectMessage(int courses, int credits) throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct credit message";
+    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct credit message.";
     runWithInput(courses + "", new Clause[][] { {
         new StringLiteral("The number of credits you'll receive is "),
         new IntegerLiteral(credits),
