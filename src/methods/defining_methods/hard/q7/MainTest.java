@@ -66,14 +66,14 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(CurrentYearMethod.class, "leapChecker", arguments);
         Object output = m.callMethod();
-        String errorMessage = "Your leapChecker() method does not return the correct result";
+        String errorMessage = "Your leapChecker() method does not return the correct result.";
         CustomAssertions._assertEquals(isLeapYear, output, errorMessage);
     }
 
     @ParameterizedTest
     @MethodSource("possibleNumDaysForOutput")
     void printsCorrectLeapYearMessage(int numDays, String isLeapYearStr) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message for this year";
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message for this year.";
         runWithInput(numDays + "", new Clause[]{
                 new StringLiteral(isLeapYearStr),
         });
