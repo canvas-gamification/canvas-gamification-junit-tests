@@ -2,6 +2,7 @@ package methods.defining_methods.hard.q9;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -49,10 +50,13 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("coursesInputProvider")
   void methodCreditsCalcCorrect(int courses, int credits) throws Throwable {
+    Object[][] arguments = {
+            {courses, int.class}
+    };
+    MethodTest m = new MethodTest(NumCoursesMethod.class, "creditsCalc", arguments);
+    Object output = m.callMethod();
     String errorMsg = "Your creditsCalc() method does not correctly calculate the number of credits.";
-    Object output = MethodUtil.invokeIfMethodExists(NumCoursesMethod.class, "creditsCalc", new Object[] { courses },
-        int.class);
-    CustomAssertions._assertEquals(output, credits, errorMsg);
+    CustomAssertions._assertEquals(credits, output, errorMsg);
   }
 
   @ParameterizedTest
