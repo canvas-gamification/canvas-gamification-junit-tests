@@ -26,6 +26,7 @@ public class MainTest extends BaseTest {
     return new Clause[] {
         new StringLiteral("Enter the number of courses you're taking this year:"),
         new NewLine(),
+            new StringLiteral("The number of credits you'll receive is "),
         new PlaceHolder(),
     };
   }
@@ -63,9 +64,8 @@ public class MainTest extends BaseTest {
   @MethodSource("coursesInputProvider")
   void printsCorrectMessage(int courses, int credits) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not print the correct credit message.";
-    runWithInput(courses + "", new Clause[][] { {
-        new StringLiteral("The number of credits you'll receive is "),
-        new IntegerLiteral(credits),
-    } });
+    runWithInput(courses + "", new Clause[] {
+        new IntegerLiteral(credits)
+    } );
   }
 }
