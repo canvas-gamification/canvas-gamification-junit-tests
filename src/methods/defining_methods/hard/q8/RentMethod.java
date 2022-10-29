@@ -3,7 +3,7 @@ package methods.defining_methods.hard.q8;
 /*
 Write a Java Program that asks users for the cost of rent for their housing per month. Then write a Java method called
 rentCalcYear that accepts that value as a double and returns the cost per year for housing as a double. Your program should
-print the returned value in the main method.
+print the returned value in the main method. Assume a user input of 0 or greater.
 
 Sample Output:
   Enter the cost of rent per month:
@@ -18,10 +18,10 @@ public class RentMethod {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter the cost of rent per month:");
         double rentCostMonth = input.nextDouble();
-        System.out.println("The total cost of rent per year is $" + rentCalcYear(rentCostMonth));
+        System.out.println("The total cost of rent per year is $" + rentCalc(rentCostMonth));
     }
 
-    public static double rentCalcYear(double costPerMonth) {
+    public static double rentCalc(double costPerMonth) {
         return 12 * costPerMonth;
     }
 }

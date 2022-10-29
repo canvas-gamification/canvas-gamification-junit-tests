@@ -48,7 +48,8 @@ public class MainTest extends BaseTest {
                 Arguments.of(700.0, 8400.0),
                 Arguments.of(1000.0, 12000.0),
                 Arguments.of(321.344, 3856.128),
-                Arguments.of(1.1, 13.2));
+                Arguments.of(1.1, 13.2),
+                Arguments.of(0, 0));
     }
 
     @ParameterizedTest
@@ -57,9 +58,9 @@ public class MainTest extends BaseTest {
         Object[][] arguments = {
                 {rentMonthly, double.class}
         };
-        MethodTest m = new MethodTest(RentMethod.class, "rentCalcYear", arguments);
+        MethodTest m = new MethodTest(RentMethod.class, "rentCalc", arguments);
         Object output = m.callMethod();
-        String errorMsg = "Your rentCalcYear() method does not calculate the yearly rent correctly.";
+        String errorMsg = "Your rentCalc() method does not calculate the yearly rent correctly.";
         CustomAssertions._assertEquals(output, rentYearly, 0.01, errorMsg);
     }
 
