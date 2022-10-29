@@ -2,7 +2,7 @@ package arrays.creating_arrays.medium.q4;
 
 /*
 Make a Java program that initializes an array of 100 random integers from the range of 0-9, inclusive of both 0 and 9,
-using the Random class.
+using the Random class then print each element of the array on a different line.
 
 Sample output:
     5
