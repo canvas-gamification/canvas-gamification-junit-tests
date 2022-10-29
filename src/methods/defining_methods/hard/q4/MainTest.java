@@ -65,7 +65,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(GreaterThan.class, "greaterNum", arguments);
         Object output = m.callMethod();
-        String errorMessage = "Your greaterNum() method does not return the greater number.";
+        String errorMessage = "Your greaterNum() method does not return the larger number.";
         CustomAssertions._assertEquals(greater, output, errorMessage);
     }
 
@@ -73,6 +73,6 @@ public class MainTest extends BaseTest {
     @MethodSource("correctInputProvider")
     void printsCorrectGreaterNum(int a, int b, int greater) {
         runWithInput(a + " " + b);
-        assertEquals(greater, Integer.parseInt(getItemByName("number")), "Your program does not print the greater number.");
+        assertEquals(greater, Integer.parseInt(getItemByName("number")), "Your program does not print the larger number.");
     }
 }
