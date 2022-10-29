@@ -67,9 +67,9 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(
-                Arguments.of("4 5", 1024.0, 0.08726646259971647),
-                Arguments.of("5.7 2.3", 54.76614451050491, 0.09948376736367678),
-                Arguments.of("6.1 -4.7", 2.0368065149446233E-4, 0.1064650843716541)
+                Arguments.of(4, 5, 1024.0, 0.08726646259971647),
+                Arguments.of(5.7, 2.3, 54.76614451050491, 0.09948376736367678),
+                Arguments.of(6.1, -4.7, 2.0368065149446233E-4, 0.1064650843716541)
         );
     }
 
@@ -99,8 +99,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
-    void printsOutputCorrectly(String in, double raised, double radians) {
-        runWithInput(in);
+    void printsOutputCorrectly(double first, double second, double raised, double radians) {
+        runWithInput(first + " " + second);
         assertEquals(raised, Double.parseDouble(getItemByName("raised")), 0.001, "Your program does not properly display the raised value.");
         assertEquals(radians, Double.parseDouble(getItemByName("radians")), 0.001, "Your program does not properly display the converted radians.");
     }
