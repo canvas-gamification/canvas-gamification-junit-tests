@@ -49,7 +49,11 @@ public class MainTest extends BaseTest {
                 Arguments.of(-1, 1, 1),
                 Arguments.of(1, -1, 1),
                 Arguments.of(1000, 999, 1000),
-                Arguments.of(1, -1000, 1));
+                Arguments.of(1, -1000, 1),
+                Arguments.of(50, 531830, 531830),
+                Arguments.of(8537285, 12, 8537285),
+                Arguments.of(5673892, 482204, 5673892),
+                Arguments.of(-75342, 6849, 6849));
     }
 
     @ParameterizedTest
