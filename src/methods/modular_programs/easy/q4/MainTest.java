@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The values after the decimal point for the first variable are "),
