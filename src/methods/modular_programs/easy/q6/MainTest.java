@@ -61,13 +61,13 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(
-                Arguments.of("2022", "21st Century"),
-                Arguments.of("1950", "20th Century"),
-                Arguments.of("1830", "19th Century"),
-                Arguments.of("1782", "18th Century"),
-                Arguments.of("1634", "17th Century"),
-                Arguments.of("1555", "16th Century"),
-                Arguments.of("1265", "Unknown Century"));
+                Arguments.of(2022, "21st Century"),
+                Arguments.of(1950, "20th Century"),
+                Arguments.of(1830, "19th Century"),
+                Arguments.of(1782, "18th Century"),
+                Arguments.of(1634, "17th Century"),
+                Arguments.of(1555, "16th Century"),
+                Arguments.of(1265, "Unknown Century"));
     }
 
     @ParameterizedTest
@@ -83,9 +83,9 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
-    void printsOutputCorrectly(String in, String century) throws InvalidClauseException {
+    void printsOutputCorrectly(int in, String century) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print the correct century.";
-        runWithInput(in, new Clause[]{
+        runWithInput(String.valueOf(in), new Clause[]{
                 new StringLiteral(century)
         });
     }
