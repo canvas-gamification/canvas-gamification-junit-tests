@@ -4,7 +4,7 @@ package methods.defining_methods.hard.q9;
 Write a Java program asking the user for the number of courses they are taking right now. Then, create a method named
 creditsCac that accepts the number of courses as an integer and returns an integer for credits the student will receive,
 assuming that each course consists of three credits. Print the number of credits the user will receive in the main
-method.
+method. If the user inputs a number less than 0, return -1.
 
 Sample Output:
   Enter the number of courses you're taking this year:
@@ -23,6 +23,9 @@ public class NumCoursesMethod {
     }
 
     public static int creditsCalc(int coursesCount) {
-        return 3 * coursesCount;
+        if (coursesCount < 0)
+            return -1;
+        else
+            return 3 * coursesCount;
     }
 }

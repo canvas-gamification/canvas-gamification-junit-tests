@@ -39,7 +39,11 @@ public class MainTest extends BaseTest {
         Arguments.of(4, 12),
         Arguments.of(50, 150),
         Arguments.of(0, 0),
-        Arguments.of(10000, 30000));
+        Arguments.of(10000, 30000),
+            Arguments.of(-1, -1),
+            Arguments.of(-2, -1),
+            Arguments.of(-404, -1)
+    );
   }
 
   @ParameterizedTest
