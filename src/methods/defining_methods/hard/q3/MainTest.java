@@ -56,14 +56,14 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(Polygo.class, "innerAngles", arguments);
         Object output = m.callMethod();
-        String errorMessage = "Your innerAngles() method does not correctly calculated the inner angles of a polygon.";
+        String errorMessage = "Your innerAngles() method does not correctly calculate the inner angles of a polygon in degrees.";
         CustomAssertions._assertEquals(innerAngles, output, errorMessage);
     }
 
     @ParameterizedTest
     @MethodSource("innerAnglesInputProvider")
     void printsOutputCorrectly(int a, int innerAngles) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly calculate and print the inner angles of a polygon.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly calculate and print the inner angles of a polygon in degrees.";
         runWithInput(a + "", new Clause[][]{{
                 new StringLiteral("The sum of interior angles of the polygon is\\: "),
                 new IntegerLiteral(innerAngles)
