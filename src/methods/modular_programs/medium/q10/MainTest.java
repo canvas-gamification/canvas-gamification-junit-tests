@@ -1,6 +1,7 @@
 package methods.modular_programs.medium.q10;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
@@ -81,7 +82,13 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void testForFindGCDMethod(int first, int second, int gcd) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(GCDCalculator.class, "findGCD", new Object[]{first, second}, int.class, int.class);
-        CustomAssertions._assertEquals(gcd, output, "Your finGCD method does not calculate the value of gcd correctly.");
+        Object[][] arguments = {
+                {first, int.class},
+                {second, int.class}
+        };
+        MethodTest m = new MethodTest(GCDCalculator.class, "findGCD", arguments);
+        Object output = m.callMethod();
+        CustomAssertions._assertEquals(gcd, output,
+                "Your findGCD method does not correctly return the gcd of the two input numbers.");
     }
 }

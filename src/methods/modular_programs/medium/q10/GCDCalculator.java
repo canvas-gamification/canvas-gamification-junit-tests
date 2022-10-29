@@ -9,7 +9,7 @@ Your program should ask the user to input two integers in the main method, and t
 accepts two integers as parameters, and returns the GCD of those two integers. Then, print what the gcd of the two
 integers is in the main method. Assume that all input numbers are positive.
 
-    Sample Output:
+Sample Output:
 	Enter two integers:
     18
     30
