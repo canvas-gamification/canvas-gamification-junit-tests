@@ -3,6 +3,7 @@ package methods.defining_methods.hard.q4;
 import java.util.stream.Stream;
 
 import global.MethodTest;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -23,8 +24,10 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "5 10";
         return new Clause[]{
-                new StringLiteral("Enter the first number: "),
-                new StringLiteral("Enter the second number: "),
+                new StringLiteral("Enter the first number:"),
+                new Optional(new StringLiteral(" ")),
+                new StringLiteral("Enter the second number:"),
+                new Optional(new StringLiteral(" ")),
                 new StringLiteral("The greater number is "),
                 new IntegerLiteral("number")
         };
