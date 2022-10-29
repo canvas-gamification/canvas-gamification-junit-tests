@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "5.23 17.95";
@@ -26,10 +27,10 @@ public class MainTest extends BaseTest {
                 new NewLine(),
                 new StringLiteral("Enter the second number: "),
                 new NewLine(),
-                new StringLiteral("The value of the first variable raised to the second variable is "),
+                new StringLiteral("The value of the first number raised to the second variable is "),
                 new DoubleLiteral("raised"),
                 new NewLine(),
-                new StringLiteral("The value of the greater variable converted from degrees to radians is "),
+                new StringLiteral("The value of the larger number converted from degrees to radians is "),
                 new DoubleLiteral("radians")
         };
     }
