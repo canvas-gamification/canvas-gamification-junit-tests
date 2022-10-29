@@ -2,6 +2,7 @@ package methods.defining_methods.hard.q6;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -19,6 +20,7 @@ import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseTest {
     // Java
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "5";
@@ -60,9 +62,12 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctMultiply1000Method(int num, int newNum) throws Throwable {
+        Object[][] arguments = {
+                {num, int.class}
+        };
+        MethodTest m = new MethodTest(IntegerMulter.class, "multiply1000", arguments);
+        Object output = m.callMethod();
         String errorMessage = "Your method multiply1000() does not return the correct number.";
-        Object output = MethodUtil.invokeIfMethodExists(IntegerMulter.class, "multiply1000", new Object[]{num},
-                int.class);
         CustomAssertions._assertEquals(newNum, output, errorMessage);
     }
 
