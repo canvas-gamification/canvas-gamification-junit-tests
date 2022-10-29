@@ -56,7 +56,7 @@ public class MainTest extends BaseTest {
     };
     MethodTest m = new MethodTest(NumCoursesMethod.class, "creditsCalc", arguments);
     Object output = m.callMethod();
-    String errorMsg = "Your creditsCalc() method does not correctly calculate the number of credits.";
+    String errorMsg = "Your creditsCalc() method does not correctly calculate the number of credits the user will earn.";
     CustomAssertions._assertEquals(credits, output, errorMsg);
   }
 
