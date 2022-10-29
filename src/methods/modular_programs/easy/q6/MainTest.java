@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "2012";
