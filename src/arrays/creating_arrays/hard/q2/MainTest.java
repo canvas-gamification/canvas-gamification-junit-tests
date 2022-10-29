@@ -46,11 +46,12 @@ public class MainTest extends BaseTest {
         );
     }
 
-    static Stream<Arguments> mainMethodInputProvider() {
+    static Stream<int[]> mainMethodInputProvider() {
         return Stream.of(
-                Arguments.of("0 55 64 13 7356", 0, 55, 46, 31, 6537),
-                Arguments.of("319 404 257 123 666", 913, 404, 752, 321, 666),
-                Arguments.of("10000 43 7 8273 4372", 1, 34, 7, 3728, 2734)
+                ArrayUtil.generateRandomArray(5, 200, num),
+                ArrayUtil.generateRandomArray(5, 200, num),
+                ArrayUtil.generateRandomArray(5, 200, num),
+                ArrayUtil.generateRandomArray(5, 200, num)
         );
     }
 
@@ -67,13 +68,13 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
-    void printsOutputCorrectly(String in, int one, int two, int three, int four, int five) {
-        runWithInput(in);
-        assertEquals(one, Integer.parseInt(getItemByName("one")), "Your program does not correctly reverse the first number");
-        assertEquals(two, Integer.parseInt(getItemByName("two")), "Your program does not correctly reverse the second number");
-        assertEquals(three, Integer.parseInt(getItemByName("three")), "Your program does not correctly reverse the third number");
-        assertEquals(four, Integer.parseInt(getItemByName("four")), "Your program does not correctly reverse the fourth number");
-        assertEquals(five, Integer.parseInt(getItemByName("five")), "Your program does not correctly reverse the fifth number");
+    void printsOutputCorrectly(int[] in) {
+        runWithInput(ArrayUtil.arrayToInput(in));
+
+        for(int x = 0; x < in.length; x++){
+            assertEquals(solution(in[x]), Integer.parseInt(getItemByName("num" + x)), "Your program does not correctly reverse array element" + x);
+        }
+
     }
 
     public Clause[] clauseBuilder(){
@@ -91,5 +92,14 @@ public class MainTest extends BaseTest {
         }
 
         return c;
+    }
+
+    public static int solution(int n) {
+        int reversed = 0;
+        while (n > 0) {
+            reversed = (reversed * 10) + n % 10;
+            n = n / 10;
+        }
+        return reversed;
     }
 }
