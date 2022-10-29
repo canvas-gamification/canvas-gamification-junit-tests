@@ -1,8 +1,8 @@
 package arrays.creating_arrays.hard.q3;
 
 /*
-Write a program that asks the user for 5 integers, and stores those values into an array and prints the array, with
-each value on a new line, back to the user.
+Write a program that asks the user for five integers, stores those values into an array, and prints the array with each
+value on a new line back to the user.
 
 Sample output:
     Enter 5 integers:
