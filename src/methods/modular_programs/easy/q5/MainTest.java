@@ -63,7 +63,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(HeightInFeet.class, "heightConversion", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(feet, output, 0.005, "Your heightConversion method does not correctly convert from centimetres to feet.");
+        CustomAssertions._assertEquals(feet, output, 0.002, "Your heightConversion method does not correctly convert from centimetres to feet.");
     }
 
     @ParameterizedTest
