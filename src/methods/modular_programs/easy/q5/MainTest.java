@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "135.2";
@@ -48,10 +49,10 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(
-                Arguments.of("1523", 49.96719),
-                Arguments.of("23", 0.754593),
-                Arguments.of("174.8264", 5.7357742782),
-                Arguments.of("-345246.13", -1.0));
+                Arguments.of(1523, 49.96719),
+                Arguments.of(23, 0.754593),
+                Arguments.of(174.8264, 5.7357742782),
+                Arguments.of(-345246.13, -1.0));
     }
 
     @ParameterizedTest
@@ -67,8 +68,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
-    void printsOutputCorrectly(String in, double feet) {
-        runWithInput(in);
+    void printsOutputCorrectly(double in, double feet) {
+        runWithInput(String.valueOf(in));
         assertEquals(feet, Double.parseDouble(getItemByName("feet")), 0.0001, "Your program does not correctly output the height in feet.");
     }
 }
