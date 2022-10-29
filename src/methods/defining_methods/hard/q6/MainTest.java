@@ -51,8 +51,8 @@ public class MainTest extends BaseTest {
 
   @ParameterizedTest
   @MethodSource("numberBetween0And10")
-  void correctReturnMultiply1000(int num, int newNum) throws Throwable {
-    String errorMessage = "Your method \"multiply1000()\" does not return the correct new number.";
+  void correctMultiply1000Method(int num, int newNum) throws Throwable {
+    String errorMessage = "Your method multiply1000() does not return the correct number.";
     Object output = MethodUtil.invokeIfMethodExists(IntegerMulter.class, "multiply1000", new Object[] { num },
         int.class);
     CustomAssertions._assertEquals(output, newNum, errorMessage);
