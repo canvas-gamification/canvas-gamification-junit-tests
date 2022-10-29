@@ -54,10 +54,10 @@ public class MainTest extends BaseTest {
     @MethodSource("mainMethodInputProvider")
     void printsOutputCorrectly(String in, int one, int two, int three, int four, int five) {
         runWithInput(in);
-        assertEquals(String.valueOf(one), getItemByName("one"), "Your program does not print the first input value");
-        assertEquals(String.valueOf(two), getItemByName("two"), "Your program does not print the second input value");
-        assertEquals(String.valueOf(three), getItemByName("three"), "Your program does not print the third input value");
-        assertEquals(String.valueOf(four), getItemByName("four"), "Your program does not print the fourth input value");
-        assertEquals(String.valueOf(five), getItemByName("five"), "Your program does not print the fifth input value");
+        assertEquals(one, Integer.parseInt(getItemByName("one")), "Your program does not print the first input value");
+        assertEquals(two, Integer.parseInt(getItemByName("two")), "Your program does not print the second input value");
+        assertEquals(three, Integer.parseInt(getItemByName("three")), "Your program does not print the third input value");
+        assertEquals(four, Integer.parseInt(getItemByName("four")), "Your program does not print the fourth input value");
+        assertEquals(five, Integer.parseInt(getItemByName("five")), "Your program does not print the fifth input value");
     }
 }
