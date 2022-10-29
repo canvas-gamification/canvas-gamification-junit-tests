@@ -39,7 +39,11 @@ public class MainTest extends BaseTest {
                 Arguments.of(366, true),
                 Arguments.of(365, false),
                 Arguments.of(34, false),
-                Arguments.of(367, false));
+                Arguments.of(367, false),
+                Arguments.of(1, false),
+                Arguments.of(0, false),
+                Arguments.of(-1, false),
+                Arguments.of(-366, false));
     }
 
     static Stream<Arguments> possibleNumDaysForOutput() {
@@ -47,7 +51,11 @@ public class MainTest extends BaseTest {
                 Arguments.of(366, "This year is a leap year"),
                 Arguments.of(365, "This year isn't a leap year"),
                 Arguments.of(18, "This year isn't a leap year"),
-                Arguments.of(367, "This year isn't a leap year"));
+                Arguments.of(367, "This year isn't a leap year"),
+                Arguments.of(1, "This year isn't a leap year"),
+                Arguments.of(0, "This year isn't a leap year"),
+                Arguments.of(-5, "This year isn't a leap year"),
+                Arguments.of(-366, "This year isn't a leap year"));
     }
 
     @ParameterizedTest
