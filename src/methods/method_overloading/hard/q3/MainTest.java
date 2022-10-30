@@ -2,6 +2,7 @@ package methods.method_overloading.hard.q3;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import global.tools.TestOption;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.Test;
@@ -41,7 +42,7 @@ public class MainTest extends BaseTest {
     }
 
     public void runMain() {
-        Overload3.main(new String[0]);
+        SumOverloaded.main(new String[0]);
     }
 
     static Stream<Arguments> integerInputProvider() {
@@ -68,21 +69,29 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("integerInputProvider")
     public void methodIntegerCorrect(int a, int b, int sum) throws Throwable {
+        Object[][] arguments = {
+                {a, int.class},
+                {b, int.class}
+        };
+        MethodTest m = new MethodTest(SumOverloaded.class, "sum", arguments);
+        Object output = m.callMethod();
         String errorMsg = "Your method did not calculate the correct sum for 2 integers.";
-        Object output = MethodUtil.invokeIfMethodExists(Overload3.class, "sum", new Object[]{a, b,}, int.class,
-                int.class);
-        CustomAssertions._assertEquals(output, sum, errorMsg);
+        CustomAssertions._assertEquals(sum, output, errorMsg);
     }
 
     @ParameterizedTest
     @MethodSource("doubleInputProvider")
     public void methodDoubleCorrect(double a, double b, double sum) throws Throwable {
+        Object[][] arguments = {
+                {a, double.class},
+                {b, double.class}
+        };
+        MethodTest m = new MethodTest(SumOverloaded.class, "sum", arguments);
+        Object output = m.callMethod();
         String errorMsg = "Your method did not calculate the correct sum for 2 doubles.";
-        Object output = MethodUtil.invokeIfMethodExists(Overload3.class, "sum", new Object[]{a, b,}, double.class,
-                double.class);
-        CustomAssertions._assertEquals(output, sum, 0.0001, errorMsg);
+        CustomAssertions._assertEquals(sum, output, 0.0001, errorMsg);
     }
-
+    //switch so it works with input, will need to make new stream thingy
     @Test
     public void printsCorrectMessage() {
         String errorMessageInt = "Your program did not print the correct message for sum of 2 integers.";
