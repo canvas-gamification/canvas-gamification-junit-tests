@@ -43,7 +43,7 @@ public class MainTest extends BaseTest {
     static Stream<int[]> inputProvider() {
         return Stream.of(new int[]{4, 9, 0, -1, 3},
                 new int[]{0, 0, 0, 1},
-                ArrayUtil.generateRandomIntArray(0, 150, 20),
+                ArrayUtil.generateRandomArray(0, 150, 20),
                 new int[]{});
     }
 
