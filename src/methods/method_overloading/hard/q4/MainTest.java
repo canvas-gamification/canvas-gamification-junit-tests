@@ -2,6 +2,7 @@ package methods.method_overloading.hard.q4;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import global.tools.TestOption;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import global.BaseTest;
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.IntegerLiteral;
@@ -86,35 +86,51 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("twoIntegersInputProvider")
     void twoIntegerCorrect(int a, int b, int area) throws Throwable {
-        String errorMsg = "Your method \"rectangleArea()\" does not calculate the correct area for two integers.";
-        Object output = MethodUtil.invokeIfMethodExists(RectangleOverload.class, "rectangleArea", new Object[]{a, b}, int.class,
-                int.class);
-        CustomAssertions._assertEquals(output, area, errorMsg);
+        Object[][] arguments = {
+                {a, int.class},
+                {b, int.class}
+        };
+        MethodTest m = new MethodTest(RectangleOverload.class, "rectangleArea", arguments);
+        Object output = m.callMethod();
+        String errorMsg = "Your rectangleArea() method does not calculate the correct area for two integers.";
+        CustomAssertions._assertEquals(area, output, errorMsg);
     }
 
     @ParameterizedTest
     @MethodSource("oneIntegerInputProvider")
     void oneIntegerCorrect(int a, int area) throws Throwable {
-        String errorMsg = "Your method \"rectangleArea()\" does not calculate the correct area for one integer.";
-        Object output = MethodUtil.invokeIfMethodExists(RectangleOverload.class, "rectangleArea", new Object[]{a}, int.class);
-        CustomAssertions._assertEquals(output, area, errorMsg);
+        Object[][] arguments = {
+                {a, int.class}
+        };
+        MethodTest m = new MethodTest(RectangleOverload.class, "rectangleArea", arguments);
+        Object output = m.callMethod();
+        String errorMsg = "Your rectangleArea() method does not calculate the correct area for one integer.";
+        CustomAssertions._assertEquals(area, output, errorMsg);
     }
 
     @ParameterizedTest
     @MethodSource("integerDoubleInputProvider")
     void twoDoubleCorrect(int a, double b, double area) throws Throwable {
-        String errorMsg = "Your method \"rectangleArea()\" does not calculate the correct area for an integer and a double.";
-        Object output = MethodUtil.invokeIfMethodExists(RectangleOverload.class, "rectangleArea", new Object[]{a, b},
-                int.class, double.class);
-        CustomAssertions._assertEquals(output, area, 0.0001, errorMsg);
+        Object[][] arguments = {
+                {a, int.class},
+                {b, double.class}
+        };
+        MethodTest m = new MethodTest(RectangleOverload.class, "rectangleArea", arguments);
+        Object output = m.callMethod();
+        String errorMsg = "Your rectangleArea() method does not calculate the correct area for an integer and a double.";
+        CustomAssertions._assertEquals(area, output, 0.0001, errorMsg);
     }
 
     @ParameterizedTest
     @MethodSource("oneDoubleInputProvider")
     void oneDoubleCorrect(double a, double area) throws Throwable {
-        String errorMsg = "Your method \"rectangleArea()\" does not calculate the correct area for one double.";
-        Object output = MethodUtil.invokeIfMethodExists(RectangleOverload.class, "rectangleArea", new Object[]{a}, double.class);
-        CustomAssertions._assertEquals(output, area, 0.0001, errorMsg);
+        Object[][] arguments = {
+                {a, double.class}
+        };
+        MethodTest m = new MethodTest(RectangleOverload.class, "rectangleArea", arguments);
+        Object output = m.callMethod();
+        String errorMsg = "Your rectangleArea() method does not calculate the correct area for one double.";
+        CustomAssertions._assertEquals(area, output, 0.0001, errorMsg);
     }
 
     @Test
