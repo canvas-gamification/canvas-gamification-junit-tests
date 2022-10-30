@@ -18,6 +18,11 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
     private final double lower, upper;
     private int precision = 16;  // max double precision
 
+    /**
+     * This constant is equal to the minimum number of bins for random checking with RandomDouble
+     */
+    private static final int MIN_BINS = 10;
+
     public RandomDouble(double lower, double upper) {
         super();
         this.lower = lower;
@@ -77,7 +82,9 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
     private static int getNumBins(double lower, double upper) {
         int upperCeil = (int) (upper + 1);
         int lowerFloor = (int) lower;
-        return RandomUtil.getNumBins(lowerFloor, upperCeil); // TODO: do properly
+        // Ensures that there will be at least 10 bins
+        return (upperCeil - lowerFloor <= MIN_BINS) ? RandomUtil.getNumBins(0, 10) :
+                RandomUtil.getNumBins(lowerFloor, upperCeil); // TODO: do properly
     }
 
     private static int assignedBinIndex(double value, double lower, double upper, int numBins) {
@@ -111,9 +118,6 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
 
     @Override
     public String getRegex() {
-        int lowSplit = RegexUtil.getSplitDecimal(lower)[0];
-        int highSplit = RegexUtil.getSplitDecimal(upper)[0];
-        String regexContent = RegexUtil.getRegexInt(lowSplit, highSplit);
-        return "(" + orNegative(regexContent + "\\.\\d+") + ")";
+        return "([-+]?[0-9]+\\.[0-9]+(?:[eE][-+]?[0-9]+)?)";
     }
 }
