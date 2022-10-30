@@ -5,14 +5,12 @@ import java.util.stream.Stream;
 import global.MethodTest;
 import global.tools.TestOption;
 import global.variables.wrappers.Optional;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import global.BaseTest;
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.IntegerLiteral;
@@ -68,7 +66,7 @@ public class MainTest extends BaseTest {
         );
     }
 
-    static Stream<Arguments> mainMethodInputProvider(){
+    static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(
                 Arguments.of(2, 3, 5, 2.4, 76.2, 78.6),
                 Arguments.of(-45, 6, -39, 17.2473, 16837.2, 16854.4473),
@@ -108,6 +106,6 @@ public class MainTest extends BaseTest {
     public void printsCorrectMessage(int a, int b, int c, double x, double y, double w) {
         runWithInput(a + " " + b + " " + x + " " + y);
         assertEquals(c, Integer.parseInt(getItemByName("sumInt")), "Your program does not print the correct message for sum of 2 integers.");
-        assertEquals(w, Double.parseDouble(getItemByName("sumDouble")), 0.0001,  "Your program does not print the correct message for sum of 2 doubles.");
+        assertEquals(w, Double.parseDouble(getItemByName("sumDouble")), 0.0001, "Your program does not print the correct message for sum of 2 doubles.");
     }
 }
