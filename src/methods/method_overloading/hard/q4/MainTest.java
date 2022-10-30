@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import global.BaseTest;
 import global.tools.CustomAssertions;
-import global.tools.TestOption;
 import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
@@ -36,7 +35,7 @@ public class MainTest extends BaseTest {
   }
 
   public void runMain() {
-    Overload4.main(new String[0]);
+    RectangleOverload.main(new String[0]);
   }
 
   static Stream<Arguments> twoIntegersInputProvider() {
@@ -77,7 +76,7 @@ public class MainTest extends BaseTest {
   @MethodSource("twoIntegersInputProvider")
   void twoIntegerCorrect(int a, int b, int area) throws Throwable {
     String errorMsg = "Your method \"rectangleArea()\" does not calculate the correct area for two integers.";
-    Object output = MethodUtil.invokeIfMethodExists(Overload4.class, "rectangleArea", new Object[] { a, b }, int.class,
+    Object output = MethodUtil.invokeIfMethodExists(RectangleOverload.class, "rectangleArea", new Object[] { a, b }, int.class,
         int.class);
     CustomAssertions._assertEquals(output, area, errorMsg);
   }
@@ -86,7 +85,7 @@ public class MainTest extends BaseTest {
   @MethodSource("oneIntegerInputProvider")
   void oneIntegerCorrect(int a, int area) throws Throwable {
     String errorMsg = "Your method \"rectangleArea()\" does not calculate the correct area for one integer.";
-    Object output = MethodUtil.invokeIfMethodExists(Overload4.class, "rectangleArea", new Object[] { a }, int.class);
+    Object output = MethodUtil.invokeIfMethodExists(RectangleOverload.class, "rectangleArea", new Object[] { a }, int.class);
     CustomAssertions._assertEquals(output, area, errorMsg);
   }
 
@@ -94,7 +93,7 @@ public class MainTest extends BaseTest {
   @MethodSource("integerDoubleInputProvider")
   void twoDoubleCorrect(int a, double b, double area) throws Throwable {
     String errorMsg = "Your method \"rectangleArea()\" does not calculate the correct area for an integer and a double.";
-    Object output = MethodUtil.invokeIfMethodExists(Overload4.class, "rectangleArea", new Object[] { a, b },
+    Object output = MethodUtil.invokeIfMethodExists(RectangleOverload.class, "rectangleArea", new Object[] { a, b },
         int.class, double.class);
     CustomAssertions._assertEquals(output, area, 0.0001, errorMsg);
   }
@@ -103,7 +102,7 @@ public class MainTest extends BaseTest {
   @MethodSource("oneDoubleInputProvider")
   void oneDoubleCorrect(double a, double area) throws Throwable {
     String errorMsg = "Your method \"rectangleArea()\" does not calculate the correct area for one double.";
-    Object output = MethodUtil.invokeIfMethodExists(Overload4.class, "rectangleArea", new Object[] { a }, double.class);
+    Object output = MethodUtil.invokeIfMethodExists(RectangleOverload.class, "rectangleArea", new Object[] { a }, double.class);
     CustomAssertions._assertEquals(output, area, 0.0001, errorMsg);
   }
 
