@@ -5,7 +5,6 @@ import java.util.stream.Stream;
 import global.MethodTest;
 import global.tools.TestOption;
 import global.variables.wrappers.Optional;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -17,6 +16,8 @@ import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Java
@@ -83,6 +84,15 @@ public class MainTest extends BaseTest {
                 Arguments.of(-112.1232, 12571.61197824));
     }
 
+    static Stream<Arguments> mainMethodInputProvider() {
+        return Stream.of(
+                Arguments.of(4, 76, 23.4246, 648372.1, 304, 93.6984, 5776, 4.2038638005841E11),
+                Arguments.of(32917, 4, 57.3, 1.321, 131668, 1886144.1, 16, 1.745041),
+                Arguments.of(-43, -23, 43, 763, 989, -1849.0, 529, 582169.0),
+                Arguments.of(4738, -32, -4372.432, 584.432391, -151616, -2.0716582816E7, 1024, 341561.21964997693)
+        );
+    }
+
     @ParameterizedTest
     @MethodSource("twoIntegersInputProvider")
     void twoIntegerCorrect(int a, int b, int area) throws Throwable {
@@ -133,23 +143,14 @@ public class MainTest extends BaseTest {
         CustomAssertions._assertEquals(area, output, 0.0001, errorMsg);
     }
 
-    @Test
-    void printsCorrectMessage() {
-        String errorMsg = "Your program does not print the correct message.";
+    @ParameterizedTest
+    @MethodSource("mainMethodInputProvider")
+    void printsCorrectMessage(int a, int b, double x, double y, int twoInts, double intDouble, int oneInt, double oneDouble) {
+        runWithInput(a + " " + b + " " + x + " " + y);
 
-        int areaIntInt = Integer.parseInt(getItemByName("int_int"));
-        int areaInt = Integer.parseInt(getItemByName("int_only"));
-        double areaIntegerDouble = Double.parseDouble(getItemByName("int_double"));
-        double areaDouble = Double.parseDouble(getItemByName("double_only"));
-
-        final int expectedAreaIntInt = 8;
-        final int expectedAreaInt = 100;
-        final double expectedAreaDoubleDouble = 10.6;
-        final double expectedAreaDouble = 10.89;
-
-        CustomAssertions._assertEquals(areaIntInt, expectedAreaIntInt, errorMsg);
-        CustomAssertions._assertEquals(areaInt, expectedAreaInt, errorMsg);
-        CustomAssertions._assertEquals(areaIntegerDouble, expectedAreaDoubleDouble, 0.001, errorMsg);
-        CustomAssertions._assertEquals(areaDouble, expectedAreaDouble, 0.0001, errorMsg);
+        assertEquals(twoInts, Integer.parseInt(getItemByName("int_int")), "Your program does not print the correct message for the first area.");
+        assertEquals(intDouble, Double.parseDouble(getItemByName("int_double")), 0.0001, "Your program does not print the correct message for the second area.");
+        assertEquals(oneInt, Integer.parseInt(getItemByName("int_only")), "Your program does not print the correct message for the third area.");
+        assertEquals(oneDouble, Double.parseDouble(getItemByName("double_only")), 0.0001, "Your program does not print the correct message for the fourth area.");
     }
 }
