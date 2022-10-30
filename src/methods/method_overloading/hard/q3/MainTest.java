@@ -19,6 +19,8 @@ import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class MainTest extends BaseTest {
     // Java
 
@@ -66,6 +68,15 @@ public class MainTest extends BaseTest {
         );
     }
 
+    static Stream<Arguments> mainMethodInputProvider(){
+        return Stream.of(
+                Arguments.of(2, 3, 5, 2.4, 76.2, 78.6),
+                Arguments.of(-45, 6, -39, 17.2473, 16837.2, 16854.4473),
+                Arguments.of(-19, -4827164, -4827183, 42.21, -7.2, 35.01),
+                Arguments.of(4783, 394, 5177, 1234.123, 4893, 6127.123)
+        );
+    }
+
     @ParameterizedTest
     @MethodSource("integerInputProvider")
     public void methodIntegerCorrect(int a, int b, int sum) throws Throwable {
@@ -91,18 +102,12 @@ public class MainTest extends BaseTest {
         String errorMsg = "Your method did not calculate the correct sum for 2 doubles.";
         CustomAssertions._assertEquals(sum, output, 0.0001, errorMsg);
     }
-    //switch so it works with input, will need to make new stream thingy
-    @Test
-    public void printsCorrectMessage() {
-        String errorMessageInt = "Your program did not print the correct message for sum of 2 integers.";
-        String errorMessageDouble = "Your program did not print the correct message for sum of 2 integers.";
-        final int expectedSumInt = 99;
-        final double expectedSumDouble = 117.5;
 
-        int sumInt = Integer.parseInt(getItemByName("sumInt"));
-        double sumDouble = Double.parseDouble(getItemByName("sumDouble"));
-
-        CustomAssertions._assertEquals(sumInt, expectedSumInt, errorMessageInt);
-        CustomAssertions._assertEquals(sumDouble, expectedSumDouble, 0.0001, errorMessageDouble);
+    @ParameterizedTest
+    @MethodSource("mainMethodInputProvider")
+    public void printsCorrectMessage(int a, int b, int c, double x, double y, double w) {
+        runWithInput(a + " " + b + " " + x + " " + y);
+        assertEquals(c, Integer.parseInt(getItemByName("sumInt")), "Your program does not print the correct message for sum of 2 integers.");
+        assertEquals(w, Double.parseDouble(getItemByName("sumDouble")), 0.0001,  "Your program does not print the correct message for sum of 2 doubles.");
     }
 }
