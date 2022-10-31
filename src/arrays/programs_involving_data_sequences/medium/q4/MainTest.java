@@ -51,7 +51,7 @@ public class MainTest extends BaseTest {
     void printsCorrectOutput() throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the array with the replaced element.";
         runWithInput("", new Clause[]{
-                new StringLiteral(ArrayUtil.intArrayToInput(outputArray))
+                new StringLiteral(ArrayUtil.arrayToInput(outputArray))
         });
     }
 }
