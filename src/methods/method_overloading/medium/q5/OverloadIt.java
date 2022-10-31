@@ -5,11 +5,11 @@ package methods.method_overloading.medium.q5;
  multiply both values together.
  */
 public class OverloadIt {
-  public static int multiply(int a, int b) {
-    return a * b;
-  }
+    public static int multiply(int a, int b) {
+        return a * b;
+    }
 
-  public static double multiply(double a, int b) {
-    return a * b;
-  }
+    public static double multiply(double a, int b) {
+        return a * b;
+    }
 }
