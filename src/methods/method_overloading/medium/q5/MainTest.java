@@ -2,6 +2,7 @@ package methods.method_overloading.medium.q5;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -11,6 +12,7 @@ import global.utils.MethodUtil;
 
 public class MainTest {
   // Parsons
+
   static Stream<Arguments> inputTwoIntegersProvider() {
     return Stream.of(
         Arguments.of(1, 1, 1),
@@ -34,18 +36,26 @@ public class MainTest {
   @ParameterizedTest
   @MethodSource("inputTwoIntegersProvider")
   void correctTwoIntegerProduct(int a, int b, int product) throws Throwable {
-    String errMsg = "Your method \"multiply\" does not return the correct product of 2 integers.";
-    Object output = MethodUtil.invokeIfMethodExists(OverloadIt.class, "multiply", new Object[] { a, b }, int.class,
-        int.class);
-    CustomAssertions._assertEquals(output, product, errMsg);
+    Object[][] arguments = {
+            {a, int.class},
+            {b, int.class}
+    };
+    MethodTest m = new MethodTest(OverloadIt.class, "multiply", arguments);
+    Object output = m.callMethod();
+    String errMsg = "Your multiply method does not return the correct product of 2 integers.";
+    CustomAssertions._assertEquals(product, output, errMsg);
   }
 
   @ParameterizedTest
   @MethodSource("inputDoubleAndIntegerProvider")
   void correctTwoDoubleProduct(double a, int b, double product) throws Throwable {
-    String errMsg = "Your method \"multiply\" does not return the correct product of 2 doubles.";
-    Object output = MethodUtil.invokeIfMethodExists(OverloadIt.class, "multiply", new Object[] { a, b }, double.class,
-        int.class);
-    CustomAssertions._assertEquals(output, product, 0.0001, errMsg);
+    Object[][] arguments = {
+            {a, double.class},
+            {b, int.class}
+    };
+    MethodTest m = new MethodTest(OverloadIt.class, "multiply", arguments);
+    Object output = m.callMethod();
+    String errMsg = "Your multiply method does not return the correct product of 2 doubles.";
+    CustomAssertions._assertEquals(product, output, 0.0001, errMsg);
   }
 }
