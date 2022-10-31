@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 
 public class MainTest {
     // Parsons
