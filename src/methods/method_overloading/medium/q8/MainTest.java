@@ -11,6 +11,7 @@ import global.tools.CustomAssertions;
 
 public class MainTest {
     // Parsons
+
     static Stream<Arguments> inputTwoCharsProvider() {
         return Stream.of(
                 Arguments.of('a', 'b', 'b'),
