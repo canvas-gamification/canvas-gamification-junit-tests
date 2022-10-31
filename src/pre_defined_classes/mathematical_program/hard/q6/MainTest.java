@@ -11,7 +11,7 @@ public class MainTest extends BaseTest {
     // Parsons with distractors
     public Clause[] testSentence() {
         return new Clause[]{
-                new StringLiteral("The ratio of the decibel values between a person speak and a person shouting is "),
+                new StringLiteral("The ratio of the decibel values between a person speaking and a person who is shouting is "),
                 new DoubleLiteral("ratio")
         };
     }
