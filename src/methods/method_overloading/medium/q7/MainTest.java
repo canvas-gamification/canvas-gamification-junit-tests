@@ -2,12 +2,12 @@ package methods.method_overloading.medium.q7;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 
 public class MainTest {
   // Parsons
@@ -34,17 +34,25 @@ public class MainTest {
   @ParameterizedTest
   @MethodSource("inputDoubleProvider")
   void correctMultiplyDouble(double a, double multiply) throws Throwable {
-    String errMsg = "Your method \"multiply()\" does not return the correct value for a double.";
-    Object output = MethodUtil.invokeIfMethodExists(OverloadDubDub.class, "multiply", new Object[] { a }, double.class);
-    CustomAssertions._assertEquals(output, multiply, 0.0001, errMsg);
+    Object[][] arguments = {
+            {a, double.class}
+    };
+    MethodTest m = new MethodTest(OverloadDubDub.class, "multiply", arguments);
+    Object output = m.callMethod();
+    String errMsg = "Your multiply() method does not return the correct value for a double.";
+    CustomAssertions._assertEquals(multiply, output, 0.0001, errMsg);
   }
 
   @ParameterizedTest
   @MethodSource("inputDoubleIntegerProvider")
   void correctMultiplyDoubleInteger(double a, int b, double multiply) throws Throwable {
-    String errMsg = "Your method \"multiply()\" does not return the correct value for a double and an integer.";
-    Object output = MethodUtil.invokeIfMethodExists(OverloadDubDub.class, "multiply", new Object[] { a, b },
-        double.class, int.class);
-    CustomAssertions._assertEquals(output, multiply, 0.0001, errMsg);
+    Object[][] arguments = {
+            {a, double.class},
+            {b, int.class}
+    };
+    MethodTest m = new MethodTest(OverloadDubDub.class, "multiply", arguments);
+    Object output = m.callMethod();
+    String errMsg = "Your multiply() method does not return the correct value for a double and an integer.";
+    CustomAssertions._assertEquals(multiply, output, 0.0001, errMsg);
   }
 }
