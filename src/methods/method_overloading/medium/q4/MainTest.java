@@ -2,14 +2,15 @@ package methods.method_overloading.medium.q4;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 
 public class MainTest {
+
   // Parsons
   static Stream<Arguments> inputThreeIntegersProvider() {
     return Stream.of(
@@ -33,18 +34,28 @@ public class MainTest {
   @ParameterizedTest
   @MethodSource("inputThreeIntegersProvider")
   void correctsThreeIntegersAverage(int a, int b, int c, double avg) throws Throwable {
-    String errMsg = "Your method \"average()\" does not return the correct average for three integers";
-    Object output = MethodUtil.invokeIfMethodExists(AveOfThree.class, "average", new Object[] { a, b, c },
-        int.class, int.class, int.class);
-    CustomAssertions._assertEquals(output, avg, 0.0001, errMsg);
+    Object[][] arguments = {
+            {a, int.class},
+            {b, int.class},
+            {c, int.class}
+    };
+    MethodTest m = new MethodTest(AveOfThree.class, "average", arguments);
+    Object output = m.callMethod();
+    String errMsg = "Your average() method does not return the correct average for three integers";
+    CustomAssertions._assertEquals(avg, output, 0.0001, errMsg);
   }
 
   @ParameterizedTest
   @MethodSource("inputThreeDoublesProvider")
   void correctsThreeDoublesAverage(double a, double b, double c, double avg) throws Throwable {
-    String errMsg = "Your method \"average()\" does not return the correct average for three doubles";
-    Object output = MethodUtil.invokeIfMethodExists(AveOfThree.class, "average", new Object[] { a, b, c },
-        double.class, double.class, double.class);
-    CustomAssertions._assertEquals(output, avg, 0.0001, errMsg);
+    Object[][] arguments = {
+            {a, double.class},
+            {b, double.class},
+            {c, double.class}
+    };
+    MethodTest m = new MethodTest(AveOfThree.class, "average", arguments);
+    Object output = m.callMethod();
+    String errMsg = "Your average() method does not return the correct average for three doubles";
+    CustomAssertions._assertEquals(avg, output, 0.0001, errMsg);
   }
 }
