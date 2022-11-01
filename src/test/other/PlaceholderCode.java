@@ -1,4 +1,4 @@
-package test;
+package test.other;
 
 public class PlaceholderCode {
     public static void main(String[] args) {
