@@ -29,7 +29,7 @@ public class MainTest extends BaseTest {
   static Stream<Arguments> inputTwoStringsProvider() {
     return Stream.of(
         Arguments.of("Hello", " I am ", "Hello I am "),
-        Arguments.of("Hello", " I am bob", "Hello I am bob"),
+        Arguments.of("Hello", " the world is ending", "Hello the world is ending"),
         Arguments.of("Hello ", "World!", "Hello World!"),
         Arguments.of(" ", " ", "  "),
         Arguments.of("", "", ""));
@@ -39,8 +39,8 @@ public class MainTest extends BaseTest {
     return Stream.of(
         Arguments.of("Hello", " I am ", "bob", "Hello I am bob"),
         Arguments.of("Hello", " I am", "", "Hello I am"),
-        Arguments.of("Hello", "", "bob", "Hellobob"),
-        Arguments.of("I am", " ", "bob", "I am bob"),
+        Arguments.of("Goodbye", "", "Seth", "GoodbyeSeth"),
+        Arguments.of("I am", " ", "rob", "I am rob"),
         Arguments.of("", "I am", " bob", "I am bob"),
         Arguments.of("", "", "", ""),
         Arguments.of(" ", " ", " ", "   "));
