@@ -2,15 +2,14 @@ package methods.modular_programs.medium.q7;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
@@ -18,6 +17,7 @@ import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseTest {
   // Java
+
   public Clause[] testSentence() {
     TestOption.isInputTest = true;
     TestOption.defaultInput = "6";
@@ -43,19 +43,25 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("perfectNumberProvider")
   public void correctsPerfectNumberMethod(int n) throws Throwable {
-    String errMsg = "Your method \"perfectOrNot()\" does not return the correct result for perfect numbers.";
-    Object output = MethodUtil.invokeIfMethodExists(NowThatsPerfect.class, "perfectOrNot", new Object[] { n },
-        int.class);
-    CustomAssertions._assertEquals(output, true, errMsg);
+    Object[][] arguments = {
+            {n, int.class}
+    };
+    MethodTest m = new MethodTest(NowThatsPerfect.class, "perfectOrNot", arguments);
+    Object output = m.callMethod();
+    String errMsg = "Your perfectOrNot() method does not return the correct result for perfect numbers.";
+    CustomAssertions._assertEquals(true, output, errMsg);
   }
 
   @ParameterizedTest
   @MethodSource("imperfectNumberProvider")
   public void correctsImperfectNumberMethod(int n) throws Throwable {
-    String errMsg = "Your method \"perfectOrNot()\" does not return the correct result for imperfect numbers.";
-    Object output = MethodUtil.invokeIfMethodExists(NowThatsPerfect.class, "perfectOrNot", new Object[] { n },
-        int.class);
-    CustomAssertions._assertEquals(output, false, errMsg);
+    Object[][] arguments = {
+            {n, int.class}
+    };
+    MethodTest m = new MethodTest(NowThatsPerfect.class, "perfectOrNot", arguments);
+    Object output = m.callMethod();
+    String errMsg = "Your perfectOrNot() method does not return the correct result for imperfect numbers.";
+    CustomAssertions._assertEquals(false, output, errMsg);
   }
 
   @ParameterizedTest
