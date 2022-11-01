@@ -1,4 +1,4 @@
-package test;
+package test.methods;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
@@ -11,6 +11,7 @@ import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import test.methods.MethodCode;
 
 import java.util.stream.Stream;
 
@@ -68,16 +69,5 @@ public class MethodCodeTest extends BaseTest {
         double f = (double) MethodUtil.invokeIfMethodExists(MethodCode.class, "max", new Object[]{5, 9}, int.class, int.class);
         String s = MethodUtil.getMethodOutput();
         assertEquals(f, 9.0, "Assert failed");
-    }
-
-//    @Test
-//    void testIfTestOptionResets(){
-//        MethodUtil.invokeIfMethodExists(MethodCode.class, "ThisMethod");
-//    }
-
-    @Test
-    void arrayErrorMessageTesting() throws Throwable {
-        int output = (int) MethodUtil.invokeIfMethodExists(MethodCode.class, "sum", new Object[]{new int[]{1, 2, 3, 4, 5}}, int[].class);
-        assertEquals(15, output, "Failed at assert");
     }
 }
