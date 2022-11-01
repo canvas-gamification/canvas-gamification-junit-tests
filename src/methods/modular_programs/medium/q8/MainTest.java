@@ -18,6 +18,7 @@ import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseTest {
   // Java
+
   public Clause[] testSentence() {
     TestOption.isInputTest = true;
     TestOption.defaultInput = " Hello There ";
@@ -36,8 +37,8 @@ public class MainTest extends BaseTest {
     return Stream.of(
         Arguments.of(" Hello There ", "%20%Hello%20%There%20%"),
         Arguments.of(" ", "%20%"),
-        Arguments.of("Hello", "Hello"),
-        Arguments.of("Hello There", "Hello%20%There"));
+        Arguments.of("World", "World"),
+        Arguments.of("The sun will come up tomorrow", "The%20%sun%20%will%20%come%20%up%20%tomorrow"));
   }
 
   @ParameterizedTest
