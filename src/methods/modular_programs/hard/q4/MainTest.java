@@ -2,6 +2,7 @@ package methods.modular_programs.hard.q4;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -18,6 +19,7 @@ import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseTest {
   // Java
+
   public Clause[] testSentence() {
     TestOption.isInputTest = true;
     TestOption.defaultInput = "5000";
@@ -51,19 +53,25 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputValidPointsProvider")
   void methodGivePrizeCorrect(int score, String prize) throws Throwable {
-    String errMsg = "Your method \"pointsScored()\" does not return the correct prize for the given score.";
-    Object output = MethodUtil.invokeIfMethodExists(PointsScoring.class, "pointsScored", new Object[] { score },
-        int.class);
-    CustomAssertions._assertEquals(output, prize, errMsg);
+    Object[][] arguments = {
+            {score, int.class}
+    };
+    MethodTest m = new MethodTest(PointsScoring.class, "pointsScored", arguments);
+    Object output = m.callMethod();
+    String errMsg = "Your pointsScored() method does not return the correct prize for the given score.";
+    CustomAssertions._assertEquals(prize, output, errMsg);
   }
 
   @ParameterizedTest
   @MethodSource("inputInvalidPointsProvider")
   void methodGiveErrorCorrect(int score) throws Throwable {
-    String errMsg = "Your method \"pointsScored()\" does not return the correct error message for the given score.";
-    Object output = MethodUtil.invokeIfMethodExists(PointsScoring.class, "pointsScored", new Object[] { score },
-        int.class);
-    CustomAssertions._assertEquals(output, "Sorry, you didn't win any prize.", errMsg);
+    Object[][] arguments = {
+            {score, int.class}
+    };
+    MethodTest m = new MethodTest(PointsScoring.class, "pointsScored", arguments);
+    Object output = m.callMethod();
+    String errMsg = "Your pointsScored() method does not return the correct error message for the given score.";
+    CustomAssertions._assertEquals("Sorry, you didn't win any prize.", output, errMsg);
   }
 
   @ParameterizedTest
