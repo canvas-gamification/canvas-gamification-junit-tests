@@ -2,13 +2,13 @@ package methods.method_overloading.medium.q3;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import global.BaseTest;
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
@@ -48,19 +48,26 @@ public class MainTest extends BaseTest {
 
   @ParameterizedTest
   @MethodSource("inputTwoStringsProvider")
-  void correctTwoStringMethod(String s1, String s2, String output) throws Throwable {
-    Object outputObject = MethodUtil.invokeIfMethodExists(ThreeStrings.class, "concatenate", new Object[] { s1, s2 },
-        String.class, String.class);
-    CustomAssertions._assertEquals(output, outputObject,
-        "Your concatenate method does not correctly concatenate two strings.");
+  void correctTwoStringMethod(String s1, String s2, String result) throws Throwable {
+    Object[][] arguments = {
+            {s1, String.class},
+            {s2, String.class}
+    };
+    MethodTest m = new MethodTest(ThreeStrings.class, "concatenate", arguments);
+    Object output = m.callMethod();
+    CustomAssertions._assertEquals(output, result, "Your concatenate method does not correctly concatenate two strings.");
   }
 
   @ParameterizedTest
   @MethodSource("inputThreeStringsProvider")
-  void correctThreeStringMethod(String s1, String s2, String s3, String output) throws Throwable {
-    Object outputObject = MethodUtil.invokeIfMethodExists(ThreeStrings.class, "concatenate", new Object[] { s1, s2, s3 },
-        String.class, String.class, String.class);
-    CustomAssertions._assertEquals(output, outputObject,
-        "Your concatenate method does not correctly concatenate three strings.");
+  void correctThreeStringMethod(String s1, String s2, String s3, String result) throws Throwable {
+    Object[][] arguments = {
+            {s1, String.class},
+            {s2, String.class},
+            {s3, String.class}
+    };
+    MethodTest m = new MethodTest(ThreeStrings.class, "concatenate", arguments);
+    Object output = m.callMethod();
+    CustomAssertions._assertEquals(output, result,"Your concatenate method does not correctly concatenate three strings.");
   }
 }
