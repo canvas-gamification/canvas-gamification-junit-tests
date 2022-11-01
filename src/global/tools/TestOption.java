@@ -6,6 +6,8 @@ public class TestOption {
     public static boolean isInputTest = false;
     public static String defaultInput = null;
     public static String incorrectStructureErrorMessage = null;
+
+    @Deprecated
     public static String invalidMethodMessage = null;
 
     public static void validate() throws InvalidTestOptionException {
