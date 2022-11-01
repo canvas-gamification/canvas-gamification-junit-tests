@@ -36,7 +36,7 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Integer> inputInvalidProvider() {
-        return Stream.of(-1, -2, -10, -100);
+        return Stream.of(0, -1, -2, -10, -100);
     }
 
     @RepeatedTest(50)

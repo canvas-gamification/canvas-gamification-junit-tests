@@ -1,7 +1,7 @@
 package methods.modular_programs.hard.q9;
 
 /*
-Write a program that calls a method called printPattern. The method takes an integer n, if the number is negative it
+Write a program that calls a method called printPattern. The method takes an integer n, if the number is less than 1 it
 should print "Number must be positive". Otherwise, it prints the following pattern using nested loops based on their input:
 
 1 2 3 4 5 … n
