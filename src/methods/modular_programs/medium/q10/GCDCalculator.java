@@ -3,7 +3,7 @@ package methods.modular_programs.medium.q10;
 Write a java program that calculates the greatest common divisor (GCD) of two integers. The GCD of two integers is the
 largest integer which divides the two integers evenly. In other words, it is the largest integer that when you divide
 both integers, the remainders are both equal to zero. For example, the GCD of 18 and 30 is 6, as 6 is the largest
-integer which divides both 18 and 30 evenly.
+integer that divides both 18 and 30 evenly.
 
 Your program should ask the user to input two integers in the main method, and then call a method named findGCD which
 accepts two integers as parameters, and returns the GCD of those two integers. Then, print what the gcd of the two
