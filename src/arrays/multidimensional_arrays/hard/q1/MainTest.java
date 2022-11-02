@@ -3,6 +3,7 @@ package arrays.multidimensional_arrays.hard.q1;
 import global.BaseTest;
 import global.tools.TestOption;
 import global.variables.Clause;
+import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
@@ -43,5 +44,42 @@ public class MainTest extends BaseTest {
                 Arguments.of(56, 2),
                 Arguments.of(582, 281)
         );
+    }
+
+    public static int[][] arrayBuilder(int rows, int columns){
+        int[][] arr = new int[rows][columns];
+
+        for(int x = 0; x < rows; x++){
+            for(int y = 0; y < columns; y++){
+                arr[x][y] = (int)(Math.random()*1000);
+            }
+        }
+
+        return arr;
+    }
+
+    public static Clause[][] clauseBuilder(int rows, int columns){
+        //first bracket is for collecting the inputs. Second bracket is for printing array. Third is for new lines after each printed row.
+        Clause[][] c = new Clause[1][(rows*columns*3)+(rows*columns*2)+(rows)];
+
+        int count = 0;
+
+        for(int x = 0; x < rows; x++){
+            for(int y = 0; y < columns; y++){
+                c[0][count++] = new StringLiteral("Enter the number to store at row " + (x+1) + ", column " + (y+1) + ":");
+                c[0][count++] = new Optional(new StringLiteral(" "));
+                c[0][count++] = new NewLine();
+            }
+        }
+
+        for(int x = 0; x < rows; x++){
+            for(int y = 0; y < columns; y++){
+                c[0][count++] = new IntegerLiteral("row" + x + "col" + y);
+                c[0][count++] = new StringLiteral(" ");
+            }
+            c[0][count++] = new NewLine();
+        }
+
+        return c;
     }
 }
