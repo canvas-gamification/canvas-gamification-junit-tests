@@ -37,11 +37,11 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         SimpleDisplay.main(new String[0]);
     }
 
-    static Stream<Arguments> mainMethodInputProvider(){
+    static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(
                 Arguments.of(0, 0, new int[]{}, 0),
                 Arguments.of(1, 0, new int[]{}, 0),
@@ -50,13 +50,13 @@ public class MainTest extends BaseTest {
                 Arguments.of(5, 5, new int[]{5, 12, -43, -5, 12, 43, 5, 7, 76, 854, -7542, 75, 98, 2842, 53912, 24, 532,
                         65, 542, -523, 75, -753, 563, 4, 32}, 13),
                 Arguments.of(10, 2, new int[]{44, 26, 12, 780, 56, 8024, 477632, 382, 78, 8, 2, 12, 432, 56, 370, 790,
-                12, 42, 612, 964}, 20),
+                        12, 42, 612, 964}, 20),
                 Arguments.of(3, 8, new int[]{131, 421, 6427, 85, 7, 1, 81, 839, 2581, 294267, 81623, 91, 19, 85, 901, 61,
-                873245, 867, 831, 2945763, 53, 71, 8365, 641}, 0)
+                        873245, 867, 831, 2945763, 53, 71, 8365, 641}, 0)
         );
     }
 
-    static Stream<Arguments> numsInputProvider(){
+    static Stream<Arguments> numsInputProvider() {
         return Stream.of(
                 Arguments.of(new int[][]{}, 0),
                 Arguments.of(new int[][]{}, 0),
@@ -73,13 +73,13 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
-    void correctMainMethodOutput(int row, int col, int[] nums, int evens){
+    void correctMainMethodOutput(int row, int col, int[] nums, int evens) {
         StringBuilder s = new StringBuilder(row + " " + col + " ");
 
         int count = 0;
 
-        for(int x = 0; x < row; x++){
-            for(int y = 0; y < col; y++){
+        for (int x = 0; x < row; x++) {
+            for (int y = 0; y < col; y++) {
                 s.append(nums[count++]);
                 s.append(" ");
             }
