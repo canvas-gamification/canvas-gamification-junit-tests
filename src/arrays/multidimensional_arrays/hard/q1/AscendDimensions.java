@@ -27,26 +27,22 @@ Sample output:
  */
 
 import java.util.Scanner;
-public class AscendDimensions
-{
-    public static void main( String [] args )
-    {
-        Scanner input = new Scanner( System.in );
+
+public class AscendDimensions {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
         System.out.println("Enter the number of rows: ");
         int row = input.nextInt();
         System.out.println("Enter the number of columns: ");
         int col = input.nextInt();
-        int [][] nums = new int[row][col];
-        for( int i = 0; i < row; i++ )
-            for( int j = 0; j < col; j++ )
-            {
-                System.out.println("Enter the number to store at row " + ( i + 1 ) + ", column " + ( j + 1 ) + ": ");
+        int[][] nums = new int[row][col];
+        for (int i = 0; i < row; i++)
+            for (int j = 0; j < col; j++) {
+                System.out.println("Enter the number to store at row " + (i + 1) + ", column " + (j + 1) + ": ");
                 nums[i][j] = input.nextInt();
             }
-        for( int i = 0; i < row; i++ )
-        {
-            for( int j = 0; j < col; j++ )
-            {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
                 System.out.print(nums[i][j] + " ");
             }
             System.out.println();
