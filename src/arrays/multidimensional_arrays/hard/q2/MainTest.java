@@ -1,6 +1,7 @@
 package arrays.multidimensional_arrays.hard.q2;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
@@ -87,5 +88,22 @@ public class MainTest extends BaseTest {
         runWithInput(s.toString());
 
         assertEquals(evens, Integer.parseInt(getItemByName("even")), "Your program does not display the correct amount of even numbers in the array.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("numsInputProvider")
+    void correctNumsMethod(int[][] arr, int evens) throws Throwable {
+        Clause[] methodSentence = new Clause[]{
+                new StringLiteral("count of even numbers in array = "),
+                new IntegerLiteral("even")
+        };
+        Object[][] arguments = {
+                {arr, int[][].class}
+        };
+        MethodTest m = new MethodTest(SimpleDisplay.class, "simpleDisplay", arguments, methodSentence);
+        m.setIncorrectMethodStructureErrorMessage("Your simpleDisplay method does not print the count of even numbers.");
+        m.callMethod();
+
+        assertEquals(evens, Integer.parseInt(m.getMethodItemByName("even")), "Your simpleDisplay method does not print the correct number of even numbers present in the array.");
     }
 }
