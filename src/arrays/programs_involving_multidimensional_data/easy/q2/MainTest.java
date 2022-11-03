@@ -16,7 +16,7 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         LineUps.main(new String[0]);
     }
 }
