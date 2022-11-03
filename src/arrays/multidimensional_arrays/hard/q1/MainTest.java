@@ -1,6 +1,8 @@
 package arrays.multidimensional_arrays.hard.q1;
 
 import global.BaseTest;
+import global.exceptions.InvalidClauseException;
+import global.tools.Logger;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
@@ -8,9 +10,14 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Java
@@ -42,8 +49,30 @@ public class MainTest extends BaseTest {
                 Arguments.of(4, 4),
                 Arguments.of(8, 11),
                 Arguments.of(56, 2),
-                Arguments.of(582, 281)
+                Arguments.of(53, 16)
         );
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    void printsCorrectOutput(int rows, int columns) throws InvalidClauseException {
+        int[][] nums = arrayBuilder(rows, columns);
+        StringBuilder s = new StringBuilder(rows + " " + columns + " ");
+
+        for(int x = 0; x < rows; x++){
+            for(int y = 0; y < columns; y++){
+                s.append(nums[x][y]);
+                s.append(" ");
+            }
+        }
+
+        runWithInput(s.toString(), clauseBuilder(rows, columns));
+
+        for(int x = 0; x < rows; x++){
+            for(int y = 0; y < columns; y++){
+                assertEquals(nums[x][y], Integer.parseInt(getItemByName("row"+x+"col"+y)), "The number on row " + x + " column " + y + " is incorrect.");
+            }
+        }
     }
 
     public static int[][] arrayBuilder(int rows, int columns){
