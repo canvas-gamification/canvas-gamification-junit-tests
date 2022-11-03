@@ -36,12 +36,12 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         AscendDimensions.main(new String[0]);
     }
 
-    static Stream<Arguments> inputProvider(){
-        return  Stream.of(
+    static Stream<Arguments> inputProvider() {
+        return Stream.of(
                 Arguments.of(0, 0),
                 Arguments.of(0, 1),
                 Arguments.of(1, 0),
@@ -59,8 +59,8 @@ public class MainTest extends BaseTest {
         int[][] nums = arrayBuilder(rows, columns);
         StringBuilder s = new StringBuilder(rows + " " + columns + " ");
 
-        for(int x = 0; x < rows; x++){
-            for(int y = 0; y < columns; y++){
+        for (int x = 0; x < rows; x++) {
+            for (int y = 0; y < columns; y++) {
                 s.append(nums[x][y]);
                 s.append(" ");
             }
@@ -68,41 +68,41 @@ public class MainTest extends BaseTest {
 
         runWithInput(s.toString(), clauseBuilder(rows, columns));
 
-        for(int x = 0; x < rows; x++){
-            for(int y = 0; y < columns; y++){
-                assertEquals(nums[x][y], Integer.parseInt(getItemByName("row"+x+"col"+y)), "The number on row " + x + " column " + y + " is incorrect.");
+        for (int x = 0; x < rows; x++) {
+            for (int y = 0; y < columns; y++) {
+                assertEquals(nums[x][y], Integer.parseInt(getItemByName("row" + x + "col" + y)), "The number on row " + x + " column " + y + " is incorrect.");
             }
         }
     }
 
-    public static int[][] arrayBuilder(int rows, int columns){
+    public static int[][] arrayBuilder(int rows, int columns) {
         int[][] arr = new int[rows][columns];
 
-        for(int x = 0; x < rows; x++){
-            for(int y = 0; y < columns; y++){
-                arr[x][y] = (int)(Math.random()*1000);
+        for (int x = 0; x < rows; x++) {
+            for (int y = 0; y < columns; y++) {
+                arr[x][y] = (int) (Math.random() * 1000);
             }
         }
 
         return arr;
     }
 
-    public static Clause[][] clauseBuilder(int rows, int columns){
+    public static Clause[][] clauseBuilder(int rows, int columns) {
         //first bracket is for collecting the inputs. Second bracket is for printing array. Third is for new lines after each printed row.
-        Clause[][] c = new Clause[1][(rows*columns*3)+(rows*columns*2)+(rows)];
+        Clause[][] c = new Clause[1][(rows * columns * 3) + (rows * columns * 2) + (rows)];
 
         int count = 0;
 
-        for(int x = 0; x < rows; x++){
-            for(int y = 0; y < columns; y++){
-                c[0][count++] = new StringLiteral("Enter the number to store at row " + (x+1) + ", column " + (y+1) + ":");
+        for (int x = 0; x < rows; x++) {
+            for (int y = 0; y < columns; y++) {
+                c[0][count++] = new StringLiteral("Enter the number to store at row " + (x + 1) + ", column " + (y + 1) + ":");
                 c[0][count++] = new Optional(new StringLiteral(" "));
                 c[0][count++] = new NewLine();
             }
         }
 
-        for(int x = 0; x < rows; x++){
-            for(int y = 0; y < columns; y++){
+        for (int x = 0; x < rows; x++) {
+            for (int y = 0; y < columns; y++) {
                 c[0][count++] = new IntegerLiteral("row" + x + "col" + y);
                 c[0][count++] = new StringLiteral(" ");
             }
