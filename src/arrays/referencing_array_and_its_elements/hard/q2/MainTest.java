@@ -1,87 +1,86 @@
 package arrays.referencing_array_and_its_elements.hard.q2;
 
 import global.BaseTest;
+import global.MethodTest;
+import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
+import global.tools.TestOption;
 import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
+import global.variables.clauses.NewLine;
+import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 
+import static global.utils.ArrayUtil.arrayToInput;
+import static global.utils.ArrayUtil.generateRandomArray;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class MainTest extends BaseTest {
     // Java
 
-    int[] arr = {3, 4, 6, 21, 48, 42, 89, 2, 0};
-    static int subsection = 1; // 0 for the first subarray, 1 for the second and 2 for the third
+    public static int n = 9;
 
     public Clause[] testSentence() {
-        Clause[] c = new Clause[2 * arr.length / 3];
-        for (int i = 0; i < 2 * arr.length / 3; i += 2) {
-            c[i] = new IntegerLiteral((i / 2) + "");
-            c[i + 1] = new StringLiteral(" ");
-        }
-        return c;
+        TestOption.isInputTest = true;
+        TestOption.defaultInput = "1 2 3 4 5 6 7 8 9 2";
+        return new Clause[]{
+                new StringLiteral("Enter nine integers: "),
+                new NewLine(),
+                new StringLiteral("Enter a positive integer: "),
+                new NewLine(),
+                new StringLiteral("The first "),
+                new IntegerLiteral("x"),
+                new StringLiteral(" numbers of the array are: "),
+                new Optional(new PlaceHolder()),
+
+        };
+
     }
 
     public void runMain() {
-        InThirds.main(new String[0]);
+        Remainder.main(new String[0]);
     }
 
-    public static int[] answerFor(int[] array) {
-        int size = array.length;
-        int[] first = new int[size / 3];
-        int[] second = new int[size / 3];
-        int[] third = new int[size / 3];
-        for (int i = 0; i < size; i++) {
-            if (i < (size / 3))
-                first[i] = array[i];
-            else if (size / 3 <= i && i < (2 * size / 3))
-                second[i - (size / 3)] = array[i];
-            else
-                third[i - (2 * size / 3)] = array[i];
-        }
-        if (subsection == 0)
-            return first;
-        if (subsection == 1)
-            return second;
-        if (subsection == 2)
-            return third;
-        return null;
-
-    }
-
-    @Test
-    public void mainMethodTest() {
-        int[] ex = answerFor(arr);
-        int[] ans = new int[arr.length / 3];
-        for (int i = 0; i < arr.length / 3; i++) {
-            ans[i] = Integer.parseInt(getItemByName(i + ""));
-        }
-        assertArrayEquals(ex, ans, "Your program doest not display the correct output");
-    }
-
-    static Stream<Arguments> methodInputProvider() {
+    static Stream<Arguments> InputProvider() {
+        int[] a1 = generateRandomArray(-1000, 1000, n);
+        int[] a2 = generateRandomArray(-1000, 1000, n);
+        int[] a3 = generateRandomArray(-1000, 1000, n);
         return Stream.of(
-                Arguments.of(new int[]{3, 4, 6, 21, 48, 42, 89, 2, 0}, answerFor(new int[]{3, 4, 6, 21, 48, 42, 89, 2, 0})),
-                Arguments.of(new int[]{1, 2, 3}, answerFor(new int[]{1, 2, 3})),
-                Arguments.of(new int[]{}, answerFor(new int[]{})),
-                Arguments.of(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}, answerFor(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}))
-
-
+                Arguments.of(a1, 3,  Arrays.copyOfRange(a1, 0, n % 3)),
+                Arguments.of(a2, n,  Arrays.copyOfRange(a2, 0, 0)),
+                Arguments.of(a3, 1,  Arrays.copyOfRange(a3, 0, n % 1))
         );
     }
-
     @ParameterizedTest
-    @MethodSource("methodInputProvider")
-    void splitterMethodTest(int[] input, int[] ans) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(InThirds.class, "splitter", new Object[]{input}, int[].class);
-        CustomAssertions._assertArrayEquals(ans, output, "Your splitter method does not divide the array correctly");
+    @MethodSource("InputProvider")
+    void correctMainMethod(int[] input, int x, int[] ans) throws InvalidClauseException {
+        int t = ans.length;
+        Clause[] c = new Clause[t];
+        for(int i = 0; i < t; i ++)
+            c[i] = new IntegerLiteral(ans[i]);
+        runWithInput(arrayToInput(input) + " " +  x, c);
+    }
+    @ParameterizedTest
+    @MethodSource("InputProvider")
+    void correctRemainderMethod(int[] input, int x, int[] ans) throws Throwable {
+        Object[][] arguments = {
+                {input, int[].class},
+                {x, int.class}
+        };
+        MethodTest m = new MethodTest(Remainder.class, "remainder", arguments);
+        Object output = m.callMethod();
+        CustomAssertions._assertArrayEquals(ans, output,
+                "Your remainder method does not return the correct subarray");
+
     }
 }
