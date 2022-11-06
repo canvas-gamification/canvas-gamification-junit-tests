@@ -8,16 +8,17 @@ will be pushed to the front of the array. At the end, print the array in one lin
  */
 
 import java.util.Scanner;
+
 public class ALittleToTheRight {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int[] arr = new int[10];
         System.out.println("Enter 10 numbers:");
-        for(int i = 0; i < 10; i ++)
+        for (int i = 0; i < 10; i++)
             arr[i] = in.nextInt();
         int[] changed = lilToDaRight(arr);
         System.out.println("The shifted array is:");
-        for(int i = 0; i < changed.length; i++) {
+        for (int i = 0; i < changed.length; i++) {
             System.out.print(changed[i] + " ");
         }
     }

@@ -38,8 +38,8 @@ public class MainTest extends BaseTest {
         c[0] = new StringLiteral("Enter 10 numbers:");
         c[1] = new NewLine();
         c[2] = new StringLiteral("The shifted array is:");
-        c[3] =  new NewLine();
-        for(int i = 4; i < 2 * n + 4; i += 2){
+        c[3] = new NewLine();
+        for (int i = 4; i < 2 * n + 4; i += 2) {
             c[i] = new PlaceHolder();
             c[i + 1] = new StringLiteral(" ");
         }
@@ -60,7 +60,6 @@ public class MainTest extends BaseTest {
     }
 
 
-
     static Stream<Arguments> mainInputProvider() {
         int[] a1 = generateRandomArray(-1000, 1000, n);
         int[] a2 = generateRandomArray(-1000, 1000, n);
@@ -74,25 +73,31 @@ public class MainTest extends BaseTest {
 
         );
     }
+
     @ParameterizedTest
     @MethodSource("mainInputProvider")
     void correctMainMethod(int[] input, int[] ans) throws Throwable {
         TestOption.incorrectStructureErrorMessage = "Your program did printed the correct shifted array in the main method";
         Clause[] c = new Clause[n];
-        for(int i = 0; i < n; i ++)
+        for (int i = 0; i < n; i++)
             c[i] = new IntegerLiteral(ans[i]);
         runWithInput(arrayToInput(input), c);
     }
 
     static Stream<Arguments> methodInputProvider() {
+        int[] test1 = generateRandomArray(-1000000000, 1000000000, 100000);
+        int[] test2 = generateRandomArray(-1000000000, 1000000000, 100000);
         return Stream.of(
                 Arguments.of(new int[]{3, 4, 6, 21, 48, 42, 89, 2, 0, 91, 33}, new int[]{33, 3, 4, 6, 21, 48, 42, 89, 2, 0, 91}),
+                Arguments.of(test1, shifted(test1)),
+                Arguments.of(test2, shifted(test2)),
                 Arguments.of(new int[]{0, 1}, new int[]{1, 0}),
                 Arguments.of(new int[]{1}, new int[]{1}),
                 Arguments.of(new int[]{0, 0}, new int[]{0, 0})
 
         );
     }
+
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void LilToDaRightMethodTest(int[] input, int[] ans) throws Throwable {
