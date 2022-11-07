@@ -1,14 +1,20 @@
 package arrays.programs_involving_data_sequences.programs_involving_multidimensional_data.medium.q2;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
+import global.variables.clauses.RandomInteger;
 import global.variables.clauses.StringLiteral;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
@@ -16,7 +22,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         return new Clause[]{
-                new IntegerLiteral("multiplier"),
+                new RandomInteger(5, 11, "multiplier"),
                 new NewLine(),
                 new IntegerLiteral("1 1"),
                 new StringLiteral(" "),
@@ -71,9 +77,9 @@ public class MainTest extends BaseTest {
                 }, -7, new int[][]{
                         {-4984, -49, -49, -49, -49, -49, -49, -49, -49, -49},
                         {-56, -14, 7, -56},
-                        {-161, -378, -47586, -392, 63},
-                        {623, 35, 3969, 2275, 455},
-                        {126, -6307, 826}
+                        {-161, -378, -47586, -392, -63},
+                        {623, 35, 3969, 2275, 53578, 455},
+                        {126, -6307, -826}
                 }),
                 Arguments.of(new int[][]{
                         {-32, 283, -12, -48},
@@ -81,7 +87,7 @@ public class MainTest extends BaseTest {
                         {89, 273, -27, 328, 4, -293, 7},
                         {0, 38, -1}
                 }, 27, new int[][]{
-                        {864, 7641, -324, -1296},
+                        {-864, 7641, -324, -1296},
                         {-54},
                         {2403, 7371, -729, 8856, 108, -7911, 189},
                         {0, 1026, -27}
@@ -89,6 +95,19 @@ public class MainTest extends BaseTest {
         );
     }
 
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    void correctIncreaseByMethod(int[][] pass, int mult, int[][] solution) throws Throwable {
+        Object[][] arguments = {
+                {pass, int[][].class},
+                {mult, int.class}
+        };
+        MethodTest m = new MethodTest(MultiplyArrays.class, "increaseBy", arguments);
+        m.callMethod();
+        assertArrayEquals(solution, pass, "Your increaseBy method does not correctly multiply the given array.");
+    }
+
+    @Test
     public void correctMainMethodOutput(){
         runMain();
 
@@ -96,8 +115,8 @@ public class MainTest extends BaseTest {
 
         boolean b = true;
 
-        for(int x = 0; x < 2; x++){
-            for(int y = 0; y < 3; y++){
+        for(int x = 1; x <= 2; x++){
+            for(int y = 1; y <= 3; y++){
                 if(Integer.parseInt(getItemByName(x + " " + y))%multiplier != 0){
                     b = false;
                 }
