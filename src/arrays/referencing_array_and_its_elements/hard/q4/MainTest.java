@@ -2,27 +2,36 @@ package arrays.referencing_array_and_its_elements.hard.q4;
 
 import global.BaseTest;
 import global.MethodTest;
-import global.tools.CustomAssertions;
+import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.variables.Clause;
+import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static global.utils.ArrayUtil.arrayToInput;
+import static global.utils.ArrayUtil.generateRandomArray;
+
 public class MainTest extends BaseTest {
     // Java
 
-    final static double[] arr = {76.9, 50.8, 68.4, 95.7, 88.6, 81.2, 89.5, 74.9, 12.76, 64.0};
+    final static int n = 10;
     final static double pivot = 88.0;
 
     public Clause[] testSentence() {
+        TestOption.isInputTest = true;
+        TestOption.defaultInput = "76.9 50.8 68.4 95.7 88.6 81.2 89.5 74.9 12.76 64.0";
         return new Clause[]{
-                new StringLiteral(answerFor(arr))
+                new StringLiteral("Enter " + n + " double numbers:"),
+                new NewLine(),
+                new StringLiteral("The indices of potential candidates for teaching assistants are:"),
+                new NewLine(),
+                new PlaceHolder()
         };
     }
 
@@ -40,21 +49,41 @@ public class MainTest extends BaseTest {
         return ans.trim();
     }
 
+    static Stream<Arguments> mainInputProvider() {
+        return Stream.of(
+                Arguments.of(generateRandomArray(0.0, 100, n)),
+                Arguments.of(generateRandomArray(0.0, 100, n)),
+                Arguments.of(generateRandomArray(0.0, 100, n))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("mainInputProvider")
+    void correctMainMethod(double[] input) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your main method does not correctly print the indices of potential students.";
+        runWithInput(
+                arrayToInput(input),
+                new Clause[]{
+                        new StringLiteral(answerFor(input))
+                }
+        );
+    }
+
     static Stream<Arguments> InputProvider() {
         return Stream.of(
-                Arguments.of(arr, answerFor(arr)),
-                Arguments.of(new double[]{}, answerFor(new double[]{})),
-                Arguments.of(new double[]{pivot, pivot / 2, pivot + 1}, answerFor(new double[]{pivot, pivot / 2, pivot + 1})),
-                Arguments.of(new double[]{pivot + 1, pivot + 1, pivot}, answerFor(new double[]{pivot + 1, pivot + 1, pivot})),
-                Arguments.of(new double[]{pivot + 1}, answerFor(new double[]{pivot + 1}))
+                Arguments.of(generateRandomArray(0.0, 100, n)),
+                Arguments.of(new double[]{}),
+                Arguments.of(new double[]{pivot, pivot / 2, pivot + 1}),
+                Arguments.of(new double[]{pivot + 1, pivot + 1, pivot}),
+                Arguments.of(new double[]{pivot + 1})
         );
     }
 
     @ParameterizedTest
     @MethodSource("InputProvider")
-    void testForPGSMethod(double[] input, String ans) throws Throwable {
+    void testForPGSMethod(double[] input) throws Throwable {
         Clause[] methodSentence = new Clause[]{
-                new StringLiteral(ans)
+                new StringLiteral(answerFor(input))
         };
         Object[][] arguments = {
                 {input, double[].class},
