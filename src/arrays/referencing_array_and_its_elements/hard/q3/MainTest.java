@@ -6,22 +6,31 @@ import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.variables.Clause;
+import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
-import org.junit.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static global.utils.ArrayUtil.arrayToInput;
+import static global.utils.ArrayUtil.generateRandomArray;
+
 public class MainTest extends BaseTest {
     // Java
 
-    static int[] arr = {3, 4, 6, 21, 48, 42, 89, 2, 5, 91};
+    public static int n = 10;
 
     public Clause[] testSentence() {
+        TestOption.isInputTest = true;
+        TestOption.defaultInput = "1 2 3 4 5 6 7 8 9 10";
         return new Clause[]{
+                new StringLiteral("Enter 10 positive integers:"),
+                new NewLine(),
+                new StringLiteral("The separated array is:"),
+                new NewLine(),
                 new PlaceHolder()
         };
     }
@@ -30,7 +39,7 @@ public class MainTest extends BaseTest {
         EvenorOdd.main(new String[0]);
     }
 
-    public static String answerFor(int[] a) {
+    public static String separated(int[] a) {
         String ans = "";
         for (int i = 0; i < a.length; i++) {
             if (a[i] % 2 == 0)
@@ -43,11 +52,23 @@ public class MainTest extends BaseTest {
         return ans.trim();
     }
 
-    @Test
-    public void testForMainMethod() throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your main method does not print the correct answer";
-        runWithInput(String.valueOf(arr), new Clause[]{
-                new StringLiteral(answerFor(arr))
+    static Stream<Arguments> mainInputProvider() {
+        int[] a1 = generateRandomArray(1, 1000000000, n);
+        int[] a2 = generateRandomArray(1, 1000000000, n);
+        int[] a3 = generateRandomArray(1, 1000000000, n);
+        return Stream.of(
+                Arguments.of(a1,
+                        Arguments.of(a3),
+                        Arguments.of(a3)
+                ));
+    }
+
+    @ParameterizedTest
+    @MethodSource("mainInputProvider")
+    public void correctMainMethod(int[] input) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your main method does not print the correct separated array";
+        runWithInput(arrayToInput(input), new Clause[]{
+                new StringLiteral(separated(input))
         });
     }
 
