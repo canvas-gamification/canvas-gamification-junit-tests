@@ -20,25 +20,22 @@ arr[i][j] /= mult;
 arr[i][j] = mult;
  */
 
-public class MultiplyArrays
-{
-    public static void main (String[] args)
-    {
-        int[][] arr = {{2,3,4}, {4,5,1} };
-        int mult = ( int ) (Math.random() * (6)+5);
+public class MultiplyArrays {
+    public static void main(String[] args) {
+        int[][] arr = {{2, 3, 4}, {4, 5, 1}};
+        int mult = (int) (Math.random() * (6) + 5);
         System.out.println(mult);
-        increaseBy( arr, mult);
-        for( int i = 0; i < arr.length; i++ )
-        {
-            for( int j = 0; j < arr[i].length; j++ )
-                System.out.print( arr[i][j] + " " );
+        increaseBy(arr, mult);
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++)
+                System.out.print(arr[i][j] + " ");
             System.out.println();
         }
     }
-    public static void increaseBy( int[][] arr,int m)
-    {
-        for( int i = 0; i < arr.length; i++ )
-            for( int j = 0; j < arr[i].length; j++ )
+
+    public static void increaseBy(int[][] arr, int m) {
+        for (int i = 0; i < arr.length; i++)
+            for (int j = 0; j < arr[i].length; j++)
                 arr[i][j] = arr[i][j] * m;
     }
 }

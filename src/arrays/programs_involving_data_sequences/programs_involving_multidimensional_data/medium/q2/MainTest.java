@@ -40,11 +40,11 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){
+    public void runMain() {
         MultiplyArrays.main(new String[0]);
     }
 
-    static Stream<Arguments> inputProvider(){
+    static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of(new int[][]{
                         {5, 20, 1, 3},
@@ -108,16 +108,16 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    public void correctMainMethodOutput(){
+    public void correctMainMethodOutput() {
         runMain();
 
         int multiplier = Integer.parseInt(getItemByName("multiplier"));
 
         boolean b = true;
 
-        for(int x = 1; x <= 2; x++){
-            for(int y = 1; y <= 3; y++){
-                if(Integer.parseInt(getItemByName(x + " " + y))%multiplier != 0){
+        for (int x = 1; x <= 2; x++) {
+            for (int y = 1; y <= 3; y++) {
+                if (Integer.parseInt(getItemByName(x + " " + y)) % multiplier != 0) {
                     b = false;
                 }
             }
