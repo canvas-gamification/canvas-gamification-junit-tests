@@ -10,7 +10,6 @@ Sample Output:
     76.9 50.8 68.4 95.7 88.6 81.2 89.5 74.9 12.76 64.0
     The indices of students needing help are:
     1 8
-
  */
 
 import java.util.Scanner;

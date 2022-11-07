@@ -20,8 +20,8 @@ import static global.utils.ArrayUtil.generateRandomArray;
 public class MainTest extends BaseTest {
     // Java
 
-    final static int n = 10;
-    final static double pivot = 60.0;
+    public static int n = 10;
+    public static double pivot = 60.0;
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
