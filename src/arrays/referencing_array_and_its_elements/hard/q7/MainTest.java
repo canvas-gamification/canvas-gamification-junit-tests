@@ -78,7 +78,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("InputProvider")
-    void correctSplitHalfMethod(int[] input) throws Throwable {
+    void correctRevMethod(int[] input) throws Throwable {
         Object[][] arguments = {
                 {input, int[].class},
         };
