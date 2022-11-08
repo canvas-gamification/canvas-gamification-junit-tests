@@ -65,19 +65,21 @@ public class MainTest extends BaseTest {
         int[] a2 = generateRandomArray(-1000, 1000, n);
         int[] a3 = generateRandomArray(-1000, 1000, n);
         int[] a4 = generateRandomArray(-1000, 1000, n);
+        int[] a5 = generateRandomArray(0, 1, n);
         return Stream.of(
                 Arguments.of(a1, shifted(a1)),
                 Arguments.of(a2, shifted(a2)),
                 Arguments.of(a3, shifted(a3)),
-                Arguments.of(a4, shifted(a4))
+                Arguments.of(a4, shifted(a4)),
+                Arguments.of(a5, shifted(a5))
 
         );
     }
 
     @ParameterizedTest
     @MethodSource("mainInputProvider")
-    void correctMainMethod(int[] input, int[] ans) throws Throwable {
-        TestOption.incorrectStructureErrorMessage = "Your program did printed the correct shifted array in the main method";
+    void printsCorrectOutput(int[] input, int[] ans) throws Throwable {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the shifted array.";
         Clause[] c = new Clause[n];
         for (int i = 0; i < n; i++)
             c[i] = new IntegerLiteral(ans[i]);
@@ -87,10 +89,12 @@ public class MainTest extends BaseTest {
     static Stream<Arguments> methodInputProvider() {
         int[] test1 = generateRandomArray(-1000000000, 1000000000, 100000);
         int[] test2 = generateRandomArray(-1000000000, 1000000000, 100000);
+        int[] test3 = generateRandomArray(0, 1, 100000);
         return Stream.of(
                 Arguments.of(new int[]{3, 4, 6, 21, 48, 42, 89, 2, 0, 91, 33}, new int[]{33, 3, 4, 6, 21, 48, 42, 89, 2, 0, 91}),
                 Arguments.of(test1, shifted(test1)),
                 Arguments.of(test2, shifted(test2)),
+                Arguments.of(test3, shifted(test3)),
                 Arguments.of(new int[]{0, 1}, new int[]{1, 0}),
                 Arguments.of(new int[]{1}, new int[]{1}),
                 Arguments.of(new int[]{0, 0}, new int[]{0, 0})
@@ -107,6 +111,6 @@ public class MainTest extends BaseTest {
         MethodTest m = new MethodTest(ALittleToTheRight.class, "lilToDaRight", arguments);
         Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(ans, output,
-                "Your lilToDaRight does not shift the array correctly");
+                "Your lilToDaRight method does not correctly shift all the array elements one spot to the right.");
     }
 }

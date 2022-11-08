@@ -1,10 +1,11 @@
 package arrays.referencing_array_and_its_elements.hard.q1;
 
 /*
-write a program called ALittleToTheRight, with a method called LilToDaRight, that will take a 10 integer array and shift
-the elements of the integer array forward by one, using a method called lilToDaRight that takes an array and returns the
-shifted array. For example, the element at index 4 will move to index 5, and so on. Then, the last element of the array
-will be pushed to the front of the array. At the end, print the array in one line.
+Write a program called ALittleToTheRight, with a method called LilToDaRight, that will take an array of ten integers and
+shift the elements of the array forward by one. For example, the element at index 1 will move to index 2, and so on.
+Then, the last element of the array will shift to the front of the array. Create a method called lilToDaRight to do
+this. It should take an integer array and return the array with all the elements shifted. Finally, print the returned
+array in the main method. The method should be general enough to work with an array of any length.
  */
 
 import java.util.Scanner;
