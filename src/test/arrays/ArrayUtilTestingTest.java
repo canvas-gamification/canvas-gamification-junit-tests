@@ -1,4 +1,4 @@
-package test;
+package test.arrays;
 
 import global.BaseTest;
 import global.variables.Clause;
