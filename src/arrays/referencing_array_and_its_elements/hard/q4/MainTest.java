@@ -8,6 +8,7 @@ import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -28,8 +29,10 @@ public class MainTest extends BaseTest {
         TestOption.defaultInput = "76.9 50.8 68.4 95.7 88.6 81.2 89.5 74.9 12.76 64.0";
         return new Clause[]{
                 new StringLiteral("Enter " + n + " double numbers:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("The indices of potential candidates for teaching assistants are:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new PlaceHolder()
         };
@@ -53,7 +56,9 @@ public class MainTest extends BaseTest {
         return Stream.of(
                 Arguments.of(generateRandomArray(0.0, 100, n)),
                 Arguments.of(generateRandomArray(0.0, 100, n)),
-                Arguments.of(generateRandomArray(0.0, 100, n))
+                Arguments.of(generateRandomArray(0.0, 100, n)),
+                Arguments.of(generateRandomArray(88.0, 100, n)),
+                Arguments.of(generateRandomArray(0.0, 88.0, n))
         );
     }
 
@@ -71,11 +76,13 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> InputProvider() {
         return Stream.of(
-                Arguments.of(generateRandomArray(0.0, 100, n)),
+                Arguments.of(generateRandomArray(0.0, 100, 10000)),
+                Arguments.of(generateRandomArray(88.0, 100, 10000)),
+                Arguments.of(generateRandomArray(0.0, 88.0, 10000)),
                 Arguments.of(new double[]{}),
-                Arguments.of(new double[]{pivot, pivot / 2, pivot + 1}),
-                Arguments.of(new double[]{pivot + 1, pivot + 1, pivot}),
-                Arguments.of(new double[]{pivot + 1})
+                Arguments.of(new double[]{pivot, pivot / 2, pivot + 0.00001}),
+                Arguments.of(new double[]{pivot + 0.00001, pivot + 0.00001, pivot}),
+                Arguments.of(new double[]{pivot + 0.00001})
         );
     }
 
