@@ -8,6 +8,7 @@ import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -25,11 +26,13 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "76.9 50.8 68.4 95.7 88.6 81.2 89.5 74.9 12.76 64.0";
+        TestOption.defaultInput = arrayToInput(generateRandomArray(0.0, 100.0, n));
         return new Clause[]{
                 new StringLiteral("Enter " + n + " double numbers:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("The indices of students needing help are:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new PlaceHolder()
         };
@@ -53,13 +56,15 @@ public class MainTest extends BaseTest {
         return Stream.of(
                 Arguments.of(generateRandomArray(0.0, 100, n)),
                 Arguments.of(generateRandomArray(0.0, 100, n)),
-                Arguments.of(generateRandomArray(0.0, 100, n))
+                Arguments.of(generateRandomArray(0.0, 100, n)),
+                Arguments.of(generateRandomArray(60.0, 100, n)),
+                Arguments.of(generateRandomArray(0.0, 60.0, n))
         );
     }
 
     @ParameterizedTest
     @MethodSource("mainInputProvider")
-    void correctMainMethod(double[] input) throws InvalidClauseException {
+    void printCorrectOutput(double[] input) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your main method does not correctly print the indices of students needing help.";
         runWithInput(
                 arrayToInput(input),
@@ -71,17 +76,19 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> InputProvider() {
         return Stream.of(
-                Arguments.of(generateRandomArray(0.0, 100, n)),
+                Arguments.of(generateRandomArray(0.0, 100, 10000)),
                 Arguments.of(new double[]{}),
-                Arguments.of(new double[]{pivot, pivot / 2, pivot - 1}),
-                Arguments.of(new double[]{pivot - 1, pivot - 1, pivot}),
-                Arguments.of(new double[]{pivot - 1})
+                Arguments.of(new double[]{pivot, pivot / 2, pivot - 0.0001}),
+                Arguments.of(new double[]{pivot - 0.0001, pivot - 0.0001, pivot}),
+                Arguments.of(new double[]{pivot - 0.0001}),
+                Arguments.of(generateRandomArray(60.0, 100, 10000)),
+                Arguments.of(generateRandomArray(0.0, 60.0, 10000))
         );
     }
 
     @ParameterizedTest
     @MethodSource("InputProvider")
-    void testForPGSMethod(double[] input) throws Throwable {
+    void correctSNHMethod(double[] input) throws Throwable {
         Clause[] methodSentence = new Clause[]{
                 new StringLiteral(answerFor(input))
         };
@@ -89,7 +96,7 @@ public class MainTest extends BaseTest {
                 {input, double[].class},
         };
         MethodTest m = new MethodTest(StudentsNeedHelp.class, "SNH", arguments, methodSentence);
-        m.setIncorrectMethodStructureErrorMessage("Your SNH method does not print the correct indices");
+        m.setIncorrectMethodStructureErrorMessage("Your SNH method does not correctly print the indices of students who require more help.");
         Object output = m.callMethod();
     }
 }
