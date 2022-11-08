@@ -9,6 +9,7 @@ import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -27,11 +28,14 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "10";
         return new Clause[]{
-                new StringLiteral("Enter a value for n: "),
+                new StringLiteral("Enter a value for n:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("The first "),
+                new StringLiteral("The first"),
+                new Optional(new StringLiteral(" ")),
                 new PlaceHolder(),
-                new StringLiteral(" values of the sequence are: "),
+                new StringLiteral(" values of the sequence are:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new PlaceHolder()
         };
@@ -54,15 +58,16 @@ public class MainTest extends BaseTest {
                 Arguments.of(10),
                 Arguments.of(1),
                 Arguments.of(0),
-                Arguments.of(25)
-
+                Arguments.of(25),
+                Arguments.of(137),
+                Arguments.of(1000)
         );
     }
 
     @ParameterizedTest
     @MethodSource("InputProvider")
     void correctMainMethod(int n) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program did not display the correct answer";
+        TestOption.incorrectStructureErrorMessage = "Your program did not display the correct geometric sequence up to the nth term";
         runWithInput(Integer.toString(n), new Clause[]{
                 new StringLiteral(Integer.toString(n)),
                 new StringLiteral(arrayToInput(geometicSeqAnswerFor(n)))});
@@ -77,6 +82,6 @@ public class MainTest extends BaseTest {
         MethodTest m = new MethodTest(GeometricSequence.class, "geometricSequence", arguments);
         Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(geometicSeqAnswerFor(n), output,
-                "Your geometricSequence method does not correctly return the geometric sequence with the specified parameter up to the nth term.");
+                "Your geometricSequence method does not correctly return the geometric sequence up to the nth term.");
     }
 }
