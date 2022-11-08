@@ -40,7 +40,7 @@ public class MainTest extends BaseTest {
     public void calculatesGradeCorrectly(int x, double y, double answer) {
         runWithInput(x + " " + y);
         assertEquals(answer, Double.parseDouble(getItemByName("ans")),
-                "You did not correctly calculate the student's grade with the bonus.");
+                "Your program does not correctly calculate the student's grade with the bonus.");
     }
 
     public static Stream<Arguments> calculatesGradeCorrectlyInputProvider() {
