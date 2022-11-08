@@ -34,14 +34,19 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "1 2 3 4 5 6 7 8 9 2";
         return new Clause[]{
-                new StringLiteral("Enter nine integers: "),
+                new StringLiteral("Enter nine integers:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("Enter a positive integer: "),
+                new StringLiteral("Enter a positive integer:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("The first "),
                 new IntegerLiteral("x"),
-                new StringLiteral(" numbers of the array are: "),
-                new Optional(new PlaceHolder()),
+                new StringLiteral(" numbers of the array are:"),
+                new Optional(new StringLiteral(" ")),
+                new NewLine(),
+                new PlaceHolder(),
+                new Optional(new StringLiteral(" "))
 
         };
 
@@ -55,21 +60,29 @@ public class MainTest extends BaseTest {
         int[] a1 = generateRandomArray(-1000, 1000, n);
         int[] a2 = generateRandomArray(-1000, 1000, n);
         int[] a3 = generateRandomArray(-1000, 1000, n);
+        int[] a4 = generateRandomArray(-1000, 1000, n);
+        int[] a5 = generateRandomArray(-1000, 1000, n);
         return Stream.of(
-                Arguments.of(a1, 3,  Arrays.copyOfRange(a1, 0, n % 3)),
-                Arguments.of(a2, n,  Arrays.copyOfRange(a2, 0, 0)),
-                Arguments.of(a3, 1,  Arrays.copyOfRange(a3, 0, n % 1))
+                Arguments.of(a1, 3, Arrays.copyOfRange(a1, 0, n % 3)),
+                Arguments.of(a2, n, Arrays.copyOfRange(a2, 0, 0)),
+                Arguments.of(a3, 1, Arrays.copyOfRange(a3, 0, n % 1)),
+                Arguments.of(a4, n, Arrays.copyOfRange(a4, 0, n % n)),
+                Arguments.of(a5, n / 3, Arrays.copyOfRange(a5, 0, n % (n / 3)))
         );
     }
+
     @ParameterizedTest
     @MethodSource("InputProvider")
-    void correctMainMethod(int[] input, int x, int[] ans) throws InvalidClauseException {
+    void printCorrectOutput(int[] input, int x, int[] ans) throws InvalidClauseException {
         int t = ans.length;
-        Clause[] c = new Clause[t];
-        for(int i = 0; i < t; i ++)
-            c[i] = new IntegerLiteral(ans[i]);
-        runWithInput(arrayToInput(input) + " " +  x, c);
+        String st = "";
+        for (int i = 0; i < t; i++)
+            st += ans[i] + " ";
+        runWithInput(arrayToInput(input) + " " + x, new Clause[]{
+                new StringLiteral(st)
+        });
     }
+
     @ParameterizedTest
     @MethodSource("InputProvider")
     void correctRemainderMethod(int[] input, int x, int[] ans) throws Throwable {
@@ -80,7 +93,7 @@ public class MainTest extends BaseTest {
         MethodTest m = new MethodTest(Remainder.class, "remainder", arguments);
         Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(ans, output,
-                "Your remainder method does not return the correct subarray");
+                "Your remainder method does not return the correct subarray.");
 
     }
 }
