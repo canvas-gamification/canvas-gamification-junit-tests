@@ -55,7 +55,9 @@ public class MainTest extends BaseTest {
                 Arguments.of(1, 0, 1),
                 Arguments.of(45, 142, 1),
                 Arguments.of(248, 84, 4),
-                Arguments.of(10000007, 181232123, 1)
+                Arguments.of(10000007, 181232123, 1),
+                Arguments.of(61245341, 74139097, 3223439),
+                Arguments.of(4697185, 707795, 64345)
         );
     }
 
@@ -77,6 +79,6 @@ public class MainTest extends BaseTest {
         MethodTest m = new MethodTest(GCDCalculator.class, "findGCD", arguments);
         Object output = m.callMethod();
         CustomAssertions._assertEquals(gcd, output,
-                "Your findGCD method does not correctly return the gcd of the two input integers.");
+                "Your findGCD method does not correctly return the GCD of the two input integers.");
     }
 }
