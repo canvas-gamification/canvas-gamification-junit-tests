@@ -31,8 +31,7 @@ public class MainTest extends BaseTest {
                 new StringLiteral("Enter a value for n:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("The first"),
-                new Optional(new StringLiteral(" ")),
+                new StringLiteral("The first "),
                 new PlaceHolder(),
                 new StringLiteral(" values of the sequence are:"),
                 new Optional(new StringLiteral(" ")),
@@ -66,8 +65,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("InputProvider")
-    void correctMainMethod(int n) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program did not display the correct geometric sequence up to the nth term";
+    void printsSequenceCorrectly(int n) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly display the geometric sequence up to the nth term.";
         runWithInput(Integer.toString(n), new Clause[]{
                 new StringLiteral(Integer.toString(n)),
                 new StringLiteral(arrayToInput(geometicSeqAnswerFor(n)))});

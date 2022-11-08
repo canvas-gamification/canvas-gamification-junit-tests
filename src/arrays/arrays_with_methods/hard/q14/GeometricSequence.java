@@ -6,7 +6,7 @@ sequence into an array. A geometric sequence is one of the form s_n = ar^(n - 1)
 common ratio between terms. Your program should contain a method with the method header
 public static double[] geometricSequence(int n), which takes an integer and returns the first n terms of the sequence
 in an array of doubles. For this question, assume that a = 2 and r = ½. After returning the array, print its values in
-the main method.
+the main method. Assume the user will input an integer greater than or equal to 0.
 
 Sample Output:
     Enter a value for n:
