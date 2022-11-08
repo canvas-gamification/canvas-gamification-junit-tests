@@ -8,6 +8,7 @@ import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -29,8 +30,10 @@ public class MainTest extends BaseTest {
         TestOption.defaultInput = "3 4 6 21 48 42 89 2 0 91";
         return new Clause[]{
                 new StringLiteral("Enter an array of size " + n + " to split in half:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("The first half of the array is:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new PlaceHolder()
         };
@@ -41,7 +44,7 @@ public class MainTest extends BaseTest {
     }
 
     public static String split(int[] a) {
-        return arrayToInput(Arrays.copyOf(a, a.length / 2)).trim();
+        return arrayToInput(Arrays.copyOf(a, a.length / 2));
     }
 
     static Stream<Arguments> mainInputProvider() {
