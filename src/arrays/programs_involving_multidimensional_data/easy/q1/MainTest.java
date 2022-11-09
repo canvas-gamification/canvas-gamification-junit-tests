@@ -1,12 +1,15 @@
 package arrays.programs_involving_multidimensional_data.easy.q1;
 
 import global.BaseTest;
+import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.utils.ArrayUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
@@ -32,7 +35,7 @@ public class MainTest extends BaseTest {
         }
         int[][] two = new int[size][size];
         for(int x = 0; x < size; x ++){
-            two[x] = ArrayUtil.generateRandomArray(5, 5, size);
+            two[x] = ArrayUtil.generateRandomArray(5, 6, size);
         }
         int[][] three = new int[size][size];
         for(int x = 0; x < size; x ++){
@@ -53,6 +56,32 @@ public class MainTest extends BaseTest {
         }
 
         return Stream.of(one, two, three, four, five);
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    void correctMainMethodOutput(int[][] arr) throws InvalidClauseException {
+        boolean sumEqual = true;
+        int [] sumArray = new int[arr.length];
+        for( int i = 0; i < arr.length; i++ )
+            sumArray[i] = ArrayUtil.sum(arr[i]);
+        for( int i = 0; i < sumArray.length - 1; i++ )
+            if( sumArray[i] != sumArray[i + 1])
+                sumEqual = false;
+
+        StringBuilder s = new StringBuilder();
+
+        for(int x = 0; x < size; x++){
+            s.append(ArrayUtil.arrayToInput(arr[x]));
+            s.append(" ");
+        }
+
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify if the sum of the rows are all equal.";
+
+        runWithInput(s.toString(), new Clause[]{
+                new StringLiteral(String.valueOf(sumEqual))
+        });
+
     }
 
     public Clause[] clauseBuilder(){
