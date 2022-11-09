@@ -2,8 +2,9 @@ package arrays.multidimensional_arrays.hard.q1;
 
 /*
 Make a program that asks the user to enter the number of rows and columns of a 2D integer array and then create that
-array in the program. The program also needs to ask the user for the values to initialize each element in that 2D array.
-The program then needs to print the elements of the array with each row on a separate line.
+array in the program. Also, the program should prompt the user for the values to initialize each element in that 2D array.
+Finally, print the elements of this array with each row on a separate line, with spaces between each number. Assume that
+the user will enter positive integers for the row and column numbers.
 
 Sample output:
     Enter the number of rows:

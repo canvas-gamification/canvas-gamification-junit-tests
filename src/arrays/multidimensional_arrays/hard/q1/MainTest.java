@@ -3,6 +3,7 @@ package arrays.multidimensional_arrays.hard.q1;
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
+import global.utils.ArrayUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -40,21 +41,30 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> inputProvider() {
         return Stream.of(
-                Arguments.of(0, 0),
-                Arguments.of(0, 1),
-                Arguments.of(1, 0),
-                Arguments.of(2, 3),
-                Arguments.of(4, 4),
-                Arguments.of(8, 11),
-                Arguments.of(56, 2),
-                Arguments.of(41, 13)
+                Arguments.of(2, 3, 1),
+                Arguments.of(4, 4, 1),
+                Arguments.of(8, 11, 1),
+                Arguments.of(56, 2, 1),
+                Arguments.of(41, 13, 1),
+                Arguments.of(2, 3, -1),
+                Arguments.of(4, 4, -1),
+                Arguments.of(8, 11, -1),
+                Arguments.of(56, 2, -1),
+                Arguments.of(41, 13, -1)
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void printsCorrectOutput(int rows, int columns) throws InvalidClauseException {
+    void printsCorrectOutput(int rows, int columns, int mult) throws InvalidClauseException {
         int[][] nums = arrayBuilder(rows, columns);
+
+        for (int x = 0; x < rows; x++) {
+            for (int y = 0; y < columns; y++) {
+                nums[x][y] *= mult;
+            }
+        }
+
         StringBuilder s = new StringBuilder(rows + " " + columns + " ");
 
         for (int x = 0; x < rows; x++) {
@@ -68,7 +78,7 @@ public class MainTest extends BaseTest {
 
         for (int x = 0; x < rows; x++) {
             for (int y = 0; y < columns; y++) {
-                assertEquals(nums[x][y], Integer.parseInt(getItemByName("row" + x + "col" + y)), "The number on row " + x + " column " + y + " is incorrect.");
+                assertEquals(nums[x][y], Integer.parseInt(getItemByName("row" + x + "col" + y)), "Your program did not correctly print the number on row " + x + " column " + y + " is incorrect.");
             }
         }
     }
@@ -77,9 +87,7 @@ public class MainTest extends BaseTest {
         int[][] arr = new int[rows][columns];
 
         for (int x = 0; x < rows; x++) {
-            for (int y = 0; y < columns; y++) {
-                arr[x][y] = (int) (Math.random() * 1000);
-            }
+            arr[x] = ArrayUtil.generateRandomArray(0, 1000, columns);
         }
 
         return arr;
