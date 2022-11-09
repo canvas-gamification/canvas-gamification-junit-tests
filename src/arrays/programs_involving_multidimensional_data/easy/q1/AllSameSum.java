@@ -2,15 +2,26 @@ package arrays.programs_involving_multidimensional_data.easy.q1;
 
 /*
 A magic square is a box of numbers where each row and column has the same sum. Write a Java program that initialises a
-4 by 4 multidimensional array of integers with values between 1 to 10 (inclusive of both ends), and prints true if all
-the rows have the same sum and false otherwise.
+4 by 4 multidimensional array of integers with values given by the user, and prints true if all the rows have the same
+sum and false otherwise.
  */
+import java.util.Scanner;
 
 public class AllSameSum
 {
     public static void main(String[] args)
     {
-        int[][] arr = { {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 7, 1, 2}, {3,4,5,6}};
+        Scanner input = new Scanner(System.in);
+
+        int[][] arr = new int[4][4];
+
+        for(int x = 0; x < 4; x++){
+            for(int y = 0; y < 4; y++){
+                System.out.println("Enter the value for row " + x + " column " + y + ": ");
+                arr[x][y] = input.nextInt();
+            }
+        }
+
         boolean sumEqual = true;
         int [] sumArray = new int[arr.length];
         for( int i = 0; i < arr.length; i++ )
