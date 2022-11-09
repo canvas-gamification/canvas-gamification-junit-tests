@@ -24,33 +24,33 @@ public class MainTest extends BaseTest {
         return clauseBuilder();
     }
 
-    public void runMain(){
+    public void runMain() {
         AllSameSum.main(new String[0]);
     }
 
-    static Stream<int[][]> inputProvider(){
+    static Stream<int[][]> inputProvider() {
         int[][] one = new int[size][size];
-        for(int x = 0; x < size; x ++){
+        for (int x = 0; x < size; x++) {
             one[x] = ArrayUtil.generateRandomArray(0, 10, size);
         }
         int[][] two = new int[size][size];
-        for(int x = 0; x < size; x ++){
+        for (int x = 0; x < size; x++) {
             two[x] = ArrayUtil.generateRandomArray(5, 6, size);
         }
         int[][] three = new int[size][size];
-        for(int x = 0; x < size; x ++){
+        for (int x = 0; x < size; x++) {
             three[x] = ArrayUtil.generateRandomArray(10, 100, size);
         }
         int[][] four = new int[size][size];
-        for(int x = 0; x < size; x ++){
+        for (int x = 0; x < size; x++) {
             four[x] = ArrayUtil.generateRandomArray(0, 10, size);
         }
         int[][] five = new int[size][size];
-        for(int x = 0; x < size; x ++){
+        for (int x = 0; x < size; x++) {
             five[x] = ArrayUtil.generateRandomArray(10, 20, size);
         }
-        for(int x = 0; x < size; x++){
-            for(int y = 0; y < size; y++){
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
                 five[x][y] *= -1;
             }
         }
@@ -62,16 +62,16 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void correctMainMethodOutput(int[][] arr) throws InvalidClauseException {
         boolean sumEqual = true;
-        int [] sumArray = new int[arr.length];
-        for( int i = 0; i < arr.length; i++ )
+        int[] sumArray = new int[arr.length];
+        for (int i = 0; i < arr.length; i++)
             sumArray[i] = ArrayUtil.sum(arr[i]);
-        for( int i = 0; i < sumArray.length - 1; i++ )
-            if( sumArray[i] != sumArray[i + 1])
+        for (int i = 0; i < sumArray.length - 1; i++)
+            if (sumArray[i] != sumArray[i + 1])
                 sumEqual = false;
 
         StringBuilder s = new StringBuilder();
 
-        for(int x = 0; x < size; x++){
+        for (int x = 0; x < size; x++) {
             s.append(ArrayUtil.arrayToInput(arr[x]));
             s.append(" ");
         }
@@ -84,13 +84,13 @@ public class MainTest extends BaseTest {
 
     }
 
-    public Clause[] clauseBuilder(){
-        Clause[] c = new Clause[size*size*2+1];
+    public Clause[] clauseBuilder() {
+        Clause[] c = new Clause[size * size * 2 + 1];
 
         int count = 0;
 
-        for(int x = 0; x < size; x++){
-            for(int y = 0; y < size; y++){
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
                 c[count++] = new StringLiteral("Enter the value for row " + x + " column " + y + ": ");
                 c[count++] = new NewLine();
             }
