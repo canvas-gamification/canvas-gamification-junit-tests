@@ -3,6 +3,7 @@ package arrays.multidimensional_arrays.hard.q2;
 import global.BaseTest;
 import global.MethodTest;
 import global.tools.TestOption;
+import global.utils.ArrayUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -32,7 +33,7 @@ public class MainTest extends BaseTest {
                 new StringLiteral("Enter the values for the array:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("count of even numbers in array = "),
+                new StringLiteral("The number of even integers in array is: "),
                 new IntegerLiteral("even")
         };
     }
@@ -43,9 +44,6 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(
-                Arguments.of(0, 0, new int[]{}, 0),
-                Arguments.of(1, 0, new int[]{}, 0),
-                Arguments.of(0, 1, new int[]{}, 0),
                 Arguments.of(2, 3, new int[]{-3, 1, 7, 2, 1, 19}, 1),
                 Arguments.of(5, 5, new int[]{5, 12, -43, -5, 12, 43, 5, 7, 76, 854, -7542, 75, 98, 2842, 53912, 24, 532,
                         65, 542, -523, 75, -753, 563, 4, 32}, 13),
@@ -74,36 +72,26 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
     void correctMainMethodOutput(int row, int col, int[] nums, int evens) {
-        StringBuilder s = new StringBuilder(row + " " + col + " ");
 
-        int count = 0;
+        runWithInput(row + " " + col + " " + ArrayUtil.arrayToInput(nums));
 
-        for (int x = 0; x < row; x++) {
-            for (int y = 0; y < col; y++) {
-                s.append(nums[count++]);
-                s.append(" ");
-            }
-        }
-
-        runWithInput(s.toString());
-
-        assertEquals(evens, Integer.parseInt(getItemByName("even")), "Your program does not display the correct amount of even numbers in the array.");
+        assertEquals(evens, Integer.parseInt(getItemByName("even")), "Your program does not correctly count and display the number of even integers in the array.");
     }
 
     @ParameterizedTest
     @MethodSource("numsInputProvider")
     void correctNumsMethod(int[][] arr, int evens) throws Throwable {
         Clause[] methodSentence = new Clause[]{
-                new StringLiteral("count of even numbers in array = "),
+                new StringLiteral("The number of even integers in array is: "),
                 new IntegerLiteral("even")
         };
         Object[][] arguments = {
                 {arr, int[][].class}
         };
-        MethodTest m = new MethodTest(SimpleDisplay.class, "simpleDisplay", arguments, methodSentence);
-        m.setIncorrectMethodStructureErrorMessage("Your simpleDisplay method does not print the count of even numbers.");
+        MethodTest m = new MethodTest(SimpleDisplay.class, "even", arguments, methodSentence);
+        m.setIncorrectMethodStructureErrorMessage("Your even method does not print the count of even numbers.");
         m.callMethod();
 
-        assertEquals(evens, Integer.parseInt(m.getMethodItemByName("even")), "Your simpleDisplay method does not print the correct number of even numbers present in the array.");
+        assertEquals(evens, Integer.parseInt(m.getMethodItemByName("even")), "Your even method does not correctly count and display number of even integers present in the array.");
     }
 }

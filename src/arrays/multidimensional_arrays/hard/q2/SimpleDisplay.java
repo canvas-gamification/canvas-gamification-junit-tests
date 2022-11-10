@@ -1,10 +1,11 @@
 package arrays.multidimensional_arrays.hard.q2;
 
 /*
-Write a Java program called SimpleDisplay. It should have a main method which asks the user for the number of rows,
-columns, and array values, and passes that array to a method called simpleDisplay. The method simpleDisplay should
-accept a multidimensional 2D array (int [][] nums), and count the number of elements in it that are even. The count is
-printed out in the method. This should work for any size 2D array.
+Write a Java program called SimpleDisplay. It should have a main method asking the user for the number of rows and
+columns in an array and initialize an array of that size. Then, it should prompt the user to enter the values for this
+array. Also, create a method called even that accepts a multidimensional 2D array (int [][] nums) and counts the number
+of elements in it that are even. Print out this count in the method. Assume the user will provide integers greater than
+or equal to zero for the array row and column lengths.
 
 Sample output:
     Enter the number of rows:
@@ -13,7 +14,7 @@ Sample output:
     2
     Enter the values for the array:
     1 2 3 4 5 6
-    count of even numbers in array = 3
+    The number of even integers in array is: 3
  */
 
 import java.util.Scanner;
@@ -35,16 +36,16 @@ public class SimpleDisplay {
             }
         }
 
-        simpleDisplay(arr);
+        even(arr);
     }
 
-    public static void simpleDisplay(int[][] nums) {
+    public static void even(int[][] nums) {
         int count = 0;
         for (int i = 0; i < nums.length; i++)
             for (int j = 0; j < nums[i].length; j++)
                 if (nums[i][j] % 2 == 0)
                     count++;
-        System.out.println("count of even numbers in array = " + count);
+        System.out.println("The number of even integers in array is: " + count);
     }
 }
 
