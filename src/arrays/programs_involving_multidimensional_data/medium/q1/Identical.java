@@ -1,34 +1,40 @@
 package arrays.programs_involving_multidimensional_data.medium.q1;
 
 /*
-Write a Java program that initializes and prints two integer arrays, both of size 5 by 5, with values within both arrays
-randomly being generated from 1-5 (inclusive of both values). Then, check to see if each of their elements in the
-respective positions are the same. If any pair of elements are not the same, print "different", otherwise do nothing.
+Write a Java program that initializes two integers arrays of size 5 by 5and takes user input values for them. Then,
+check to see if each of their elements in the respective positions are the same. If any pair of elements are not the
+same, print "different", otherwise do nothing.
 
 Sample output:
-    1 5 5 3 3
-    2 2 2 4 4
-    2 2 4 4 4
-    4 2 5 3 3
-    4 3 0 5 2
-
-    1 5 5 3 1
-    2 2 2 4 4
-    2 0 4 0 1
-    4 2 5 3 3
-    4 3 0 0 1
-
-    different
-    different
+    Enter five values for array a row 0:
+    1 2 3 4 5
+    Enter five values for array a row 1:
+    1 2 3 4 5
+    Enter five values for array a row 2:
+    1 2 3 4 5
+    Enter five values for array a row 3:
+    1 2 3 4 5
+    Enter five values for array a row 4:
+    1 2 3 4 5
+    Enter five values for array b row 0:
+    1 2 3 4 5
+    Enter five values for array b row 1:
+    1 2 3 4 5
+    Enter five values for array b row 2:
+    5 4 3 2 1
+    Enter five values for array b row 3:
+    1 2 3 4 5
+    Enter five values for array b row 4:
+    1 2 3 4 5
     different
     different
     different
     different
 
 Distractors:
-a[i][j] = ( int ) (Math.random() * 4) + 1;
-b[i][j] = (Math.random() * 4) + 1;
-b[i][j] = ( int ) (Math.random() * 4) + 1;
+for (int i = 0; i <= a.length; i++)
+for (int i = 0; i <= a.length; i++)
+for (int j = 0; j <= a[i].length; j++)
 if ( a[i][j] == b[i][j] )
 if( a[i] == b[i] )
 int[][] a = new int[][];
@@ -39,35 +45,32 @@ public static void main (String args)
 int[][] b = new int[5][5]
  */
 
-public class Identical
-{
-    public static void main (String[] args)
-    {
+import java.util.Scanner;
+
+public class Identical {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
         int[][] a = new int[5][5];
         int[][] b = new int[5][5];
-        for( int i = 0; i < a.length; i++ )
-            for( int j = 0; j < a[i].length; j++ )
-            {
-                a[i][j] = ( int ) (Math.random() * (5+1));
-                b[i][j] = ( int ) (Math.random() * (5+1));
-            }
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j < a[i].length; j++){
-                System.out.print(a[i][j] + " ");
-            }
-            System.out.println();
+        for (int i = 0; i < a.length; i++) {
+            System.out.println("Enter five values for array a row " + i + ": ");
+            a[i][0] = input.nextInt();
+            a[i][1] = input.nextInt();
+            a[i][2] = input.nextInt();
+            a[i][3] = input.nextInt();
+            a[i][4] = input.nextInt();
         }
-        System.out.println();
-        for(int i = 0; i < b.length; i++){
-            for(int j = 0; j < b[i].length; j++){
-                System.out.print(b[i][j] + " ");
-            }
-            System.out.println();
+        for (int i = 0; i < a.length; i++) {
+            System.out.println("Enter five values for array b row " + i + ": ");
+            b[i][0] = input.nextInt();
+            b[i][1] = input.nextInt();
+            b[i][2] = input.nextInt();
+            b[i][3] = input.nextInt();
+            b[i][4] = input.nextInt();
         }
-        System.out.println();
-        for( int i = 0; i < a.length; i++ )
-            for( int j = 0; j < a[i].length; j++ )
-                if( a[i][j] != b[i][j] )
+        for (int i = 0; i < a.length; i++)
+            for (int j = 0; j < a[i].length; j++)
+                if (a[i][j] != b[i][j])
                     System.out.println("different");
 
     }

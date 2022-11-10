@@ -10,6 +10,9 @@ import global.variables.clauses.StringLiteral;
 public class MainTest extends BaseTest {
     // Parsons with distractors
 
+    /*
+    Literally all of this now needs to be changed
+     */
     public Clause[] testSentence() {
         return clauseBuilder();
     }
