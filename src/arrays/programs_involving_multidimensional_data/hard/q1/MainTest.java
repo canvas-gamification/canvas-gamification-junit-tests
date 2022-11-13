@@ -11,7 +11,6 @@ import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -40,27 +39,74 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<int[][]> mainMethodInputProvider(){
-        return Stream.of(
-                new int[][]{
-                        {232, 43, 23, 43, 42, 43, 2},
-                        {43, 8, 12, 321, 53, 5, 1},
-                        {90, 43, 84, 1923, 48, 19, 7}
-                }
-                ,
-                new int[][]{
-                        {5},
-                        {7}
-                }
-        );
+        int[][] a = new int[8][3];
+
+        for(int x = 0; x < 8; x ++){
+            a[x] = ArrayUtil.generateRandomArray(1, 11, 3);
+        }
+
+        int[][] b = new int[2][2];
+
+        for(int x = 0; x < 2; x ++){
+            b[x] = ArrayUtil.generateRandomArray(10, 1001, 2);
+        }
+
+        int[][] c = new int[5][10];
+
+        for(int x = 0; x < 5; x ++){
+            c[x] = ArrayUtil.generateRandomArray(1, 2, 10);
+        }
+
+        int[][] d = new int[15][2];
+
+        for(int x = 0; x < 15; x ++){
+            d[x] = ArrayUtil.generateRandomArray(1, 11, 3);
+            for(int y = 0; y < 2; y++){
+                d[x][y] *= -1;
+            }
+        }
+
+        return Stream.of(a, b, c, d);
+    }
+
+    static Stream<int[][]> sumInputProvider(){
+        int[][] a = new int[7][3];
+
+        for(int x = 0; x < 7; x ++){
+            a[x] = ArrayUtil.generateRandomArray(0, 21, 3);
+        }
+
+        int[][] b = new int[4][4];
+
+        for(int x = 0; x < 4; x ++){
+            b[x] = ArrayUtil.generateRandomArray(1, 100001, 4);
+        }
+
+        int[][] c = new int[2][9];
+
+        for(int x = 0; x < 2; x ++){
+            c[x] = ArrayUtil.generateRandomArray(15, 16, 9);
+        }
+
+        int[][] d = new int[17][4];
+
+        for(int x = 0; x < 17; x ++){
+            d[x] = ArrayUtil.generateRandomArray(1, 16, 4);
+            for(int y = 0; y < 4; y++){
+                d[x][y] *= -1;
+            }
+        }
+
+        return Stream.of(a, b, c, d);
     }
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
     void correctMainMethodOutput(int[][] input) throws InvalidClauseException {
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for(int x = 0; x < input.length; x++){
-            s += ArrayUtil.arrayToInput(input[x]);
-            s += " ";
+            s.append(ArrayUtil.arrayToInput(input[x]));
+            s.append(" ");
         }
         runWithInput(input.length + " " + input[0].length + " " + s, clauseBuilder(input.length, input[0].length));
 
@@ -90,7 +136,7 @@ public class MainTest extends BaseTest {
         }
 
         for(int x = 0; x < rows; x++){
-            c[0][count++] = new IntegerLiteral(x);
+            c[0][count++] = new IntegerLiteral(String.valueOf(x));
             c[0][count++] = new StringLiteral(" ");
         }
 
