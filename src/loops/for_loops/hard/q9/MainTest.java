@@ -36,6 +36,7 @@ public class MainTest extends BaseTest {
                 Arguments.of(6, 3, "true"),
                 Arguments.of(150, 75, "true"),
                 Arguments.of(99999, 9, "true"),
+                Arguments.of(7283, 6841, "false"),
                 Arguments.of(10, 3, "false"),
                 Arguments.of(131, 15, "false"),
                 Arguments.of(21, 2, "false"),
@@ -45,7 +46,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("InputProvider")
-    void testingTheOutput(int s1, int s2, String ans) throws InvalidClauseException {
+    void printsCorrectOutput(int s1, int s2, String ans) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage =
                 "Your program does not correctly identify if the two input integers have a common divisor greater than one.";
         runWithInput(s1 + " " + s2, new Clause[]{
