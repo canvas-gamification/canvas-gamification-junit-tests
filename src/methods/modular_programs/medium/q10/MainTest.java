@@ -5,11 +5,11 @@ import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -25,7 +25,8 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "18 30";
         return new Clause[]{
-                new StringLiteral("Enter two integers: "),
+                new StringLiteral("Enter two integers:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("The greatest common factor of "),
                 new IntegerLiteral("firstNum"),
@@ -33,7 +34,7 @@ public class MainTest extends BaseTest {
                 new IntegerLiteral("secondNum"),
                 new StringLiteral(" is "),
                 new IntegerLiteral("ans"),
-                new StringLiteral(".")
+                new Optional(new StringLiteral("."))
         };
     }
 
@@ -79,6 +80,6 @@ public class MainTest extends BaseTest {
         MethodTest m = new MethodTest(GCDCalculator.class, "findGCD", arguments);
         Object output = m.callMethod();
         CustomAssertions._assertEquals(gcd, output,
-                "Your findGCD method does not correctly return the GCD of the two input integers.");
+                "Your findGCD method does not correctly find the GCD of two integers.");
     }
 }
