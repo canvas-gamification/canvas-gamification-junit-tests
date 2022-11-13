@@ -21,7 +21,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = ArrayUtil.arrayToInput(ArrayUtil.generateRandomArray(1, 11, size*size*2));
+        TestOption.defaultInput = ArrayUtil.arrayToInput(ArrayUtil.generateRandomArray(1, 11, size * size * 2));
         return clauseBuilder();
     }
 
@@ -29,11 +29,11 @@ public class MainTest extends BaseTest {
         Identical.main(new String[0]);
     }
 
-    static Stream<Arguments> inputProvider(){
+    static Stream<Arguments> inputProvider() {
         int[][] a1 = new int[size][size];
         int[][] b1 = new int[size][size];
 
-        for(int x = 0; x < size; x++){
+        for (int x = 0; x < size; x++) {
             a1[x] = ArrayUtil.generateRandomArray(1, 11, size);
             b1[x] = ArrayUtil.generateRandomArray(1, 11, size);
         }
@@ -41,7 +41,7 @@ public class MainTest extends BaseTest {
         int[][] a2 = new int[size][size];
         int[][] b2 = new int[size][size];
 
-        for(int x = 0; x < size; x++){
+        for (int x = 0; x < size; x++) {
             a2[x] = ArrayUtil.generateRandomArray(10, 1001, size);
             b2[x] = ArrayUtil.generateRandomArray(10, 1001, size);
         }
@@ -49,7 +49,7 @@ public class MainTest extends BaseTest {
         int[][] a3 = new int[size][size];
         int[][] b3 = new int[size][size];
 
-        for(int x = 0; x < size; x++){
+        for (int x = 0; x < size; x++) {
             a3[x] = ArrayUtil.generateRandomArray(1, 2, size);
             b3[x] = ArrayUtil.generateRandomArray(1, 2, size);
         }
@@ -57,10 +57,10 @@ public class MainTest extends BaseTest {
         int[][] a4 = new int[size][size];
         int[][] b4 = new int[size][size];
 
-        for(int x = 0; x < size; x++){
+        for (int x = 0; x < size; x++) {
             a4[x] = ArrayUtil.generateRandomArray(1, 101, size);
             b4[x] = ArrayUtil.generateRandomArray(1, 101, size);
-            for(int y = 0; y < size; y++){
+            for (int y = 0; y < size; y++) {
                 a4[x][y] *= -1;
                 b4[x][y] *= -1;
             }
@@ -79,11 +79,11 @@ public class MainTest extends BaseTest {
     void correctMainMethodOutput(int[][] a, int[][] b) throws InvalidClauseException {
         StringBuilder s = new StringBuilder();
 
-        for(int x = 0; x < size; x ++){
+        for (int x = 0; x < size; x++) {
             s.append(ArrayUtil.arrayToInput(a[x]));
         }
         s.append(" ");
-        for(int x = 0; x < size; x ++){
+        for (int x = 0; x < size; x++) {
             s.append(ArrayUtil.arrayToInput(b[x]));
         }
 
@@ -111,17 +111,17 @@ public class MainTest extends BaseTest {
     public Clause[][] placeHolderClauseBuilder(int[][] a, int[][] b) {
         int differences = 0;
 
-        for(int x = 0; x < size; x++){
-            for(int y = 0; y < size; y++){
-                if(a[x][y] != b[x][y])
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                if (a[x][y] != b[x][y])
                     differences++;
             }
         }
 
-        Clause[][] c = new Clause[1][differences*2];
+        Clause[][] c = new Clause[1][differences * 2];
         int count = 0;
 
-        for(int x = 0; x < differences; x++){
+        for (int x = 0; x < differences; x++) {
             c[0][count++] = new StringLiteral("different");
             c[0][count++] = new NewLine();
         }
