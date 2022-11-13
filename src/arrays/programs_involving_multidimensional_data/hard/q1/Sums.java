@@ -28,7 +28,7 @@ Sample output:
 import java.util.Scanner;
 
 public class Sums {
-    public static void main( String[] args ){
+    public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Enter the number of rows: ");
@@ -37,22 +37,23 @@ public class Sums {
         int cols = input.nextInt();
         int[][] arr = new int[rows][cols];
 
-        for(int x = 0; x < rows; x++){
-            for(int y = 0; y < cols; y++){
-                System.out.println("Enter the number for row " + (x+1) + " column " + (y+1) + ": ");
+        for (int x = 0; x < rows; x++) {
+            for (int y = 0; y < cols; y++) {
+                System.out.println("Enter the number for row " + (x + 1) + " column " + (y + 1) + ": ");
                 arr[x][y] = input.nextInt();
             }
         }
 
         int[] sums = sums(arr);
 
-        for( int i = 0; i < sums.length; i++ )
+        for (int i = 0; i < sums.length; i++)
             System.out.print(sums[i] + " ");
     }
-    public static int [] sums(int [][] arr){
-        int [] sums = new int[ arr.length ];
-        for( int i = 0; i < arr.length; i++ )
-            for( int j = 0; j < arr[i].length; j++ )
+
+    public static int[] sums(int[][] arr) {
+        int[] sums = new int[arr.length];
+        for (int i = 0; i < arr.length; i++)
+            for (int j = 0; j < arr[i].length; j++)
                 sums[i] += arr[i][j];
         return sums;
     }
