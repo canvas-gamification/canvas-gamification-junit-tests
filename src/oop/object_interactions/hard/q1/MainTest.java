@@ -21,11 +21,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MainTest {
     // Java
 
-    static Stream<Arguments> stealInputProvider(){
+    static Stream<Arguments> stealInputProvider() {
         return Stream.of(
-            Arguments.of("Steve", "11/06/1997"),
-            Arguments.of("Jasmine Gregson", "04/04/1934"),
-            Arguments.of("No Name", "No Birthdate")
+                Arguments.of("Steve", "11/06/1997"),
+                Arguments.of("Jasmine Gregson", "04/04/1934"),
+                Arguments.of("No Name", "No Birthdate")
         );
     }
 
@@ -44,11 +44,12 @@ public class MainTest {
         Passport stolen = new Passport("Test Name", "Test DOB");
         Passport victim = new Passport(name, birthdate);
         Passport expected = new Passport(name, birthdate);
-        if(ClassUtil.classHasMethod(Passport.class, "public void Passport)"))
+        if (ClassUtil.classHasMethod(Passport.class, "public void Passport)"))
             stolen.steal(victim);
         else
             _fail("Your Passport class does not have a steal method.", "No steal method found.");
         _assertEquals(expected.getDob(), victim.getDob(), "Your program does not correctly steal the values from the input passport.");
         _assertEquals(expected.getName(), victim.getName(), "Your program does not correctly steal the values from the input passport.");
+
     }
 }
