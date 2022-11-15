@@ -17,13 +17,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static global.utils.ArrayUtil.arrayToInput;
-import static global.utils.ArrayUtil.generateRandomArray;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static global.utils.ArrayUtil.*;
 
 
 public class MainTest extends BaseTest {
@@ -65,7 +61,7 @@ public class MainTest extends BaseTest {
         int[] a2 = generateRandomArray(-1000, 1000, n);
         int[] a3 = generateRandomArray(-1000, 1000, n);
         int[] a4 = generateRandomArray(-1000, 1000, n);
-        int[] a5 = generateRandomArray(0, 1, n);
+        int[] a5 = replicateArray(0, n);
         return Stream.of(
                 Arguments.of(a1, shifted(a1)),
                 Arguments.of(a2, shifted(a2)),
@@ -89,7 +85,7 @@ public class MainTest extends BaseTest {
     static Stream<Arguments> methodInputProvider() {
         int[] test1 = generateRandomArray(-1000000000, 1000000000, 100000);
         int[] test2 = generateRandomArray(-1000000000, 1000000000, 100000);
-        int[] test3 = generateRandomArray(0, 1, 100000);
+        int[] test3 = replicateArray(0, 100000);
         return Stream.of(
                 Arguments.of(new int[]{3, 4, 6, 21, 48, 42, 89, 2, 0, 91, 33}, new int[]{33, 3, 4, 6, 21, 48, 42, 89, 2, 0, 91}),
                 Arguments.of(test1, shifted(test1)),

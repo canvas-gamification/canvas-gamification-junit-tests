@@ -4,8 +4,8 @@ package arrays.referencing_array_and_its_elements.hard.q1;
 Write a program called ALittleToTheRight, with a method called LilToDaRight, that will take an array of ten integers and
 shift the elements of the array forward by one. For example, the element at index 1 will move to index 2, and so on.
 Then, the last element of the array will shift to the front of the array. Create a method called lilToDaRight to do
-this. It should take an integer array and return the array with all the elements shifted. Finally, print the returned
-array in the main method. The method should be general enough to work with an array of any length.
+this. It should take an integer array and return the array with all the elements shifted, Note that your method should
+be general enough to work with an array of any length. Finally, print the returned array in the main method.
  */
 
 import java.util.Scanner;
