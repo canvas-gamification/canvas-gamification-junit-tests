@@ -34,7 +34,7 @@ public class MainTest extends BaseTest {
                 new IntegerLiteral("secondNum"),
                 new StringLiteral(" is "),
                 new IntegerLiteral("ans"),
-                new Optional(new StringLiteral("."))
+                new Optional(new StringLiteral("\\."))
         };
     }
 
