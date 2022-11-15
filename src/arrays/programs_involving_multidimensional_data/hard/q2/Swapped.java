@@ -20,29 +20,27 @@ Sample output:
     55 50 19 59 40
  */
 
-public class Swapped
-{
-    public static void main( String[] args )
-    {
+public class Swapped {
+    public static void main(String[] args) {
         int[][] arr = new int[5][5];
-        for( int i = 0; i < arr.length; i++ )
-            for( int j = 0; j < arr[i].length; j++ )
-                arr[i][j] = ( int ) ( Math.random() *100 ) + 1;
+        for (int i = 0; i < arr.length; i++)
+            for (int j = 0; j < arr[i].length; j++)
+                arr[i][j] = (int) (Math.random() * 100) + 1;
 
-        for( int i = 0; i < arr.length; i++ ) {
+        for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++)
                 System.out.print(arr[i][j] + " ");
             System.out.println();
         }
         System.out.println();
 
-        for( int i = 0; i < arr.length; i++ ){
-            int first = arr[i][ 0 ];
-            int last = arr[i][ arr[i].length - 1];
-            arr[i][ arr[i].length - 1] = first;
+        for (int i = 0; i < arr.length; i++) {
+            int first = arr[i][0];
+            int last = arr[i][arr[i].length - 1];
+            arr[i][arr[i].length - 1] = first;
             arr[i][0] = last;
         }
-        for( int i = 0; i < arr.length; i++ ) {
+        for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++)
                 System.out.print(arr[i][j] + " ");
             System.out.println();
