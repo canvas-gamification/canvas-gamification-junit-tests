@@ -1,4 +1,4 @@
-package test;
+package test.methods;
 
 import global.BaseTest;
 import global.MethodTest;
@@ -10,6 +10,7 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import test.methods.MethodClause;
 
 import java.util.stream.Stream;
 
