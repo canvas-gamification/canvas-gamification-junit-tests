@@ -29,7 +29,7 @@ public class Remainder {
         int[] remain = remainder(arr, x);
         System.out.println("The first " + (9 % x) + " numbers of the array are:");
         for (int i = 0; i < remain.length; i++)
-            System.out.println(remain[i]);
+            System.out.print(remain[i] + " ");
     }
 
     public static int[] remainder(int[] arr, int x) {
