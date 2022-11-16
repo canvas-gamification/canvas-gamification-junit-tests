@@ -1,8 +1,8 @@
 package arrays.referencing_array_and_its_elements.hard.q7;
 /*
-Write a java program that takes an array of 10 integers as an input and reverse it. Write a method called Rev that takes
-an array and reverse it and then returns a string of the elements of array with a space between them, then print that
-string in your main method (No extra spaces).
+Write a java program that takes an array of ten integers as input and reverses it. For example, the array {1, 2, 3, 4}
+would become {4, 3, 2, 1}. To do this, create a method called rev that takes an array and reverses it by placing the
+elements in a new array in reverse order. Then, return this array and print it in the main method.
 
 Sample Output:
     Enter an array of 10 integers to reverse:
