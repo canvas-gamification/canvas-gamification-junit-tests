@@ -26,7 +26,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "76.9 50.8 68.4 95.7 88.6 81.2 89.5 74.9 12.76 64.0";
+        TestOption.defaultInput = arrayToInput(generateRandomArray(-100, 100, n));
         return new Clause[]{
                 new StringLiteral("Enter " + n + " double numbers:"),
                 new Optional(new StringLiteral(" ")),
@@ -57,8 +57,8 @@ public class MainTest extends BaseTest {
                 Arguments.of(generateRandomArray(0.0, 100, n)),
                 Arguments.of(generateRandomArray(0.0, 100, n)),
                 Arguments.of(generateRandomArray(0.0, 100, n)),
-                Arguments.of(generateRandomArray(88.0, 100, n)),
-                Arguments.of(generateRandomArray(0.0, 88.0, n))
+                Arguments.of(generateRandomArray(pivot, 100, n)),
+                Arguments.of(generateRandomArray(0.0, pivot, n))
         );
     }
 
@@ -77,8 +77,8 @@ public class MainTest extends BaseTest {
     static Stream<Arguments> InputProvider() {
         return Stream.of(
                 Arguments.of(generateRandomArray(0.0, 100, 10000)),
-                Arguments.of(generateRandomArray(88.0, 100, 10000)),
-                Arguments.of(generateRandomArray(0.0, 88.0, 10000)),
+                Arguments.of(generateRandomArray(pivot, 100, 10000)),
+                Arguments.of(generateRandomArray(0.0, pivot, 10000)),
                 Arguments.of(new double[]{}),
                 Arguments.of(new double[]{pivot, pivot / 2, pivot + 0.00001}),
                 Arguments.of(new double[]{pivot + 0.00001, pivot + 0.00001, pivot}),
