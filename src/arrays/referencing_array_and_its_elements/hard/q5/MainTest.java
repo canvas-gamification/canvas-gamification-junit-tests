@@ -34,7 +34,8 @@ public class MainTest extends BaseTest {
                 new StringLiteral("The indices of students needing help are:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new PlaceHolder()
+                new PlaceHolder(),
+                new Optional(new StringLiteral(" "))
         };
     }
 
@@ -57,15 +58,15 @@ public class MainTest extends BaseTest {
                 Arguments.of(generateRandomArray(0.0, 100, n)),
                 Arguments.of(generateRandomArray(0.0, 100, n)),
                 Arguments.of(generateRandomArray(0.0, 100, n)),
-                Arguments.of(generateRandomArray(60.0, 100, n)),
-                Arguments.of(generateRandomArray(0.0, 60.0, n))
+                Arguments.of(generateRandomArray(pivot, 100, n)),
+                Arguments.of(generateRandomArray(0.0, pivot, n))
         );
     }
 
     @ParameterizedTest
     @MethodSource("mainInputProvider")
     void printCorrectOutput(double[] input) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your main method does not correctly print the indices of students needing help.";
+        TestOption.incorrectStructureErrorMessage = "The program does not correctly print the indices of students needing help.";
         runWithInput(
                 arrayToInput(input),
                 new Clause[]{
@@ -79,10 +80,10 @@ public class MainTest extends BaseTest {
                 Arguments.of(generateRandomArray(0.0, 100, 10000)),
                 Arguments.of(new double[]{}),
                 Arguments.of(new double[]{pivot, pivot / 2, pivot - 0.0001}),
-                Arguments.of(new double[]{pivot - 0.0001, pivot - 0.0001, pivot}),
+                Arguments.of(new double[]{pivot + 0.0001, pivot - 0.0001, pivot}),
                 Arguments.of(new double[]{pivot - 0.0001}),
-                Arguments.of(generateRandomArray(60.0, 100, 10000)),
-                Arguments.of(generateRandomArray(0.0, 60.0, 10000))
+                Arguments.of(generateRandomArray(pivot, 100, 10000)),
+                Arguments.of(generateRandomArray(0.0, pivot, 10000))
         );
     }
 

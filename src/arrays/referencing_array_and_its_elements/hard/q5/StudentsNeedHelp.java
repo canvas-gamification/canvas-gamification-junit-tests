@@ -4,8 +4,7 @@ Write a Java program that takes an array of 10 doubles between 0 and 100, indica
 traverse through the array and print out the index of students on the same line separated by spaces (Eg: "3 4 6 " )
 who got below 60% in the course, indicating that those students need help. Your program should use a method called SNH
 that takes a double array and print the indices of the students needing help, and the method should be general enough to
-work with any array length. Assume that the user will enter numbers between 0 and 100 (inclusive). Your method should
-be general enough to work with any length of array.
+work with any array length. Assume that the user will enter numbers between 0 and 100 (inclusive).
 
 Sample Output:
     Enter 10 double numbers:
