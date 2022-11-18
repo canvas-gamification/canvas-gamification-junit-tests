@@ -29,7 +29,7 @@ public class Averages {
         int n5 = input.nextInt();
         int n6 = input.nextInt();
         int n7 = input.nextInt();
-        System.out.println("  Enter five numbers: ");
+        System.out.println("Enter five numbers: ");
         int n8 = input.nextInt();
         int n9 = input.nextInt();
         int n10 = input.nextInt();
