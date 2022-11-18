@@ -98,6 +98,6 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(StudentsNeedHelp.class, "SNH", arguments, methodSentence);
         m.setIncorrectMethodStructureErrorMessage("Your SNH method does not correctly print the indices of students who require more help.");
-        Object output = m.callMethod();
+        m.callMethod();
     }
 }
