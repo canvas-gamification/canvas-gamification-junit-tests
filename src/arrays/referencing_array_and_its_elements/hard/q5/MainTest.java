@@ -66,7 +66,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("mainInputProvider")
     void printsCorrectOutput(double[] input) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "The program does not correctly print the indices of students needing help.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the indices of the students who need help.";
         runWithInput(
                 arrayToInput(input),
                 new Clause[]{
