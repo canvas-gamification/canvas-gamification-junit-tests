@@ -1,7 +1,8 @@
 package methods.method_overloading.hard.q5;
 
 /*
-Write a Java Program that uses a method called average to calculate the average of 3, 4 and 5 integers which are then displayed in the main method. Use method overloading in your solution.
+Write a Java Program that uses a method called average to calculate the average of 3, 4 and 5 integers which are then
+displayed in the main method. Use method overloading in your solution.
 
 Sample Output:
   Enter three numbers:
