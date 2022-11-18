@@ -12,11 +12,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import global.BaseTest;
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Java
@@ -118,17 +119,10 @@ public class MainTest extends BaseTest {
 
     @Test
     void printsCorrectMessage() {
-        String errMsg = "Your program does not print the correct average for the numbers";
-        final int expectedThreeInt = 2;
-        final int expectedFourInt = 22;
-        final int expectedFiveInt = 202;
+        runWithInput("32 593 213 493 593 23 12 3492 95 483 102 4");
 
-        int threeInt = Integer.parseInt(getItemByName("threeInt"));
-        int fourInt = Integer.parseInt(getItemByName("fourInt"));
-        int fiveInt = Integer.parseInt(getItemByName("fiveInt"));
-
-        CustomAssertions._assertEquals(threeInt, expectedThreeInt, errMsg);
-        CustomAssertions._assertEquals(fourInt, expectedFourInt, errMsg);
-        CustomAssertions._assertEquals(fiveInt, expectedFiveInt, errMsg);
+        assertEquals(279, Integer.parseInt(getItemByName("threeInt")), "Your program does not print the correct average for three numbers");
+        assertEquals(280, Integer.parseInt(getItemByName("fourInt")), "Your program does not print the correct average for four numbers");
+        assertEquals(835, Integer.parseInt(getItemByName("fiveInt")), "Your program does not print the correct average for five numbers");
     }
 }
