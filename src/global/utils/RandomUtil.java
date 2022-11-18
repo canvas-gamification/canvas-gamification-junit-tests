@@ -18,7 +18,20 @@ public class RandomUtil {
      * This constant is the ratio of bin frequencies that must be within the range for the group of bin frequencies to be
      * considered to represent a random set
      */
-    public static final double ACCEPTANCE_RATE = 0.90;
+    public static final double ACCEPTANCE_RATE = 0.75;
+
+    /**
+     * This constant is the percentage error each bin is allowed to stray from the calculated median value. If the value
+     * is greater than the target + target * PERCENTAGE_ERROR or is less than the target - target * PERCENTAGE_ERROR,
+     * the bin falls outside the allowed range.
+     */
+    public static final double PERCENTAGE_ERROR = 0.25;
+
+    /**
+     * This constant is the maximum number of bins which will be used when determining if something is randomly
+     * distributed.
+     */
+    public static final int MAX_BINS = 20;
 
     /**
      * Returns if the set of values described by the total number of values considered and an array of "bin sizes" is
@@ -54,14 +67,17 @@ public class RandomUtil {
 
     public static int getNumBins(int lower, int upper) {
         int range = upper - lower;
-        return Math.min(range, 50);
+        int binNumber = 10;
+        while (range % binNumber != 0 && binNumber < MAX_BINS)
+            binNumber++;
+        return Math.min(range, binNumber);
     }
 
     public static int assignedBinIndex(int value, int lower, int upper, int numBins) {
         int range = upper - lower;
-        double gap = (double) range / numBins;
+        double gap = (range * 1.0) / numBins;
         assertWithinRange(value, lower, upper, "One or more of your randomly generated numbers fall outside of the required range.");
-        int binNumber = (int) ((value - lower) / gap);
+        int binNumber = (int) Math.floor((value - lower) / gap);
         return (binNumber <= numBins) ? binNumber : NO_BIN;
     }
 
@@ -83,7 +99,7 @@ public class RandomUtil {
         for (int frequency : frequencies) {
             // TODO: calculate percentage error based on total values and number of bins
             // Checks if each bin is within 50% of the expected value
-            if (valueAlmostEquals(frequency, expectedFrequency, 0.50))
+            if (valueAlmostEquals(frequency, expectedFrequency, PERCENTAGE_ERROR))
                 count++;
         }
         // If the number of bins which pass the randomness check is above the acceptance rate, the numbers are considered random
