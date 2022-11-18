@@ -28,7 +28,7 @@ public class MainTest extends BaseTest {
   }
 
   public void runMain() {
-    Overload6.main(new String[0]);
+    AttendingStudent.main(new String[0]);
   }
 
   static Stream<Integer> validStudentNumberProvider() {
@@ -62,7 +62,7 @@ public class MainTest extends BaseTest {
   @MethodSource("validStudentNumberProvider")
   public void StudentNumberCorrects(int studentID) throws Throwable {
     String errMsg = "Your method \"studentCheck()\" does not determine the correct student for given student id.";
-    Object output = MethodUtil.invokeIfMethodExists(Overload6.class, "studentCheck", new Object[] { studentID },
+    Object output = MethodUtil.invokeIfMethodExists(AttendingStudent.class, "studentCheck", new Object[] { studentID },
         int.class);
     CustomAssertions._assertEquals(output, true, errMsg);
   }
@@ -71,7 +71,7 @@ public class MainTest extends BaseTest {
   @MethodSource("invalidStudentNumberProvider")
   public void StudentNumberIncorrects(int studentID) throws Throwable {
     String errMsg = "Your method \"studentCheck()\" does not determine the correct student for given student id.";
-    Object output = MethodUtil.invokeIfMethodExists(Overload6.class, "studentCheck", new Object[] { studentID },
+    Object output = MethodUtil.invokeIfMethodExists(AttendingStudent.class, "studentCheck", new Object[] { studentID },
         int.class);
     CustomAssertions._assertEquals(output, false, errMsg);
   }
@@ -80,7 +80,7 @@ public class MainTest extends BaseTest {
   @MethodSource("validStudentNameProvider")
   public void StudentNameCorrects(String fname, String lname, String username) throws Throwable {
     String errMsg = "Your method \"studentCheck()\" does not determine the correct student for given student name.";
-    Object output = MethodUtil.invokeIfMethodExists(Overload6.class, "studentCheck",
+    Object output = MethodUtil.invokeIfMethodExists(AttendingStudent.class, "studentCheck",
         new Object[] { fname, lname, username },
         String.class, String.class, String.class);
     CustomAssertions._assertEquals(output, true, errMsg);
@@ -90,7 +90,7 @@ public class MainTest extends BaseTest {
   @MethodSource("invalidStudentNameProvider")
   public void StudentNameIncorrects(String fname, String lname, String username) throws Throwable {
     String errMsg = "Your method \"studentCheck()\" does not determine the correct student for given student name.";
-    Object output = MethodUtil.invokeIfMethodExists(Overload6.class, "studentCheck",
+    Object output = MethodUtil.invokeIfMethodExists(AttendingStudent.class, "studentCheck",
         new Object[] { fname, lname, username },
         String.class, String.class, String.class);
     CustomAssertions._assertEquals(output, false, errMsg);
