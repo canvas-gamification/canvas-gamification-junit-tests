@@ -2,6 +2,7 @@ package methods.method_overloading.hard.q5;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -17,6 +18,7 @@ import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseTest {
   // Java
+
   public Clause[] testSentence() {
     return new Clause[] {
         new StringLiteral("The average of the following numbers is: "),
@@ -31,7 +33,7 @@ public class MainTest extends BaseTest {
   }
 
   public void runMain() {
-    Overload5.main(new String[0]);
+    Averages.main(new String[0]);
   }
 
   static Stream<Arguments> threeNumbersAndTheirAverageProvider() {
@@ -59,8 +61,14 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("threeNumbersAndTheirAverageProvider")
   void threeNumbersAverageCorrect(int a, int b, int c, int avg) throws Throwable {
-    String errMsg = "Your method\"average()\" does not correctly calculate the average of three numbers";
-    Object output = MethodUtil.invokeIfMethodExists(Overload5.class, "average", new Object[] { a, b, c }, int.class,
+    Object[][] arguments = {
+            {a, int.class},
+            {b, int.class},
+            {c, int.class}
+    };
+    MethodTest m = new MethodTest(Averages.class, "average");
+    String errMsg = "Your average method does not correctly calculate the average of three numbers";
+    Object output = MethodUtil.invokeIfMethodExists(Averages.class, "average", new Object[] { a, b, c }, int.class,
         int.class, int.class);
     CustomAssertions._assertEquals(output, avg, errMsg);
   }
@@ -69,7 +77,7 @@ public class MainTest extends BaseTest {
   @MethodSource("fourNumbersAndTheirAverageProvider")
   void fourNumbersAverageCorrect(int a, int b, int c, int d, int avg) throws Throwable {
     String errMsg = "Your method\"average()\" does not correctly calculate the average of four numbers";
-    Object output = MethodUtil.invokeIfMethodExists(Overload5.class, "average", new Object[] { a, b, c, d }, int.class,
+    Object output = MethodUtil.invokeIfMethodExists(Averages.class, "average", new Object[] { a, b, c, d }, int.class,
         int.class, int.class, int.class);
     CustomAssertions._assertEquals(output, avg, errMsg);
   }
@@ -78,7 +86,7 @@ public class MainTest extends BaseTest {
   @MethodSource("fiveNumbersAndTheirAverageProvider")
   void fiveNumbersAverageCorrect(int a, int b, int c, int d, int e, int avg) throws Throwable {
     String errMsg = "Your method\"average()\" does not correctly calculate the average of five numbers";
-    Object output = MethodUtil.invokeIfMethodExists(Overload5.class, "average", new Object[] { a, b, c, d, e },
+    Object output = MethodUtil.invokeIfMethodExists(Averages.class, "average", new Object[] { a, b, c, d, e },
         int.class,
         int.class, int.class, int.class, int.class);
     CustomAssertions._assertEquals(output, avg, errMsg);
