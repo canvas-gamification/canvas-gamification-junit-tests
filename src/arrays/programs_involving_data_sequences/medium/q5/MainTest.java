@@ -68,7 +68,7 @@ public class MainTest extends BaseTest {
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the array with the replaced values.";
         int[] output = replace();
         runWithInput("", new Clause[]{
-                new StringLiteral(ArrayUtil.intArrayToInput(output))
+                new StringLiteral(ArrayUtil.arrayToInput(output))
         });
         assertEquals(replacementIndex(), Integer.parseInt(getItemByName("replacedIndex")), "Your program does not correctly print the index of the replaced integer.");
     }
