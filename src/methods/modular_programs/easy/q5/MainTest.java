@@ -70,6 +70,6 @@ public class MainTest extends BaseTest {
     @MethodSource("mainMethodInputProvider")
     void printsOutputCorrectly(double in, double feet) {
         runWithInput(String.valueOf(in));
-        assertEquals(feet, Double.parseDouble(getItemByName("feet")), 0.0001, "Your program does not correctly output the height in feet.");
+        assertEquals(feet, Double.parseDouble(getItemByName("feet")), 0.00001, "Your program does not correctly output the height in feet.");
     }
 }
