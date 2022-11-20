@@ -1,10 +1,10 @@
 package arrays.programs_involving_multidimensional_data.hard.q2;
 
 /*
-Write a Java program called Swapped, in the main method initialize a 5 by 5 array and fill it with random numbers
-between 0 and 100, inclusive. Print out the original array, with spaces between each number and a new line between each
-row in the array. Add an extra new line. Then swap the first and last item in each row of the array, and print the
-results with spaces in between numbers and a new line in between each row of the array.
+Write a Java program called Swapped and in the main method initialize a 5 by 5 array and fill it with random numbers
+between 0 and 100 (inclusive). Print out the array with spaces between each number and a new line between each row.
+Then, swap the first and last item in each row of the array and print the resulting array in the same format as the
+first one. Note that there should be an empty line separating the two printed arrays.
 
 Sample output:
     48 9 38 32 69
