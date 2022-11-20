@@ -3,6 +3,7 @@ package methods.defining_methods.hard.q3;
 import java.util.stream.Stream;
 
 import global.MethodTest;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -27,6 +28,7 @@ public class MainTest extends BaseTest {
 
         return new Clause[]{
                 new StringLiteral("Enter the number of sides on the polygon:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new PlaceHolder()
         };
