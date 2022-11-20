@@ -2,6 +2,9 @@ package methods.method_overloading.hard.q6;
 
 import java.util.stream.Stream;
 
+import global.tools.TestOption;
+import global.variables.clauses.PlaceHolder;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -16,14 +19,19 @@ import global.variables.clauses.StringLiteral;
 public class MainTest extends BaseTest {
   // Java
   public Clause[] testSentence() {
+    TestOption.isInputTest = true;
+    TestOption.defaultInput = "Jack Swift\nJack.Swift\n38471";
     return new Clause[] {
-        new StringLiteral("The following student has a valid username: true"),
-        new NewLine(),
-        new StringLiteral("The following student has a valid student number: true"),
-        new NewLine(),
-        new StringLiteral("The following student does not have a valid username: false"),
-        new NewLine(),
-        new StringLiteral("The following student does not have a valid student number: false"),
+            new StringLiteral("Please enter a student's name:"),
+            new Optional(new StringLiteral(" ")),
+            new NewLine(),
+            new StringLiteral("Please enter a username:"),
+            new Optional(new StringLiteral(" ")),
+            new NewLine(),
+            new StringLiteral("Please enter a student number:"),
+            new Optional(new StringLiteral(" ")),
+            new NewLine(),
+            new PlaceHolder()
     };
   }
 
