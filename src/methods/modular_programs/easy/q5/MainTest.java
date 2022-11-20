@@ -36,22 +36,22 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> heightConversionInputProvider() {
         return Stream.of(
-                Arguments.of(161.5, 5.2972),
+                Arguments.of(161.5, 5.29855643),
                 Arguments.of(88.392, 2.9),
                 Arguments.of(182.88, 6.0),
-                Arguments.of(0.1, 0.00328084),
+                Arguments.of(0.1, 0.003280839895),
                 Arguments.of(-0.1, -1.0),
                 Arguments.of(-45, -1.0),
                 Arguments.of(0, 0.0),
-                Arguments.of(3629, 119.0617),
-                Arguments.of(782541, 25673.9173));
+                Arguments.of(3629, 119.06167979),
+                Arguments.of(782541, 25673.91732283));
     }
 
     static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(
                 Arguments.of(1523, 49.96719),
                 Arguments.of(23, 0.754593),
-                Arguments.of(174.8264, 5.7357742782),
+                Arguments.of(174.8264, 5.735774278),
                 Arguments.of(-345246.13, -1.0));
     }
 
