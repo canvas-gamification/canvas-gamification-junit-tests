@@ -33,8 +33,6 @@ public class MainTest extends BaseTest {
         };
     }
 
-    ;
-
     public void runMain() {
         RentMethod.main(new String[0]);
     }
@@ -54,14 +52,14 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("rentPricesProvider")
-    void correctCalculatesRent(double rentMonthly, double rentYearly) throws Throwable {
+    void correctCalculatesRentMethod(double rentMonthly, double rentYearly) throws Throwable {
         Object[][] arguments = {
                 {rentMonthly, double.class}
         };
         MethodTest m = new MethodTest(RentMethod.class, "rentCalc", arguments);
         Object output = m.callMethod();
-        String errorMsg = "Your rentCalc() method does not calculate the yearly rent correctly.";
-        CustomAssertions._assertEquals(output, rentYearly, 0.00001, errorMsg);
+        String errorMsg = "Your rentCalc() method does not correctly calculate the yearly rent.";
+        CustomAssertions._assertEquals(rentYearly, output, 0.00001, errorMsg);
     }
 
     @ParameterizedTest
@@ -69,7 +67,6 @@ public class MainTest extends BaseTest {
     void printsCorrectYearlyRent(double rentMonthly, double rentYearly) {
         String errorMsg = "Your program does not print the correct yearly rent.";
         runWithInput(rentMonthly + "");
-        assertEquals(Double.parseDouble(getItemByName("rentYearly")), rentYearly, 0.00001, errorMsg);
-
+        assertEquals(rentYearly, Double.parseDouble(getItemByName("rentYearly")), 0.00001, errorMsg);
     }
 }
