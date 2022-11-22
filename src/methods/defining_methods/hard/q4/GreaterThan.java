@@ -1,7 +1,7 @@
 package methods.defining_methods.hard.q4;
 
 /*
- Write a Java Program that asks the user for two integers, then prints out the greater of the two integers. To do this,
+Write a Java Program that asks the user for two integers, then prints out the greater integer. To do this,
  write a method called greaterNum, taking the two integers as parameters and returning the larger one to be printed out
  in the main method. If they are equal, return either of the integers.
 
