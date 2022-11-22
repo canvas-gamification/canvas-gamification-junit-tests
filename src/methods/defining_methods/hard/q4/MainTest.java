@@ -71,7 +71,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("correctInputProvider")
-    void printsCorrectGreaterNum(int a, int b, int greater) {
+    void printsCorrectNumber(int a, int b, int greater) {
         runWithInput(a + " " + b);
         assertEquals(greater, Integer.parseInt(getItemByName("number")), "Your program does not print the larger number.");
     }
