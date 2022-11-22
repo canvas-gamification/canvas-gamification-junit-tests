@@ -1,18 +1,14 @@
 package arrays.referencing_array_and_its_elements.hard.q1;
 
-import arrays.programs_involving_data_sequences.medium.q5.DoTheDeletion;
 import global.BaseTest;
 import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
-import global.variables.wrappers.Optional;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -29,7 +25,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "1 2 3 4 5 6 7 8 9 10";
+        TestOption.defaultInput = arrayToInput(generateAscendingArray(1, n));
         Clause[] c = new Clause[2 * n + 4];
         c[0] = new StringLiteral("Enter 10 numbers:");
         c[1] = new NewLine();
@@ -100,7 +96,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
-    void LilToDaRightMethodTest(int[] input, int[] ans) throws Throwable {
+    void correctLilToDaRightMethod(int[] input, int[] ans) throws Throwable {
         Object[][] arguments = {
                 {input, int[].class}
         };
