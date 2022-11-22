@@ -50,8 +50,8 @@ public class MainTest extends BaseTest {
         int[][] b3 = new int[size][size];
 
         for (int x = 0; x < size; x++) {
-            a3[x] = ArrayUtil.generateRandomArray(1, 2, size);
-            b3[x] = ArrayUtil.generateRandomArray(1, 2, size);
+            a3[x] = ArrayUtil.replicateArray(1, size);
+            b3[x] = ArrayUtil.replicateArray(1, size);
         }
 
         int[][] a4 = new int[size][size];
@@ -66,11 +66,20 @@ public class MainTest extends BaseTest {
             }
         }
 
+        int[][] a5 = new int[size][size];
+        int[][] b5 = new int[size][size];
+
+        for (int x = 0; x < size; x++) {
+            a5[x] = ArrayUtil.generateAscendingArray(6, size);
+            b5[x] = ArrayUtil.generateAscendingArray(6, size);
+        }
+
         return Stream.of(
                 Arguments.of(a1, b1),
                 Arguments.of(a2, b2),
                 Arguments.of(a3, b3),
-                Arguments.of(a4, b4)
+                Arguments.of(a4, b4),
+                Arguments.of(a5, b5)
         );
     }
 

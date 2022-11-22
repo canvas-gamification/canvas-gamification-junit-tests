@@ -1,9 +1,10 @@
 package arrays.programs_involving_multidimensional_data.medium.q1;
 
 /*
-Write a Java program that initializes two integers arrays of size 5 by 5 and takes user input values for them. Then,
-check to see if each of their elements in the respective positions are the same. If any pair of elements are not the
-same, print "different", otherwise do nothing.
+Write a Java program that initializes two integer arrays of size 5 by 5 and prompts the user to input values for them.
+Then, check to see if each element in the first array matches the corresponding element in the second array. If any pair
+of elements are not the same, print "different", otherwise, do nothing. For example, if arr1[x][y] = 5, and arr2[x][y]
+= 6, you would print different.
 
 Sample output:
     Enter 5 values for array a row 0:
