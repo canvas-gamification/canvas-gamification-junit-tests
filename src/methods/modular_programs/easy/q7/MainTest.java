@@ -27,7 +27,7 @@ public class MainTest extends BaseTest {
                 new NewLine(),
                 new StringLiteral("Enter the second number: "),
                 new NewLine(),
-                new StringLiteral("The value of the first number raised to the second variable is "),
+                new StringLiteral("The value of the first number raised to the second number is "),
                 new DoubleLiteral("raised"),
                 new NewLine(),
                 new StringLiteral("The value of the larger number converted from degrees to radians is "),
@@ -49,7 +49,8 @@ public class MainTest extends BaseTest {
                 Arguments.of(5.67, -9.6, 5.8291151506320536E-8),
                 Arguments.of(23, 0, 1.0),
                 Arguments.of(0, 25, 0.0),
-                Arguments.of(0, 0, 1.0));
+                Arguments.of(0, 0, 1.0),
+                Arguments.of(45.2, 107.1, 1.8421558445639454E177));
     }
 
     static Stream<Arguments> degreeCalcInputProvider() {
@@ -62,7 +63,8 @@ public class MainTest extends BaseTest {
                 Arguments.of(5.67, -9.6, 0.09896016858807849),
                 Arguments.of(25, 0, 0.4363323129985824),
                 Arguments.of(0, 13, 0.22689280275926285),
-                Arguments.of(0, 0, 0.0));
+                Arguments.of(0, 0, 0.0),
+                Arguments.of(45.2, 107.1, 1.8692476288859268));
     }
 
     static Stream<Arguments> mainMethodInputProvider() {
