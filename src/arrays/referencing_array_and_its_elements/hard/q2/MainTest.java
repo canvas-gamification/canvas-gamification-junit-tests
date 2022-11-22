@@ -32,7 +32,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "1 2 3 4 5 6 7 8 9 2";
+        TestOption.defaultInput = arrayToInput(generateRandomArray(1, 100, n + 1));
         return new Clause[]{
                 new StringLiteral("Enter nine integers:"),
                 new Optional(new StringLiteral(" ")),
@@ -62,14 +62,12 @@ public class MainTest extends BaseTest {
         int[] a3 = generateRandomArray(-1000, 1000, n);
         int[] a4 = generateRandomArray(-1000, 1000, n);
         int[] a5 = generateRandomArray(-1000, 1000, n);
-        int[] a6 = generateRandomArray(-1000, 1000, n);
         return Stream.of(
                 Arguments.of(a1, 3, Arrays.copyOfRange(a1, 0, n % 3)),
                 Arguments.of(a2, n, Arrays.copyOfRange(a2, 0, 0)),
                 Arguments.of(a3, 1, Arrays.copyOfRange(a3, 0, n % 1)),
-                Arguments.of(a4, n, Arrays.copyOfRange(a4, 0, n % n)),
-                Arguments.of(a5, n - 1, Arrays.copyOfRange(a5, 0, n % (n - 1))),
-                Arguments.of(a6, n - 2, Arrays.copyOfRange(a6, 0, n % (n - 2)))
+                Arguments.of(a4, n - 1, Arrays.copyOfRange(a4, 0, n % (n - 1))),
+                Arguments.of(a5, n - 2, Arrays.copyOfRange(a5, 0, n % (n - 2)))
         );
     }
 

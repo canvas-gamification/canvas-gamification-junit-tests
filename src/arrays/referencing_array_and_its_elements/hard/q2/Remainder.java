@@ -2,8 +2,8 @@ package arrays.referencing_array_and_its_elements.hard.q2;
 /*
 Write a Java program that takes an array of nine numbers from the user and a positive integer x. Then, call a method
 named remainder(int[] arr, int x) that takes the array and returns the first n numbers in a new array of length n, where
-is the remainder after dividing the array length by x. Print the new array in the main method. Assume the user provides
-valid input.
+n is the remainder after dividing the array length by x. Print the new array in the main method. Assume the user
+provides valid input.
 
 Sample Output:
     Enter nine integers:
