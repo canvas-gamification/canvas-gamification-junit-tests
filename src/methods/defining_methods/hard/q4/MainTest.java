@@ -57,7 +57,7 @@ public class MainTest extends BaseTest {
     }
 
     @ParameterizedTest
-    @MethodSource("correctInputProvider")
+    @MethodSource("inputProvider")
     void correctGreaterNumMethod(int a, int b, int greater) throws Throwable {
         Object[][] arguments = {
                 {a, int.class},
