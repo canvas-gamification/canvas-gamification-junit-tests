@@ -40,11 +40,18 @@ public class ObjectTest {
             Field field = objectClass.getField(fieldName);
             assertEquals(fieldClass, field.getDeclaringClass(), String.join(" ", "The field", fieldName, "is not the correct type."));
         } catch (NoSuchFieldException e) {
-            fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName));
+            fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
         }
     }
 
-    public Object getFieldValue() {
+    public Object getFieldValue(String fieldName, Class<?> fieldClass) {
+        try{
+            Field field = objectClass.getField(fieldName);
+            assertEquals(fieldClass, field.getDeclaringClass(), String.join(" ", "The field", fieldName, "is not the correct type."));
+            // return field.get(Object);
+        } catch (NoSuchFieldException e) {
+            fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
+        }
         return null;
     }
 
