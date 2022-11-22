@@ -63,7 +63,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(FindDataType.class, "printType", arguments);
         Object output = m.callMethod();
-        String errorMessage = "Your printType() method for integer does not print the correct type.";
+        String errorMessage = "Your printType() method for integers does not return the correct string.";
         CustomAssertions._assertEquals("int", output, errorMessage);
     }
 
