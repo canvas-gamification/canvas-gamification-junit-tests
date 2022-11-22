@@ -20,7 +20,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "1 2 3 4 4 3 2 1 2 4 1 3 3 4 2 1";
+        TestOption.defaultInput = ArrayUtil.arrayToInput(ArrayUtil.generateRandomArray(1, 11,size*size));
         return clauseBuilder();
     }
 
