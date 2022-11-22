@@ -37,7 +37,7 @@ public class MainTest extends BaseTest {
         GreaterThan.main(new String[0]);
     }
 
-    static Stream<Arguments> correctInputProvider() {
+    static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of(1, 2, 2),
                 Arguments.of(2, 1, 2),
