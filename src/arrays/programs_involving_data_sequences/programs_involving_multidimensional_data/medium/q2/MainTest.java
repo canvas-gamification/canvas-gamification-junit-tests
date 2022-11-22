@@ -91,6 +91,15 @@ public class MainTest extends BaseTest {
                         {-54},
                         {2403, 7371, -729, 8856, 108, -7911, 189},
                         {0, 1026, -27}
+                }),
+                Arguments.of(new int[][]{
+                        {1, 0, 5, 12},
+                        {4, 23, 5},
+                        {78, 47, 128, 49, 1, 3}
+                }, 1, new int[][]{
+                        {1, 0, 5, 12},
+                        {4, 23, 5},
+                        {78, 47, 128, 49, 1, 3}
                 })
         );
     }
@@ -104,7 +113,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(MultiplyArrays.class, "increaseBy", arguments);
         m.callMethod();
-        assertArrayEquals(solution, pass, "Your increaseBy method does not correctly multiply the given array.");
+        assertArrayEquals(solution, pass, "Your increaseBy method does not correctly multiply the given array by the multiplier.");
     }
 
     @Test
@@ -123,7 +132,7 @@ public class MainTest extends BaseTest {
             }
         }
 
-        assertTrue(b, "Your main method does not output a correctly multiplied array.");
+        assertTrue(b, "Your main method does not correctly print the multiplied array.");
 
     }
 }
