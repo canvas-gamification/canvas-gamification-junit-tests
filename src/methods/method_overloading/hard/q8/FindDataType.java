@@ -1,8 +1,9 @@
 package methods.method_overloading.hard.q8;
 
 /*
-Write a Java Program that asks the user for an integer then a double and prints out a message with the data type of the
-number. Write two methods called printType to return a string of the data type using method overloading.
+Write a Java Program that asks the user for an integer and a double and then prints out a message with the data type of
+each number. To identify the data type, write two methods called printType, one that accepts an int and returns the
+string "int" and one that takes a double and returns the string "double".
 
 Sample Output:
     Enter an integer:

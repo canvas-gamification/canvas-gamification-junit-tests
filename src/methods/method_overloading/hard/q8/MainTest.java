@@ -57,7 +57,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputIntegerProvider")
-    void correctPrintTypeIntegerMethod(int intNumber) throws Throwable {
+    void correctPrintTypeMethodForIntegers(int intNumber) throws Throwable {
         Object[][] arguments = {
                 {intNumber, int.class}
         };
@@ -69,7 +69,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputDoubleProvider")
-    void correctPrintTypeDoubleMethod(double doubleNumber) throws Throwable {
+    void correctPrintTypeMethodForDoubles(double doubleNumber) throws Throwable {
         Object[][] arguments = {
                 {doubleNumber, double.class}
         };
@@ -82,13 +82,12 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("mainMethodInput")
     void printsCorrectOutput(int x, double y) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct data type.";
         runWithInput(x + " " + y, new Clause[][]{
                 {
-                        new StringLiteral("The data type associated with " + x + " is: "),
-                        new StringLiteral("int"),
+                        new StringLiteral("The data type associated with " + x + " is: int"),
                         new NewLine(),
-                        new StringLiteral("The data type associated with " + y + " is: "),
-                        new StringLiteral("double")
+                        new StringLiteral("The data type associated with " + y + " is: double")
                 }
         });
     }
