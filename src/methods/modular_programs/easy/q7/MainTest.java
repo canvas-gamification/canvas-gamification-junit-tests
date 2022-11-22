@@ -84,7 +84,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(TwoMethods.class, "raisedCalc", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(raised, output, 0.00001, "Your raisedCalc method does not correctly calculate the first variable raised to the second.");
+        CustomAssertions._assertEquals(raised, output, 0.00001, "Your raisedCalc method does not correctly calculate the first number raised to the second number.");
     }
 
     @ParameterizedTest
