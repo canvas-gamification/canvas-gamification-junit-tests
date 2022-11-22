@@ -104,6 +104,6 @@ public class MainTest extends BaseTest {
     void printsOutputCorrectly(double first, double second, double raised, double radians) {
         runWithInput(first + " " + second);
         assertEquals(raised, Double.parseDouble(getItemByName("raised")), 0.00001, "Your program does not correctly print the first number raised to the second number.");
-        assertEquals(radians, Double.parseDouble(getItemByName("radians")), 0.00001, "Your program does not properly display the converted radians.");
+        assertEquals(radians, Double.parseDouble(getItemByName("radians")), 0.00001, "Your program does not  correctly print the larger number converted to radians.");
     }
 }
