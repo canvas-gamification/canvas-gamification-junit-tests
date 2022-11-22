@@ -24,7 +24,7 @@ public class TwoMethods {
         double a = input.nextDouble();
         System.out.println("Enter the second number: ");
         double b = input.nextDouble();
-        System.out.println("The value of the first number raised to the second variable is " + raisedCalc(a, b));
+        System.out.println("The value of the first number raised to the second number is " + raisedCalc(a, b));
         System.out.println("The value of the larger number converted from degrees to radians is " + degreeCalc(a, b));
     }
 
