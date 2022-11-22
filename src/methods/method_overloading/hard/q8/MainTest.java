@@ -75,7 +75,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(FindDataType.class, "printType", arguments);
         Object output = m.callMethod();
-        String errorMessage = "Your printType() method for double does not print the correct type.";
+        String errorMessage = "Your printType() method for doubles does not return the correct type.";
         CustomAssertions._assertEquals(output, "double", errorMessage);
     }
 
