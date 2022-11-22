@@ -102,6 +102,6 @@ public class MainTest extends BaseTest {
     void printsOutputCorrectly(double first, double second, double raised, double radians) {
         runWithInput(first + " " + second);
         assertEquals(raised, Double.parseDouble(getItemByName("raised")), 0.00001, "Your program does not properly display the raised value.");
-        assertEquals(radians, Double.parseDouble(getItemByName("radians")), 0.001, "Your program does not properly display the converted radians.");
+        assertEquals(radians, Double.parseDouble(getItemByName("radians")), 0.00001, "Your program does not properly display the converted radians.");
     }
 }
