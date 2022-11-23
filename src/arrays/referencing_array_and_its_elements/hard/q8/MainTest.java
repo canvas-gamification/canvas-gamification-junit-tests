@@ -2,7 +2,7 @@ package arrays.referencing_array_and_its_elements.hard.q8;
 
 import global.BaseTest;
 import global.MethodTest;
-import global.exceptions.InvalidClauseException;
+import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
@@ -30,7 +30,7 @@ public class MainTest extends BaseTest {
                 new StringLiteral("Enter " + n + " integers in ascending order:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("The lowest missing number is "),
+                new StringLiteral("The lowest missing number is: "),
                 new IntegerLiteral("ans")
         };
     }
@@ -55,6 +55,8 @@ public class MainTest extends BaseTest {
                 Arguments.of(merge(generateAscendingArray(1, 2), generateAscendingArray(4, n - 2))),
                 Arguments.of(generateAscendingArray(1, n)),
                 Arguments.of(merge(generateAscendingArray(-n / 2, n / 2), generateAscendingArray(1, n - n / 2))),
+                Arguments.of(merge(generateAscendingArray(1, n - 1), generateAscendingArray(n + 1, 1))),
+                Arguments.of(merge(generateAscendingArray(1, 1), generateAscendingArray(3, n - 1))),
                 Arguments.of(generateAscendingArray(-n, n))
 
         );
@@ -62,10 +64,10 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("mainInputProvider")
-    void printCorrectOutput(int[] input) {
+    void printsCorrectOutput(int[] input) {
         int ans = miss(input);
         runWithInput(arrayToInput(input));
-        assertEquals(ans, Integer.parseInt(getItemByName("ans")));
+        assertEquals("Your program does not print the lowest missing number correctly.", ans, Integer.parseInt(getItemByName("ans")));
     }
 
 
@@ -73,6 +75,7 @@ public class MainTest extends BaseTest {
         return Stream.of(
                 Arguments.of(merge(generateAscendingArray(1, 10000), generateAscendingArray(10002, 10000))),
                 Arguments.of(merge(generateAscendingArray(1, 10000), generateAscendingArray(10002, 1))),
+                Arguments.of(merge(generateAscendingArray(1, 1), generateAscendingArray(3, 10000))),
                 Arguments.of(merge(generateAscendingArray(-10000, 40000), generateAscendingArray(40002, 10000))),
                 Arguments.of(generateAscendingArray(-324234, 10000)),
                 Arguments.of(merge(generateAscendingArray(-1000000000, 10000), generateAscendingArray(1000000000, 10000)))
@@ -87,9 +90,8 @@ public class MainTest extends BaseTest {
                 {input, int[].class},
         };
         MethodTest m = new MethodTest(WhichOneIsNext.class, "missingNo", arguments);
-        m.setIncorrectMethodStructureErrorMessage("Your missingNo method does not correctly show the first missing number in the ascending array.");
         Object output = m.callMethod();
-        assertEquals(output, miss(input));
+        CustomAssertions._assertEquals(miss(input), output, "Your missingNo method does not correctly show the first missing number in the ascending array.");
     }
 
 }

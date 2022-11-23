@@ -1,15 +1,15 @@
 package arrays.referencing_array_and_its_elements.hard.q8;
 /*
-Write a program that takes an array of ten integers in ascending order. Because we need these numbers to be consecutive
-numbers, the program goes through each number one at a time to find the lowest missing number from the sequence.
-For example, in an array with elements {2, 3, 5, 6, 7, 10} the lowest missing number is 4. Print out that missing number
-if found, or print -1 if there are no missing numbers. For that, write a method called missingNo that takes an ascending
-array and return the lowest missing number. Your method should be general enough to work with any size of array.
+Write a program that takes an array of ten integers in ascending order, checks if they are consecutive numbers, and
+prints the lowest missing number (if there is one). For example, in an array with elements {2, 3, 5, 6, 7, 10}, the
+lowest missing number is 4. To do this, write a method called missingNo that takes an ascending integer array and
+returns the lowest missing integer. This method should be generalized to work with any array length. If no integer is
+missing, return -1. Print out the number returned by missingNo.
 
 Sample Output:
     Enter 10 integers in ascending order:
     1 2 3 5 6 7 8 9 10 11
-    The lowest missing number is 4
+    The lowest missing number is: 4
  */
 
 import java.util.Scanner;
@@ -21,7 +21,7 @@ public class WhichOneIsNext {
         System.out.println("Enter 10 integers in ascending order:");
         for (int i = 0; i < 10; i++)
             arr[i] = in.nextInt();
-        System.out.println("The lowest missing number is " + missingNo(arr));
+        System.out.println("The lowest missing number is: " + missingNo(arr));
     }
 
     public static int missingNo(int[] arr) {
