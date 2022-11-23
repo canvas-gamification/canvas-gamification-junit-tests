@@ -3,6 +3,7 @@ package arrays.referencing_array_and_its_elements.hard.q7;
 import global.BaseTest;
 import global.MethodTest;
 import global.exceptions.InvalidClauseException;
+import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
@@ -17,7 +18,6 @@ import java.util.stream.Stream;
 
 import static global.utils.ArrayUtil.arrayToInput;
 import static global.utils.ArrayUtil.generateRandomArray;
-import static org.junit.Assert.assertEquals;
 
 public class MainTest extends BaseTest {
     // Java
@@ -26,7 +26,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "3 4 6 21 48 42 89 2 0 91";
+        TestOption.defaultInput = arrayToInput(generateRandomArray(-100, 100, n));
         return new Clause[]{
                 new StringLiteral("Enter an array of " + n + " integers to reverse:"),
                 new Optional(new StringLiteral(" ")),
@@ -43,11 +43,11 @@ public class MainTest extends BaseTest {
         TakeItBackNow.main(new String[0]);
     }
 
-    public static String reverse(int[] a) {
-        String ans = "";
+    public static int[] reverse(int[] a) {
+        int[] ans = new int[a.length];
         for (int i = a.length - 1; i >= 0; i--)
-            ans += a[i] + " ";
-        return ans.trim();
+            ans[a.length - i - 1] = a[i];
+        return ans;
     }
 
     static Stream<Arguments> mainInputProvider() {
@@ -61,11 +61,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("mainInputProvider")
     void correctMainMethod(int[] input) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly reverse the array";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly reverse the array.";
         runWithInput(
                 arrayToInput(input),
                 new Clause[]{
-                        new StringLiteral(reverse(input))
+                        new StringLiteral(arrayToInput(reverse(input)))
                 }
         );
     }
@@ -86,10 +86,9 @@ public class MainTest extends BaseTest {
         Object[][] arguments = {
                 {input, int[].class},
         };
-        MethodTest m = new MethodTest(TakeItBackNow.class, "Rev", arguments);
-        m.setIncorrectMethodStructureErrorMessage("Your Rev method does not correctly reverse the array");
+        MethodTest m = new MethodTest(TakeItBackNow.class, "rev", arguments);
         Object output = m.callMethod();
-        assertEquals(output, reverse(input));
+        CustomAssertions._assertArrayEquals(reverse(input), output, "Your rev method does not correctly reverse the array.");
     }
 
 }
