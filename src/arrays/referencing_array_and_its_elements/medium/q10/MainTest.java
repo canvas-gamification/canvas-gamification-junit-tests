@@ -52,7 +52,7 @@ public class MainTest extends BaseTest {
         return ans.trim();
     }
 
-    static Stream<String> InputProvider() {
+    static Stream<String> inputProvider() {
         return Stream.of(
                 randStr(),
                 randStr(),
