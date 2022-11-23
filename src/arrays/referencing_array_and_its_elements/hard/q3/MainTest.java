@@ -16,8 +16,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static global.utils.ArrayUtil.arrayToInput;
-import static global.utils.ArrayUtil.generateRandomArray;
+import static global.utils.ArrayUtil.*;
 
 public class MainTest extends BaseTest {
     // Java
@@ -56,13 +55,12 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> mainInputProvider() {
-        int[] a1 = generateRandomArray(1, 1000000000, n);
-        int[] a2 = generateRandomArray(1, 1000000000, n);
-        int[] a3 = generateRandomArray(1, 1000000000, n);
         return Stream.of(
-                Arguments.of(a1),
-                Arguments.of(a2),
-                Arguments.of(a3)
+                Arguments.of(generateRandomArray(1, 1000000000, n)),
+                Arguments.of(generateRandomArray(1, 1000000000, n)),
+                Arguments.of(generateRandomArray(1, 1000000000, n)),
+                Arguments.of(generateAscendingArray(1, n, 2)),
+                Arguments.of(generateAscendingArray(2, n, 2))
         );
     }
 
@@ -82,7 +80,9 @@ public class MainTest extends BaseTest {
                 Arguments.of(new int[]{1, 3, 5}),
                 Arguments.of(new int[]{2, 4, 6}),
                 Arguments.of(new int[]{5, 3, 1, 6, 4, 2}),
-                Arguments.of(generateRandomArray(1, 1000000000, 100000))
+                Arguments.of(generateRandomArray(1, 1000000000, 100000)),
+                Arguments.of(generateAscendingArray(1, 100000, 2)),
+                Arguments.of(generateAscendingArray(2, 100000, 2))
         );
     }
 
