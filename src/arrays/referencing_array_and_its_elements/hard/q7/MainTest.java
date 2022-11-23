@@ -60,7 +60,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("mainInputProvider")
-    void correctMainMethod(int[] input) throws InvalidClauseException {
+    void printsCorrectOutput(int[] input) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly reverse the array.";
         runWithInput(
                 arrayToInput(input),
