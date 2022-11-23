@@ -96,7 +96,7 @@ public class MainTest extends BaseTest {
         MethodTest m = new MethodTest(Even.class, "even", arguments);
         Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(getEven(input), output,
-                "Your even method does not return the correct even array");
+                "Your even method does not correctly create a new array consisting of only even values from the input array.");
 
 
     }
