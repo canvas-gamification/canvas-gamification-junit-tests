@@ -3,6 +3,7 @@ package arrays.referencing_array_and_its_elements.hard.q6;
 import global.BaseTest;
 import global.MethodTest;
 import global.exceptions.InvalidClauseException;
+import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
@@ -16,6 +17,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import static global.tools.CustomAssertions._assertEquals;
 import static global.utils.ArrayUtil.arrayToInput;
 import static global.utils.ArrayUtil.generateRandomArray;
 import static org.junit.Assert.assertEquals;
@@ -57,8 +59,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("mainInputProvider")
-    void correctMainMethod(int[] input) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly split the array in half";
+    void printsCorrectOutput(int[] input) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly split the array in half.";
         runWithInput(
                 arrayToInput(input),
                 new Clause[]{
@@ -70,7 +72,7 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> InputProvider() {
         return Stream.of(
-                Arguments.of(generateRandomArray(-1000000000, 1000000000, 10)),
+                Arguments.of(generateRandomArray(-1000000000, 1000000000, n)),
                 Arguments.of(new int[]{}),
                 Arguments.of(new int[]{1, 2}),
                 Arguments.of(generateRandomArray(-1000000000, 1000000000, 100000))
@@ -84,9 +86,8 @@ public class MainTest extends BaseTest {
                 {input, int[].class},
         };
         MethodTest m = new MethodTest(RightDownTheMiddle.class, "splitHalf", arguments);
-        m.setIncorrectMethodStructureErrorMessage("Your splitHalf method does not print the first half of the array correctly");
         Object output = m.callMethod();
-        assertEquals(output, split(input));
+        CustomAssertions._assertEquals(split(input), output, "Your splitHalf method does not correctly split the array in half.");
     }
 
 
