@@ -25,6 +25,6 @@ public class VowelNames {
             if (arr[i].charAt(0) == 'B')
                 count++;
         }
-        System.out.println("There are " + count + " names start with the letter B");
+        System.out.println("There are " + count + " names that start with the letter B");
     }
 }
