@@ -97,7 +97,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(PotentialGoodStudents.class, "PGS", arguments, methodSentence);
         m.setIncorrectMethodStructureErrorMessage("Your PGS method does not correctly print the indices of potential teaching assistant candidates.");
-        Object output = m.callMethod();
+        m.callMethod();
     }
 }
 
