@@ -34,7 +34,8 @@ public class MainTest extends BaseTest {
                 new StringLiteral("The indices of potential candidates for teaching assistants are:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new PlaceHolder()
+                new PlaceHolder(),
+                new Optional(new StringLiteral(" "))
         };
     }
 
@@ -77,7 +78,7 @@ public class MainTest extends BaseTest {
     static Stream<Arguments> InputProvider() {
         return Stream.of(
                 Arguments.of(generateRandomArray(0.0, 100, 10000)),
-                Arguments.of(generateRandomArray(pivot, 100, 10000)),
+                Arguments.of(generateRandomArray(pivot + 0.0001, 100, 10000)),
                 Arguments.of(generateRandomArray(0.0, pivot, 10000)),
                 Arguments.of(new double[]{}),
                 Arguments.of(new double[]{pivot, pivot / 2, pivot + 0.00001}),
