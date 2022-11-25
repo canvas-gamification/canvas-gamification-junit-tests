@@ -3,9 +3,8 @@ package methods.method_overloading.hard.q8;
 import java.util.stream.Stream;
 
 import global.MethodTest;
-import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
-import global.variables.clauses.PlaceHolder;
+import global.variables.clauses.*;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,8 +13,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import global.BaseTest;
 import global.tools.CustomAssertions;
 import global.variables.Clause;
-import global.variables.clauses.NewLine;
-import global.variables.clauses.StringLiteral;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Java
@@ -30,7 +29,13 @@ public class MainTest extends BaseTest {
                 new StringLiteral("Enter a double\\:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new PlaceHolder()
+                new StringLiteral("The data type associated with "),
+                new IntegerLiteral("x"),
+                new StringLiteral(" is: int"),
+                new NewLine(),
+                new StringLiteral("The data type associated with "),
+                new DoubleLiteral("y"),
+                new StringLiteral(" is: double")
         };
     }
 
@@ -81,14 +86,9 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("mainMethodInput")
-    void printsCorrectOutput(int x, double y) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct data type.";
-        runWithInput(x + " " + y, new Clause[][]{
-                {
-                        new StringLiteral("The data type associated with " + x + " is: int"),
-                        new NewLine(),
-                        new StringLiteral("The data type associated with " + y + " is: double")
-                }
-        });
+    void printsCorrectOutput(int x, double y) {
+        runWithInput(x + " " + y);
+        assertEquals(x, Integer.parseInt(getItemByName("x")), "Your program does not print the correct value for the first line.");
+        assertEquals(y, Double.parseDouble(getItemByName("y")), "Your program does not print the correct value for the second line.");
     }
 }
