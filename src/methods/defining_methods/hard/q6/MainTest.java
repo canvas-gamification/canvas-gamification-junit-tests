@@ -8,14 +8,14 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import global.BaseTest;
-import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
-import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Java
@@ -27,7 +27,8 @@ public class MainTest extends BaseTest {
         return new Clause[]{
                 new StringLiteral("Enter a number:"),
                 new NewLine(),
-                new PlaceHolder(),
+                new StringLiteral("The new number is: "),
+                new IntegerLiteral("newNum"),
         };
     }
 
@@ -72,11 +73,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void printsCorrectMessage(int num, int newNum) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message for the number.";
-        runWithInput(num + "", new Clause[][]{{
-                new StringLiteral("The new number is: "),
-                new IntegerLiteral(newNum),
-        }});
+    void printsCorrectMessage(int num, int newNum) {
+        runWithInput(num + "");
+        assertEquals(newNum, Integer.parseInt(getItemByName("newNum")), "Your program does not print the correct message for the number.");
     }
 }
