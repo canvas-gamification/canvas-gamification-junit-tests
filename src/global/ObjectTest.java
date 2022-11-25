@@ -1,18 +1,15 @@
 package global;
 
 import global.exceptions.InvalidClauseException;
-import global.tools.Logger;
 import global.variables.Clause;
 import global.variables.RandomClause;
 import global.variables.clauses.PlaceHolder;
-import test.object.House;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -54,8 +51,8 @@ public class ObjectTest {
 
     public void hasField(String fieldName, Class<?> fieldClass) {
         try {
-            Field field = objectClass.getField(fieldName);
-            assertEquals(fieldClass, field.getDeclaringClass(), String.join(" ", "The field", fieldName, "is not the correct type."));
+            Field field = objectClass.getDeclaredField(fieldName);
+            assertEquals(fieldClass, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
         } catch (NoSuchFieldException e) {
             fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
         }
@@ -69,7 +66,7 @@ public class ObjectTest {
              assertEquals(fieldClass, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
             fieldValue = field.get(testObject);
         } catch (NoSuchFieldException e) {
-            fail(String.join(" ", "Your", objectClass.getSimpleName(), " class does not contain the field", fieldName, "."));
+            fail(String.join("", "Your ", objectClass.getSimpleName(), " class does not contain the field ", fieldName, " ."));
         } catch (IllegalAccessException e){
             e.printStackTrace();
         }
@@ -78,8 +75,8 @@ public class ObjectTest {
 
     public void setFieldValue(Object testObject, Object value, String fieldName, Class<?> fieldClass) {
         try {
-            Field field = objectClass.getField(fieldName);
-            assertEquals(fieldClass, field.getDeclaringClass(), String.join(" ", "The field", fieldName, "is not the correct type."));
+            Field field = testObject.getClass().getDeclaredField(fieldName);
+            assertEquals(fieldClass, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
             if (!value.getClass().isInstance(fieldClass))
                 _fail("Error with test definition, please contact an administrator.",
                         "The type of value must match the type of the field you are trying to set.");

@@ -19,7 +19,7 @@ public class ObjectsTesting {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void createsHouse(int number, String address) throws Throwable {
+    public void houseClassHasCorrectConstructors(int number, String address) throws Throwable {
         ObjectTest objectTest = new ObjectTest("test.object.House");
         Object[][] arguments = {
                 {number, int.class},
