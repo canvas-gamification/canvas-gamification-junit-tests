@@ -32,7 +32,6 @@ public class ObjectTest {
         try {
             this.objectClass = Class.forName(objectClass);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
             fail("Your program does not contain the class " + objectClass);
         }
     }
