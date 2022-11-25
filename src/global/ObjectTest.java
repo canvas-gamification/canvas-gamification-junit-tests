@@ -63,12 +63,14 @@ public class ObjectTest {
         return object;
     }
 
-    public void hasField(String fieldName, Class<?> fieldClass) {
+    public boolean hasField(String fieldName, Class<?> fieldClass) {
         try {
             Field field = objectClass.getDeclaredField(fieldName);
             assertEquals(fieldClass, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
+            return true;
         } catch (NoSuchFieldException e) {
             fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
+            return false;
         }
     }
 
