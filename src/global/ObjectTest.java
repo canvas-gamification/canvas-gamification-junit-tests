@@ -1,15 +1,18 @@
 package global;
 
 import global.exceptions.InvalidClauseException;
+import global.tools.Logger;
 import global.variables.Clause;
 import global.variables.RandomClause;
 import global.variables.clauses.PlaceHolder;
+import test.object.House;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -62,11 +65,14 @@ public class ObjectTest {
     public Object getFieldValue(Object testObject, String fieldName, Class<?> fieldClass) {
         Object fieldValue = null;
         try {
-            Field field = objectClass.getField(fieldName);
-            assertEquals(fieldClass, field.getDeclaringClass(), String.join(" ", "The field", fieldName, "is not the correct type."));
+            Field field = testObject.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+             assertEquals(fieldClass, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
             fieldValue = field.get(testObject);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
+        } catch (NoSuchFieldException e) {
+            fail(String.join(" ", "Your", objectClass.getSimpleName(), " class does not contain the field", fieldName, "."));
+        } catch (IllegalAccessException e){
+            e.printStackTrace();
         }
         return fieldValue;
     }
@@ -84,11 +90,51 @@ public class ObjectTest {
         }
     }
 
-    public Object callMethod(String methodName) {
-        return null;
+    public Object callMethod(String methodName) throws Throwable {
+        return callMethod(methodName, null, null, null, "");
     }
 
-    public Object callMethod(Object object, String methodName, Object[][] arguments, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
+    public Object callMethod(String methodName, Object object) throws Throwable {
+        return callMethod(methodName, object, null, null, "");
+    }
+
+    public Object callMethod(String methodName, Object[][] arguments) throws Throwable {
+        return callMethod(methodName, null, null, null, "");
+    }
+
+    public Object callMethod(String methodName, Clause[] methodTestSentence) throws Throwable {
+        return callMethod(methodName, null, null, methodTestSentence, "");
+    }
+
+    public Object callMethod(String methodName, Object object, Object[][] arguments) throws Throwable {
+        return callMethod(methodName, object, arguments, null, "");
+    }
+
+    public Object callMethod(String methodName, Object object, Clause[] methodTestSentence) throws Throwable {
+        return callMethod(methodName, object, null, methodTestSentence, "");
+    }
+
+    public Object callMethod(String methodName, Object[][] arguments, Clause[] methodTestSentence) throws Throwable {
+        return callMethod(methodName, null, arguments, methodTestSentence, "");
+    }
+
+    public Object callMethod(String methodName, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
+        return callMethod(methodName, null, null, methodTestSentence, incorrectMethodStructureErrorMessage);
+    }
+
+    public Object callMethod(String methodName, Object object, Object[][] arguments, Clause[] methodTestSentence) throws Throwable {
+        return callMethod(methodName, object, arguments, methodTestSentence, "");
+    }
+
+    public Object callMethod(String methodName, Object[][] arguments, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
+        return callMethod(methodName, null, arguments, methodTestSentence, incorrectMethodStructureErrorMessage);
+    }
+
+    public Object callMethod(String methodName, Object object, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
+        return callMethod(methodName, object, null, methodTestSentence, incorrectMethodStructureErrorMessage);
+    }
+
+    public Object callMethod(String methodName, Object object, Object[][] arguments, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
         Class<?>[] argsClass = getArgumentClasses(arguments);
         Object[] args = getArguments(arguments);
         try {
@@ -96,18 +142,20 @@ public class ObjectTest {
             ByteArrayOutputStream methodOutput = new ByteArrayOutputStream();
             System.setOut(new PrintStream(methodOutput));
             Object output = objectMethodInvoke.invoke(object, args);
-            methodOutputFollowsCorrectStructure(methodName, methodTestSentence, methodOutput);
+            methodOutputFollowsCorrectStructure(methodName, methodTestSentence, incorrectMethodStructureErrorMessage, methodOutput);
             return output;
-        } catch (NoSuchMethodException | IllegalAccessException e) {
+        } catch (NoSuchMethodException e) {
             fail(String.join("", "Your ", objectClass.getSimpleName(),
                     " class does not contain the method ", methodName, "."));
             return null;
-        } catch (InvocationTargetException e) {
+        } catch (InvocationTargetException | IllegalAccessException e) {
             throw e.getCause();
         }
     }
 
     private Class<?>[] getArgumentClasses(Object[][] arguments) {
+        if (Objects.isNull(arguments))
+            return null;
         Class<?>[] argsClass = new Class[arguments.length];
         for (int i = 0; i < arguments.length; i++)
             if (arguments[i][1] instanceof Class<?>) {
@@ -120,6 +168,8 @@ public class ObjectTest {
     }
 
     private Object[] getArguments(Object[][] arguments) {
+        if (Objects.isNull(arguments))
+            return null;
         Object[] args = new Object[arguments.length];
         for (int i = 0; i < arguments.length; i++)
             args[i] = arguments[i][0];

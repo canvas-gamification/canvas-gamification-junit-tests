@@ -1,7 +1,7 @@
 package test.object;
 
 public class House {
-    int number;
+    public int number;
     String address;
 
     public House(){

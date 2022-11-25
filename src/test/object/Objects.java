@@ -12,5 +12,7 @@ public class Objects {
         };
         ObjectTest objectTest = new ObjectTest("test.object.House");
         Object output = objectTest.createInstance(arguments);
+        House h = new House(4, "test");
+
     }
 }
