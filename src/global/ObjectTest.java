@@ -49,6 +49,20 @@ public class ObjectTest {
         return object;
     }
 
+    public Object createInstance() throws Throwable {
+        Object object = null;
+        try {
+            object = objectClass.getDeclaredConstructor().newInstance();
+        } catch (InvocationTargetException | IllegalAccessException e) {
+            throw e.getCause();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            fail(String.join(" ", "The", objectClass.getSimpleName(), "class does not contain a required constructor."));
+        }
+        return object;
+    }
+
     public void hasField(String fieldName, Class<?> fieldClass) {
         try {
             Field field = objectClass.getDeclaredField(fieldName);

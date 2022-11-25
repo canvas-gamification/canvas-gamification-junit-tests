@@ -21,14 +21,23 @@ public class ObjectsTesting {
     @MethodSource("inputProvider")
     public void houseClassHasCorrectConstructors(int number, String address) throws Throwable {
         ObjectTest objectTest = new ObjectTest("test.object.House");
-        Object[][] arguments = {
+        // Constructor 1
+        Object[][] arguments1 = {
                 {number, int.class},
                 {address, String.class}
         };
-        Object object = objectTest.createInstance(arguments);
-        _assertEquals(number, objectTest.getFieldValue(object, "number", int.class),
+        Object object1 = objectTest.createInstance(arguments1);
+        _assertEquals(number, objectTest.getFieldValue(object1, "number", int.class),
                 "Your House class does not correctly initialize the number field.");
-        _assertEquals(address, objectTest.getFieldValue(object, "address", String.class),
+        _assertEquals(address, objectTest.getFieldValue(object1, "address", String.class),
                 "Your House class does not correctly initialize the address field.");
+
+        // Constructor 2
+        Object object2 = objectTest.createInstance();
+        _assertEquals(0, objectTest.getFieldValue(object2, "number", int.class),
+                "Your House class does not correctly initialize the number field.");
+        _assertEquals("nowhere", objectTest.getFieldValue(object2, "address", String.class),
+                "Your House class does not correctly initialize the address field.");
+
     }
 }
