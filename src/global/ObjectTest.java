@@ -1,9 +1,11 @@
 package global;
 
 import global.exceptions.InvalidClauseException;
+import global.tools.Logger;
 import global.variables.Clause;
 import global.variables.RandomClause;
 import global.variables.clauses.PlaceHolder;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -20,6 +22,7 @@ import static global.tools.CustomAssertions._fail;
 import static global.tools.Logger.parseTestInformation;
 import static global.utils.RegexUtil.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ObjectTest {
@@ -66,10 +69,9 @@ public class ObjectTest {
     public boolean hasField(String fieldName, Class<?> fieldClass) {
         try {
             Field field = objectClass.getDeclaredField(fieldName);
-            assertEquals(fieldClass, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
             return true;
         } catch (NoSuchFieldException e) {
-            fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
+            // fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
             return false;
         }
     }
@@ -79,11 +81,11 @@ public class ObjectTest {
         try {
             Field field = testObject.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
-             assertEquals(fieldClass, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
+            assertEquals(fieldClass, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
             fieldValue = field.get(testObject);
         } catch (NoSuchFieldException e) {
             fail(String.join("", "Your ", objectClass.getSimpleName(), " class does not contain the field ", fieldName, " ."));
-        } catch (IllegalAccessException e){
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
         return fieldValue;
@@ -92,10 +94,58 @@ public class ObjectTest {
     public void setFieldValue(Object testObject, Object value, String fieldName, Class<?> fieldClass) {
         try {
             Field field = testObject.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
             assertEquals(fieldClass, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
-            if (!value.getClass().isInstance(fieldClass))
+            Logger.logMessage(value.getClass() + "\n" + fieldClass.toString());
+            Logger.logMessage(value.getClass().isInstance(fieldClass) + "");
+            if (!value.getClass().isInstance(fieldClass)) {
                 _fail("Error with test definition, please contact an administrator.",
                         "The type of value must match the type of the field you are trying to set.");
+            }
+            field.set(testObject, value);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
+        }
+    }
+
+    public void setFieldValue(Object testObject, int value, String fieldName) {
+        try {
+            Field field = testObject.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            assertEquals(int.class, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
+            field.set(testObject, value);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
+        }
+    }
+
+    public void setFieldValue(Object testObject, double value, String fieldName) {
+        try {
+            Field field = testObject.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            assertEquals(double.class, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
+            field.set(testObject, value);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
+        }
+    }
+
+    public void setFieldValue(Object testObject, boolean value, String fieldName) {
+        try {
+            Field field = testObject.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            assertEquals(boolean.class, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
+            field.set(testObject, value);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
+        }
+    }
+
+    public void setFieldValue(Object testObject, char value, String fieldName) {
+        try {
+            Field field = testObject.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            assertEquals(char.class, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
             field.set(testObject, value);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
@@ -257,5 +307,9 @@ public class ObjectTest {
             }
             i += 1;
         }
+    }
+
+    public String missingFieldValueMessage(String fieldName) {
+        return String.join("", "Your ", objectClass.getSimpleName(), " class does not contain the field ", fieldName, ".");
     }
 }
