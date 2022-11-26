@@ -14,6 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ObjectsTesting {
     private final String houseClass = "test.object.House";
+    // Have beforeEach in class to create an objectTest to use
+
+    // User can also make their own object tests (for specifying constructors, etc.)
+
 
     @Test
     public void houseClassHasRequiredFields() {

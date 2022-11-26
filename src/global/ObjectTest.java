@@ -36,6 +36,10 @@ public class ObjectTest {
         }
     }
 
+    // When you create an objectTest, you should be able to specify fields, methods, and constructors\
+
+    // TODO: When specifying methods and parameters, you can also specify the modifier (public, private, etc.) and it should check that
+
     public Object createInstance(Object[][] arguments) throws Throwable {
         Class<?>[] argsClass = getArgumentClasses(arguments);
         Object[] args = getArguments(arguments);
