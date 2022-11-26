@@ -1,11 +1,9 @@
 package global;
 
 import global.exceptions.InvalidClauseException;
-import global.tools.Logger;
 import global.variables.Clause;
 import global.variables.RandomClause;
 import global.variables.clauses.PlaceHolder;
-import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -22,7 +20,6 @@ import static global.tools.CustomAssertions._fail;
 import static global.tools.Logger.parseTestInformation;
 import static global.utils.RegexUtil.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ObjectTest {
@@ -100,9 +97,7 @@ public class ObjectTest {
             Field field = testObject.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
             assertEquals(fieldClass, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
-            Logger.logMessage(value.getClass() + "\n" + fieldClass.toString());
-            Logger.logMessage(value.getClass().isInstance(fieldClass) + "");
-            if (!value.getClass().isInstance(fieldClass)) {
+            if (!fieldClass.isInstance(value)) {
                 _fail("Error with test definition, please contact an administrator.",
                         "The type of value must match the type of the field you are trying to set.");
             }
