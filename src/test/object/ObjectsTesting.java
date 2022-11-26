@@ -1,6 +1,7 @@
 package test.object;
 
 import global.ObjectTest;
+import global.variables.Clause;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -97,38 +98,24 @@ public class ObjectsTesting {
                 "Your House class does not correctly initialize the address field.");
     }
 
-    static Stream<Integer> setNumberInputProvider() {
+    static Stream<Integer> printNumberInputProvider() {
         return Stream.of(
                 0, 1, 6, 1, 7453, 24
         );
     }
 
-    static Stream<String> setStringInputProvider() {
-        return Stream.of(
-                "Test Address 1",
-                "Another address",
-                "One more"
-        );
-    }
-
     @ParameterizedTest
-    @MethodSource("setNumberInputProvider")
-    public void canSetNumber(int number) throws Throwable {
+    @MethodSource("printNumberInputProvider")
+    public void correctPrintNumberMethod(String address) throws Throwable {
         ObjectTest objectTest = new ObjectTest(houseClass);
-        Object object = objectTest.createInstance();
-        objectTest.setFieldValue(object, number, "number");
-        Object output = objectTest.getFieldValue(object, "number", int.class);
-        _assertEquals(number, output, "Your ");
-    }
+        Object[][] constructorArguments = {
+                {address, String.class}
+        };
+        Object object = objectTest.createInstance(constructorArguments);
+        Clause[] methodTestSentence = {
 
-    @ParameterizedTest
-    @MethodSource("setStringInputProvider")
-    public void canSetAddress(String address) throws Throwable {
-        ObjectTest objectTest = new ObjectTest(houseClass);
-        Object object = objectTest.createInstance();
-        objectTest.setFieldValue(object, address, "address", String.class);
-        Object output = objectTest.getFieldValue(object, "address", String.class);
-        _assertEquals(address, output, "Your ");
+        };
+        objectTest.callMethod("printNumber", object);
     }
 
 }
