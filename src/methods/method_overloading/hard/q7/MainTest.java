@@ -2,6 +2,7 @@ package methods.method_overloading.hard.q7;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,7 +11,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import global.BaseTest;
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.IntegerLiteral;
@@ -67,19 +67,27 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputDoubleProvider")
     void testDouble(double x, double y, double distance) throws Throwable {
-        String errMsg = "Your method \"calcDistance()\" does not return the correct distance for two doubles.";
-        Object output = MethodUtil.invokeIfMethodExists(Distances.class, "calcDistance", new Object[]{x, y,},
-                double.class, double.class);
-        CustomAssertions._assertEquals(output, distance, 0.0001, errMsg);
+        Object[][] arguments = {
+                {x, double.class},
+                {y, double.class}
+        };
+        MethodTest m = new MethodTest(Distances.class, "calcDistance", arguments);
+        Object output = m.callMethod();
+        String errMsg = "Your calcDistance method does not return the correct distance for two doubles.";
+        CustomAssertions._assertEquals(distance, output, 0.0001, errMsg);
     }
 
     @ParameterizedTest
     @MethodSource("inputIntegerProvider")
     void testInteger(int x, int y, int distance) throws Throwable {
-        String errMsg = "Your method \"calcDistance()\" does not return the correct distance for two integers.";
-        Object output = MethodUtil.invokeIfMethodExists(Distances.class, "calcDistance", new Object[]{x, y,}, int.class,
-                int.class);
-        CustomAssertions._assertEquals(output, distance, errMsg);
+        Object[][] arguments = {
+                {x, int.class},
+                {y, int.class}
+        };
+        MethodTest m = new MethodTest(Distances.class, "calcDistance", arguments);
+        Object output = m.callMethod();
+        String errMsg = "Your calcDistance method does not return the correct distance for two integers.";
+        CustomAssertions._assertEquals(distance, output, errMsg);
     }
 
     @Test
