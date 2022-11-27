@@ -3,8 +3,8 @@ package methods.method_overloading.hard.q7;
 import java.util.stream.Stream;
 
 import global.MethodTest;
+import global.tools.TestOption;
 import global.variables.wrappers.Optional;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -17,9 +17,14 @@ import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class MainTest extends BaseTest {
+    // Java
+
     public Clause[] testSentence() {
-        // Java
+        TestOption.isInputTest = true;
+        TestOption.defaultInput = "22.2 56.142 6 31";
         return new Clause[]{
                 new StringLiteral("Enter a set of doubles:"),
                 new Optional(new StringLiteral(" ")),
@@ -33,6 +38,7 @@ public class MainTest extends BaseTest {
                 new DoubleLiteral("d2"),
                 new StringLiteral(" is: "),
                 new DoubleLiteral("a1"),
+                new NewLine(),
                 new StringLiteral("The distance between "),
                 new IntegerLiteral("i1"),
                 new StringLiteral(" and "),
@@ -46,7 +52,7 @@ public class MainTest extends BaseTest {
         Distances.main(new String[0]);
     }
 
-    static Stream<Arguments> inputDoubleProvider() {
+    static Stream<Arguments> doubleInputProvider() {
         return Stream.of(
                 Arguments.of(141.4, 591.3, 449.9),
                 Arguments.of(20.0, 20.0, 0.0),
@@ -55,7 +61,7 @@ public class MainTest extends BaseTest {
                 Arguments.of(-123.111, 90.11, 213.221));
     }
 
-    static Stream<Arguments> inputIntegerProvider() {
+    static Stream<Arguments> integerInputProvider() {
         return Stream.of(
                 Arguments.of(123, 456, 333),
                 Arguments.of(0, 0, 0),
@@ -64,9 +70,30 @@ public class MainTest extends BaseTest {
                 Arguments.of(46, 985, 939));
     }
 
+    static Stream<Arguments> mainMethodInputProvider(){
+        return Stream.of(
+                Arguments.of(367.2, 1982.6, 56, 91, 1615.4, 35),
+                Arguments.of(1.1, 1, 564, 382194, 0.1, 381630),
+                Arguments.of(67.32781, 467.237, 38, 2, 399.90919, 36)
+        );
+    }
+
     @ParameterizedTest
-    @MethodSource("inputDoubleProvider")
-    void testDouble(double x, double y, double distance) throws Throwable {
+    @MethodSource("mainMethodInputProvider")
+    void correctMainMethodOutput(double x, double y, int a, int b, double ans1, int ans2){
+        runWithInput(x + " " + y + " " + a + " " + b);
+        assertEquals(x, Double.parseDouble(getItemByName("d1")), 0.0000001, "Your program does not order the double values correctly.");
+        assertEquals(y, Double.parseDouble(getItemByName("d2")), 0.0000001, "Your program does not order the double values correctly.");
+        assertEquals(a, Integer.parseInt(getItemByName("i1")), "Your program does not order the integer values correctly.");
+        assertEquals(b, Integer.parseInt(getItemByName("i2")), "Your program does not order the integer values correctly.");
+
+        assertEquals(ans1, Double.parseDouble(getItemByName("a1")), 0.0000001, "Your program does not print the correct distance between two double values.");
+        assertEquals(ans2, Integer.parseInt(getItemByName("a2")), "Your program does not print the correct distance between two integer values.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("doubleInputProvider")
+    void correctDoubleCalcDistanceMethod(double x, double y, double distance) throws Throwable {
         Object[][] arguments = {
                 {x, double.class},
                 {y, double.class}
@@ -74,12 +101,12 @@ public class MainTest extends BaseTest {
         MethodTest m = new MethodTest(Distances.class, "calcDistance", arguments);
         Object output = m.callMethod();
         String errMsg = "Your calcDistance method does not return the correct distance for two doubles.";
-        CustomAssertions._assertEquals(distance, output, 0.0001, errMsg);
+        CustomAssertions._assertEquals(distance, output, 0.0000001, errMsg);
     }
 
     @ParameterizedTest
-    @MethodSource("inputIntegerProvider")
-    void testInteger(int x, int y, int distance) throws Throwable {
+    @MethodSource("integerInputProvider")
+    void correctIntegerCalcDistanceMethod(int x, int y, int distance) throws Throwable {
         Object[][] arguments = {
                 {x, int.class},
                 {y, int.class}
@@ -88,19 +115,5 @@ public class MainTest extends BaseTest {
         Object output = m.callMethod();
         String errMsg = "Your calcDistance method does not return the correct distance for two integers.";
         CustomAssertions._assertEquals(distance, output, errMsg);
-    }
-
-    @Test
-    void printsCorrectMessage() {
-        String errMsg = "Your program does not print the correct message.";
-
-        double doubleDistance = Double.parseDouble(getItemByName("doubleDistance"));
-        int intDistance = Integer.parseInt(getItemByName("intDistance"));
-
-        final double expectedDoubleDistance = 449.9;
-        final int expectedIntDistance = 939;
-
-        CustomAssertions._assertEquals(expectedDoubleDistance, doubleDistance, errMsg);
-        CustomAssertions._assertEquals(expectedIntDistance, intDistance, errMsg);
     }
 }
