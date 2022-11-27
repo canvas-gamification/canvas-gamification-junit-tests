@@ -10,6 +10,7 @@ import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -19,8 +20,7 @@ import static global.tools.CustomAssertions._assertTrue;
 import static global.tools.CustomAssertions._fail;
 import static global.tools.Logger.parseTestInformation;
 import static global.utils.RegexUtil.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ObjectTest {
     Class<?> objectClass;
@@ -33,7 +33,7 @@ public class ObjectTest {
         }
     }
 
-    // When you create an objectTest, you should be able to specify fields, methods, and constructors\
+    // When you create an objectTest, you should be able to specify fields, methods, and constructors
 
     // TODO: When specifying methods and parameters, you can also specify the modifier (public, private, etc.) and it should check that
 
@@ -69,12 +69,50 @@ public class ObjectTest {
 
     public boolean hasField(String fieldName, Class<?> fieldClass) {
         try {
-            Field field = objectClass.getDeclaredField(fieldName);
+            Field f = objectClass.getDeclaredField(fieldName);
             return true;
         } catch (NoSuchFieldException e) {
-            // fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
             return false;
         }
+    }
+
+    public void assertField(boolean hasField, String fieldName) {
+        assertTrue(hasField, String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
+    }
+
+    public boolean checkModifier(Field field, String modifier) {
+        /*
+            The modifier values below for the default modifier is based on the java constant values documentation.
+            The comparison is done in binary as there is no method in the modifiers class for checking if something
+            has the default modifier, but the modifier int in binary will have its final three bits as zeros if the field
+            is using the default modifier.
+
+            // Documentation on modifier ints
+            https://docs.oracle.com/javase/7/docs/api/constant-values.html#java.lang
+         */
+
+        int m = field.getModifiers();
+        System.out.println(Integer.toBinaryString(m));
+        switch (modifier) {
+            case "public":
+                return Modifier.isPublic(m);
+            case "private":
+                return Modifier.isPrivate(m);
+            case "protected":
+                return Modifier.isProtected(m);
+            case "static":
+                return Modifier.isStatic(m);
+            case "final":
+                return Modifier.isFinal(m);
+            case "abstract":
+                return Modifier.isAbstract(m);
+            case "interface":
+                return Modifier.isInterface(m);
+            case "default":
+                String binaryInt = Integer.toBinaryString(m);
+                // binaryInt = binaryInt.substring(, binaryInt.length());
+        }
+        return false;
     }
 
     public Object getFieldValue(Object testObject, String fieldName, Class<?> fieldClass) {
