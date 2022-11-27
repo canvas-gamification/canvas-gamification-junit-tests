@@ -50,14 +50,14 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(
-                Arguments.of(366, "This year is a leap year"),
-                Arguments.of(365, "This year isn't a leap year"),
-                Arguments.of(18, "This year isn't a leap year"),
-                Arguments.of(367, "This year isn't a leap year"),
-                Arguments.of(1, "This year isn't a leap year"),
-                Arguments.of(0, "This year isn't a leap year"),
-                Arguments.of(-5, "This year isn't a leap year"),
-                Arguments.of(-366, "This year isn't a leap year"));
+                Arguments.of(366, "This year is a leap year."),
+                Arguments.of(365, "This year isn't a leap year."),
+                Arguments.of(18, "This year isn't a leap year."),
+                Arguments.of(367, "This year isn't a leap year."),
+                Arguments.of(1, "This year isn't a leap year."),
+                Arguments.of(0, "This year isn't a leap year."),
+                Arguments.of(-5, "This year isn't a leap year."),
+                Arguments.of(-366, "This year isn't a leap year."));
     }
 
     @ParameterizedTest
@@ -77,7 +77,7 @@ public class MainTest extends BaseTest {
     void printsCorrectLeapYearMessage(int numDays, String isLeapYearStr) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly print if the year is a leap year.";
         runWithInput(numDays + "", new Clause[]{
-                new StringLiteral(isLeapYearStr),
+                new StringLiteral(isLeapYearStr)
         });
     }
 }
