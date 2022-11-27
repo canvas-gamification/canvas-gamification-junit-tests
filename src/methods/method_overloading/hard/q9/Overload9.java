@@ -1,34 +1,40 @@
 package methods.method_overloading.hard.q9;
 
-/**
- * [J] Write a Java Program that passes in a user's first name and age and
- * returns their username as their first name.age. For example, john.34. Use
- * method overloading to accept user's input in either order for example, (name,
- * age) or (age, name).
- * 
- * Input Sets:
- *    - Set1: Joe, 21
- *    - Set2: 19, Madi
- * 
- * Sample Output:
- *  The username for Joe with the age of 21 is: Joe.21
- *  The username for Madi with the age of 19 is: Madi.19
+/*
+Write a Java Program that receives two first names and ages from the user and passes that information to an
+overloaded method called userName. The method should take the String and int in either order, (name, age) or (age, name),
+and return their username as first_name.age. For example john.34.
+
+Sample Output:
+  Enter two names:
+  Joe Madi
+  Enter corresponding ages:
+  21 19
+  The username for Joe with the age of 21 is: Joe.21
+  The username for  Madi with the age of 19 is:  Madi.19
  */
+import java.util.Scanner;
+
 public class Overload9 {
   public static void main(String[] args) {
-    System.out.println("The username for Joe with the age of 21 is: " + userName("Joe", 21));
-    System.out.println("The username for Madi with the age of 19 is: " + userName(19, "Madi"));
+    Scanner input = new Scanner(System.in);
+    System.out.println("Enter two names: ");
+    String n1 = input.next();
+    String n2 = input.next();
+    input.nextLine();
+    System.out.println("Enter corresponding ages: ");
+    int a1 = input.nextInt();
+    int a2 = input.nextInt();
+    System.out.println("The username for "+n1+" with the age of "+a1+" is: " + userName(n1, a1));
+    System.out.println("The username for "+n2+" with the age of "+a2+" is: " + userName(a2, n2));
   }
 
   public static String userName(int age, String name) {
-    String username = name + "." + age;
-    return username;
+    return name + "." + age;
 
   }
 
   public static String userName(String name, int age) {
-    String username = name + "." + age;
-    return username;
+    return name + "." + age;
   }
-
 }
