@@ -70,7 +70,7 @@ public class MainTest extends BaseTest {
                 Arguments.of(46, 985, 939));
     }
 
-    static Stream<Arguments> mainMethodInputProvider(){
+    static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(
                 Arguments.of(367.2, 1982.6, 56, 91, 1615.4, 35),
                 Arguments.of(1.1, 1, 564, 382194, 0.1, 381630),
@@ -80,7 +80,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
-    void correctMainMethodOutput(double x, double y, int a, int b, double ans1, int ans2){
+    void correctMainMethodOutput(double x, double y, int a, int b, double ans1, int ans2) {
         runWithInput(x + " " + y + " " + a + " " + b);
         assertEquals(x, Double.parseDouble(getItemByName("d1")), 0.0000001, "Your program does not order the double values correctly.");
         assertEquals(y, Double.parseDouble(getItemByName("d2")), 0.0000001, "Your program does not order the double values correctly.");
