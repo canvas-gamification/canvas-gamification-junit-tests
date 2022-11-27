@@ -2,3 +2,6 @@
 /.idea/
 *.iml
 /out/production
+bin/
+reports/
+.DS_Store
