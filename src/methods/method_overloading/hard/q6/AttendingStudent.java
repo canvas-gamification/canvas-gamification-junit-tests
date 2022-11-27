@@ -1,10 +1,10 @@
 package methods.method_overloading.hard.q6;
 
 /*
-Write a Java Program with an overloaded method called studentCheck to check whether a student has a valid username or
+Write a Java Program with an overloaded method called studentCheck to check whether a student has a valid username and
 student number. One method takes the first name, the last name, and the username and returns a boolean. The other name
-takes the student number and returns a boolean. To determine this, ask the user for either their name, username, and
-student number. The following conditions should be met to determine their validity:
+takes the student number and returns a boolean. To determine this, ask the user for their name, username, and student
+number. The following conditions should be met to determine their validity:
 Their username must be their first name and last name back-to-back with a dot in the middle for example: john.doe
 Their student number must at least be 8 digits long
 
