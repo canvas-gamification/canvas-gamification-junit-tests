@@ -15,7 +15,7 @@ Sample Output:
  */
 import java.util.Scanner;
 
-public class Overload9 {
+public class GenerateUsername {
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
     System.out.println("Enter two names: ");
