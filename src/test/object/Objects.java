@@ -14,10 +14,11 @@ public class Objects {
 //        System.out.println(b);
         Field ft = test.class.getDeclaredField("x");
         ObjectTest o = new ObjectTest("test.object.test");
-        o.checkModifier(ft, "interface");
+        boolean b = o.checkModifier(ft, "default");
+        System.out.println(b);
     }
 }
 
 class test {
-    public static final int x = 5;
+    protected final static int x = 5;
 }

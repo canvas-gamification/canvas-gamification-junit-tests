@@ -109,8 +109,11 @@ public class ObjectTest {
             case "interface":
                 return Modifier.isInterface(m);
             case "default":
+                // Gets last three bits of modifier binary number and checks if they are zero
                 String binaryInt = Integer.toBinaryString(m);
-                // binaryInt = binaryInt.substring(, binaryInt.length());
+                String fieldModifier = binaryInt.substring(binaryInt.length() > 3 ? binaryInt.length() - 3 : 0);
+                int number = Integer.parseInt(fieldModifier, 2);
+                return number == 0;
         }
         return false;
     }
