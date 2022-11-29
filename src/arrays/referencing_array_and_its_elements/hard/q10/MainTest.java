@@ -83,7 +83,7 @@ public class MainTest extends BaseTest {
                 {input, double[].class},
         };
         MethodTest m = new MethodTest(MinFinder.class, "findLow", arguments);
-        m.setIncorrectMethodStructureErrorMessage("Your findLow method does not correctly show the minimum value of the double array");
+        m.setIncorrectMethodStructureErrorMessage("Your findLow method does not correctly return the minimum value in a double array.");
         Object output = m.callMethod();
         assertEquals((double) output, min(input), 0.001);
     }
