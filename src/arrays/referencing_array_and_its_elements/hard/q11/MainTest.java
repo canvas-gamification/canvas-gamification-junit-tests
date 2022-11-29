@@ -50,11 +50,9 @@ public class MainTest extends BaseTest {
     static Stream<Arguments> mainInputProvider() {
         return Stream.of(
                 Arguments.of(generateRandomArray(-1000.0, 1000.0, n)),
-                Arguments.of(generateRandomArray(-1000.0, 1000.0, n)),
-                Arguments.of(generateRandomArray(-1000.0, 1000.0, n)),
+                Arguments.of(generateRandomArray(-100000.0, 100000.0, n)),
+                Arguments.of(generateRandomArray(-1000000000.0, 1000000000.0, n)),
                 Arguments.of(replicateArray(1.0, n))
-
-
         );
     }
 
@@ -63,16 +61,20 @@ public class MainTest extends BaseTest {
     void printCorrectOutput(double[] input) {
         double ans = max(input);
         runWithInput(arrayToInput(input));
-        assertEquals(ans, Double.parseDouble(getItemByName("ans")), 0.001, "Your program does not print the maximum value of the double array.");
+        assertEquals("Your program does not print the maximum value of the double array.", ans, Double.parseDouble(getItemByName("ans")), 0.001);
     }
 
 
     static Stream<Arguments> methodInputProvider() {
         return Stream.of(
-                Arguments.of(generateRandomArray(-1000.0, 1000.0, 10000)),
-                Arguments.of(generateRandomArray(-1000.0, 1000.0, 10000)),
-                Arguments.of(generateRandomArray(-1000.0, 1000.0, 10000)),
-                Arguments.of(replicateArray(1.0, 10000))
+                Arguments.of(generateRandomArray(-1000.0, 1000.0, 100)),
+                Arguments.of(generateRandomArray(-1000.0, 1000.0, 1000)),
+                Arguments.of(generateRandomArray(-1000.0, 1000.0, 100000)),
+                Arguments.of(replicateArray(1.0, 10000)),
+                Arguments.of(new double[] {-999999.999}),
+                Arguments.of(new double[] {1.0, 1.1, 1.01, 1.001}),
+                Arguments.of(new double[] {-100.0, -100.1, -100.01, -99.9, - 99.99})
+
         );
     }
 
@@ -85,7 +87,7 @@ public class MainTest extends BaseTest {
         MethodTest m = new MethodTest(MaxFinder.class, "findMax", arguments);
         m.setIncorrectMethodStructureErrorMessage("Your findMax method does not correctly show the maximum value of the double array");
         Object output = m.callMethod();
-        assertEquals((double) output, max(input), 0.001);
+        assertEquals(max(input), (double) output, 0.001);
     }
 
 }

@@ -1,9 +1,10 @@
 package arrays.referencing_array_and_its_elements.hard.q11;
 
 /*
-Write a java program called MaxFinder. It should have a main method and another method called findMax. The findMax
-method should accept an array of doubles (double [] arr) and print out its highest value. The main method should take an
-array of doubles (double [] arr) and call the method findMax with that array as the parameter.
+Write a Java program that asks the user to enter 10 double values and stores them in an array. The array should then be
+passed to a method called findMax which accepts an array of doubles and finds and returns the largest value in the array
+which the main method then prints out.
+
 Sample Output:
     Enter an array of 10 double values:
     60.5 50.2 70.2 43.2 61.4 32.5 74.1 11.2 94.3 64.3
