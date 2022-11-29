@@ -72,7 +72,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("InputProvider")
     void identifiesDiscountCorrectly(int a, int b, int c) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program did not correctly identify the qualification for the discount.";
+        TestOption.incorrectStructureErrorMessage = "Your program did not correctly identify if the user qualifies for the discount.";
         if (calcAns(a, b, c)) {
             runWithInput(a + " " + b + " " + c, new Clause[]{
                     new StringLiteral("You qualify for a 10% discount!")});
