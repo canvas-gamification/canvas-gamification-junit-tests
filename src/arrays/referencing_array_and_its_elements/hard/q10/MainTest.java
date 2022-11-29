@@ -60,7 +60,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("mainInputProvider")
-    void printCorrectOutput(double[] input) {
+    void printsCorrectOutput(double[] input) {
         double ans = min(input);
         runWithInput(arrayToInput(input));
         assertEquals("Your program does not print the minimum value of the double array.", ans, Double.parseDouble(getItemByName("ans")), 0.001);
