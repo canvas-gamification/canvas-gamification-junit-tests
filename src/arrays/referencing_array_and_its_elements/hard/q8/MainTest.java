@@ -78,9 +78,15 @@ public class MainTest extends BaseTest {
                 Arguments.of(merge(generateAscendingArray(1, 1), generateAscendingArray(3, 10000))),
                 Arguments.of(merge(generateAscendingArray(-10000, 40000), generateAscendingArray(40002, 10000))),
                 Arguments.of(generateAscendingArray(-324234, 10000)),
-                Arguments.of(merge(generateAscendingArray(-1000000000, 10000), generateAscendingArray(1000000000, 10000)))
+                Arguments.of(merge(generateAscendingArray(-1000000000, 10000), generateAscendingArray(1000000000, 10000))),
+                Arguments.of(new int[] {1, 3, 4, 5, 6, 7}),
+                Arguments.of(new int[] {1, 2, 3, 4, 5, 6, 7, 9}),
+                Arguments.of(new int[] {1, 3}),
+                Arguments.of(new int[] {1})
 
-        );
+
+
+                );
     }
 
     @ParameterizedTest
