@@ -62,7 +62,7 @@ public class MainTest extends BaseTest {
     }
 
     @ParameterizedTest
-    @MethodSource("InputProvider")
+    @MethodSource("inputProvider")
     void printCorrectOutput(int n) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print the correct fibonacci sequence.";
         runWithInput(Integer.toString(n), new Clause[]{
