@@ -1,6 +1,6 @@
 package conditionals.programs_with_decision_points.hard.q11;
 /*
-Write a Java question that helps a store cashier determine if a purchase qualifies for the birthday discount. To promote
+Write a Java program that helps a store cashier determine if a purchase qualifies for the birthday discount. To promote
 customer loyalty, the store gives all its customers a 10% discount for all purchases within 45 days of their birthday.
 Ask the user for the day, month, and year of their most recent birthday as integers and calculates if today is within
 45 days from that day. The program should display whether the purchase qualifies for a 10% discount. Assume the current
