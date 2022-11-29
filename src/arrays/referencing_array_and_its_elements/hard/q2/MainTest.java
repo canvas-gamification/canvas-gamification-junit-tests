@@ -57,10 +57,10 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> InputProvider() {
         int[] a1 = generateRandomArray(-1000, 1000, n);
-        int[] a2 = generateRandomArray(-1000, 1000, n);
-        int[] a3 = generateRandomArray(-1000, 1000, n);
-        int[] a4 = generateRandomArray(-1000, 1000, n);
-        int[] a5 = generateRandomArray(-1000, 1000, n);
+        int[] a2 = generateRandomArray(-100000, 100000, n);
+        int[] a3 = generateRandomArray(-10000000, 10000000, n);
+        int[] a4 = generateRandomArray(-1000000, 0, n);
+        int[] a5 = generateRandomArray(0, 1000000, n);
         return Stream.of(
                 Arguments.of(a1, 3, Arrays.copyOfRange(a1, 0, n % 3)),
                 Arguments.of(a2, n, Arrays.copyOfRange(a2, 0, 0)),
