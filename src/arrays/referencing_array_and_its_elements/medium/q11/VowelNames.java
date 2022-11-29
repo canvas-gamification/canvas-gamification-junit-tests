@@ -24,6 +24,6 @@ public class VowelNames {
             if (arr[i].charAt(arr[i].length() - 1) == 'b')
                 count++;
         }
-        System.out.println("There are " + count + " names end with the letter b");
+        System.out.println("There are " + count + " names that end with the letter b");
     }
 }
