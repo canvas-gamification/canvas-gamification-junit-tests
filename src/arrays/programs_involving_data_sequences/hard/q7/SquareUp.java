@@ -1,10 +1,10 @@
 package arrays.programs_involving_data_sequences.hard.q7;
 
 /*
-Write a Java program that calls a method called doubler that takes as input an integer array, and squares each element
-and return the new array. After calling this method, print out the contents of the resulting array on the same line
-separated by a single space. In your main method, take an array of 10 integers and call doubler using that array. Your
-method should be general enough to work with any size of array.
+Write a Java program that asks the user to input 10 integers and stores them in an array. Then it should pass them to a
+method called doubler takes an input of an integer array and stores the square of each element in a new array which it
+then returns. After calling the method, the main method should print the contents of the new array separated by a space.
+Your method should be general enough to work with any size of array.
 
 Sample Output:
     Enter an array of 10 integers to be squared:

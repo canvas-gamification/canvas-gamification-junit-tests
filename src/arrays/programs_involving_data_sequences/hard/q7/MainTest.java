@@ -3,6 +3,7 @@ package arrays.programs_involving_data_sequences.hard.q7;
 import global.BaseTest;
 import global.MethodTest;
 import global.exceptions.InvalidClauseException;
+import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.*;
@@ -14,7 +15,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.utils.ArrayUtil.*;
-import static org.junit.Assert.assertArrayEquals;
 
 public class MainTest extends BaseTest {
     // Java
@@ -29,8 +29,10 @@ public class MainTest extends BaseTest {
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("The squared array is:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new PlaceHolder(),
+                new Optional(new StringLiteral(" "))
         };
     }
 
@@ -47,8 +49,8 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> mainInputProvider() {
         return Stream.of(
-                Arguments.of(generateRandomArray(-10000, 10000, n)),
-                Arguments.of(generateRandomArray(-10000, 10000, n)),
+                Arguments.of(generateRandomArray(-100, 100, n)),
+                Arguments.of(generateRandomArray(-1000, 1000, n)),
                 Arguments.of(generateRandomArray(-10000, 10000, n)),
                 Arguments.of(generateRandomArray(-1, 2, n)),
                 Arguments.of(replicateArray(1, n)),
@@ -70,26 +72,31 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> methodInputProvider() {
         return Stream.of(
-                Arguments.of(generateRandomArray(-10000, 10000, 10000)),
-                Arguments.of(generateRandomArray(-10000, 10000, 10000)),
+                Arguments.of(generateRandomArray(-100, 100, 100)),
+                Arguments.of(generateRandomArray(-1000, 1000, 1000)),
                 Arguments.of(generateRandomArray(-10000, 10000, 1000)),
                 Arguments.of(generateRandomArray(-1, 2, 10000)),
                 Arguments.of(replicateArray(1, 10000)),
                 Arguments.of(replicateArray(0, 10000)),
-                Arguments.of(replicateArray(10000, 10000))
+                Arguments.of(replicateArray(10000, 10000)),
+                Arguments.of(new int[] {}),
+                Arguments.of(new int[] {-1, 1}),
+                Arguments.of(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}),
+                Arguments.of(new int[] {1, -1, 1, -1, 1}),
+                Arguments.of(new int[] {-1, -2, -3, -4, -5, -6, -7, -8, -9, -10})
         );
     }
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void correctFibonacciMaker(int[] input) throws Throwable {
+        int[] ans = sq(input);
         Object[][] arguments = {
                 {input, int[].class},
         };
         MethodTest m = new MethodTest(SquareUp.class, "doubler", arguments);
-        m.setIncorrectMethodStructureErrorMessage("Your doubler method does not return the correct array of squared integers.");
         Object output = m.callMethod();
-        assertArrayEquals((int[]) output, sq(input));
+        CustomAssertions._assertArrayEquals(ans, output, "Your doubler method does not return the correct array of squared integers.");
     }
 
 }
