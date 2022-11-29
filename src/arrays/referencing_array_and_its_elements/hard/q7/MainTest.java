@@ -83,12 +83,13 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("InputProvider")
     void correctRevMethod(int[] input) throws Throwable {
+        int[] ans = reverse(input);
         Object[][] arguments = {
                 {input, int[].class},
         };
         MethodTest m = new MethodTest(TakeItBackNow.class, "rev", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertArrayEquals(reverse(input), output, "Your rev method does not correctly reverse the array.");
+        CustomAssertions._assertArrayEquals(ans, output, "Your rev method does not correctly reverse the array.");
     }
 
 }
