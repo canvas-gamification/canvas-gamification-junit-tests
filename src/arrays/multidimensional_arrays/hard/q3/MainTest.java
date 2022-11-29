@@ -64,6 +64,6 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(CountsOdd.class, "countsOdd", arguments, methodSentence);
         m.setIncorrectMethodStructureErrorMessage("Your countsOdd method does not correctly count the number of odd elements in the 2D array");
-        Object output = m.callMethod();
+        m.callMethod();
     }
 }
