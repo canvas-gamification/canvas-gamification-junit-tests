@@ -30,7 +30,7 @@ public class RightDownTheMiddle {
     public static String splitHalf(int[] inputArray) {
         int size = inputArray.length;
         int[] first = new int[size / 2];
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size/2; i++) {
             if (i < (size / 2))
                 first[i] = inputArray[i];
         }
