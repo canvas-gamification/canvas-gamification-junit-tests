@@ -53,7 +53,7 @@ public class MainTest extends BaseTest {
     }
 
     @ParameterizedTest
-    @MethodSource("InputProvider")
+    @MethodSource("inputProvider")
     void correctCountsOddMethod(int[][] input) throws Throwable {
         Clause[] methodSentence = new Clause[]{
                 new StringLiteral("count of odd numbers in array = "),
