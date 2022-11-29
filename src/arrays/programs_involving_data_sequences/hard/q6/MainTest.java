@@ -52,7 +52,7 @@ public class MainTest extends BaseTest {
         return out;
     }
 
-    static Stream<Arguments> InputProvider() {
+    static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of(1),
                 Arguments.of(10),
@@ -62,7 +62,7 @@ public class MainTest extends BaseTest {
     }
 
     @ParameterizedTest
-    @MethodSource("InputProvider")
+    @MethodSource("inputProvider")
     void printCorrectOutput(int n) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print the correct fibonacci sequence.";
         runWithInput(Integer.toString(n), new Clause[]{
@@ -71,7 +71,7 @@ public class MainTest extends BaseTest {
     }
 
     @ParameterizedTest
-    @MethodSource("InputProvider")
+    @MethodSource("inputProvider")
     void correctFibonacciMaker(int n) throws Throwable {
         Object[][] arguments = {
                 {n, int.class},
