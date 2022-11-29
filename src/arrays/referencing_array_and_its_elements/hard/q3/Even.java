@@ -1,7 +1,7 @@
 package arrays.referencing_array_and_its_elements.hard.q3;
 
 /*
-Write a java program that accepts an array of 10 numbers from the user and then creates a new array of only even numbers
+Write a Java program that accepts an array of 10 integers from the user and then creates a new array of only even numbers
 from the original array. To do this, create a method named even that accepts an integer array, counts the number of even
 integers in the array, and then transfer them to a new array of that length in the same order. Note that your method
 must be general enough to work with any size of array. Then, return the new array to the main method, and print out its
