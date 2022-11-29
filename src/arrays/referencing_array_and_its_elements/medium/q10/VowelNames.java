@@ -1,13 +1,13 @@
 package arrays.referencing_array_and_its_elements.medium.q10;
 
 /*
-Write a Java program that takes a String array of 6 given names. Then, count how many of those names begin with the
-letter "B" and display the value.
+Write a Java program that asks the user for 6 names and stores them in an array of Strings. Then, count how many of the
+names start with the letter "B" and display the value.
 
 Sample Output:
     Enter 6 given names:
-    Billy John Bennett Anthony Bartholomew Angus
-    There are 3 names start with the letter B.
+    Billy Bob Jacob Anthony Bartholomew Angus
+    There are 3 names that start with the letter B
 
  */
 
