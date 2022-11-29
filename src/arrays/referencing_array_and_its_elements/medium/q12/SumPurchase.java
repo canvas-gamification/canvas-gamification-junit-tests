@@ -1,8 +1,8 @@
 package arrays.referencing_array_and_its_elements.medium.q12;
 
 /*
-Write a Java program that takes an array of 10 doubles. Each value represents a purchase, and you need to sum up the
-total cost of the purchases and display the total.
+Write a Java program that asks the user to input the cost of 10 purchases and stores those values in an array of 10
+doubles. The program then calculates the total cost of the purchases and displays the total.
 
 Sample Output:
     Enter the price of 10 purchases:

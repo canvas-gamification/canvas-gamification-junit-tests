@@ -37,9 +37,9 @@ public class MainTest extends BaseTest {
 
     static Stream<double[]> inputProvider() {
         return Stream.of(
-                generateRandomArray(-100000000.0, 100000000.0, n),
-                generateRandomArray(-100000000.0, 100000000.0, n),
-                generateRandomArray(-100000000.0, 100000000.0, n),
+                generateRandomArray(-100000.0, 100000.0, n),
+                generateRandomArray(-1000000.0, 1000000.0, n),
+                generateRandomArray(-10000000.0, 10000000.0, n),
                 generateRandomArray(-100000000.0, 100000000.0, n),
                 replicateArray(0.0, n),
                 replicateArray(1.0, n)
@@ -51,6 +51,6 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void printsCorrectOutput(double[] a) {
         runWithInput(arrayToInput(a));
-        assertEquals(sum(a), Double.parseDouble(getItemByName("ans")), 0.001);
+        assertEquals("Your program does not calculate the correct sum of purchases.", sum(a), Double.parseDouble(getItemByName("ans")), 0.001);
     }
 }
