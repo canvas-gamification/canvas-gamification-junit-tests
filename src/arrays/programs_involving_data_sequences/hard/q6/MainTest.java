@@ -71,7 +71,7 @@ public class MainTest extends BaseTest {
     }
 
     @ParameterizedTest
-    @MethodSource("InputProvider")
+    @MethodSource("inputProvider")
     void correctFibonacciMaker(int n) throws Throwable {
         Object[][] arguments = {
                 {n, int.class},
