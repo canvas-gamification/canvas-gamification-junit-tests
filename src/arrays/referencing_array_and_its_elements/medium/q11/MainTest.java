@@ -29,7 +29,7 @@ public class MainTest extends BaseTest {
                 new NewLine(),
                 new StringLiteral("There are "),
                 new IntegerLiteral("ans"),
-                new StringLiteral(" names end with the letter " + c),
+                new StringLiteral(" names that end with the letter " + c),
                 new Optional(new StringLiteral("."))
         };
     }
