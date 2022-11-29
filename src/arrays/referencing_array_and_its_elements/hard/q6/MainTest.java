@@ -17,10 +17,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static global.tools.CustomAssertions._assertEquals;
 import static global.utils.ArrayUtil.arrayToInput;
 import static global.utils.ArrayUtil.generateRandomArray;
-import static org.junit.Assert.assertEquals;
 
 public class MainTest extends BaseTest {
     // Java
@@ -29,7 +27,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "3 4 6 21 48 42 89 2 0 91";
+        TestOption.defaultInput = arrayToInput(generateRandomArray(-10, 10, n));
         return new Clause[]{
                 new StringLiteral("Enter an array of size " + n + " to split in half:"),
                 new Optional(new StringLiteral(" ")),
