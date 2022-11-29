@@ -67,7 +67,7 @@ public class MainTest extends BaseTest {
     }
 
     @ParameterizedTest
-    @MethodSource("InputProvider")
+    @MethodSource("inputProvider")
     void printsCorrectOutput(String a) {
         int t = 0;
         for (int i = 0; i < a.length(); i++)
