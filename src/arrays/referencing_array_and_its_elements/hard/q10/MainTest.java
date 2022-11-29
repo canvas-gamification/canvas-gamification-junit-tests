@@ -78,7 +78,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
-    void correctFindLow(double[] input) throws Throwable {
+    void correctFindLowMethod(double[] input) throws Throwable {
         Object[][] arguments = {
                 {input, double[].class},
         };
