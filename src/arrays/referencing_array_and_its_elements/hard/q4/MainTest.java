@@ -58,7 +58,7 @@ public class MainTest extends BaseTest {
                 Arguments.of(generateRandomArray(0.0, 100, n)),
                 Arguments.of(generateRandomArray(0.0, 100, n)),
                 Arguments.of(generateRandomArray(0.0, 100, n)),
-                Arguments.of(generateRandomArray(pivot, 100, n)),
+                Arguments.of(generateRandomArray(pivot+1, 100, n)),
                 Arguments.of(generateRandomArray(0.0, pivot, n))
         );
     }
