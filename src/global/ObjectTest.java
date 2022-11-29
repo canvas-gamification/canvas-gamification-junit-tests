@@ -35,6 +35,10 @@ public class ObjectTest {
 
     // When you create an objectTest, you should be able to specify fields, methods, and constructors
 
+    public ObjectTest(String objectClass, Object[][][] constructors) {
+
+    }
+
     // TODO: When specifying methods and parameters, you can also specify the modifier (public, private, etc.) and it should check that
 
     public Object createInstance(Object[][] arguments) throws Throwable {
@@ -70,14 +74,22 @@ public class ObjectTest {
     public boolean hasField(String fieldName, Class<?> fieldClass) {
         try {
             Field f = objectClass.getDeclaredField(fieldName);
-            return true;
+            return fieldClass.equals(f.getType());
         } catch (NoSuchFieldException e) {
             return false;
         }
     }
 
-    public void assertField(boolean hasField, String fieldName) {
-        assertTrue(hasField, String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
+    public void assertField(boolean hasField, String fieldName, Class<?> fieldClass) {
+        assertTrue(hasField, String.join(
+                " ",
+                "Your", objectClass.getSimpleName(),
+                "does not contain the field",
+                fieldName,
+                " of the type ",
+                fieldClass.getSimpleName(),
+                ".")
+        );
     }
 
     public boolean checkModifier(Field field, String modifier) {
