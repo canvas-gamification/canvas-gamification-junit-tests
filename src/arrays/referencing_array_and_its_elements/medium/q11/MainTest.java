@@ -22,7 +22,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = arrayToInput(replicateArray('A', n));
+        TestOption.defaultInput = arrayToInput(generateRandomWordArray(n));
         return new Clause[]{
                 new StringLiteral("Enter " + n + " given names:"),
                 new Optional(new StringLiteral(" ")),
@@ -76,6 +76,6 @@ public class MainTest extends BaseTest {
         if (a.charAt(a.length() - 1) == c)
             t++;
         runWithInput(a);
-        assertEquals(t, Integer.parseInt(getItemByName("ans")));
+        assertEquals("Your program does not print the correct number of names that ends with " + c + ".", t, Integer.parseInt(getItemByName("ans")));
     }
 }
