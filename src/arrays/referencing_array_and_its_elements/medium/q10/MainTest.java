@@ -22,7 +22,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = arrayToInput(replicateArray('A', n));
+        TestOption.defaultInput = arrayToInput(generateRandomWordArray(n));
         return new Clause[]{
                 new StringLiteral("Enter " + n + " given names:"),
                 new Optional(new StringLiteral(" ")),
