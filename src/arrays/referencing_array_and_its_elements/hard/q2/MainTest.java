@@ -65,7 +65,7 @@ public class MainTest extends BaseTest {
                 Arguments.of(a1, 3, Arrays.copyOfRange(a1, 0, n % 3)),
                 Arguments.of(a2, n, Arrays.copyOfRange(a2, 0, 0)),
                 Arguments.of(a3, 1, Arrays.copyOfRange(a3, 0, 0)),
-                Arguments.of(a4, n - 1, Arrays.copyOfRange(a4, 0, n % (n - 1))),
+                Arguments.of(a4, n - 1, Arrays.copyOfRange(a4, 0, 1)),
                 Arguments.of(a5, n - 2, Arrays.copyOfRange(a5, 0, n % (n - 2)))
         );
     }
