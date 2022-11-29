@@ -6,7 +6,8 @@ Ask the user for the day, month, and year of their most recent birthday as integ
 45 days from that day. The program should display whether the purchase qualifies for a 10% discount. Assume the current
 date is 27/09 and all months have 30 days. If the person qualifies for the discount print out "You qualify for a 10%
 discount!", and if not, print "You do not qualify for any discounts.".
-    Sample Output:
+
+Sample Output:
 	Enter your birth day:
     12
     Enter your birth month as a number:

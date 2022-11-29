@@ -7,6 +7,7 @@ import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -26,11 +27,14 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "12 11 2022";
         return new Clause[]{
-                new StringLiteral("Enter your birth day: "),
+                new StringLiteral("Enter your birth day:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("Enter your birth month as a number: "),
+                new StringLiteral("Enter your birth month as a number:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("Enter the year of your most recent birthday: "),
+                new StringLiteral("Enter the year of your most recent birthday:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new PlaceHolder()
         };
