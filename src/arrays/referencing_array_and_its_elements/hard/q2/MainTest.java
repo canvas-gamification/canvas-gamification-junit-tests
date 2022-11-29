@@ -47,7 +47,6 @@ public class MainTest extends BaseTest {
                 new NewLine(),
                 new PlaceHolder(),
                 new Optional(new StringLiteral(" "))
-
         };
 
     }
