@@ -67,7 +67,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("mainInputProvider")
     public void correctMainMethod(int[] input) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your main method does not print the correct even array";
+        TestOption.incorrectStructureErrorMessage = "Your main method does not print the correct array of even numbers.";
         runWithInput(arrayToInput(input), new Clause[]{
                 new StringLiteral(arrayToInput(getEven(input)).trim())
         });
