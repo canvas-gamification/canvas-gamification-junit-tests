@@ -48,7 +48,7 @@ public class MainTest extends BaseTest {
     }
 
     @ParameterizedTest
-    @MethodSource("InputProvider")
+    @MethodSource("inputProvider")
     void printsCorrectOutput(double[] a) {
         runWithInput(arrayToInput(a));
         assertEquals(sum(a), Double.parseDouble(getItemByName("ans")), 0.001);
