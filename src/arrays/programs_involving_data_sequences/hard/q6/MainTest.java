@@ -3,6 +3,7 @@ package arrays.programs_involving_data_sequences.hard.q6;
 import global.BaseTest;
 import global.MethodTest;
 import global.exceptions.InvalidClauseException;
+import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.*;
@@ -29,6 +30,7 @@ public class MainTest extends BaseTest {
                 new StringLiteral("The Fibonacci sequence of "),
                 new IntegerLiteral(),
                 new StringLiteral(" is:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new PlaceHolder(),
                 new Optional(new StringLiteral(" "))
@@ -56,8 +58,6 @@ public class MainTest extends BaseTest {
                 Arguments.of(10),
                 Arguments.of(100),
                 Arguments.of(10000)
-
-
         );
     }
 
@@ -77,9 +77,8 @@ public class MainTest extends BaseTest {
                 {n, int.class},
         };
         MethodTest m = new MethodTest(FibBeat.class, "fibonacciMaker", arguments);
-        m.setIncorrectMethodStructureErrorMessage("Your fibonacciMaker method does not calculate the correct fibonacci sequence up to nth element.");
         Object output = m.callMethod();
-        assertArrayEquals((int[]) output, fib(n));
+        CustomAssertions._assertArrayEquals(fib(n), output, "Your fibonacciMaker method does not calculate the correct fibonacci sequence up to nth element.");
     }
 
 }
