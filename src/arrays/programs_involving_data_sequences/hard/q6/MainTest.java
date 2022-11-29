@@ -50,7 +50,7 @@ public class MainTest extends BaseTest {
         return out;
     }
 
-    static Stream<Arguments> InputProvider() {
+    static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of(1),
                 Arguments.of(10),
