@@ -35,7 +35,7 @@ public class MainTest extends BaseTest {
         SumPurchase.main(new String[0]);
     }
 
-    static Stream<double[]> InputProvider() {
+    static Stream<double[]> inputProvider() {
         return Stream.of(
                 generateRandomArray(-100000000.0, 100000000.0, n),
                 generateRandomArray(-100000000.0, 100000000.0, n),
