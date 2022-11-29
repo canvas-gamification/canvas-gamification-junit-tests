@@ -38,17 +38,22 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<int[][]> inputProvider() {
-        int[][] a1 = new int[100][100];
-        for(int i = 0; i < 100; i ++)
-            a1[i] = generateRandomArray(1, 100000000, 100);
+        int[][] a1 = new int[10][70];
+        for(int i = 0; i < 10; i ++)
+            a1[i] = generateRandomArray(-100000000, 100000000, 70);
         int[][] a2 = new int[100][100];
         for(int i = 0; i < 100; i ++)
-            a2[i] = generateRandomArray(1, 100000000, 100);
-        int[][] a3 = new int[100][100];
-        for(int i = 0; i < 100; i ++)
-            a3[i] = generateRandomArray(1, 100000000, 100);
+            a2[i] = generateRandomArray(-100000000, 100000000, 100);
+        int[][] a3 = new int[400][300];
+        for(int i = 0; i < 400; i ++)
+            a3[i] = generateRandomArray(-100000000, 100000000, 300);
+        int[][] a4 = {
+                {0, 1, 1, 1, 0},
+                {1, 1, 0, 0, 1},
+                {0, 0, 0, 1, 1}
+        };
         return Stream.of(
-                a1, a2, a3
+                a1, a2, a3, a4
         );
     }
 

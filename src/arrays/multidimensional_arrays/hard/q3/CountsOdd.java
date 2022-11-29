@@ -1,10 +1,9 @@
 package arrays.multidimensional_arrays.hard.q3;
 
 /*
-Write a Java program called CountsOdd. It should have a main method and countsOdd method. The countsOdd method should
-have a parameter that accepts a 2D multidimensional array, it should count the number of odd elements in an array and
-print the count to the system.  Initialize the following array ({ {1,2,3}, {4,5,6}, {7,8,9} }) in the main method, and
-call the countsOdd method using the array as a parameter.
+Make a Java program that initializes a multidimensional array in the main method and calls the countsOdd method. The
+countsOdd method should accept a multidimensional array of integers, count the number of odd integers in the array, and
+print the count.
 
 Sample output:
     count of odd numbers in array = 2
