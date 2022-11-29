@@ -31,7 +31,6 @@ public class MainTest extends BaseTest {
                 new StringLiteral("The squared array is:"),
                 new NewLine(),
                 new PlaceHolder(),
-                new Optional(new StringLiteral(" "))
         };
     }
 
