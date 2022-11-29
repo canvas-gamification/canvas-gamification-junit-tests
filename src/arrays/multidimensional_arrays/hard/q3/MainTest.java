@@ -37,7 +37,7 @@ public class MainTest extends BaseTest {
         return count;
     }
 
-    static Stream<int[][]> InputProvider() {
+    static Stream<int[][]> inputProvider() {
         int[][] a1 = new int[100][100];
         for(int i = 0; i < 100; i ++)
             a1[i] = generateRandomArray(1, 100000000, 100);
