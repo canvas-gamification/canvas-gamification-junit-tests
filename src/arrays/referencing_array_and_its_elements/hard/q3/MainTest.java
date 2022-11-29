@@ -17,6 +17,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.utils.ArrayUtil.*;
+import static java.lang.System.arraycopy;
 
 public class MainTest extends BaseTest {
     // Java
@@ -43,21 +44,21 @@ public class MainTest extends BaseTest {
     }
 
     public static int[] getEven(int[] arr) {
-        int numEven = 0;
-        for (int i = 0; i < arr.length; i++)
-            numEven += arr[i] % 2 == 0 ? 1 : 0;
-        int[] evenNumbers = new int[numEven];
-        int evenIndices = 0;
-        for (int i = 0; i < arr.length; i++)
-            if (arr[i] % 2 == 0)
-                evenNumbers[evenIndices++] = arr[i];
-        return evenNumbers;
+        int[] ev = new int[arr.length];
+        int t = 0;
+        for(int i = 0; i < arr.length; i ++){
+            if(arr[i] % 2 == 0)
+                ev[t ++] = arr[i];
+        }
+        int[] ans = new int[t];
+        arraycopy(ev, 0, ans, 0, t);
+        return ans;
     }
 
     static Stream<Arguments> mainInputProvider() {
         return Stream.of(
-                Arguments.of(generateRandomArray(1, 1000000000, n)),
-                Arguments.of(generateRandomArray(1, 1000000000, n)),
+                Arguments.of(generateRandomArray(1, 10, n)),
+                Arguments.of(generateRandomArray(1, 1000, n)),
                 Arguments.of(generateRandomArray(1, 1000000000, n)),
                 Arguments.of(generateAscendingArray(1, n, 2)),
                 Arguments.of(generateAscendingArray(2, n, 2))
