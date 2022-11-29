@@ -54,17 +54,22 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> mainInputProvider() {
         int[] a1 = generateRandomArray(-1000, 1000, n);
-        int[] a2 = generateRandomArray(-1000, 1000, n);
-        int[] a3 = generateRandomArray(-1000, 1000, n);
-        int[] a4 = generateRandomArray(-1000, 1000, n);
+        int[] a2 = generateRandomArray(-1000000, 1000000, n);
+        int[] a3 = generateRandomArray(-100000000, 100000000, n);
+        int[] a4 = generateRandomArray(-10, 10, n);
         int[] a5 = replicateArray(0, n);
+        int[] a6 = generateAscendingArray(1, n);
+        int[] a7 = generateAscendingArray(-n/2, n);
+        int[] a8 = generateAscendingArray(-n, n);
         return Stream.of(
                 Arguments.of(a1, shifted(a1)),
                 Arguments.of(a2, shifted(a2)),
                 Arguments.of(a3, shifted(a3)),
                 Arguments.of(a4, shifted(a4)),
-                Arguments.of(a5, shifted(a5))
-
+                Arguments.of(a5, shifted(a5)),
+                Arguments.of(a6, shifted(a6)),
+                Arguments.of(a7, shifted(a7)),
+                Arguments.of(a8, shifted(a8))
         );
     }
 
@@ -80,13 +85,17 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> methodInputProvider() {
         int[] test1 = generateRandomArray(-1000000000, 1000000000, 100000);
-        int[] test2 = generateRandomArray(-1000000000, 1000000000, 100000);
-        int[] test3 = replicateArray(0, 100000);
+        int[] test2 = generateRandomArray(-1000000000, 1000000000, 1000);
+        int[] test3 = generateRandomArray(-1000000000, 0, 1000);
+        int[] test4 = generateRandomArray(0, 1000000000, 1000);
+        int[] test5 = replicateArray(0, 100000);
         return Stream.of(
                 Arguments.of(new int[]{3, 4, 6, 21, 48, 42, 89, 2, 0, 91, 33}, new int[]{33, 3, 4, 6, 21, 48, 42, 89, 2, 0, 91}),
                 Arguments.of(test1, shifted(test1)),
                 Arguments.of(test2, shifted(test2)),
                 Arguments.of(test3, shifted(test3)),
+                Arguments.of(test4, shifted(test4)),
+                Arguments.of(test5, shifted(test5)),
                 Arguments.of(new int[]{0, 1}, new int[]{1, 0}),
                 Arguments.of(new int[]{1}, new int[]{1}),
                 Arguments.of(new int[]{0, 0}, new int[]{0, 0})
