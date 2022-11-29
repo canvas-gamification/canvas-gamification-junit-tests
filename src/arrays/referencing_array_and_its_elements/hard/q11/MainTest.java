@@ -63,7 +63,7 @@ public class MainTest extends BaseTest {
     void printCorrectOutput(double[] input) {
         double ans = max(input);
         runWithInput(arrayToInput(input));
-        assertEquals("Your program does not print the maximum value of the double array.", ans, Double.parseDouble(getItemByName("ans")), 0.001);
+        assertEquals(ans, Double.parseDouble(getItemByName("ans")), 0.001, "Your program does not print the maximum value of the double array.");
     }
 
 
