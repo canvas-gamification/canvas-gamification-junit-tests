@@ -63,7 +63,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("coursesInputProvider")
     void printsCorrectMessage(int courses, int credits) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct credit message.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct number of credits based on the input recieved.";
         runWithInput(courses + "", new Clause[]{
                 new IntegerLiteral(credits)
         });
