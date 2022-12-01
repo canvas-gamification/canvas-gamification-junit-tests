@@ -53,7 +53,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctMethodMovieCounter(String movieName, int timeWatched, String exclaimatory) throws Throwable {
+    void correctMovieCounterMethod(String movieName, int timeWatched, String exclaimatory) throws Throwable {
         Object[][] arguments = {
                 {movieName, String.class},
                 {timeWatched, int.class}
