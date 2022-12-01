@@ -50,7 +50,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("coursesInputProvider")
-    void methodCreditsCalcCorrect(int courses, int credits) throws Throwable {
+    void correctCreditsCalcMethod(int courses, int credits) throws Throwable {
         Object[][] arguments = {
                 {courses, int.class}
         };
