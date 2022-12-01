@@ -67,7 +67,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void printsCorrectOutput(String movieName, int timeWatched, String exclaimatory) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message for the movie.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message for the input movie and the number of times the user watched it.";
         runWithInput(movieName + "\n" + timeWatched, new Clause[]{
                 new StringLiteral(exclaimatory),
         });
