@@ -60,7 +60,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(FavMovie.class, "movieCounter", arguments);
         Object output = m.callMethod();
-        String errorMessage = "Your movieCounter() method does not return the correct message.";
+        String errorMessage = "Your movieCounter() method does not return the correct message based on the move name and the number of times the user watched the moveie.";
         CustomAssertions._assertEquals(output, exclaimatory, errorMessage);
     }
 
