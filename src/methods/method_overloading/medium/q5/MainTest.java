@@ -34,27 +34,27 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputTwoIntegersProvider")
-    void correctTwoIntegerProduct(int a, int b, int product) throws Throwable {
+    void correctTwoIntegerMultiplyMethod(int a, int b, int product) throws Throwable {
         Object[][] arguments = {
                 {a, int.class},
                 {b, int.class}
         };
         MethodTest m = new MethodTest(OverloadIt.class, "multiply", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your multiply method does not return the correct product of 2 integers.";
+        String errMsg = "Your multiply method does not correctly calculate the product of 2 integers.";
         CustomAssertions._assertEquals(product, output, errMsg);
     }
 
     @ParameterizedTest
     @MethodSource("inputDoubleAndIntegerProvider")
-    void correctTwoDoubleProduct(double a, int b, double product) throws Throwable {
+    void correctTwoDoubleMultiplyMethod(double a, int b, double product) throws Throwable {
         Object[][] arguments = {
                 {a, double.class},
                 {b, int.class}
         };
         MethodTest m = new MethodTest(OverloadIt.class, "multiply", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your multiply method does not return the correct product of 2 doubles.";
+        String errMsg = "Your multiply method does not correctly calculate the product of an integer and a double.";
         CustomAssertions._assertEquals(product, output, 0.0001, errMsg);
     }
 }
