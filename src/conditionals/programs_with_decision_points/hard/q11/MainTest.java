@@ -20,20 +20,16 @@ public class MainTest extends BaseTest {
 
     private static final int currentDay = 27;
     private static final int currentMonth = 9;
-    private static final int currentYear = 2022;
     private static final int diff = 45;
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "12 11 2022";
+        TestOption.defaultInput = "12 11";
         return new Clause[]{
                 new StringLiteral("Enter your birth day:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("Enter your birth month as a number:"),
-                new Optional(new StringLiteral(" ")),
-                new NewLine(),
-                new StringLiteral("Enter the year of your most recent birthday:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new PlaceHolder()
@@ -45,43 +41,43 @@ public class MainTest extends BaseTest {
         Discount.main(new String[0]);
     }
 
-    public static boolean calcAns(int birthDay, int birthMonth, int birthYear) {
-        int difference = Math.abs(((birthYear - currentYear) * 365) + ((birthMonth - currentMonth) * 30) + birthDay - currentDay);
-        if (difference <= diff)
+    public static boolean calcAns(int birthDay, int birthMonth) {
+        int cd = (currentDay) + (currentMonth - 1) * 30;
+        int bd = (birthDay) + (birthMonth - 1) * 30;
+        if (Math.min(Math.abs(cd - bd), Math.min(Math.abs((cd - 360) - bd), Math.abs((cd + 360) - bd))) <= diff)
             return true;
-        else
-            return false;
+        return false;
     }
 
     static Stream<Arguments> InputProvider() {
         return Stream.of(
-                Arguments.of(1, 1, currentYear),
-                Arguments.of(30, 12, currentYear),
-                Arguments.of(2, 1, currentYear),
-                Arguments.of(2, 30, currentYear),
+                Arguments.of(1, 1),
+                Arguments.of(30, 12),
+                Arguments.of(2, 1),
+                Arguments.of(2, 3),
                 Arguments.of(1, 1, 2015),
                 Arguments.of(30, 12, 2015),
                 Arguments.of(2, 1, 2015),
                 Arguments.of(2, 30, 2015),
-                Arguments.of(currentDay, currentMonth, currentYear),
-                Arguments.of(1, currentMonth, currentYear),
-                Arguments.of(30, currentMonth, currentYear),
-                Arguments.of((currentDay + diff) % 30, (currentMonth + diff / 30) % 12, (currentYear + diff / 365)),
-                Arguments.of((currentDay + diff + 1) % 30, (currentMonth + diff / 30) % 12, (currentYear + diff / 365)),
-                Arguments.of((currentDay - diff + 30) % 30, (currentMonth - diff / 30 + 12) % 12, (currentYear - diff / 365 + 365)),
-                Arguments.of((currentDay - diff - 1 + 30) % 30, (currentMonth - diff / 30 + 12) % 12, (currentYear - diff / 365 + 365))
+                Arguments.of(currentDay, currentMonth),
+                Arguments.of(1, currentMonth),
+                Arguments.of(30, currentMonth),
+                Arguments.of((currentDay + diff) % 30, (currentMonth + diff / 30) % 12),
+                Arguments.of((currentDay + diff + 1) % 30, (currentMonth + diff / 30) % 12),
+                Arguments.of((currentDay - diff + 30) % 30, (currentMonth - diff / 30 + 12) % 12),
+                Arguments.of((currentDay - diff - 1 + 30) % 30, (currentMonth - diff / 30 + 12) % 12)
         );
     }
 
     @ParameterizedTest
     @MethodSource("InputProvider")
-    void identifiesDiscountCorrectly(int a, int b, int c) throws InvalidClauseException {
+    void identifiesDiscountCorrectly(int a, int b) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program did not correctly identify if the user qualifies for the discount.";
-        if (calcAns(a, b, c)) {
-            runWithInput(a + " " + b + " " + c, new Clause[]{
+        if (calcAns(a, b)) {
+            runWithInput(a + " " + b, new Clause[]{
                     new StringLiteral("You qualify for a 10% discount!")});
         } else {
-            runWithInput(a + " " + b + " " + c, new Clause[]{
+            runWithInput(a + " " + b, new Clause[]{
                     new StringLiteral("You do not qualify for any discounts.")});
         }
     }
