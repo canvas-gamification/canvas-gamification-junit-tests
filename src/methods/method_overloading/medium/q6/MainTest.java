@@ -34,27 +34,27 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputDoubleFloatProvider")
-    void correctDoubleFloatDivide(double a, double b, double divide) throws Throwable {
+    void correctDoubleFloatDivideMethod(double a, double b, double divide) throws Throwable {
         Object[][] arguments = {
                 {a, double.class},
                 {(float) b, float.class}
         };
         MethodTest m = new MethodTest(OverloadFloat.class, "divide", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your divide() method does not return a correct value for double and float.";
+        String errMsg = "Your divide method does not return the correct value after double and float division.";
         CustomAssertions._assertEquals(divide, output, 0.0001, errMsg);
     }
 
     @ParameterizedTest
     @MethodSource("inputIntLongProvider")
-    void correctIntLongDivide(int a, long b, double divide) throws Throwable {
+    void correctIntLongDivideMethod(int a, long b, double divide) throws Throwable {
         Object[][] arguments = {
                 {a, int.class},
                 {b, long.class}
         };
         MethodTest m = new MethodTest(OverloadFloat.class, "divide", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your divide() method does not return a correct value for int and long.";
+        String errMsg = "Your divide method does not return the correct value after int and long division.";
         CustomAssertions._assertEquals(divide, output, 0.0001, errMsg);
     }
 }

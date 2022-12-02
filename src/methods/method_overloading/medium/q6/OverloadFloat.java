@@ -1,8 +1,8 @@
 package methods.method_overloading.medium.q6;
 
 /*
- Overload a Java Method so that it can take a double variable and float variable or it can take a int variable and long
- variable, then divide the former variable by the latter variable.
+Overload a Java method called divide which divides the first passed parameter by the second. The first method
+should take a double and float and return a double. The second method should take an int and a long and return a double.
  */
 public class OverloadFloat {
     public static double divide(double a, float b) {
