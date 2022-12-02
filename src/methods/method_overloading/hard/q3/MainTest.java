@@ -32,10 +32,10 @@ public class MainTest extends BaseTest {
                 new StringLiteral("Enter two doubles:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("The sum of the 2 numbers: "),
+                new StringLiteral("The sum of the 2 integers: "),
                 new IntegerLiteral("sumInt"),
                 new NewLine(),
-                new StringLiteral("The sum of the 2 numbers: "),
+                new StringLiteral("The sum of the 2 doubles: "),
                 new DoubleLiteral("sumDouble"),
                 new NewLine()
         };
@@ -77,35 +77,35 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("integerInputProvider")
-    public void methodIntegerCorrect(int a, int b, int sum) throws Throwable {
+    public void correctIntegerSumMethod(int a, int b, int sum) throws Throwable {
         Object[][] arguments = {
                 {a, int.class},
                 {b, int.class}
         };
         MethodTest m = new MethodTest(SumOverloaded.class, "sum", arguments);
         Object output = m.callMethod();
-        String errorMsg = "Your method did not calculate the correct sum for 2 integers.";
+        String errorMsg = "Your method did not correctly calculate the sum of 2 integers.";
         CustomAssertions._assertEquals(sum, output, errorMsg);
     }
 
     @ParameterizedTest
     @MethodSource("doubleInputProvider")
-    public void methodDoubleCorrect(double a, double b, double sum) throws Throwable {
+    public void correctDoubleSumMethod(double a, double b, double sum) throws Throwable {
         Object[][] arguments = {
                 {a, double.class},
                 {b, double.class}
         };
         MethodTest m = new MethodTest(SumOverloaded.class, "sum", arguments);
         Object output = m.callMethod();
-        String errorMsg = "Your method did not calculate the correct sum for 2 doubles.";
+        String errorMsg = "Your method did not correctly calculate the sum of 2 doubles.";
         CustomAssertions._assertEquals(sum, output, 0.0001, errorMsg);
     }
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
-    public void printsCorrectMessage(int a, int b, int c, double x, double y, double w) {
+    public void correctMainMethodOutput(int a, int b, int c, double x, double y, double w) {
         runWithInput(a + " " + b + " " + x + " " + y);
-        assertEquals(c, Integer.parseInt(getItemByName("sumInt")), "Your program does not print the correct message for sum of 2 integers.");
-        assertEquals(w, Double.parseDouble(getItemByName("sumDouble")), 0.0001, "Your program does not print the correct message for sum of 2 doubles.");
+        assertEquals(c, Integer.parseInt(getItemByName("sumInt")), "Your program does not correctly print the sum of 2 integers.");
+        assertEquals(w, Double.parseDouble(getItemByName("sumDouble")), 0.0001, "Your program does not correctly print the sum of 2 doubles.");
     }
 }

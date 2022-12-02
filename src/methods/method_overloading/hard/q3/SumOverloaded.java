@@ -2,15 +2,16 @@ package methods.method_overloading.hard.q3;
 
 /*
 Write a Java program that prompts the user to input two integers and two doubles. Then pass each pair of numbers to an
-overloaded method called sum which takes the two numbers as parameters and returns their sum.
+overloaded method called sum which takes the two numbers as parameters and returns their sum. Print the returned sums
+in the main method.
 
 Sample Output:
   Enter two integers:
   43 56
   Enter two doubles:
   91.4 26.1
-  The sum of the 2 numbers: 99
-  The sum of the 2 numbers: 117.5
+  The sum of the 2 integers: 99
+  The sum of the 2 doubles: 117.5
 */
 
 import java.util.Scanner;
@@ -24,8 +25,8 @@ public class SumOverloaded {
     System.out.println("Enter two doubles: ");
     double x = input.nextDouble();
     double y = input.nextDouble();
-    System.out.println("The sum of the 2 numbers: " + sum(one, two));
-    System.out.println("The sum of the 2 numbers: " + sum(x, y));
+    System.out.println("The sum of the 2 integers: " + sum(one, two));
+    System.out.println("The sum of the 2 doubles: " + sum(x, y));
   }
 
   public static int sum(int num1, int num2) {
