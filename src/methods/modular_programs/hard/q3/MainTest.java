@@ -33,57 +33,37 @@ public class MainTest extends BaseTest {
         UniversityLife.main(new String[0]);
     }
 
-    static Stream<Arguments> inputValidYearProvider() {
+    static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of(1, "You're a Freshman"),
                 Arguments.of(2, "You're a Sophomore"),
                 Arguments.of(3, "You're a Junior"),
-                Arguments.of(4, "You're a Senior"));
-    }
-
-    static Stream<Integer> inputInvalidYearProvider() {
-        return Stream.of(-1, 0, 5, 100);
+                Arguments.of(4, "You're a Senior"),
+                Arguments.of(-1, "Invalid Input!"),
+                Arguments.of(0, "Invalid Input!"),
+                Arguments.of(5, "Invalid Input!"),
+                Arguments.of(100, "Invalid Input!")
+        );
     }
 
     @ParameterizedTest
-    @MethodSource("inputValidYearProvider")
-    void methodValidYearCorrect(int year, String title) throws Throwable {
+    @MethodSource("inputProvider")
+    void correctUniversityYearMethod(int year, String title) throws Throwable {
         Object[][] arguments = {
                 {year, int.class}
         };
         MethodTest m = new MethodTest(UniversityLife.class, "universityYear", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your universityYear method does not return the correct title for the given year.";
+        String errMsg = "Your universityYear method does not return the correct message for the given year.";
         CustomAssertions._assertEquals(title, output, errMsg);
     }
 
     @ParameterizedTest
-    @MethodSource("inputInvalidYearProvider")
-    void methodInvalidYearException(int year) throws Throwable {
-        Object[][] arguments = {
-                {year, int.class}
-        };
-        MethodTest m = new MethodTest(UniversityLife.class, "universityYear", arguments);
-        Object output = m.callMethod();
-        String errMsg = "Your universityYear method does not throw an exception for the given year.";
-        CustomAssertions._assertEquals("Invalid Input!", output, errMsg);
-    }
-
-    @ParameterizedTest
-    @MethodSource("inputValidYearProvider")
-    void printsCorrectOutputValidYear(int year, String title) throws InvalidClauseException {
+    @MethodSource("inputProvider")
+    void correctMainMethodOutput(int year, String title) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print the correct output for the given year.";
         runWithInput(year + "", new Clause[]{
                 new StringLiteral(title),
-        });
-    }
-
-    @ParameterizedTest
-    @MethodSource("inputInvalidYearProvider")
-    void printsCorrectOutputInvalidYear(int year) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct output for the given year.";
-        runWithInput(year + "", new Clause[]{
-                new StringLiteral("Invalid Input!"),
         });
     }
 }
