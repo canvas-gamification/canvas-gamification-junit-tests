@@ -11,12 +11,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
-import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
     // Java
@@ -40,23 +41,23 @@ public class MainTest extends BaseTest {
     }
 
     @RepeatedTest(50)
-    public void methodReturnsCorrectPattern(RepetitionInfo repetitionInfo) throws Throwable {
+    public void correctPrintPatternMethod(RepetitionInfo repetitionInfo) throws Throwable {
         int n = repetitionInfo.getCurrentRepetition();
         Clause[] methodSentence = methodClauseBuilder(n);
         Object[][] arguments = {
                 {n, int.class}
         };
         MethodTest m = new MethodTest(TryAngleButReflected.class, "printPattern", arguments, methodSentence);
-        m.setIncorrectMethodStructureErrorMessage("Your printPattern() method does not print the correct pattern for the given input.");
+        m.setIncorrectMethodStructureErrorMessage("Your printPattern method does not correctly print the pattern from the given input.");
         Object output = m.callMethod();
-        String errMsg = "Your printPattern() method should not return a value.";
+        String errMsg = "Your printPattern method should not return a value.";
 
-        CustomAssertions._assertTrue(Objects.isNull(output), errMsg, errMsg);
+        assertTrue(Objects.isNull(output), errMsg);
     }
 
     @ParameterizedTest
     @MethodSource("inputInvalidProvider")
-    public void methodPrintsErrorForInvalidInput(int n) throws Throwable {
+    public void correctInvalidPrintPatternMethod(int n) throws Throwable {
         Clause[] methodSentence = new Clause[]{
                 new StringLiteral("Number must be positive")
         };
@@ -64,17 +65,14 @@ public class MainTest extends BaseTest {
                 {n, int.class}
         };
         MethodTest m = new MethodTest(TryAngleButReflected.class, "printPattern", arguments, methodSentence);
-        m.setIncorrectMethodStructureErrorMessage("Your printPattern() method does not print an error message for the given input.");
-        Object output = m.callMethod();
-        String errMsg = "Your printPattern() method returns a value, which is not allowed.";
-
-        CustomAssertions._assertTrue(Objects.isNull(output), errMsg, errMsg);
+        m.setIncorrectMethodStructureErrorMessage("Your printPattern method does not correctly identify invalid input.");
+        m.callMethod();
     }
 
 
     @RepeatedTest(50)
-    public void printsCorrectPatternValidInput(RepetitionInfo repetitionInfo) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct pattern for the given input.";
+    public void correctMainMethodOutput(RepetitionInfo repetitionInfo) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the pattern from the given input.";
 
         int n = repetitionInfo.getCurrentRepetition();
 
@@ -83,8 +81,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputInvalidProvider")
-    public void printsErrorForInvalidInput(int n) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for the given input.";
+    public void correctInvalidMainMethodOutput(int n) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for invalid input.";
         runWithInput(n + "", new Clause[]{
                 new StringLiteral("Number must be positive"),
         });
