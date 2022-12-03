@@ -23,8 +23,8 @@ public class ObjectsTesting {
     @Test
     public void houseClassHasRequiredFields() {
         ObjectTest objectTest = new ObjectTest(houseClass);
-        assertTrue(objectTest.hasField("number", int.class), objectTest.missingFieldValueMessage("number"));
-        assertTrue(objectTest.hasField("address", String.class), objectTest.missingFieldValueMessage("address"));
+        assertTrue(objectTest.hasField("number", int.class, new String[]{"public"}), objectTest.missingFieldValueMessage("number"));
+        assertTrue(objectTest.hasField("address", String.class, new String[]{"default"}), objectTest.missingFieldValueMessage("address"));
     }
 
     public static Stream<Arguments> inputProviderConstructor1() {

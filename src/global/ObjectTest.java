@@ -35,8 +35,15 @@ public class ObjectTest {
 
     // When you create an objectTest, you should be able to specify fields, methods, and constructors
 
-    public ObjectTest(String objectClass, Object[][][] constructors) {
+    public ObjectTest(String objectClass, Object[][] constructors, Object[][] fields) {
+        try{
+            this.objectClass = Class.forName(objectClass);
+        }
+        for(int i  = 0; i < constructors.length; i++){
+            try{
 
+            }
+        }
     }
 
     // TODO: When specifying methods and parameters, you can also specify the modifier (public, private, etc.) and it should check that
@@ -71,9 +78,12 @@ public class ObjectTest {
         return object;
     }
 
-    public boolean hasField(String fieldName, Class<?> fieldClass) {
+    public boolean hasField(String fieldName, Class<?> fieldClass, String[] modifiers) {
         try {
             Field f = objectClass.getDeclaredField(fieldName);
+            for (String item : modifiers) {
+
+            }
             return fieldClass.equals(f.getType());
         } catch (NoSuchFieldException e) {
             return false;
