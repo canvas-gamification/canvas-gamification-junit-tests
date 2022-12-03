@@ -33,7 +33,7 @@ public class MainTest extends BaseTest {
         QueryStr.main(new String[0]);
     }
 
-    static Stream<Arguments> inputSentenceProvider() {
+    static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of(" Hello There ", "%20%Hello%20%There%20%"),
                 Arguments.of(" ", "%20%"),
@@ -42,21 +42,21 @@ public class MainTest extends BaseTest {
     }
 
     @ParameterizedTest
-    @MethodSource("inputSentenceProvider")
-    void methodCleanUpCorrect(String originalStr, String cleanedUpStr) throws Throwable {
+    @MethodSource("inputProvider")
+    void correctCleanUpMethod(String originalStr, String cleanedUpStr) throws Throwable {
         Object[][] arguments = {
                 {originalStr, String.class}
         };
         MethodTest m = new MethodTest(QueryStr.class, "cleanUp", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your cleanUp() method does not return the correct cleaned up string.";
+        String errMsg = "Your cleanUp method does not correctly modify and return the query string.";
         CustomAssertions._assertEquals(cleanedUpStr, output, errMsg);
     }
 
     @ParameterizedTest
-    @MethodSource("inputSentenceProvider")
-    void printsCorrectOutput(String originalStr, String cleanedUpStr) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct cleanup up string for the given string.";
+    @MethodSource("inputProvider")
+    void correctMainMethodOutput(String originalStr, String cleanedUpStr) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the modified query string.";
         runWithInput(originalStr, new Clause[][]{{
                 new StringLiteral("The new query string is: "),
                 new StringLiteral(cleanedUpStr),

@@ -2,9 +2,10 @@ package methods.modular_programs.medium.q8;
 
 /*
 Search Engines usually make formatted "Query Strings" by replacing the spaces in a search term with a special character.
-Write a program with a method called cleanUp that will accept a search term from the user and replace all the spaces
-with "%20%" and store the result in a separate string variable. Eg: " Hello There " becomes "%20%Hello%20%There%20%."
-Use a single-layered loop to write this program.
+Write a program that asks for a sentence and passes it to a method called cleanUp that will accept a search term from
+the user and replace all the spaces with "%20%" and store the result in a separate string variable. Eg: " Hello There "
+becomes "%20%Hello%20%There%20%." Use a single-layered loop to write this method. Return the query string and print it
+in the main method.
 
 Sample Output:
   Enter a sentence:
