@@ -35,20 +35,20 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputTwoCharsProvider")
-    void correctTwoCharGreater(char a, char b, char greater) throws Throwable {
+    void correctGreatestMethod(char a, char b, char greater) throws Throwable {
         Object[][] arguments = {
                 {a, char.class},
                 {b, char.class}
         };
         MethodTest m = new MethodTest(OverloadChar.class, "greatest", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your greatest() method does not print the greater character.";
+        String errMsg = "Your two character greatest method does not correctly print the greater character.";
         CustomAssertions._assertEquals(greater, output, errMsg);
     }
 
     @ParameterizedTest
     @MethodSource("inputThreeIntsProvider")
-    void correctThreeIntsGreatest(int a, int b, int c, int greatest) throws Throwable {
+    void correctGreatestMethod(int a, int b, int c, int greatest) throws Throwable {
         Object[][] arguments = {
                 {a, int.class},
                 {b, int.class},
@@ -56,7 +56,7 @@ public class MainTest {
         };
         MethodTest m = new MethodTest(OverloadChar.class, "greatest", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your greatest() method does not print the greatest character.";
+        String errMsg = "Your three character greatest method does not correctly print the greatest character.";
         CustomAssertions._assertEquals(greatest, output, errMsg);
     }
 }

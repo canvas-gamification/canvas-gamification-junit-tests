@@ -1,8 +1,8 @@
 package methods.method_overloading.medium.q8;
 
 /*
-Overload a Java Method so that it can take either two characters, or it can take three integers and returns the greatest
-value from the input values. Note: it is possible to compare characters.
+Overload a Java Method so that it can take either two characters or three integers and returns the greatest value from
+the inputs. Note: it is possible to numerically compare characters.
  */
 public class OverloadChar {
     public static char greatest(char a, char b) {
