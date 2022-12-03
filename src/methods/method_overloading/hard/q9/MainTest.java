@@ -2,6 +2,7 @@ package methods.method_overloading.hard.q9;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
 import global.tools.TestOption;
 import global.variables.clauses.PlaceHolder;
 import global.variables.wrappers.Optional;
@@ -11,7 +12,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import global.BaseTest;
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
@@ -21,7 +21,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "Susanna Mary 13 81";
+        TestOption.defaultInput = "Susanna Mary \n 13 81";
         return new Clause[]{
                 new StringLiteral("Enter two names:"),
                 new Optional(new StringLiteral(" ")),
@@ -57,19 +57,27 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputNameAgeProvider")
-    void userNameWithNameAgeCorrect(String name, int age, String username) throws Throwable {
-        String errMsg = "Your method \"userName()\" does not give the correct username.";
-        Object output = MethodUtil.invokeIfMethodExists(GenerateUsername.class, "userName", new Object[]{name, age},
-                String.class, int.class);
-        CustomAssertions._assertEquals(output, username, errMsg);
+    void correctUserNameMethod(String name, int age, String username) throws Throwable {
+        Object[][] arguments = {
+                {name, String.class},
+                {age, int.class}
+        };
+        MethodTest m = new MethodTest(GenerateUsername.class, "userName", arguments);
+        Object output = m.callMethod();
+        String errMsg = "Your userName method does not format the username correctly when given the name and age.";
+        CustomAssertions._assertEquals(username, output, errMsg);
     }
 
     @ParameterizedTest
     @MethodSource("inputAgeNameProvider")
-    void userNameWithAgeNameCorrect(int age, String name, String username) throws Throwable {
-        String errMsg = "Your method \"userName()\" does not give the correct username.";
-        Object output = MethodUtil.invokeIfMethodExists(GenerateUsername.class, "userName", new Object[]{age, name},
-                int.class, String.class);
-        CustomAssertions._assertEquals(output, username, errMsg);
+    void correctUserNameMethod(int age, String name, String username) throws Throwable {
+        Object[][] arguments = {
+                {age, int.class},
+                {name, String.class}
+        };
+        MethodTest m = new MethodTest(GenerateUsername.class, "userName", arguments);
+        Object output = m.callMethod();
+        String errMsg = "Your userName method does not format the username correctly when given the age and name.";
+        CustomAssertions._assertEquals(username, output, errMsg);
     }
 }
