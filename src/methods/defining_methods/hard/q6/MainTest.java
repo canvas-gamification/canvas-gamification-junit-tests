@@ -67,7 +67,13 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(IntegerMulter.class, "multiply1000", arguments);
         Object output = m.callMethod();
-        String errorMessage = "Your method multiply1000() does not return the correct number.";
+        String errorMessage;
+        if(newNum == -1){
+            errorMessage = "Your multiply1000 method does not identify invalid input and return -1.";
+        }
+        else{
+            errorMessage = "Your multiply1000 method does not correctly multiply the number by 1000.";
+        }
         CustomAssertions._assertEquals(newNum, output, errorMessage);
     }
 
@@ -75,6 +81,6 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void printsCorrectMessage(int num, int newNum) {
         runWithInput(num + "");
-        assertEquals(newNum, Integer.parseInt(getItemByName("newNum")), "Your program does not print the correct message for the number.");
+        assertEquals(newNum, Integer.parseInt(getItemByName("newNum")), "Your program does not print the correct number in the result.");
     }
 }
