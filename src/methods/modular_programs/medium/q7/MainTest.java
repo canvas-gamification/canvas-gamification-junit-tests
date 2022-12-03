@@ -4,6 +4,7 @@ import java.util.stream.Stream;
 
 import global.MethodTest;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import global.BaseTest;
@@ -32,53 +33,45 @@ public class MainTest extends BaseTest {
         NowThatsPerfect.main(new String[0]);
     }
 
-    static Stream<Integer> perfectNumberProvider() {
-        return Stream.of(6, 28, 496, 8128, 33550336);
-    }
-
-    static Stream<Integer> imperfectNumberProvider() {
-        return Stream.of(1, 2, -1, 27, 11, 9092);
+    static Stream<Arguments> inputProvider() {
+        return Stream.of(
+                Arguments.of(6, true),
+                Arguments.of(28, true),
+                Arguments.of(496, true),
+                Arguments.of(8128, true),
+                Arguments.of(33550336, true),
+                Arguments.of(1, false),
+                Arguments.of(2, false),
+                Arguments.of(-1, false),
+                Arguments.of(27, false),
+                Arguments.of(11, false),
+                Arguments.of(9092, false)
+        );
     }
 
     @ParameterizedTest
-    @MethodSource("perfectNumberProvider")
-    public void correctsPerfectNumberMethod(int n) throws Throwable {
+    @MethodSource("inputProvider")
+    public void correctsPerfectOrNotMethod(int n, boolean b) throws Throwable {
         Object[][] arguments = {
                 {n, int.class}
         };
         MethodTest m = new MethodTest(NowThatsPerfect.class, "perfectOrNot", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your perfectOrNot() method does not return the correct result for perfect numbers.";
-        CustomAssertions._assertEquals(true, output, errMsg);
+        String errMsg = "Your perfectOrNot method does not correctly identify perfect numbers.";
+        CustomAssertions._assertEquals(b, output, errMsg);
     }
 
     @ParameterizedTest
-    @MethodSource("imperfectNumberProvider")
-    public void correctsImperfectNumberMethod(int n) throws Throwable {
-        Object[][] arguments = {
-                {n, int.class}
-        };
-        MethodTest m = new MethodTest(NowThatsPerfect.class, "perfectOrNot", arguments);
-        Object output = m.callMethod();
-        String errMsg = "Your perfectOrNot() method does not return the correct result for imperfect numbers.";
-        CustomAssertions._assertEquals(false, output, errMsg);
-    }
-
-    @ParameterizedTest
-    @MethodSource("perfectNumberProvider")
-    public void printsPerfectNumberCorrects(int n) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message for perfect number.";
+    @MethodSource("inputProvider")
+    public void printsPerfectNumberCorrects(int n, boolean b) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print if a number is perfect.";
+        String s;
+        if(b)
+            s = "perfect";
+        else
+            s = "imperfect";
         runWithInput(n + "", new Clause[]{
-                new StringLiteral("perfect"),
-        });
-    }
-
-    @ParameterizedTest
-    @MethodSource("imperfectNumberProvider")
-    public void printsImperfectNumberCorrects(int n) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message for imperfect number.";
-        runWithInput(n + "", new Clause[]{
-                new StringLiteral("imperfect"),
+                new StringLiteral(s),
         });
     }
 }
