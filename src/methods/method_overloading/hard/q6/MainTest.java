@@ -50,31 +50,36 @@ public class MainTest extends BaseTest {
         AttendingStudent.main(new String[0]);
     }
 
-    static Stream<Integer> validStudentNumberProvider() {
-        return Stream.of(12345678, 51927731, 981237091, 10000000);
-    }
-
-    static Stream<Integer> invalidStudentNumberProvider() {
-        return Stream.of(0, -1, 100, 999, 6484831, 9999999, 00000001);
-    }
-
-    static Stream<Arguments> validStudentNameProvider() {
+    static Stream<Arguments> studentNumberProvider() {
         return Stream.of(
-                Arguments.of("John", "Smith", "John.Smith"),
-                Arguments.of("Jack", "Swift", "Jack.Swift"),
-                Arguments.of("Ben", "Doe", "Ben.Doe"),
-                Arguments.of("123", "456", "123.456"),
-                Arguments.of("Hello", "World", "Hello.World"),
-                Arguments.of(" ", " ", " . "));
+                Arguments.of(12345678, true),
+                Arguments.of(51927731, true),
+                Arguments.of(981237091, true),
+                Arguments.of(10000000, true),
+                Arguments.of(0, false),
+                Arguments.of(-1, false),
+                Arguments.of(100, false),
+                Arguments.of(999, false),
+                Arguments.of(6484831, false),
+                Arguments.of(9999999, false),
+                Arguments.of(00000001, false)
+        );
     }
 
-    static Stream<Arguments> invalidStudentNameProvider() {
+    static Stream<Arguments> studentNameProvider() {
         return Stream.of(
-                Arguments.of(" ", "123", " .12"),
-                Arguments.of("Jack", "Swift", "jackSwift151"),
-                Arguments.of("Hello", "World", "Hello.World!"),
-                Arguments.of("Hello", "World", "Hello World"),
-                Arguments.of("Hello", "World", "HelloWorld"));
+                Arguments.of("John", "Smith", "John.Smith", true),
+                Arguments.of("Jack", "Swift", "Jack.Swift", true),
+                Arguments.of("Ben", "Doe", "Ben.Doe", true),
+                Arguments.of("123", "456", "123.456", true),
+                Arguments.of("Hello", "World", "Hello.World", true),
+                Arguments.of(" ", " ", " . ", true),
+                Arguments.of(" ", "123", " .12", false),
+                Arguments.of("Jack", "Swift", "jackSwift151", false),
+                Arguments.of("Hello", "World", "Hello.World!", false),
+                Arguments.of("Hello", "World", "Hello World", false),
+                Arguments.of("Hello", "World", "HelloWorld", false)
+        );
     }
 
     static Stream<Arguments> mainMethodInputProvider() {
@@ -99,32 +104,20 @@ public class MainTest extends BaseTest {
     }
 
     @ParameterizedTest
-    @MethodSource("validStudentNumberProvider")
-    public void correctValidStudentCheckNumberMethod(int studentID) throws Throwable {
+    @MethodSource("studentNumberProvider")
+    public void correctStudentCheckMethod(int studentID, boolean result) throws Throwable {
         Object[][] arguments = {
                 {studentID, int.class}
         };
         MethodTest m = new MethodTest(AttendingStudent.class, "studentCheck", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your studentCheck method does not correctly identify a valid student number.";
-        CustomAssertions._assertEquals(true, output, errMsg);
+        String errMsg = "Your studentCheck method does not correctly check if a student number is valid.";
+        CustomAssertions._assertEquals(result, output, errMsg);
     }
 
     @ParameterizedTest
-    @MethodSource("invalidStudentNumberProvider")
-    public void correctInvalidStudentCheckMethod(int studentID) throws Throwable {
-        Object[][] arguments = {
-                {studentID, int.class}
-        };
-        MethodTest m = new MethodTest(AttendingStudent.class, "studentCheck", arguments);
-        Object output = m.callMethod();
-        String errMsg = "Your studentCheck method does not correctly identify an invalid student number.";
-        CustomAssertions._assertEquals(false, output, errMsg);
-    }
-
-    @ParameterizedTest
-    @MethodSource("validStudentNameProvider")
-    public void correctValidStudentCheckNameMethod(String fname, String lname, String username) throws Throwable {
+    @MethodSource("studentNameProvider")
+    public void correctStudentCheckMethod(String fname, String lname, String username, boolean result) throws Throwable {
         Object[][] arguments = {
                 {fname, String.class},
                 {lname, String.class},
@@ -132,21 +125,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(AttendingStudent.class, "studentCheck", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your studentCheck method does not correctly identify a valid student username.";
-        CustomAssertions._assertEquals(true, output, errMsg);
-    }
-
-    @ParameterizedTest
-    @MethodSource("invalidStudentNameProvider")
-    public void correctInvalidStudentCheckNameMethod(String fname, String lname, String username) throws Throwable {
-        Object[][] arguments = {
-                {fname, String.class},
-                {lname, String.class},
-                {username, String.class}
-        };
-        MethodTest m = new MethodTest(AttendingStudent.class, "studentCheck", arguments);
-        Object output = m.callMethod();
-        String errMsg = "Your studentCheck method does not correctly identify an invalid student username.";
-        CustomAssertions._assertEquals(false, output, errMsg);
+        String errMsg = "Your studentCheck method does not correctly check if a username is valid.";
+        CustomAssertions._assertEquals(result, output, errMsg);
     }
 }
