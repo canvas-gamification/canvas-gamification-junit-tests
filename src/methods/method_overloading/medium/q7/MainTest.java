@@ -34,26 +34,26 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputDoubleProvider")
-    void correctMultiplyDouble(double a, double multiply) throws Throwable {
+    void correctMultiplyMethod(double a, double multiply) throws Throwable {
         Object[][] arguments = {
                 {a, double.class}
         };
         MethodTest m = new MethodTest(OverloadDubDub.class, "multiply", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your multiply() method does not return the correct value for a double.";
+        String errMsg = "Your multiply method does not correctly return the double multiplied by 1000.";
         CustomAssertions._assertEquals(multiply, output, 0.0001, errMsg);
     }
 
     @ParameterizedTest
     @MethodSource("inputDoubleIntegerProvider")
-    void correctMultiplyDoubleInteger(double a, int b, double multiply) throws Throwable {
+    void correctMultiplyMethod(double a, int b, double multiply) throws Throwable {
         Object[][] arguments = {
                 {a, double.class},
                 {b, int.class}
         };
         MethodTest m = new MethodTest(OverloadDubDub.class, "multiply", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your multiply() method does not return the correct value for a double and an integer.";
+        String errMsg = "Your multiply method does not correctly return the double and integer multiplied together.";
         CustomAssertions._assertEquals(multiply, output, 0.0001, errMsg);
     }
 }
