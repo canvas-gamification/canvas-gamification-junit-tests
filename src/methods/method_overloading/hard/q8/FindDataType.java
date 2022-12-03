@@ -1,38 +1,29 @@
 package methods.method_overloading.hard.q8;
 
 /*
-Write a Java Program that asks the user for an integer and a double and then prints out a message with the data type of
-each number. To identify the data type, write two methods called printType, one that accepts an int and returns the
-string "int" and one that takes a double and returns the string "double".
+Write a Java Program with an overloaded method called printType which can take either an integer or a double. In the
+main method, pass the method the integer 14, and on a new line the double 61.34, then print what the associated data
+type is.
 
 Sample Output:
-    Enter an integer:
-    5
-    Enter a double:
-    16.32
-    The data type associated with 5 is: int
-    The data type associated with 16.32 is: double
+The data type associated with 14 is: int
+	The data type associated with 61.34 is: double
  */
 
-import java.util.Scanner;
-
-public class FindDataType {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter an integer: ");
-        int x = input.nextInt();
-        System.out.println("Enter a double: ");
-        double y = input.nextDouble();
-        System.out.println("The data type associated with " + x + " is: " + printType(x));
-        System.out.println("The data type associated with " + y + " is: " + printType(y));
-    }
-
-    public static String printType(int x) {
-        return "int";
-    }
-
-    public static String printType(double x) {
-        return "double";
-    }
+public class FindDataType
+{
+   public static void main( String[] args )
+      {
+         System.out.println("The data type associated with 14 is: " + printType( 14 ));
+         System.out.println("The data type associated with 61.34 is: " + printType( 61.34 ));
+      }
+   public static String printType( int x)
+      {
+         return "int";
+      }
+   public static String printType ( double x)
+      {
+         return "double";
+      }
 
 }
