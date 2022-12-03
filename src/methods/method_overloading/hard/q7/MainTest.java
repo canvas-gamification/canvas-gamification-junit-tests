@@ -32,18 +32,10 @@ public class MainTest extends BaseTest {
                 new StringLiteral("Enter a set of integers:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("The distance between "),
-                new DoubleLiteral("d1"),
-                new StringLiteral(" and "),
-                new DoubleLiteral("d2"),
-                new StringLiteral(" is: "),
+                new StringLiteral("The distance between the set of doubles is: "),
                 new DoubleLiteral("a1"),
                 new NewLine(),
-                new StringLiteral("The distance between "),
-                new IntegerLiteral("i1"),
-                new StringLiteral(" and "),
-                new IntegerLiteral("i2"),
-                new StringLiteral(" is: "),
+                new StringLiteral("The distance between the set of integers is: "),
                 new IntegerLiteral("a2")
         };
     }
@@ -82,38 +74,34 @@ public class MainTest extends BaseTest {
     @MethodSource("mainMethodInputProvider")
     void correctMainMethodOutput(double x, double y, int a, int b, double ans1, int ans2) {
         runWithInput(x + " " + y + " " + a + " " + b);
-        assertEquals(x, Double.parseDouble(getItemByName("d1")), 0.0000001, "Your program does not order the double values correctly.");
-        assertEquals(y, Double.parseDouble(getItemByName("d2")), 0.0000001, "Your program does not order the double values correctly.");
-        assertEquals(a, Integer.parseInt(getItemByName("i1")), "Your program does not order the integer values correctly.");
-        assertEquals(b, Integer.parseInt(getItemByName("i2")), "Your program does not order the integer values correctly.");
 
-        assertEquals(ans1, Double.parseDouble(getItemByName("a1")), 0.0000001, "Your program does not print the correct distance between two double values.");
-        assertEquals(ans2, Integer.parseInt(getItemByName("a2")), "Your program does not print the correct distance between two integer values.");
+        assertEquals(ans1, Double.parseDouble(getItemByName("a1")), 0.0000001, "Your program does not correctly print the distance between the set of doubles.");
+        assertEquals(ans2, Integer.parseInt(getItemByName("a2")), "Your program does not correctly print the distance between the set of integers.");
     }
 
     @ParameterizedTest
     @MethodSource("doubleInputProvider")
-    void correctDoubleCalcDistanceMethod(double x, double y, double distance) throws Throwable {
+    void correctCalcDistanceMethod(double x, double y, double distance) throws Throwable {
         Object[][] arguments = {
                 {x, double.class},
                 {y, double.class}
         };
         MethodTest m = new MethodTest(Distances.class, "calcDistance", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your calcDistance method does not return the correct distance for two doubles.";
+        String errMsg = "Your calcDistance method does not correctly calculate the distance between two doubles.";
         CustomAssertions._assertEquals(distance, output, 0.0000001, errMsg);
     }
 
     @ParameterizedTest
     @MethodSource("integerInputProvider")
-    void correctIntegerCalcDistanceMethod(int x, int y, int distance) throws Throwable {
+    void correctCalcDistanceMethod(int x, int y, int distance) throws Throwable {
         Object[][] arguments = {
                 {x, int.class},
                 {y, int.class}
         };
         MethodTest m = new MethodTest(Distances.class, "calcDistance", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your calcDistance method does not return the correct distance for two integers.";
+        String errMsg = "Your calcDistance method does not correctly calculate the distance between two integers.";
         CustomAssertions._assertEquals(distance, output, errMsg);
     }
 }

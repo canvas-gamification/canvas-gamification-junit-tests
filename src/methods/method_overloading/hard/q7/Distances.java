@@ -11,8 +11,8 @@ Sample Output:
     141.4 591.3
     Enter a set of integers:
     46 985
-    The distance between 141.4 and 591.3 is: 449.9
-    The distance between 46 and 985 is: 939
+    The distance between the set of doubles is: 449.9
+    The distance between the set of integers is: 939
  */
 
 import java.util.Scanner;
@@ -26,8 +26,8 @@ public class Distances {
         System.out.println("Enter a set of integers: ");
         int a = input.nextInt();
         int b = input.nextInt();
-        System.out.println("The distance between " + x + " and " + y + " is: " + calcDistance(x, y));
-        System.out.println("The distance between " + a + " and " + b + " is: " + calcDistance(a, b));
+        System.out.println("The distance between the set of doubles is: " + calcDistance(x, y));
+        System.out.println("The distance between the set of integers is: " + calcDistance(a, b));
     }
 
     public static int calcDistance(int x, int y) {
