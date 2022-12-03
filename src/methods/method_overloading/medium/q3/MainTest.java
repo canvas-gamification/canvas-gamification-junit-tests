@@ -50,19 +50,19 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputTwoStringsProvider")
-    void correctTwoStringMethod(String s1, String s2, String result) throws Throwable {
+    void correctConcatenateMethod(String s1, String s2, String result) throws Throwable {
         Object[][] arguments = {
                 {s1, String.class},
                 {s2, String.class}
         };
         MethodTest m = new MethodTest(ThreeStrings.class, "concatenate", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(output, result, "Your concatenate method does not correctly concatenate two strings.");
+        CustomAssertions._assertEquals(output, result, "Your concatenate method does not correctly combine two strings.");
     }
 
     @ParameterizedTest
     @MethodSource("inputThreeStringsProvider")
-    void correctThreeStringMethod(String s1, String s2, String s3, String result) throws Throwable {
+    void correctConcatenateMethod(String s1, String s2, String s3, String result) throws Throwable {
         Object[][] arguments = {
                 {s1, String.class},
                 {s2, String.class},
@@ -70,6 +70,6 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(ThreeStrings.class, "concatenate", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(output, result, "Your concatenate method does not correctly concatenate three strings.");
+        CustomAssertions._assertEquals(output, result, "Your concatenate method does not correctly combine three strings.");
     }
 }
