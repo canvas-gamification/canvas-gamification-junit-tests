@@ -42,52 +42,35 @@ public class MainTest extends BaseTest {
                 Arguments.of(2500, "You won a silver prize!"),
                 Arguments.of(2499, "You won a bronze prize!"),
                 Arguments.of(1833, "You won a bronze prize!"),
-                Arguments.of(1000, "You won a bronze prize!"));
-    }
-
-    static Stream<Integer> inputInvalidPointsProvider() {
-        return Stream.of(999, 0, 1, -1, -2222, 231, -1000);
+                Arguments.of(1000, "You won a bronze prize!"),
+                Arguments.of(999, "Sorry, you didn't win any prize."),
+                Arguments.of(0, "Sorry, you didn't win any prize."),
+                Arguments.of(1, "Sorry, you didn't win any prize."),
+                Arguments.of(-1, "Sorry, you didn't win any prize."),
+                Arguments.of(-2222, "Sorry, you didn't win any prize."),
+                Arguments.of(231, "Sorry, you didn't win any prize."),
+                Arguments.of(-1000, "Sorry, you didn't win any prize.")
+        );
     }
 
     @ParameterizedTest
     @MethodSource("inputValidPointsProvider")
-    void methodGivePrizeCorrect(int score, String prize) throws Throwable {
+    void correctPointsScoredMethod(int score, String prize) throws Throwable {
         Object[][] arguments = {
                 {score, int.class}
         };
         MethodTest m = new MethodTest(PointsScoring.class, "pointsScored", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your pointsScored() method does not return the correct prize for the given score.";
+        String errMsg = "Your pointsScored method does not return the correct prize for the given score.";
         CustomAssertions._assertEquals(prize, output, errMsg);
     }
 
     @ParameterizedTest
-    @MethodSource("inputInvalidPointsProvider")
-    void methodGiveErrorCorrect(int score) throws Throwable {
-        Object[][] arguments = {
-                {score, int.class}
-        };
-        MethodTest m = new MethodTest(PointsScoring.class, "pointsScored", arguments);
-        Object output = m.callMethod();
-        String errMsg = "Your pointsScored() method does not return the correct error message for the given score.";
-        CustomAssertions._assertEquals("Sorry, you didn't win any prize.", output, errMsg);
-    }
-
-    @ParameterizedTest
     @MethodSource("inputValidPointsProvider")
-    void printsCorrectPrize(int score, String prize) throws InvalidClauseException {
+    void correctMainMethodOutput(int score, String prize) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print the correct prize for the given score.";
         runWithInput(score + "", new Clause[]{
                 new StringLiteral(prize),
-        });
-    }
-
-    @ParameterizedTest
-    @MethodSource("inputInvalidPointsProvider")
-    void printsCorrectError(int score) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct error message for the given score.";
-        runWithInput(score + "", new Clause[]{
-                new StringLiteral("Sorry, you didn't win any prize."),
         });
     }
 }
