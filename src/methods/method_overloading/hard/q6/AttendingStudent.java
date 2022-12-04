@@ -4,7 +4,8 @@ package methods.method_overloading.hard.q6;
 Write a Java Program that asks a user for their name, username and student number and has an overloaded method called
 studentCheck that checks if the username or student number are valid. One method takes the first name, the last name,
 and the username to check if the username follows the format of first_name.last_name, and returns a boolean. The other
-method takes the student number and checks it is 8-digits long, then returns a boolean. The username should be case
+method takes the student number and checks it is at least 8-digits long, then returns a boolean. Both booleans should
+then be printed in the main method. The username should be case
 sensitive.
 
 Sample Output:

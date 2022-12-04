@@ -62,7 +62,8 @@ public class MainTest extends BaseTest {
                 Arguments.of(999, false),
                 Arguments.of(6484831, false),
                 Arguments.of(9999999, false),
-                Arguments.of(00000001, false)
+                Arguments.of(00000001, false),
+                Arguments.of(100000000, true)
         );
     }
 
@@ -100,7 +101,7 @@ public class MainTest extends BaseTest {
                 new StringLiteral(String.valueOf(validName)),
                 new StringLiteral(String.valueOf(validNum))
         });
-        assertEquals(Integer.parseInt(num), Integer.parseInt(getItemByName("studentNum")), "Your program does not print the given student number.");
+        assertEquals(Integer.parseInt(num), Integer.parseInt(getItemByName("studentNum")), "Your program does not print the input student number.");
     }
 
     @ParameterizedTest
