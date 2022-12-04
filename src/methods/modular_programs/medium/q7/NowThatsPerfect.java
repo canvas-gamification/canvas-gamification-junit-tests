@@ -1,7 +1,7 @@
 package methods.modular_programs.medium.q7;
 
 /*
-Write a program that takes a number from the user and determine if it is a "perfect" number using a method called
+Write a program that takes an integer from the user and determines if it is a "perfect" number using a method called
 perfectOrNot. (Hint: A perfect number is one whose factors sum up to equal the given number. Eg. 6 has factors of 1,
 2, and 3, whose sum is 6, so it is a perfect number). If it is perfect, return true and print "perfect" if it is
 not, return false print "imperfect".
