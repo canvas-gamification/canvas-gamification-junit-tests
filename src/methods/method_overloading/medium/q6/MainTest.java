@@ -41,7 +41,7 @@ public class MainTest {
         };
         MethodTest m = new MethodTest(OverloadFloat.class, "divide", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your divide method does not return the correct value after double and float division.";
+        String errMsg = "Your divide method does not return the correct value after dividing a double by a float.";
         CustomAssertions._assertEquals(divide, output, 0.0001, errMsg);
     }
 
