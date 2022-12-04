@@ -3,7 +3,7 @@ package methods.modular_programs.hard.q3;
 /*
 Write a program that asks the user for their undergraduate year level and passes it as an integer to a method called
 universityYear which returns out their University Status as a string. 1st year students are "Freshman", 2nd year students
-are "Sophomore", 3rd year students are "Junior" and 4th year students are "Senior." If the user does not enter in 1, 2,
+are "Sophomore", 3rd-year students are "Junior", and 4th-year students are "Senior". If the user does not enter 1, 2,
  3, or 4, return the error message “Invalid Input!”. The returned string should be printed in the main method.
 
 Sample Output:
