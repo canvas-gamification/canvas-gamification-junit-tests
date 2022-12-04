@@ -2,6 +2,8 @@ package methods.modular_programs.hard.q6;
 
 import java.util.stream.Stream;
 
+import global.MethodTest;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -18,67 +20,68 @@ import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseTest {
-  // Java
-  public Clause[] testSentence() {
-    TestOption.isInputTest = true;
-    TestOption.defaultInput = "120 N";
-    return new Clause[] {
-        new StringLiteral("How much was the food"),
-        new NewLine(),
-        new StringLiteral("Was the service great\\? \\(Enter Y\\/N\\)"),
-        new NewLine(),
-        new PlaceHolder(),
-    };
-  }
+    // Java
 
-  public void runMain() {
-    DinnerCost.main(new String[0]);
-  }
+    public static final double cn = 1.15;
+    public static final double cy = 1.20;
 
-  static Stream<Arguments> inputProvider() {
-    return Stream.of(
-        Arguments.of(120.0, 'N', 138.0),
-        Arguments.of(120.0, 'Y', 144.0),
-        Arguments.of(100.0, 'N', 115.0),
-        Arguments.of(100.0, 'Y', 120.0),
-        Arguments.of(0.0, 'N', 0.0),
-        Arguments.of(0.0, 'Y', 0.0),
-        Arguments.of(1000.0, 'N', 1150.0),
-        Arguments.of(1000.0, 'Y', 1200.0),
-        Arguments.of(7877.0, 'N', 9058.55),
-        Arguments.of(7877.0, 'Y', 9452.4),
-        Arguments.of(3.0, 'Y', 3.6),
-        Arguments.of(3.0, 'N', 3.45),
-        Arguments.of(111.223, 'Y', 133.4676),
-        Arguments.of(92.121, 'N', 105.93915),
-        Arguments.of(3.33, 'Y', 3.996),
-        Arguments.of(3.51, 'N', 4.0365));
-  }
+    public Clause[] testSentence() {
+        TestOption.isInputTest = true;
+        TestOption.defaultInput = "120 N";
+        return new Clause[]{
+                new StringLiteral("Enter the cost of the food:"),
+                new Optional(new StringLiteral(" ")),
+                new NewLine(),
+                new StringLiteral("Was the service great\\? \\(Enter Y\\/N\\)"),
+                new Optional(new StringLiteral(" ")),
+                new NewLine(),
+                new PlaceHolder(),
+                new Optional(new StringLiteral(" "))
+        };
+    }
 
-  @ParameterizedTest
-  @MethodSource("inputProvider")
-  public void methodReturnsCorrectTotal(double costOfFood, char service, double totalCost) throws Throwable {
-    String errMsg = "Your method \"foodCost()\" does not return the correct total cost for the given input.";
-    String errMsgOut = "Your method \"foodCost\" prints to the console, which is not allowed.";
+    public void runMain() {
+        DinnerCost.main(new String[0]);
+    }
 
-    Object output = MethodUtil.invokeIfMethodExists(DinnerCost.class, "foodCost", new Object[] { service, costOfFood },
-        char.class, double.class);
-    String consoleOutput = MethodUtil.getMethodOutput().trim();
+    static Stream<Arguments> inputProvider() {
+        return Stream.of(
+                Arguments.of(120.0, 'N', 120.0 * cn),
+                Arguments.of(120.0, 'Y', 120.0 * cy),
+                Arguments.of(100.0, 'N', 100.0 * cn),
+                Arguments.of(100.0, 'Y', 100.0 * cy),
+                Arguments.of(0.0, 'N', 0.0),
+                Arguments.of(0.0, 'Y', 0.0),
+                Arguments.of(1000.0, 'N', 1000.0 * cn),
+                Arguments.of(1000.0, 'Y', 1000.0 * cy),
+                Arguments.of(7877.0, 'N', 7877.0 * cn),
+                Arguments.of(7877.0, 'Y', 7877.0 * cy),
+                Arguments.of(3.0, 'Y', 3.0 * cy),
+                Arguments.of(3.0, 'N', 3.0 * cn),
+                Arguments.of(111.223, 'Y', 111.223 * cy),
+                Arguments.of(92.121, 'N', 92.121 * cn),
+                Arguments.of(3.33, 'Y', 3.33 * cy),
+                Arguments.of(3.51, 'N', 3.51 * cn));
+    }
 
-    CustomAssertions._assertEquals(totalCost, output, 0.001, errMsg);
-    CustomAssertions._assertEquals("", consoleOutput, errMsgOut);
-  }
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void methodReturnsCorrectTotal(double costOfFood, char service, double totalCost) throws Throwable {
+        Object[][] arguments = {
+                {costOfFood, double.class},
+                {service, char.class}
+        };
+        MethodTest m = new MethodTest(DinnerCost.class, "foodCost", arguments);
+        Object output = m.callMethod();
+        CustomAssertions._assertEquals(totalCost, output, "Your foodCost method does not return the correct amount needed to be paid.");
+    }
 
-  @ParameterizedTest
-  @MethodSource("inputProvider")
-  public void printsCorrectDinnerCost(double costOfFood, char service, double totalCost)
-      throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct total cost of dinner for the given input.";
-    double delta = 0.001;
-    runWithInput(costOfFood + " " + service, new Clause[][] { {
-        new StringLiteral("For dinner, you will pay "),
-        new DoubleLiteral(totalCost - delta, totalCost + delta),
-        new StringLiteral(" dollars."),
-    } });
-  }
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void printsCorrectDinnerCost(double costOfFood, char service, double totalCost) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct total cost of dinner for the given input.";
+        runWithInput(costOfFood + " " + service, new Clause[]{
+                new StringLiteral("For dinner, you will pay " + totalCost + " dollars.")
+        });
+    }
 }
