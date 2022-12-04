@@ -53,7 +53,7 @@ public class MainTest {
         };
         MethodTest m = new MethodTest(OverloadDubDub.class, "multiply", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your multiply method does not correctly return the double and integer multiplied together.";
+        String errMsg = "Your multiply method does not correctly calculate and return the product of the input double and integer.";
         CustomAssertions._assertEquals(multiply, output, 0.0001, errMsg);
     }
 }
