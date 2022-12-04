@@ -3,9 +3,10 @@ package methods.method_overloading.hard.q4;
 /*
 Write a Java Program that prompts the user to enter two integers and two doubles which will be used to calculate
 rectangle areas. This calculation will be performed by four overloaded methods called rectangleArea. The first takes
-both integer values for the sides of the rectangle. The second takes the first integer and the first double for the sides
-of the rectangle. The third takes the second integer and uses it for all sides of the rectangle. The fourth takes the
-second double and uses it for all sides of the rectangle. Assume the user will only enter positive numbers.
+both integer values for the sides of the rectangle and returns and integer. The second takes the first integer and the
+first double for the sides of the rectangle and returns a double. The third takes the second integer and uses it for all
+sides of the rectangle and returns an integers. The fourth takes the second double and uses it for all sides of the
+rectangle and returns a double. Assume the user will only enter positive numbers.
 
 Sample Output:
   Enter two integers:
