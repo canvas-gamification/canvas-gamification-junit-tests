@@ -1,8 +1,9 @@
 package methods.method_overloading.medium.q3;
 
 /*
-Overload a Java method so that it can take two strings or can take three strings and concatenate them (combines all the
-strings to one large string). The main method should print two calls to the method, one with two inputs and one with three.
+Overload a Java method called concatenate so that it can take two or three strings and concatenate them (combines all
+the strings into one large string). The main method should print two calls to the method, one with two inputs and one
+with three.
 
 Sample Output:
   Hello I am
