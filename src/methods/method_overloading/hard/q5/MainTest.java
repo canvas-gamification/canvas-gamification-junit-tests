@@ -34,13 +34,13 @@ public class MainTest extends BaseTest {
                 new StringLiteral("Enter five numbers:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("The average of the three numbers is: "),
+                new StringLiteral("The average of the set of three numbers is: "),
                 new DoubleLiteral("threeDouble"),
                 new NewLine(),
-                new StringLiteral("The average of the four numbers is: "),
+                new StringLiteral("The average of the set of four numbers is: "),
                 new DoubleLiteral("fourDouble"),
                 new NewLine(),
-                new StringLiteral("The average of the five numbers is: "),
+                new StringLiteral("The average of the set of five numbers is: "),
                 new DoubleLiteral("fiveDouble"),
         };
     }
@@ -81,7 +81,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("threeNumbersAndTheirAverageProvider")
-    void threeNumbersAverageCorrect(int a, int b, int c, double avg) throws Throwable {
+    void correctAverageMethod(int a, int b, int c, double avg) throws Throwable {
         Object[][] arguments = {
                 {a, int.class},
                 {b, int.class},
@@ -95,7 +95,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("fourNumbersAndTheirAverageProvider")
-    void fourNumbersAverageCorrect(int a, int b, int c, int d, double avg) throws Throwable {
+    void correctAverageMethod(int a, int b, int c, int d, double avg) throws Throwable {
         Object[][] arguments = {
                 {a, int.class},
                 {b, int.class},
@@ -110,7 +110,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("fiveNumbersAndTheirAverageProvider")
-    void fiveNumbersAverageCorrect(int a, int b, int c, int d, int e, double avg) throws Throwable {
+    void correctAverageMethod(int a, int b, int c, int d, int e, double avg) throws Throwable {
         Object[][] arguments = {
                 {a, int.class},
                 {b, int.class},
