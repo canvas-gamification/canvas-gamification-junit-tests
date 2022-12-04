@@ -56,7 +56,7 @@ public class MainTest {
         };
         MethodTest m = new MethodTest(OverloadChar.class, "greatest", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your three character greatest method does not correctly print the greatest character.";
+        String errMsg = "Your greatest method for three integers does not return the greatest character.";
         CustomAssertions._assertEquals(greatest, output, errMsg);
     }
 }
