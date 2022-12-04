@@ -42,7 +42,7 @@ public class MainTest {
         };
         MethodTest m = new MethodTest(OverloadChar.class, "greatest", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your two character greatest method does not correctly print the greater character.";
+        String errMsg = "Your greatest method for two characters does not return the greater character.";
         CustomAssertions._assertEquals(greater, output, errMsg);
     }
 
