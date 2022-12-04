@@ -1,7 +1,7 @@
 package methods.method_overloading.medium.q4;
 
 /*
- Overload a Java Method so that it can take three integer variables or three double variables and returns the average
+ Overload a Java Method called average so that it can take three integer variables or three double variables and returns the average
  of the values as doubles.
  */
 public class AveOfThree {
