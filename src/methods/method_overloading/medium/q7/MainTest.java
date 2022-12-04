@@ -40,7 +40,7 @@ public class MainTest {
         };
         MethodTest m = new MethodTest(OverloadDubDub.class, "multiply", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your multiply method does not correctly return the double multiplied by 1000.";
+        String errMsg = "Your multiply method does not correctly calculate and return the double multiplied by 1000.";
         CustomAssertions._assertEquals(multiply, output, 0.0001, errMsg);
     }
 
