@@ -1,6 +1,5 @@
 package global.utils;
 
-import global.tools.Logger;
 import global.tools.TestOption;
 
 import java.io.ByteArrayOutputStream;
@@ -11,6 +10,10 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * @deprecated This class should no longer be used for testing methods. Instead, the new MethodTest class should be used.
+ */
+@Deprecated
 public class MethodUtil {
     private static ByteArrayOutputStream methodOutput;
 
@@ -25,7 +28,7 @@ public class MethodUtil {
                     () -> String.join("", methodClass.getSimpleName(), " does not contain method ", methodName, "."))
             );
             return null;
-        } catch (InvocationTargetException e){
+        } catch (InvocationTargetException e) {
             throw e.getCause();
         }
     }
