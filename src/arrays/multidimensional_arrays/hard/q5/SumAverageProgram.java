@@ -1,10 +1,11 @@
 package arrays.multidimensional_arrays.hard.q5;
 
 /*
-Make two methods named SumArray and AvgArray. Sum Array should accept a multidimensional array of integers
-( int [][]nums ) and return the sum of all values of that array, it should return an integer. AvgArray should accept a
-multidimensional array of integers ( int [][]nums ) and return the average of values of that array, it should return a
-double. Both Methods should be able to handle arrays of any size
+Create a program that initializes a multidimensional array of integers, and then uses methods to calculate the sum and
+the average of the elements in the array. The main method should then print out those values. The first method, SumArray,
+should accept a multidimensional array of integers and returns the sum of all values in that array. The second method,
+AvgArray, should take a multidimensional array of integers and return the average value of the array as a double. Both
+methods should work with an array of any length.
  */
 
 public class SumAverageProgram {
