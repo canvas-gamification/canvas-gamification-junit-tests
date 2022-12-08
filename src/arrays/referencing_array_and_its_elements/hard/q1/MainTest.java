@@ -112,6 +112,6 @@ public class MainTest extends BaseTest {
         MethodTest m = new MethodTest(ALittleToTheRight.class, "lilToDaRight", arguments);
         Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(ans, output,
-                "Your lilToDaRight method does not correctly shift all the array elements one spot to the right.");
+                "Your lilToDaRight method does not correctly shift all the array elements one index to the right.");
     }
 }
