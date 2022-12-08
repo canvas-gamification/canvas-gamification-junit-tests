@@ -4,8 +4,6 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 import global.MethodTest;
-import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -40,9 +38,13 @@ public class MainTest extends BaseTest {
         return Stream.of(0, -1, -2, -10, -100);
     }
 
-    @RepeatedTest(50)
-    public void correctPrintPatternMethod(RepetitionInfo repetitionInfo) throws Throwable {
-        int n = repetitionInfo.getCurrentRepetition();
+    static Stream<Integer> inputProvider(){
+        return Stream.of(1, 2, 5, 7, 10, 15, 19, 23, 34, 84);
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void correctPrintPatternMethod(int n) throws Throwable {
         Clause[] methodSentence = methodClauseBuilder(n);
         Object[][] arguments = {
                 {n, int.class}
@@ -59,7 +61,7 @@ public class MainTest extends BaseTest {
     @MethodSource("inputInvalidProvider")
     public void correctInvalidPrintPatternMethod(int n) throws Throwable {
         Clause[] methodSentence = new Clause[]{
-                new StringLiteral("Number must be positive")
+                new StringLiteral("Number must be positive.")
         };
         Object[][] arguments = {
                 {n, int.class}
@@ -69,12 +71,10 @@ public class MainTest extends BaseTest {
         m.callMethod();
     }
 
-
-    @RepeatedTest(50)
-    public void correctMainMethodOutput(RepetitionInfo repetitionInfo) throws InvalidClauseException {
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void correctMainMethodOutput(int n) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the pattern from the given input.";
-
-        int n = repetitionInfo.getCurrentRepetition();
 
         runWithInput(n + "", clauseBuilder(n));
     }
@@ -84,7 +84,7 @@ public class MainTest extends BaseTest {
     public void correctInvalidMainMethodOutput(int n) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for invalid input.";
         runWithInput(n + "", new Clause[]{
-                new StringLiteral("Number must be positive"),
+                new StringLiteral("Number must be positive."),
         });
     }
 
