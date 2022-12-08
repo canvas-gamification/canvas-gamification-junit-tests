@@ -2,8 +2,8 @@ package methods.method_overloading.hard.q8;
 
 /*
 Write a Java Program with an overloaded method called printType which can take either an integer or a double. In the
-main method, pass the method the integer 14, and on a new line the double 61.34, then print what the associated data
-type is.
+given main method, printType is passed the integer 14 and on a new line the double 61.34. You must write the methods and
+pass back a string containing the associated data type to be printed.
 
 Sample Output:
 The data type associated with 14 is: int
