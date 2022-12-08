@@ -3,7 +3,7 @@ package methods.method_overloading.hard.q9;
 /*
 Write a Java Program that receives two first names and ages from the user and passes that information to an
 overloaded method called userName. The method should take the String and int in either order, (name, age) or (age, name),
-and return their username as first_name.age. For example john.34.
+and return their username as first_name.age. For example, if the first name is john and the age 34, the username is john.34.
 
 Sample Output:
   Enter two names:
