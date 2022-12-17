@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MainTest extends BaseRandomTest{
+public class MainTest extends BaseRandomTest {
     // Java
 
     public static final int n = 7;
@@ -20,11 +20,11 @@ public class MainTest extends BaseRandomTest{
         Clause[] c = new Clause[2 * n + 8];
         c[0] = new StringLiteral("The list of tickets are:");
         c[1] = new NewLine();
-        for(int i = 2; i < 2 * n; i += 2){
+        for (int i = 2; i < 2 * n; i += 2) {
             c[i] = new RandomInteger(10000, 100000, "" + ((i) / 2));
             c[i + 1] = new StringLiteral(" ");
         }
-        c[2 * n] = new RandomInteger(10000, 100000,"" + n);
+        c[2 * n] = new RandomInteger(10000, 100000, "" + n);
         c[2 * n + 1] = new Optional(new StringLiteral(" "));
         c[2 * n + 2] = new NewLine();
         c[2 * n + 3] = new StringLiteral("The winner is the ticket number ");
@@ -38,9 +38,11 @@ public class MainTest extends BaseRandomTest{
     public void runMain() {
         Lottery.main(new String[0]);
     }
+
     @Test
-    void printsCorrectOutput(){
+    void printsCorrectOutput() {
         runMain();
-        assertEquals(Integer.parseInt(getItemByName("Ans")), Integer.parseInt(getItemByName("" + (Integer.parseInt(getItemByName("Index"))))));
+        assertEquals(Integer.parseInt(getItemByName("Ans")), Integer.parseInt(getItemByName("" + (Integer.parseInt(getItemByName("Index"))))),
+                "Your program does not print the correct ticket number corresponding the selected index.");
     }
 }

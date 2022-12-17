@@ -15,13 +15,13 @@ public class Lottery {
     public static void main(String[] args) {
         int n = 7;
         int[] arr = new int[n];
-        for(int i = 0; i < n; i ++)
-            arr[i] = 10000 + (int)(Math.random() * (100000 - 10000));
+        for (int i = 0; i < n; i++)
+            arr[i] = 10000 + (int) (Math.random() * (100000 - 10000));
         System.out.println("The list of tickets are:");
-        for(int i = 0; i < n; i ++)
+        for (int i = 0; i < n; i++)
             System.out.print(arr[i] + " ");
         System.out.println();
-        int idx = (int)(Math.random() * arr.length);
+        int idx = (int) (Math.random() * arr.length);
         System.out.println("The winner is the ticket number " + (idx + 1) + " with number " + arr[idx] + ".");
     }
 
