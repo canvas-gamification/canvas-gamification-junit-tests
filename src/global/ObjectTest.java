@@ -7,10 +7,7 @@ import global.variables.clauses.PlaceHolder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -33,22 +30,46 @@ public class ObjectTest {
         }
     }
 
-    // When you create an objectTest, you should be able to specify fields, methods, and constructors
+    // When you create an objectTest, you should be able to specify fields, methods, and constructors object should have
 
-    public ObjectTest(String objectClass, Object[][] constructors, Object[][] fields) {
-        try{
-            this.objectClass = Class.forName(objectClass);
-        }
-        for(int i  = 0; i < constructors.length; i++){
-            try{
-
-            }
-        }
-    }
+//    public ObjectTest(String objectClass, Object[][] constructors, Object[][] fields) {
+//        try {
+//            this.objectClass = Class.forName(objectClass);
+//        }
+//        for (int i = 0; i < constructors.length; i++) {
+//            try {
+//
+//            }
+//        }
+//    }
 
     // TODO: When specifying methods and parameters, you can also specify the modifier (public, private, etc.) and it should check that
 
+    // hasSuperclass
+    public boolean hasSuperclass(Class<?> superClass) {
+        Class<?> objectSuperclass = objectClass.getSuperclass();
+        return superClass.equals(objectSuperclass);
+    }
+
+    // hasInterface
+    public boolean hasInterfaces(Class<?>[] interfaces) {
+        Class<?>[] objectInterfaces = objectClass.getInterfaces();
+        for(Class<?> item : interfaces){
+            // Need to iterate through the interfaces and see if the class has all the required ones
+        }
+    }
+
+    public boolean hasConstructor(Class<?>[] argsClass) {
+        try {
+            Constructor<?> constructor = objectClass.getDeclaredConstructor(argsClass);
+            return true;
+        } catch (NoSuchMethodException e) {
+            return false;
+        }
+    }
+
     public Object createInstance(Object[][] arguments) throws Throwable {
+        // Creates an instance of the object using the constructor which matches the provided arguments.
         Class<?>[] argsClass = getArgumentClasses(arguments);
         Object[] args = getArguments(arguments);
         Object object = null;
@@ -82,7 +103,8 @@ public class ObjectTest {
         try {
             Field f = objectClass.getDeclaredField(fieldName);
             for (String item : modifiers) {
-
+                if (!hasModifier(f, item))
+                    return false;
             }
             return fieldClass.equals(f.getType());
         } catch (NoSuchFieldException e) {
@@ -98,11 +120,11 @@ public class ObjectTest {
                 fieldName,
                 " of the type ",
                 fieldClass.getSimpleName(),
-                ".")
+                " with the correct modifiers.")
         );
     }
 
-    public boolean checkModifier(Field field, String modifier) {
+    public boolean hasModifier(Field field, String modifier) {
         /*
             The modifier values below for the default modifier is based on the java constant values documentation.
             The comparison is done in binary as there is no method in the modifiers class for checking if something
@@ -140,7 +162,89 @@ public class ObjectTest {
         return false;
     }
 
+    public boolean hasModifier(Constructor<?> constructor, String modifier) {
+        int m = constructor.getModifiers();
+        switch (modifier) {
+            case "public":
+                return Modifier.isPublic(m);
+            case "private":
+                return Modifier.isPrivate(m);
+            case "protected":
+                return Modifier.isProtected(m);
+            case "static":
+                return Modifier.isStatic(m);
+            case "final":
+                return Modifier.isFinal(m);
+            case "abstract":
+                return Modifier.isAbstract(m);
+            case "interface":
+                return Modifier.isInterface(m);
+            case "default":
+                // Gets last three bits of modifier binary number and checks if they are zero
+                String binaryInt = Integer.toBinaryString(m);
+                String fieldModifier = binaryInt.substring(binaryInt.length() > 3 ? binaryInt.length() - 3 : 0);
+                int number = Integer.parseInt(fieldModifier, 2);
+                return number == 0;
+        }
+        return false;
+    }
+
+    public boolean hasModifier(String modifier) {
+        int m = objectClass.getModifiers();
+        switch (modifier) {
+            case "public":
+                return Modifier.isPublic(m);
+            case "private":
+                return Modifier.isPrivate(m);
+            case "protected":
+                return Modifier.isProtected(m);
+            case "static":
+                return Modifier.isStatic(m);
+            case "final":
+                return Modifier.isFinal(m);
+            case "abstract":
+                return Modifier.isAbstract(m);
+            case "interface":
+                return Modifier.isInterface(m);
+            case "default":
+                // Gets last three bits of modifier binary number and checks if they are zero
+                String binaryInt = Integer.toBinaryString(m);
+                String fieldModifier = binaryInt.substring(binaryInt.length() > 3 ? binaryInt.length() - 3 : 0);
+                int number = Integer.parseInt(fieldModifier, 2);
+                return number == 0;
+        }
+        return false;
+    }
+
+    public boolean hasModifier(Method method, String modifier) {
+        int m = method.getModifiers();
+        switch (modifier) {
+            case "public":
+                return Modifier.isPublic(m);
+            case "private":
+                return Modifier.isPrivate(m);
+            case "protected":
+                return Modifier.isProtected(m);
+            case "static":
+                return Modifier.isStatic(m);
+            case "final":
+                return Modifier.isFinal(m);
+            case "abstract":
+                return Modifier.isAbstract(m);
+            case "interface":
+                return Modifier.isInterface(m);
+            case "default":
+                // Gets last three bits of modifier binary number and checks if they are zero
+                String binaryInt = Integer.toBinaryString(m);
+                String fieldModifier = binaryInt.substring(binaryInt.length() > 3 ? binaryInt.length() - 3 : 0);
+                int number = Integer.parseInt(fieldModifier, 2);
+                return number == 0;
+        }
+        return false;
+    }
+
     public Object getFieldValue(Object testObject, String fieldName, Class<?> fieldClass) {
+        // Returns the value of the specified field from the passed object
         Object fieldValue = null;
         try {
             Field field = testObject.getClass().getDeclaredField(fieldName);
@@ -156,6 +260,7 @@ public class ObjectTest {
     }
 
     public void setFieldValue(Object testObject, Object value, String fieldName, Class<?> fieldClass) {
+        // Sets the value of the specified field of the passed object
         try {
             Field field = testObject.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);

@@ -14,7 +14,7 @@ public class Objects {
 //        System.out.println(b);
         Field ft = test.class.getDeclaredField("x");
         ObjectTest o = new ObjectTest("test.object.test");
-        boolean b = o.checkModifier(ft, "default");
+        boolean b = o.hasModifier(ft, "default");
         System.out.println(b);
     }
 }
