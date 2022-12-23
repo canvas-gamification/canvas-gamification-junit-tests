@@ -8,9 +8,7 @@ import global.variables.clauses.PlaceHolder;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 
 import static global.tools.CustomAssertions._assertTrue;
@@ -53,10 +51,17 @@ public class ObjectTest {
 
     // hasInterface
     public boolean hasInterfaces(Class<?>[] interfaces) {
-        Class<?>[] objectInterfaces = objectClass.getInterfaces();
-        for(Class<?> item : interfaces){
-            // Need to iterate through the interfaces and see if the class has all the required ones
+        ArrayList<Class<?>> objectClassInterfaces = new ArrayList<>(Arrays.asList(objectClass.getInterfaces()));
+        for (Class<?> item : interfaces) {
+            if (!objectClassInterfaces.contains(item))
+                return false;
         }
+        return true;
+    }
+
+    public boolean hasInterface(Class<?> interfaceClass) {
+        ArrayList<Class<?>> objectClassInterfaces = new ArrayList<>(Arrays.asList(objectClass.getInterfaces()));
+        return !objectClassInterfaces.contains(interfaceClass);
     }
 
     public boolean hasConstructor(Class<?>[] argsClass) {
