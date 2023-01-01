@@ -1,11 +1,12 @@
 package methods.method_overloading.hard.q7;
 
 /*
-Write a Java Program that calculates the distance between 2 sets of points where one point is already specified and the
-other is given by the user. The first set of points are 7.32 and a double given by the user and the second set is 3 and
-an integer given by the user. Pass each set of values to  an overloaded method called calcDistance, one method takes two
-doubles and the other two integers. The calculation should be done by subtracting the two points and returning the
-absolute value of the answer.
+Write a Java Program that calculates the distance between 2 points on the Cartesian plane. Your program will compute the
+distance for two sets of points, {7.32, x} and {3, y}, where x is a double and y is an integer. Using a Scanner, prompt
+the user to enter input for x and y. Then, pass each set of values to an overloaded method called calcDistance, where
+one method takes two doubles and the other two integers as input. The distance is calculated by subtracting the two
+points and returning the absolute value of the answer. Finally, print the result of these calculations in the main
+method.
 
 Sample Output:
     Enter a double:
