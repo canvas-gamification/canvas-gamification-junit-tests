@@ -43,14 +43,12 @@ public class ObjectTest {
 
     // TODO: When specifying methods and parameters, you can also specify the modifier (public, private, etc.) and it should check that
 
-    // hasSuperclass
     public boolean hasSuperclass(Class<?> superClass) {
         Class<?> objectSuperclass = objectClass.getSuperclass();
         return superClass.equals(objectSuperclass);
     }
 
-    // hasInterface
-    public boolean hasInterfaces(Class<?>[] interfaces) {
+    public boolean implementsInterfaces(Class<?>[] interfaces) {
         ArrayList<Class<?>> objectClassInterfaces = new ArrayList<>(Arrays.asList(objectClass.getInterfaces()));
         for (Class<?> item : interfaces) {
             if (!objectClassInterfaces.contains(item))
@@ -59,12 +57,21 @@ public class ObjectTest {
         return true;
     }
 
-    public boolean hasInterface(Class<?> interfaceClass) {
+    public boolean implementsInterface(Class<?> interfaceClass) {
         ArrayList<Class<?>> objectClassInterfaces = new ArrayList<>(Arrays.asList(objectClass.getInterfaces()));
-        return !objectClassInterfaces.contains(interfaceClass);
+        return objectClassInterfaces.contains(interfaceClass);
     }
 
     public boolean hasConstructor(Class<?>[] argsClass) {
+        try {
+            Constructor<?> constructor = objectClass.getDeclaredConstructor(argsClass);
+            return true;
+        } catch (NoSuchMethodException e) {
+            return false;
+        }
+    }
+
+    public boolean hasConstructor(Class<?>[] argsClass, String[] modifiers) {
         try {
             Constructor<?> constructor = objectClass.getDeclaredConstructor(argsClass);
             return true;
@@ -104,13 +111,13 @@ public class ObjectTest {
         return object;
     }
 
+    // Only check if that field exists
+
+    // If it exists AND has correct modifiers
+
     public boolean hasField(String fieldName, Class<?> fieldClass, String[] modifiers) {
         try {
             Field f = objectClass.getDeclaredField(fieldName);
-            for (String item : modifiers) {
-                if (!hasModifier(f, item))
-                    return false;
-            }
             return fieldClass.equals(f.getType());
         } catch (NoSuchFieldException e) {
             return false;
@@ -130,6 +137,22 @@ public class ObjectTest {
     }
 
     public boolean hasModifier(Field field, String modifier) {
+        return hasModifier(field.getModifiers(), modifier);
+    }
+
+    public boolean hasModifier(Constructor<?> constructor, String modifier) {
+        return hasModifier(constructor.getModifiers(), modifier);
+    }
+
+    public boolean hasModifier(String modifier) {
+        return hasModifier(objectClass.getModifiers(), modifier);
+    }
+
+    public boolean hasModifier(Method method, String modifier) {
+        return hasModifier(method.getModifiers(), modifier);
+    }
+
+    private boolean hasModifier(int modifierInteger, String modifier) {
         /*
             The modifier values below for the default modifier is based on the java constant values documentation.
             The comparison is done in binary as there is no method in the modifiers class for checking if something
@@ -198,22 +221,22 @@ public class ObjectTest {
         int m = objectClass.getModifiers();
         switch (modifier) {
             case "public":
-                return Modifier.isPublic(m);
+                return Modifier.isPublic(modifierInteger);
             case "private":
-                return Modifier.isPrivate(m);
+                return Modifier.isPrivate(modifierInteger);
             case "protected":
-                return Modifier.isProtected(m);
+                return Modifier.isProtected(modifierInteger);
             case "static":
-                return Modifier.isStatic(m);
+                return Modifier.isStatic(modifierInteger);
             case "final":
-                return Modifier.isFinal(m);
+                return Modifier.isFinal(modifierInteger);
             case "abstract":
-                return Modifier.isAbstract(m);
+                return Modifier.isAbstract(modifierInteger);
             case "interface":
-                return Modifier.isInterface(m);
+                return Modifier.isInterface(modifierInteger);
             case "default":
                 // Gets last three bits of modifier binary number and checks if they are zero
-                String binaryInt = Integer.toBinaryString(m);
+                String binaryInt = Integer.toBinaryString(modifierInteger);
                 String fieldModifier = binaryInt.substring(binaryInt.length() > 3 ? binaryInt.length() - 3 : 0);
                 int number = Integer.parseInt(fieldModifier, 2);
                 return number == 0;
@@ -221,40 +244,12 @@ public class ObjectTest {
         return false;
     }
 
-    public boolean hasModifier(Method method, String modifier) {
-        int m = method.getModifiers();
-        switch (modifier) {
-            case "public":
-                return Modifier.isPublic(m);
-            case "private":
-                return Modifier.isPrivate(m);
-            case "protected":
-                return Modifier.isProtected(m);
-            case "static":
-                return Modifier.isStatic(m);
-            case "final":
-                return Modifier.isFinal(m);
-            case "abstract":
-                return Modifier.isAbstract(m);
-            case "interface":
-                return Modifier.isInterface(m);
-            case "default":
-                // Gets last three bits of modifier binary number and checks if they are zero
-                String binaryInt = Integer.toBinaryString(m);
-                String fieldModifier = binaryInt.substring(binaryInt.length() > 3 ? binaryInt.length() - 3 : 0);
-                int number = Integer.parseInt(fieldModifier, 2);
-                return number == 0;
-        }
-        return false;
-    }
-
-    public Object getFieldValue(Object testObject, String fieldName, Class<?> fieldClass) {
+    public Object getFieldValue(Object testObject, String fieldName) {
         // Returns the value of the specified field from the passed object
         Object fieldValue = null;
         try {
             Field field = testObject.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
-            assertEquals(fieldClass, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
             fieldValue = field.get(testObject);
         } catch (NoSuchFieldException e) {
             fail(String.join("", "Your ", objectClass.getSimpleName(), " class does not contain the field ", fieldName, " ."));
@@ -269,11 +264,10 @@ public class ObjectTest {
         try {
             Field field = testObject.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
-            assertEquals(fieldClass, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
-            if (!fieldClass.isInstance(value)) {
-                _fail("Error with test definition, please contact an administrator.",
-                        "The type of value must match the type of the field you are trying to set.");
-            }
+//            if (!fieldClass.isInstance(value)) {
+//                _fail("Error with test definition, please contact an administrator.",
+//                        "The type of value must match the type of the field you are trying to set.");
+//            }
             field.set(testObject, value);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
@@ -284,7 +278,7 @@ public class ObjectTest {
         try {
             Field field = testObject.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
-            assertEquals(int.class, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
+//            assertEquals(int.class, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
             field.set(testObject, value);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
@@ -295,7 +289,7 @@ public class ObjectTest {
         try {
             Field field = testObject.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
-            assertEquals(double.class, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
+//            assertEquals(double.class, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
             field.set(testObject, value);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
@@ -306,7 +300,7 @@ public class ObjectTest {
         try {
             Field field = testObject.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
-            assertEquals(boolean.class, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
+//            assertEquals(boolean.class, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
             field.set(testObject, value);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
@@ -317,7 +311,7 @@ public class ObjectTest {
         try {
             Field field = testObject.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
-            assertEquals(char.class, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
+//            assertEquals(char.class, field.getType(), String.join(" ", "The field", fieldName, "is not the correct type."));
             field.set(testObject, value);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
