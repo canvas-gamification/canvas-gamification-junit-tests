@@ -27,7 +27,6 @@ public class ObjectTest {
             fail("Your program does not contain the class " + objectClass);
         }
     }
-    // TODO: When specifying methods and parameters, you can also specify the modifier (public, private, etc.) and it should check that
 
     public boolean hasSuperclass(Class<?> superClass) {
         Class<?> objectSuperclass = objectClass.getSuperclass();
@@ -72,11 +71,18 @@ public class ObjectTest {
         Object[] args = getArguments(arguments);
         Object object = null;
         try {
-            object = objectClass.getDeclaredConstructor(argsClass).newInstance(args);
-        } catch (InvocationTargetException | IllegalAccessException e) {
-            throw e.getCause();
+            Constructor<?> objectConstructor = objectClass.getDeclaredConstructor(argsClass);
+            objectConstructor.setAccessible(true);
+            object = objectConstructor.newInstance(args);
+        } catch (InvocationTargetException e) {
+            _fail("Error with test, could not access a required constructor", e.getMessage());
+        } catch (IllegalAccessException e) {
+            _fail(
+                    "Error with test definition. Please contact a test administrator.",
+                    String.join(" ", "Could not access a constructor.", e.getMessage())
+            );
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            fail(String.join(" ", "The ", objectClass.getSimpleName(), "class", " could not be instantiated."));
         } catch (NoSuchMethodException e) {
             fail(String.join(" ", "The", objectClass.getSimpleName(), "class does not contain a required constructor."));
         }
@@ -87,8 +93,10 @@ public class ObjectTest {
         Object object = null;
         try {
             object = objectClass.getDeclaredConstructor().newInstance();
-        } catch (InvocationTargetException | IllegalAccessException e) {
-            throw e.getCause();
+        } catch (InvocationTargetException e) {
+            _fail("Error with test, could not access a required constructor", e.getMessage());
+        } catch (IllegalAccessException e) {
+
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
@@ -97,11 +105,7 @@ public class ObjectTest {
         return object;
     }
 
-    // Only check if that field exists
-
-    // If it exists AND has correct modifiers
-
-    public boolean hasField(String fieldName, Class<?> fieldClass, String[] modifiers) {
+    public boolean hasField(String fieldName, Class<?> fieldClass) {
         try {
             Field f = objectClass.getDeclaredField(fieldName);
             return fieldClass.equals(f.getType());
@@ -110,20 +114,36 @@ public class ObjectTest {
         }
     }
 
-    public void assertField(boolean hasField, String fieldName, Class<?> fieldClass) {
-        assertTrue(hasField, String.join(
-                " ",
-                "Your", objectClass.getSimpleName(),
-                "does not contain the field",
-                fieldName,
-                " of the type ",
-                fieldClass.getSimpleName(),
-                " with the correct modifiers.")
-        );
+    public boolean hasMethod(String methodName, Class<?>[] argsClass, Class<?> methodReturnType) {
+        try {
+            Method objectMethod = objectClass.getDeclaredMethod(methodName, argsClass);
+            return methodReturnType.equals(objectMethod.getReturnType());
+        } catch (NoSuchMethodException e) {
+            return false;
+        }
     }
 
     public boolean hasModifier(Field field, String modifier) {
         return hasModifier(field.getModifiers(), modifier);
+    }
+
+    public boolean hasModifier(String fieldName, String modifier) {
+        Field field = null;
+        try {
+            field = objectClass.getDeclaredField(fieldName);
+        } catch (NoSuchFieldException e) {
+            return false;
+        }
+        return hasModifier(field.getModifiers(), modifier);
+    }
+
+    public boolean hasModifier(Class<?>[] argsClass, String modifier) {
+        try {
+            Constructor<?> constructor = objectClass.getDeclaredConstructor(argsClass);
+            return hasModifier(constructor.getModifiers(), modifier);
+        } catch (NoSuchMethodException e) {
+            return false;
+        }
     }
 
     public boolean hasModifier(Constructor<?> constructor, String modifier) {
@@ -132,6 +152,15 @@ public class ObjectTest {
 
     public boolean hasModifier(String modifier) {
         return hasModifier(objectClass.getModifiers(), modifier);
+    }
+
+    public boolean hasModifier(String methodName, Class<?>[] argsClass, String modifier) {
+        try {
+            Method objectMethod = objectClass.getDeclaredMethod(methodName, argsClass);
+            return hasModifier(objectMethod.getModifiers(), modifier);
+        } catch (NoSuchMethodException e) {
+            return false;
+        }
     }
 
     public boolean hasModifier(Method method, String modifier) {
@@ -174,16 +203,6 @@ public class ObjectTest {
         return false;
     }
 
-    public Field getObjectField(Object testObject, String fieldName) {
-        Field field = null;
-        try {
-            field = testObject.getClass().getDeclaredField(fieldName);
-        } catch (NoSuchFieldException e) {
-            fail(String.join("", "Your ", objectClass.getSimpleName(), " class does not contain the field ", fieldName, " ."));
-        }
-        return field;
-    }
-
     public Object getFieldValue(Object testObject, String fieldName) {
         // Returns the value of the specified field from the passed object
         Object fieldValue = null;
@@ -199,18 +218,8 @@ public class ObjectTest {
         return fieldValue;
     }
 
-    public void setFieldValue(Object testObject, Object value, String fieldName, Class<?> fieldClass) {
+    public void setFieldValue(Object testObject, Object value, String fieldName) {
         // Sets the value of the specified field of the passed object
-        try {
-            Field field = testObject.getClass().getDeclaredField(fieldName);
-            field.setAccessible(true);
-            field.set(testObject, value);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
-        }
-    }
-
-    public void setFieldValue(Object testObject, int value, String fieldName) {
         try {
             Field field = testObject.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
@@ -245,8 +254,13 @@ public class ObjectTest {
             Field field = testObject.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
             field.set(testObject, value);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
+        } catch (NoSuchFieldException e) {
             fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
+        } catch (IllegalAccessException e) {
+            _fail(
+                    "Error with test definition. Please contact a test administrator.",
+                    String.join(" ", "Could not access field", fieldName, "/nError: ", e.getMessage())
+            );
         }
     }
 
@@ -407,7 +421,15 @@ public class ObjectTest {
         }
     }
 
-    public String missingFieldValueMessage(String fieldName) {
-        return String.join("", "Your ", objectClass.getSimpleName(), " class does not contain the field ", fieldName, ".");
+    public void assertField(boolean hasField, String fieldName, Class<?> fieldClass) {
+        assertTrue(hasField, String.join(
+                " ",
+                "Your", objectClass.getSimpleName(),
+                "does not contain the field",
+                fieldName,
+                " of the type ",
+                fieldClass.getSimpleName(),
+                " with the correct modifiers.")
+        );
     }
 }
