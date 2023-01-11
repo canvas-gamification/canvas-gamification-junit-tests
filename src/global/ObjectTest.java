@@ -59,6 +59,11 @@ public class ObjectTest {
     public boolean hasConstructor(Class<?>[] argsClass, String[] modifiers) {
         try {
             Constructor<?> constructor = objectClass.getDeclaredConstructor(argsClass);
+            for(String modifier : modifiers) {
+                boolean hasModifier = hasModifier(constructor, modifier);
+                if (!hasModifier)
+                    return false;
+            }
             return true;
         } catch (NoSuchMethodException e) {
             return false;
@@ -114,9 +119,37 @@ public class ObjectTest {
         }
     }
 
+    public boolean hasField(String fieldName, Class<?> fieldClass, String[] modifiers) {
+        try {
+            Field field = objectClass.getDeclaredField(fieldName);
+            for(String modifier: modifiers){
+                boolean hasModifier = hasModifier(field, modifier);
+                if(!hasModifier)
+                    return false;
+            }
+            return fieldClass.equals(field.getType());
+        } catch (NoSuchFieldException e) {
+            return false;
+        }
+    }
+
     public boolean hasMethod(String methodName, Class<?>[] argsClass, Class<?> methodReturnType) {
         try {
             Method objectMethod = objectClass.getDeclaredMethod(methodName, argsClass);
+            return methodReturnType.equals(objectMethod.getReturnType());
+        } catch (NoSuchMethodException e) {
+            return false;
+        }
+    }
+
+    public boolean hasMethod(String methodName, Class<?>[] argsClass, Class<?> methodReturnType, String[] modifiers) {
+        try {
+            Method objectMethod = objectClass.getDeclaredMethod(methodName, argsClass);
+            for(String modifier: modifiers){
+                boolean hasModifier = hasModifier(objectMethod, modifier);
+                if(!hasModifier)
+                    return false;
+            }
             return methodReturnType.equals(objectMethod.getReturnType());
         } catch (NoSuchMethodException e) {
             return false;
