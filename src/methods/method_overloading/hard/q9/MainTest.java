@@ -3,8 +3,7 @@ package methods.method_overloading.hard.q9;
 import java.util.stream.Stream;
 
 import global.MethodTest;
-import global.tools.TestOption;
-import global.variables.clauses.PlaceHolder;
+import global.variables.clauses.IntegerLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -18,18 +17,33 @@ import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseTest {
     // Java
+    private final String name1 = "Joe";
+    private final String name2 = "Madi";
+    private final int age1 = 80;
+    private final int age2 = 49;
 
     public Clause[] testSentence() {
-        TestOption.isInputTest = true;
-        TestOption.defaultInput = "Susanna Mary \n 13 81";
         return new Clause[]{
-                new StringLiteral("Enter two names:"),
+                new StringLiteral("The username for "),
+                new StringLiteral(name1),
+                new StringLiteral(" with the age of "),
+                new IntegerLiteral(age1),
+                new StringLiteral(" is: "),
+                new StringLiteral(name1),
+                new StringLiteral("\\."),
+                new IntegerLiteral(age1),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("Enter corresponding ages:"),
+                new StringLiteral("The username for "),
+                new StringLiteral(name2),
+                new StringLiteral(" with the age of "),
+                new IntegerLiteral(age2),
+                new StringLiteral(" is: "),
+                new StringLiteral(name2),
+                new StringLiteral("\\."),
+                new IntegerLiteral(age2),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new PlaceHolder()
         };
     }
 
@@ -57,27 +71,27 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputNameAgeProvider")
-    void correctUserNameMethod(String name, int age, String username) throws Throwable {
+    void correctUserNameMethod1(String name, int age, String username) throws Throwable {
         Object[][] arguments = {
                 {name, String.class},
                 {age, int.class}
         };
         MethodTest m = new MethodTest(GenerateUsername.class, "userName", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your userName method does not format the username correctly when given the name and age.";
+        String errMsg = "Your userName method does not return the correct username based on the input name and age.";
         CustomAssertions._assertEquals(username, output, errMsg);
     }
 
     @ParameterizedTest
     @MethodSource("inputAgeNameProvider")
-    void correctUserNameMethod(int age, String name, String username) throws Throwable {
+    void correctUserNameMethod2(int age, String name, String username) throws Throwable {
         Object[][] arguments = {
                 {age, int.class},
                 {name, String.class}
         };
         MethodTest m = new MethodTest(GenerateUsername.class, "userName", arguments);
         Object output = m.callMethod();
-        String errMsg = "Your userName method does not format the username correctly when given the age and name.";
+        String errMsg = "Your userName method does not return the correct username based on the input name and age.";
         CustomAssertions._assertEquals(username, output, errMsg);
     }
 }
