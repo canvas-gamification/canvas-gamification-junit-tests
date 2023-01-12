@@ -1,7 +1,7 @@
 package methods.modular_programs.medium.q9;
 
 /*
-Write a program that asks for two integers and passes them to a method called maxOut which check if one of the numbers
+Write a program that asks for two integers and passes them to a method called maxOut which checks if one of the numbers
 is divisible by the other. If so, it returns a string of the format "x is the max". If not, it should return “Not
 divisible”. The main method then prints the returned string.
 

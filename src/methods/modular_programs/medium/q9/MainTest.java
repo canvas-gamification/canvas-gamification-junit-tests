@@ -38,14 +38,15 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> inputDivisibleProvider() {
         return Stream.of(
-                Arguments.of(10, 5, 10 + " is the max"),
+                Arguments.of(5, 10, 10 + " is the max"),
                 Arguments.of(20, 2, 20 + " is the max"),
                 Arguments.of(200, -10, 200 + " is the max"),
-                Arguments.of(0, -3789123, 0 + " is the max"),
-                Arguments.of(0, 5, 5 + " is the max"),
+                Arguments.of(3789123, -3789123, 3789123 + " is the max"),
+                Arguments.of(5, 1, 5 + " is the max"),
+                Arguments.of(1, 1, 1 + " is the max"),
                 Arguments.of(5, 10, 10 + " is the max"),
                 Arguments.of(2, 20, 20 + " is the max"),
-                Arguments.of(-10, 200, 200 + " is the max"),
+                Arguments.of(200, -10, 200 + " is the max"),
                 Arguments.of(10, 4, "Not divisible"),
                 Arguments.of(20, -3, "Not divisible"),
                 Arguments.of(-201, 10, "Not divisible"),
@@ -63,10 +64,9 @@ public class MainTest extends BaseTest {
         MethodTest m = new MethodTest(MaxItOut.class, "maxOut", arguments);
         Object output = m.callMethod();
         String errMsg;
-        if(message.equals("Not divisible")){
+        if (message.equals("Not divisible")) {
             errMsg = "Your maxOut method does not correctly identify when the numbers are not divisible.";
-        }
-        else {
+        } else {
             errMsg = "Your maxOut method does not return the larger number when one number is divisible by the other.";
         }
         CustomAssertions._assertEquals(message, output, errMsg);
@@ -75,8 +75,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputDivisibleProvider")
     void correctMainMethodOutput(int n1, int n2, String message) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message for a given input.";
-
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message based on the input provided.";
         runWithInput(n1 + " " + n2, new Clause[]{
                 new StringLiteral(message)
         });
