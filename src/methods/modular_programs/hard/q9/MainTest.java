@@ -38,30 +38,29 @@ public class MainTest extends BaseTest {
         return Stream.of(0, -1, -2, -10, -100);
     }
 
-    static Stream<Integer> inputProvider(){
+    static Stream<Integer> inputProvider() {
         return Stream.of(1, 2, 5, 7, 10, 15, 19, 23, 34, 84);
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctPrintPatternMethod(int n) throws Throwable {
+    public void correctPrintPatternMethodForValidInput(int n) throws Throwable {
         Clause[] methodSentence = methodClauseBuilder(n);
         Object[][] arguments = {
                 {n, int.class}
         };
         MethodTest m = new MethodTest(TryAngleButReflected.class, "printPattern", arguments, methodSentence);
-        m.setIncorrectMethodStructureErrorMessage("Your printPattern method does not correctly print the pattern from the given input.");
+        m.setIncorrectMethodStructureErrorMessage("Your printPattern method does not correctly print the pattern for the given input.");
         Object output = m.callMethod();
         String errMsg = "Your printPattern method should not return a value.";
-
         assertTrue(Objects.isNull(output), errMsg);
     }
 
     @ParameterizedTest
     @MethodSource("inputInvalidProvider")
-    public void correctInvalidPrintPatternMethod(int n) throws Throwable {
+    public void correctPrintPatternMethodForInvalidInput(int n) throws Throwable {
         Clause[] methodSentence = new Clause[]{
-                new StringLiteral("Number must be positive.")
+                new StringLiteral("Input number must be positive.")
         };
         Object[][] arguments = {
                 {n, int.class}
@@ -75,7 +74,6 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     public void correctMainMethodOutput(int n) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the pattern from the given input.";
-
         runWithInput(n + "", clauseBuilder(n));
     }
 

@@ -33,7 +33,7 @@ public class TryAngleButReflected {
 
     public static void printPattern(int n) {
         if (n <= 0) {
-            System.out.println("Number must be positive.");
+            System.out.println("Input number must be positive.");
         }
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= (n - i + 1); j++)
