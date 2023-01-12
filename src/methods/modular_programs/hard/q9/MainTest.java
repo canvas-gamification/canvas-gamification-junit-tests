@@ -82,7 +82,7 @@ public class MainTest extends BaseTest {
     public void correctInvalidMainMethodOutput(int n) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for invalid input.";
         runWithInput(n + "", new Clause[]{
-                new StringLiteral("Number must be positive."),
+                new StringLiteral("Input number must be positive."),
         });
     }
 
