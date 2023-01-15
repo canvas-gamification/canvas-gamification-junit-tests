@@ -29,7 +29,7 @@ public class Person {
         this.name = "Bob";
     }
 
-    public Person(int age, String name) {
+    public Person(String name, int age) {
         this.name = name;
         this.age = age;
         this.employed = false;
@@ -41,7 +41,7 @@ public class Person {
         this.age = 21;
     }
 
-    public Person(boolean employed, int age) {
+    public Person(int age, boolean employed) {
         this.employed = employed;
         this.age = age;
         this.name = "Bob";
