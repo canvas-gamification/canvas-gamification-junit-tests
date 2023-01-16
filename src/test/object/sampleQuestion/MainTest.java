@@ -1,25 +1,27 @@
 package test.object.sampleQuestion;
 
 import global.ObjectTest;
+import global.tools.Logger;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.condition.DisabledIf;
 
-import static org.junit.Assume.assumeNotNull;
+import java.io.Console;
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
-    private ObjectTest objectTest;
+    private static ObjectTest objectTest;
 
     @Test
-    @Order(1)
     public void programContainsPersonClass() {
-        this.objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        objectTest = new ObjectTest("test.object.sampleQuestion.Person");]
     }
 
     @Test
-    @Order(2)
-    public void personClassHasRequiredFields(){
-        assumeNotNull(this.objectTest);
+    public void personClassHasRequiredFields() {
         assertTrue(objectTest.hasField("name", String.class),
                 "Your Person class is missing the string name field.");
         assertTrue(objectTest.hasModifier("name", "default"),
@@ -32,7 +34,6 @@ public class MainTest {
             This test checks that the Person class has the required constructors, and that the constructors all have
             the public modifier.
          */
-        assumeNotNull(objectTest);
         assertTrue(objectTest.hasConstructor(null),
                 "Your Person class does not have a default constructor.");
         assertTrue(objectTest.hasModifier(new Class[]{}, "public"),
@@ -63,7 +64,5 @@ public class MainTest {
 
     @Test
     public void personClassConstructorsInitializeCorrectValues() {
-        assumeNotNull(objectTest);
-
     }
 }
