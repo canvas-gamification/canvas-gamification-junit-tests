@@ -24,7 +24,7 @@ public class Person {
     }
 
     public Person(boolean employed) {
-        this.employed = false;
+        this.employed = employed;
         this.age = 21;
         this.name = "Bob";
     }
@@ -50,7 +50,7 @@ public class Person {
     public Person(String name, int age, boolean employed) {
         this.name = name;
         this.age = age;
-        this.employed = false;
+        this.employed = employed;
     }
 
     public String getName() {
@@ -75,5 +75,9 @@ public class Person {
 
     public void setEmployed(boolean employed) {
         this.employed = employed;
+    }
+
+    public void printName() {
+        System.out.println(this.name);
     }
 }
