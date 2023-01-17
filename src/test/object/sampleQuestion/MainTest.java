@@ -1,6 +1,8 @@
 package test.object.sampleQuestion;
 
 import global.ObjectTest;
+import global.variables.Clause;
+import global.variables.clauses.StringLiteral;
 import org.junit.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -203,6 +205,8 @@ public class MainTest {
                 "Your Person String name, int age, boolean employed constructor does not initialize the employed field to the correct value.");
     }
 
+    // TODO: Add modifier checks to methods
+
     @ParameterizedTest
     @MethodSource("nameInputProvider")
     public void correctGetNameMethod(String name) throws Throwable {
@@ -265,5 +269,18 @@ public class MainTest {
         objectTest.callMethod("setEmployed", person, arguments);
         Object updatedAge = objectTest.getFieldValue(person, "employed");
         assertEquals(updateEmployed, updatedAge, "Your setEmployed method does not update the value of the employed field.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("nameInputProvider")
+    public void correctPrintNameMethod(String name) throws Throwable {
+        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        Object[][] arguments = {{name, String.class}};
+        Object person = objectTest.createInstance(arguments);
+        Clause[] methodSentence = {
+                new StringLiteral(name)
+        };
+        objectTest.callMethod("printName", person, methodSentence,
+                "Your printName method in the Person class does not correctly print the name field.");
     }
 }
