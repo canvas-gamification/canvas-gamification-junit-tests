@@ -63,7 +63,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(RevdArray.class, "reverse", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(ans, output, "Your reverse method does not correctly reverse the given number.");
+        CustomAssertions._assertEquals(ans, output, "Your reverse method does not correctly reverse the input integer.");
     }
 
     @ParameterizedTest
@@ -72,13 +72,13 @@ public class MainTest extends BaseTest {
         runWithInput(ArrayUtil.arrayToInput(in));
 
         for(int x = 0; x < in.length; x++){
-            assertEquals(solution(in[x]), Integer.parseInt(getItemByName("num" + x)), "Your program does not correctly reverse array element" + x);
+            assertEquals(solution(in[x]), Integer.parseInt(getItemByName("num" + x)), "Your program does not correctly reverse each element in the array.");
         }
 
     }
 
     public Clause[] clauseBuilder(){
-        Clause[] c = new Clause[num*5];
+        Clause[] c = new Clause[num*5+3];
         int count = 0;
 
         for(int x = 0; x < num; x++){
@@ -86,6 +86,9 @@ public class MainTest extends BaseTest {
             c[count++] = new Optional(new StringLiteral(" "));
             c[count++] = new NewLine();
         }
+        c[count++] = new StringLiteral("The numbers in the array are:");
+        c[count++] = new Optional(new StringLiteral(" "));
+        c[count++] = new NewLine();
         for(int x = 0; x < num; x++){
             c[count++] = new IntegerLiteral("num" + x);
             c[count++] = new NewLine();
@@ -95,11 +98,11 @@ public class MainTest extends BaseTest {
     }
 
     public static int solution(int n) {
-        int reversed = 0;
-        while (n > 0) {
-            reversed = (reversed * 10) + n % 10;
-            n = n / 10;
+        String hold = String.valueOf(n);
+        StringBuilder reversed = new StringBuilder();
+        for(int x = hold.length()-1; x >= 0; x--){
+            reversed.append(hold.charAt(x));
         }
-        return reversed;
+        return Integer.parseInt(String.valueOf(reversed));
     }
 }

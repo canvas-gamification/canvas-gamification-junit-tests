@@ -4,7 +4,7 @@ package arrays.creating_arrays.hard.q2;
 Write a program asking the user for five numbers and initialize an integer array with the reverse of each number. For
 example, if the user enters 432 as the 5th number, then the 5th array element will be 234. Assume only positive numbers
 will be input. To simplify your code, create a method called reverse() that takes a single integer as input and returns
-an integer in a reversed format as output.
+the reverse of that integer. Assume the user will only input positive integers.
 
 Sample output:
     Enter a number to add to the array:
@@ -17,6 +17,7 @@ Sample output:
     23
     Enter a number to add to the array:
     18525
+    The numbers in the array are:
     43
     876
     1
@@ -34,6 +35,7 @@ public class RevdArray {
             System.out.println("Enter a number to add to the array: ");
             arr[i] = reverse(input.nextInt());
         }
+        System.out.println("The numbers in the array are: ");
         for (int i = 0; i < arr.length; i++)
             System.out.println(arr[i]);
     }
