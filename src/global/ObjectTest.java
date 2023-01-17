@@ -59,7 +59,7 @@ public class ObjectTest {
     public boolean hasConstructor(Class<?>[] argsClass, String[] modifiers) {
         try {
             Constructor<?> constructor = objectClass.getDeclaredConstructor(argsClass);
-            for(String modifier : modifiers) {
+            for (String modifier : modifiers) {
                 boolean hasModifier = hasModifier(constructor, modifier);
                 if (!hasModifier)
                     return false;
@@ -75,12 +75,18 @@ public class ObjectTest {
         Class<?>[] argsClass = getArgumentClasses(arguments);
         Object[] args = getArguments(arguments);
         Object object = null;
+        if (!(Objects.isNull(argsClass) || Objects.isNull(args))) {
+            if (args.length != argsClass.length)
+                _fail("Error with test definition, please contact a test administrator.",
+                        "Tried to create an instance using a constructor but the number of arguments " +
+                                "provided does not match the number of argument classes provided.");
+        }
         try {
             Constructor<?> objectConstructor = objectClass.getDeclaredConstructor(argsClass);
             objectConstructor.setAccessible(true);
             object = objectConstructor.newInstance(args);
         } catch (InvocationTargetException e) {
-            _fail("Error with test, could not access a required constructor", e.getMessage());
+            throw e.getTargetException();
         } catch (IllegalAccessException e) {
             _fail(
                     "Error with test definition. Please contact a test administrator.",
@@ -95,19 +101,7 @@ public class ObjectTest {
     }
 
     public Object createInstance() throws Throwable {
-        Object object = null;
-        try {
-            object = objectClass.getDeclaredConstructor().newInstance();
-        } catch (InvocationTargetException e) {
-            _fail("Error with test, could not access a required constructor", e.getMessage());
-        } catch (IllegalAccessException e) {
-
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            fail(String.join(" ", "The", objectClass.getSimpleName(), "class does not contain a required constructor."));
-        }
-        return object;
+        return createInstance(null);
     }
 
     public boolean hasField(String fieldName, Class<?> fieldClass) {
@@ -122,9 +116,9 @@ public class ObjectTest {
     public boolean hasField(String fieldName, Class<?> fieldClass, String[] modifiers) {
         try {
             Field field = objectClass.getDeclaredField(fieldName);
-            for(String modifier: modifiers){
+            for (String modifier : modifiers) {
                 boolean hasModifier = hasModifier(field, modifier);
-                if(!hasModifier)
+                if (!hasModifier)
                     return false;
             }
             return fieldClass.equals(field.getType());
@@ -145,9 +139,9 @@ public class ObjectTest {
     public boolean hasMethod(String methodName, Class<?>[] argsClass, Class<?> methodReturnType, String[] modifiers) {
         try {
             Method objectMethod = objectClass.getDeclaredMethod(methodName, argsClass);
-            for(String modifier: modifiers){
+            for (String modifier : modifiers) {
                 boolean hasModifier = hasModifier(objectMethod, modifier);
-                if(!hasModifier)
+                if (!hasModifier)
                     return false;
             }
             return methodReturnType.equals(objectMethod.getReturnType());
@@ -354,10 +348,13 @@ public class ObjectTest {
         } catch (NoSuchMethodException e) {
             fail(String.join("", "Your ", objectClass.getSimpleName(),
                     " class does not contain the method ", methodName, "."));
-            return null;
-        } catch (InvocationTargetException | IllegalAccessException e) {
-            throw e.getCause();
+        } catch (InvocationTargetException e) {
+            throw e.getTargetException();
+        } catch (IllegalAccessException e) {
+            _fail("Error with test definition. Please contact a test administrator.",
+                    "Unable to call a method in the tested code.");
         }
+        return null;
     }
 
     private Class<?>[] getArgumentClasses(Object[][] arguments) {
@@ -452,17 +449,5 @@ public class ObjectTest {
             }
             i += 1;
         }
-    }
-
-    public void assertField(boolean hasField, String fieldName, Class<?> fieldClass) {
-        assertTrue(hasField, String.join(
-                " ",
-                "Your", objectClass.getSimpleName(),
-                "does not contain the field",
-                fieldName,
-                " of the type ",
-                fieldClass.getSimpleName(),
-                " with the correct modifiers.")
-        );
     }
 }
