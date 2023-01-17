@@ -251,36 +251,6 @@ public class ObjectTest {
             Field field = testObject.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
             field.set(testObject, value);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
-        }
-    }
-
-    public void setFieldValue(Object testObject, double value, String fieldName) {
-        try {
-            Field field = testObject.getClass().getDeclaredField(fieldName);
-            field.setAccessible(true);
-            field.set(testObject, value);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
-        }
-    }
-
-    public void setFieldValue(Object testObject, boolean value, String fieldName) {
-        try {
-            Field field = testObject.getClass().getDeclaredField(fieldName);
-            field.setAccessible(true);
-            field.set(testObject, value);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
-        }
-    }
-
-    public void setFieldValue(Object testObject, char value, String fieldName) {
-        try {
-            Field field = testObject.getClass().getDeclaredField(fieldName);
-            field.setAccessible(true);
-            field.set(testObject, value);
         } catch (NoSuchFieldException e) {
             fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
         } catch (IllegalAccessException e) {
