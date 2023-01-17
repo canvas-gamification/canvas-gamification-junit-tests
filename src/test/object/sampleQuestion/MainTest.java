@@ -83,8 +83,25 @@ public class MainTest {
         );
     }
 
-    private static Stream<String> getNameInputProvider() {
+    private static Stream<String> nameInputProvider() {
         return Stream.of("Caroline", "George", "Elvin Elvis", "Madalyn", "Peterolomew");
+    }
+
+    private static Stream<Integer> ageInputProvider() {
+        return Stream.of(4, 11, 91, 0, 2, 12993, 452);
+    }
+
+    private static Stream<Boolean> getEmployedInputProvider() {
+        return Stream.of(true, false);
+    }
+
+    private static Stream<Arguments> setEmployedInputProvider() {
+        return Stream.of(
+                Arguments.of(true, true),
+                Arguments.of(true, false),
+                Arguments.of(false, true),
+                Arguments.of(false, false)
+        );
     }
 
     @ParameterizedTest
@@ -187,10 +204,66 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("getNameInputProvider")
+    @MethodSource("nameInputProvider")
     public void correctGetNameMethod(String name) throws Throwable {
         ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
         Object[][] arguments = {{name, String.class}};
         Object person = objectTest.createInstance(arguments);
+        Object output = objectTest.callMethod("getName", person);
+        assertEquals(name, output, "Your getName method does not return the value of the name field.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("nameInputProvider")
+    public void correctSetNameMethod(String name) throws Throwable {
+        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        Object person = objectTest.createInstance();
+        Object[][] arguments = {{name, String.class}};
+        objectTest.callMethod("setName", person, arguments);
+        Object updatedName = objectTest.getFieldValue(person, "name");
+        assertEquals(name, updatedName, "Your setName method does not update the value of the name field.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("ageInputProvider")
+    public void correctGetAgeMethod(int age) throws Throwable {
+        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        Object[][] arguments = {{age, int.class}};
+        Object person = objectTest.createInstance(arguments);
+        Object output = objectTest.callMethod("getAge", person);
+        assertEquals(age, output, "Your getAge method does not return the value of the age field.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("ageInputProvider")
+    public void correctSetAgeMethod(int age) throws Throwable {
+        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        Object person = objectTest.createInstance();
+        Object[][] arguments = {{age, int.class}};
+        objectTest.callMethod("setAge", person, arguments);
+        Object updatedAge = objectTest.getFieldValue(person, "age");
+        assertEquals(age, updatedAge, "Your setAge method does not update the value of the age field.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("getEmployedInputProvider")
+    public void correctIsEmployedMethod(boolean employed) throws Throwable {
+        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        Object[][] arguments = {{employed, boolean.class}};
+        Object person = objectTest.createInstance(arguments);
+        Object output = objectTest.callMethod("isEmployed", person);
+        assertEquals(employed, output, "Your isEmployed method does not return the value of the employed field.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("setEmployedInputProvider")
+    public void correctSetEmployedMethod(boolean initialEmployed, boolean updateEmployed) throws Throwable {
+        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        Object[][] constructionArguments = {{initialEmployed, boolean.class}};
+        Object person = objectTest.createInstance(constructionArguments);
+        Object[][] arguments = {{updateEmployed, boolean.class}};
+        objectTest.callMethod("setEmployed", person, arguments);
+        Object updatedAge = objectTest.getFieldValue(person, "employed");
+        assertEquals(updateEmployed, updatedAge, "Your setEmployed method does not update the value of the employed field.");
     }
 }
