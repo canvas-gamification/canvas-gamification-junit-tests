@@ -211,6 +211,9 @@ public class MainTest {
     @MethodSource("nameInputProvider")
     public void correctGetNameMethod(String name) throws Throwable {
         ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        assertTrue(objectTest.hasMethod("getName", new Class<?>[]{}, String.class),
+                "Your object test is missing the getName method.");
+        assertTrue(objectTest.hasModifier());
         Object[][] arguments = {{name, String.class}};
         Object person = objectTest.createInstance(arguments);
         Object output = objectTest.callMethod("getName", person);
