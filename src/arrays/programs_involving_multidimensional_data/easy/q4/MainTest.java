@@ -1,53 +1,58 @@
 package arrays.programs_involving_multidimensional_data.easy.q4;
 
 import global.BaseRandomTest;
+import global.tools.CustomAssertions;
 import global.variables.Clause;
 import global.variables.clauses.*;
-import global.variables.wrappers.Optional;
-
-import java.util.stream.Stream;
-
-import static global.utils.ArrayUtil.generateRandomArray;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseRandomTest {
 
-    public static int n = 2;
-
+    public static int n = 4;
+    public static int up = 100;
+    public static int down = 0;
     public Clause[] testSentence() {
-        Clause[] c = new Clause[2];
+        Clause[] c = new Clause[4 * n * n + 4];
         c[0] = new StringLiteral("Before the rotation:");
         c[1] = new NewLine();
-
-         return c;
+        for(int i = 2; i < 2 * n * n + 2; i += 2){
+            c[i] = new RandomInteger(down, up, "" + ((i - 2)/2));
+            c[i + 1] = new NewLine();
+        }
+        c[2 * n * n + 2] = new StringLiteral("After the rotation:");
+        c[2 * n * n + 3] = new NewLine();
+        for(int i = 2 * n * n + 4; i < 4 * n * n + 4; i += 2){
+            c[i] = new IntegerLiteral("x" + (((i - 2 * n * n + 4) - 2) / 2));
+            c[i + 1] = new NewLine();
+        }
+        return c;
     }
 
     public void runMain() {
         Rotation.main(new String[0]);
     }
 
-    int[][] answerFor(int[][] arr) {
-        int a = arr[0][0], b = arr[0][n - 1], c = arr[n - 1][n - 1], d = arr[n - 1][0];
-        int[][] ans = arr.clone();
-        ans[0][0] = b;
-        ans[0][n - 1] = c;
-        ans[n - 1][n - 1] = d;
-        ans[n - 1][0] = a;
-        return ans;
+    public static int[] answerFor(int[] arr) {
+        int a = arr[0], b = arr[n - 1], c = arr[n * n - 1], d = arr[n * n - n];
+        arr[n - 1] = a;
+        arr[n * n - 1] = b;
+        arr[n * n - n] = c;
+        arr[0] = d;
+        return arr;
+
     }
 
-    /*void printsCorrectOutput(){
-        int[][] arr = new int[n][n];
-        for(int i = 0; i < n; i ++){
-            for(int j = 0; j < n; j ++){
-                arr[i][j] = Integer.parseInt(getItemByName(i + " " + j));
-            }
+    void printsCorrectOutput(){
+        int[] arr = new int[n * n];
+        for(int i = 0; i < n * n; i ++){
+            arr[i] = Integer.parseInt(getItemByName("" + i));
         }
-        int[][] ans = answerFor(arr);
-        for(int i = 0; i < n; i ++){
-            for(int j = 0; j < n; j ++){
-                assertEquals(ans[i][j], Integer.parseInt(getItemByName("x" + i + " " + j)));
-            }
+        int[] ans = answerFor(arr);
+        int[] in = new int[n * n];
+        for(int i = 0; i < n * n; i ++){
+            in[i] = Integer.parseInt(getItemByName("x" + i));
         }
-    }*/
+        CustomAssertions._assertArrayEquals(ans, in, "Your program does not rotated the 2D array correctly.");
+
+
+    }
 }
