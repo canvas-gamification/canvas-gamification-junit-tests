@@ -294,4 +294,27 @@ public class MainTest {
     }
 
     // TODO: Tests for House class
+
+    @Test
+    public void programContainsHouseClass() {
+        new ObjectTest("test.object.sampleQuestion.House");
+    }
+
+    @Test
+    public void houseClassHasRequiredFields() {
+        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.House");
+        ObjectTest person = new ObjectTest("test.object.sampleQuestion.Person");
+        assertTrue(objectTest.hasField("residents", person.getObjectClass().arrayType()),
+                "Your House class is missing the Person[] residents field.");
+        assertTrue(objectTest.hasModifier("residents", "private"),
+                "Your House class residents field does not have the correct modifiers.");
+        assertTrue(objectTest.hasField("number", int.class),
+                "Your House class is missing the int number field.");
+        assertTrue(objectTest.hasModifier("number", "private"),
+                "Your House class number field does not have the correct modifiers.");
+        assertTrue(objectTest.hasField("address", String.class),
+                "Your House class is missing the String address field.");
+        assertTrue(objectTest.hasModifier("address", "private"),
+                "Your House class address filed does not have the correct modifiers.");
+    }
 }
