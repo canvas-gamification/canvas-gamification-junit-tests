@@ -18,7 +18,7 @@ import static global.utils.RegexUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ObjectTest {
-    Class<?> objectClass;
+    private Class<?> objectClass;
 
     public ObjectTest(String objectClass) {
         try {
@@ -93,7 +93,10 @@ public class ObjectTest {
                     String.join(" ", "Could not access a constructor.", e.getMessage())
             );
         } catch (InstantiationException e) {
-            fail(String.join(" ", "The ", objectClass.getSimpleName(), "class", " could not be instantiated."));
+            _fail(
+                    "Error with test definition. Please contact a test administrator.",
+                    String.join(" ", "This class cannot be initialized.", e.getMessage())
+            );
         } catch (NoSuchMethodException e) {
             fail(String.join(" ", "The", objectClass.getSimpleName(), "class does not contain a required constructor."));
         }
@@ -240,43 +243,16 @@ public class ObjectTest {
         } catch (NoSuchFieldException e) {
             fail(String.join("", "Your ", objectClass.getSimpleName(), " class does not contain the field ", fieldName, " ."));
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            _fail(
+                    "Error with test definition. Please contact a test administrator.",
+                    String.join(" ", "Could not access a constructor.", e.getMessage())
+            );
         }
         return fieldValue;
     }
 
     public void setFieldValue(Object testObject, Object value, String fieldName) {
         // Sets the value of the specified field of the passed object
-        try {
-            Field field = testObject.getClass().getDeclaredField(fieldName);
-            field.setAccessible(true);
-            field.set(testObject, value);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
-        }
-    }
-
-    public void setFieldValue(Object testObject, double value, String fieldName) {
-        try {
-            Field field = testObject.getClass().getDeclaredField(fieldName);
-            field.setAccessible(true);
-            field.set(testObject, value);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
-        }
-    }
-
-    public void setFieldValue(Object testObject, boolean value, String fieldName) {
-        try {
-            Field field = testObject.getClass().getDeclaredField(fieldName);
-            field.setAccessible(true);
-            field.set(testObject, value);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            fail(String.join(" ", "Your", objectClass.getSimpleName(), "does not contain the field", fieldName, "."));
-        }
-    }
-
-    public void setFieldValue(Object testObject, char value, String fieldName) {
         try {
             Field field = testObject.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
@@ -292,54 +268,106 @@ public class ObjectTest {
     }
 
     public Object callMethod(String methodName) throws Throwable {
-        return callMethod(methodName, null, null, null, "");
+        return callMethod(methodName, null, null, null, null, "");
+    }
+
+    public Object callMethod(String methodName, String[] modifiers) throws Throwable {
+        return callMethod(methodName, null, modifiers, null, null, "");
     }
 
     public Object callMethod(String methodName, Object object) throws Throwable {
-        return callMethod(methodName, object, null, null, "");
+        return callMethod(methodName, null, null, object, null, "");
+    }
+
+    public Object callMethod(String methodName, String[] modifiers, Object object) throws Throwable {
+        return callMethod(methodName, null, modifiers, object, null, "");
+    }
+
+    public Object callMethod(String methodName, Object[][] arguments, String[] modifiers) throws Throwable {
+        return callMethod(methodName, arguments, modifiers, null, null, "");
     }
 
     public Object callMethod(String methodName, Object[][] arguments) throws Throwable {
-        return callMethod(methodName, null, null, null, "");
+        return callMethod(methodName, arguments, null, null, null, "");
+    }
+
+    public Object callMethod(String methodName, String[] modifiers, Clause[] methodTestSentence) throws Throwable {
+        return callMethod(methodName, null, modifiers, null, methodTestSentence, "");
     }
 
     public Object callMethod(String methodName, Clause[] methodTestSentence) throws Throwable {
-        return callMethod(methodName, null, null, methodTestSentence, "");
+        return callMethod(methodName, null, null, null, methodTestSentence, "");
     }
 
-    public Object callMethod(String methodName, Object object, Object[][] arguments) throws Throwable {
-        return callMethod(methodName, object, arguments, null, "");
+    public Object callMethod(String methodName, Object[][] arguments, String[] modifiers, Object object) throws Throwable {
+        return callMethod(methodName, arguments, modifiers, object, null, "");
+    }
+
+    public Object callMethod(String methodName, Object[][] arguments, Object object) throws Throwable {
+        return callMethod(methodName, arguments, null, object, null, "");
+    }
+
+    public Object callMethod(String methodName, String[] modifiers, Object object, Clause[] methodTestSentence) throws Throwable {
+        return callMethod(methodName, null, modifiers, object, methodTestSentence, "");
     }
 
     public Object callMethod(String methodName, Object object, Clause[] methodTestSentence) throws Throwable {
-        return callMethod(methodName, object, null, methodTestSentence, "");
+        return callMethod(methodName, null, null, object, methodTestSentence, "");
+    }
+
+    public Object callMethod(String methodName, Object[][] arguments, String[] modifiers, Clause[] methodTestSentence) throws Throwable {
+        return callMethod(methodName, arguments, modifiers, null, methodTestSentence, "");
     }
 
     public Object callMethod(String methodName, Object[][] arguments, Clause[] methodTestSentence) throws Throwable {
-        return callMethod(methodName, null, arguments, methodTestSentence, "");
+        return callMethod(methodName, arguments, null, null, methodTestSentence, "");
+    }
+
+    public Object callMethod(String methodName, String[] modifiers, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
+        return callMethod(methodName, null, modifiers, null, methodTestSentence, incorrectMethodStructureErrorMessage);
     }
 
     public Object callMethod(String methodName, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
-        return callMethod(methodName, null, null, methodTestSentence, incorrectMethodStructureErrorMessage);
+        return callMethod(methodName, null, null, null, methodTestSentence, incorrectMethodStructureErrorMessage);
     }
 
-    public Object callMethod(String methodName, Object object, Object[][] arguments, Clause[] methodTestSentence) throws Throwable {
-        return callMethod(methodName, object, arguments, methodTestSentence, "");
+    public Object callMethod(String methodName, Object[][] arguments, String[] modifiers, Object object, Clause[] methodTestSentence) throws Throwable {
+        return callMethod(methodName, arguments, modifiers, object, methodTestSentence, "");
+    }
+
+    public Object callMethod(String methodName, Object[][] arguments, Object object, Clause[] methodTestSentence) throws Throwable {
+        return callMethod(methodName, arguments, null, object, methodTestSentence, "");
+    }
+
+    public Object callMethod(String methodName, Object[][] arguments, String[] modifiers, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
+        return callMethod(methodName, arguments, modifiers, null, methodTestSentence, incorrectMethodStructureErrorMessage);
     }
 
     public Object callMethod(String methodName, Object[][] arguments, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
-        return callMethod(methodName, null, arguments, methodTestSentence, incorrectMethodStructureErrorMessage);
+        return callMethod(methodName, arguments, null, null, methodTestSentence, incorrectMethodStructureErrorMessage);
+    }
+
+    public Object callMethod(String methodName, String[] modifiers, Object object, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
+        return callMethod(methodName, null, modifiers, object, methodTestSentence, incorrectMethodStructureErrorMessage);
     }
 
     public Object callMethod(String methodName, Object object, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
-        return callMethod(methodName, object, null, methodTestSentence, incorrectMethodStructureErrorMessage);
+        return callMethod(methodName, null, null, object, methodTestSentence, incorrectMethodStructureErrorMessage);
     }
 
-    public Object callMethod(String methodName, Object object, Object[][] arguments, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
+    public Object callMethod(String methodName, Object[][] arguments, String[] modifiers, Object object,
+                             Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
         Class<?>[] argsClass = getArgumentClasses(arguments);
         Object[] args = getArguments(arguments);
         try {
             Method objectMethodInvoke = objectClass.getMethod(methodName, argsClass);
+            if (!Objects.isNull(modifiers)) {
+                for (String modifier : modifiers) {
+                    assertTrue(hasModifier(objectMethodInvoke, modifier),
+                            String.join(" ", "Your", methodName, "method in the", objectClass.getSimpleName(),
+                                    "class does not have the correct modifiers."));
+                }
+            }
             ByteArrayOutputStream methodOutput = new ByteArrayOutputStream();
             System.setOut(new PrintStream(methodOutput));
             Object output = objectMethodInvoke.invoke(object, args);
@@ -352,7 +380,7 @@ public class ObjectTest {
             throw e.getTargetException();
         } catch (IllegalAccessException e) {
             _fail("Error with test definition. Please contact a test administrator.",
-                    "Unable to call a method in the tested code.");
+                    "Unable to call a method in the tested code." + e.getMessage());
         }
         return null;
     }
@@ -449,5 +477,9 @@ public class ObjectTest {
             }
             i += 1;
         }
+    }
+
+    public Class<?> getObjectClass() {
+        return this.objectClass;
     }
 }
