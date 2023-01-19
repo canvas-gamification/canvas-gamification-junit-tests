@@ -18,7 +18,7 @@ import static global.utils.RegexUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ObjectTest {
-    Class<?> objectClass;
+    private Class<?> objectClass;
 
     public ObjectTest(String objectClass) {
         try {
@@ -93,7 +93,10 @@ public class ObjectTest {
                     String.join(" ", "Could not access a constructor.", e.getMessage())
             );
         } catch (InstantiationException e) {
-            fail(String.join(" ", "The ", objectClass.getSimpleName(), "class", " could not be instantiated."));
+            _fail(
+                    "Error with test definition. Please contact a test administrator.",
+                    String.join(" ", "This class cannot be initialized.", e.getMessage())
+            );
         } catch (NoSuchMethodException e) {
             fail(String.join(" ", "The", objectClass.getSimpleName(), "class does not contain a required constructor."));
         }
@@ -240,7 +243,10 @@ public class ObjectTest {
         } catch (NoSuchFieldException e) {
             fail(String.join("", "Your ", objectClass.getSimpleName(), " class does not contain the field ", fieldName, " ."));
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            _fail(
+                    "Error with test definition. Please contact a test administrator.",
+                    String.join(" ", "Could not access a constructor.", e.getMessage())
+            );
         }
         return fieldValue;
     }
@@ -322,7 +328,7 @@ public class ObjectTest {
             throw e.getTargetException();
         } catch (IllegalAccessException e) {
             _fail("Error with test definition. Please contact a test administrator.",
-                    "Unable to call a method in the tested code.");
+                    "Unable to call a method in the tested code." + e.getMessage());
         }
         return null;
     }
@@ -419,5 +425,9 @@ public class ObjectTest {
             }
             i += 1;
         }
+    }
+
+    public Class<?> getObjectClass() {
+        return this.objectClass;
     }
 }
