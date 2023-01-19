@@ -14,6 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
+
+    // Tests for Person class
     private final String defaultName = "Bob";
     private final int defaultAge = 21;
     private final boolean defaultEmployed = false;
@@ -211,12 +213,10 @@ public class MainTest {
     @MethodSource("nameInputProvider")
     public void correctGetNameMethod(String name) throws Throwable {
         ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
-        assertTrue(objectTest.hasMethod("getName", new Class<?>[]{}, String.class),
-                "Your object test is missing the getName method.");
-        assertTrue(objectTest.hasModifier());
         Object[][] arguments = {{name, String.class}};
         Object person = objectTest.createInstance(arguments);
-        Object output = objectTest.callMethod("getName", person);
+        String[] modifiers = {"public"};
+        Object output = objectTest.callMethod("getName", modifiers, person);
         assertEquals(name, output, "Your getName method does not return the value of the name field.");
     }
 
@@ -226,7 +226,8 @@ public class MainTest {
         ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
         Object person = objectTest.createInstance();
         Object[][] arguments = {{name, String.class}};
-        objectTest.callMethod("setName", person, arguments);
+        String[] modifiers = {"public"};
+        objectTest.callMethod("setName", arguments, modifiers, person);
         Object updatedName = objectTest.getFieldValue(person, "name");
         assertEquals(name, updatedName, "Your setName method does not update the value of the name field.");
     }
@@ -237,7 +238,8 @@ public class MainTest {
         ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
         Object[][] arguments = {{age, int.class}};
         Object person = objectTest.createInstance(arguments);
-        Object output = objectTest.callMethod("getAge", person);
+        String[] modifiers = {"public"};
+        Object output = objectTest.callMethod("getAge", modifiers, person);
         assertEquals(age, output, "Your getAge method does not return the value of the age field.");
     }
 
@@ -247,7 +249,8 @@ public class MainTest {
         ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
         Object person = objectTest.createInstance();
         Object[][] arguments = {{age, int.class}};
-        objectTest.callMethod("setAge", person, arguments);
+        String[] modifiers = {"public"};
+        objectTest.callMethod("setAge", arguments, modifiers, person);
         Object updatedAge = objectTest.getFieldValue(person, "age");
         assertEquals(age, updatedAge, "Your setAge method does not update the value of the age field.");
     }
@@ -257,8 +260,9 @@ public class MainTest {
     public void correctIsEmployedMethod(boolean employed) throws Throwable {
         ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
         Object[][] arguments = {{employed, boolean.class}};
+        String[] modifiers = {"public"};
         Object person = objectTest.createInstance(arguments);
-        Object output = objectTest.callMethod("isEmployed", person);
+        Object output = objectTest.callMethod("isEmployed", modifiers, person);
         assertEquals(employed, output, "Your isEmployed method does not return the value of the employed field.");
     }
 
@@ -269,7 +273,8 @@ public class MainTest {
         Object[][] constructionArguments = {{initialEmployed, boolean.class}};
         Object person = objectTest.createInstance(constructionArguments);
         Object[][] arguments = {{updateEmployed, boolean.class}};
-        objectTest.callMethod("setEmployed", person, arguments);
+        String[] modifiers = {"public"};
+        objectTest.callMethod("setEmployed", arguments, modifiers, person);
         Object updatedAge = objectTest.getFieldValue(person, "employed");
         assertEquals(updateEmployed, updatedAge, "Your setEmployed method does not update the value of the employed field.");
     }
@@ -280,10 +285,13 @@ public class MainTest {
         ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
         Object[][] arguments = {{name, String.class}};
         Object person = objectTest.createInstance(arguments);
+        String[] modifiers = {"public"};
         Clause[] methodSentence = {
                 new StringLiteral(name)
         };
-        objectTest.callMethod("printName", person, methodSentence,
+        objectTest.callMethod("printName", modifiers, person, methodSentence,
                 "Your printName method in the Person class does not correctly print the name field.");
     }
+
+    // TODO: Tests for House class
 }

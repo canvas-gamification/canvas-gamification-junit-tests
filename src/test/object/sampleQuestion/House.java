@@ -46,4 +46,8 @@ public class House {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public static String houseMessage() {
+        return "This is a house";
+    }
 }
