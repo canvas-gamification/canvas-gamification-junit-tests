@@ -268,54 +268,106 @@ public class ObjectTest {
     }
 
     public Object callMethod(String methodName) throws Throwable {
-        return callMethod(methodName, null, null, null, "");
+        return callMethod(methodName, null, null, null, null, "");
+    }
+
+    public Object callMethod(String methodName, String[] modifiers) throws Throwable {
+        return callMethod(methodName, null, modifiers, null, null, "");
     }
 
     public Object callMethod(String methodName, Object object) throws Throwable {
-        return callMethod(methodName, object, null, null, "");
+        return callMethod(methodName, null, null, object, null, "");
+    }
+
+    public Object callMethod(String methodName, String[] modifiers, Object object) throws Throwable {
+        return callMethod(methodName, null, modifiers, object, null, "");
+    }
+
+    public Object callMethod(String methodName, Object[][] arguments, String[] modifiers) throws Throwable {
+        return callMethod(methodName, arguments, modifiers, null, null, "");
     }
 
     public Object callMethod(String methodName, Object[][] arguments) throws Throwable {
-        return callMethod(methodName, null, null, null, "");
+        return callMethod(methodName, arguments, null, null, null, "");
+    }
+
+    public Object callMethod(String methodName, String[] modifiers, Clause[] methodTestSentence) throws Throwable {
+        return callMethod(methodName, null, modifiers, null, methodTestSentence, "");
     }
 
     public Object callMethod(String methodName, Clause[] methodTestSentence) throws Throwable {
-        return callMethod(methodName, null, null, methodTestSentence, "");
+        return callMethod(methodName, null, null, null, methodTestSentence, "");
     }
 
-    public Object callMethod(String methodName, Object object, Object[][] arguments) throws Throwable {
-        return callMethod(methodName, object, arguments, null, "");
+    public Object callMethod(String methodName, Object[][] arguments, String[] modifiers, Object object) throws Throwable {
+        return callMethod(methodName, arguments, modifiers, object, null, "");
+    }
+
+    public Object callMethod(String methodName, Object[][] arguments, Object object) throws Throwable {
+        return callMethod(methodName, arguments, null, object, null, "");
+    }
+
+    public Object callMethod(String methodName, String[] modifiers, Object object, Clause[] methodTestSentence) throws Throwable {
+        return callMethod(methodName, null, modifiers, object, methodTestSentence, "");
     }
 
     public Object callMethod(String methodName, Object object, Clause[] methodTestSentence) throws Throwable {
-        return callMethod(methodName, object, null, methodTestSentence, "");
+        return callMethod(methodName, null, null, object, methodTestSentence, "");
+    }
+
+    public Object callMethod(String methodName, Object[][] arguments, String[] modifiers, Clause[] methodTestSentence) throws Throwable {
+        return callMethod(methodName, arguments, modifiers, null, methodTestSentence, "");
     }
 
     public Object callMethod(String methodName, Object[][] arguments, Clause[] methodTestSentence) throws Throwable {
-        return callMethod(methodName, null, arguments, methodTestSentence, "");
+        return callMethod(methodName, arguments, null, null, methodTestSentence, "");
+    }
+
+    public Object callMethod(String methodName, String[] modifiers, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
+        return callMethod(methodName, null, modifiers, null, methodTestSentence, incorrectMethodStructureErrorMessage);
     }
 
     public Object callMethod(String methodName, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
-        return callMethod(methodName, null, null, methodTestSentence, incorrectMethodStructureErrorMessage);
+        return callMethod(methodName, null, null, null, methodTestSentence, incorrectMethodStructureErrorMessage);
     }
 
-    public Object callMethod(String methodName, Object object, Object[][] arguments, Clause[] methodTestSentence) throws Throwable {
-        return callMethod(methodName, object, arguments, methodTestSentence, "");
+    public Object callMethod(String methodName, Object[][] arguments, String[] modifiers, Object object, Clause[] methodTestSentence) throws Throwable {
+        return callMethod(methodName, arguments, modifiers, object, methodTestSentence, "");
+    }
+
+    public Object callMethod(String methodName, Object[][] arguments, Object object, Clause[] methodTestSentence) throws Throwable {
+        return callMethod(methodName, arguments, null, object, methodTestSentence, "");
+    }
+
+    public Object callMethod(String methodName, Object[][] arguments, String[] modifiers, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
+        return callMethod(methodName, arguments, modifiers, null, methodTestSentence, incorrectMethodStructureErrorMessage);
     }
 
     public Object callMethod(String methodName, Object[][] arguments, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
-        return callMethod(methodName, null, arguments, methodTestSentence, incorrectMethodStructureErrorMessage);
+        return callMethod(methodName, arguments, null, null, methodTestSentence, incorrectMethodStructureErrorMessage);
+    }
+
+    public Object callMethod(String methodName, String[] modifiers, Object object, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
+        return callMethod(methodName, null, modifiers, object, methodTestSentence, incorrectMethodStructureErrorMessage);
     }
 
     public Object callMethod(String methodName, Object object, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
-        return callMethod(methodName, object, null, methodTestSentence, incorrectMethodStructureErrorMessage);
+        return callMethod(methodName, null, null, object, methodTestSentence, incorrectMethodStructureErrorMessage);
     }
 
-    public Object callMethod(String methodName, Object object, Object[][] arguments, Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
+    public Object callMethod(String methodName, Object[][] arguments, String[] modifiers, Object object,
+                             Clause[] methodTestSentence, String incorrectMethodStructureErrorMessage) throws Throwable {
         Class<?>[] argsClass = getArgumentClasses(arguments);
         Object[] args = getArguments(arguments);
         try {
             Method objectMethodInvoke = objectClass.getMethod(methodName, argsClass);
+            if (!Objects.isNull(modifiers)) {
+                for (String modifier : modifiers) {
+                    assertTrue(hasModifier(objectMethodInvoke, modifier),
+                            String.join(" ", "Your", methodName, "method in the", objectClass.getSimpleName(),
+                                    "class does not have the correct modifiers."));
+                }
+            }
             ByteArrayOutputStream methodOutput = new ByteArrayOutputStream();
             System.setOut(new PrintStream(methodOutput));
             Object output = objectMethodInvoke.invoke(object, args);
