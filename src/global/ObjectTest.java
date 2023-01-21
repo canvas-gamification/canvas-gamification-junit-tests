@@ -482,4 +482,11 @@ public class ObjectTest {
     public Class<?> getObjectClass() {
         return this.objectClass;
     }
+
+    public Object createArray(int length) {
+        if (length < 0)
+            _fail("Error with test definition. Please contact a test administrator.",
+                    "Must pass a positive length to initialize an array.");
+        return Array.newInstance(this.objectClass, length);
+    }
 }
