@@ -10,8 +10,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static global.tools.CustomAssertions._assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest {
 
@@ -19,15 +19,17 @@ public class MainTest {
     private final String defaultName = "Bob";
     private final int defaultAge = 21;
     private final boolean defaultEmployed = false;
+    private final String personClassString = "test.object.sampleQuestion.Person";
+    private final String houseClassString = "test.object.sampleQuestion.House";
 
     @Test
     public void programContainsPersonClass() {
-        new ObjectTest("test.object.sampleQuestion.Person");
+        new ObjectTest(personClassString);
     }
 
     @Test
     public void personClassHasRequiredFields() {
-        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        ObjectTest objectTest = new ObjectTest(personClassString);
         assertTrue(objectTest.hasField("name", String.class),
                 "Your Person class is missing the string name field.");
         assertTrue(objectTest.hasModifier("name", "private"),
@@ -48,7 +50,7 @@ public class MainTest {
             This test checks that the Person class has the required constructors, and that the constructors all have
             the public modifier.
          */
-        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        ObjectTest objectTest = new ObjectTest(personClassString);
         assertTrue(objectTest.hasConstructor(null),
                 "Your Person class does not have a default constructor.");
         assertTrue(objectTest.hasModifier(new Class[]{}, "public"),
@@ -112,7 +114,7 @@ public class MainTest {
     @MethodSource("constructorInputProvider")
     public void personClassConstructorsInitializeCorrectValues(String name, int age, boolean employed) throws Throwable {
         // Find object
-        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        ObjectTest objectTest = new ObjectTest(personClassString);
 
         // Default constructor
         Object person = objectTest.createInstance();
@@ -212,7 +214,7 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("nameInputProvider")
     public void correctGetNameMethod(String name) throws Throwable {
-        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        ObjectTest objectTest = new ObjectTest(personClassString);
         Object[][] arguments = {{name, String.class}};
         Object person = objectTest.createInstance(arguments);
         String[] modifiers = {"public"};
@@ -223,7 +225,7 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("nameInputProvider")
     public void correctSetNameMethod(String name) throws Throwable {
-        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        ObjectTest objectTest = new ObjectTest(personClassString);
         Object person = objectTest.createInstance();
         Object[][] arguments = {{name, String.class}};
         String[] modifiers = {"public"};
@@ -235,7 +237,7 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("ageInputProvider")
     public void correctGetAgeMethod(int age) throws Throwable {
-        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        ObjectTest objectTest = new ObjectTest(personClassString);
         Object[][] arguments = {{age, int.class}};
         Object person = objectTest.createInstance(arguments);
         String[] modifiers = {"public"};
@@ -246,7 +248,7 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("ageInputProvider")
     public void correctSetAgeMethod(int age) throws Throwable {
-        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        ObjectTest objectTest = new ObjectTest(personClassString);
         Object person = objectTest.createInstance();
         Object[][] arguments = {{age, int.class}};
         String[] modifiers = {"public"};
@@ -258,7 +260,7 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("getEmployedInputProvider")
     public void correctIsEmployedMethod(boolean employed) throws Throwable {
-        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        ObjectTest objectTest = new ObjectTest(personClassString);
         Object[][] arguments = {{employed, boolean.class}};
         String[] modifiers = {"public"};
         Object person = objectTest.createInstance(arguments);
@@ -269,7 +271,7 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("setEmployedInputProvider")
     public void correctSetEmployedMethod(boolean initialEmployed, boolean updateEmployed) throws Throwable {
-        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        ObjectTest objectTest = new ObjectTest(personClassString);
         Object[][] constructionArguments = {{initialEmployed, boolean.class}};
         Object person = objectTest.createInstance(constructionArguments);
         Object[][] arguments = {{updateEmployed, boolean.class}};
@@ -282,7 +284,7 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("nameInputProvider")
     public void correctPrintNameMethod(String name) throws Throwable {
-        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.Person");
+        ObjectTest objectTest = new ObjectTest(personClassString);
         Object[][] arguments = {{name, String.class}};
         Object person = objectTest.createInstance(arguments);
         String[] modifiers = {"public"};
@@ -297,13 +299,13 @@ public class MainTest {
 
     @Test
     public void programContainsHouseClass() {
-        new ObjectTest("test.object.sampleQuestion.House");
+        new ObjectTest(houseClassString);
     }
 
     @Test
     public void houseClassHasRequiredFields() {
-        ObjectTest objectTest = new ObjectTest("test.object.sampleQuestion.House");
-        ObjectTest person = new ObjectTest("test.object.sampleQuestion.Person");
+        ObjectTest objectTest = new ObjectTest(houseClassString);
+        ObjectTest person = new ObjectTest(personClassString);
         assertTrue(objectTest.hasField("residents", person.getObjectClass().arrayType()),
                 "Your House class is missing the Person[] residents field.");
         assertTrue(objectTest.hasModifier("residents", "private"),
@@ -316,5 +318,23 @@ public class MainTest {
                 "Your House class is missing the String address field.");
         assertTrue(objectTest.hasModifier("address", "private"),
                 "Your House class address filed does not have the correct modifiers.");
+    }
+
+    @Test
+    public void houseClassHasRequiredConstructors() throws Throwable {
+        ObjectTest houseClass = new ObjectTest(this.houseClassString);
+        ObjectTest personClass = new ObjectTest(this.personClassString);
+        String defaultAddress = "nowhere";
+        int defaultNumber = 0;
+        Object defaultResidents = personClass.createArray(0);
+
+        // Default Constructor
+        Object house = houseClass.createInstance();
+        assertEquals(defaultAddress, houseClass.getFieldValue(house, "address"),
+                "Your House default constructor does not initialize the address field to the correct value.");
+        assertEquals(defaultNumber, houseClass.getFieldValue(house, "number"),
+                "Your House default constructor does not initialize the address field to the correct value.");
+        _assertArrayEquals(defaultResidents, houseClass.getFieldValue(house, "residents"),
+                "Your House default constructor does not initialize the residents field to the correct value.");
     }
 }
