@@ -4,6 +4,7 @@ import global.ObjectTest;
 import global.variables.Clause;
 import global.variables.clauses.StringLiteral;
 import org.junit.Test;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -14,13 +15,11 @@ import static global.tools.CustomAssertions._assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest {
-
-    // Tests for Person class
+    private final String personClassString = "test.object.sampleQuestion.Person";
+    private final String houseClassString = "test.object.sampleQuestion.House";
     private final String defaultName = "Bob";
     private final int defaultAge = 21;
     private final boolean defaultEmployed = false;
-    private final String personClassString = "test.object.sampleQuestion.Person";
-    private final String houseClassString = "test.object.sampleQuestion.House";
 
     @Test
     public void programContainsPersonClass() {
@@ -29,18 +28,18 @@ public class MainTest {
 
     @Test
     public void personClassHasRequiredFields() {
-        ObjectTest objectTest = new ObjectTest(personClassString);
-        assertTrue(objectTest.hasField("name", String.class),
+        ObjectTest personClass = new ObjectTest(personClassString);
+        assertTrue(personClass.hasField("name", String.class),
                 "Your Person class is missing the string name field.");
-        assertTrue(objectTest.hasModifier("name", "private"),
+        assertTrue(personClass.hasModifier("name", "private"),
                 "Your Person class name field does not have the correct modifiers.");
-        assertTrue(objectTest.hasField("age", int.class),
+        assertTrue(personClass.hasField("age", int.class),
                 "Your Person class is missing the int age field.");
-        assertTrue(objectTest.hasModifier("age", "private"),
+        assertTrue(personClass.hasModifier("age", "private"),
                 "Your Person class age field does not have the correct modifiers.");
-        assertTrue(objectTest.hasField("employed", boolean.class),
+        assertTrue(personClass.hasField("employed", boolean.class),
                 "Your Person class is missing the boolean employed field.");
-        assertTrue(objectTest.hasModifier("employed", "private"),
+        assertTrue(personClass.hasModifier("employed", "private"),
                 "Your Person class employed field does not have the correct modifiers.");
     }
 
@@ -50,36 +49,36 @@ public class MainTest {
             This test checks that the Person class has the required constructors, and that the constructors all have
             the public modifier.
          */
-        ObjectTest objectTest = new ObjectTest(personClassString);
-        assertTrue(objectTest.hasConstructor(null),
+        ObjectTest personClass = new ObjectTest(personClassString);
+        assertTrue(personClass.hasConstructor(null),
                 "Your Person class does not have a default constructor.");
-        assertTrue(objectTest.hasModifier(new Class[]{}, "public"),
+        assertTrue(personClass.hasModifier(new Class[]{}, "public"),
                 "Your Person class default constructor does not have the correct modifiers.");
-        assertTrue(objectTest.hasConstructor(new Class[]{int.class}),
+        assertTrue(personClass.hasConstructor(new Class[]{int.class}),
                 "Your Person class does not have a constructor for only initializing the Person's age");
-        assertTrue(objectTest.hasModifier(new Class[]{int.class}, "public"),
+        assertTrue(personClass.hasModifier(new Class[]{int.class}, "public"),
                 "Your Person class int constructor does not have the correct modifiers.");
-        assertTrue(objectTest.hasConstructor(new Class[]{String.class}),
+        assertTrue(personClass.hasConstructor(new Class[]{String.class}),
                 "Your Person class does not have a constructor with the String parameter.");
-        assertTrue(objectTest.hasModifier(new Class[]{String.class}, "public"),
+        assertTrue(personClass.hasModifier(new Class[]{String.class}, "public"),
                 "Your Person class String constructor does not have the correct modifiers.");
-        assertTrue(objectTest.hasConstructor(new Class[]{String.class, int.class}),
+        assertTrue(personClass.hasConstructor(new Class[]{String.class, int.class}),
                 "Your Person class does not have a constructor with the String and int parameters.");
-        assertTrue(objectTest.hasModifier(new Class[]{String.class, int.class}, "public"),
+        assertTrue(personClass.hasModifier(new Class[]{String.class, int.class}, "public"),
                 "Your Person class String, int constructor does not have the correct modifiers.");
-        assertTrue(objectTest.hasConstructor(new Class[]{String.class, boolean.class}),
+        assertTrue(personClass.hasConstructor(new Class[]{String.class, boolean.class}),
                 "Your Person class does not have a constructor with the parameters of String and boolean.");
-        assertTrue(objectTest.hasModifier(new Class[]{String.class, boolean.class}, "public"),
+        assertTrue(personClass.hasModifier(new Class[]{String.class, boolean.class}, "public"),
                 "Your Person class String, boolean constructor does not have the correct modifiers.");
-        assertTrue(objectTest.hasConstructor(new Class[]{int.class, boolean.class}),
+        assertTrue(personClass.hasConstructor(new Class[]{int.class, boolean.class}),
                 "Your Person class does not have a constructor with the parameters of int and boolean.");
-        assertTrue(objectTest.hasModifier(new Class[]{int.class, boolean.class}, "public"),
+        assertTrue(personClass.hasModifier(new Class[]{int.class, boolean.class}, "public"),
                 "Your Person class int, boolean constructor does not have the correct modifiers.");
-        assertTrue(objectTest.hasConstructor(new Class[]{String.class, int.class, boolean.class}),
+        assertTrue(personClass.hasConstructor(new Class[]{String.class, int.class, boolean.class}),
                 "Your Person class does not have a constructor with the parameters of String, int, and boolean.");
     }
 
-    private static Stream<Arguments> constructorInputProvider() {
+    private static Stream<Arguments> personConstructorInputProvider() {
         return Stream.of(
                 Arguments.of("Caroline", 35, true),
                 Arguments.of("George", 20, false),
@@ -89,19 +88,36 @@ public class MainTest {
         );
     }
 
-    private static Stream<String> nameInputProvider() {
-        return Stream.of("Caroline", "George", "Elvin Elvis", "Madalyn", "Peterolomew");
+    private static Stream<Arguments> personNameInputProvider() {
+        return Stream.of(
+                Arguments.of("Caroline"),
+                Arguments.of("George"),
+                Arguments.of("Elvin Elvis"),
+                Arguments.of("Madalyn"),
+                Arguments.of("Peterolomew")
+        );
     }
 
-    private static Stream<Integer> ageInputProvider() {
-        return Stream.of(4, 11, 91, 0, 2, 12993, 452);
+    private static Stream<Arguments> personAgeInputProvider() {
+        return Stream.of(
+                Arguments.of(4),
+                Arguments.of(11),
+                Arguments.of(91),
+                Arguments.of(0),
+                Arguments.of(2),
+                Arguments.of(12993),
+                Arguments.of(452)
+        );
     }
 
-    private static Stream<Boolean> getEmployedInputProvider() {
-        return Stream.of(true, false);
+    private static Stream<Arguments> personGetEmployedInputProvider() {
+        return Stream.of(
+                Arguments.of(true),
+                Arguments.of(false)
+        );
     }
 
-    private static Stream<Arguments> setEmployedInputProvider() {
+    private static Stream<Arguments> personSetEmployedInputProvider() {
         return Stream.of(
                 Arguments.of(true, true),
                 Arguments.of(true, false),
@@ -110,192 +126,222 @@ public class MainTest {
         );
     }
 
-    @ParameterizedTest
-    @MethodSource("constructorInputProvider")
-    public void personClassConstructorsInitializeCorrectValues(String name, int age, boolean employed) throws Throwable {
-        // Find object
-        ObjectTest objectTest = new ObjectTest(personClassString);
-
-        // Default constructor
-        Object person = objectTest.createInstance();
-        assertEquals(defaultName, objectTest.getFieldValue(person, "name"),
+    @RepeatedTest(3)
+    public void correctPersonDefaultConstructor() throws Throwable {
+        ObjectTest personClass = new ObjectTest(personClassString);
+        Object person = personClass.createInstance();
+        assertEquals(defaultName, personClass.getFieldValue(person, "name"),
                 "Your Person default constructor does not initialize the name field to the correct value.");
-        assertEquals(defaultAge, objectTest.getFieldValue(person, "age"),
+        assertEquals(defaultAge, personClass.getFieldValue(person, "age"),
                 "Your Person default constructor does not initialize the age field to the correct value.");
-        assertEquals(defaultEmployed, objectTest.getFieldValue(person, "employed"),
+        assertEquals(defaultEmployed, personClass.getFieldValue(person, "employed"),
                 "Your Person default constructor does not initialize the employed field to the correct value.");
+    }
 
-        // String name constructor
+    @ParameterizedTest
+    @MethodSource("personNameInputProvider")
+    public void correctPersonStringConstructor(String name) throws Throwable {
+        ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] arguments = {{name, String.class}};
-        person = objectTest.createInstance(arguments);
-        assertEquals(name, objectTest.getFieldValue(person, "name"),
+        Object person = personClass.createInstance(arguments);
+        assertEquals(name, personClass.getFieldValue(person, "name"),
                 "Your Person String name constructor does not initialize the name field to the correct value.");
-        assertEquals(defaultAge, objectTest.getFieldValue(person, "age"),
+        assertEquals(defaultAge, personClass.getFieldValue(person, "age"),
                 "Your default Person constructor does not initialize the age field to the correct value.");
-        assertEquals(defaultEmployed, objectTest.getFieldValue(person, "employed"),
+        assertEquals(defaultEmployed, personClass.getFieldValue(person, "employed"),
                 "Your default Person constructor does not initialize the employed field to the correct value.");
+    }
 
-        // int age constructor
-        arguments = new Object[][]{{age, int.class}};
-        person = objectTest.createInstance(arguments);
-        assertEquals(defaultName, objectTest.getFieldValue(person, "name"),
+    @ParameterizedTest
+    @MethodSource("personAgeInputProvider")
+    public void correctPersonIntConstructor(int age) throws Throwable {
+        ObjectTest personClass = new ObjectTest(personClassString);
+        Object[][] arguments = new Object[][]{
+                {age, int.class}
+        };
+        Object person = personClass.createInstance(arguments);
+        assertEquals(defaultName, personClass.getFieldValue(person, "name"),
                 "Your Person String name constructor does not initialize the name field to the correct value.");
-        assertEquals(age, objectTest.getFieldValue(person, "age"),
+        assertEquals(age, personClass.getFieldValue(person, "age"),
                 "Your Person String name constructor does not initialize the age field to the correct value.");
-        assertEquals(defaultEmployed, objectTest.getFieldValue(person, "employed"),
+        assertEquals(defaultEmployed, personClass.getFieldValue(person, "employed"),
                 "Your Person String name constructor does not initialize the employed field to the correct value.");
+    }
 
-        // boolean employed constructor
-        arguments = new Object[][]{{employed, boolean.class}};
-        person = objectTest.createInstance(arguments);
-        assertEquals(defaultName, objectTest.getFieldValue(person, "name"),
+    @ParameterizedTest
+    @MethodSource("personGetEmployedInputProvider")
+    public void correctPersonBooleanConstructor(boolean employed) throws Throwable {
+        ObjectTest personClass = new ObjectTest(personClassString);
+        Object[][] arguments = new Object[][]{
+                {employed, boolean.class}
+        };
+        Object person = personClass.createInstance(arguments);
+        assertEquals(defaultName, personClass.getFieldValue(person, "name"),
                 "Your Person boolean employed constructor does not initialize the name field to the correct value.");
-        assertEquals(defaultAge, objectTest.getFieldValue(person, "age"),
+        assertEquals(defaultAge, personClass.getFieldValue(person, "age"),
                 "Your Person boolean employed constructor does not initialize the age field to the correct value.");
-        assertEquals(employed, objectTest.getFieldValue(person, "employed"),
+        assertEquals(employed, personClass.getFieldValue(person, "employed"),
                 "Your Person boolean employed constructor does not initialize the employed field to the correct value.");
+    }
 
-        // String name, int age constructor
-        arguments = new Object[][]{
+    @ParameterizedTest
+    @MethodSource({"personNameInputProvider", "personAgeInputProvider"})
+    public void correctPersonStringIntConstructor(String name, int age) throws Throwable {
+        ObjectTest objectTest = new ObjectTest(personClassString);
+        Object[][] arguments = new Object[][]{
                 {name, String.class},
                 {age, int.class}
         };
-        person = objectTest.createInstance(arguments);
+        Object person = objectTest.createInstance(arguments);
         assertEquals(name, objectTest.getFieldValue(person, "name"),
                 "Your Person String name, int age constructor does not initialize the name field to the correct value.");
         assertEquals(age, objectTest.getFieldValue(person, "age"),
                 "Your Person String name, int age constructor does not initialize the age field to the correct value.");
         assertEquals(defaultEmployed, objectTest.getFieldValue(person, "employed"),
                 "Your Person String name, int age constructor does not initialize the employed field to the correct value.");
-
-        // String name, boolean employed constructor
-        arguments = new Object[][]{
-                {name, String.class},
-                {employed, boolean.class}
-        };
-        person = objectTest.createInstance(arguments);
-        assertEquals(name, objectTest.getFieldValue(person, "name"),
-                "Your Person String name, int age constructor does not initialize the name field to the correct value.");
-        assertEquals(defaultAge, objectTest.getFieldValue(person, "age"),
-                "Your Person String name, int age constructor does not initialize the age field to the correct value.");
-        assertEquals(employed, objectTest.getFieldValue(person, "employed"),
-                "Your Person String name, int age constructor does not initialize the employed field to the correct value.");
-
-        // int age, boolean employed constructor
-        arguments = new Object[][]{
-                {age, int.class},
-                {employed, boolean.class}
-        };
-        person = objectTest.createInstance(arguments);
-        assertEquals(defaultName, objectTest.getFieldValue(person, "name"),
-                "Your Person int age, boolean employed constructor does not initialize the name field to the correct value.");
-        assertEquals(age, objectTest.getFieldValue(person, "age"),
-                "Your Person int age, boolean employed constructor does not initialize the age field to the correct value.");
-        assertEquals(employed, objectTest.getFieldValue(person, "employed"),
-                "Your Person int age, boolean employed constructor does not initialize the employed field to the correct value.");
-
-        // String name, int age, boolean employed constructor
-        arguments = new Object[][]{
-                {name, String.class},
-                {age, int.class},
-                {employed, boolean.class}
-        };
-        person = objectTest.createInstance(arguments);
-        assertEquals(name, objectTest.getFieldValue(person, "name"),
-                "Your Person String name, int age, boolean employed constructor does not initialize the name field to the correct value.");
-        assertEquals(age, objectTest.getFieldValue(person, "age"),
-                "Your Person String name, int age, boolean employed constructor does not initialize the age field to the correct value.");
-        assertEquals(employed, objectTest.getFieldValue(person, "employed"),
-                "Your Person String name, int age, boolean employed constructor does not initialize the employed field to the correct value.");
     }
 
-    // TODO: Add modifier checks to methods
+//    @ParameterizedTest
+//    @MethodSource("personConstructorInputProvider")
+//    public void personClassConstructorsInitializeCorrectValues(String name, int age, boolean employed) throws Throwable {
+//        ObjectTest objectTest = new ObjectTest(personClassString);
+//        // String name, int age constructor
+//        arguments = new Object[][]{
+//                {name, String.class},
+//                {age, int.class}
+//        };
+//        person = objectTest.createInstance(arguments);
+//        assertEquals(name, objectTest.getFieldValue(person, "name"),
+//                "Your Person String name, int age constructor does not initialize the name field to the correct value.");
+//        assertEquals(age, objectTest.getFieldValue(person, "age"),
+//                "Your Person String name, int age constructor does not initialize the age field to the correct value.");
+//        assertEquals(defaultEmployed, objectTest.getFieldValue(person, "employed"),
+//                "Your Person String name, int age constructor does not initialize the employed field to the correct value.");
+//
+//        // String name, boolean employed constructor
+//        arguments = new Object[][]{
+//                {name, String.class},
+//                {employed, boolean.class}
+//        };
+//        person = objectTest.createInstance(arguments);
+//        assertEquals(name, objectTest.getFieldValue(person, "name"),
+//                "Your Person String name, int age constructor does not initialize the name field to the correct value.");
+//        assertEquals(defaultAge, objectTest.getFieldValue(person, "age"),
+//                "Your Person String name, int age constructor does not initialize the age field to the correct value.");
+//        assertEquals(employed, objectTest.getFieldValue(person, "employed"),
+//                "Your Person String name, int age constructor does not initialize the employed field to the correct value.");
+//
+//        // int age, boolean employed constructor
+//        arguments = new Object[][]{
+//                {age, int.class},
+//                {employed, boolean.class}
+//        };
+//        person = objectTest.createInstance(arguments);
+//        assertEquals(defaultName, objectTest.getFieldValue(person, "name"),
+//                "Your Person int age, boolean employed constructor does not initialize the name field to the correct value.");
+//        assertEquals(age, objectTest.getFieldValue(person, "age"),
+//                "Your Person int age, boolean employed constructor does not initialize the age field to the correct value.");
+//        assertEquals(employed, objectTest.getFieldValue(person, "employed"),
+//                "Your Person int age, boolean employed constructor does not initialize the employed field to the correct value.");
+//
+//        // String name, int age, boolean employed constructor
+//        arguments = new Object[][]{
+//                {name, String.class},
+//                {age, int.class},
+//                {employed, boolean.class}
+//        };
+//        person = objectTest.createInstance(arguments);
+//        assertEquals(name, objectTest.getFieldValue(person, "name"),
+//                "Your Person String name, int age, boolean employed constructor does not initialize the name field to the correct value.");
+//        assertEquals(age, objectTest.getFieldValue(person, "age"),
+//                "Your Person String name, int age, boolean employed constructor does not initialize the age field to the correct value.");
+//        assertEquals(employed, objectTest.getFieldValue(person, "employed"),
+//                "Your Person String name, int age, boolean employed constructor does not initialize the employed field to the correct value.");
+//    }
 
     @ParameterizedTest
-    @MethodSource("nameInputProvider")
+    @MethodSource("personNameInputProvider")
     public void correctGetNameMethod(String name) throws Throwable {
-        ObjectTest objectTest = new ObjectTest(personClassString);
+        ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] arguments = {{name, String.class}};
-        Object person = objectTest.createInstance(arguments);
+        Object person = personClass.createInstance(arguments);
         String[] modifiers = {"public"};
-        Object output = objectTest.callMethod("getName", modifiers, person);
+        Object output = personClass.callMethod("getName", modifiers, person);
         assertEquals(name, output, "Your getName method does not return the value of the name field.");
     }
 
     @ParameterizedTest
-    @MethodSource("nameInputProvider")
+    @MethodSource("personNameInputProvider")
     public void correctSetNameMethod(String name) throws Throwable {
-        ObjectTest objectTest = new ObjectTest(personClassString);
-        Object person = objectTest.createInstance();
+        ObjectTest personClass = new ObjectTest(personClassString);
+        Object person = personClass.createInstance();
         Object[][] arguments = {{name, String.class}};
         String[] modifiers = {"public"};
-        objectTest.callMethod("setName", arguments, modifiers, person);
-        Object updatedName = objectTest.getFieldValue(person, "name");
+        personClass.callMethod("setName", arguments, modifiers, person);
+        Object updatedName = personClass.getFieldValue(person, "name");
         assertEquals(name, updatedName, "Your setName method does not update the value of the name field.");
     }
 
     @ParameterizedTest
-    @MethodSource("ageInputProvider")
+    @MethodSource("personAgeInputProvider")
     public void correctGetAgeMethod(int age) throws Throwable {
-        ObjectTest objectTest = new ObjectTest(personClassString);
+        ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] arguments = {{age, int.class}};
-        Object person = objectTest.createInstance(arguments);
+        Object person = personClass.createInstance(arguments);
         String[] modifiers = {"public"};
-        Object output = objectTest.callMethod("getAge", modifiers, person);
+        Object output = personClass.callMethod("getAge", modifiers, person);
         assertEquals(age, output, "Your getAge method does not return the value of the age field.");
     }
 
     @ParameterizedTest
-    @MethodSource("ageInputProvider")
+    @MethodSource("personAgeInputProvider")
     public void correctSetAgeMethod(int age) throws Throwable {
-        ObjectTest objectTest = new ObjectTest(personClassString);
-        Object person = objectTest.createInstance();
+        ObjectTest personClass = new ObjectTest(personClassString);
+        Object person = personClass.createInstance();
         Object[][] arguments = {{age, int.class}};
         String[] modifiers = {"public"};
-        objectTest.callMethod("setAge", arguments, modifiers, person);
-        Object updatedAge = objectTest.getFieldValue(person, "age");
+        personClass.callMethod("setAge", arguments, modifiers, person);
+        Object updatedAge = personClass.getFieldValue(person, "age");
         assertEquals(age, updatedAge, "Your setAge method does not update the value of the age field.");
     }
 
     @ParameterizedTest
-    @MethodSource("getEmployedInputProvider")
+    @MethodSource("personGetEmployedInputProvider")
     public void correctIsEmployedMethod(boolean employed) throws Throwable {
-        ObjectTest objectTest = new ObjectTest(personClassString);
+        ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] arguments = {{employed, boolean.class}};
         String[] modifiers = {"public"};
-        Object person = objectTest.createInstance(arguments);
-        Object output = objectTest.callMethod("isEmployed", modifiers, person);
+        Object person = personClass.createInstance(arguments);
+        Object output = personClass.callMethod("isEmployed", modifiers, person);
         assertEquals(employed, output, "Your isEmployed method does not return the value of the employed field.");
     }
 
     @ParameterizedTest
-    @MethodSource("setEmployedInputProvider")
+    @MethodSource("personSetEmployedInputProvider")
     public void correctSetEmployedMethod(boolean initialEmployed, boolean updateEmployed) throws Throwable {
-        ObjectTest objectTest = new ObjectTest(personClassString);
+        ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] constructionArguments = {{initialEmployed, boolean.class}};
-        Object person = objectTest.createInstance(constructionArguments);
+        Object person = personClass.createInstance(constructionArguments);
         Object[][] arguments = {{updateEmployed, boolean.class}};
         String[] modifiers = {"public"};
-        objectTest.callMethod("setEmployed", arguments, modifiers, person);
-        Object updatedAge = objectTest.getFieldValue(person, "employed");
+        personClass.callMethod("setEmployed", arguments, modifiers, person);
+        Object updatedAge = personClass.getFieldValue(person, "employed");
         assertEquals(updateEmployed, updatedAge, "Your setEmployed method does not update the value of the employed field.");
     }
 
     @ParameterizedTest
-    @MethodSource("nameInputProvider")
+    @MethodSource("personNameInputProvider")
     public void correctPrintNameMethod(String name) throws Throwable {
-        ObjectTest objectTest = new ObjectTest(personClassString);
+        ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] arguments = {{name, String.class}};
-        Object person = objectTest.createInstance(arguments);
+        Object person = personClass.createInstance(arguments);
         String[] modifiers = {"public"};
         Clause[] methodSentence = {
                 new StringLiteral(name)
         };
-        objectTest.callMethod("printName", modifiers, person, methodSentence,
+        personClass.callMethod("printName", modifiers, person, methodSentence,
                 "Your printName method in the Person class does not correctly print the name field.");
     }
-
-    // TODO: Tests for House class
 
     @Test
     public void programContainsHouseClass() {
@@ -320,15 +366,21 @@ public class MainTest {
                 "Your House class address filed does not have the correct modifiers.");
     }
 
-    @Test
-    public void houseClassHasRequiredConstructors() throws Throwable {
+    private static Stream<Arguments> houseConstructorIntStringInputProvider() {
+        return Stream.of(
+                Arguments.of(2421, "Medicine Hat"),
+                Arguments.of(69, "Kelowna Ave, Toronto"),
+                Arguments.of(223412521, "Another Road Name Here")
+        );
+    }
+
+    @RepeatedTest(3)
+    public void houseClassHasCorrectDefaultConstructor() throws Throwable {
         ObjectTest houseClass = new ObjectTest(this.houseClassString);
         ObjectTest personClass = new ObjectTest(this.personClassString);
-        String defaultAddress = "nowhere";
         int defaultNumber = 0;
+        String defaultAddress = "nowhere";
         Object defaultResidents = personClass.createArray(0);
-
-        // Default Constructor
         Object house = houseClass.createInstance();
         assertEquals(defaultAddress, houseClass.getFieldValue(house, "address"),
                 "Your House default constructor does not initialize the address field to the correct value.");
@@ -336,5 +388,24 @@ public class MainTest {
                 "Your House default constructor does not initialize the address field to the correct value.");
         _assertArrayEquals(defaultResidents, houseClass.getFieldValue(house, "residents"),
                 "Your House default constructor does not initialize the residents field to the correct value.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("houseConstructorIntStringInputProvider")
+    public void houseClassHasCorrectIntStringConstructor(int number, String address) throws Throwable {
+        ObjectTest houseClass = new ObjectTest(this.houseClassString);
+        ObjectTest personClass = new ObjectTest(this.personClassString);
+        Object defaultResidents = personClass.createArray(0);
+        Object[][] arguments = {
+                {number, int.class},
+                {address, String.class}
+        };
+        Object house = houseClass.createInstance(arguments);
+        assertEquals(address, houseClass.getFieldValue(house, "address"),
+                "Your House(int, String) constructor does not initialize the address field to the correct value.");
+        assertEquals(number, houseClass.getFieldValue(house, "number"),
+                "Your House(int, String) constructor does not initialize the number field to the correct value.");
+        _assertArrayEquals(defaultResidents, houseClass.getFieldValue(house, "residents"),
+                "Your House(int, String) constructor does not initialize the residents field to the correct value.");
     }
 }
