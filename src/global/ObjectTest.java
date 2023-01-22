@@ -489,4 +489,14 @@ public class ObjectTest {
                     "Must pass a positive length to initialize an array.");
         return Array.newInstance(this.objectClass, length);
     }
+
+    public Object createArray(int length, Object[][][] arguments) throws Throwable {
+        if (length < 0)
+            _fail("Error with test definition. Please contact a test administrator.",
+                    "Must pass a positive length to initialize an array.");
+        Object array = Array.newInstance(this.objectClass, length);
+        for (int i = 0; i < length; i++)
+            Array.set(array, i, createInstance(arguments[i]));
+        return array;
+    }
 }
