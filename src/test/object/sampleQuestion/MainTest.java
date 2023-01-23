@@ -380,17 +380,24 @@ public class MainTest {
 
     private static Stream<Arguments> houseConstructorIntStringPersonArrayInputProvider() {
         return Stream.of(
-            Arguments.of(12, "Grimmauld Place", new Object[][][]{
-                    {},
-                    {
-                            {4, int.class}
-                    },
-                    {
-                            {"John", String.class},
-                            {4, int.class},
-                            {true, boolean.class}
-                    }
-            })
+                Arguments.of(12, "Grimmauld Place", new Object[][][]{
+                        {}, {{4, int.class}}, {{"John", String.class}, {4, int.class}, {true, boolean.class}}}),
+                Arguments.of(35512, "Not an adddress really", new Object[][][]{
+                        {
+                                {"My name", String.class},
+                                {349234, int.class},
+                        },
+                        {
+                                {true, boolean.class}
+                        },
+                        {},
+                        {
+                                {"Joe", String.class},
+                                {true, boolean.class}
+                        },
+                        {},
+                        {}
+                })
         );
     }
 
@@ -448,5 +455,115 @@ public class MainTest {
                 "Your House(int, String, Person[]) constructor does not initialize the number field to the correct value.");
         _assertArrayEquals(o, houseClass.getFieldValue(house, "residents"),
                 "Your House(int, String, Person[]) constructor does not initialize the residents field to the correct value.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("houseConstructorIntStringPersonArrayInputProvider")
+    public void correctGetResidentsMethod(int number, String address, Object[][][] residents) throws Throwable {
+        ObjectTest personClass = new ObjectTest(personClassString);
+        ObjectTest houseClass = new ObjectTest(houseClassString);
+        Object residentsArray = personClass.createArray(residents.length, residents);
+        Object[][] arguments = {
+                {number, int.class},
+                {address, String.class},
+                {residentsArray, personClass.getObjectClass().arrayType()}
+        };
+        Object house = houseClass.createInstance(arguments);
+        String[] modifiers = {"public"};
+        Object output = houseClass.callMethod("getResidents", modifiers, house);
+        _assertArrayEquals(residentsArray, output,
+                "The getResidents method in your House class does not return the correct value for the residents field.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("houseConstructorIntStringPersonArrayInputProvider")
+    public void correctHouseSetResidentsMethod(int number, String address, Object[][][] residents) throws Throwable {
+        ObjectTest personClass = new ObjectTest(personClassString);
+        ObjectTest houseClass = new ObjectTest(houseClassString);
+        Object residentsArray = personClass.createArray(residents.length, residents);
+        Object[][] arguments = {
+                {number, int.class},
+                {address, String.class}
+        };
+        Object house = houseClass.createInstance(arguments);
+        String[] modifiers = {"public"};
+        Object[][] methodArguments = {
+                {residentsArray, personClass.getObjectArrayClass()}
+        };
+        houseClass.callMethod("setResidents", methodArguments, modifiers, house);
+        Object updatedResidents = houseClass.getFieldValue(house, "residents");
+        _assertArrayEquals(residentsArray, updatedResidents,
+                "The setResidents method in your House class does not correctly update the residents field.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("houseConstructorIntStringInputProvider")
+    public void correctHouseGetNumberMethod(int number, String address) throws Throwable {
+        ObjectTest houseClass = new ObjectTest(houseClassString);
+        Object[][] arguments = {
+                {number, int.class},
+                {address, String.class}
+        };
+        Object house = houseClass.createInstance(arguments);
+        String[] modifiers = {"public"};
+        Object methodOutput = houseClass.callMethod("getNumber", modifiers, house);
+        assertEquals(number, methodOutput,
+                "Your House class getNumber method does not return the correct value for the number field.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("personAgeInputProvider")
+    public void correctHouseSetNumberMethod(int number) throws Throwable {
+        ObjectTest houseClass = new ObjectTest(houseClassString);
+        Object house = houseClass.createInstance();
+        String[] modifiers = {"public"};
+        Object[][] methodArguments = {
+                {number, int.class}
+        };
+        houseClass.callMethod("setNumber", methodArguments, modifiers, house);
+        Object updatedNumber = houseClass.getFieldValue(house, "number");
+        assertEquals(number, updatedNumber,
+                "Your House class getNumber method does not return the correct value for the number field.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("houseConstructorIntStringInputProvider")
+    public void correctHouseGetAddressMethod(int number, String address) throws Throwable {
+        ObjectTest houseClass = new ObjectTest(houseClassString);
+        Object[][] arguments = {
+                {number, int.class},
+                {address, String.class}
+        };
+        Object house = houseClass.createInstance(arguments);
+        String[] modifiers = {"public"};
+        Object methodOutput = houseClass.callMethod("getAddress", modifiers, house);
+        assertEquals(address, methodOutput,
+                "Your House class getAddress method does not return the correct value for the address field.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("personStringInputProvider")
+    public void correctHouseSetAddressMethod(String address) throws Throwable {
+        ObjectTest houseClass = new ObjectTest(houseClassString);
+        Object house = houseClass.createInstance();
+        String[] modifiers = {"public"};
+        Object[][] methodArguments = {
+                {address, String.class}
+        };
+        houseClass.callMethod("setNumber", methodArguments, modifiers, house);
+        Object updatedNumber = houseClass.getFieldValue(house, "number");
+        assertEquals(address, updatedNumber,
+                "Your House class getNumber method does not return the correct value for the number field.");
+    }
+
+    @RepeatedTest(3)
+    public void correctHouseMessageMethod() throws Throwable {
+        ObjectTest houseClass = new ObjectTest(houseClassString);
+        Clause[] methodOutput = {
+                new StringLiteral("This is a house")
+        };
+        String[] modifiers = {"public", "static"};
+        houseClass.callMethod("houseMessage", methodOutput,
+                "Your House class houseMessage method does not print the correct message.");
     }
 }

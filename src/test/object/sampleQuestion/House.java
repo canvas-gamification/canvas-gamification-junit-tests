@@ -47,7 +47,7 @@ public class House {
         this.address = address;
     }
 
-    public static String houseMessage() {
-        return "This is a house";
+    public static void houseMessage() {
+        System.out.println("This is a house");
     }
 }
