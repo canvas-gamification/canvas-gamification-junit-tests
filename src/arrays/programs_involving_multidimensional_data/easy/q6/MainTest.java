@@ -13,7 +13,7 @@ public class MainTest extends BaseTest {
     public static int r = 20;
 
     public Clause[] testSentence() {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly modify the values to inbetween 0 and " + (r - 1);
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly modify the values so that they are between 0 and " + (r - 1);
         Clause[] c = new Clause[arr.length * arr[0].length * 2];
         int[][] ans = answerFor(arr);
         for(int i = 0; i < arr.length * arr[0].length; i ++){

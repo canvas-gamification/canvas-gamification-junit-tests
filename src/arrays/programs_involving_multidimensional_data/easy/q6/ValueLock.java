@@ -1,8 +1,8 @@
 package arrays.programs_involving_multidimensional_data.easy.q6;
 
 /*
-Write a Java program that defines a 2D integer array of size 2 by 3. Then, uses the % operator to modify each value in
-the array to be a value between 0 and 19. Print the resulting array to the console.
+Make a Java program that defines a 2D integer array of size 2 by 3. Then, use the % operator to modify each value in the
+array such that it becomes a value between 0 and 19. Print the resulting array to the console.
  */
 public class ValueLock {
     public static void main(String[] args) {
