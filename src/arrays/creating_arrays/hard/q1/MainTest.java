@@ -1,9 +1,9 @@
 package arrays.creating_arrays.hard.q1;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.*;
 import global.variables.wrappers.Optional;
@@ -50,7 +50,12 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("createRandomArrayInputProvider")
     public void correctCreateRandomArrayMethod(int in) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(RandomArray.class, "createRandomArray", new Object[]{in}, int.class);
+        Object[][] arguments = {
+                {in, int.class}
+        };
+        MethodTest m = new MethodTest(RandomArray.class, "createRandomArray", arguments, "");
+        Object output = m.callMethod();
+
         assertNotNull(output, "Your createRandomArray method does not return anything.");
         boolean b = output.getClass().isArray();
         assertTrue(b, "Your createRandomArray method does not return an array.");
