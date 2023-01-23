@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     private static final int length = 100;
     private static final int subtract = 1, add = 0; //swap two numbers for a starting multiplication of 1
 
