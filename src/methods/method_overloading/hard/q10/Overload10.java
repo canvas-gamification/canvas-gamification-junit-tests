@@ -1,10 +1,11 @@
 package methods.method_overloading.hard.q10;
 
 /*
-Write a Java Program for a hospital that displays the name and the gender of the baby to the parents. The method takes
-in either only the name or the name and the gender ( boolean, if true = girl, false = boy) of the baby. Use method
-overloading to only call one method to complete this. In you main method take the name or name and gender and print
-the name and gender, if presented, accordingly.
+Write a Java Program for a hospital that displays the name and the gender of a baby to the parents. The main method
+should take only the name or both the name and a boolean for the gender (true = girl, false = boy). The program should
+pass the input information to an overloaded method called baby which takes either a String or a String and a boolean,
+and returns a String. The main method should then print out the returned String. (Hint: You may want to use the Scanner
+method .hasNextBoolean)
 
 Sample Output 1:
         Enter a name or a name with gender:
@@ -16,7 +17,7 @@ Sample Output 2:
         John false
 		The baby's name is John and the gender is Male
 
-Sample Output 2:
+Sample Output 3:
         Enter a name or a name with gender:
         John
 		The baby's name is John
