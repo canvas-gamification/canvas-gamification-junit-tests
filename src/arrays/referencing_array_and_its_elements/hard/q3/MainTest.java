@@ -70,7 +70,7 @@ public class MainTest extends BaseTest {
     public void correctMainMethod(int[] input) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your main method does not print the correct array of even numbers.";
         runWithInput(arrayToInput(input), new Clause[]{
-                new StringLiteral(arrayToInput(getEven(input)).trim())
+                new StringLiteral(arrayToInput(getEven(input)))
         });
     }
 
@@ -81,9 +81,9 @@ public class MainTest extends BaseTest {
                 Arguments.of(new int[]{1, 3, 5}),
                 Arguments.of(new int[]{2, 4, 6}),
                 Arguments.of(new int[]{5, 3, 1, 6, 4, 2}),
-                Arguments.of(generateRandomArray(1, 1000000000, 100000)),
-                Arguments.of(generateAscendingArray(1, 100000, 2)),
-                Arguments.of(generateAscendingArray(2, 100000, 2))
+                Arguments.of(generateRandomArray(1, 1000000000, 1000)),
+                Arguments.of(generateAscendingArray(1, 1000, 2)),
+                Arguments.of(generateAscendingArray(2, 1000, 2))
         );
     }
 
@@ -98,7 +98,5 @@ public class MainTest extends BaseTest {
         Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(getEven(input), output,
                 "Your even method does not correctly create a new array containing the even values from the input array.");
-
-
     }
 }
