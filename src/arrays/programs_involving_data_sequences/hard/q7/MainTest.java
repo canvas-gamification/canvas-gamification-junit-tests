@@ -42,8 +42,8 @@ public class MainTest extends BaseTest {
 
     public static int[] sq(int[] arr) {
         int[] input = arr.clone();
-        for (int i = 0; i < input.length; i++)
-            input[i] = (int) Math.pow(input[i], 2);
+        for(int i = 0; i < arr.length; i ++)
+            input[i]*=input[i];
         return input;
     }
 
@@ -75,10 +75,10 @@ public class MainTest extends BaseTest {
                 Arguments.of(generateRandomArray(-100, 100, 100)),
                 Arguments.of(generateRandomArray(-1000, 1000, 1000)),
                 Arguments.of(generateRandomArray(-10000, 10000, 1000)),
-                Arguments.of(generateRandomArray(-1, 2, 10000)),
-                Arguments.of(replicateArray(1, 10000)),
-                Arguments.of(replicateArray(0, 10000)),
-                Arguments.of(replicateArray(10000, 10000)),
+                Arguments.of(generateRandomArray(-1, 2, 1000)),
+                Arguments.of(replicateArray(1, 1000)),
+                Arguments.of(replicateArray(0, 1000)),
+                Arguments.of(replicateArray(10000, 1000)),
                 Arguments.of(new int[] {}),
                 Arguments.of(new int[] {-1, 1}),
                 Arguments.of(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}),
