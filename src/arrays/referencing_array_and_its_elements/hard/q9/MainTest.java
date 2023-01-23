@@ -42,7 +42,7 @@ public class MainTest extends BaseRandomTest {
     @Test
     void printsCorrectOutput() {
         runMain();
-        assertEquals(Integer.parseInt(getItemByName("Ans")), Integer.parseInt(getItemByName("Index"))),
+        assertEquals(getItemByName("Ans"), getItemByName("" + Integer.parseInt(getItemByName("Index"))),
                 "Your program does not print the ticket number from the selected index.");
     }
 }
