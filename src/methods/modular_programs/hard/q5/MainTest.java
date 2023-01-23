@@ -86,7 +86,7 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputProvider")
   public void printsCorrectOutput(String speedst, char isSchoolZone, int fine) throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not print the correct amount of fine or the correct answer.";
+    TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the cost of the fine.";
     if (fine != -1) {
       runWithInput(speedst + " " + isSchoolZone, new Clause[]{
               new StringLiteral("Your fine is " + fine + " dollars!")
