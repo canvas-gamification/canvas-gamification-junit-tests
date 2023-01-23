@@ -61,7 +61,7 @@ public class MainTest extends BaseRandomTest {
         for(int i = 0; i < n * n; i ++){
             in[i] = Integer.parseInt(getItemByName("x" + i));
         }
-        CustomAssertions._assertArrayEquals(ans, in, "Your program does not rotated the 2D array correctly.");
+        CustomAssertions._assertArrayEquals(ans, in, "Your program does not rotate the 2D array correctly.");
     }
     static Stream<int[][]> inputProvider() {
         int[][] t1 = {
