@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 import static global.utils.ArrayUtil.*;
 
 public class MainTest extends BaseTest {
-
     public static int n = 4;
 
     public Clause[] testSentence() {
@@ -71,7 +70,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void printsCorrectOutput(int[][] a) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your programs does not correctly find if the rows of the 2D array have the sam sum or not.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly finds if the rows of the 2D array have the same sum or not.";
         String input = "";
         for (int i = 0; i < n; i++)
             input += arrayToInput(a[i]) + "\n";
