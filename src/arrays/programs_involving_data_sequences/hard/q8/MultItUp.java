@@ -23,10 +23,10 @@ public class MultItUp {
         System.out.println("Enter an array of 10 integers:");
         for (int i = 0; i < 10; i++)
             arr[i] = in.nextInt();
-        int[] result = productMaker(arr);
+        productMaker(arr);
         System.out.println("The result of multiplied array is:");
-        for (int i = 0; i < result.length; i++)
-            System.out.print(result[i] + " ");
+        for (int i = 0; i < arr.length; i++)
+            System.out.print(arr[i] + " ");
     }
 
     public static void productMaker(int[] input) {

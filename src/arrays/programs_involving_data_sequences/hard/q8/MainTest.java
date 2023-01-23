@@ -12,11 +12,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Currency;
 import java.util.stream.Stream;
 
 import static global.utils.ArrayUtil.*;
-import static org.junit.Assert.assertArrayEquals;
 
 public class MainTest extends BaseTest {
     // Java
@@ -65,7 +63,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("mainInputProvider")
-    void printCorrectOutput(int[] a) throws InvalidClauseException {
+    void printsCorrectOutput(int[] a) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print the correct multiplied array.";
         runWithInput(arrayToInput(a), new Clause[]{
                 new StringLiteral(arrayToInput(mul(a)))
@@ -92,13 +90,13 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
-    void correctFibonacciMaker(int[] input) throws Throwable {
+    void correctProductMakerr(int[] input) throws Throwable {
         int[] ans = mul(input);
         Object[][] arguments = {
                 {input, int[].class},
         };
         MethodTest m = new MethodTest(MultItUp.class, "productMaker", arguments);
-        Object output = m.callMethod();
-        CustomAssertions._assertArrayEquals(ans, output, "Your productMaker method does not return the correct multiplied array");
+        m.callMethod();
+        CustomAssertions._assertArrayEquals(ans, input, "Your productMaker method does not return the correct multiplied array");
     }
 }
