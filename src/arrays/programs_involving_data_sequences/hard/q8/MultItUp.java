@@ -34,6 +34,5 @@ public class MultItUp {
             int value = input[i] * i;
             input[i] = value;
         }
-        return input;
     }
 }
