@@ -49,7 +49,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(RevUp.class, "revString", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(revStr, output, "Your revString method does not reverse the string correctly.");
+        CustomAssertions._assertEquals(revStr, output, "Your revString method does not correctly reverse the string.");
     }
 
     @ParameterizedTest
