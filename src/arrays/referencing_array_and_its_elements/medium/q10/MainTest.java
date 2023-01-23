@@ -1,6 +1,7 @@
 package arrays.referencing_array_and_its_elements.medium.q10;
 
 import global.BaseTest;
+import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.*;
@@ -12,7 +13,6 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 import static global.utils.ArrayUtil.*;
-import static org.junit.Assert.assertEquals;
 
 public class MainTest extends BaseTest {
     // Java
@@ -49,7 +49,7 @@ public class MainTest extends BaseTest {
             ans += st + " ";
         }
 
-        return ans.trim();
+        return ans;
     }
 
     static Stream<String> inputProvider() {
@@ -74,7 +74,6 @@ public class MainTest extends BaseTest {
             if (a.charAt(i) == c)
                 t++;
         runWithInput(a);
-        assertEquals(t, Integer.parseInt(getItemByName("ans")));
+        CustomAssertions._assertEquals(t, Integer.parseInt(getItemByName("ans")), "Your program does not correctly print the number of names starting with " + c + ".");
     }
-
 }
