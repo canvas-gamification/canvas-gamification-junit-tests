@@ -13,24 +13,32 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 public class MainTest extends BaseRandomTest {
+    // Parsons
 
     public static int n = 4;
     public static int up = 100;
     public static int down = 0;
     public Clause[] testSentence() {
-        Clause[] c = new Clause[4 * n * n + 4];
+        Clause[] c = new Clause[4 * n * n + 2 * n + 4];
         int p = 0;
-        c[p++] = new StringLiteral("Before the rotation:");
-        c[p++] = new NewLine();
-        for(int i = 0; i < n * n; i++){
-            c[p++] = new RandomInteger(down, up, "" + i);
-            c[p++] = new NewLine();
+        c[p ++] = new StringLiteral("Before the rotation:");
+        c[p ++] = new NewLine();
+        for(int i = 0; i < n; i ++){
+            for(int j = 0; j < n; j ++){
+                c[p ++] = new RandomInteger(down, up, i + " " + j);
+                c[p ++] = new StringLiteral(" ");
+            }
+            c[p ++] = new NewLine();
         }
+
         c[p++] = new StringLiteral("After the rotation:");
         c[p++] = new NewLine();
-        for(int i = 0; i < n * n; i++){
-            c[p++] = new IntegerLiteral("x" + i);
-            c[p++] = new NewLine();
+        for(int i = 0; i < n; i ++){
+            for(int j = 0; j < n; j ++){
+                c[p ++] = new IntegerLiteral(i + "x" + j);
+                c[p ++] = new StringLiteral(" ");
+            }
+            c[p ++] = new NewLine();
         }
         return c;
     }
@@ -39,29 +47,31 @@ public class MainTest extends BaseRandomTest {
         Rotation.main(new String[0]);
     }
 
-    public static int[] answerFor(int[] arr) {
-        int sz = (int)Math.sqrt(arr.length);
-        int a = arr[0], b = arr[sz - 1], c = arr[sz * sz - 1], d = arr[sz * sz - sz];
-        arr[sz - 1] = a;
-        arr[sz * sz - 1] = b;
-        arr[sz * sz - sz] = c;
-        arr[0] = d;
+    public static int[][] answerFor(int[][] arr) {
+        int sz = arr.length;
+        int a = arr[0][0], b = arr[0][sz - 1], c = arr[sz - 1][sz - 1], d = arr[sz - 1][0];
+        arr[0][sz - 1] = a;
+        arr[sz - 1][sz - 1] = b;
+        arr[sz - 1][0] = c;
+        arr[0][0] = d;
         return arr;
-
     }
 
     @Test
     public void printsCorrectOutput(){
-        int[] arr = new int[n * n];
-        for(int i = 0; i < n * n; i ++){
-            arr[i] = Integer.parseInt(getItemByName("" + i));
+        int[][] arr = new int[n][n];
+        for(int i = 0; i < n; i ++){
+            for(int j = 0; j < n; j ++){
+                arr[i][j] = Integer.parseInt(getItemByName(i + " " + j));
+            }
         }
-        int[] ans = answerFor(arr);
-        int[] in = new int[n * n];
-        for(int i = 0; i < n * n; i ++){
-            in[i] = Integer.parseInt(getItemByName("x" + i));
+        int[][] ans = answerFor(arr);
+        int[][] in = new int[n][n];
+        for(int i = 0; i < n; i ++){
+            for(int j = 0; j < n; j ++)
+                in[i][j] = Integer.parseInt(getItemByName(i + "x" + j));
         }
-        CustomAssertions._assertArrayEquals(ans, in, "Your program does not rotated the 2D array correctly.");
+        CustomAssertions._assertArrayEquals(ans, in, "Your program does not rotate the 2D array correctly.");
     }
     static Stream<int[][]> inputProvider() {
         int[][] t1 = {
@@ -80,29 +90,33 @@ public class MainTest extends BaseRandomTest {
                 {4, 5, 1, 2, 3},
                 {5, 1, 2, 3, 4}
         };
+        int[][] t4 = {
+                {1, 0, 0, 2},
+                {0, 0 ,0 ,0},
+                {0, 0, 0, 0},
+                {4, 0, 0, 3}
+        };
         return Stream.of(
-            t1, t2, t3
+            t1, t2, t3, t4
         );
     }
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void correctRotateArrayMethod(int[][] arr) throws Throwable {
-        int[] input = new int[arr.length * arr[0].length];
+        int[][] ans = answerFor(arr);
+        Clause[] c = new Clause[2 * arr.length * arr.length + arr.length];
+        int t = 0;
         for(int i = 0; i < arr.length; i ++){
-            for(int j = 0; j < arr[0].length; j ++)
-                input[i * arr[0].length + j] = arr[i][j];
-        }
-        int[] ans = answerFor(input);
-        Clause[] c = new Clause[2 * arr.length * arr[0].length];
-        for(int i = 0; i < 2 * arr.length * arr[0].length; i += 2){
-            c[i] = new StringLiteral("" + ans[i / 2]);
-            c[i + 1] = new NewLine();
+            for(int j = 0; j < arr.length; j ++){
+                c[t ++] = new StringLiteral("" + ans[i][j]);
+                c[t ++] = new StringLiteral(" ");
+            }
+            c[t ++] = new NewLine();
         }
         Object[][] arguments = {
                 {arr, int[][].class}
         };
-        TestOption.incorrectStructureErrorMessage = "Your rotateArray method does not rotated the 2D array correctly.";
+        TestOption.incorrectStructureErrorMessage = "Your rotateArray method does not rotate the 2D array correctly.";
         MethodTest m = new MethodTest(Rotation.class, "rotateArray", arguments, c);
-
     }
 }
