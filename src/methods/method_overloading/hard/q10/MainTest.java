@@ -79,7 +79,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(Overload10.class, "baby", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(babyStr, output, "Your baby method with gender does not print the correct output.");
+        CustomAssertions._assertEquals(babyStr, output, "Your baby method does not correctly print the name and gender.");
     }
 
     @ParameterizedTest
