@@ -91,6 +91,6 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(Overload10.class, "baby", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(ans, output, "Your baby method without gender does not print the correct output.");
+        CustomAssertions._assertEquals(ans, output, "Your baby method does not correctly print only the name.");
     }
 }
