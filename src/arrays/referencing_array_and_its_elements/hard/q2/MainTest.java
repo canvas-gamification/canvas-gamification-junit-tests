@@ -92,7 +92,7 @@ public class MainTest extends BaseTest {
         MethodTest m = new MethodTest(Remainder.class, "remainder", arguments);
         Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(ans, output,
-                "Your remainder method does not return the correct subarray.");
+                "Your remainder method does not correctly return the subarray of the first n numbers.");
 
     }
 }
