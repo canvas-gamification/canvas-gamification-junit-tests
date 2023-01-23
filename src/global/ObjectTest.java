@@ -483,6 +483,10 @@ public class ObjectTest {
         return this.objectClass;
     }
 
+    public Class<?> getObjectArrayClass() {
+        return this.objectClass.arrayType();
+    }
+
     public Object createArray(int length) {
         if (length < 0)
             _fail("Error with test definition. Please contact a test administrator.",
