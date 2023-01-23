@@ -1,10 +1,19 @@
 package arrays.multidimensional_arrays.hard.q6;
 
 import global.BaseTest;
+import global.MethodTest;
+import global.tools.CustomAssertions;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
     // Parsons
@@ -39,11 +48,55 @@ public class MainTest extends BaseTest {
     }
 
     public static int[][] answerFor(int[][] x, int[][] y){
+        if( x.length != y.length  || x[0].length != y[0].length )
+            return null;
         int[][] ans = new int[x.length][x[0].length];
         for(int i = 0; i < x.length; i ++){
             for(int j = 0; j < x[0].length; j ++)
                 ans[i][j] = x[i][j] + y[i][j];
         }
         return ans;
+    }
+
+    static Stream<Arguments> inputProvider() {
+        int[][] t1 = {
+                {12, 54, 31},
+                {54, 76, 32},
+                {23, 32, 12}
+        };
+        int[][] t2 = {
+                {65, 43, 12},
+                {54, 65, 32},
+                {43, 1, 2}
+        };
+        int[][] t3 = {
+                {1, 0},
+                {0, 1}
+        };
+        int[][] t4 = {
+                {0, 1},
+                {1, 0}
+        };
+        return Stream.of(
+                Arguments.of(t1, t2),
+                Arguments.of(t3, t4),
+                Arguments.of(t1, t3),
+                Arguments.of(t2, t4)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void correctAddMatrices(int[][] a, int[][] b) throws Throwable {
+        Object[][] arguments = {
+                {a, int[][].class},
+                {b, int[][].class}
+        };
+        MethodTest m = new MethodTest(OneAndOneMakeTwoDArrays.class, "addMatrices", arguments);
+        Object output = m.callMethod();
+        if(output != null)
+            CustomAssertions._assertArrayEquals(answerFor(a, b), output, "Your addMatrices method does not correctly add two matrices.");
+        else
+            assertTrue(answerFor(a, b) == null, "Your addMatrices method does not give the correct answer.");
     }
 }
