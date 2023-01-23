@@ -4,9 +4,7 @@ import global.BaseTest;
 import global.MethodTest;
 import global.tools.TestOption;
 import global.variables.Clause;
-import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
-import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -28,8 +26,7 @@ public class MainTest extends BaseTest {
             }
         }
         return new Clause[]{
-                new StringLiteral(st.trim()),
-                new Optional(new StringLiteral(" "))
+                new StringLiteral(st),
         };
     }
 
@@ -69,6 +66,5 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(ImAWholeDimensionAhead.class, "imAWholeDimensionAhead", arguments, methodSentence);
         m.callMethod();
-
     }
 }
