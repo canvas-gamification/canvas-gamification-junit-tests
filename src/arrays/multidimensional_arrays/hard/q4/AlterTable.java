@@ -1,10 +1,9 @@
 package arrays.multidimensional_arrays.hard.q4;
 
 /*
-Make a program that defines a 2D array and goes through each element in it by traversing each row's elements one at a
-time. While going through each of these elements, the program prints out alternating elements starting from the first
-element. For example, if you have the following 2D array {{1,2,3}, {4, 5 ,6}, {7,8,9} }, the program will
-print 1, 3, 5, 7, 9.
+Make a program that defines a multidimensional array and iterates over each row of the array, printing out every other
+element starting from the first element of the first row. For example, if you have the following 2D array {{1,2,3},
+{4, 5 ,6}, {7,8,9} }, the program will print 1, 3, 5, 7, 9."
  */
 
 public class AlterTable {
