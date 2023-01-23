@@ -5,14 +5,12 @@ import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -22,8 +20,6 @@ import java.util.stream.Stream;
 
 import static global.utils.ArrayUtil.arrayToInput;
 import static global.utils.ArrayUtil.generateRandomArray;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class MainTest extends BaseTest {
     // Java
@@ -73,6 +69,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void printsCorrectOutput(int[] input, int x, int[] ans) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the subarray of the first n numbers.";
         int t = ans.length;
         String st = "";
         for (int i = 0; i < t; i++)
