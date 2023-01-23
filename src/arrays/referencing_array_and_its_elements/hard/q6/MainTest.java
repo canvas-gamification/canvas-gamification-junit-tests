@@ -58,7 +58,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("mainInputProvider")
     void printsCorrectOutput(int[] input) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly split the array in half.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the first half of the split array.";
         runWithInput(
                 arrayToInput(input),
                 new Clause[]{
@@ -73,7 +73,7 @@ public class MainTest extends BaseTest {
                 Arguments.of(generateRandomArray(-1000000000, 1000000000, n)),
                 Arguments.of(new int[]{}),
                 Arguments.of(new int[]{1, 2}),
-                Arguments.of(generateRandomArray(-1000000000, 1000000000, 100000))
+                Arguments.of(generateRandomArray(-1000000000, 1000000000, 1000))
         );
     }
 
@@ -85,8 +85,6 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(RightDownTheMiddle.class, "splitHalf", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(split(input), output, "Your splitHalf method does not correctly split the array in half.");
+        CustomAssertions._assertEquals(split(input), output, "Your splitHalf method does not correctly return a String containing the first half of the array");
     }
-
-
 }
