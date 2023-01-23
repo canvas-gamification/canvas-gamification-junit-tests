@@ -71,7 +71,7 @@ public class MainTest extends BaseTest {
     }
 
     @ParameterizedTest
-    @MethodSource("InputProvider")
+    @MethodSource("inputProvider")
     void printsCorrectOutput(int[] input, int x, int[] ans) throws InvalidClauseException {
         int t = ans.length;
         String st = "";
