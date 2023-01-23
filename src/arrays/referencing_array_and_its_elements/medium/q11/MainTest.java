@@ -1,6 +1,7 @@
 package arrays.referencing_array_and_its_elements.medium.q11;
 
 import global.BaseTest;
+import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.*;
@@ -49,7 +50,7 @@ public class MainTest extends BaseTest {
             ans += st + " ";
         }
 
-        return ans.trim();
+        return ans;
     }
 
     static Stream<String> inputProvider() {
@@ -73,8 +74,6 @@ public class MainTest extends BaseTest {
         for (int i = 0; i < a.length(); i++)
             if (a.charAt(i) == ' ' && a.charAt(i - 1) == c)
                 t++;
-        if (a.charAt(a.length() - 1) == c)
-            t++;
         runWithInput(a);
         assertEquals("Your program does not print the correct number of names that ends with " + c + ".", t, Integer.parseInt(getItemByName("ans")));
     }
