@@ -43,6 +43,6 @@ public class MainTest extends BaseRandomTest {
     void printsCorrectOutput() {
         runMain();
         assertEquals(Integer.parseInt(getItemByName("Ans")), Integer.parseInt(getItemByName("Index"))),
-                "Your program does not print the correct ticket number corresponding the selected index.");
+                "Your program does not print the ticket number from the selected index.");
     }
 }
