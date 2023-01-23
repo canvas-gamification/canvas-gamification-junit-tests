@@ -55,7 +55,7 @@ public class MainTest extends BaseTest {
         Remainder.main(new String[0]);
     }
 
-    static Stream<Arguments> InputProvider() {
+    static Stream<Arguments> inputProvider() {
         int[] a1 = generateRandomArray(-1000, 1000, n);
         int[] a2 = generateRandomArray(-100000, 100000, n);
         int[] a3 = generateRandomArray(-10000000, 10000000, n);
