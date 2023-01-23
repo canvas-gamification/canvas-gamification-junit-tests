@@ -85,7 +85,7 @@ public class MainTest extends BaseTest {
                 {input, double[].class},
         };
         MethodTest m = new MethodTest(MaxFinder.class, "findMax", arguments);
-        m.setIncorrectMethodStructureErrorMessage("Your findMax method does not correctly show the maximum value of the double array");
+        m.setIncorrectMethodStructureErrorMessage("Your findMax method does not correctly return the maximum value of the double array");
         Object output = m.callMethod();
         assertEquals(max(input), (double) output, 0.001);
     }
