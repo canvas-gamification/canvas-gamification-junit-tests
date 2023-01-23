@@ -3,20 +3,17 @@ package methods.modular_programs.hard.q6;
 import java.util.stream.Stream;
 
 import global.MethodTest;
+import global.variables.clauses.DoubleLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import global.BaseTest;
-import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
-import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.NewLine;
-import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseTest {
@@ -35,7 +32,9 @@ public class MainTest extends BaseTest {
                 new StringLiteral("Was the service great\\? \\(Enter Y\\/N\\)"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new PlaceHolder(),
+                new StringLiteral("For dinner, you will pay "),
+                new DoubleLiteral("ans"),
+                new StringLiteral(" dollars."),
                 new Optional(new StringLiteral(" "))
         };
     }
@@ -66,7 +65,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void methodReturnsCorrectTotal(double costOfFood, char service, double totalCost) throws Throwable {
+    public void correctFoodCostMethod(double costOfFood, char service, double totalCost) throws Throwable {
         Object[][] arguments = {
                 {costOfFood, double.class},
                 {service, char.class}
@@ -78,10 +77,8 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void printsCorrectDinnerCost(double costOfFood, char service, double totalCost) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct total cost of dinner for the given input.";
-        runWithInput(costOfFood + " " + service, new Clause[]{
-                new StringLiteral("For dinner, you will pay " + totalCost + " dollars.")
-        });
+    public void printsCorrectOutput(double costOfFood, char service, double totalCost) {
+        runWithInput(costOfFood + " " + service);
+        CustomAssertions._assertEquals(totalCost, Double.parseDouble(getItemByName("ans")), "Your program does not print the correct total cost of dinner for the given input.");
     }
 }

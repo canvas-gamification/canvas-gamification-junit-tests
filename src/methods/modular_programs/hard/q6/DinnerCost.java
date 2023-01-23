@@ -1,12 +1,14 @@
 package methods.modular_programs.hard.q6;
 
 /*
-Write a Java Program with a method called foodCost that determines the cost of a dinner considering if the service was
-good i.e. if the service was good, the user will tip more. If the service was great, then the user tips 20%. If the
-service is okay, then the user tips 15%. It's guaranteed that the input is always valid.
+Write a Java program that calculates the final bill at a restaurant. The main method asks the user to enter the cost of
+the food as a double, and either a 'Y' or 'N' character if the service was great. The double and char should then be
+passed to a method called foodCost. If the service was great, then the user tips 20% of the cost of the food. If the
+service was okay, the user tips 15%. The method returns the total cost as a double which the main method then prints out.
+Assume user input is always valid.
 
 Sample Output:
-	Enter the cost of the food:
+    Enter the cost of the food:
     120
     Was the service great? (Enter Y/N)
     N
