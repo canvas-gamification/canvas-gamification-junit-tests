@@ -29,7 +29,7 @@ public class MultItUp {
             System.out.print(result[i] + " ");
     }
 
-    public static int[] productMaker(int[] input) {
+    public static void productMaker(int[] input) {
         for (int i = 0; i < input.length; i++) {
             int value = input[i] * i;
             input[i] = value;
