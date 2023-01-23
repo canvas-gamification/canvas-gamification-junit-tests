@@ -74,7 +74,7 @@ public class MainTest extends BaseTest {
         });
     }
 
-    static Stream<Arguments> InputProvider() {
+    static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of(new int[]{3, 4, 6, 21, 48, 42, 89, 2, 5, 91}),
                 Arguments.of(new int[]{}),
