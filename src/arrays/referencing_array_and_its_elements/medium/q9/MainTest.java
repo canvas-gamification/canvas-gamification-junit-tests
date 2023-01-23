@@ -56,6 +56,5 @@ public class MainTest extends BaseRandomTest {
                 flg = false;
         }
         assertTrue(flg);
-
     }
 }

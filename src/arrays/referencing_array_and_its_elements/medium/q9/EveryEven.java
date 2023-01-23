@@ -1,13 +1,12 @@
 package arrays.referencing_array_and_its_elements.medium.q9;
 
 /*
-Make a Java program that initializes an integer array with 10 elements, whose values are randomly generated between 1
-and 1000 (inclusive of both ends), and print it. Then, create a second array of half of the size that copies the values
-from every even index element in the first array, and only finally print out the values of the second array to
-the console.
+Write a Java program that initializes an array of 10 integers randomly generated between 1 and 1000 (inclusive on both ends)
+and then prints the array. Then initialize a second array to be half the size of the first. Then copy all the values at
+even indexes from the first array and store them in the second array. Then print out the second array.
 
 Sample Output:
-    The random generated array:
+    The randomly generated array:
     315 197 258 756 982 424 235 201 624 446
     The elements on even indices are:
     315 258 982 235 624
@@ -33,5 +32,4 @@ public class EveryEven {
         for (int i = 0; i < arr2.length; i++)
             System.out.print(arr2[i] + " ");
     }
-
 }
