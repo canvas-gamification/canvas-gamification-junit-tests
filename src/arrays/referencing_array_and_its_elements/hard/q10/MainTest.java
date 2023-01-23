@@ -2,6 +2,7 @@ package arrays.referencing_array_and_its_elements.hard.q10;
 
 import global.BaseTest;
 import global.MethodTest;
+import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
@@ -52,6 +53,8 @@ public class MainTest extends BaseTest {
                 Arguments.of(generateRandomArray(-1000.0, 1000.0, n)),
                 Arguments.of(generateRandomArray(-1000.0, 1000.0, n)),
                 Arguments.of(generateRandomArray(-1000.0, 1000.0, n)),
+                Arguments.of(generateAscendingArray(-10.0, n)),
+                Arguments.of(generateAscendingArray(0.0, n)),
                 Arguments.of(replicateArray(1.0, n))
         );
     }
@@ -61,7 +64,7 @@ public class MainTest extends BaseTest {
     void printsCorrectOutput(double[] input) {
         double ans = min(input);
         runWithInput(arrayToInput(input));
-        assertEquals("Your program does not print the minimum value of the double array.", Double.parseDouble(getItemByName("ans")), ans, 0.001);
+        CustomAssertions._assertEquals(ans, Double.parseDouble(getItemByName("ans")), 0.001, "Your program does not print the minimum value of the double array.");
     }
 
 
@@ -72,7 +75,11 @@ public class MainTest extends BaseTest {
                 Arguments.of(generateRandomArray(-1000.0, 1000.0, 10000)),
                 Arguments.of(replicateArray(1.0, 10000)),
                 Arguments.of(new double[] {1.0, -0.01}),
+                Arguments.of(new double[] {-0.01, 1.0}),
+                Arguments.of(new double[] {0.0, -0.01}),
                 Arguments.of(new double[] {100000000.0}),
+                Arguments.of(new double[] {100.0, 100000000.0}),
+                Arguments.of(new double[] {100.0, 10.0, 1.0, 100000000.0}),
                 Arguments.of(new double[] {100000000.0, 10000.0, 999.9})
 
         );
@@ -85,9 +92,8 @@ public class MainTest extends BaseTest {
                 {input, double[].class},
         };
         MethodTest m = new MethodTest(MinFinder.class, "findLow", arguments);
-        m.setIncorrectMethodStructureErrorMessage("Your findLow method does not correctly return the minimum value in a double array.");
         Object output = m.callMethod();
-        assertEquals((double) output, min(input), 0.001);
+        CustomAssertions._assertEquals(min(input), (double) output, 0.001, "Your findLow method does not correctly return the minimum value in a double array.");
     }
 
 }

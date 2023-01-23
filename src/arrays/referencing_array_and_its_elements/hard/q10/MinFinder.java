@@ -2,7 +2,7 @@ package arrays.referencing_array_and_its_elements.hard.q10;
 
 /*
 Write a Java program to find the smallest number in a double array. The program should prompt the user to enter an array
-of 10 doubles and then calls a method named minFinder. This method should loop through the numbers in the array and
+of 10 doubles and then calls a method named findLow. This method should loop through the numbers in the array and
 return the lowest value found. Print the returned value in the main method. Note that your method should be generalized
 to work with an array or any length.
 
