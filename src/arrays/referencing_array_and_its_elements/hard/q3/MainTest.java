@@ -89,7 +89,7 @@ public class MainTest extends BaseTest {
 
 
     @ParameterizedTest
-    @MethodSource("InputProvider")
+    @MethodSource("inputProvider")
     void correctEvenMethod(int[] input) throws Throwable {
         Object[][] arguments = {
                 {input, int[].class},
