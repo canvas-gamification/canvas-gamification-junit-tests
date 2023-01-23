@@ -21,6 +21,7 @@ import global.variables.clauses.StringLiteral;
 
 public class MainTest extends BaseTest {
     // Java
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "Hello world";
@@ -28,6 +29,7 @@ public class MainTest extends BaseTest {
                 new StringLiteral("Enter a sentence:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
+                new StringLiteral("Total number of Characters in the sentence: "),
                 new PlaceHolder()
         };
     }
@@ -42,6 +44,11 @@ public class MainTest extends BaseTest {
                 Arguments.of("Hello World!!!", 13),
                 Arguments.of("                      Hello                 ", 5),
                 Arguments.of("123HelloWorld!!!", 16),
+                Arguments.of("12  3H ello W o r  l    d! !! ", 16),
+                Arguments.of("!", 1),
+                Arguments.of(" ", 0),
+                Arguments.of("             !            ", 1),
+                Arguments.of("                         ", 0),
                 Arguments.of("@@@@@@@@@@@@@@@@@@@@@@@@@@", 26));
     }
 
@@ -61,7 +68,7 @@ public class MainTest extends BaseTest {
     public void printsCorrectOutput(String str, int numChars) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print the correct number of characters for the given input.";
         runWithInput(str, new Clause[]{
-                new StringLiteral("Total number of Characters in the sentence: " + numChars),
+                new IntegerLiteral(numChars),
         });
     }
 }

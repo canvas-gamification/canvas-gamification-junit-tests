@@ -1,20 +1,19 @@
 package methods.modular_programs.hard.q8;
 
 /*
-Write a program with a method called charCounter that asks the user for a sentence and then counts the number of
-characters in the sentence. (Hint: Space / ' ' is not considered a character)
+Write a program that asks the user to enter a sentence, then passes that sentence to a method called charCounter. The
+method counts the number of characters in the given String and returns the total as an integer. The main method then
+prints out the returned number. (Hint: Space/' ' is not considered a character)
 
 Sample Output:
-  Enter a sentence
+  Enter a sentence:
   Hello World
   Total number of Characters in the sentence: 10
-
  */
 
 import java.util.Scanner;
 
 public class CounterChar {
-    // Java
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter a sentence:");
