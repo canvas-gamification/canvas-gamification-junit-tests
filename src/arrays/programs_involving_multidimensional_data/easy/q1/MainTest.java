@@ -1,4 +1,4 @@
-package arrays.programs_involving_multidimensional_data.easy.q3;
+package arrays.programs_involving_multidimensional_data.easy.q1;
 
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
@@ -71,6 +71,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void printsCorrectOutput(int[][] a) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your programs does not correctly find if the rows of the 2D array have the sam sum or not.";
         String input = "";
         for (int i = 0; i < n; i++)
             input += arrayToInput(a[i]) + "\n";

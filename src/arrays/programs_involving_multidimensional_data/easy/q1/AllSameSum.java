@@ -1,4 +1,4 @@
-package arrays.programs_involving_multidimensional_data.easy.q3;
+package arrays.programs_involving_multidimensional_data.easy.q1;
 
 /*
 Write a Java program that initialises a 4 by 4 multidimensional array of integers with values given by the user, and
