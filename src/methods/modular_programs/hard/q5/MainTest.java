@@ -30,7 +30,7 @@ public class MainTest extends BaseTest {
     TestOption.isInputTest = true;
     TestOption.defaultInput = "20 T";
     return new Clause[]{
-            new StringLiteral("How fast were you above the speed limit\\?"),
+            new StringLiteral("How far above the speed limit were you\\?"),
             new Optional(new StringLiteral(" ")),
             new NewLine(),
             new StringLiteral("Were you in a school zone\\? \\(Enter T\\/F\\)"),
@@ -65,59 +65,44 @@ public class MainTest extends BaseTest {
 
   static Stream<Arguments> inputProvider() {
     return Stream.of(
-            Arguments.of("20", 'T', findFor(20, 'T')),
-            Arguments.of(Integer.toString(v1), 'T', findFor(v1, 'T')),
-            Arguments.of(Integer.toString(v2), 'T', findFor(v2, 'T')),
-            Arguments.of(Integer.toString(v3), 'T', findFor(v3, 'T')),
-            Arguments.of(Integer.toString(v1 + 1), 'T', findFor(v1 + 1, 'T')),
-            Arguments.of(Integer.toString(v2 + 1), 'T', findFor(v2 + 1, 'T')),
-            Arguments.of(Integer.toString(v3 + 1), 'T', findFor(v3 + 1, 'T')),
-            Arguments.of(Integer.toString(v1 - 1), 'T', findFor(v1 - 1, 'T')),
-            Arguments.of(Integer.toString(v2 - 1), 'T', findFor(v2 - 1, 'T')),
-            Arguments.of(Integer.toString(v3 - 1), 'T', findFor(v3 - 1, 'T')),
-            Arguments.of("0", 'T', findFor(0, 'T')),
-            Arguments.of("-1", 'T', findFor(0, 'T')),
-            Arguments.of("False Number Format", 'T', -1),
-            Arguments.of("10", 'R', -1),
-            Arguments.of("False Number Format", 'E', -1)
+            Arguments.of(20, 'T', findFor(20, 'T')),
+            Arguments.of(v1, 'T', findFor(v1, 'T')),
+            Arguments.of(v2, 'T', findFor(v2, 'T')),
+            Arguments.of(v3, 'T', findFor(v3, 'T')),
+            Arguments.of(v1 + 1, 'T', findFor(v1 + 1, 'T')),
+            Arguments.of(v2 + 1, 'T', findFor(v2 + 1, 'T')),
+            Arguments.of(v3 + 1, 'T', findFor(v3 + 1, 'T')),
+            Arguments.of(v1 - 1, 'T', findFor(v1 - 1, 'T')),
+            Arguments.of(v2 - 1, 'T', findFor(v2 - 1, 'T')),
+            Arguments.of(v3 - 1, 'T', findFor(v3 - 1, 'T')),
+            Arguments.of(0, 'T', findFor(0, 'T')),
+            Arguments.of(-1, 'T', findFor(0, 'T'))
     );
   }
 
   @ParameterizedTest
   @MethodSource("inputProvider")
-  public void printsCorrectOutput(String speedst, char isSchoolZone, int fine) throws InvalidClauseException {
+  public void printsCorrectOutput(int speed, char isSchoolZone, int fine) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the cost of the fine.";
-    if (fine != -1) {
-      runWithInput(speedst + " " + isSchoolZone, new Clause[]{
-              new StringLiteral("Your fine is " + fine + " dollars!")
-      });
-    } else {
-      runWithInput(speedst + " " + isSchoolZone, new Clause[]{
-              new StringLiteral("Invalid Input!")
-      });
-    }
+    runWithInput(speed + " " + isSchoolZone, new Clause[]{
+            new StringLiteral("Your fine is " + fine + " dollars!")
+    });
+
   }
 
   @ParameterizedTest
   @MethodSource("inputProvider")
-  public void correctFineCalculatorMethod(String speedst, char isSchoolZone, int fine) throws Throwable {
+  public void correctFineCalculatorMethod(int speed, char isSchoolZone, int fine) throws Throwable {
     TestOption.incorrectStructureErrorMessage = "Your fineCalculator method does not print the correct fine or answer.";
     Clause[] methodSentence;
-    if (fine != -1) {
-      methodSentence = new Clause[]{
-              new StringLiteral("Your fine is " + fine + " dollars!"),
-      };
-    } else {
-      methodSentence = new Clause[]{
-              new StringLiteral("Invalid Input!"),
-      };
-    }
+    methodSentence = new Clause[]{
+            new StringLiteral("Your fine is " + fine + " dollars!"),
+    };
     Object[][] arguments = {
-            {speedst, String.class},
+            {speed, int.class},
             {isSchoolZone, char.class}
     };
     MethodTest m = new MethodTest(DrivingFines.class, "fineCalculator", arguments, methodSentence);
     m.callMethod();
   }
 }
-
