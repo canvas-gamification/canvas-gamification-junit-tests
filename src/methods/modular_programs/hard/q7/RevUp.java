@@ -1,14 +1,13 @@
 package methods.modular_programs.hard.q7;
 
 /*
-Write a Java Program with a method called revString that accepts a string and returns it in reverse. Write a main method
-that asks the user to enter a sentence and calls the revString method and prints the result.
+Write a Java Program that asks the user to enter a sentence and calls a method called revString. The method accepts the
+string and returns it in reverse, which the main method then prints.
 
 Sample Output:
     Enter a sentence:
     Hello World
     Your sentence in reverse is: dlroW olleH
-
  */
 
 import java.util.Scanner;
