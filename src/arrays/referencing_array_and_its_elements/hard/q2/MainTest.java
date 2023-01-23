@@ -83,7 +83,7 @@ public class MainTest extends BaseTest {
     }
 
     @ParameterizedTest
-    @MethodSource("InputProvider")
+    @MethodSource("inputProvider")
     void correctRemainderMethod(int[] input, int x, int[] ans) throws Throwable {
         Object[][] arguments = {
                 {input, int[].class},
