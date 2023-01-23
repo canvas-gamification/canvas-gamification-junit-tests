@@ -1,9 +1,9 @@
 package arrays.referencing_array_and_its_elements.hard.q9;
 
 /*
-Write a Java program that randomly makes an array of integers with size 7 that have 5 digits representing ticket numbers
-to a prize draw. Next, the program randomly picks an index within that array, and displays the corresponding ticket
-number as the winning ticket. The program should also print the array and the winning index.
+Write a Java program that randomly generates an array of integers with 7 elements. Each element should have 5 digits
+representing ticket numbers for a prize draw. Print out the list of tickets then generate a random index for the array
+and display the index and corresponding ticket number as the winning ticket.
 
 Sample Output:
     The list of tickets are:
