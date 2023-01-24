@@ -78,7 +78,7 @@ public class MainTest {
                 "Your Person class does not have a constructor with the parameters of String, int, and boolean.");
     }
 
-    private static Stream<Arguments> personStringIntBooleanInputProvider() {
+    private static Stream<Arguments> stringIntBooleanInputProvider() {
         return Stream.of(
                 Arguments.of("Caroline", 35, true),
                 Arguments.of("George", 20, false),
@@ -88,19 +88,19 @@ public class MainTest {
         );
     }
 
-    private static Stream<String> personStringInputProvider() {
+    private static Stream<String> stringInputProvider() {
         return Stream.of("Caroline", "George", "Elvin Elvis", "Madalyn", "Peterolomew");
     }
 
-    private static Stream<Integer> personAgeInputProvider() {
+    private static Stream<Integer> intInputProvider() {
         return Stream.of(4, 11, 91, 0, 2, 12993, 452);
     }
 
-    private static Stream<Boolean> personGetEmployedInputProvider() {
+    private static Stream<Boolean> booleanInputProvider() {
         return Stream.of(true, false);
     }
 
-    private static Stream<Arguments> personNameAgeInputProvider() {
+    private static Stream<Arguments> stringIntInputProvider() {
         return Stream.of(
                 Arguments.of("five", 5),
                 Arguments.of("A very original name", 2877728),
@@ -109,7 +109,7 @@ public class MainTest {
         );
     }
 
-    private static Stream<Arguments> personSetEmployedInputProvider() {
+    private static Stream<Arguments> booleanBooleanInputProvider() {
         return Stream.of(
                 Arguments.of(true, true),
                 Arguments.of(true, false),
@@ -118,7 +118,7 @@ public class MainTest {
         );
     }
 
-    private static Stream<Arguments> personStringBooleanInputProvider() {
+    private static Stream<Arguments> stringBooleanInputProvider() {
         return Stream.of(
                 Arguments.of("Another cool name", false),
                 Arguments.of("George the George", true),
@@ -127,7 +127,7 @@ public class MainTest {
         );
     }
 
-    private static Stream<Arguments> personIntBooleanInputProvider() {
+    private static Stream<Arguments> intBooleanInputProvider() {
         return Stream.of(
                 Arguments.of(4, true),
                 Arguments.of(26, false),
@@ -149,7 +149,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("personStringInputProvider")
+    @MethodSource("stringInputProvider")
     public void correctPersonStringConstructor(String name) throws Throwable {
         ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] arguments = {{name, String.class}};
@@ -163,7 +163,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("personAgeInputProvider")
+    @MethodSource("intInputProvider")
     public void correctPersonIntConstructor(int age) throws Throwable {
         ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] arguments = new Object[][]{
@@ -179,7 +179,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("personGetEmployedInputProvider")
+    @MethodSource("booleanInputProvider")
     public void correctPersonBooleanConstructor(boolean employed) throws Throwable {
         ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] arguments = new Object[][]{
@@ -195,7 +195,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("personNameAgeInputProvider")
+    @MethodSource("stringIntInputProvider")
     public void correctPersonStringIntConstructor(String name, int age) throws Throwable {
         ObjectTest objectTest = new ObjectTest(personClassString);
         Object[][] arguments = new Object[][]{
@@ -212,7 +212,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("personStringBooleanInputProvider")
+    @MethodSource("stringBooleanInputProvider")
     public void correctPersonStringBooleanConstructor(String name, boolean employed) throws Throwable {
         ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] arguments = new Object[][]{
@@ -229,7 +229,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("personIntBooleanInputProvider")
+    @MethodSource("intBooleanInputProvider")
     public void correctPersonIntBooleanInputProvider(int age, boolean employed) throws Throwable {
         ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] arguments = new Object[][]{
@@ -246,7 +246,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("personStringIntBooleanInputProvider")
+    @MethodSource("stringIntBooleanInputProvider")
     public void correctPersonStringIntBooleanConstructor(String name, int age, boolean employed) throws Throwable {
         ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] arguments = new Object[][]{
@@ -264,7 +264,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("personStringInputProvider")
+    @MethodSource("stringInputProvider")
     public void correctGetNameMethod(String name) throws Throwable {
         ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] arguments = {{name, String.class}};
@@ -275,7 +275,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("personStringInputProvider")
+    @MethodSource("stringInputProvider")
     public void correctSetNameMethod(String name) throws Throwable {
         ObjectTest personClass = new ObjectTest(personClassString);
         Object person = personClass.createInstance();
@@ -287,7 +287,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("personAgeInputProvider")
+    @MethodSource("intInputProvider")
     public void correctGetAgeMethod(int age) throws Throwable {
         ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] arguments = {{age, int.class}};
@@ -298,7 +298,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("personAgeInputProvider")
+    @MethodSource("intInputProvider")
     public void correctSetAgeMethod(int age) throws Throwable {
         ObjectTest personClass = new ObjectTest(personClassString);
         Object person = personClass.createInstance();
@@ -310,7 +310,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("personGetEmployedInputProvider")
+    @MethodSource("booleanInputProvider")
     public void correctIsEmployedMethod(boolean employed) throws Throwable {
         ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] arguments = {{employed, boolean.class}};
@@ -321,7 +321,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("personSetEmployedInputProvider")
+    @MethodSource("booleanBooleanInputProvider")
     public void correctSetEmployedMethod(boolean initialEmployed, boolean updateEmployed) throws Throwable {
         ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] constructionArguments = {{initialEmployed, boolean.class}};
@@ -334,7 +334,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("personStringInputProvider")
+    @MethodSource("stringInputProvider")
     public void correctPrintNameMethod(String name) throws Throwable {
         ObjectTest personClass = new ObjectTest(personClassString);
         Object[][] arguments = {{name, String.class}};
@@ -370,7 +370,7 @@ public class MainTest {
                 "Your House class address filed does not have the correct modifiers.");
     }
 
-    private static Stream<Arguments> houseConstructorIntStringInputProvider() {
+    private static Stream<Arguments> intStringInputProvider() {
         return Stream.of(
                 Arguments.of(2421, "Medicine Hat"),
                 Arguments.of(69, "Kelowna Ave, Toronto"),
@@ -378,7 +378,7 @@ public class MainTest {
         );
     }
 
-    private static Stream<Arguments> houseConstructorIntStringPersonArrayInputProvider() {
+    private static Stream<Arguments> intStringPersonArrayInputProvider() {
         return Stream.of(
                 Arguments.of(12, "Grimmauld Place", new Object[][][]{
                         {}, {{4, int.class}}, {{"John", String.class}, {4, int.class}, {true, boolean.class}}}),
@@ -418,7 +418,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("houseConstructorIntStringInputProvider")
+    @MethodSource("intStringInputProvider")
     public void houseClassHasCorrectIntStringConstructor(int number, String address) throws Throwable {
         ObjectTest houseClass = new ObjectTest(this.houseClassString);
         ObjectTest personClass = new ObjectTest(this.personClassString);
@@ -437,9 +437,8 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("houseConstructorIntStringPersonArrayInputProvider")
+    @MethodSource("intStringPersonArrayInputProvider")
     public void houseClassHasCorrectIntStringPersonConstructor(int number, String address, Object[][][] residents) throws Throwable {
-        // TODO: Discuss non-primitive array comparison
         ObjectTest houseClass = new ObjectTest(this.houseClassString);
         ObjectTest personClass = new ObjectTest(this.personClassString);
         Object o = personClass.createArray(residents.length, residents);
@@ -458,8 +457,8 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("houseConstructorIntStringPersonArrayInputProvider")
-    public void correctGetResidentsMethod(int number, String address, Object[][][] residents) throws Throwable {
+    @MethodSource("intStringPersonArrayInputProvider")
+    public void correctHouseGetResidentsMethod(int number, String address, Object[][][] residents) throws Throwable {
         ObjectTest personClass = new ObjectTest(personClassString);
         ObjectTest houseClass = new ObjectTest(houseClassString);
         Object residentsArray = personClass.createArray(residents.length, residents);
@@ -476,7 +475,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("houseConstructorIntStringPersonArrayInputProvider")
+    @MethodSource("intStringPersonArrayInputProvider")
     public void correctHouseSetResidentsMethod(int number, String address, Object[][][] residents) throws Throwable {
         ObjectTest personClass = new ObjectTest(personClassString);
         ObjectTest houseClass = new ObjectTest(houseClassString);
@@ -497,7 +496,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("houseConstructorIntStringInputProvider")
+    @MethodSource("intStringInputProvider")
     public void correctHouseGetNumberMethod(int number, String address) throws Throwable {
         ObjectTest houseClass = new ObjectTest(houseClassString);
         Object[][] arguments = {
@@ -512,7 +511,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("personAgeInputProvider")
+    @MethodSource("intInputProvider")
     public void correctHouseSetNumberMethod(int number) throws Throwable {
         ObjectTest houseClass = new ObjectTest(houseClassString);
         Object house = houseClass.createInstance();
@@ -527,7 +526,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("houseConstructorIntStringInputProvider")
+    @MethodSource("intStringInputProvider")
     public void correctHouseGetAddressMethod(int number, String address) throws Throwable {
         ObjectTest houseClass = new ObjectTest(houseClassString);
         Object[][] arguments = {
@@ -542,7 +541,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("personStringInputProvider")
+    @MethodSource("stringInputProvider")
     public void correctHouseSetAddressMethod(String address) throws Throwable {
         ObjectTest houseClass = new ObjectTest(houseClassString);
         Object house = houseClass.createInstance();
@@ -550,8 +549,8 @@ public class MainTest {
         Object[][] methodArguments = {
                 {address, String.class}
         };
-        houseClass.callMethod("setNumber", methodArguments, modifiers, house);
-        Object updatedNumber = houseClass.getFieldValue(house, "number");
+        houseClass.callMethod("setAddress", methodArguments, modifiers, house);
+        Object updatedNumber = houseClass.getFieldValue(house, "address");
         assertEquals(address, updatedNumber,
                 "Your House class getNumber method does not return the correct value for the number field.");
     }
