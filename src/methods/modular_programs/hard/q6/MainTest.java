@@ -72,7 +72,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(DinnerCost.class, "foodCost", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(totalCost, output, "Your foodCost method does not return the correct cost to be paid.");
+        CustomAssertions._assertEquals(totalCost, output, "Your foodCost method does not return the correct bill total.");
     }
 
     @ParameterizedTest
