@@ -11,7 +11,7 @@ limit, their fine is $150. If a person is in a school zone, then their fine is d
 anything but instead prints the fine. Assume that input is always valid.
 
 Sample Output:
-    How fast were you above the speed limit?
+    How far above the speed limit were you?
     20
     Were you in a school zone? (Enter T/F)
     T

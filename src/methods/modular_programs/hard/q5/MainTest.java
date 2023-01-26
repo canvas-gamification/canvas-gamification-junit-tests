@@ -3,8 +3,10 @@ package methods.modular_programs.hard.q5;
 import global.BaseTest;
 import global.MethodTest;
 import global.exceptions.InvalidClauseException;
+import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.variables.Clause;
+import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
@@ -36,7 +38,9 @@ public class MainTest extends BaseTest {
             new StringLiteral("Were you in a school zone\\? \\(Enter T\\/F\\)"),
             new Optional(new StringLiteral(" ")),
             new NewLine(),
+            new StringLiteral("Your fine is "),
             new PlaceHolder(),
+            new StringLiteral(" dollars!"),
             new Optional(new StringLiteral(" ")),
     };
   }
@@ -85,7 +89,7 @@ public class MainTest extends BaseTest {
   public void printsCorrectOutput(int speed, char isSchoolZone, int fine) throws InvalidClauseException {
     TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the cost of the fine.";
     runWithInput(speed + " " + isSchoolZone, new Clause[]{
-            new StringLiteral("Your fine is " + fine + " dollars!")
+            new IntegerLiteral(fine)
     });
 
   }
