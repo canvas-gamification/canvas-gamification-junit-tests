@@ -64,7 +64,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("mainInputProvider")
     void printCorrectOutput(int[] a) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct sequence of squared array.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the squared array.";
         runWithInput(arrayToInput(a), new Clause[]{
                 new StringLiteral(arrayToInput(sq(a)))
         });
