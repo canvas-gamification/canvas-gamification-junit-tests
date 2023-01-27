@@ -1,7 +1,7 @@
 package arrays.arrays_with_methods.medium.q7;
 
 /*
-Make a method that takes a character array, increment all of the values by 2, and combine all of the characters in the
+Make a method that takes a character array, increments all of the values by 2, and combines all of the characters in the
 array into a single String and return that string.
 
 Distractors:
