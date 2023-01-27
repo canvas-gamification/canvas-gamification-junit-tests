@@ -42,6 +42,6 @@ public class MainTest {
     @MethodSource("inputProvider")
     void correctMapThePatternMethod(int n, char c, char[][] arr) throws Throwable {
         Object output = MethodUtil.invokeIfMethodExists(PatternMaker.class, "mapThePattern", new Object[]{n, c}, int.class, char.class);
-        CustomAssertions._assertArrayEquals(arr, output, "Your mapThePattern method does no correctly generate the pattern.");
+        CustomAssertions._assertArrayEquals(arr, output, "Your mapThePattern method does not correctly generate the pattern for the specified character.");
     }
 }
