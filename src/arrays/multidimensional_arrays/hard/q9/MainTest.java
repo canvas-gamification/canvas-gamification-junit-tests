@@ -50,7 +50,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctImAWholeDimensionAheadMethod(int[][][] a) throws Throwable {
-        TestOption.incorrectStructureErrorMessage = "Your imAWholeDimensionAhead does not print the elements of the 3D array correctly.";
+        TestOption.incorrectStructureErrorMessage = "Your imAWholeDimensionAhead method does not correctly print the elements of the 3D array.";
         String ans = "";
         for (int i = 0; i < a.length; i++) {
             for (int j = 0; j < a[i].length; j++) {
