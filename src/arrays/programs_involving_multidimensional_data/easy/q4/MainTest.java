@@ -18,6 +18,7 @@ public class MainTest extends BaseRandomTest {
     public static int n = 4;
     public static int up = 100;
     public static int down = 0;
+    
     public Clause[] testSentence() {
         Clause[] c = new Clause[4 * n * n + 2 * n + 4];
         int p = 0;
