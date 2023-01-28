@@ -27,7 +27,7 @@ public class MainTest extends BaseTest {
         int s1 = ans[0];
         int s2 = ans[1];
         CustomAssertions._assertEquals(s1, Integer.parseInt(getItemByName("ans1")), "Your program does not correctly print the sum of the diagonals.");
-        CustomAssertions._assertEquals(s2, Integer.parseInt(getItemByName("ans2")), "Your program does not print the correct sum of the diagonals.");
+        CustomAssertions._assertEquals(s2, Integer.parseInt(getItemByName("ans2")), "Your program does not correctly print the sum of the diagonals.");
     }
     public void runMain() {
         SumDiags.main(new String[0]);
