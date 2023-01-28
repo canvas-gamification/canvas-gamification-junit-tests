@@ -1,7 +1,7 @@
 package arrays.creating_arrays.medium.q6;
 
 /*
-Make a Java program that creates a boolean array with 100 elements all initialized to true.
+Make a Java program that creates a boolean array with 100 elements all initialized to true and prints the array values to the console. 
 Sample output:
 true
 true
