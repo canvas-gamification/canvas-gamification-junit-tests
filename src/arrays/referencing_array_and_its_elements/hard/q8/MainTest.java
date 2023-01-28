@@ -10,13 +10,12 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
 import static global.utils.ArrayUtil.*;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Java
@@ -49,16 +48,15 @@ public class MainTest extends BaseTest {
         return ans;
     }
 
-    static Stream<Arguments> mainInputProvider() {
+    static Stream<int[]> mainInputProvider() {
         return Stream.of(
-                Arguments.of(merge(generateAscendingArray(1, n / 2), generateAscendingArray(n / 2 + 2, n - n / 2))),
-                Arguments.of(merge(generateAscendingArray(1, 2), generateAscendingArray(4, n - 2))),
-                Arguments.of(generateAscendingArray(1, n)),
-                Arguments.of(merge(generateAscendingArray(-n / 2, n / 2), generateAscendingArray(1, n - n / 2))),
-                Arguments.of(merge(generateAscendingArray(1, n - 1), generateAscendingArray(n + 1, 1))),
-                Arguments.of(merge(generateAscendingArray(1, 1), generateAscendingArray(3, n - 1))),
-                Arguments.of(generateAscendingArray(-n, n))
-
+                merge(generateAscendingArray(1, n / 2), generateAscendingArray(n / 2 + 2, n - n / 2)),
+                merge(generateAscendingArray(1, 2), generateAscendingArray(4, n - 2)),
+                generateAscendingArray(1, n),
+                merge(generateAscendingArray(-n / 2, n / 2), generateAscendingArray(1, n - n / 2)),
+                merge(generateAscendingArray(1, n - 1), generateAscendingArray(n + 1, 1)),
+                merge(generateAscendingArray(1, 1), generateAscendingArray(3, n - 1)),
+                generateAscendingArray(-n, n)
         );
     }
 
@@ -67,26 +65,23 @@ public class MainTest extends BaseTest {
     void printsCorrectOutput(int[] input) {
         int ans = miss(input);
         runWithInput(arrayToInput(input));
-        assertEquals("Your program does not print the lowest missing number correctly.", ans, Integer.parseInt(getItemByName("ans")));
+        assertEquals(ans, Integer.parseInt(getItemByName("ans")), "Your program does not print the lowest missing number correctly.");
     }
 
 
-    static Stream<Arguments> methodInputProvider() {
+    static Stream<int[]> methodInputProvider() {
         return Stream.of(
-                Arguments.of(merge(generateAscendingArray(1, 10000), generateAscendingArray(10002, 10000))),
-                Arguments.of(merge(generateAscendingArray(1, 10000), generateAscendingArray(10002, 1))),
-                Arguments.of(merge(generateAscendingArray(1, 1), generateAscendingArray(3, 10000))),
-                Arguments.of(merge(generateAscendingArray(-10000, 40000), generateAscendingArray(40002, 10000))),
-                Arguments.of(generateAscendingArray(-324234, 10000)),
-                Arguments.of(merge(generateAscendingArray(-1000000000, 10000), generateAscendingArray(1000000000, 10000))),
-                Arguments.of(new int[] {1, 3, 4, 5, 6, 7}),
-                Arguments.of(new int[] {1, 2, 3, 4, 5, 6, 7, 9}),
-                Arguments.of(new int[] {1, 3}),
-                Arguments.of(new int[] {1})
-
-
-
-                );
+                merge(generateAscendingArray(1, 10000), generateAscendingArray(10002, 10000)),
+                merge(generateAscendingArray(1, 10000), generateAscendingArray(10002, 1)),
+                merge(generateAscendingArray(1, 1), generateAscendingArray(3, 10000)),
+                merge(generateAscendingArray(-10000, 40000), generateAscendingArray(40002, 10000)),
+                generateAscendingArray(-324234, 10000),
+                merge(generateAscendingArray(-1000000000, 10000), generateAscendingArray(1000000000, 10000)),
+                new int[]{1, 3, 4, 5, 6, 7},
+                new int[]{1, 2, 3, 4, 5, 6, 7, 9},
+                new int[]{1, 3},
+                new int[]{1}
+        );
     }
 
     @ParameterizedTest
