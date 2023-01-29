@@ -63,7 +63,7 @@ public class MainTest extends BaseTest {
     void printsCorrectOutput(double[] input) {
         double ans = min(input);
         runWithInput(arrayToInput(input));
-        CustomAssertions._assertEquals(ans, Double.parseDouble(getItemByName("ans")), 0.001, "Your program does not print the minimum value of the double array.");
+        CustomAssertions._assertEquals(ans, Double.parseDouble(getItemByName("ans")), 0.00001, "Your program does not print the minimum value of the double array.");
     }
 
 
