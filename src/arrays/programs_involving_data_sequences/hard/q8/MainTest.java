@@ -64,7 +64,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("mainInputProvider")
     void printsCorrectOutput(int[] a) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct multiplied array.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the multiplied array.";
         runWithInput(arrayToInput(a), new Clause[]{
                 new StringLiteral(arrayToInput(mul(a)))
         });
@@ -97,6 +97,6 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(MultItUp.class, "productMaker", arguments);
         m.callMethod();
-        CustomAssertions._assertArrayEquals(ans, input, "Your productMaker method does not return the correct multiplied array");
+        CustomAssertions._assertArrayEquals(ans, input, "Your productMaker method does not return a correctly multiplied array");
     }
 }
