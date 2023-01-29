@@ -21,7 +21,7 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = arrayToInput(generateRandomArray(1, 10, n * n));
         return new Clause[]{
-                new StringLiteral("Enter a " + n + " by " + n + " multidimentional array in " + n + " lines:"),
+                new StringLiteral("Enter a " + n + " by " + n + " multidimensional array in " + n + " lines:"),
                 new NewLine(),
                 new PlaceHolder()
         };
@@ -62,19 +62,27 @@ public class MainTest extends BaseTest {
             }
             t3[i][0] += 1000 - sum;
         }
+        int[][] t4 = new int[n][n];
+        for (int i = 0; i < n; i++)
+            t4[i] = generateRandomArray(1, 100, n);
+        for(int i = 0; i < n; n++){
+            for(int j = 0; j < n; j++){
+                t4[i][j] *= -1;
+            }
+        }
         return Stream.of(
-                t1, t2, t3
+                t1, t2, t3, t4
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
     void printsCorrectOutput(int[][] a) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly finds if the rows of the 2D array have the same sum or not.";
-        String input = "";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify if the sum of the rows are all equal.";
+        StringBuilder input = new StringBuilder();
         for (int i = 0; i < n; i++)
-            input += arrayToInput(a[i]) + "\n";
-        runWithInput(input, new Clause[]{
+            input.append(arrayToInput(a[i])).append("\n");
+        runWithInput(input.toString(), new Clause[]{
                 new StringLiteral("" + answerFor(a))
         });
     }
