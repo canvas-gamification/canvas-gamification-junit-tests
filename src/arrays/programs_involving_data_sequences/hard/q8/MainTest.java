@@ -64,7 +64,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("mainInputProvider")
     void printsCorrectOutput(int[] a) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct multiplied array.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the multiplied array.";
         runWithInput(arrayToInput(a), new Clause[]{
                 new StringLiteral(arrayToInput(mul(a)))
         });
