@@ -97,6 +97,6 @@ public class MainTest extends BaseTest {
         if(output != null)
             CustomAssertions._assertArrayEquals(answerFor(a, b), output, "Your addMatrices method does not correctly add two matrices.");
         else
-            assertTrue(answerFor(a, b) == null, "Your addMatrices method does not give the correct answer.");
+            assertTrue(answerFor(a, b) == null, "Your addMatrices method does not correctly identify invalid input.");
     }
 }
