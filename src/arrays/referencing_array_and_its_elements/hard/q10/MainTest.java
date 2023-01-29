@@ -79,7 +79,9 @@ public class MainTest extends BaseTest {
                 Arguments.of(new double[] {100000000.0}),
                 Arguments.of(new double[] {100.0, 100000000.0}),
                 Arguments.of(new double[] {100.0, 10.0, 1.0, 100000000.0}),
-                Arguments.of(new double[] {100000000.0, 10000.0, 999.9})
+                Arguments.of(new double[] {100000000.0, 10000.0, 999.9}),
+                Arguments.of(new double[] {1.0, 0.5, 0.0, -1.0, -1.5, -0.5, 0.75, 2.0}),
+                Arguments.of(new double[] {100000000.0, 10000.0, 999.9, 999.9999, 1000, 20000})
 
         );
     }
