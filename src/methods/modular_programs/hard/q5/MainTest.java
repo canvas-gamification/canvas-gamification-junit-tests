@@ -80,7 +80,19 @@ public class MainTest extends BaseTest {
             Arguments.of(v2 - 1, 'T', findFor(v2 - 1, 'T')),
             Arguments.of(v3 - 1, 'T', findFor(v3 - 1, 'T')),
             Arguments.of(0, 'T', findFor(0, 'T')),
-            Arguments.of(-1, 'T', findFor(0, 'T'))
+            Arguments.of(-1, 'T', findFor(0, 'T')),
+            Arguments.of(20, 'F', findFor(20, 'F')),
+            Arguments.of(v1, 'F', findFor(v1, 'F')),
+            Arguments.of(v2, 'F', findFor(v2, 'F')),
+            Arguments.of(v3, 'F', findFor(v3, 'F')),
+            Arguments.of(v1 + 1, 'F', findFor(v1 + 1, 'F')),
+            Arguments.of(v2 + 1, 'F', findFor(v2 + 1, 'F')),
+            Arguments.of(v3 + 1, 'F', findFor(v3 + 1, 'F')),
+            Arguments.of(v1 - 1, 'F', findFor(v1 - 1, 'F')),
+            Arguments.of(v2 - 1, 'F', findFor(v2 - 1, 'F')),
+            Arguments.of(v3 - 1, 'F', findFor(v3 - 1, 'F')),
+            Arguments.of(0, 'F', findFor(0, 'F')),
+            Arguments.of(-1, 'F', findFor(0, 'F'))
     );
   }
 
@@ -97,7 +109,7 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputProvider")
   public void correctFineCalculatorMethod(int speed, char isSchoolZone, int fine) throws Throwable {
-    TestOption.incorrectMethodStructureErrorMessage = "Your fineCalculator method does not correctly print the fine.";
+    TestOption.incorrectStructureErrorMessage = "Your fineCalculator method does not correctly print the fine.";
     Clause[] methodSentence;
     methodSentence = new Clause[]{
             new StringLiteral("Your fine is " + fine + " dollars!"),
