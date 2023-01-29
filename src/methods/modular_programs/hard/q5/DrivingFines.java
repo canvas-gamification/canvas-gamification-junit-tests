@@ -2,7 +2,7 @@ package methods.modular_programs.hard.q5;
 
 /*
 Write a Java Program that determines the fine of a person caught speeding. The main method should ask the user how far
-over the speed limit the person was driving as an int and the character 'T' (true) or 'F' (false) for if they were in a
+over the speed limit the person was driving as an int and a character 'T' (true) or 'F' (false) for if they were in a
 school zone. The integer and character should then be passed to a method called fineCalculator which determines the fine.
 If a person is driving under or equal to speed limit their fine is $0. If a person is driving 0 - 10 km/h above the
 speed limit, their fine is $50. If a person is driving 11 - 30 km/h above the speed limit, their fine is $75. If a
