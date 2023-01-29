@@ -22,7 +22,7 @@ public class OneAndOneMakeTwoDArrays {
             }
         }
         else
-            System.out.println("Can't add because arrays of different sizes!");
+            System.out.println("Can't add the arrays because they are different sizes!");
     }
 
     public static int[][] addMatrices(int[][] a, int[][] b){
