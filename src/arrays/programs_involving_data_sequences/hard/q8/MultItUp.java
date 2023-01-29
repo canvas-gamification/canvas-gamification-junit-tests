@@ -1,11 +1,11 @@
 package arrays.programs_involving_data_sequences.hard.q8;
 
 /*
-Write a Java program that calls a method called productMaker that takes as input an array of integers. The method
-multiplies each element of the array by the index value and returns that array as output. For example, if the input
-array is [1,4,6], then the output array will be [0,4,12]. The program should then print out the resulting array with
-each element on a newline. Take an array of size 10 in the main method and give it to the method and print the result
-in one line. Your method should be general enough to work with any size of array.
+Write a Java program that asks the user to enter 10 integers, stores them in an array, and passes that array to a method
+called productMaker. This method should take an array of integers and multiply each element by its index. The method
+should have no return value as the changes to the array will carry back over to the main method. The main method should
+then print the result with a space between each element. The productMaker method should be able to work with an array of
+any size. Ex. the array [1,4,6] will become [0,4,12]
 
 Sample Output:
     Enter an array of 10 integers:
