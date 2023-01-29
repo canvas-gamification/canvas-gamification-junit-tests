@@ -97,7 +97,7 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputProvider")
   public void correctFineCalculatorMethod(int speed, char isSchoolZone, int fine) throws Throwable {
-    TestOption.incorrectStructureErrorMessage = "Your fineCalculator method does not correctly print the response with the fine.";
+    TestOption.incorrectMethodStructureErrorMessage = "Your fineCalculator method does not correctly print the fine.";
     Clause[] methodSentence;
     methodSentence = new Clause[]{
             new StringLiteral("Your fine is " + fine + " dollars!"),
