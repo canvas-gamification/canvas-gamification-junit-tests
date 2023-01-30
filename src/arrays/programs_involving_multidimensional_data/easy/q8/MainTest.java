@@ -64,6 +64,6 @@ public class MainTest extends BaseRandomTest {
                 out[i][j] = Integer.parseInt(getItemByName(i + "x" + j));
             }
         }
-        CustomAssertions._assertArrayEquals(arr, out, "Your program does not correctly print the multiplied 2D array.");
+        CustomAssertions._assertArrayEquals(arr, out, "Your program does not correctly modify the 2D array.");
     }
 }
