@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MainTest extends BaseRandomTest {
     // Java
 
-    public static final int n = 7;
+    public static final int n = 120;
 
     public Clause[] testSentence() {
         Clause[] c = new Clause[2 * n + 8];
