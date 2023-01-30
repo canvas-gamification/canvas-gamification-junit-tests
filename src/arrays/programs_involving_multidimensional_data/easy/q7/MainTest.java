@@ -61,6 +61,6 @@ public class MainTest extends BaseRandomTest {
                 out[i][j] = Integer.parseInt(getItemByName(i + "x" + j));
             }
         }
-        CustomAssertions._assertArrayEquals(ans, out, "Your program does not correctly print the integer 2D array.");
+        CustomAssertions._assertArrayEquals(ans, out, "Your program does not correctly convert the 2D double array to an integer array.");
     }
 }
