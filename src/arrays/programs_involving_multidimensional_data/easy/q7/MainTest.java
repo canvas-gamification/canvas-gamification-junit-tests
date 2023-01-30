@@ -37,27 +37,15 @@ public class MainTest extends BaseRandomTest {
         ChangedVals.main(new String[0]);
     }
 
-    public static int[][] answerFor(double[][] arr) {
-        int[][] ans = new int[arr.length][arr[0].length];
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[0].length; j++)
-                ans[i][j] = (int) (arr[i][j] + diff);
-        }
-        return ans;
-    }
-
     @Test
     public void printsCorrectOutput() throws InvalidClauseException {
         double[][] arr = new double[n][n];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                arr[i][j] = Double.parseDouble(getItemByName(i + " " + j));
-            }
-        }
-        int[][] ans = answerFor(arr);
+        int[][] ans = new int[n][n];
         int[][] out = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
+                arr[i][j] = Double.parseDouble(getItemByName(i + " " + j));
+                ans[i][j] = (int)(arr[i][j] + diff);
                 out[i][j] = Integer.parseInt(getItemByName(i + "x" + j));
             }
         }

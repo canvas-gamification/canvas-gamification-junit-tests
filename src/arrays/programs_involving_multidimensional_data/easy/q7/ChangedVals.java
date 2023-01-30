@@ -1,9 +1,9 @@
 package arrays.programs_involving_multidimensional_data.easy.q7;
 
 /*
-Write a Java program that creates a 2D array of random double values of size 3 by 3, with a range of values from 1-1000
-(inclusive of both values), print the generated 2D array each row in a line. Then convert all of its values into a new
-integer array and add 30 to each value. Finally, print out the contents of the new integer array, each row in a line.
+Write a Java program that creates a 3 by 3 2D array of random double values ranging from 1-1000 (inclusive on both ends),
+print each row of the array on a new line. Then convert all of its values into a new integer array and add 30 to each
+value. Finally, print out the contents of the new integer array, following the same formatting.
  */
 
 public class ChangedVals {
