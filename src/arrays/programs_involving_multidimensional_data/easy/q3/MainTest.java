@@ -107,7 +107,7 @@ public class MainTest extends BaseRandomTest {
         };
         MethodTest m = new MethodTest(Identities.class, "checkMatrix", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(ans, output, "Your checkMatrix method does not correctly check if the input is an identitly matrix.");
+        CustomAssertions._assertEquals(ans, output, "Your checkMatrix method does not correctly identify an identity matrix.");
     }
 
 }
