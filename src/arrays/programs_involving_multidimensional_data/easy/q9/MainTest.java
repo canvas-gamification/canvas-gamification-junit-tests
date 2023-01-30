@@ -34,28 +34,17 @@ public class MainTest extends BaseRandomTest {
         Sum.main(new String[0]);
     }
 
-    public static int[] answerFor(int[][] arr) {
-        int[] ans = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[0].length; j++) {
-                arr[i][j] /= div;
-                ans[i] += arr[i][j];
-            }
-        }
-        return ans;
-    }
-
     @Test
     public void printsCorrectOutput() throws InvalidClauseException {
         int[][] arr = new int[n][n];
+        int[] ans = new int[n];
+        int[] out = new int[n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 arr[i][j] = Integer.parseInt(getItemByName(i + " " + j));
+                arr[i][j] /= div;
+                ans[i] += arr[i][j];
             }
-        }
-        int[] ans = answerFor(arr);
-        int[] out = new int[n];
-        for (int i = 0; i < n; i++) {
             out[i] = Integer.parseInt(getItemByName(i + ""));
         }
         CustomAssertions._assertArrayEquals(ans, out, "Your program does not correctly print the sum of each modified row.");
