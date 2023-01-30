@@ -58,6 +58,6 @@ public class MainTest extends BaseRandomTest {
         for (int i = 0; i < n; i++) {
             out[i] = Integer.parseInt(getItemByName(i + ""));
         }
-        CustomAssertions._assertArrayEquals(ans, out, "Your program does not correctly print the array including sum of each rows after division.");
+        CustomAssertions._assertArrayEquals(ans, out, "Your program does not correctly print the sum of each modified row.");
     }
 }
