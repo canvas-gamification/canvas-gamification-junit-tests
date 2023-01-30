@@ -3,10 +3,10 @@ package arrays.multidimensional_arrays.hard.q6;
 /*
 Make a program that defines two 2D integer arrays and uses a method called addMatrices to add them together to create a
 new 2D array. The main method should define the two initial arrays and pass them to the addMatrices method. The method
-should check that the two arrays have the same dimensions, otherwise printing an error message. For the sake of
-simplicity, assume that the rows in an array have a consistent length. To add two arrays you take the elements at the
-same index, add them together, and place the new number at the same index in the new array. Once the new 2D array is
-created, print the newly created 2D array.
+should check that the two arrays have the same dimensions, otherwise returning null. To add two arrays you take the
+elements at the same index, add them together, and place the new number at the same index in the new array. For the sake
+of simplicity, assume that the rows in an array have a consistent length. In the main method, if the method returned null,
+print an error message and otherwise print the newly created 2D array.
  */
 
 public class OneAndOneMakeTwoDArrays {

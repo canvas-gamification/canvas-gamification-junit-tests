@@ -6,7 +6,6 @@ import global.tools.CustomAssertions;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
-import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -24,20 +23,20 @@ public class MainTest extends BaseTest {
     public Clause[] testSentence() {
         if(a.length != b.length || a[0].length != b[0].length) {
             return new Clause[]{
-                    new StringLiteral("Can't add because arrays of different sizes!")
+                    new StringLiteral("Can't add the arrays because they are different sizes!")
             };
         }
         else{
-            Clause[] c = new Clause[3 * a.length];
+            Clause[] c = new Clause[2 * a.length];
+
             int[][] ans = answerFor(a, b);
             for(int i = 0; i < a.length; i ++){
                 String st = "";
                 for(int j = 0; j < a[0].length; j ++){
                     st += ans[i][j] + " ";
                 }
-                c[3 * i] = new StringLiteral(st.trim());
-                c[3 * i + 1] = new Optional(new StringLiteral(" "));
-                c[3 * i + 2] = new NewLine();
+                c[2 * i] = new StringLiteral(st);
+                c[2 * i + 1] = new NewLine();
             }
             return c;
         }
