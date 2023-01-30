@@ -12,6 +12,7 @@ import global.variables.clauses.RandomInteger;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -60,12 +61,13 @@ public class MainTest extends BaseRandomTest {
             }
         }
         boolean ans = answerFor(arr);
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify an identity matrix.";
         runWithInput("", new Clause[]{
                 new StringLiteral("" + ans)
         });
     }
 
-    static Stream<int[][]> inputProvider() {
+    static Stream<Arguments> inputProvider() {
         int[][] t1 = new int[][]{
                 {1, 0},
                 {0, 1}
@@ -93,15 +95,27 @@ public class MainTest extends BaseRandomTest {
                 {0, 1, 0, 1, 0},
                 {1, 0, 1, 0, 1}
         };
+        int[][] t7 = new int[][]{
+                {1, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 0, 1, 0},
+                {0, 0, 0, 0, 1}
+        };
         return Stream.of(
-                t1, t2, t3, t4, t5, t6
+                Arguments.of(t1, true),
+                Arguments.of(t2, true),
+                Arguments.of(t3, false),
+                Arguments.of(t4, false),
+                Arguments.of(t5, false),
+                Arguments.of(t6, false),
+                Arguments.of(t7, true)
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctCheckMatrix(int[][] arr) throws Throwable {
-        boolean ans = answerFor(arr);
+    public void correctCheckMatrix(int[][] arr, boolean ans) throws Throwable {
         Object[][] arguments = {
                 {arr, int[][].class}
         };
