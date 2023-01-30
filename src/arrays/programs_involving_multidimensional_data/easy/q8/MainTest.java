@@ -38,30 +38,18 @@ public class MainTest extends BaseRandomTest {
         EvenOrOdd.main(new String[0]);
     }
 
-    public static void answerFor(int[][] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[0].length; j++) {
+    @Test
+    public void printsCorrectOutput() throws InvalidClauseException {
+        int[][] arr = new int[n][n];
+        int[][] out = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                arr[i][j] = Integer.parseInt(getItemByName(i + " " + j));
+                out[i][j] = Integer.parseInt(getItemByName(i + "x" + j));
                 if (arr[i][j] % 2 == 0)
                     arr[i][j] *= em;
                 else
                     arr[i][j] *= om;
-            }
-        }
-    }
-
-    @Test
-    public void printsCorrectOutput() throws InvalidClauseException {
-        int[][] arr = new int[n][n];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                arr[i][j] = Integer.parseInt(getItemByName(i + " " + j));
-            }
-        }
-        answerFor(arr);
-        int[][] out = new int[n][n];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                out[i][j] = Integer.parseInt(getItemByName(i + "x" + j));
             }
         }
         CustomAssertions._assertArrayEquals(arr, out, "Your program does not correctly modify the 2D array.");
