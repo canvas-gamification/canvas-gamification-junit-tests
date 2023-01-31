@@ -1,4 +1,4 @@
-package test.object.sampleQuestion;
+package test.object.sample_question;
 
 public class House {
     private Person[] residents;

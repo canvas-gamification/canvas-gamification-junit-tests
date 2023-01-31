@@ -1,4 +1,4 @@
-package test.object.sampleQuestion;
+package test.object.sample_question;
 
 import global.ObjectTest;
 import global.variables.Clause;
@@ -15,8 +15,8 @@ import static global.tools.CustomAssertions._assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest {
-    private final String personClassString = "test.object.sampleQuestion.Person";
-    private final String houseClassString = "test.object.sampleQuestion.House";
+    private final String personClassString = "test.object.sample_question.Person";
+    private final String houseClassString = "test.object.sample_question.House";
     private final String defaultName = "Bob";
     private final int defaultAge = 21;
     private final boolean defaultEmployed = false;
