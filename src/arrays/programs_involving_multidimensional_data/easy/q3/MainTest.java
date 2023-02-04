@@ -61,7 +61,7 @@ public class MainTest extends BaseRandomTest {
             }
         }
         boolean ans = answerFor(arr);
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify an identity matrix.";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print if the matrix is an identity matrix.";
         runWithInput("", new Clause[]{
                 new StringLiteral("" + ans)
         });
