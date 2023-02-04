@@ -39,7 +39,7 @@ public class MainTest extends BaseTest {
             new Optional(new StringLiteral(" ")),
             new NewLine(),
             new StringLiteral("Your fine is "),
-            new PlaceHolder(),
+            new IntegerLiteral("ans"),
             new StringLiteral(" dollars!"),
             new Optional(new StringLiteral(" ")),
     };
@@ -99,11 +99,8 @@ public class MainTest extends BaseTest {
   @ParameterizedTest
   @MethodSource("inputProvider")
   public void printsCorrectOutput(int speed, char isSchoolZone, int fine) throws InvalidClauseException {
-    TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the cost of the fine.";
-    runWithInput(speed + " " + isSchoolZone, new Clause[]{
-            new IntegerLiteral(fine)
-    });
-
+    runWithInput(speed + " " + isSchoolZone);
+    CustomAssertions._assertEquals(fine, Integer.parseInt(getItemByName("ans")), "Your program does not correctly print the cost of the fine.");
   }
 
   @ParameterizedTest
