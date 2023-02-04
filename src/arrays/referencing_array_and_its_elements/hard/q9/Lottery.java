@@ -3,7 +3,7 @@ package arrays.referencing_array_and_its_elements.hard.q9;
 /*
 Write a Java program that randomly generates an array of integers with 120 elements. Each element should have 5 digits
 representing ticket numbers for a prize draw. Print out the list of tickets then generate a random index for the array
-and display the index and corresponding ticket number as the winning ticket.
+and display the index plus 1, and the corresponding ticket number of the winning ticket.
 
 Sample Output:
     The list of tickets are:
