@@ -1,8 +1,8 @@
 package arrays.arrays_with_methods.medium.q9;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     public Clause[] testSentence() {
         return new Clause[]{
                 new IntegerLiteral(24),
@@ -63,7 +64,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("factInputProvider")
     void correctFactMethod(int n, int fact) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(TwoDAndThatsAFact.class, "fact", new Object[]{n}, int.class);
+        Object[][] arguments = {
+                {n, int.class}
+        };
+        MethodTest m = new MethodTest(TwoDAndThatsAFact.class, "fact", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(fact, output, "Your fact method does not correctly calculate factorials.");
     }
 }

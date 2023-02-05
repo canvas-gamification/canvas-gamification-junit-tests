@@ -1,9 +1,8 @@
 package arrays.arrays_with_methods.medium.q9;
 
 /*
-Make a program that will calculate the factorial of each element in a 2D array and store the factorial of each element
-of the array into a separate 2D array, and print the resulting array. Use a method called fact to calculate the factorial
-of a given number.
+Make a program that defines a 2D array in the main method. Then calculate the factorial of each element using a method
+called fact that returns an integer, and store it in a separate 2D array. Print the resulting array.
 Sample output:
 24 120 720
 2 1 2
