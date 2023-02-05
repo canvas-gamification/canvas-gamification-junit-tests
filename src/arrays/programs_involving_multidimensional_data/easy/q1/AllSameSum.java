@@ -5,7 +5,7 @@ Write a Java program that initialises a 4 by 4 multidimensional array of integer
 prints true if all the rows have the same sum and false otherwise.
 
 Sample Output:
-    Enter a 4 by 4 multidimentional array in 4 lines:
+    Enter a 4 by 4 multidimensional array in 4 lines:
     4 5 3 2
     7 8 -1 0
     10 1 1 2
@@ -20,7 +20,7 @@ public class AllSameSum {
         Scanner input = new Scanner(System.in);
         int[][] arr = new int[4][4];
 
-        System.out.println("Enter a 4 by 4 multidimentional array in 4 lines:");
+        System.out.println("Enter a 4 by 4 multidimensional array in 4 lines:");
         for (int x = 0; x < 4; x++)
             for (int y = 0; y < 4; y++)
                 arr[x][y] = input.nextInt();

@@ -15,6 +15,8 @@ import java.util.stream.Stream;
 import static global.utils.ArrayUtil.*;
 
 public class MainTest extends BaseTest {
+    //Parsons
+
     public static int n = 4;
 
     public Clause[] testSentence() {
@@ -65,7 +67,7 @@ public class MainTest extends BaseTest {
         int[][] t4 = new int[n][n];
         for (int i = 0; i < n; i++)
             t4[i] = generateRandomArray(1, 100, n);
-        for(int i = 0; i < n; n++){
+        for(int i = 0; i < n; i++){
             for(int j = 0; j < n; j++){
                 t4[i][j] *= -1;
             }
