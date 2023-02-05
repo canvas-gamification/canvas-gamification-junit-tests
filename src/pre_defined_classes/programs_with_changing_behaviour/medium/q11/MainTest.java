@@ -17,7 +17,7 @@ public class MainTest extends BaseRandomTest {
                 new RandomInteger(0, 100, "score"),
                 new NewLine(),
                 new StringLiteral("The modifier for this round is "),
-                new RandomDouble(0, 5,  "modifier"),
+                new RandomDouble(0, 5, "modifier"),
                 new NewLine(),
                 new StringLiteral("Your modified score is "),
                 new DoubleLiteral("modifiedScore"),
