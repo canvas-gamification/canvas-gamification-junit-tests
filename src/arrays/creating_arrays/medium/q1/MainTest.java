@@ -27,7 +27,7 @@ public class MainTest extends BaseTest {
         double expected = Double.parseDouble(getItemByName("rand" + (repetitionInfo.getCurrentRepetition() - 1)))
                 * (repetitionInfo.getCurrentRepetition() - subtract);
         double actual = Double.parseDouble(getItemByName("num" + (repetitionInfo.getCurrentRepetition() - 1)));
-        assertEquals(expected, actual, 0.00001, "Your program does not correctly calculate the final number on row " + repetitionInfo.getCurrentRepetition());
+        assertEquals(expected, actual, 0.00001, "Your program does not correctly calculate the random value by the index");
     }
 
     public Clause[] clauseBuilder() {
