@@ -1,8 +1,8 @@
 package arrays.arrays_with_methods.medium.q6;
 
 /*
-Make a method that takes an integer array and return a new array that consists of the largest and smaller value in the
-original array. Assume that the numbers in the array are between 0 and 100.
+Make a method that takes an integer array as input and returns a new array that consists of the largest and smallest
+value in the original array. Assume that the numbers in the array are between 0 and 100.
 
 Distractors:
 for( int i = 0; i < arr.length; i -- )
@@ -30,8 +30,7 @@ public class OppositeEnds {
             if( arr[i] < small )
                 small = arr[i];
         }
-        int[] result = {large, small};
-        return result;
+        return new int[]{large, small};
     }
 
 }
