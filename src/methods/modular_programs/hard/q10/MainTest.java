@@ -58,7 +58,7 @@ public class MainTest extends BaseTest {
     @MethodSource("inputProvider")
     void printsCorrectChineseZodiacSign(int year, String sign) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print the correct chinese zodiac sign for the entered year.";
-        runWithInput(String.valueOf(year), new Clause[] {
+        runWithInput(String.valueOf(year), new Clause[]{
                 new StringLiteral(sign)
         });
     }
