@@ -30,5 +30,4 @@ public class ArrayThereDelilah {
             middle[i] = arr[i].charAt((int) Math.round(arr[i].length() / 2.0) - 1);
         return middle;
     }
-
 }
