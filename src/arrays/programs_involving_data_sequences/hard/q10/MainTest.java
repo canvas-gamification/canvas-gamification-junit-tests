@@ -43,7 +43,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void printCorrectOutput(String[] input, char[] word) throws Throwable {
+    void correctMiddleMethod(String[] input, char[] word) throws Throwable {
         Object[][] arguments = {
                 {input, String[].class},
         };
