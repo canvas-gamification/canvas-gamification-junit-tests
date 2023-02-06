@@ -49,6 +49,6 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(ArrayThereDelilah.class, "middle", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertArrayEquals(word, output, "");
+        CustomAssertions._assertArrayEquals(word, output, "Your middle method does not return the correct array of middle characters.");
     }
 }
