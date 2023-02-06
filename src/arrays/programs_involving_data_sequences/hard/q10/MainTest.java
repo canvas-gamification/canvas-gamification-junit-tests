@@ -37,8 +37,8 @@ public class MainTest extends BaseTest {
                 Arguments.of(new String[]{"funky", "opera", "flowers"}, "new".toCharArray()),
                 Arguments.of(new String[]{"rhyme", "yolk", "corks", "bookcase"}, "york".toCharArray()),
                 Arguments.of(new String[]{"lucid", "doing", "retry", "thyme"}, "city".toCharArray()),
-                Arguments.of(new String[]{"lemon", "faith", "pylon", "field", "backslash"},"miles".toCharArray())
-                );
+                Arguments.of(new String[]{"lemon", "faith", "pylon", "field", "backslash"}, "miles".toCharArray())
+        );
     }
 
     @ParameterizedTest

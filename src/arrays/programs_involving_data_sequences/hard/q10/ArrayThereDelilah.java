@@ -15,16 +15,16 @@ Sample Output:
 
 public class ArrayThereDelilah {
     public static void main(String[] args) {
-        String[] array = new String[] {"add", "here", "lilly", "president", "jelly", "advance", "archers"};
+        String[] array = new String[]{"add", "here", "lilly", "president", "jelly", "advance", "archers"};
         char[] middleCharacter = middle(array);
         String output = "";
-        for(char item: middleCharacter)
+        for (char item : middleCharacter)
             output += item;
         System.out.println("The middle letters of the array are: ");
         System.out.println(output);
     }
 
-    public static char[] middle(String[] arr){
+    public static char[] middle(String[] arr) {
         char[] middle = new char[arr.length];
         for (int i = 0; i < arr.length; i++)
             middle[i] = arr[i].charAt((int) Math.round(arr[i].length() / 2.0) - 1);
