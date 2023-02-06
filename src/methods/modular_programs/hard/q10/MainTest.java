@@ -19,12 +19,11 @@ public class MainTest extends BaseTest {
     @Override
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "Goat";
+        TestOption.defaultInput = "2012";
         return new Clause[]{
                 new StringLiteral("Enter a year:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new IntegerLiteral(),
                 new StringLiteral("The Chinese zodiac sign for the year "),
                 new IntegerLiteral(),
                 new StringLiteral(" is "),
@@ -51,7 +50,7 @@ public class MainTest extends BaseTest {
                 Arguments.of(2004, "Monkey"),
                 Arguments.of(1573, "Rooster"),
                 Arguments.of(14, "Dog"),
-                Arguments.of(600, "Pig")
+                Arguments.of(603, "Pig")
         );
     }
 

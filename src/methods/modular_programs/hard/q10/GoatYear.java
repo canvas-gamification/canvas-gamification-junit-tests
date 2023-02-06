@@ -49,7 +49,7 @@ public class GoatYear {
         } else if (year % 12 == 9) {
             sign = "Snake";
         } else if (year % 12 == 10) {
-            sign = "Hose";
+            sign = "Horse";
         } else if (year % 12 == 11) {
             sign = "Goat";
         }
