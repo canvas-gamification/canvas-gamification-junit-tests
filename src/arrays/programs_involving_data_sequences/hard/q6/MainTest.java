@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.utils.ArrayUtil.*;
+import static org.junit.Assert.assertArrayEquals;
 
 public class MainTest extends BaseTest {
     // Java
