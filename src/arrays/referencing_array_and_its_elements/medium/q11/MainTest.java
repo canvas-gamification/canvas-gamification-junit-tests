@@ -1,6 +1,7 @@
 package arrays.referencing_array_and_its_elements.medium.q11;
 
 import global.BaseTest;
+import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.variables.Clause;
@@ -9,16 +10,14 @@ import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Random;
 import java.util.stream.Stream;
 
 import static global.utils.ArrayUtil.*;
-import static org.junit.Assert.assertEquals;
 
 public class MainTest extends BaseTest {
     // Java
 
-    public static int n = 6;
+    public static int n = 30;
     public static char c = 'b';
 
     public Clause[] testSentence() {
@@ -28,10 +27,14 @@ public class MainTest extends BaseTest {
                 new StringLiteral("Enter " + n + " given names:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("There are "),
+                new StringLiteral("These "),
                 new IntegerLiteral("ans"),
-                new StringLiteral(" names that end with the letter " + c),
-                new Optional(new StringLiteral("."))
+                new StringLiteral(" names end with the letter " + c + ":"),
+                new Optional(new StringLiteral(" ")),
+                new NewLine(),
+                new PlaceHolder(),
+                new Optional(new StringLiteral(" ")),
+                new Optional(new NewLine())
         };
     }
 
@@ -39,28 +42,15 @@ public class MainTest extends BaseTest {
         VowelNames.main(new String[0]);
     }
 
-    public static String randStr() {
-        Random r = new Random();
-        String ans = "";
-        for (int i = 0; i < n; i++) {
-            int up = r.nextInt(20) + 1;
-            String st = "" + (char) ('A' + r.nextInt(26));
-            for (int j = 1; j < up; j++)
-                st += "" + (char) ('a' + r.nextInt(26));
-            ans += st + " ";
-        }
-
-        return ans;
-    }
 
     static Stream<String> inputProvider() {
         return Stream.of(
-                randStr(),
-                randStr(),
-                randStr(),
-                randStr(),
-                randStr(),
-                randStr(),
+                arrayToInput(generateRandomWordArray(n)),
+                arrayToInput(generateRandomWordArray(n)),
+                arrayToInput(generateRandomWordArray(n)),
+                arrayToInput(generateRandomWordArray(n)),
+                arrayToInput(generateRandomWordArray(n)),
+                arrayToInput(generateRandomWordArray(n)),
                 arrayToInput(replicateArray(c, n)),
                 arrayToInput(replicateArray((char) (c + 1), n))
 
@@ -69,12 +59,23 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void printsCorrectOutput(String a) {
+    void printsCorrectOutput(String a) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the current names ending with the letter " + c;
         int t = 0;
-        for (int i = 0; i < a.length(); i++)
-            if (a.charAt(i) == ' ' && a.charAt(i - 1) == c)
+        String ans = "";
+        String temp = "";
+        for (int i = 0; i < a.length(); i++) {
+            temp += a.charAt(i);
+            if (a.charAt(i) == ' ' && a.charAt(i - 1) == c) {
                 t++;
-        runWithInput(a);
-        assertEquals("Your program does not print the correct number of names that ends with " + c + ".", t, Integer.parseInt(getItemByName("ans")));
+                ans += temp;
+            }
+            if (a.charAt(i) == ' ')
+                temp = "";
+        }
+        runWithInput(a, new Clause[]{
+                new StringLiteral(ans)
+        });
+        CustomAssertions._assertEquals(t, Integer.parseInt(getItemByName("ans")), "Your program does not print the correct number of names that ends with " + c + ".");
     }
 }
