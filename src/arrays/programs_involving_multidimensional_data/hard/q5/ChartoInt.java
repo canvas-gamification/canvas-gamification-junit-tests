@@ -1,7 +1,7 @@
 package arrays.programs_involving_multidimensional_data.hard.q5;
 
 /*
-Write a Java program that initializes a 2 in 13 2D array with random integer between 97 to 122 (Inclusive of both ends),
+Write a Java program that initializes a 2 by 13 2D array with random integers between 97 to 122 (Inclusive of both ends),
 and print it. The program will then convert each one of those integer values into a character and display each row of
 the 2D array on a separate line.
 Note: the characters within a line do not need any spaces in between them.
