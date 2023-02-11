@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class MainTest extends BaseRandomTest {
     // Parsons with Distractors
 
-    public static final int n = 5;
+    public static final int n = 10;
     public static final int up = 1000;
     public static final int down = 1;
 
