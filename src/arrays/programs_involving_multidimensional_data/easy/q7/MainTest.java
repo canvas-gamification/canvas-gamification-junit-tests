@@ -12,13 +12,14 @@ public class MainTest extends BaseRandomTest {
 
     public static int n = 3;
     public static int diff = 30;
+    public static int limit = 1001;
 
     public Clause[] testSentence() {
         Clause[] c = new Clause[4 * n * n + 2 * n];
         int t = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                c[t++] = new RandomDouble(1, 1001, i + " " + j);
+                c[t++] = new RandomDouble(1, limit, i + " " + j);
                 c[t++] = new StringLiteral(" ");
             }
             c[t++] = new NewLine();
@@ -38,14 +39,14 @@ public class MainTest extends BaseRandomTest {
     }
 
     @Test
-    public void printsCorrectOutput() throws InvalidClauseException {
+    public void printsCorrectOutput() {
         double[][] arr = new double[n][n];
         int[][] ans = new int[n][n];
         int[][] out = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 arr[i][j] = Double.parseDouble(getItemByName(i + " " + j));
-                ans[i][j] = (int)(arr[i][j] + diff);
+                ans[i][j] = (int) (arr[i][j] + diff);
                 out[i][j] = Integer.parseInt(getItemByName(i + "x" + j));
             }
         }
