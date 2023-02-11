@@ -1,9 +1,9 @@
 package arrays.programs_involving_multidimensional_data.medium.q7;
 
 /*
-Write a Java program that initialises a 2D array of size 5 by 5, with integers generated randomly in the range of 1 to
-100 (inclusive of both values), and print it each row in a line.Then use a method called addorSub, that adds 4 to
-the element if it is even and subtracts 3 from it if it is odd. The resulting array is displayed as output.
+Write a Java program that initializes a 2D array of size 10 by 10, with randomly generated integers in the range of 1 to
+100 (inclusive of both values), and print each row in a line. Then use a method called addorSub, which adds 4 to
+the element if it is even and subtracts 3 from it if it is odd. Display the resulting array as output.
 
 Distractors:
     if(arr[i] % 2 == 0)
@@ -16,7 +16,7 @@ Distractors:
 
 public class MultiDivide {
     public static void main(String[] args) {
-        int[][] arr = new int[5][5];
+        int[][] arr = new int[10][10];
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
                 arr[i][j] = (int) (Math.random() * 100 + 1);
