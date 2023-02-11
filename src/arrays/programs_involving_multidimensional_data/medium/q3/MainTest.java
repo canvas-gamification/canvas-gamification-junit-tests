@@ -109,7 +109,7 @@ public class MainTest extends BaseRandomTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctAddMatrices(int[][] a, int[][] b, int[][] ans) throws Throwable {
+    public void correctAddMatrices(int[][] a, int[][] b, int[][] ans) {
         TestOption.incorrectStructureErrorMessage = "Your multiply method does not correctly multiply elements of the two 2D arrays.";
         Clause[] c = new Clause[ans.length * ans.length + ans.length];
         int t = 0;
@@ -122,6 +122,6 @@ public class MainTest extends BaseRandomTest {
                 {a, int[][].class},
                 {b, int[][].class}
         };
-        MethodTest m = new MethodTest(MultiDifferent.class, "multiply", arguments, c);
+        new MethodTest(MultiDifferent.class, "multiply", arguments, c);
     }
 }
