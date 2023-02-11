@@ -11,15 +11,16 @@ public class MainTest extends BaseRandomTest {
     // Parsons
 
     public static int n = 5;
-    public static int em = 5;
-    public static int om = 3;
+    public static int evenMulti = 5;
+    public static int oddMulti = 3;
+    public static int top = 1001;
 
     public Clause[] testSentence() {
         Clause[] c = new Clause[4 * n * n + 2 * n];
         int t = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                c[t++] = new RandomInteger(1, 1001, i + " " + j);
+                c[t++] = new RandomInteger(1, top, i + " " + j);
                 c[t++] = new StringLiteral(" ");
             }
             c[t++] = new NewLine();
@@ -47,9 +48,9 @@ public class MainTest extends BaseRandomTest {
                 arr[i][j] = Integer.parseInt(getItemByName(i + " " + j));
                 out[i][j] = Integer.parseInt(getItemByName(i + "x" + j));
                 if (arr[i][j] % 2 == 0)
-                    arr[i][j] *= em;
+                    arr[i][j] *= evenMulti;
                 else
-                    arr[i][j] *= om;
+                    arr[i][j] *= oddMulti;
             }
         }
         CustomAssertions._assertArrayEquals(arr, out, "Your program does not correctly modify the 2D array.");
