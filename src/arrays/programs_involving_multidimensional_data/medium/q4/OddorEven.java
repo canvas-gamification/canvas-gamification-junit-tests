@@ -1,10 +1,9 @@
 package arrays.programs_involving_multidimensional_data.medium.q4;
 
 /*
-Write a Java program that initializes a 2D array of random integers of size 5 by 5, with numbers in the range of 1and 10
-(inclusive of both values), and print in each row in a line. Then use a method named <<count>> that creates a 1D array
-with two elements in it, and count the number of even and odd numbers in the 2D array. Then, print out the resulting 1D
-array.
+Write a Java program that initializes a 2D array of random integers of size 5 by 5, with numbers in the range of 1 to 10
+(inclusive of both values), and print each row in a line. Then use a method named <<count>> that creates a 1D array
+with two elements, and count the number of even and odd numbers in the 2D array. Then, print out the resulting 1D array.
 
 Distractors:
     oddEve[0]--;

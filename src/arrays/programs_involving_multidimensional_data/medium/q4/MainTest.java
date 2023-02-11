@@ -93,7 +93,7 @@ public class MainTest extends BaseRandomTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctAddMatrices(int[][] arr, int even, int odd) throws Throwable {
+    public void correctAddMatrices(int[][] arr, int even, int odd) {
         TestOption.incorrectStructureErrorMessage = "Your count method does not correctly count the number of odd and even elements in the 2D array.";
         Clause[] c = new Clause[]{
                 new StringLiteral("" + even),
@@ -104,6 +104,6 @@ public class MainTest extends BaseRandomTest {
         Object[][] arguments = {
                 {arr, int[][].class}
         };
-        MethodTest m = new MethodTest(OddorEven.class, "count", arguments, c);
+        new MethodTest(OddorEven.class, "count", arguments, c);
     }
 }
