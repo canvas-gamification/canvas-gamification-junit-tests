@@ -17,22 +17,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MainTest extends BaseTest {
     // Parsons
 
-    public static final int [][] a = { {4, 5, 6}, {66, 54, 21}, {609, 998, 543}, {1111, 2342, 4583}  };
-    public static final int [][] b = { {4433, 2316, 9879}, {662, 154, 721}, {69, 98, 54},{1, 4, 3}  };
+    public static final int[][] a = {{4, 5, 6}, {66, 54, 21}, {609, 998, 543}, {1111, 2342, 4583}};
+    public static final int[][] b = {{4433, 2316, 9879}, {662, 154, 721}, {69, 98, 54}, {1, 4, 3}};
 
     public Clause[] testSentence() {
-        if(a.length != b.length || a[0].length != b[0].length) {
+        if (a.length != b.length || a[0].length != b[0].length) {
             return new Clause[]{
                     new StringLiteral("Can't add the arrays because they are different sizes!")
             };
-        }
-        else{
+        } else {
             Clause[] c = new Clause[2 * a.length];
 
             int[][] ans = answerFor(a, b);
-            for(int i = 0; i < a.length; i ++){
+            for (int i = 0; i < a.length; i++) {
                 String st = "";
-                for(int j = 0; j < a[0].length; j ++){
+                for (int j = 0; j < a[0].length; j++) {
                     st += ans[i][j] + " ";
                 }
                 c[2 * i] = new StringLiteral(st);
@@ -46,12 +45,12 @@ public class MainTest extends BaseTest {
         OneAndOneMakeTwoDArrays.main(new String[0]);
     }
 
-    public static int[][] answerFor(int[][] x, int[][] y){
-        if( x.length != y.length  || x[0].length != y[0].length )
+    public static int[][] answerFor(int[][] x, int[][] y) {
+        if (x.length != y.length || x[0].length != y[0].length)
             return null;
         int[][] ans = new int[x.length][x[0].length];
-        for(int i = 0; i < x.length; i ++){
-            for(int j = 0; j < x[0].length; j ++)
+        for (int i = 0; i < x.length; i++) {
+            for (int j = 0; j < x[0].length; j++)
                 ans[i][j] = x[i][j] + y[i][j];
         }
         return ans;
@@ -93,9 +92,10 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(OneAndOneMakeTwoDArrays.class, "addMatrices", arguments);
         Object output = m.callMethod();
-        if(output != null)
-            CustomAssertions._assertArrayEquals(answerFor(a, b), output, "Your addMatrices method does not correctly add two matrices.");
+        int[][] ans = answerFor(a, b);
+        if (ans != null)
+            CustomAssertions._assertArrayEquals(ans, output, "Your addMatrices method does not correctly add two matrices.");
         else
-            assertTrue(answerFor(a, b) == null, "Your addMatrices method does not correctly identify invalid input.");
+            assertTrue(output == null, "Your addMatrices method does not correctly identify invalid input.");
     }
 }

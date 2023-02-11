@@ -10,30 +10,28 @@ print an error message and otherwise print the newly created 2D array.
  */
 
 public class OneAndOneMakeTwoDArrays {
-    public static void main( String [] args ) {
-        int [][] a = { {4, 5, 6}, {66, 54, 21}, {609, 998, 543}, {1111, 2342, 4583}  };
-        int [][] b = { {4433, 2316, 9879}, {662, 154, 721}, {69, 98, 54},{1, 4, 3}  };
-        int [][] c = addMatrices(a, b);
-        if(c != null){
-            for(int i = 0; i < c.length; i ++){
-                for(int j = 0; j < c[0].length; j ++)
+    public static void main(String[] args) {
+        int[][] a = {{4, 5, 6}, {66, 54, 21}, {609, 998, 543}, {1111, 2342, 4583}};
+        int[][] b = {{4433, 2316, 9879}, {662, 154, 721}, {69, 98, 54}, {1, 4, 3}};
+        int[][] c = addMatrices(a, b);
+        if (c != null) {
+            for (int i = 0; i < c.length; i++) {
+                for (int j = 0; j < c[0].length; j++)
                     System.out.print(c[i][j] + " ");
                 System.out.println();
             }
-        }
-        else
+        } else
             System.out.println("Can't add the arrays because they are different sizes!");
     }
 
-    public static int[][] addMatrices(int[][] a, int[][] b){
-        if( a.length == b.length  && a[0].length == b[0].length ){
-            int [][] c = new int[ a.length ][ a[0].length ];
-            for( int i = 0; i < c.length; i++ )
-                for( int j = 0; j < c[i].length; j++ )
+    public static int[][] addMatrices(int[][] a, int[][] b) {
+        if (a.length == b.length && a[0].length == b[0].length) {
+            int[][] c = new int[a.length][a[0].length];
+            for (int i = 0; i < c.length; i++)
+                for (int j = 0; j < c[i].length; j++)
                     c[i][j] = a[i][j] + b[i][j];
             return c;
-        }
-        else
+        } else
             return null;
     }
 
