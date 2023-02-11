@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class MainTest extends BaseRandomTest {
     // Parsons
 
-    public static int n = 5;
+    public static int n = 20;
     public static int div = 5;
 
     public Clause[] testSentence() {

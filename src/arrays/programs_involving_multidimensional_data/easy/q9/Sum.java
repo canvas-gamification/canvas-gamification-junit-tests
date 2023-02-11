@@ -1,14 +1,14 @@
 package arrays.programs_involving_multidimensional_data.easy.q9;
 
 /*
-Write a Java program that generates a 5 by 5 2D array of random integers ranging from 100-1000 (inclusive on both ends),
-and print the 2D array each row on a new line. Divide all the values by 5, then sum all the values in each row and store
-those sums into a 1D array which is printed to the console.
+Write a Java program that generates a 20 by 20 2D array of random integers ranging from 100-1000 (inclusive on both ends),
+and print the 2D array for each row on a new line. Divide all the values by 5, then sum all the values in each row and
+store those sums into a 1D array printed to the console.
  */
 
 public class Sum {
     public static void main(String[] args) {
-        int[][] arr = new int[5][5];
+        int[][] arr = new int[20][20];
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
                 arr[i][j] = 100 + (int) (Math.random() * 901);
