@@ -17,7 +17,7 @@ public class EveryEven {
         int[] arr = new int[10];
         for (int i = 0; i < arr.length; i++)
             arr[i] = (int) (Math.random() * 1000) + 1;
-        System.out.println("The random generated array:");
+        System.out.println("The randomly generated array:");
         for(int i = 0; i < 10; i ++)
             System.out.print(arr[i] + " ");
         System.out.println();
