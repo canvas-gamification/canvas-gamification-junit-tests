@@ -1,9 +1,10 @@
 package arrays.arrays_with_methods.hard.q9;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
+import global.utils.ArrayUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -20,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class MainTest extends BaseTest {
     // Java
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "4 23 87 17 96";
@@ -43,15 +45,18 @@ public class MainTest extends BaseTest {
         ArrayofDigits.main(new String[0]);
     }
 
-    static Stream<Arguments> powerNInputProvider() {
+    static Stream<int[]> powerNInputProvider() {
         return Stream.of(
-                Arguments.of(new int[]{0, 0, 0, 0, 0}, new int[]{0, 0, 0, 0, 0}),
-                Arguments.of(new int[]{1, 1, 1, 1, 1}, new int[]{1, 1, 1, 1, 1}),
-                Arguments.of(new int[]{1, 2, 3, 4, 5}, new int[]{1, 4, 9, 16, 25}),
-                Arguments.of(new int[]{6, 7, 8, 9, 10}, new int[]{36, 49, 64, 81, 100}),
-                Arguments.of(new int[]{2128, 73, 29, 18236, 273}, new int[]{4528384, 5329, 841, 332551696, 74529}),
-                Arguments.of(new int[]{-5, -23, -78, -1542, -18}, new int[]{25, 529, 6084, 2377764, 324}),
-                Arguments.of(new int[]{-46, 2, 98, -37413, -8701}, new int[]{2116, 4, 9604, 1399732569, 75707401})
+                new int[]{0, 0, 0, 0, 0},
+                new int[]{1, 1, 1, 1, 1}, new int[]{1, 1, 1, 1, 1},
+                new int[]{1, 2, 3, 4, 5},
+                new int[]{6, 7, 8, 9, 10},
+                new int[]{2128, 73, 29, 18236, 273},
+                new int[]{-5, -23, -78, -1542, -18},
+                new int[]{-46, 2, 98, -37413, -8701},
+                ArrayUtil.generateRandomArray(-1000, 1000, 500),
+                ArrayUtil.generateRandomArray(-300, -1, 550),
+                ArrayUtil.generateAscendingArray(-100, 200)
         );
     }
 
@@ -63,10 +68,22 @@ public class MainTest extends BaseTest {
         );
     }
 
+    public static int[] ans(int[] arr) {
+        int[] result = new int[arr.length];
+        for (int i = 0; i < arr.length; i++)
+            result[i] = arr[i]*arr[i];
+        return result;
+    }
+
     @ParameterizedTest
     @MethodSource("powerNInputProvider")
-    void correctPowerNMethod(int[] given, int[] expected) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(ArrayofDigits.class, "powerN", new Object[]{given}, int[].class);
+    void correctPowerNMethod(int[] given) throws Throwable {
+        int[] expected = ans(given);
+        Object[][] arguments = {
+                {given, int[].class}
+        };
+        MethodTest m = new MethodTest(ArrayofDigits.class, "powerN", arguments);
+        Object output = m.callMethod();
         assertNull(output, "Your powerN method should not have a return variable.");
         CustomAssertions._assertArrayEquals(expected, given, "Your method does not square the values in the given array.");
     }
@@ -75,10 +92,10 @@ public class MainTest extends BaseTest {
     @MethodSource("mainMethodInputProvider")
     void correctMainMethodOutput(String in, int one, int two, int three, int four, int five) {
         runWithInput(in);
-        assertEquals(one, Integer.parseInt(getItemByName("first")), "Your program does not square the first number.");
-        assertEquals(two, Integer.parseInt(getItemByName("second")), "Your program does not square the first number.");
-        assertEquals(three, Integer.parseInt(getItemByName("third")), "Your program does not square the first number.");
-        assertEquals(four, Integer.parseInt(getItemByName("fourth")), "Your program does not square the first number.");
-        assertEquals(five, Integer.parseInt(getItemByName("fifth")), "Your program does not square the first number.");
+        assertEquals(one, Integer.parseInt(getItemByName("first")), "Your program does not square the first number in the array.");
+        assertEquals(two, Integer.parseInt(getItemByName("second")), "Your program does not square the first number in the array.");
+        assertEquals(three, Integer.parseInt(getItemByName("third")), "Your program does not square the first number in the array.");
+        assertEquals(four, Integer.parseInt(getItemByName("fourth")), "Your program does not square the first number in the array.");
+        assertEquals(five, Integer.parseInt(getItemByName("fifth")), "Your program does not square the first number in the array.");
     }
 }
