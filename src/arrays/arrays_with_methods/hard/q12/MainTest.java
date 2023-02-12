@@ -1,10 +1,10 @@
 package arrays.arrays_with_methods.hard.q12;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -36,12 +36,16 @@ public class MainTest extends BaseTest {
 
     @RepeatedTest(15)
     void correctFactorialMethod(RepetitionInfo repetitionInfo) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(ArrayOfFacts.class, "factorial", new Object[]{repetitionInfo.getCurrentRepetition()}, int.class);
+        Object[][] arguments = {
+                {repetitionInfo.getCurrentRepetition(), int.class}
+        };
+        MethodTest m = new MethodTest(ArrayOfFacts.class, "factorial", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(factorials[repetitionInfo.getCurrentRepetition() - 1], output, "Your factorial method does not return the correct factorial value.");
     }
 
     @RepeatedTest(15)
-    void correctMainMethodOuput(RepetitionInfo repetitionInfo) throws InvalidClauseException {
+    void correctMainMethodOutput(RepetitionInfo repetitionInfo) throws InvalidClauseException {
         int[] values = new int[repetitionInfo.getCurrentRepetition()];
         System.arraycopy(factorials, 0, values, 0, repetitionInfo.getCurrentRepetition());
 
