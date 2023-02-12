@@ -2,7 +2,7 @@ package arrays.arrays_with_methods.medium.q9;
 
 /*
 Make a program that defines a 2D array in the main method. Then calculate the factorial of each element using a method
-called fact that returns an integer, and store it in a separate 2D array. Print the resulting array.
+called fact that returns an integer, and stores it in a separate 2D array. Print the resulting array.
 Sample output:
 24 120 720
 2 1 2
