@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
     // Parsons with distractors
+
     public Clause[] testSentence() {
         return new Clause[]{
                 new IntegerLiteral(2),
@@ -46,7 +47,10 @@ public class MainTest extends BaseTest {
                 ArrayUtil.generateRandomArray(-60, 60, 25),
                 ArrayUtil.generateRandomArray(0, 40, 250),
                 ArrayUtil.generateRandomArray(500, 2000, 25),
-                ArrayUtil.generateRandomArray(1, 10, 5)
+                ArrayUtil.generateRandomArray(1, 10, 5),
+                new int[]{2, 8, 2, 4, 8374, 18, 93726712},
+                new int[]{1, 17, 592381, 33, 59},
+                new int[]{17, 49328, 192, 3712, 1, 35}
         );
     }
 
@@ -59,7 +63,6 @@ public class MainTest extends BaseTest {
                 {arr, int[].class}
         };
         MethodTest m = new MethodTest(MultiThing.class, "multiplier", arguments);
-
         Object output = m.callMethod();
 
         CustomAssertions._assertArrayEquals(arrayAnswer(expected), output, "Your multiplier method does not correctly alter the given array.");
