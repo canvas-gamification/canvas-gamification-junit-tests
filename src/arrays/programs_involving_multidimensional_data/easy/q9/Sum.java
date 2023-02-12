@@ -3,7 +3,7 @@ package arrays.programs_involving_multidimensional_data.easy.q9;
 /*
 Write a Java program that generates a 20 by 20 2D array of random integers ranging from 100-1000 (inclusive on both ends),
 and print the 2D array with each row a seperate line. Divide all the values by 5, then sum all the values in each row and
-store those sums into a 1D array. Print the sums array to the console.
+store those sums into a 1D array. Print the array of sums to the console.
  */
 
 public class Sum {
