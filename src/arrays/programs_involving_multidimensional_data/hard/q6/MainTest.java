@@ -97,7 +97,7 @@ public class MainTest extends BaseRandomTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctIntToCharMethod(int[][] a, int ans) throws Throwable {
+    void correctMaxValueMethod(int[][] a, int ans) throws Throwable {
         Object[][] arguments = {
                 {a, int[][].class},
         };
