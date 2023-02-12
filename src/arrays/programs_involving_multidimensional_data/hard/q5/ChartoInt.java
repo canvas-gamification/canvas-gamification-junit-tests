@@ -2,9 +2,10 @@ package arrays.programs_involving_multidimensional_data.hard.q5;
 
 /*
 Write a Java program that initializes a 2 in 13 2D array with random integer between 97 to 122 (Inclusive of both ends),
-and print it. The program will then convert each one of those integer values into a character and display each row of
-the 2D array on a separate line.
-Note: the characters within a line do not need any spaces in between them.
+and print it. The program will then with a method called intToChar convert each one of those integer values into a
+character and display each row of the 2D array on a separate line in that method.
+Note: the characters within a line do not need any spaces in between them, and your method should only print the values
+and not return anything.
 
 Sample Output:
     105 112 110 121 109 112 115 117 99 111 108 113 116
@@ -23,6 +24,9 @@ public class ChartoInt {
             }
             System.out.println();
         }
+        intToChar(arr);
+    }
+    public static void intToChar(int[][] arr){
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
                 System.out.print((char) arr[i][j]);

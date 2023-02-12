@@ -1,12 +1,18 @@
 package arrays.programs_involving_multidimensional_data.hard.q5;
 
 import global.BaseRandomTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.variables.Clause;
 import global.variables.clauses.*;
 import global.variables.wrappers.Optional;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 public class MainTest extends BaseRandomTest {
     // Java
@@ -48,7 +54,7 @@ public class MainTest extends BaseRandomTest {
         ChartoInt.main(new String[0]);
     }
 
-    @Test
+    @RepeatedTest(10)
     public void printsCorrectOutput() throws InvalidClauseException {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
@@ -56,6 +62,78 @@ public class MainTest extends BaseRandomTest {
                         , "Your program does not correctly change the integer 2D array to a char 2D array.");
             }
         }
+    }
 
+
+    static Stream<Arguments> inputProvider() {
+        return Stream.of(
+                Arguments.of(
+                        new int[][]{
+                                {'a', 'b', 'c'},
+                                {'d', 'e', 'f'},
+                                {'g', 'h', 'i'}
+                        },
+                        new char[][]{
+                                {'a', 'b', 'c'},
+                                {'d', 'e', 'f'},
+                                {'g', 'h', 'i'}
+                        }
+                ),
+                Arguments.of(
+                        new int[][]{
+                                {'a', 'b', 'c'},
+                                {'d', 'e', 'f'},
+                                {'g', 'h', 'i'},
+                                {'j', 'k', 'l'},
+                                {'m', 'n', 'o'},
+                                {'p', 'q', 'r'},
+                                {'s', 't', 'u'},
+                                {'v', 'w', 'x'},
+                                {'y', 'z', 'x'}
+                        },
+                        new char[][]{
+                                {'a', 'b', 'c'},
+                                {'d', 'e', 'f'},
+                                {'g', 'h', 'i'},
+                                {'j', 'k', 'l'},
+                                {'m', 'n', 'o'},
+                                {'p', 'q', 'r'},
+                                {'s', 't', 'u'},
+                                {'v', 'w', 'x'},
+                                {'y', 'z', 'x'}
+                        }
+                ),
+                Arguments.of(
+                        new int[][]{
+                                {'a', 'a', 'a', 'a', 'a', 'a',},
+                                {'a', 'a', 'a', 'a', 'a', 'a',},
+                                {'a', 'a', 'a', 'a', 'a', 'a',}
+                        },
+                        new char[][]{
+                                {'a', 'a', 'a', 'a', 'a', 'a',},
+                                {'a', 'a', 'a', 'a', 'a', 'a',},
+                                {'a', 'a', 'a', 'a', 'a', 'a',}
+                        }
+                )
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    void correctIntToCharMethod(int[][] a, char[][] b) throws Throwable {
+        Clause[] c = new Clause[b.length * 2];
+        int t = 0;
+        for (int i = 0; i < b.length; i++) {
+            String st = "";
+            for (int j = 0; j < b[i].length; j++)
+                st += b[i][j];
+            c[t++] = new StringLiteral(st);
+            c[t++] = new NewLine();
+        }
+        Object[][] arguments = {
+                {a, int[][].class},
+        };
+        MethodTest m = new MethodTest(ChartoInt.class, "intToChar", arguments, c);
+        m.callMethod();
     }
 }
