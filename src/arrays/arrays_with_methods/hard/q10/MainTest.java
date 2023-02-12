@@ -1,10 +1,10 @@
 package arrays.arrays_with_methods.hard.q10;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -19,6 +19,7 @@ import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
     // Java
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "3 9";
@@ -57,7 +58,12 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("digitIntInputProvider")
     void correctDigitIntMethod(int a, int b) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(ArrayofDigits.class, "digitInt", new Object[]{a, b}, int.class, int.class);
+        Object[][] arguments = {
+                {a, int.class},
+                {b, int.class}
+        };
+        MethodTest m = new MethodTest(ArrayofDigits.class, "digitInt", arguments);
+        Object output = m.callMethod();
 
         int[] arr = new int[b];
         for (int x = 0; x < b; x++)
