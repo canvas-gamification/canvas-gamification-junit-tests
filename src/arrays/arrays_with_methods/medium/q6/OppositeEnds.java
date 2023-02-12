@@ -15,22 +15,18 @@ large = arr;
 small = arr;
 if( arr[i] > small )
 if( arr < small )
-
  */
 
 public class OppositeEnds {
-    public static int[] smallAndLarge( int [] arr )
-    {
+    public static int[] smallAndLarge(int[] arr) {
         int large = -9999999;
         int small = 9999999;
-        for( int i = 0; i < arr.length; i ++ )
-        {
-            if( arr[i] > large )
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > large)
                 large = arr[i];
-            if( arr[i] < small )
+            if (arr[i] < small)
                 small = arr[i];
         }
         return new int[]{large, small};
     }
-
 }
