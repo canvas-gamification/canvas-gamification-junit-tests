@@ -6,7 +6,7 @@ different assignment from all the students. You have to enter the student grades
 that the database only takes integers and not decimal numbers. So you will round the grade down for each student. Write
 a program that carries this conversion out. Write a Java Program , that makes a 5 * 5 2D array and fills it with random
 numbers between 0 to 100, and prints it. Then create a called rounding function to round down each of the grades in the
-array to the floor, then return that integer array. Finally, print the rounded 2D array.
+array, and returns that integer array. Finally, print the rounded 2D array.
 
 Sample Output:
     The random 2D array:
