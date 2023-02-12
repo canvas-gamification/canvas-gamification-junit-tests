@@ -4,7 +4,7 @@ package arrays.programs_involving_multidimensional_data.hard.q7;
 Suppose you have a 2D array that stores student assignment grades. In particular, each row represents the grades for a
 different assignment from all the students. You have to enter the student grades into a database and suddenly realize
 that the database only takes integers and not decimal numbers. So you will round the grade down for each student. Write
-a program that carries this conversion out. Write a Java Program , that makes a 5 * 5 2D array and fills it with random
+Write a Java Program that makes a 5 by 5 2D array, fills it with random
 numbers between 0 to 100, and prints it. Then create a called rounding function to round each of the grades in the
 array, and returns that integer array. Finally, print the rounded 2D array.
 
