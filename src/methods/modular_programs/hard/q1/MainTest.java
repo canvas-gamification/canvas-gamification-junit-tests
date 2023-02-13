@@ -1,10 +1,10 @@
 package methods.modular_programs.hard.q1;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.*;
 import global.variables.clauses.*;
 import global.variables.wrappers.Optional;
@@ -13,8 +13,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest extends BaseTest {
     // Java
@@ -63,11 +61,14 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("rightPrimeInputProvider")
     public void correctRightPrimeMethod(int input, boolean isRightPrime) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(RightPrime.class, "isRightPrime", new Object[]{input},
-                int.class);
+        Clause[] methodSentence = new Clause[0];
+        Object[][] arguments = {
+                {input, int.class}
+        };
+        MethodTest m = new MethodTest(RightPrime.class, "isRightPrime", arguments, methodSentence);
+        Object output = m.callMethod();
+        m.setIncorrectMethodStructureErrorMessage("Your isRightPrime method should not have any console output.");
         CustomAssertions._assertEquals(isRightPrime, output, "Your isRightPrime method does not correctly identify if a number is a right-truncatable prime.");
-        String methodConsoleOutput = MethodUtil.getMethodOutput();
-        assertEquals("", methodConsoleOutput, "Your isRightPrime method should not have any console output.");
     }
 
     @ParameterizedTest
