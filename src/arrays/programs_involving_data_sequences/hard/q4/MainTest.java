@@ -1,11 +1,11 @@
 package arrays.programs_involving_data_sequences.hard.q4;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.utils.ArrayUtil;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
@@ -16,8 +16,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Java
@@ -67,11 +65,15 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void correctGetRestMethod(String[] words, int index, String[] result) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(StringSlice.class, "getRest", new Object[]{words, index},
-                String[].class, int.class);
+        TestOption.incorrectStructureErrorMessage = "Your getRest method should not have printed output.";
+        Clause[] methodSentence = new Clause[0];
+        Object[][] arguments = {
+                {words, String[].class},
+                {index, int.class}
+        };
+        MethodTest m = new MethodTest(StringSlice.class, "getRest", arguments, methodSentence);
+        Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(result, output, "Your getRest method does not return an array with all the strings after an index.");
-        String methodConsoleOutput = MethodUtil.getMethodOutput();
-        assertEquals("", methodConsoleOutput, "Your getRest method should not have printed output.");
     }
 
     @ParameterizedTest
