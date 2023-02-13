@@ -10,8 +10,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class MainTest extends BaseTest {
     // Parsons
     private static final String output = "13 29 66 9 1 4 2 ";
