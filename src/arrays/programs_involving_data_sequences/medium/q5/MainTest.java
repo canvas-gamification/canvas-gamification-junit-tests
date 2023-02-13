@@ -1,11 +1,11 @@
 package arrays.programs_involving_data_sequences.medium.q5;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.utils.ArrayUtil;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -56,11 +56,15 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void correctDeleteThisMethod(int[] input, int replace, int index) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(DoTheDeletion.class, "deleteThis",
-                new Object[]{input, replace}, int[].class, int.class);
+        TestOption.incorrectStructureErrorMessage = "Your deleteThis method should not have any printed output.";
+        Clause[] methodSentence = new Clause[0];
+        Object[][] arguments = {
+                {input, int[].class},
+                {replace, int.class}
+        };
+        MethodTest m = new MethodTest(DoTheDeletion.class, "deleteThis", arguments, methodSentence);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(index, output, "Your deleteThis method does not return the index the item in the array was replaced at.");
-        String consoleOutput = MethodUtil.getMethodOutput();
-        assertEquals("", consoleOutput, "Your deleteThis method should not have any printed output.");
     }
 
     @Test
