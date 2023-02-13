@@ -1,9 +1,10 @@
 package arrays.programs_involving_data_sequences.hard.q5;
 
 import global.BaseTest;
+import global.MethodTest;
+import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.utils.ArrayUtil;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -15,7 +16,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
@@ -67,13 +67,15 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void correctFindTheLastMethod(int[] arr, int search, int index) throws Throwable {
-        Object outputIndex = MethodUtil.invokeIfMethodExists(
-                FindThatNumber.class,
-                "findTheLast",
-                new Object[]{arr, search}, int[].class, int.class);
-        _assertEquals(index, outputIndex, "Your findTheLast method does not find the index of last occurrence of a number in an array.");
-        String methodConsoleOutput = MethodUtil.getMethodOutput();
-        assertEquals("", methodConsoleOutput, "Your findTheLast method should not have any printed output.");
+        TestOption.incorrectStructureErrorMessage = "Your findTheLast method should not have any printed output.";
+        Clause[] methodSentence = new Clause[0];
+        Object[][] arguments = {
+                {arr, int[].class},
+                {search, int.class}
+        };
+        MethodTest m = new MethodTest(FindThatNumber.class, "findTheLast", arguments, methodSentence);
+        Object outputIndex = m.callMethod();
+        CustomAssertions._assertEquals(index, outputIndex, "Your findTheLast method does not find the index of last occurrence of a number in an array.");
     }
 
     @ParameterizedTest
