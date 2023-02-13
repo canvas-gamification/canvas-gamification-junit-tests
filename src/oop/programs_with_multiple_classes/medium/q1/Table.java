@@ -8,4 +8,11 @@ public class Table {
         woodType = wt;
         numSeats = ns;
     }
+
+    public String toString() {
+        return "Table{" +
+                "woodType='" + woodType + '\'' +
+                ", numSeats=" + numSeats +
+                '}';
+    }
 }

@@ -10,4 +10,12 @@ public class Chair {
         weightCapacity = wc;
         longevity = lv;
     }
+
+    public String toString() {
+        return "Chair{" +
+                "comfort='" + comfort + '\'' +
+                ", weightCapacity=" + weightCapacity +
+                ", longevity=" + longevity +
+                '}';
+    }
 }
