@@ -1,11 +1,14 @@
 package arrays.programs_involving_data_sequences.easy.q2;
 
 import global.BaseTest;
+import global.MethodTest;
+import global.tools.TestOption;
 import global.utils.ArrayUtil;
 import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -50,18 +53,25 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctPrintArrayPatternMethod(int[] input) throws Throwable {
-        MethodUtil.invokeIfMethodExists(StarryNight.class, "printArrayPattern", new Object[]{input}, int[].class);
-        String output = MethodUtil.getMethodOutput();
-        assertEquals(pattern(input), output, "Your printArrayPattern method does not correctly print the pattern based on the input array.");
-    }
+        Clause[] c = new Clause[2 * input.length];
+        int t = 0;
+        for (int i = 0; i < input.length; i++) {
+            String st = "";
+            for (int j = 0; j < input[i]; j++)
+                st += "\\*";
+            c[t++] = new StringLiteral(st);
+            if (i != input.length - 1)
+                c[t++] = new NewLine();
+            else
+                c[t++] = new Optional(new NewLine());
 
-    private String pattern(int[] arr) {
-        StringBuilder sb = new StringBuilder();
-        for (int k : arr) {
-            sb.append("*".repeat(Math.max(0, k)));
-            sb.append(System.lineSeparator());
         }
-        return sb.toString();
+        Object[][] arguments = {
+                {input, int[].class}
+        };
+        TestOption.incorrectStructureErrorMessage = "Your printArrayPattern method does not correctly print the pattern based on the input array.";
+        MethodTest m = new MethodTest(StarryNight.class, "printArrayPattern", arguments, c);
+        m.callMethod();
     }
 
 }
