@@ -1,6 +1,7 @@
 package arrays.programs_involving_data_sequences.hard.q3;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
@@ -79,11 +80,16 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void correctSubCharacterStringMethod(char[] input, int start, int end, String subString) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(SubThat.class, "subCharacterString",
-                new Object[]{input, start, end}, char[].class, int.class, int.class);
+        TestOption.incorrectStructureErrorMessage = "Your SubCharacterString method should not print anything to the console.";
+        Clause[] methodSentence = new Clause[0];
+        Object[][] arguments = {
+                {input, char[].class},
+                {start, int.class},
+                {end, int.class}
+        };
+        MethodTest m = new MethodTest(SubThat.class, "subCharacterString", arguments, methodSentence);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(subString, output, "Your SubCharacterString method does not generate the correct substring based on the inputs provided.");
-        String consoleOutput = MethodUtil.getMethodOutput();
-        assertEquals("", consoleOutput, "Your SubCharacterString method should not print anything to the console.");
     }
 
     @ParameterizedTest
