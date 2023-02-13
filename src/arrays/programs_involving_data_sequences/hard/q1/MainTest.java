@@ -2,10 +2,10 @@ package arrays.programs_involving_data_sequences.hard.q1;
 
 import global.BaseTest;
 
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.utils.ArrayUtil;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -66,11 +66,16 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("countThisInputProvider")
     void correctCountThisPleaseMethod(int[] input, int pivot, int[] result) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(CountArray.class, "countThisPlease",
-                new Object[]{input, pivot}, int[].class, int.class);
+        Clause[] methodSentence = new Clause[]{
+
+        };
+        Object[][] arguments = {
+                {input, int[].class},
+                {pivot, int.class}
+        };
+        MethodTest m = new MethodTest(CountArray.class, "countThisPlease", arguments, methodSentence);
+        Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(result, output, "Your countThisPlease method does not correctly count the all the number below, equal to, and above the pivot.");
-        String consoleOutput = MethodUtil.getMethodOutput();
-        assertEquals("", consoleOutput, "Your countThisPlease method should not have console output.");
     }
 
     @ParameterizedTest
