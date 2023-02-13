@@ -1,8 +1,8 @@
 package arrays.arrays_with_methods.hard.q2;
 
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.utils.ArrayUtil;
-import global.utils.MethodUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -30,8 +30,12 @@ public class MainTest {
     @MethodSource("inputProvider")
     void correctWhoIsLongerMethod(int[] a, int[] b) throws Throwable {
         int[] longer = longer(a, b);
-        Object output = MethodUtil.invokeIfMethodExists(Longer.class, "whoIsLonger",
-                new Object[]{a, b}, int[].class, int[].class);
+        Object[][] arguments = {
+                {a, int[].class},
+                {b, int[].class}
+        };
+        MethodTest m = new MethodTest(Longer.class, "whoIsLonger", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(longer, output, "Your method does not return the longer array.");
     }
 }
