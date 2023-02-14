@@ -77,7 +77,6 @@ public class MainTest extends BaseTest {
         );
     }
 
-    @Override
     public void runMain() {
         SignFromTheStars.main(new String[0]);
     }
@@ -86,7 +85,7 @@ public class MainTest extends BaseTest {
     @MethodSource("InputProvider")
     void printsCorrectAstrologicalSign(int day, int month, String sign) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print the correct star sign for the entered date.";
-        runWithInput(day + "/" + month, new Clause[] {
+        runWithInput(day + "/" + month, new Clause[]{
                 new StringLiteral(sign)
         });
     }
