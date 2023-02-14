@@ -7,7 +7,7 @@ return the lowest value found. Print the returned value in the main method. Note
 to work with an array of any length.
 
 Sample Output:
-    Enter an array of 10 double values:
+    Enter an array of 100 double values:
     60.5 50.2 70.2 43.2 61.4 32.5 74.1 11.2 94.3 64.3
     The minimum value of the array is: 11.2
  */
@@ -17,9 +17,9 @@ import java.util.Scanner;
 public class MinFinder {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        double[] arr = new double[10];
-        System.out.println("Enter an array of 10 double values:");
-        for (int i = 0; i < 10; i++)
+        double[] arr = new double[100];
+        System.out.println("Enter an array of 100 double values:");
+        for (int i = 0; i < 100; i++)
             arr[i] = in.nextDouble();
         System.out.println("The minimum value of the array is: " + findLow(arr));
     }
