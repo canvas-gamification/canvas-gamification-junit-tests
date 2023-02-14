@@ -10,7 +10,7 @@ any size. Ex. the array [1,4,6] will become [0,4,12]
 Sample Output:
     Enter an array of 10 integers:
     1 2 3 4 5 6 7 8 9 10
-    The result of multiplied array is::
+    The result of multiplied array is:
     0 2 6 12 20 30 42 56 72 90
  */
 
