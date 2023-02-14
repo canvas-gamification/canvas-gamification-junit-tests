@@ -17,7 +17,6 @@ import java.util.stream.Stream;
 public class MainTest extends BaseTest {
     // Java
 
-    @Override
     public Clause[] testSentence() {
         // when you need to provide Scanner input
         TestOption.isInputTest = true;
@@ -85,7 +84,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("InputProvider")
-    void printsAstrologicalSignCorrectly(int day, int month, String sign) throws InvalidClauseException {
+    void printsCorrectAstrologicalSign(int day, int month, String sign) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print the correct star sign for the entered date.";
         runWithInput(day + "/" + month, new Clause[] {
                 new StringLiteral(sign)
