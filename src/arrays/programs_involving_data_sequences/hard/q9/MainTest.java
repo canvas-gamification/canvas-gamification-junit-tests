@@ -68,8 +68,61 @@ public class MainTest extends BaseTest {
                         "Charlottetown" + System.lineSeparator() +
                         "Quebec City" + System.lineSeparator() +
                         "Regina" + System.lineSeparator() +
-                        "Whitehorse" + System.lineSeparator(), 13)
+                        "Whitehorse" + System.lineSeparator(), 13),
+                Arguments.of("Edmonton" + System.lineSeparator() +
+                        "Victoria" + System.lineSeparator() +
+                        "Winnipeg" + System.lineSeparator() +
+                        "I forgot" + System.lineSeparator() +
+                        "St. John's" + System.lineSeparator() +
+                        "Yellowknife" + System.lineSeparator() +
+                        "Halifax" + System.lineSeparator() +
+                        "Iqaluit" + System.lineSeparator() +
+                        "Toronto" + System.lineSeparator() +
+                        "idk" + System.lineSeparator() +
+                        "Quebec City" + System.lineSeparator() +
+                        "Regina" + System.lineSeparator() +
+                        "Whitehorse" + System.lineSeparator(), 11),
+                Arguments.of("?" + System.lineSeparator() +
+                        "?" + System.lineSeparator() +
+                        "?" + System.lineSeparator() +
+                        "?" + System.lineSeparator() +
+                        "?" + System.lineSeparator() +
+                        "?" + System.lineSeparator() +
+                        "?" + System.lineSeparator() +
+                        "?" + System.lineSeparator() +
+                        "?" + System.lineSeparator() +
+                        "?" + System.lineSeparator() +
+                        "?" + System.lineSeparator() +
+                        "?" + System.lineSeparator() +
+                        "?" + System.lineSeparator(), 0),
+                Arguments.of("Victoria" + System.lineSeparator() +
+                        "Winnipeg" + System.lineSeparator() +
+                        "I forgot" + System.lineSeparator() +
+                        "St. John's" + System.lineSeparator() +
+                        "Yellowknife" + System.lineSeparator() +
+                        "Halifax" + System.lineSeparator() +
+                        "Iqaluit" + System.lineSeparator() +
+                        "Toronto" + System.lineSeparator() +
+                        "idk" + System.lineSeparator() +
+                        "Quebec City" + System.lineSeparator() +
+                        "Regina" + System.lineSeparator() +
+                        "Whitehorse" + System.lineSeparator() +
+                        "Edmonton" + System.lineSeparator(), 0),
+                Arguments.of("Edmonton" + System.lineSeparator() +
+                        "Winnipeg" + System.lineSeparator() +
+                        "I forgot" + System.lineSeparator() +
+                        "St. John's" + System.lineSeparator() +
+                        "" + System.lineSeparator() +
+                        "Yellowknife" + System.lineSeparator() +
+                        "Iqaluit" + System.lineSeparator() +
+                        "idk" + System.lineSeparator() +
+                        "Toronto" + System.lineSeparator() +
+                        "Quebec City" + System.lineSeparator() +
+                        "Regina" + System.lineSeparator() +
+                        "Whitehorse" + System.lineSeparator() +
+                        "Edmonton" + System.lineSeparator(), 3)
         );
+
     }
 
     @ParameterizedTest
