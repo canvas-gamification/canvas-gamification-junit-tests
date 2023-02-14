@@ -1,16 +1,16 @@
 package arrays.arrays_with_methods.medium.q8;
 
+import global.MethodTest;
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class MainTest {
     // Parsons
+
     static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of(0, 's', new char[][]{}),
@@ -41,7 +41,12 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctMapThePatternMethod(int n, char c, char[][] arr) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(PatternMaker.class, "mapThePattern", new Object[]{n, c}, int.class, char.class);
+        Object[][] arguments = {
+                {n, int.class},
+                {c, char.class}
+        };
+        MethodTest m = new MethodTest(PatternMaker.class, "mapThePattern", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(arr, output, "Your mapThePattern method does not correctly generate the pattern for the specified character.");
     }
 }
