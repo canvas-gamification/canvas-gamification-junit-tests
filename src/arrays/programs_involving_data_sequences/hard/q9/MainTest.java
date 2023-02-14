@@ -1,6 +1,7 @@
 package arrays.programs_involving_data_sequences.hard.q9;
 
 import global.BaseTest;
+import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -35,6 +36,9 @@ public class MainTest extends BaseTest {
 
     @Override
     public Clause[] testSentence() {
+        TestOption.isInputTest = true;
+        TestOption.defaultInput = "Edmonton";
+
         Clause[] clause = new Clause[42];
         for (int i = 0; i < clause.length - 3; i += 3) {
             clause[i] = new StringLiteral("What is the capital of the Canadian jurisdiction of " + jurisdictions[i / 3] + "\\?");
