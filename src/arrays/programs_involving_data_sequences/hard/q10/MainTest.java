@@ -40,7 +40,11 @@ public class MainTest extends BaseTest {
                 Arguments.of(new String[]{"rhyme", "yolk", "corks", "bookcase"}, "york".toCharArray()),
                 Arguments.of(new String[]{"lucid", "doing", "retry", "thyme"}, "city".toCharArray()),
                 Arguments.of(new String[]{"lemon", "faith", "pylon", "field", "backslash"}, "miles".toCharArray()),
-                Arguments.of(arr = ArrayUtil.generateRandomWordArray(100), getMiddleChars(arr))
+                Arguments.of(arr = ArrayUtil.generateRandomWordArray(100), getMiddleChars(arr)),
+                Arguments.of(arr = ArrayUtil.generateRandomWordArray(1), getMiddleChars(arr)),
+                Arguments.of(arr = ArrayUtil.generateRandomWordArray(20), getMiddleChars(arr)),
+                Arguments.of(arr = ArrayUtil.generateRandomWordArray(13), getMiddleChars(arr)),
+                Arguments.of(arr = ArrayUtil.generateRandomWordArray(55), getMiddleChars(arr))
         );
     }
 
