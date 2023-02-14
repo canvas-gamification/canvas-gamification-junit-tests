@@ -34,7 +34,6 @@ public class MainTest extends BaseTest {
             "Yukon"
     };
 
-    @Override
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "Edmonton";
@@ -51,7 +50,6 @@ public class MainTest extends BaseTest {
         return clause;
     }
 
-    @Override
     public void runMain() {
         QuizGameEh.main(new String[0]);
     }
