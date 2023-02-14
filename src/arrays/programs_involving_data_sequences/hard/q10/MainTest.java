@@ -3,6 +3,7 @@ package arrays.programs_involving_data_sequences.hard.q10;
 import global.BaseTest;
 import global.MethodTest;
 import global.tools.CustomAssertions;
+import global.utils.ArrayUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
@@ -30,6 +31,7 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider() {
+        String[] arr;
         return Stream.of(
                 Arguments.of(new String[]{"add", "here", "lilly", "president", "jelly", "advance", "archers"}, "delilah".toCharArray()),
                 Arguments.of(new String[]{"archers", "get", "hello", "island", "cloud"}, "hello".toCharArray()),
@@ -37,8 +39,19 @@ public class MainTest extends BaseTest {
                 Arguments.of(new String[]{"funky", "opera", "flowers"}, "new".toCharArray()),
                 Arguments.of(new String[]{"rhyme", "yolk", "corks", "bookcase"}, "york".toCharArray()),
                 Arguments.of(new String[]{"lucid", "doing", "retry", "thyme"}, "city".toCharArray()),
-                Arguments.of(new String[]{"lemon", "faith", "pylon", "field", "backslash"}, "miles".toCharArray())
+                Arguments.of(new String[]{"lemon", "faith", "pylon", "field", "backslash"}, "miles".toCharArray()),
+                Arguments.of(arr = ArrayUtil.generateRandomWordArray(100), getMiddleChars(arr))
         );
+    }
+
+    static char[] getMiddleChars(String[] arr) {
+        char[] chars = new char[arr.length];
+        int idx;
+        for (int i = 0; i < arr.length; i++) {
+            idx = arr[i].length() % 2 == 0 ? arr[i].length() / 2 - 1 : arr[i].length() / 2;
+            chars[i] = arr[i].charAt(idx);
+        }
+        return chars;
     }
 
     @ParameterizedTest
