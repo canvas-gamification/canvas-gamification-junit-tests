@@ -36,7 +36,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "Edmonton";
+        TestOption.defaultInput = "Edmonton\nVictoria\nWinnipeg\nFredericton\nSt. John's\nYellowknife\nHalifax\nIqaluit\nToronto\nCharlottetown\nQuebec City\nRegina\nWhitehorse\n";
 
         Clause[] clause = new Clause[42];
         for (int i = 0; i < clause.length - 3; i += 3) {
@@ -59,11 +59,11 @@ public class MainTest extends BaseTest {
                 Arguments.of("Edmonton" + System.lineSeparator() +
                         "Victoria" + System.lineSeparator() +
                         "Winnipeg" + System.lineSeparator() +
-                        "Fredrickton" + System.lineSeparator() +
+                        "Fredericton" + System.lineSeparator() +
                         "St. John's" + System.lineSeparator() +
                         "Yellowknife" + System.lineSeparator() +
                         "Halifax" + System.lineSeparator() +
-                        "Iqualuit" + System.lineSeparator() +
+                        "Iqaluit" + System.lineSeparator() +
                         "Toronto" + System.lineSeparator() +
                         "Charlottetown" + System.lineSeparator() +
                         "Quebec City" + System.lineSeparator() +
