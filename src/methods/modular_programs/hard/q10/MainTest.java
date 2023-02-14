@@ -16,7 +16,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
-    @Override
+    // Java
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "2012";
@@ -32,7 +32,6 @@ public class MainTest extends BaseTest {
         };
     }
 
-    @Override
     public void runMain() {
         GoatYear.main(new String[0]);
     }
