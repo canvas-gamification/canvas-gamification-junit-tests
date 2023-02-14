@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
     //Java
-    @Override
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("The middle letters of the array are\\: "),
@@ -25,7 +24,6 @@ public class MainTest extends BaseTest {
         };
     }
 
-    @Override
     public void runMain() {
         ArrayThereDelilah.main(new String[0]);
     }
