@@ -8,9 +8,7 @@ import org.junit.jupiter.api.RepeatedTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseRandomTest {
-
-    @Override
-    // define what output should look like
+    // Java
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("Your score for this round was "),
@@ -26,8 +24,6 @@ public class MainTest extends BaseRandomTest {
         };
     }
 
-    @Override
-    // calls main method of what you're trying to run
     public void runMain() {
         WhatAScore.main(new String[0]);
     }
