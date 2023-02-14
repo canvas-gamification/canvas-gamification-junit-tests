@@ -1,7 +1,7 @@
 package arrays.referencing_array_and_its_elements.hard.q11;
 
 /*
-Write a Java program that asks the user to enter 10 double values and stores them in an array. The array should then be
+Write a Java program that asks the user to enter 100 double values and stores them in an array. The array should then be
 passed to a method called findMax which accepts an array of doubles of any size and finds and returns the largest value in the array
 which the main method then prints out.
 
