@@ -4,6 +4,7 @@ import global.exceptions.InvalidClauseException;
 import global.variables.Clause;
 import global.variables.RandomClause;
 import global.variables.clauses.PlaceHolder;
+import test.object.sample_question.Person;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -24,7 +25,7 @@ public class ObjectTest {
         try {
             this.objectClass = Class.forName(objectClass);
         } catch (ClassNotFoundException e) {
-            fail("Your program does not contain the class " + objectClass);
+            fail("Your program does not contain the class " + Person.class);
         }
     }
 
