@@ -16,8 +16,8 @@ import static global.tools.CustomAssertions._assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest {
-    private final String personClassString = getClass().getPackageName() + ".Person";
-    private final String houseClassString =  getClass().getPackageName() + ".House";
+    private final String personClassString = "Person";
+    private final String houseClassString = "House";
     private final String defaultName = "Bob";
     private final int defaultAge = 21;
     private final boolean defaultEmployed = false;
