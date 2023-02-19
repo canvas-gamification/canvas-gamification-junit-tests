@@ -94,7 +94,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(MinFinder.class, "findLow", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(min(input), output, 0.001, "Your findLow method does not correctly return the minimum value in a double array.");
+        CustomAssertions._assertEquals(min(input), output, 0.00001, "Your findLow method does not correctly return the minimum value in a double array.");
     }
 
 }
