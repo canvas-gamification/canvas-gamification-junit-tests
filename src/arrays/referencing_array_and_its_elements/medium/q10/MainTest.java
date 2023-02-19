@@ -90,6 +90,6 @@ public class MainTest extends BaseTest {
         runWithInput(st, new Clause[]{
                 new StringLiteral(ans.trim())
         });
-        CustomAssertions._assertEquals(t, Integer.parseInt(getItemByName("ans")), "Your program does not correctly print the number of names starting with " + ch + ".");
+        CustomAssertions._assertEquals(t, Integer.parseInt(getItemByName("ans")), "Your program does not print the correct number of names starting with " + ch + ".");
     }
 }
