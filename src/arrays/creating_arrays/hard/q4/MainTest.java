@@ -3,6 +3,7 @@ package arrays.creating_arrays.hard.q4;
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
+import global.utils.ArrayUtil;
 import global.variables.Clause;
 import global.variables.clauses.*;
 import global.variables.wrappers.Optional;
@@ -10,6 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,33 +19,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MainTest extends BaseTest {
     // Java
 
-    String[][] s = {
-            {"Obi\\-wan", "Darth Revan", "Ashoka", "Luke", "Jaba the Hutt"},
-            {"Toph", "Geralt", "Yennefer of Vengerberg", "Jaskier", "Uncle Iroh"},
-            {"Spike", "Jack Sparrow", "Kenshin", "Vash", "Alphonse"},
-            {" ", " ", " ", " ", " "},
-            {"single", "word", "test", "input", "stuff"},
-            {"Li77y", "d@rl1ng", "gr00t", "Bu55y", "M\\*x"}
-    };
-
-    String[][] sForEquals = {
-            {"Obi-wan", "Darth Revan", "Ashoka", "Luke", "Jaba the Hutt"},
-            {"Toph", "Geralt", "Yennefer of Vengerberg", "Jaskier", "Uncle Iroh"},
-            {"Spike", "Jack Sparrow", "Kenshin", "Vash", "Alphonse"},
-            {" ", " ", " ", " ", " "},
-            {"single", "word", "test", "input", "stuff"},
-            {"Li77y", "d@rl1ng", "gr00t", "Bu55y", "M*x"}
-    };
+    private static final int size = 50;
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "Seth \n Liam \n Teresa \n Paige \n Hannah";
+        TestOption.defaultInput = arrayToInput(ArrayUtil.generateRandomWordArray(size)) + (size - 2);
         return new Clause[]{
-                new StringLiteral("Enter 5 names:"),
+                new StringLiteral("Enter " + size + " names:"),
+                new Optional(new StringLiteral(" ")),
+                new NewLine(),
+                new StringLiteral("Enter an index:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("At index "),
-                new RandomInteger(0, 5, "index"),
+                new IntegerLiteral("index"),
                 new StringLiteral(": "),
                 new PlaceHolder()
         };
@@ -53,26 +42,42 @@ public class MainTest extends BaseTest {
         RandomPickingNames.main(new String[0]);
     }
 
-    //ints are the index to get the names from the 2d string array at the top
+    public static String arrayToInput(String[] arr) {
+        StringBuilder sb = new StringBuilder();
+        Arrays.stream(arr).forEach((s) -> sb.append(s).append("\n"));
+        return sb.toString();
+    }
+
     static Stream<Arguments> inputProvider() {
+
+        String[] one = ArrayUtil.generateRandomWordArray(size);
+        String[] two = new String[size];
+        String[] three = ArrayUtil.generateRandomWordArray(size);
+        for(int x = 0; x < size; x++){
+            one[x] += " plus other words in row";
+            two[x] = " ";
+            three[x] += "7@!00";
+        }
+
         return Stream.of(
-                Arguments.of("Obi-wan\nDarth Revan\nAshoka\nLuke\nJaba the Hutt", 0),
-                Arguments.of("Toph\nGeralt\nYennefer of Vengerberg\nJaskier\nUncle Iroh", 1),
-                Arguments.of("Spike\nJack Sparrow\nKenshin\nVash\nAlphonse", 2),
-                Arguments.of(" \n \n \n \n ", 3),
-                Arguments.of("single\nword\ntest\ninput\nstuff", 4),
-                Arguments.of("Li77y\nd@rl1ng\ngr00t\nBu55y\nM*x", 5)
+                Arguments.of(ArrayUtil.generateRandomWordArray(size), 0),
+                Arguments.of(ArrayUtil.generateRandomWordArray(size), 1),
+                Arguments.of(ArrayUtil.generateRandomWordArray(size), 7),
+                Arguments.of(ArrayUtil.generateRandomWordArray(size), size-1),
+                Arguments.of(one, size-5),
+                Arguments.of(two, 3),
+                Arguments.of(three, size-2)
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void picksRandomNameCorrectly(String in, int c) throws InvalidClauseException {
-        String reg = "(?:" + s[c][0] + "|" + s[c][1] + "|" + s[c][2] + "|" + s[c][3] + "|" + s[c][4] + ")";
-        runWithInput(in, new Clause[]{
-                new StringLiteral(reg, "name")
+    void picksRandomNameCorrectly(String[] in, int c) throws InvalidClauseException {
+        runWithInput(arrayToInput(in) + c, new Clause[]{
+                new StringLiteral(in[c], "name")
         });
 
-        assertEquals(sForEquals[c][Integer.parseInt(getItemByName("index"))], getItemByName("name"), "Your program does not print the correct name for the randomized index.");
+        assertEquals(c, Integer.parseInt(getItemByName("index")), "Your program does not correctly print the given index.");
+        assertEquals(in[c], getItemByName("name"), "Your program does not print the correct name located at the given index.");
     }
 }
