@@ -10,14 +10,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     public Clause[] testSentence() {
         return new Clause[]{
                 new IntegerLiteral(4),
@@ -77,7 +76,6 @@ public class MainTest extends BaseTest {
             assertEquals(arr[x].length(), Integer.parseInt(m.getMethodItemByName("num " + x)), "Your method does not print the correct word lengths.");
         }
 
-        assertTrue(Arrays.asList(arr).contains("Supercalifragilisticexpialidocious"), "Your method does not substitute one element for the specified word.");
         assertEquals("Supercalifragilisticexpialidocious", arr[indexOf], "Your method does not replace the longest word with Supercalifragilisticexpialidocious.");
     }
 
@@ -92,5 +90,4 @@ public class MainTest extends BaseTest {
 
         return c;
     }
-
 }
