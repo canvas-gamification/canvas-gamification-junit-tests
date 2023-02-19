@@ -2,7 +2,7 @@ package arrays.referencing_array_and_its_elements.medium.q11;
 
 /*
 Write a Java program that asks the user for 30 names and stores them in an array of Strings. Then, count how many of the
-names end with the letter "B" and display the value.
+names end with the letter "b" and display the value.
 
 Sample Output:
     Enter 30 given names:
