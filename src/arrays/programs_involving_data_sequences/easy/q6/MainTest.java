@@ -7,8 +7,10 @@ import global.tools.TestOption;
 import global.utils.ArrayUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
+import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,12 +22,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MainTest extends BaseTest {
     // Parsons
 
-    //vary this variable to vary number of bmis calculated. Max of 20 (inclusive) because of default input.
     final static int size = 10;
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "180 65 135 45 187.3 95 67 23 132 78.3 184.78 67.521 704 15.4 63.5 38 374 23.4 437 38 180 65 135 45 187.3 95 67 23 132 78.3 184.78 67.521 704 15.4 63.5 38 374 23.4 437 38";
+        TestOption.defaultInput = ArrayUtil.arrayToInput(ArrayUtil.generateRandomArray(30.0, 500.0, size * 2));
         return clauseBuilder();
     }
 
@@ -49,9 +50,9 @@ public class MainTest extends BaseTest {
 
     static Stream<double[]> mainMethodInputProvider() {
         return Stream.of(
-                ArrayUtil.generateRandomArray(30.0, 200.0, size * 2),
-                ArrayUtil.generateRandomArray(30.0, 200.0, size * 2),
-                ArrayUtil.generateRandomArray(30.0, 200.0, size * 2)
+                ArrayUtil.generateRandomArray(30.0, 500.0, size * 2),
+                ArrayUtil.generateRandomArray(30.0, 500.0, size * 2),
+                ArrayUtil.generateRandomArray(30.0, 500.0, size * 2)
         );
     }
 
@@ -86,25 +87,22 @@ public class MainTest extends BaseTest {
         runWithInput(s.toString());
 
         for (int x = 0; x < size; x++) {
-            assertEquals(bmis[x], Double.parseDouble(getItemByName(String.valueOf(x + 1))), 0.00000001, "Your program calculate BMI " + (x + 1) + " correctly.");
+            assertEquals(bmis[x], Double.parseDouble(getItemByName(String.valueOf(x + 1))), 0.00000001, "Your program did not correctly calculate BMI.");
         }
     }
 
     public Clause[] clauseBuilder() {
-        Clause[] c = new Clause[size * 7];
+        Clause[] c = new Clause[size * 3 + 5];
+
+        c[0] = new StringLiteral("Enter the Height and Weight of ");
+        c[1] = new IntegerLiteral("size");
+        c[2] = new StringLiteral(" people in pairs:");
+        c[3] = new Optional(new StringLiteral(" "));
+        c[4] = new NewLine();
+
         int count = 1;
 
-        for (int x = 0; x < size * 4; x += 4) {
-            c[x] = new StringLiteral("Enter Height " + count + ": ");
-            c[x + 1] = new NewLine();
-            c[x + 2] = new StringLiteral("Enter Weight " + count + ": ");
-            c[x + 3] = new NewLine();
-            count++;
-        }
-
-        count = 1;
-
-        for (int x = size * 4; x < size * 7; x += 3) {
+        for (int x = 5; x < size * 3 + 5; x += 3) {
             c[x] = new StringLiteral("BMI " + count + ": ");
             c[x + 1] = new DoubleLiteral(String.valueOf(count));
             c[x + 2] = new NewLine();
