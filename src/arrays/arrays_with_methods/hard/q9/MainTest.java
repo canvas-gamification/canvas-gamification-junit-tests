@@ -92,7 +92,7 @@ public class MainTest extends BaseTest {
     @MethodSource("mainMethodInputProvider")
     void correctMainMethodOutput(String in, int one, int two, int three, int four, int five) {
         runWithInput(in);
-        assertEquals(one, Integer.parseInt(getItemByName("first")), "Your program does not square the first number in the array.");
+        assertEquals(one, Integer.parseInt(getItemByName("first")), "Your program does not correctly square and print the array elements.");
         assertEquals(two, Integer.parseInt(getItemByName("second")), "Your program does not square the first number in the array.");
         assertEquals(three, Integer.parseInt(getItemByName("third")), "Your program does not square the first number in the array.");
         assertEquals(four, Integer.parseInt(getItemByName("fourth")), "Your program does not square the first number in the array.");
