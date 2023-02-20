@@ -46,6 +46,6 @@ public class MainTest {
         };
         MethodTest m = new MethodTest(ArraySimilarity.class, "isEqual", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(equal, output, "Your isEqual method does not return the correct boolean when evaluating if the arrays are the same.");
+        CustomAssertions._assertEquals(equal, output, "Your isEqual method does not correctly evaluate if the arrays are equal.");
     }
 }
