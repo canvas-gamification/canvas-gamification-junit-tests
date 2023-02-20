@@ -78,6 +78,6 @@ public class MainTest extends BaseTest {
         });
 
         assertEquals(c, Integer.parseInt(getItemByName("index")), "Your program does not print the input index.");
-        assertEquals(in[c], getItemByName("name"), "Your program does not print the correct name located at the given index.");
+        assertEquals(in[c], getItemByName("name"), "Your program does not print the element at the input index.");
     }
 }
