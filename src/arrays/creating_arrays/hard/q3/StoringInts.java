@@ -5,7 +5,7 @@ Write a program that asks the user for one hundred integers, stores those values
 one hundred randomly generated indexes of the array.
 
 Sample output:
-    Enter 5 integers:
+    Enter 100 integers:
     374 5 ... 76 -16
     Number at index 2 is: 34
     Number at index 17 is: 5482
