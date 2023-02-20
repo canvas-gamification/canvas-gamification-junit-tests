@@ -29,6 +29,6 @@ public class MainTest {
         MethodTest m = new MethodTest(OppositeEnds.class, "smallAndLarge", arguments);
         Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(sizes, output, "Your smallAndLarge method does not return an array of the largest" +
-                " and smallest elements");
+                " and smallest elements from the original array.");
     }
 }
