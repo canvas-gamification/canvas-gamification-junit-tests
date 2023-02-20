@@ -4,7 +4,7 @@ package arrays.creating_arrays.hard.q4;
 Write a program that asks the user for 50 names of students, stores those values in an array, and asks the user for
 an index. Print the index and associated name from the array.
 Sample output:
-    Enter 5 names:
+    Enter 50 names:
     Anne
     Will
     Abla Rey
