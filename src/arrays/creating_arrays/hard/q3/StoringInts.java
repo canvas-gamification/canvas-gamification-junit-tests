@@ -1,7 +1,7 @@
 package arrays.creating_arrays.hard.q3;
 
 /*
-Write a program that asks the user for one hundred integers, stores those values into an array, and prints the values at
+Write a program that asks the user for one hundred integers, stores those values in an array, and prints 100 items from
 one hundred randomly generated indexes of the array.
 
 Sample output:
