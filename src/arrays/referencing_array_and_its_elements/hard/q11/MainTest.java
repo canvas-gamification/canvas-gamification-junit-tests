@@ -77,7 +77,7 @@ public class MainTest extends BaseTest {
                 Arguments.of(replicateArray(1.0, 1000)),
                 Arguments.of(new double[] {-999999.999}),
                 Arguments.of(new double[] {1.0, 1.1, 1.01, 1.001}),
-                Arguments.of(new double[] {-100.0, -100.1, -100.01, -99.9, - 99.99}),
+                Arguments.of(new double[] {-100.0, -100.1, -100.01, -99.9, -99.99}),
                 Arguments.of(new double[] {1.2, 1.1, 1.01, 1.001}),
                 Arguments.of(new double[] {100.0, -100.1, -100.01, -99.9, -99.99}),
                 Arguments.of(new double[] {1.0, 1.1, 1.2, 1.3, 2.5, 2.3, 2.0}),
