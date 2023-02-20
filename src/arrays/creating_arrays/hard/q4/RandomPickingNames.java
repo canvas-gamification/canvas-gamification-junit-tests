@@ -1,7 +1,7 @@
 package arrays.creating_arrays.hard.q4;
 
 /*
-Write a program that asks the user for 5 names of students, stores those values into an array, and asks the user for
+Write a program that asks the user for 50 names of students, stores those values in an array, and asks the user for
 an index. Print the index and associated name from the array.
 Sample output:
     Enter 5 names:
