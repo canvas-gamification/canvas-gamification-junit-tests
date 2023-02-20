@@ -89,12 +89,13 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void correctFindLowMethod(double[] input) throws Throwable {
+        double ans = min(input);
         Object[][] arguments = {
                 {input, double[].class},
         };
         MethodTest m = new MethodTest(MinFinder.class, "findLow", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(min(input), output, 0.00001, "Your findLow method does not correctly return the minimum value in a double array.");
+        CustomAssertions._assertEquals(ans, output, 0.00001, "Your findLow method does not correctly return the minimum value in a double array.");
     }
 
 }
