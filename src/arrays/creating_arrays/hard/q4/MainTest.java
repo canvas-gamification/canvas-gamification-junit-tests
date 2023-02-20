@@ -77,7 +77,7 @@ public class MainTest extends BaseTest {
                 new StringLiteral(in[c], "name")
         });
 
-        assertEquals(c, Integer.parseInt(getItemByName("index")), "Your program does not correctly print the given index.");
+        assertEquals(c, Integer.parseInt(getItemByName("index")), "Your program does not print the input index.");
         assertEquals(in[c], getItemByName("name"), "Your program does not print the correct name located at the given index.");
     }
 }
