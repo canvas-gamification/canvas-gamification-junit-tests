@@ -96,6 +96,6 @@ public class MainTest extends BaseTest {
         assertEquals(two, Integer.parseInt(getItemByName("second")), "Your program does not correctly square and print the array elements.");
         assertEquals(three, Integer.parseInt(getItemByName("third")), "Your program does not correctly square and print the array elements.");
         assertEquals(four, Integer.parseInt(getItemByName("fourth")), "Your program does not correctly square and print the array elements.");
-        assertEquals(five, Integer.parseInt(getItemByName("fifth")), "Your program does not square the first number in the array.");
+        assertEquals(five, Integer.parseInt(getItemByName("fifth")), "Your program does not correctly square and print the array elements.");
     }
 }
