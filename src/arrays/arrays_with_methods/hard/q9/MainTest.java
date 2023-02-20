@@ -84,7 +84,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(ArrayofDigits.class, "powerN", arguments);
         Object output = m.callMethod();
-        assertNull(output, "Your powerN method should not have a return variable.");
+        assertNull(output, "Your powerN does not have the correct return type.");
         CustomAssertions._assertArrayEquals(expected, given, "Your method does not square the values in the given array.");
     }
 
