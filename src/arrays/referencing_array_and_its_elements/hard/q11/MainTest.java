@@ -88,11 +88,12 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void correctFindLow(double[] input) throws Throwable {
+        double ans = max(input);
         Object[][] arguments = {
                 {input, double[].class},
         };
         MethodTest m = new MethodTest(MaxFinder.class, "findMax", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(max(input), output, 0.0001, "Your findMax method does not correctly return the maximum value of the double array");
+        CustomAssertions._assertEquals(ans, output, 0.0001, "Your findMax method does not correctly return the maximum value of the double array");
     }
 }
