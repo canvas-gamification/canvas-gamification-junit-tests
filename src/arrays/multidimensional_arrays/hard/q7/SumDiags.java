@@ -1,4 +1,4 @@
-package arrays.multidimensional_arrays.hard.q6;
+package arrays.multidimensional_arrays.hard.q7;
 
 /*
 Imagine a 2D array that has 3 rows and 3 columns, forming a square shape. In a square 2D array, there are
