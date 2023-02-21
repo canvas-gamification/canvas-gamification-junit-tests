@@ -1,7 +1,6 @@
 package arrays.programs_involving_multidimensional_data.easy.q7;
 
 import global.BaseRandomTest;
-import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.variables.Clause;
 import global.variables.clauses.*;
