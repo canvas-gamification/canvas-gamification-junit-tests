@@ -61,6 +61,6 @@ public class MainTest extends BaseTest {
         for (int i = 0; i < x; i++)
             s += a[i];
         CustomAssertions._assertEquals(s, Double.parseDouble(getItemByName("ans")), 0.0001, "Your program does not calculate the correct sum of purchases.");
-        CustomAssertions._assertEquals(x, Integer.parseInt(getItemByName("x")), "Your program does not print the sum of the required number of elements.");
+        CustomAssertions._assertEquals(x, Integer.parseInt(getItemByName("x")), "Your program does not print the correct number of elements to be summed.");
     }
 }
