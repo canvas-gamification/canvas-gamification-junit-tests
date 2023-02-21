@@ -1,6 +1,7 @@
 package methods.modular_programs.easy.q1;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
@@ -73,7 +74,14 @@ public class MainTest extends BaseTest {
     @MethodSource("userInputInputProvider")
     void correctUserInputMethod(double input) throws Throwable {
         provideInput(String.valueOf(input));
-        Object output = MethodUtil.invokeIfMethodExists(AverageHeight.class, "userInput");
+        Clause[] methodSentence = new Clause[]{
+                new StringLiteral("Please enter your height in cm: "),
+                new NewLine()
+        };
+        Object[][] arguments = new Object[0][0];
+        MethodTest m = new MethodTest(AverageHeight.class, "userInput", arguments, methodSentence);
+        m.setIncorrectMethodStructureErrorMessage("Your userInput method does not print the output in the correct structure.");
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(input, output, "Your userInput method does not correctly get input from the user.");
     }
 
