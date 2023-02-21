@@ -19,7 +19,7 @@ import static global.utils.ArrayUtil.*;
 public class MainTest extends BaseTest {
     // Java
 
-    public static int n = 10;
+    public static int n = 100;
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
