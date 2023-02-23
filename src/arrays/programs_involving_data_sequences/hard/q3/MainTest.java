@@ -81,7 +81,6 @@ public class MainTest extends BaseTest {
     @MethodSource("methodInputProvider")
     void correctSubCharacterStringMethod(char[] input, int start, int end, String subString) throws Throwable {
         TestOption.incorrectStructureErrorMessage = "Your SubCharacterString method should not print anything to the console.";
-        Clause[] methodSentence = new Clause[0];
         Object[][] arguments = {
                 {input, char[].class},
                 {start, int.class},
