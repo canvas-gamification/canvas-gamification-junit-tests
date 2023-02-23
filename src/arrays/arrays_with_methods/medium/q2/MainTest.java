@@ -1,5 +1,6 @@
 package arrays.arrays_with_methods.medium.q2;
 
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.utils.MethodUtil;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,8 +21,12 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctHighestMethod(double[] input1, double[] input2, double[] higher) throws Throwable{
-        Object output = MethodUtil.invokeIfMethodExists(HighestArray.class, "highest", new Object[]{input1, input2},
-                double[].class, double[].class);
+        Object[][] arguments = {
+                {input1, double[].class},
+                {input2, double[].class}
+        };
+        MethodTest m = new MethodTest(HighestArray.class, "highest", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(higher, output, "Your method does not return the array with the greatest number in it.");
     }
 }
