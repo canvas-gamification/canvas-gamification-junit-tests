@@ -3,7 +3,8 @@
 import os
 import subprocess
 from typing import List
-
+from os import listdir
+from os.path import isfile, join
 
 def _get_all_dirs(cur_dir: List[str], path: str, all_tests: List[str]) -> None:
     BLACK_LIST = ['src/test', 'src/temp']
@@ -46,10 +47,12 @@ def main() -> None:
     # get dirs
     for test in all_tests:
         dirs = os.path.join('src', '/'.join(test.split('.')))
-        # get all files in that directory
-        print(dirs)
-        subprocess.call(['javac', '-d', os.path.join(os.getcwd(), 'bin'), '-cp', 'lib/*',
-                        '-sourcepath', os.path.join(os.getcwd(), 'src'), os.path.join(dirs, '*.java')])
+
+        onlyfiles = [f for f in listdir(dirs) if isfile(join(dirs, f)) and f.endswith('.java')]
+
+        for file in onlyfiles:
+            subprocess.call(['javac', '-d', os.path.join(os.getcwd(), 'bin'), '-cp', 'lib/*',
+                            '-sourcepath', os.path.join(os.getcwd(), 'src'), os.path.join(dirs, file)])
         # run the test
         subprocess.call(['java', '-jar', 'lib/junit-platform-console-standalone-1.9.0.jar', '--class-path',
                         'bin', '-c', test + '.MainTest', '--reports-dir', os.path.join('reports', dirs[4:])])
