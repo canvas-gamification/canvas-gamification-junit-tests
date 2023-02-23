@@ -66,7 +66,6 @@ public class MainTest extends BaseTest {
     @MethodSource("methodInputProvider")
     void correctGetRestMethod(String[] words, int index, String[] result) throws Throwable {
         TestOption.incorrectStructureErrorMessage = "Your getRest method should not have printed output.";
-        Clause[] methodSentence = new Clause[0];
         Object[][] arguments = {
                 {words, String[].class},
                 {index, int.class}
