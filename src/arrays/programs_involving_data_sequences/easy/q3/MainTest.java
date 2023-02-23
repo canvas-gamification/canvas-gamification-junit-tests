@@ -1,6 +1,7 @@
 package arrays.programs_involving_data_sequences.easy.q3;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
@@ -46,10 +47,15 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void correctNextPleaseMethod(String[] names, String[] nextName, String stringOutput) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(StringyMovement.class, "nextPlease", new Object[]{names}, String[].class);
-        String removedName = MethodUtil.getMethodOutput();
+        Clause[] methodSentence = new Clause[]{
+                new StringLiteral(stringOutput)
+        };
+        Object[][] arguments = {
+                {names, String[].class}
+        };
+        MethodTest m = new MethodTest(StringyMovement.class, "nextPlease", arguments, methodSentence);
+        Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(nextName, output, "Your nextPlease method does not correctly remove the individual at the front of the queue.");
-        assertEquals(stringOutput, removedName, "Your nextPlease method does not correctly print the name removed from the queue.");
     }
 
     @Test
