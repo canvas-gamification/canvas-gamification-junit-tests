@@ -17,7 +17,3 @@
         > If the question doesn’t specify what to do, mark it as a bad question
 - [ ]  Are the test method names good?
     > Test method names show up in a “What went well” section on the website, so “mathTest” will become “What went well: math test”, which doesn’t make much sense. A better name in this example would be “calculatesTaxCorrectly” so it shows up as “What went well: calculates tax correctly”
----
-## Website
-- [ ] Is the question text on the Gamification document up to date? 
-    > Make sure to include the sample output if there is one for the question
