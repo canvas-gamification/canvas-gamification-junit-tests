@@ -1,9 +1,9 @@
 package methods.defining_methods.medium.q8;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.NewLine;
@@ -55,7 +55,12 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("costPerCalcInputProvider")
     void correctCostPerCalcMethod(double weight, double cost, double price) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(FlourPower.class, "costPerCalc", new Object[]{weight, cost}, double.class, double.class);
+        Object[][] arguments = {
+                {weight, double.class},
+                {cost, double.class}
+        };
+        MethodTest m = new MethodTest(FlourPower.class, "costPerCalc", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(price, output, 0.000001, "Your costPerCalc method does not calculate the correct price per kg.");
     }
 
