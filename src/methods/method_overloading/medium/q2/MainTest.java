@@ -49,33 +49,32 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("maxIntDoubleInputProvider")
     void correctlyOverloadedMaxMethod1(int x, double y, double max) throws Throwable {
-        TestOption.incorrectStructureErrorMessage = "Your max method should not have any console output.";
-        Clause[] methodSentence = new Clause[0];
         Object[][] arguments = {
                 {x, int.class},
                 {y, double.class}
         };
-        MethodTest m = new MethodTest(LargerOfVars.class, "max", arguments, methodSentence);
+        MethodTest m = new MethodTest(LargerOfVars.class, "max", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(max, output, 0.000000000001, "Your max method does not correctly calculate the maximum of an integer and a double.");
+        CustomAssertions._assertEquals(max, output, 0.000000000001,
+                "Your max method does not correctly calculate the maximum of an integer and a double.");
     }
 
     @ParameterizedTest
     @MethodSource("maxDoubleIntInputProvider")
     void correctlyOverloadedMaxMethod2(double x, int y, double max) throws Throwable {
-        TestOption.incorrectStructureErrorMessage = "Your max method should not have any console output.";
-        Clause[] methodSentence = new Clause[0];
         Object[][] arguments = {
                 {x, double.class},
                 {y, int.class}
         };
-        MethodTest m = new MethodTest(LargerOfVars.class, "max", arguments, methodSentence);
+        MethodTest m = new MethodTest(LargerOfVars.class, "max", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(max, output, 0.000000000001, "Your method does not correctly calculate the maximum of a double and an integer.");
+        CustomAssertions._assertEquals(max, output, 0.000000000001,
+                "Your method does not correctly calculate the maximum of a double and an integer.");
     }
 
     @Test
     void printsCorrectOutput() {
-        assertEquals(5.5, Double.parseDouble(getItemByName("max")), "Your program does not correctly identify and print which value is the maximum.");
+        assertEquals(5.5, Double.parseDouble(getItemByName("max")),
+                "Your program does not correctly identify and print which value is the maximum.");
     }
 }
