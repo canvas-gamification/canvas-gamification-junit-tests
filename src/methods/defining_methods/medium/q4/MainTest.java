@@ -36,11 +36,25 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> volumeCylinderInputProvider() {
-        return Stream.of(Arguments.of(3, 3, 84.82300164692441), Arguments.of(6.8, 2, 290.5344886039841), Arguments.of(2, 4.6, 57.805304826052186), Arguments.of(4.1, 10.9, 575.630880324604), Arguments.of(0.4, 0.7, 0.3518583772020568), Arguments.of(260, 841, 1.7860456890482548E8), Arguments.of(-24, 12, -1), Arguments.of(4.7, -1.2, -1), Arguments.of(-3, -2.2, -1));
+        return Stream.of(
+                Arguments.of(3, 3, 84.82300164692441),
+                Arguments.of(6.8, 2, 290.5344886039841),
+                Arguments.of(2, 4.6, 57.805304826052186),
+                Arguments.of(4.1, 10.9, 575.630880324604),
+                Arguments.of(0.4, 0.7, 0.3518583772020568),
+                Arguments.of(260, 841, 1.7860456890482548E8),
+                Arguments.of(-24, 12, -1),
+                Arguments.of(4.7, -1.2, -1),
+                Arguments.of(-3, -2.2, -1)
+        );
     }
 
     static Stream<Arguments> mainMethodInputProvider() {
-        return Stream.of(Arguments.of("6 4", 452.3893421169302), Arguments.of("2.2 5.1", 77.54707306121047), Arguments.of("-4 78", -1));
+        return Stream.of(
+                Arguments.of("6 4", 452.3893421169302),
+                Arguments.of("2.2 5.1", 77.54707306121047),
+                Arguments.of("-4 78", -1)
+        );
     }
 
     @ParameterizedTest
