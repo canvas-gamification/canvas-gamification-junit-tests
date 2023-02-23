@@ -56,13 +56,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void correctDeleteThisMethod(int[] input, int replace, int index) throws Throwable {
-        TestOption.incorrectStructureErrorMessage = "Your deleteThis method should not have any printed output.";
-        Clause[] methodSentence = new Clause[0];
         Object[][] arguments = {
                 {input, int[].class},
                 {replace, int.class}
         };
-        MethodTest m = new MethodTest(DoTheDeletion.class, "deleteThis", arguments, methodSentence);
+        MethodTest m = new MethodTest(DoTheDeletion.class, "deleteThis", arguments);
         Object output = m.callMethod();
         CustomAssertions._assertEquals(index, output, "Your deleteThis method does not return the index the item in the array was replaced at.");
     }
