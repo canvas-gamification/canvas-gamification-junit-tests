@@ -1,4 +1,4 @@
-package arrays.multidimensional_arrays.hard.q6;
+package arrays.multidimensional_arrays.hard.q7;
 
 import global.BaseTest;
 import global.tools.CustomAssertions;
