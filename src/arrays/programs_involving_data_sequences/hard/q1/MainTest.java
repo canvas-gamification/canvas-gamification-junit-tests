@@ -66,14 +66,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("countThisInputProvider")
     void correctCountThisPleaseMethod(int[] input, int pivot, int[] result) throws Throwable {
-        Clause[] methodSentence = new Clause[]{
-
-        };
         Object[][] arguments = {
                 {input, int[].class},
                 {pivot, int.class}
         };
-        MethodTest m = new MethodTest(CountArray.class, "countThisPlease", arguments, methodSentence);
+        MethodTest m = new MethodTest(CountArray.class, "countThisPlease", arguments);
         Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(result, output, "Your countThisPlease method does not correctly count the all the number below, equal to, and above the pivot.");
     }
@@ -94,5 +91,4 @@ public class MainTest extends BaseTest {
         int greater = Arrays.stream(arr).boxed().mapToInt((a) -> a > pivot ? 1 : 0).sum();
         return new int[]{less, equal, greater};
     }
-
 }
