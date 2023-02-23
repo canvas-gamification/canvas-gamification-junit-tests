@@ -1,9 +1,9 @@
 package methods.defining_methods.hard.q2;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.NewLine;
@@ -58,15 +58,22 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("areaCalcInputProvider")
     void correctAreaCalcMethod(double radius, double area) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(RadOfCircle.class, "areaCalc", new Object[]{radius},
-                double.class);
+        Object[][] arguments = {
+                {radius, double.class}
+        };
+        MethodTest m = new MethodTest(RadOfCircle.class, "areaCalc", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(area, output, 0.0000001, "Your areaCalc method does not correctly calculate the area of a circle.");
     }
 
     @ParameterizedTest
     @MethodSource("circCalcInputProvider")
     void correctCircCalcMethod(double radius, double circumference) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(RadOfCircle.class, "circCalc", new Object[]{radius}, double.class);
+        Object[][] arguments = {
+                {radius, double.class}
+        };
+        MethodTest m = new MethodTest(RadOfCircle.class, "circCalc", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(circumference, output, 0.0000001, "Your circCalc method does not correctly calculate the circumference of a circle.");
     }
 
