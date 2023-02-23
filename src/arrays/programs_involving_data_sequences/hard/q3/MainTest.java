@@ -86,7 +86,7 @@ public class MainTest extends BaseTest {
                 {start, int.class},
                 {end, int.class}
         };
-        MethodTest m = new MethodTest(SubThat.class, "subCharacterString", arguments, methodSentence);
+        MethodTest m = new MethodTest(SubThat.class, "subCharacterString", arguments);
         Object output = m.callMethod();
         CustomAssertions._assertEquals(subString, output, "Your SubCharacterString method does not generate the correct substring based on the inputs provided.");
     }
