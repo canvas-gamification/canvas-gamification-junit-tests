@@ -61,20 +61,20 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("rightPrimeInputProvider")
     public void correctRightPrimeMethod(int input, boolean isRightPrime) throws Throwable {
-        Clause[] methodSentence = new Clause[0];
         Object[][] arguments = {
                 {input, int.class}
         };
-        MethodTest m = new MethodTest(RightPrime.class, "isRightPrime", arguments, methodSentence);
+        MethodTest m = new MethodTest(RightPrime.class, "isRightPrime", arguments);
         Object output = m.callMethod();
-        m.setIncorrectMethodStructureErrorMessage("Your isRightPrime method should not have any console output.");
-        CustomAssertions._assertEquals(isRightPrime, output, "Your isRightPrime method does not correctly identify if a number is a right-truncatable prime.");
+        CustomAssertions._assertEquals(isRightPrime, output,
+                "Your isRightPrime method does not correctly identify if a number is a right-truncatable prime.");
     }
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
     void printsCorrectOutput(int input, boolean isRightPrime) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct output for it the input number is a right-truncatable prime.";
+        TestOption.incorrectStructureErrorMessage =
+                "Your program does not print the correct output for it the input number is a right-truncatable prime.";
         runWithInput(String.valueOf(input), new Clause[]{
                 new StringLiteral(String.valueOf(isRightPrime))
         });
