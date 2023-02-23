@@ -1,10 +1,10 @@
 package methods.defining_methods.medium.q5;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
@@ -39,7 +39,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctInverseCalcMethod(boolean b, String s) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(InverseMethod.class, "inverseCalc", new Object[]{b}, boolean.class);
+        Object[][] arguments = {
+                {b, boolean.class}
+        };
+        MethodTest m = new MethodTest(InverseMethod.class, "inverseCalc", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(!b, output, "Your inverseCalc method does not invert the input boolean.");
     }
 
