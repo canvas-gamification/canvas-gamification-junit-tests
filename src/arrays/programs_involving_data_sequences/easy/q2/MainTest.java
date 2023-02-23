@@ -53,19 +53,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctPrintArrayPatternMethod(int[] input) throws Throwable {
-        Clause[] c = new Clause[2 * input.length];
-        int t = 0;
-        for (int i = 0; i < input.length; i++) {
-            String st = "";
-            for (int j = 0; j < input[i]; j++)
-                st += "\\*";
-            c[t++] = new StringLiteral(st);
-            if (i != input.length - 1)
-                c[t++] = new NewLine();
-            else
-                c[t++] = new Optional(new NewLine());
-
-        }
+        Clause[] c = createClausePattern(input);
         Object[][] arguments = {
                 {input, int[].class}
         };
@@ -73,5 +61,4 @@ public class MainTest extends BaseTest {
         MethodTest m = new MethodTest(StarryNight.class, "printArrayPattern", arguments, c);
         m.callMethod();
     }
-
 }
