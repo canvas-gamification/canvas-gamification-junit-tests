@@ -5,20 +5,16 @@ import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Random;
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Parsons
@@ -49,7 +45,14 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Double> userInputInputProvider() {
-        return Stream.of(170.0, 168.7, -37.00, 11.00, 87.345, -13.67);
+        return Stream.of(
+                170.0,
+                168.7,
+                -37.00,
+                11.00,
+                87.345,
+                -13.67
+        );
     }
 
     static Stream<Arguments> mainMethodInputProvider() {
@@ -64,10 +67,17 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("heightCheckerInputProvider")
     void correctHeightCheckerMethod(double height, String message) throws Throwable {
-        MethodUtil.invokeIfMethodExists(AverageHeight.class, "heightChecker", new Object[]{height},
-                double.class);
-        String output = MethodUtil.getMethodOutput();
-        assertEquals(message, output, "Your heightChecker method does not print the correct message base on the input height.");
+        Object[][] arguments = {
+                {height, double.class}
+        };
+        Clause[] methodTestSentence = {
+                new StringLiteral(message)
+        };
+        String incorrectMethodStructureErrorMessage =
+                "Your heightChecker method does not print the correct message based on the input height.";
+        MethodTest methodTest = new MethodTest(AverageHeight.class, "heightChecker", arguments,
+                methodTestSentence, incorrectMethodStructureErrorMessage);
+        methodTest.callMethod();
     }
 
     @ParameterizedTest
@@ -78,17 +88,18 @@ public class MainTest extends BaseTest {
                 new StringLiteral("Please enter your height in cm: "),
                 new NewLine()
         };
-        Object[][] arguments = new Object[0][0];
-        MethodTest m = new MethodTest(AverageHeight.class, "userInput", arguments, methodSentence);
-        m.setIncorrectMethodStructureErrorMessage("Your userInput method does not print the output in the correct structure.");
+        MethodTest m = new MethodTest(AverageHeight.class, "userInput", methodSentence);
+        m.setIncorrectMethodStructureErrorMessage("Your userInput method does not print the correct console output.");
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(input, output, "Your userInput method does not correctly get input from the user.");
+        CustomAssertions._assertEquals(input, output,
+                "Your userInput method does not correctly get input from the user.");
     }
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
     void printsOutputCorrectly(double height, String message) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message based on the input height.";
+        TestOption.incorrectStructureErrorMessage =
+                "Your program does not print the correct message based on the input height.";
         runWithInput(String.valueOf(height), new Clause[]{
                 new StringLiteral(message)
         });
