@@ -49,7 +49,7 @@ def main() -> None:
         # get all files in that directory
         print(dirs)
         subprocess.call(['javac', '-d', os.path.join(os.getcwd(), 'bin'), '-cp', 'lib/*',
-                        '-sourcepath', os.path.join(os.getcwd(), 'src'), os.path.join(dirs, 'MainTest.java')])
+                        '-sourcepath', os.path.join(os.getcwd(), 'src'), os.path.join(dirs, '*.java')])
         # run the test
         subprocess.call(['java', '-jar', 'lib/junit-platform-console-standalone-1.9.0.jar', '--class-path',
                         'bin', '-c', test + '.MainTest', '--reports-dir', os.path.join('reports', dirs[4:])])
