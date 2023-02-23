@@ -1,4 +1,4 @@
-package arrays.creatings_arrays.medium.q3;
+package arrays.creating_arrays.medium.q3;
 
 /*
 Make a Java program that creates an array of 100 random integers from the range of 0-9, inclusive of both 0 and 9, using
