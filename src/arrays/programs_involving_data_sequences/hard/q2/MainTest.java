@@ -71,11 +71,10 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("validMeldInputProvider")
     void correctValidMeldMethod(int[] input, boolean isMeld) throws Throwable {
-        Clause[] methodSentence = new Clause[0];
         Object[][] arguments = {
                 {input, int[].class}
         };
-        MethodTest m = new MethodTest(MyJong.class, "validMeld", arguments, methodSentence);
+        MethodTest m = new MethodTest(MyJong.class, "validMeld", arguments);
         Object output = m.callMethod();
         CustomAssertions._assertEquals(isMeld, output, "Your validMeld method does not correctly identify valid melds in the array.");
     }
@@ -86,5 +85,4 @@ public class MainTest extends BaseTest {
         TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message based on if the array contains a valid meld.";
         runWithInput(input, new Clause[]{new StringLiteral(message)});
     }
-
 }
