@@ -1,4 +1,4 @@
-package arrays.creatings_arrays.medium.q3;
+package arrays.creating_arrays.medium.q3;
 
 import global.BaseTest;
 import global.variables.Clause;
