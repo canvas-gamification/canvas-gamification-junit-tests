@@ -1,8 +1,8 @@
 package arrays.arrays_with_methods.medium.q5;
 
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.utils.ArrayUtil;
-import global.utils.MethodUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -40,8 +40,11 @@ public class MainTest {
     @MethodSource("inputProvider")
     void correctIsItDivisibleMethod(int[] input) throws Throwable {
         boolean isDivisible = isDivisible(input);
-        Object output = MethodUtil.invokeIfMethodExists(DivideThis.class, "isItDivisible", new Object[]{input},
-                int[].class);
+        Object[][] arguments = {
+                {input, int[].class}
+        };
+        MethodTest m = new MethodTest(DivideThis.class, "isItDivisible", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(isDivisible, output, "Your method does not correctly calculate if all the elements of an array are divisible by the specified value.");
     }
 }
