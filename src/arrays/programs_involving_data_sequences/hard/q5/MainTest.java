@@ -67,13 +67,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void correctFindTheLastMethod(int[] arr, int search, int index) throws Throwable {
-        TestOption.incorrectStructureErrorMessage = "Your findTheLast method should not have any printed output.";
-        Clause[] methodSentence = new Clause[0];
         Object[][] arguments = {
                 {arr, int[].class},
                 {search, int.class}
         };
-        MethodTest m = new MethodTest(FindThatNumber.class, "findTheLast", arguments, methodSentence);
+        MethodTest m = new MethodTest(FindThatNumber.class, "findTheLast", arguments);
         Object outputIndex = m.callMethod();
         CustomAssertions._assertEquals(index, outputIndex, "Your findTheLast method does not find the index of last occurrence of a number in an array.");
     }
