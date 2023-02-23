@@ -70,7 +70,7 @@ public class MainTest extends BaseTest {
                 {words, String[].class},
                 {index, int.class}
         };
-        MethodTest m = new MethodTest(StringSlice.class, "getRest", arguments, methodSentence);
+        MethodTest m = new MethodTest(StringSlice.class, "getRest", arguments);
         Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(result, output, "Your getRest method does not return an array with all the strings after an index.");
     }
