@@ -69,12 +69,13 @@ public class MainTest extends BaseTest {
         for (int x = 0; x < b; x++)
             arr[x] = a;
 
-        CustomAssertions._assertArrayEquals(arr, output, "Your digitInt method does not return an array of the specified integers to the specified length.");
+        CustomAssertions._assertArrayEquals(arr, output, "Your digitInt method does not return the correct based on the input parameters.");
     }
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
     void correctMainMethodOutput(String in, int a, int b) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly print the array of integers.";
         Clause[][] c = new Clause[1][b * 2];
         int count = 0;
         for (int x = 0; x < b; x++) {
