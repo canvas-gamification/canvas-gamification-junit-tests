@@ -1,9 +1,9 @@
 package methods.defining_methods.medium.q6;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.NewLine;
@@ -51,7 +51,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("lengthCubeInputProvider")
     void correctLengthCubeMethod(double in, double side) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(VolToLength.class, "lengthCube", new Object[]{in}, double.class);
+        Object[][] arguments = {
+                {in, double.class}
+        };
+        MethodTest m = new MethodTest(VolToLength.class, "lengthCube", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(side, output, 0.00001, "Your lengthCube method does not correctly calculate the side length of a cube based on the volume.");
     }
 
