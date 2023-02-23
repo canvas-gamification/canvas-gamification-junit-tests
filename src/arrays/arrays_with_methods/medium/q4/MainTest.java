@@ -1,7 +1,7 @@
 package arrays.arrays_with_methods.medium.q4;
 
+import global.MethodTest;
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,8 +20,11 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctDoubleTroubleMethod(int[] input, int[] result) throws Throwable{
-        Object output = MethodUtil.invokeIfMethodExists(DoubleTrouble.class, "doubleTrouble", new Object[]{input},
-                int[].class);
+        Object[][] arguments = {
+                {input, int[].class}
+        };
+        MethodTest m = new MethodTest(DoubleTrouble.class, "doubleTrouble", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertArrayEquals(result, output, "Your method does not return an array with the elements copied twice.");
     }
 }
