@@ -1,9 +1,9 @@
 package arrays.programs_involving_data_sequences.medium.q2;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.utils.ArrayUtil;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -38,8 +38,12 @@ public class MainTest extends BaseTest {
     @MethodSource("methodInputProvider")
     void correctCharzIIStringMethod(String word, char[] letters) throws Throwable {
         String result = word + ArrayUtil.arrayToInput(letters).replaceAll(" ", "");
-        Object output = MethodUtil.invokeIfMethodExists(WordleBuilder.class, "charzIIString",
-                new Object[]{word, letters}, String.class, char[].class);
+        Object[][] arguments = {
+                {word, String.class},
+                {letters, char[].class}
+        };
+        MethodTest m = new MethodTest(WordleBuilder.class, "charzIIString", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(result, output, "Your charzIIString method does not correctly combine the input word and char array.");
     }
 }
