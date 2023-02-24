@@ -5,7 +5,7 @@ Create a Java program that takes an array of strings, finds the middle character
 console. To do this, create a method called middle, which accepts a String array, finds the middle character in the
 string, and adds it to a character array. For this method, find the middle element by dividing the length by two,
 rounding the number, and subtracting one. After computing the array, return it and print each character in the main
-method. Use the provided main method to call your method and print the output.
+method. Use the provided main method to call your method and print the output. Note that your middle method should be general enough to work with input of any length.
 
 Sample Output:
         The middle letter of the array are:
