@@ -65,7 +65,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(BMWhy.class, "calculateBMI", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(bmi, output, 0.00000001, "Your calculateBMI method does not correctly calculate the bmi.");
+        CustomAssertions._assertEquals(bmi, output, 0.00000001, "Your calculateBMI method does not correctly calculate bmi based on the input height and weight.");
     }
 
     @ParameterizedTest
