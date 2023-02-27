@@ -1,10 +1,10 @@
 package methods.modular_programs.hard.q2;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
@@ -57,8 +57,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("addSpaceInputProvider")
     void correctAddSpaceMethod(String input, String spaces) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(AddSpaces.class, "addSpace", new Object[]{input},
-                String.class);
+        Object[][] arguments = {
+                {input, String.class}
+        };
+        MethodTest m = new MethodTest(AddSpaces.class, "addSpace", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(spaces, output, "Your addSpace method does not correctly add spaces between the words of the input string.");
     }
 
