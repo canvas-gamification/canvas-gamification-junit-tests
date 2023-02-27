@@ -1,9 +1,9 @@
 package methods.defining_methods.medium.q7;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.NewLine;
@@ -57,7 +57,12 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("greaterSizeInputProvider")
     void correctGreaterAreaMethod(double first, double second, double greatest) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(PizzaPizza.class, "greaterArea", new Object[]{first, second}, double.class, double.class);
+        Object[][] arguments = {
+                {first, double.class},
+                {second, double.class}
+        };
+        MethodTest m = new MethodTest(PizzaPizza.class, "greaterArea", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(greatest, output, 0.0001, "Your greaterArea method does not correctly identify the pizza with the greatest area.");
     }
 

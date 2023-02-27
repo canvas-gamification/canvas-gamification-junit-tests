@@ -1,8 +1,8 @@
 package methods.defining_methods.medium.q1;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.StringLiteral;
@@ -40,8 +40,12 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("powerCalcInputProvider")
     void correctPowerCalcMethod(int base, int exponent, double power) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(RaiseToPower.class, "powerCalc",
-                new Object[]{base, exponent}, int.class, int.class);
+        Object[][] arguments = {
+                {base, int.class},
+                {exponent, int.class}
+        };
+        MethodTest m = new MethodTest(RaiseToPower.class, "powerCalc", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(power, output, 0.00000001, "Your powerCalc method does not correctly calculate the power.");
     }
 
