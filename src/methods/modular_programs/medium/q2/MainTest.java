@@ -1,9 +1,9 @@
 package methods.modular_programs.medium.q2;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.NewLine;
@@ -46,8 +46,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctTempConversionMethod(double fahrenheit, double celsius) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(TempConverter.class, "tempConversion",
-                new Object[]{fahrenheit}, double.class);
+        Object[][] arguments = {
+                {fahrenheit, double.class}
+        };
+        MethodTest m = new MethodTest(TempConverter.class, "tempConversion", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(celsius, output, 0.00000001, "Your tempConverter method does not correctly convert the temperature.");
     }
 
