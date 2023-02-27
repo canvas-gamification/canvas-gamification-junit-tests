@@ -1,10 +1,10 @@
 package methods.modular_programs.easy.q2;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.NewLine;
@@ -67,16 +67,22 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("isEvenInputProvider")
     void correctIsEvenMethod(int input, boolean isEven) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(FavInteger.class, "isEven", new Object[]{input},
-                int.class);
+        Object[][] arguments = {
+                {input, int.class}
+        };
+        MethodTest m = new MethodTest(FavInteger.class, "isEven", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(isEven, output, "Your isEven method does not correctly identify if a number is even.");
     }
 
     @ParameterizedTest
     @MethodSource("multiplyInputProvider")
     void correctMultiplyMethod(int input, double multiply) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(FavInteger.class, "multiply", new Object[]{input},
-                int.class);
+        Object[][] arguments = {
+                {input, int.class}
+        };
+        MethodTest m = new MethodTest(FavInteger.class, "multiply", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(multiply, output, 0.0000001, "Your multiply method does not correctly multiply the number by the specified value.");
     }
 
