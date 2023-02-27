@@ -1,8 +1,8 @@
 package methods.method_overloading.medium.q1;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.StringLiteral;
@@ -48,14 +48,25 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("sum2MethodInputProvider")
     void correctTwoIntegerSumMethod(int x, int y, int sum) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(OverloadSum.class, "sum", new Object[]{x, y}, int.class, int.class);
+        Object[][] arguments = {
+                {x, int.class},
+                {y, int.class}
+        };
+        MethodTest m = new MethodTest(OverloadSum.class, "sum", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(sum, output, "Your sum method does not correctly calculate the sum of two integers.");
     }
 
     @ParameterizedTest
     @MethodSource("sum3MethodInputProvider")
     void correctThreeIntegerSumMethod(int x, int y, int z, int sum) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(OverloadSum.class, "sum", new Object[]{x, y, z}, int.class, int.class, int.class);
+        Object[][] arguments = {
+                {x, int.class},
+                {y, int.class},
+                {z, int.class}
+        };
+        MethodTest m = new MethodTest(OverloadSum.class, "sum", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(sum, output, "Your sum method does not correctly calculate the sum of three integers.");
     }
 

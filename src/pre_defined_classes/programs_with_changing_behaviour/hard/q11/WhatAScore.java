@@ -1,4 +1,4 @@
-package pre_defined_classes.programs_with_changing_behaviour.medium.q11;
+package pre_defined_classes.programs_with_changing_behaviour.hard.q11;
 
 import java.util.Random;
 
