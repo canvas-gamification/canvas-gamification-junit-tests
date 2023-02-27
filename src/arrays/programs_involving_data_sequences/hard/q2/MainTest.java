@@ -1,10 +1,11 @@
 package arrays.programs_involving_data_sequences.hard.q2;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
+import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.utils.ArrayUtil;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
@@ -70,10 +71,12 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("validMeldInputProvider")
     void correctValidMeldMethod(int[] input, boolean isMeld) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(MyJong.class, "validMeld", new Object[]{input}, int[].class);
-        assertEquals(isMeld, output, "Your validMeld method does not correctly identify valid melds in the array.");
-        String consoleOutput = MethodUtil.getMethodOutput();
-        assertEquals("", consoleOutput, "Your validMeld method should not print console output.");
+        Object[][] arguments = {
+                {input, int[].class}
+        };
+        MethodTest m = new MethodTest(MyJong.class, "validMeld", arguments);
+        Object output = m.callMethod();
+        CustomAssertions._assertEquals(isMeld, output, "Your validMeld method does not correctly identify valid melds in the array.");
     }
 
     @ParameterizedTest
@@ -82,5 +85,4 @@ public class MainTest extends BaseTest {
         TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message based on if the array contains a valid meld.";
         runWithInput(input, new Clause[]{new StringLiteral(message)});
     }
-
 }
