@@ -1,7 +1,7 @@
 package arrays.arrays_with_methods.hard.q5;
 
+import global.MethodTest;
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -24,8 +24,11 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctSmallestDiffMethod(int[] input, int difference) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(SmallestDifference.class, "smallestDiff", new Object[]{input},
-                int[].class);
+        Object[][] arguments = {
+                {input, int[].class}
+        };
+        MethodTest m = new MethodTest(SmallestDifference.class, "smallestDiff", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(difference, output, "Your method does not correctly calculate the smallest difference between the items in an array.");
     }
 }
