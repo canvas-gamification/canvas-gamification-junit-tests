@@ -1,10 +1,10 @@
 package arrays.programs_involving_data_sequences.easy.q1;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
@@ -37,8 +37,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctAverageCharMethod(char[] input, char average) throws Throwable {
-        Object result = MethodUtil.invokeIfMethodExists(AverageChar.class, "averageChar", new Object[]{input},
-                char[].class);
+        Object[][] arguments = {
+                {input, char[].class}
+        };
+        MethodTest m = new MethodTest(AverageChar.class, "averageChar", arguments);
+        Object result = m.callMethod();
         CustomAssertions._assertEquals(average, result, "Your averageChar method does not correctly computer the average character from a character array.");
     }
 
