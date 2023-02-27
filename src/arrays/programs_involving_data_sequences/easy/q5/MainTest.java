@@ -1,7 +1,7 @@
 package arrays.programs_involving_data_sequences.easy.q5;
 
 import global.BaseTest;
-import global.utils.MethodUtil;
+import global.MethodTest;
 import global.variables.Clause;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,8 +9,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Parsons
@@ -38,8 +36,13 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctReverseMethod(int[] input, String result) throws Throwable {
-        MethodUtil.invokeIfMethodExists(RevItUp.class, "reverse", new Object[]{input}, int[].class);
-        String output = MethodUtil.getMethodOutput();
-        assertEquals(result, output, "Your method does not reverse and print the array correctly.");
+        Clause[] methodSentence = new Clause[]{
+                new StringLiteral(result)
+        };
+        Object[][] arguments = {
+                {input, int[].class}
+        };
+        MethodTest m = new MethodTest(RevItUp.class, "reverse", arguments, methodSentence);
+        m.callMethod();
     }
 }
