@@ -10,7 +10,6 @@ import global.variables.clauses.RandomInteger;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -23,14 +22,15 @@ public class MainTest extends BaseRandomTest {
     // Java
 
     public static final int n = 5;
+    public static final int m = 5;
     public static final int up = 100;
     public static final int down = 0;
 
     public Clause[] testSentence() {
-        Clause[] c = new Clause[2 * n * n + n + 2];
+        Clause[] c = new Clause[2 * n * m + n + 2];
         int t = 0;
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+            for (int j = 0; j < m; j++) {
                 c[t++] = new RandomInteger(down, up, i + " " + j);
                 if (j != n - 1)
                     c[t++] = new StringLiteral(" ");
@@ -53,7 +53,7 @@ public class MainTest extends BaseRandomTest {
     public void printsCorrectOutput() {
         int max = -1;
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+            for (int j = 0; j < m; j++) {
                 int a = Integer.parseInt(getItemByName(i + " " + j));
                 if (max < a)
                     max = a;
@@ -65,12 +65,12 @@ public class MainTest extends BaseRandomTest {
 
 
     static Stream<Arguments> inputProvider() {
-        int[][] t = new int[10][10];
+        int[][] t = new int[10][15];
         for (int i = 0; i < 10; i++)
-            t[i] = generateRandomArray(1, 100, 10);
+            t[i] = generateRandomArray(1, 100, 15);
         int max = -1;
         for (int i = 0; i < 10; i++)
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < 15; j++)
                 max = Math.max(max, t[i][j]);
         return Stream.of(
                 Arguments.of(
@@ -88,6 +88,23 @@ public class MainTest extends BaseRandomTest {
                                 {7, 8, 9}
                         },
                         9
+                ),
+                Arguments.of(
+                        new int[][]{
+                                {12, 11, 10, 9},
+                                {8, 7, 6, 5},
+                                {4, 3, 2, 1}
+                        },
+                        12
+                ),
+                Arguments.of(
+                        new int[][]{
+                                {1, 2, 3},
+                                {4, 5, 6},
+                                {7, 8, 9},
+                                {10, 11, 12}
+                        },
+                        12
                 ),
                 Arguments.of(
                         t, max
