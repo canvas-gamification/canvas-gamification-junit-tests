@@ -54,7 +54,7 @@ public class MainTest extends BaseTest {
 
     @Test
     public void pencilClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your Pencil class is missing a required field";
+        String incorrectFieldMessage = "Your Pencil class is missing a required field.";
         String incorrectModifierMessage = "One of your Pencil class attributes does not have the correct modifier.";
         assertTrue(pencil.hasField("hardness", int.class), incorrectFieldMessage);
         assertTrue(pencil.hasField("isForSchool", boolean.class), incorrectModifierMessage);
