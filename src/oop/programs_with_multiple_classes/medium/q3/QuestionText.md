@@ -13,7 +13,7 @@ Your `Pencil` class should have the following items:
 
 - Constructors:
     - A `public Pencil(int, boolean)` constructor to set the
-      **hardness** and **isForSchool** in that order
+      **hardness** and **isForSchool** attributes in that order
 
 ## Eraser
 
