@@ -80,7 +80,7 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    public void eraserCLassHasRequiredConstructor() {
+    public void eraserClassHasRequiredConstructor() {
         Class<?>[] classArguments = {double.class};
         assertTrue(eraser.hasConstructor(classArguments),
                 "Your Eraser constructor does not have the correct parameters.");
