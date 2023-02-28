@@ -10,6 +10,5 @@ public class TestPencilCase {
         System.out.println("Pencil 2: " + p2.toString());
         System.out.println("Eraser 1: " + e1.toString());
         System.out.println("Eraser 2: " + e2.toString());
-
     }
 }
