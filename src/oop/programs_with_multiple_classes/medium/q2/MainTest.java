@@ -78,7 +78,7 @@ public class MainTest extends BaseTest {
         assertTrue(bed.hasConstructor(classArguments),
                 "Your Bed constructor does not have the correct parameters.");
         assertTrue(bed.hasModifier(classArguments, "public"),
-                "Your Bed constructor does not have the correct modifiers.");
+                "Your Bed constructor does not have the correct modifier.");
     }
 
     @Test
