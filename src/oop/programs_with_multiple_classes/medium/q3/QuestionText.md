@@ -1,6 +1,8 @@
 # oop-programs_with_multiple_classes-medium-q1
 
-You want to write a program that models writing tools and stationery objects. Make a Java program with the following requirements:
+**Parsons**
+
+- You want to write a program that models writing tools and stationery objects. Make a Java program with the following requirements:
 
 
 ## Pencil
@@ -29,7 +31,8 @@ Your ``Eraser`` class should have the following items:
 ## TestPencilCase
 
 - Your `TestPencilCase` class will have a `main` method which initializes two Pencil and a two Eraser, and prints out the
-  attributes of each object. Use the `toString` method provided in each class to do this.
+  attributes of each object, for that use the values in sample output. Use the `toString` method provided in each class 
+  to do this.
 - The sample output is as follows:
   ```
   Pencil 1: Pencil{hardness = 2, isForSchool = false}

@@ -19,18 +19,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
     // Parsons
+
     public ObjectTest pencil;
     public ObjectTest eraser;
-    public ObjectTest tpc;
 
     @BeforeEach
     public void setup() {
         String pencilClassString = "oop.programs_with_multiple_classes.medium.q3.Pencil";
         String eraserClassString = "oop.programs_with_multiple_classes.medium.q3.Eraser";
-        String tpcClassString = "oop.programs_with_multiple_classes.medium.q3.TestPencilCase";
         pencil = new ObjectTest(pencilClassString);
         eraser = new ObjectTest(eraserClassString);
-        tpc = new ObjectTest(tpcClassString);
     }
 
     public Clause[] testSentence() {
