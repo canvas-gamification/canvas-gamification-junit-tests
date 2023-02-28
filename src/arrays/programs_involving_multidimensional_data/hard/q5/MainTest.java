@@ -58,7 +58,7 @@ public class MainTest extends BaseRandomTest {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 CustomAssertions._assertEquals(((char) Integer.parseInt(getItemByName(i + " " + j))) + "", getItemByName(i + "c" + j)
-                        , "Your program does not correctly change the integer 2D array to a char 2D array.");
+                        , "Your program does not correctly convert the generated integers to characters and print them.");
             }
         }
     }
