@@ -87,7 +87,7 @@ public class MainTest extends BaseTest {
         assertTrue(pillow.hasConstructor(classArguments),
                 "Your Pillow constructor does not have the correct parameters.");
         assertTrue(pillow.hasModifier(classArguments, "public"),
-                "Your Pillow constructor does not have the correct modifiers.");
+                "Your Pillow constructor does not have the correct modifier.");
     }
 
     private static Stream<Arguments> bedInputProvider() {
