@@ -64,7 +64,7 @@ public class MainTest extends BaseTest {
 
     @Test
     public void pillowClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your Pillow class is missing a required field";
+        String incorrectFieldMessage = "Your Pillow class is missing a required field.";
         String incorrectModifierMessage = "One of your Pillow class attributes does not have the correct modifier.";
         assertTrue(pillow.hasField("filling", String.class), incorrectFieldMessage);
         assertTrue(pillow.hasField("yearMade", int.class), incorrectFieldMessage);
