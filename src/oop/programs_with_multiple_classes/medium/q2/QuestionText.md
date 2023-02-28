@@ -30,7 +30,8 @@ Your ``Pillow`` class should have the following items:
 ## TestRoom
 
 - Your `TestRoom` class will have a `main` method which initializes two pillow and a bed, and prints out the
-  attributes of each object. Use the `toString` method provided in each class to do this.
+  attributes of each object, for that use the same values as the sample output. Use the `toString` method provided in 
+  each class to do this.
 - The sample output is as follows:
   ```
   Pillow 1: Pillow{filling = Cotton, yearMade = 2010}

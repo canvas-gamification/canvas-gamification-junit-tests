@@ -4,10 +4,8 @@ import global.BaseTest;
 import global.ObjectTest;
 import global.tools.TestOption;
 import global.variables.Clause;
-import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
-import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,16 +21,13 @@ public class MainTest extends BaseTest {
     // Parsons
     public ObjectTest bed;
     public ObjectTest pillow;
-    public ObjectTest testRoom;
 
     @BeforeEach
     public void setup() {
         String bedClassString = "oop.programs_with_multiple_classes.medium.q2.Bed";
         String pillowClassString = "oop.programs_with_multiple_classes.medium.q2.Pillow";
-        String testRoomClassString = "oop.programs_with_multiple_classes.medium.q2.TestRoom";
         bed = new ObjectTest(bedClassString);
         pillow = new ObjectTest(pillowClassString);
-        testRoom = new ObjectTest(testRoomClassString);
     }
 
     public Clause[] testSentence() {
