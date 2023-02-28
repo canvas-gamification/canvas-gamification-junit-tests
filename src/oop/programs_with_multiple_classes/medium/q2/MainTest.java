@@ -54,7 +54,7 @@ public class MainTest extends BaseTest {
 
     @Test
     public void bedClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your Bed class is missing a required field";
+        String incorrectFieldMessage = "Your Bed class is missing a required field.";
         String incorrectModifierMessage = "One of your Bed class attributes does not have the correct modifier.";
         assertTrue(bed.hasField("weightCapacity", int.class), incorrectFieldMessage);
         assertTrue(bed.hasField("isComfy", boolean.class), incorrectModifierMessage);
