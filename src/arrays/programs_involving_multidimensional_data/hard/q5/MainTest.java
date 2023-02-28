@@ -22,7 +22,6 @@ public class MainTest extends BaseRandomTest {
     public static final int down = 97;
     public static final int up = 122;
 
-
     public Clause[] testSentence() {
         Clause[] c = new Clause[2 * n * m + n + n * m + n];
         int t = 0;
