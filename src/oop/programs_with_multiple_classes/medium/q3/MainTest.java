@@ -64,7 +64,7 @@ public class MainTest extends BaseTest {
 
     @Test
     public void EraserClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your Eraser class is missing a required field";
+        String incorrectFieldMessage = "Your Eraser class is missing a required field.";
         String incorrectModifierMessage = "One of your Eraser class attributes does not have the correct modifier.";
         assertTrue(eraser.hasField("size", double.class), incorrectFieldMessage);
         assertTrue(eraser.hasModifier("size", "private"), incorrectModifierMessage);
