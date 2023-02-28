@@ -48,7 +48,7 @@ public class MainTest extends BaseRandomTest {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 CustomAssertions._assertEquals(num, Double.parseDouble(getItemByName(i + " " + j)),
-                        "Your program does not print the correct 2D array containing the sqrt of the generated number.");
+                        "Your program does not print the correct 2D square root array.");
             }
         }
     }
@@ -79,6 +79,6 @@ public class MainTest extends BaseRandomTest {
             for (int j = 0; j < m; j++)
                 ans[i][j] = Math.sqrt(num);
         }
-        CustomAssertions._assertArrayEquals(ans, output, "Your square Root method does not return the correct 2D array containing the sqrt of the generated number.");
+        CustomAssertions._assertArrayEquals(ans, output, "Your square Root method does not return the correct 2D square root array.");
     }
 }
