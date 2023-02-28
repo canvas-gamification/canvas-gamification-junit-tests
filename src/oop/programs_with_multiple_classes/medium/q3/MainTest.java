@@ -35,7 +35,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.incorrectStructureErrorMessage =
-                "Your program does not correctly print out the toString for each initialized object in the TestRoom class";
+                "Your program does not correctly print out the toString for each initialized object in the TestRoom class.";
         return new Clause[]{
                 new StringLiteral("Pencil 1: Pencil\\{hardness = 2, isForSchool = false}"),
                 new NewLine(),
