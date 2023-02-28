@@ -32,7 +32,7 @@ Your ``Pillow`` class should have the following items:
 ## TestRoom
 
 - Your `TestRoom` class will have a `main` method which initializes two pillow and a bed, and prints out the
-  attributes of each object, for that use the same values as the sample output. Use the `toString` method provided in 
+  attributes of each object. Use the values in the sample output to initialize these objects. To print out the information about the objects,
   each class to do this.
 - The sample output is as follows:
   ```
