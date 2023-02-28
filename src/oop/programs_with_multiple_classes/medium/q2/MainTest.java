@@ -37,7 +37,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.incorrectStructureErrorMessage =
-                "Your program does not correctly print out the toString for each initialized object in the TestRoom class";
+                "Your program does not correctly print out the toString for each initialized object in the TestRoom class.";
         return new Clause[]{
                 new StringLiteral("Pillow1: Pillow\\{filling = Cotton, yearMade = 2010}"),
                 new NewLine(),
