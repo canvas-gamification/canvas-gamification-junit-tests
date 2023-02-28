@@ -103,6 +103,6 @@ public class MainTest extends BaseRandomTest {
         };
         MethodTest m = new MethodTest(MaxVal.class, "maxValue", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(ans, output, "Your maxValue method does not correctly find the maximum value of a 2D array.");
+        CustomAssertions._assertEquals(ans, output, "Your maxValue method does not correctly find the maximum value in a 2D array.");
     }
 }
