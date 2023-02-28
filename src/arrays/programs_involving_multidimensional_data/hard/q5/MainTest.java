@@ -14,6 +14,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static global.utils.ArrayUtil.generateRandomArray;
+
 public class MainTest extends BaseRandomTest {
     // Java
 
@@ -65,6 +67,15 @@ public class MainTest extends BaseRandomTest {
 
 
     static Stream<Arguments> inputProvider() {
+        char[][] t = new char[10][15];
+        for(int i = 0; i < 10; i ++){
+            t[i] = generateRandomArray('a', 'z', 15);
+        }
+        int[][] a = new int[10][15];
+        for(int i = 0; i < 10; i ++){
+            for(int j = 0; j < 15; j ++)
+                a[i][j] = t[i][j];
+        }
         return Stream.of(
                 Arguments.of(
                         new int[][]{
@@ -113,6 +124,9 @@ public class MainTest extends BaseRandomTest {
                                 {'a', 'a', 'a', 'a', 'a', 'a',},
                                 {'a', 'a', 'a', 'a', 'a', 'a',}
                         }
+                ),
+                Arguments.of(
+                        a, t
                 )
         );
     }
@@ -133,6 +147,7 @@ public class MainTest extends BaseRandomTest {
                 {a, int[][].class},
         };
         MethodTest m = new MethodTest(ChartoInt.class, "intToChar", arguments, c);
+        m.setIncorrectMethodStructureErrorMessage("Your intToChar program does not correctly convert the generated integers to characters and print them.");
         m.callMethod();
     }
 }
