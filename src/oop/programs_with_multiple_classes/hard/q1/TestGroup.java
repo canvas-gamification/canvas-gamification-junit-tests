@@ -5,5 +5,8 @@ public class TestGroup {
         Circus funGroup = new Circus(100);
         Member owner = new Member("Nick");
         Member juggler = new Member("Sarah");
+        System.out.println("Circus: " + funGroup);
+        System.out.println("Member 1: " + owner);
+        System.out.println("Member 2: " + juggler);
     }
 }
