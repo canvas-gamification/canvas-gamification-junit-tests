@@ -30,6 +30,6 @@ Your `Member` class should have the following items:
 - The sample output is as follows:
   ```
   Circus: Circus{numMembers=100} 
-  Member 1: Member{title='Nick'} 
-  Member 2: Member{title='Sarah'}
+  Member 1: Member{title='Juggler'} 
+  Member 2: Member{title='Tightrope Walker'}
   ```
