@@ -109,7 +109,7 @@ public class MainTest extends BaseRandomTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctAddorSub(int[][] arr) throws Throwable {
+    public void correctAddorSubMethod(int[][] arr) throws Throwable {
         TestOption.incorrectStructureErrorMessage = "Your addorSub method does not add and subtract the elements of the 2D array.";
         int[][] ans = answerFor(arr);
         Clause[] c = new Clause[ans.length * ans.length + ans.length];
