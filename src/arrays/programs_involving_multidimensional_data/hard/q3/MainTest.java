@@ -95,7 +95,7 @@ public class MainTest extends BaseRandomTest {
         }
         int[][] t6 = new int[50][50];
         for (int i = 0; i < 50; i++) {
-            t5[i] = generateRandomArray(down, up + 1, 50);
+            t6[i] = generateRandomArray(down, up + 1, 50);
         }
         return Stream.of(
                 Arguments.of(t1, 12, 5),
