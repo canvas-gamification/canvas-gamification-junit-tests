@@ -93,12 +93,21 @@ public class MainTest extends BaseRandomTest {
         for (int i = 0; i < 50; i++) {
             t5[i] = generateRandomArray(down, up + 1, 50);
         }
+        int[][] t6 = new int[50][50];
+        for (int i = 0; i < 50; i++) {
+            t5[i] = generateRandomArray(down, up + 1, 50);
+        }
         return Stream.of(
                 Arguments.of(t1, 12, 5),
+                Arguments.of(t1, 4, 5),
+                Arguments.of(t1, 24, 4),
                 Arguments.of(t2, 1, 0),
                 Arguments.of(t3, 0, 2),
                 Arguments.of(t4, 14, 15),
-                Arguments.of(t5, 1010, t5[1010 / 50][1010 % 50])
+                Arguments.of(t5, 99, t5[99 / 50][99 % 50]),
+                Arguments.of(t5, 1010, t5[1010 / 50][1010 % 50]),
+                Arguments.of(t6, 2499, t6[2499 / 50][2499 % 50]),
+                Arguments.of(t6, 50, t6[1][0])
         );
     }
 
