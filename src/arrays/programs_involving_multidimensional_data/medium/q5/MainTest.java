@@ -1,6 +1,7 @@
 package arrays.programs_involving_multidimensional_data.medium.q5;
 
 import global.BaseRandomTest;
+import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
@@ -13,6 +14,7 @@ public class MainTest extends BaseRandomTest {
     public static final char start = 97;
 
     public Clause[] testSentence() {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct characters in the correct structure.";
         Clause[] c = new Clause[n * m + n];
         int t = 0;
         char ch = start;
