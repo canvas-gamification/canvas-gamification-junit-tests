@@ -2,7 +2,7 @@ package arrays.programs_involving_multidimensional_data.medium.q6;
 
 /*
 Write a Java program that initializes a 2D integer array of size 10 by 10, with randomly generated numbers in
-range of 1 to 10 (inclusive of both values), and print it each row in a line. Then, multiply each value by 10 and divide
+range of 1 to 10 (inclusive of both values), and print each row of the array on a separate line. Then, multiply each value by 10 and divide
 each by 3.14. Lastly, print the resulting array.
 
 Distractors:
