@@ -24,8 +24,10 @@ public class MainTest extends BaseRandomTest {
     public static final int down = 1;
 
     public Clause[] testSentence() {
-        Clause[] c = new Clause[6 * n * n + 3 * n];
+        Clause[] c = new Clause[6 * n * n + 3 * n + 6];
         int t = 0;
+        c[t++] = new StringLiteral("First array:");
+        c[t++] = new NewLine();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 c[t++] = new RandomInteger(down, up + 1, i + "a" + j);
@@ -33,6 +35,8 @@ public class MainTest extends BaseRandomTest {
             }
             c[t++] = new NewLine();
         }
+        c[t++] = new StringLiteral("Second array:");
+        c[t++] = new NewLine();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 c[t++] = new RandomInteger(down, up + 1, i + "b" + j);
@@ -40,6 +44,8 @@ public class MainTest extends BaseRandomTest {
             }
             c[t++] = new NewLine();
         }
+        c[t++] = new StringLiteral("Result:");
+        c[t++] = new NewLine();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 c[t++] = new IntegerLiteral(i + " " + j);
