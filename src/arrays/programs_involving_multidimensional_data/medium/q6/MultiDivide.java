@@ -5,6 +5,18 @@ Write a Java program that initializes a 2D integer array of size 10 by 10, with 
 range of 1 to 10 (inclusive of both values), and print each row of the array on a separate line. Then, multiply each value by 10 and divide
 each by 3.14. Lastly, print the resulting array.
 
+Sample Output:
+    9 7 9 5 ... 7 6
+    .             .
+    .             .
+    .             .
+    3 9 8 5 ... 5 5
+    28 22 28 15 ... 22 19
+    .                  .
+    .                  .
+    .                  .
+    9 28 25 15 ... 15 15
+
 Distractors:
     arr[i][j] = arr[i][j]/10 / 3.14;
     arr[i] = arr[i][j]*10 / 3.14;
