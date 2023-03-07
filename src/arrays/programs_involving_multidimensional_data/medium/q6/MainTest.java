@@ -53,6 +53,6 @@ public class MainTest extends BaseRandomTest {
                 out[i][j] = Integer.parseInt(getItemByName(i + "x" + j));
             }
         }
-        CustomAssertions._assertArrayEquals(arr, out, "Your program does not correctly multiply and divide the elements of the 2D array.");
+        CustomAssertions._assertArrayEquals(arr, out, "Your program does not correctly multiply and divide the elements of the 2D array by the specified values.");
     }
 }
