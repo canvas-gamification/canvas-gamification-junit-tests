@@ -2,8 +2,8 @@ package arrays.multidimensional_arrays.hard.q9;
 
 import global.BaseTest;
 import global.MethodTest;
-import global.tools.TestOption;
 import global.variables.Clause;
+import global.variables.clauses.RandomInteger;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -13,21 +13,26 @@ import java.util.stream.Stream;
 import static global.utils.ArrayUtil.generateRandomArray;
 
 public class MainTest extends BaseTest {
-    // Parsons
+    // Java
 
-    public static final int[][][] nums = {{{1, 2}, {3, 4}, {5, 6}}, {{2, 1}, {4, 4}, {11, 0}}, {{12, 24}, {31, 44}, {51, 60}}};
+    public static final int n = 3;
+    public static final int m = 3;
+    public static final int l = 3;
+    public static final int up = 100;
+    public static final int down = 1;
 
     public Clause[] testSentence() {
-        String st = "";
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = 0; j < nums[i].length; j++) {
-                for (int k = 0; k < nums[i][j].length; k++)
-                    st += nums[i][j][k] + " ";
+        Clause[] c = new Clause[2 * n * m * l];
+        int t = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                for (int k = 0; k < l; k++) {
+                    c[t++] = new RandomInteger(down, up + 1, i + " " + j + " " + k);
+                    c[t++] = new StringLiteral(" ");
+                }
             }
         }
-        return new Clause[]{
-                new StringLiteral(st),
-        };
+        return c;
     }
 
     public void runMain() {
@@ -41,7 +46,7 @@ public class MainTest extends BaseTest {
                 test[i][j] = generateRandomArray(-1000000000, 1000000000, 10);
         }
         return Stream.of(
-                nums,
+                new int[][][]{{{1, 2}, {3, 4}, {5, 6}}, {{2, 1}, {4, 4}, {11, 0}}, {{12, 24}, {31, 44}, {51, 60}}},
                 new int[][][]{{{1, 2}, {3, 4}}, {{5, 6}, {7, 8}}, {{9, 10}, {11, 12}}},
                 test
         );
@@ -50,7 +55,6 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctImAWholeDimensionAheadMethod(int[][][] a) throws Throwable {
-        TestOption.incorrectStructureErrorMessage = "Your imAWholeDimensionAhead does not print the elements of the 3D array correctly.";
         String ans = "";
         for (int i = 0; i < a.length; i++) {
             for (int j = 0; j < a[i].length; j++) {
@@ -65,6 +69,7 @@ public class MainTest extends BaseTest {
                 {a, int[][][].class}
         };
         MethodTest m = new MethodTest(ImAWholeDimensionAhead.class, "imAWholeDimensionAhead", arguments, methodSentence);
+        m.setIncorrectMethodStructureErrorMessage("Your imAWholeDimensionAhead does not print the elements of the 3D array correctly.");
         m.callMethod();
     }
 }
