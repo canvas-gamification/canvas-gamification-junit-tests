@@ -15,6 +15,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static global.utils.ArrayUtil.generateRandomArray;
+
 public class MainTest extends BaseRandomTest {
     // Parsons with Distractors
 
@@ -77,15 +79,15 @@ public class MainTest extends BaseRandomTest {
 
     static Stream<int[][]> inputProvider() {
         int[][] t1 = {
-                {1, 2, 3, 4, 5},
-                {2, 3, 4, 5, 1},
-                {3, 4, 5, 1, 2},
-                {4, 5, 1, 2, 3},
-                {5, 1, 2, 3, 4}
+                {1, 0, 1, 0, 1},
+                {0, 1, 0, 1, 0},
+                {1, 0, 1, 0, 1},
+                {0, 1, 0, 1, 0},
+                {1, 0, 1, 0, 1}
         };
         int[][] t2 = {
-                {1, 0},
-                {0, 1}
+                {9999, 9999},
+                {10000, 10000}
         };
         int[][] t3 = {
                 {0, 0},
@@ -98,30 +100,36 @@ public class MainTest extends BaseRandomTest {
                 {3}
         };
         int[][] t6 = {
-                {1, 1, 1},
+                {1, 1, 0},
                 {1, 0, 1},
-                {1, 1, 1}
+                {0, 1, 1}
         };
+        int[][] t7 = new int[50][50];
+        for(int i = 0; i < 50; i ++)
+            t7[i] = generateRandomArray(1, 101, 50);
+        int[][] t8 = new int[50][50];
+        for(int i = 0; i < 50; i ++)
+            t8[i] = generateRandomArray(1, 101, 50);
         return Stream.of(
-                t1, t2, t3, t4, t5, t6
+                t1, t2, t3, t4, t5, t6, t7, t8
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void correctAddorSubMethod(int[][] arr) throws Throwable {
-        TestOption.incorrectStructureErrorMessage = "Your addorSub method does not add and subtract the elements of the 2D array.";
         int[][] ans = answerFor(arr);
-        Clause[] c = new Clause[ans.length * ans.length + ans.length];
+        Clause[] testSentence = new Clause[ans.length * ans.length + ans.length];
         int t = 0;
         for (int i = 0; i < ans.length; i++) {
             for (int j = 0; j < ans.length; j++)
-                c[t++] = new StringLiteral(ans[i][j] + " ");
-            c[t++] = new NewLine();
+                testSentence[t++] = new StringLiteral(ans[i][j] + " ");
+            testSentence[t++] = new NewLine();
         }
         Object[][] arguments = {
                 {arr, int[][].class}
         };
-        MethodTest m = new MethodTest(MultiDivide.class, "addorSub", arguments, c);
+        MethodTest m = new MethodTest(MultiDivide.class, "addorSub", arguments, testSentence);
+        m.setIncorrectMethodStructureErrorMessage("Your addorSub method does not add and subtract the elements of the 2D array.");
     }
 }

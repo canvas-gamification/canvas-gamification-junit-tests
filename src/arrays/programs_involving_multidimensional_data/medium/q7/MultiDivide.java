@@ -5,6 +5,18 @@ Write a Java program that initializes a 2D array of size 10 by 10, with randomly
 100 (inclusive of both values), and print each row in a line. Then use a method called addorSub, which adds 4 to
 the element if it is even and subtracts 3 from it if it is odd. Display the resulting array as output.
 
+Sample Output:
+    71 42 33 ... 24
+    .            .
+    .            .
+    .            .
+    36 65 34 ... 73
+    68 46 30 ... 28
+    .            .
+    .            .
+    .            .
+    40 62 38 ... 70
+
 Distractors:
     if(arr[i] % 2 == 0)
     if(arr[i][j] / 2 == 0)
