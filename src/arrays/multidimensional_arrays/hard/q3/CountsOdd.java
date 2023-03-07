@@ -1,17 +1,30 @@
 package arrays.multidimensional_arrays.hard.q3;
 
 /*
-Make a Java program that asks the user for the values of a 3 by 3 multidimensional array in the main method and calls
-the countsOdd method. The countsOdd method should accept a multidimensional array of integers of any size, count the
-number of odd integers in the array, and print the count.
+Write a Java program that randomly initialize a 3 by 3 multidimensional array, with integers between 1 and 100
+(inclusive of both ends) in the main method and prints it. Then write a countsOdd method that accept a multidimensional
+array of integers and print the number of odd integers in it.
+Note that the last line in the sample output should be printed in the method.
 
 Sample output:
-    count of odd numbers in array = 2
+    Generated array:
+    42 84 85
+    45 50 63
+    14 7 17
+    count of odd numbers in array = 5
  */
 
 public class CountsOdd {
     public static void main(String[] args) {
-        int[][] arr = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        System.out.println("Generated array:");
+        int[][] arr = new int[3][3];
+        for(int i = 0; i < arr.length; i ++){
+            for(int j = 0; j < arr[i].length; j ++) {
+                arr[i][j] = (int) (Math.random() * 100);
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
         countsOdd(arr);
     }
 

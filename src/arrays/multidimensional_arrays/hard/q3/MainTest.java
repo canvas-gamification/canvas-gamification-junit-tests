@@ -2,8 +2,12 @@ package arrays.multidimensional_arrays.hard.q3;
 
 import global.BaseTest;
 import global.MethodTest;
+import global.tools.CustomAssertions;
 import global.variables.Clause;
 import global.variables.clauses.*;
+import global.variables.wrappers.Optional;
+import org.junit.Test;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -12,16 +16,32 @@ import java.util.stream.Stream;
 import static global.utils.ArrayUtil.*;
 
 public class MainTest extends BaseTest {
-    // Parsons
+    // Java
 
-    public static int[][] arr = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    public static int n = 3;
+    public static int down = 1;
+    public static int up = 100;
 
     public Clause[] testSentence() {
-        return new Clause[]{
-                new StringLiteral("count of odd numbers in array = "),
-                new IntegerLiteral(oddCount(arr))
-
-        };
+        Clause[] c = new Clause[2 * n * n + n + 6];
+        int t = 0;
+        c[t++] = new StringLiteral("Generated array:");
+        c[t++] = new Optional(new StringLiteral(" "));
+        c[t++] = new NewLine();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                c[t++] = new RandomInteger(down, up + 1, i + " " + j);
+                if (j != n - 1)
+                    c[t++] = new StringLiteral(" ");
+                else
+                    c[t++] = new Optional(new StringLiteral(" "));
+            }
+            c[t++] = new NewLine();
+        }
+        c[t++] = new StringLiteral("count of odd numbers in array = ");
+        c[t++] = new IntegerLiteral("ans");
+        c[t] = new Optional(new StringLiteral(" "));
+        return c;
     }
 
     public void runMain() {
@@ -36,16 +56,26 @@ public class MainTest extends BaseTest {
                     count++;
         return count;
     }
-
+    @Test
+    @RepeatedTest(10)
+    public void printsCorrectOutput(){
+        int[][] arr = new int[n][n];
+        for(int i = 0; i < n; i ++){
+            for(int j = 0; j < n; j ++){
+                arr[i][j] = Integer.parseInt(getItemByName(i + " " + j));
+            }
+        }
+        CustomAssertions._assertEquals(oddCount(arr), Integer.parseInt(getItemByName("ans")), "Your program does not print the correct number of odd elements in the generated 2D array.");
+    }
     static Stream<int[][]> inputProvider() {
         int[][] a1 = new int[10][70];
-        for(int i = 0; i < 10; i ++)
+        for (int i = 0; i < 10; i++)
             a1[i] = generateRandomArray(-100000000, 100000000, 70);
         int[][] a2 = new int[100][100];
-        for(int i = 0; i < 100; i ++)
+        for (int i = 0; i < 100; i++)
             a2[i] = generateRandomArray(-100000000, 100000000, 100);
         int[][] a3 = new int[400][300];
-        for(int i = 0; i < 400; i ++)
+        for (int i = 0; i < 400; i++)
             a3[i] = generateRandomArray(-100000000, 100000000, 300);
         int[][] a4 = {
                 {0, 1, 1, 1, 0},
