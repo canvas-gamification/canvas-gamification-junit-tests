@@ -9,6 +9,7 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.RandomInteger;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -24,11 +25,13 @@ public class MainTest extends BaseRandomTest {
     public static final int n = 8;
     public static final int up = 10;
     public static final int down = 0;
-    public static final int idx = 7;
 
     public Clause[] testSentence() {
-        Clause[] c = new Clause[2 * n * n + n + 2];
+        Clause[] c = new Clause[2 * n * n + n + 11];
         int t = 0;
+        c[t++] = new StringLiteral("Generated 2D array:");
+        c[t++] = new Optional(new StringLiteral(" "));
+        c[t++] = new NewLine();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 c[t++] = new RandomInteger(down, up + 1, i + " " + j);
@@ -39,8 +42,14 @@ public class MainTest extends BaseRandomTest {
             }
             c[t++] = new NewLine();
         }
+        c[t++] = new StringLiteral("Generated index: ");
+        c[t++] = new IntegerLiteral("index");
+        c[t++] = new NewLine();
+        c[t++] = new StringLiteral("The value at index ");
+        c[t++] = new IntegerLiteral("index2");
+        c[t++] = new StringLiteral(" is: ");
         c[t++] = new IntegerLiteral("ans");
-        c[t++] = new Optional(new NewLine());
+        c[t] = new Optional(new NewLine());
         return c;
     }
 
@@ -49,8 +58,12 @@ public class MainTest extends BaseRandomTest {
     }
 
     @Test
+    @RepeatedTest(10)
     public void printsCorrectOutput() {
-        int x = idx / 8, y = idx % 8;
+        int index = Integer.parseInt(getItemByName("index"));
+        CustomAssertions._assertEquals(index, Integer.parseInt(getItemByName("index2")),
+                "Your program does not print the correct output in correct structure.");
+        int x = index / n, y = index % n;
         CustomAssertions._assertEquals(Integer.parseInt(getItemByName(x + " " + y)), Integer.parseInt(getItemByName("ans")),
                 "Your program does not correctly print the corresponding element of the index in the 2D array.");
     }
