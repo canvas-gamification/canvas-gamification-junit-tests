@@ -16,6 +16,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static global.utils.ArrayUtil.generateRandomArray;
+
 public class MainTest extends BaseRandomTest {
     // Parsons with Distractors
 
@@ -82,19 +84,36 @@ public class MainTest extends BaseRandomTest {
         int[][] t5 = {
                 {3}
         };
+        int[][] t6 = new int[50][50];
+        for(int i = 0; i < 50; i ++)
+            t6[i] = generateRandomArray(1, 10, 50);
+        int cnt = 0;
+        for(int i = 0; i < 50; i ++)
+            for(int j = 0; j < 50; j ++)
+                if(t6[i][j] % 2 == 0)
+                    cnt ++;
+        int[][] t7 = new int[50][50];
+        for(int i = 0; i < 50; i ++)
+            t7[i] = generateRandomArray(1, 10, 50);
+        int cnt2 = 0;
+        for(int i = 0; i < 50; i ++)
+            for(int j = 0; j < 50; j ++)
+                if(t7[i][j] % 2 == 0)
+                    cnt2 ++;
         return Stream.of(
                 Arguments.of(t1, 12, 13),
                 Arguments.of(t2, 2, 2),
                 Arguments.of(t3, 4, 0),
                 Arguments.of(t4, 1, 0),
-                Arguments.of(t5, 0, 1)
+                Arguments.of(t5, 0, 1),
+                Arguments.of(t6, cnt, 2500 - cnt),
+                Arguments.of(t7, cnt2, 2500 - cnt2)
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctAddMatrices(int[][] arr, int even, int odd) {
-        TestOption.incorrectStructureErrorMessage = "Your count method does not correctly count the number of odd and even elements in the 2D array.";
+    public void correctCountMethod(int[][] arr, int even, int odd) {;
         Clause[] c = new Clause[]{
                 new StringLiteral("" + even),
                 new NewLine(),
@@ -104,6 +123,7 @@ public class MainTest extends BaseRandomTest {
         Object[][] arguments = {
                 {arr, int[][].class}
         };
-        new MethodTest(OddorEven.class, "count", arguments, c);
+        MethodTest m = new MethodTest(OddorEven.class, "count", arguments, c);
+        m.setIncorrectMethodStructureErrorMessage("Your count method does not correctly count the number of odd and even elements in the 2D array.");
     }
 }
