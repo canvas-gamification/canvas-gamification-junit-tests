@@ -129,7 +129,6 @@ public class ObjectTest {
             return false;
         }
     }
-
     public boolean hasMethod(String methodName, Class<?>[] argsClass, Class<?> methodReturnType) {
         try {
             Method objectMethod = objectClass.getDeclaredMethod(methodName, argsClass);
@@ -138,6 +137,7 @@ public class ObjectTest {
             return false;
         }
     }
+
 
     public boolean hasMethod(String methodName, Class<?>[] argsClass, Class<?> methodReturnType, String[] modifiers) {
         try {
