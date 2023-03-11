@@ -8,7 +8,7 @@ public class TestFurniture {
         System.out.println("Book 1: " + b1);
         System.out.println("Book 2: " + b2);
         System.out.println("Bookcase: " + bc1);
-        System.out.println(b1.determineTime());
-        System.out.println(b2.determineTime());
+        System.out.println("Years since Book 1 was published: " + b1.determineTime());
+        System.out.println("Years since Book 2 was published: " + b2.determineTime());
     }
 }
