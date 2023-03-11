@@ -176,7 +176,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("blanketInputProvider")
-    public void correctCircusToStringMethod(String size, int threadCount) throws Throwable {
+    public void correctBlanketToStringMethod(String size, int threadCount) throws Throwable {
         Object[][] arguments = new Object[][]{
                 {size, String.class},
                 {threadCount, int.class}
