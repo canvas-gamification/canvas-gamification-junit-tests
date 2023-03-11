@@ -27,7 +27,7 @@ public class MainTest extends BaseTest {
     private final String bookcaseUc = "Bookcase";
     private final String count = "count";
     private final String type = "type";
-    private String sizeCapacity = "sizeCapacity";
+    private final String sizeCapacity = "sizeCapacity";
 
     @BeforeEach
     public void Setup() {
@@ -39,21 +39,21 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         return new Clause[]{
-                new StringLiteral(bookUc + "1: " + bookUc + "\\{" + count + "="),
+                new StringLiteral(bookUc + " 1: " + bookUc + "\\{" + count + "="),
                 new IntegerLiteral(1),
-                new StringLiteral(", " + type + "="),
-                new StringLiteral("'HardCover'"),
-                new StringLiteral("\\}"),
-                new NewLine(),
-                new StringLiteral(bookUc + "2: " + bookUc + "\\{" + count + "="),
-                new IntegerLiteral(1),
-                new StringLiteral(", " + type + "="),
-                new StringLiteral("'SoftCover'"),
-                new StringLiteral("\\}"),
-                new NewLine(),
-                new StringLiteral(bookcaseUc + ": " + bookcaseUc + "\\{" + sizeCapacity + "='"),
-                new IntegerLiteral(20),
+                new StringLiteral(", " + type + "='"),
+                new StringLiteral("HardCover"),
                 new StringLiteral("'\\}"),
+                new NewLine(),
+                new StringLiteral(bookUc + " 2: " + bookUc + "\\{" + count + "="),
+                new IntegerLiteral(1),
+                new StringLiteral(", " + type + "='"),
+                new StringLiteral("SoftCover"),
+                new StringLiteral("'\\}"),
+                new NewLine(),
+                new StringLiteral(bookcaseUc + ": " + bookcaseUc + "\\{" + sizeCapacity + "="),
+                new IntegerLiteral(20),
+                new StringLiteral("\\}"),
         };
     }
 
