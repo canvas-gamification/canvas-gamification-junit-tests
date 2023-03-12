@@ -54,6 +54,6 @@ public class MainTest {
         Object makePetOutput = petClass.callMethod(methodName, arguments, petInstance);
         assertTrue(makePetOutput instanceof Dog, "Your " + methodName + " method does not return the correct type.");
         _assertEquals(name, animalClass.getFieldValue(makePetOutput, animalStringFieldName),
-                "Your makePet method does not return the correct output.");
+                "Your " + methodName + " method does not return the correct output.");
     }
 }
