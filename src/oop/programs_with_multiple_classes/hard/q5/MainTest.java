@@ -12,7 +12,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.time.Year;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
@@ -45,28 +44,36 @@ public class MainTest extends BaseTest {
                 new StringLiteral(bookUc + " 1: " + bookUc + "\\{" + year + "="),
                 new IntegerLiteral(2005),
                 new StringLiteral(", " + type + "='"),
-                new StringLiteral("LeatherBound"),
+                new StringLiteral("HardCover"),
                 new StringLiteral("'\\}"),
                 new NewLine(),
                 new StringLiteral(bookUc + " 2: " + bookUc + "\\{" + year + "="),
-                new IntegerLiteral(2018),
+                new IntegerLiteral(2019),
                 new StringLiteral(", " + type + "='"),
-                new StringLiteral("EPub"),
+                new StringLiteral("SoftCover"),
                 new StringLiteral("'\\}"),
                 new NewLine(),
-                new StringLiteral(bookcaseUc + ": " + bookcaseUc + "\\{" + sizeCapacity + "="),
-                new IntegerLiteral(20),
+                new StringLiteral(bookcaseUc + " 1: " + bookcaseUc + "\\{" + sizeCapacity + "="),
+                new IntegerLiteral(40),
                 new StringLiteral(", b1=" + bookUc + "\\{" + year + "="),
                 new IntegerLiteral(2005),
                 new StringLiteral(", " + type + "='"),
-                new StringLiteral("LeatherBound"),
+                new StringLiteral("HardCover"),
                 new StringLiteral("'\\}\\}"),
                 new NewLine(),
-                new StringLiteral("Years since Book 1 was published: "),
-                new IntegerLiteral(Year.now().getValue() - 2005),
+                new StringLiteral(bookcaseUc + " 2: " + bookcaseUc + "\\{" + sizeCapacity + "="),
+                new IntegerLiteral(40),
+                new StringLiteral(", b1=" + bookUc + "\\{" + year + "="),
+                new IntegerLiteral(2019),
+                new StringLiteral(", " + type + "='"),
+                new StringLiteral("SoftCover"),
+                new StringLiteral("'\\}\\}"),
                 new NewLine(),
-                new StringLiteral("Years since Book 2 was published: "),
-                new IntegerLiteral(Year.now().getValue() - 2018),
+                new StringLiteral("Do I need a new book for Bookcase 1\\? "),
+                new StringLiteral("Time to buy a new book"),
+                new NewLine(),
+                new StringLiteral("Do I need a new book for Bookcase 2\\? "),
+                new StringLiteral("The book will still last")
         };
     }
 
