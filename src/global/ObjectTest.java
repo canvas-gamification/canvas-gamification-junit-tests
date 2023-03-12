@@ -129,6 +129,16 @@ public class ObjectTest {
             return false;
         }
     }
+
+    public boolean hasMethod(String methodName, Class<?>[] argsClass) {
+        try {
+            objectClass.getDeclaredMethod(methodName, argsClass);
+            return true;
+        } catch (NoSuchMethodException e) {
+            return false;
+        }
+    }
+
     public boolean hasMethod(String methodName, Class<?>[] argsClass, Class<?> methodReturnType) {
         try {
             Method objectMethod = objectClass.getDeclaredMethod(methodName, argsClass);
@@ -137,7 +147,6 @@ public class ObjectTest {
             return false;
         }
     }
-
 
     public boolean hasMethod(String methodName, Class<?>[] argsClass, Class<?> methodReturnType, String[] modifiers) {
         try {
@@ -151,6 +160,10 @@ public class ObjectTest {
         } catch (NoSuchMethodException e) {
             return false;
         }
+    }
+
+    public boolean hasReturnType(String methodName, Class<?>[] argsClass, Class<?> methodReturnType) {
+        return hasMethod(methodName, argsClass, methodReturnType);
     }
 
     public boolean hasModifier(Field field, String modifier) {
