@@ -1,6 +1,5 @@
 package global.utils;
 
-import global.tools.Logger;
 import global.variables.*;
 import org.apache.commons.math3.stat.inference.ChiSquareTest;
 
@@ -119,7 +118,6 @@ public class RandomUtil {
     public static boolean valueAlmostEquals(double value, double target, double percentageError) {
         double upperBound = Math.ceil(target + target * percentageError);
         double lowerBound = Math.floor(target - target * percentageError);
-        Logger.logMessage(String.format("Lower: %f Upper: %f", lowerBound, upperBound));
         return lowerBound <= value && value <= upperBound;
     }
 }

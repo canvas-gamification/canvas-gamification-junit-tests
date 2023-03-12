@@ -10,24 +10,42 @@ import java.util.stream.Collectors;
 
 import static global.utils.RandomUtil.frequenciesAreRandom;
 
-public class RandomBoolean extends Clause implements RandomClause<Boolean> {
+public class RandomBoolean extends Clause implements RandomClause<Object> {
     static Map<Integer, ArrayList<Integer>> valueStore = new HashMap<>();
     private final double percentageTrue = 0.5;
+    private final String output1;
+    private final String output2;
 
     private final int NUM_BINS = 2;
 
     public RandomBoolean() {
         super();
+        output1 = "true";
+        output2 = "false";
     }
 
     public RandomBoolean(String name) {
         super(name);
+        output1 = "true";
+        output2 = "false";
+    }
+
+    public RandomBoolean(String output1, String output2) {
+        super();
+        this.output1 = output1;
+        this.output2 = output2;
+    }
+
+    public RandomBoolean(String output1, String output2, String name) {
+        super(name);
+        this.output1 = output1;
+        this.output2 = output2;
     }
 
     public void trackValue(int matchGroupNum, String matchGroupValue) {
         // Note that the input boolean values are mapped to an Integer ArrayList with true = 1 and false = 0
         valueStore.computeIfAbsent(matchGroupNum, k -> new ArrayList<>());
-        (valueStore.get(matchGroupNum)).add(convertFromRegexGroup(matchGroupValue) ? 1 : 0);
+        (valueStore.get(matchGroupNum)).add(convertFromRegexGroup(matchGroupValue));
     }
 
     public boolean validateRandom(int matchGroupNum) {
@@ -41,16 +59,17 @@ public class RandomBoolean extends Clause implements RandomClause<Boolean> {
         return frequenciesAreRandom(observedCounts, percentageTrue);
     }
 
-    public Boolean convertFromRegexGroup(String matchGroupString) {
-        return Boolean.parseBoolean(matchGroupString);
+    public Integer convertFromRegexGroup(String matchGroupString) {
+        return matchGroupString.equals(output1) ? 1 : 0;
     }
 
-    public ArrayList<Boolean> getValuesForMatchGroup(int matchGroup) {
-        // Maps Integer ArrayList back to the input boolean values to be displayed in the event of an error
-        return valueStore.get(matchGroup).stream().map(e -> (e == 1)).collect(Collectors.toCollection(ArrayList::new));
+    public ArrayList<Object> getValuesForMatchGroup(int matchGroup) {
+        // Maps Integer ArrayList back to the input values to be displayed in the event of an error
+        return valueStore.get(matchGroup).stream().map(e -> (e == 1 ? output1 : output2)).
+                collect(Collectors.toCollection(ArrayList::new));
     }
 
     public String getRegex() {
-        return "((?:true)|(?:false))";
+        return "((?:" + output1 + ")|(?:" + output2 + "))";
     }
 }
