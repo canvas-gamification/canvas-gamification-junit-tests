@@ -208,7 +208,7 @@ public abstract class BaseTest {
         String output = getOutput();
         Matcher matcher = getMatches(output, processRegexForPrintlnOutput(combineRegex(getRegexSentence())));
         String incorrectOutputMessage = TestOption.incorrectStructureErrorMessage;
-       _assertTrue(matcher.find(), incorrectOutputMessage, parseTestInformation(output, getRegexSentence(), incorrectOutputMessage));
+        _assertTrue(matcher.find(), incorrectOutputMessage, parseTestInformation(output, getRegexSentence(), incorrectOutputMessage));
         //Ensures that the output matches the pattern exactly
         assertEquals(output.substring(matcher.start(), matcher.end()), output, incorrectOutputMessage);
 
