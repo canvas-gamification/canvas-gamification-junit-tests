@@ -8,11 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static global.tools.CustomAssertions._fail;
 import static global.utils.RandomUtil.frequenciesAreRandom;
 
 public class RandomBoolean extends Clause implements RandomClause<Object> {
     static Map<Integer, ArrayList<Integer>> valueStore = new HashMap<>();
-    private final double percentageTrue = 0.5;
+    private final double percentageOutput1 = 0.5;
     private final String output1;
     private final String output2;
 
@@ -51,12 +52,20 @@ public class RandomBoolean extends Clause implements RandomClause<Object> {
     public boolean validateRandom(int matchGroupNum) {
         if (valueStore.get(matchGroupNum) == null)
             return false;
-        ArrayList<Integer> values = valueStore.get(matchGroupNum);
+        return validateRandom(valueStore.get(matchGroupNum));
+    }
+
+    public boolean validateRandom(ArrayList<Integer> values) {
+        if (values.size() < 1000)
+            _fail("There is an error with the test definition. Please contact a test administrator.",
+                    "Error: invalid number of values provided. There must be more than 1000 values generated"
+            );
+
         int[] observedCounts = new int[NUM_BINS];
         for (int value : values) {
             observedCounts[value]++;
         }
-        return frequenciesAreRandom(observedCounts, percentageTrue);
+        return frequenciesAreRandom(observedCounts, percentageOutput1);
     }
 
     public Integer convertFromRegexGroup(String matchGroupString) {
