@@ -32,5 +32,5 @@ Your `Circle` class should have the following items:
       with the input values.
 
 - Methods:
-    - A `public` method called `moveLocation` which randomly sets the value of **position** to be a number from 0 to
-      100 (exclusive) and returns nothing.
+    - A `public` method called `moveLocation` which randomly sets the value of **position** to be a number from 0 (
+      inclusive) to 100 (exclusive) and returns nothing.
