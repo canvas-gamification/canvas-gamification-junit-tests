@@ -66,7 +66,7 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(arguments);
         String incorrectFieldInstantiationMessage =
-                "Your " + testClassName + " constructor does not correctly initialize one of the fields.";
+                "Your " + testClassName + " constructor does not correctly initialize the object." ;
         _assertEquals(attribute1, classInstance.getFieldValue(instance, intAttributeName1),
                 incorrectFieldInstantiationMessage);
         _assertEquals(attribute2, classInstance.getFieldValue(instance, intAttributeName2),
