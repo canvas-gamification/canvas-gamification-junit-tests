@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class randomMethodTest {
+public class RandomMethodTest {
     // This is an example of how you can use randomDouble to check the randomness of a provided arrayList
 
     @Test
     public void correctRandomMethod() throws Throwable {
-        MethodTest m = new MethodTest(randomMethod.class, "random");
+        MethodTest m = new MethodTest(RandomMethod.class, "random");
         ArrayList<Double> values = new ArrayList<>();
         for (int i = 0; i < 1000; i ++) {
             Object output = m.callMethod();
