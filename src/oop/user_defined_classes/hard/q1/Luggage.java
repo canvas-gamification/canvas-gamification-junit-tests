@@ -4,9 +4,9 @@ public class Luggage {
     private int numShirts;
     private int numPants;
 
-    public Luggage(int ns, int np) {
-        numShirts = ns;
-        numPants = np;
+    public Luggage(int item1, int item2) {
+        numShirts = item1;
+        numPants = item2;
     }
 
     public int sumItems() {
