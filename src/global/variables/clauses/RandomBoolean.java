@@ -13,7 +13,7 @@ import static global.utils.RandomUtil.frequenciesAreRandom;
 
 public class RandomBoolean extends Clause implements RandomClause<Object> {
     static Map<Integer, ArrayList<Integer>> valueStore = new HashMap<>();
-    private final double percentageTrue = 0.5;
+    private final double percentageOutput1 = 0.5;
     private final String output1;
     private final String output2;
 
@@ -65,7 +65,7 @@ public class RandomBoolean extends Clause implements RandomClause<Object> {
         for (int value : values) {
             observedCounts[value]++;
         }
-        return frequenciesAreRandom(observedCounts, percentageTrue);
+        return frequenciesAreRandom(observedCounts, percentageOutput1);
     }
 
     public Integer convertFromRegexGroup(String matchGroupString) {
