@@ -12,6 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.time.Year;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
@@ -29,6 +30,10 @@ public class MainTest extends BaseTest {
     private final String type = "type";
     private final String sizeCapacity = "sizeCapacity";
     private final String b1 = "b1";
+
+    private final String determineTime = "determineTime";
+
+    private final String determineReplaced = "determineReplaced";
 
 
     @BeforeEach
@@ -144,6 +149,20 @@ public class MainTest extends BaseTest {
         _assertEquals(toStringExpected, toStringOutput, incorrectToString);
     }
 
+    @ParameterizedTest
+    @MethodSource("bookInputProvider")
+    public void correctDetermineTimeMethod(int year, String type) throws Throwable {
+        Object[][] arguments = new Object[][]{
+                {year, int.class},
+                {type, String.class}
+        };
+        Object bookInstance = book.createInstance(arguments);
+        Object determineTimeOutput = book.callMethod(determineTime, bookInstance);
+        int determineTimeExpected = Year.now().getValue() - year;
+        String incorrectDetermineTimeExpected = "Your " + bookLc + " " + determineTime + " method does not return the correct time.";
+        _assertEquals(determineTimeExpected, determineTimeOutput, incorrectDetermineTimeExpected);
+    }
+
     /**
      * Bookcase tests
      **/
@@ -204,6 +223,18 @@ public class MainTest extends BaseTest {
         _assertEquals(toStringExpected, toStringOutput, incorrectToString);
     }
 
+    @ParameterizedTest
+    @MethodSource("bookcaseInputProvider")
+    public void correctDetermineReplacedMethod(int sizeCapacity, Book b1) throws Throwable {
+        Object[][] arguments = new Object[][]{
+                {sizeCapacity, int.class},
+                {b1, Book.class}
+        };
+        Object bookcaseInstance = bookcase.createInstance(arguments);
+        Object determineReplacedOutput = bookcase.callMethod(determineReplaced, bookcaseInstance);
+        String determineReplacedExpected = b1.determineTime() > 5 ? "Time to buy a new book" : "The book will still last";
+        String incorrectDetermineReplacedExpected = "Your " + bookLc + " " + determineReplaced + " method does not return the correct time.";
+        _assertEquals(determineReplacedExpected, determineReplacedOutput, incorrectDetermineReplacedExpected);
+    }
+
 }
-
-
