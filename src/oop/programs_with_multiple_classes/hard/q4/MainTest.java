@@ -31,6 +31,8 @@ public class MainTest extends BaseTest {
     private final String sizeCapacity = "sizeCapacity";
     private final String b1 = "b1";
 
+    private final String determineTime = "determineTime";
+
 
     @BeforeEach
     public void Setup() {
@@ -145,9 +147,9 @@ public class MainTest extends BaseTest {
                 {type, String.class}
         };
         Object bookInstance = book.createInstance(arguments);
-        Object determineTimeOutput = book.callMethod("determineTime", bookInstance);
+        Object determineTimeOutput = book.callMethod(determineTime, bookInstance);
         int determineTimeExpected = Year.now().getValue() - year;
-        String incorrectDetermineTimeExpected = "Your " + bookLc + " determineTime method does not return the correct time.";
+        String incorrectDetermineTimeExpected = "Your " + bookLc + " " + determineTime + " method does not return the correct time.";
         _assertEquals(determineTimeExpected, determineTimeOutput, incorrectDetermineTimeExpected);
     }
 
