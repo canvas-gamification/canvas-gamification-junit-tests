@@ -19,7 +19,7 @@ import static global.utils.RegexUtil.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public abstract class BaseRandomTest extends BaseTest {
-    final static int NUM_RUNS = 500;  // TODO: this could be generated based on ranges
+    final static int NUM_RUNS = 1000;  // TODO: this could be generated based on ranges
     final static String MESSAGE_INCORRECT_RANDOM = "You do not seem to be properly generating random values.";
 
     @Test
@@ -64,11 +64,20 @@ public abstract class BaseRandomTest extends BaseTest {
             if (randomVariable == null) continue;
 
             int mapKey = i + 1;
-            // TODO: more info about which value, the way it's bad (out of bounds, within bounds, obviously hardcoded, etc) (?)
+            // TODO: the way it's bad (out of bounds, within bounds, obviously hardcoded, etc) (?)
             try {
                 _assertTrue(randomVariable.validateRandom(mapKey), MESSAGE_INCORRECT_RANDOM,
                         "Invalid Random Values at " + mapKey);
             } catch (Error error) {
+                Logger.logMessage(
+                        String.join(" ",
+                                "Randomness Error @",
+                                randomVariable.getClass().getSimpleName(),
+                                "(",
+                                "" + mapKey,
+                                ")"
+                        )
+                );
                 Logger.logMessage(randomVariable.getValuesForMatchGroup(mapKey).toString());
                 throw error;
             }

@@ -1,13 +1,13 @@
 package arrays.arrays_with_methods.medium.q2;
 
+import global.MethodTest;
+import global.tools.CustomAssertions;
 import global.utils.MethodUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class MainTest {
     // Parsons
@@ -20,9 +20,13 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctHighestMethod(double[] input1, double[] input2, double[] higher) {
-        double[] output = (double[]) MethodUtil.invokeIfMethodExists(HighestArray.class, "highest", new Object[]{input1, input2},
-                double[].class, double[].class);
-        assertArrayEquals(higher, output, "Your method does not return the array with the greatest number in it.");
+    void correctHighestMethod(double[] input1, double[] input2, double[] higher) throws Throwable{
+        Object[][] arguments = {
+                {input1, double[].class},
+                {input2, double[].class}
+        };
+        MethodTest m = new MethodTest(HighestArray.class, "highest", arguments);
+        Object output = m.callMethod();
+        CustomAssertions._assertArrayEquals(higher, output, "Your method does not return the array with the greatest number in it.");
     }
 }

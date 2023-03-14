@@ -1,16 +1,19 @@
 package methods.defining_methods.medium.q1;
 
 import global.BaseTest;
+import global.MethodTest;
+import global.tools.CustomAssertions;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class MainTest extends BaseTest {
     // Parsons
@@ -25,21 +28,30 @@ public class MainTest extends BaseTest {
         RaiseToPower.main(new String[0]);
     }
 
-    @Test
-    void correctPowerCalcMethod() {
-        String failMessage = "Your program does not contain a method to calculate the power of one integer raised to another.";
-        double result = (double) invokeIfMethodExists(RaiseToPower.class, "powerCalc", failMessage, new Object[]{5, 10}, int.class, int.class);
-        assertEquals(result, 9765625.0, 0.0000001,
-                "Your method does not correctly calculate the value of one integer raised to the power of another.");
+    static Stream<Arguments> powerCalcInputProvider() {
+        return Stream.of(
+                Arguments.of(2, 2, 4.0),
+                Arguments.of(124, -4, 4.229735977849989E-9),
+                Arguments.of(-352, 1, -352.0),
+                Arguments.of(348, 3, 42144192)
+        );
     }
 
-    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, String failMessage, Object[] arguments, Class<?>... methodArgumentTypes) {
-        try {
-            Method m = methodClass.getMethod(methodName, methodArgumentTypes);
-            return m.invoke(null, arguments);
-        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-            fail(failMessage);
-            return null;
-        }
+    @ParameterizedTest
+    @MethodSource("powerCalcInputProvider")
+    void correctPowerCalcMethod(int base, int exponent, double power) throws Throwable {
+        Object[][] arguments = {
+                {base, int.class},
+                {exponent, int.class}
+        };
+        MethodTest m = new MethodTest(RaiseToPower.class, "powerCalc", arguments);
+        Object output = m.callMethod();
+        CustomAssertions._assertEquals(power, output, 0.00000001, "Your powerCalc method does not correctly calculate the power.");
+    }
+
+    @Test
+    void printsCorrectOutput() {
+        assertEquals(9765625.0, Double.parseDouble(getItemByName("power")), 0.0000001,
+                "Your program does not correctly calculate and print the value of one integer raised to the power of another.");
     }
 }

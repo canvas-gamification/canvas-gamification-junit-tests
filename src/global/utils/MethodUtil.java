@@ -10,24 +10,30 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * @deprecated This class should no longer be used for testing methods. Instead, the new MethodTest class should be used.
+ */
+@Deprecated
 public class MethodUtil {
     private static ByteArrayOutputStream methodOutput;
 
-    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, Object[] arguments, Class<?>... methodArgumentTypes) {
+    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName, Object[] arguments, Class<?>... methodArgumentTypes) throws Throwable {
         setUpMethodOutput();
         try {
             Method testMethodInvoke = methodClass.getMethod(methodName, methodArgumentTypes);
             return testMethodInvoke.invoke(null, arguments);
-        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+        } catch (NoSuchMethodException | IllegalAccessException e) {
             fail(Objects.requireNonNullElseGet(
                     TestOption.invalidMethodMessage,
                     () -> String.join("", methodClass.getSimpleName(), " does not contain method ", methodName, "."))
             );
             return null;
+        } catch (InvocationTargetException e) {
+            throw e.getCause();
         }
     }
 
-    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName) {
+    public static Object invokeIfMethodExists(Class<?> methodClass, String methodName) throws Throwable {
         return invokeIfMethodExists(methodClass, methodName, null, null);
     }
 
@@ -37,6 +43,6 @@ public class MethodUtil {
     }
 
     public static String getMethodOutput() {
-        return methodOutput.toString().trim();
+        return methodOutput.toString();
     }
 }

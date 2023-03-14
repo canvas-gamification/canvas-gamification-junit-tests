@@ -1,13 +1,12 @@
 package arrays.arrays_with_methods.hard.q4;
 
-import global.utils.MethodUtil;
+import global.MethodTest;
+import global.tools.CustomAssertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest {
     // Java
@@ -23,10 +22,13 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void correctIsAscendingMethod(double[] input, boolean isAscending) {
-        boolean output = (boolean) MethodUtil.invokeIfMethodExists(NumbersAscend.class, "isAscending",
-                new Object[]{input}, double[].class);
-        assertEquals(isAscending, output,
+    void correctIsAscendingMethod(double[] input, boolean isAscending) throws Throwable {
+        Object[][] arguments = {
+                {input, double[].class}
+        };
+        MethodTest m = new MethodTest(NumbersAscend.class, "isAscending", arguments);
+        Object output = m.callMethod();
+        CustomAssertions._assertEquals(isAscending, output,
                 "Your method does not return the correct boolean value based on the input array.");
     }
 }
