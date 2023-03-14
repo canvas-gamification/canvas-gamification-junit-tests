@@ -137,6 +137,20 @@ public class MainTest extends BaseTest {
         _assertEquals(toStringExpected, toStringOutput, incorrectToString);
     }
 
+    @ParameterizedTest
+    @MethodSource("bookInputProvider")
+    public void correctDetermineTimeMethod(int year, String type) throws Throwable {
+        Object[][] arguments = new Object[][]{
+                {year, int.class},
+                {type, String.class}
+        };
+        Object bookInstance = book.createInstance(arguments);
+        Object determineTimeOutput = book.callMethod("determineTime", bookInstance);
+        int determineTimeExpected = Year.now().getValue() - year;
+        String incorrectDetermineTimeExpected = "Your " + bookLc + " determineTime method does not return the correct time.";
+        _assertEquals(determineTimeExpected, determineTimeOutput, incorrectDetermineTimeExpected);
+    }
+
     /**
      * Bookcase tests
      **/
@@ -198,4 +212,3 @@ public class MainTest extends BaseTest {
     }
 
 }
-
