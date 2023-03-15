@@ -13,11 +13,11 @@ import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
-    private String className = "Circle";
-    private String attributeName = "size";
-    private String getAttributeMethodName = "getSize";
-    private String setAttributeMethodName = "setSize";
-    private String toStringMessage = "My size is ";
+    private final String className = "Circle";
+    private final String attributeName = "size";
+    private final String getAttributeMethodName = "getSize";
+    private final String setAttributeMethodName = "setSize";
+    private final String toStringMessage = "My size is ";
     private ObjectTest testClass;
 
     @BeforeEach
@@ -71,12 +71,64 @@ public class MainTest {
                 "Your " + getAttributeMethodName + " method does not return the value of the size field.");
     }
 
-    private static Stream<Arguments> setMethodInputProvider() {
+    private static Stream<Arguments> twoDoublesInputProvider() {
         return Stream.of(
                 Arguments.of(4.23232, 0.0),
                 Arguments.of(343434.44364, -343434.44364),
-                Arguments.of(5.67, 2/3),
+                Arguments.of(5.67, 2 / 3),
                 Arguments.of(Math.PI, Math.E)
         );
+    }
+
+    @ParameterizedTest
+    @MethodSource("twoDoublesInputProvider")
+    public void correctSetSizeMethod(double initialValue, double updatedValue) throws Throwable {
+        Object[][] instantiationArguments = {
+                {initialValue, double.class}
+        };
+        Object testInstance = testClass.createInstance(instantiationArguments);
+        Object[][] setMethodArguments = {
+                {updatedValue, double.class}
+        };
+        Class<?>[] methodModifierClasses = {
+                double.class
+        };
+        testClass.callMethod(setAttributeMethodName, setMethodArguments, testInstance);
+        assertTrue(testClass.hasModifier(setAttributeMethodName, methodModifierClasses, "public"),
+                "Your " + setAttributeMethodName + " method does not have the correct visibility modifier.");
+        String incorrectSetterMessage =
+                "Your " + setAttributeMethodName + " method does not correctly update the value of " + attributeName + ".";
+        _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName),
+                incorrectSetterMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("doubleInputProvider")
+    public void correctToStringMethod(double value) throws Throwable {
+        Object[][] arguments = {
+                {value, double.class}
+        };
+        String incorrectToStringMessage = "Your toString method does not return the correct String.";
+        Object testInstance = testClass.createInstance(arguments);
+        String expectedOutput = toStringMessage + value;
+        Object toStringOutput = testClass.callMethod("toString", testInstance);
+        _assertEquals(expectedOutput, toStringOutput, incorrectToStringMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("twoDoublesInputProvider")
+    public void correctGetSetMethods(double initialValue, double updatedValue) throws Throwable {
+        String errorMessage = "Your " + className + " class " + getAttributeMethodName +
+                " method does not return the updated value after calling the " + setAttributeMethodName + " method.";
+        Object[][] instantiationArguments = {
+                {initialValue, double.class}
+        };
+        Object testInstance = testClass.createInstance(instantiationArguments);
+        Object[][] setMethodArguments = {
+                {updatedValue, double.class}
+        };
+        testClass.callMethod(setAttributeMethodName, setMethodArguments, testInstance);
+        Object getMethodOutput = testClass.callMethod(getAttributeMethodName, testInstance);
+        _assertEquals(updatedValue, getMethodOutput, errorMessage);
     }
 }
