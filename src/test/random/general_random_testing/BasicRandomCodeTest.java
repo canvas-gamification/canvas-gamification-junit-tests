@@ -1,4 +1,4 @@
-package test.random;
+package test.random.general_random_testing;
 
 import global.BaseRandomTest;
 import global.variables.Clause;
@@ -6,7 +6,6 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.RandomDouble;
 import global.variables.clauses.RandomInteger;
 import global.variables.clauses.StringLiteral;
-import test.random.BasicRandomCode;
 
 public class BasicRandomCodeTest extends BaseRandomTest {
     public Clause[] testSentence() {
