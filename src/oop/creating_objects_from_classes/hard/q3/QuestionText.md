@@ -17,5 +17,6 @@ String[] names = new String[]{"Grape Tomato"};
 Tomato parentTomato = new Tomato();
 Tomato childTomato = parentTomato.plantSeed(names);
 ```
+In this example, childTomato will have name "Grape Tomato," and none of its other fields will be initialized.
 
 You should use the given constructors to perform the initialization.
