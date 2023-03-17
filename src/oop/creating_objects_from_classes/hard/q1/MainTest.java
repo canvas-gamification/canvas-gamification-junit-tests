@@ -33,7 +33,7 @@ public class MainTest {
     public void petClassHasMakePetMethod() {
         Class<?>[] classes = {String.class};
         assertTrue(petClass.hasMethod(methodName, classes),
-                "Your " + pet + " class is missing the method" + methodName + ".");
+                "Your " + pet + " class is missing the method " + methodName + ".");
         assertTrue(petClass.hasReturnType(methodName, classes, Dog.class),
                 "Your " + methodName + " method does not return the correct type.");
         assertTrue(petClass.hasModifier(methodName,  classes, "public"),
