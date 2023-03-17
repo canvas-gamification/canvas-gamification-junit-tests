@@ -48,7 +48,8 @@ public class MainTest {
                 Arguments.of((Object) new String[]{"Green Beefsteak Tomato"}),
                 Arguments.of((Object) new String[]{"Cherry Tomatoes", "sweet", "salads"}),
                 Arguments.of((Object) new String[]{"Cocktail Tomatoes"}),
-                Arguments.of((Object) new String[]{})
+                Arguments.of((Object) new String[]{}),
+                Arguments.of((Object) new String[]{"Heirloom Tomatoes", "meaty", "roasting", "deep, rich colour"})
         );
     }
 
@@ -63,26 +64,38 @@ public class MainTest {
         assertTrue(plantSeedOutput instanceof Tomato, "Your " + methodName + " method does not return the correct type.");
 
         if (names.length == 1) {
+            // check that only name was initialized (correct constructor was called)
             _assertEquals(names[0], tomatoClass.getFieldValue(plantSeedOutput, this.name),
-                    "Your " + methodName + " method does not return the correct output.");
+                    "Your " + methodName + " method does not return the correct output. " +
+                            "Check that you are calling the correct constructor for the input given.");
             assertNull(tomatoClass.getFieldValue(plantSeedOutput, this.flavour),
-                    "Your " + methodName + " method does not return the correct output.");
-            _assertEquals(null, tomatoClass.getFieldValue(plantSeedOutput, this.usedFor),
-                    "Your " + methodName + " method does not return the correct output.");
+                    "Your " + methodName + " method does not return the correct output. " +
+                            "Check that you are calling the correct constructor for the input given.");
+            assertNull(tomatoClass.getFieldValue(plantSeedOutput, this.usedFor),
+                    "Your " + methodName + " method does not return the correct output. " +
+                            "Check that you are calling the correct constructor for the input given.");
         } else if (names.length == 3) {
+            // check that all fields were initialized
             _assertEquals(names[0], tomatoClass.getFieldValue(plantSeedOutput, this.name),
-                    "Your " + methodName + " method does not return the correct output.");
+                    "Your " + methodName + " method does not return the correct output. " +
+                            "Check that you are calling the correct constructor for the input given.");
             _assertEquals(names[1], tomatoClass.getFieldValue(plantSeedOutput, this.flavour),
-                    "Your " + methodName + " method does not return the correct output.");
+                    "Your " + methodName + " method does not return the correct output. " +
+                            "Check that you are calling the correct constructor for the input given.");
             _assertEquals(names[2], tomatoClass.getFieldValue(plantSeedOutput, this.usedFor),
-                    "Your " + methodName + " method does not return the correct output.");
+                    "Your " + methodName + " method does not return the correct output. " +
+                            "Check that you are calling the correct constructor for the input given.");
         } else {
-            _assertEquals(null, tomatoClass.getFieldValue(plantSeedOutput, this.name),
-                    "Your " + methodName + " method does not return the correct output.");
-            _assertEquals(null, tomatoClass.getFieldValue(plantSeedOutput, this.flavour),
-                    "Your " + methodName + " method does not return the correct output.");
-            _assertEquals(null, tomatoClass.getFieldValue(plantSeedOutput, this.usedFor),
-                    "Your " + methodName + " method does not return the correct output.");
+            // check that no fields were initialized (default constructor)
+            assertNull(tomatoClass.getFieldValue(plantSeedOutput, this.name),
+                    "Your " + methodName + " method does not return the correct output. " +
+                            "Check that you are calling the correct constructor for the input given.");
+            assertNull(tomatoClass.getFieldValue(plantSeedOutput, this.flavour),
+                    "Your " + methodName + " method does not return the correct output. " +
+                            "Check that you are calling the correct constructor for the input given.");
+            assertNull(tomatoClass.getFieldValue(plantSeedOutput, this.usedFor),
+                    "Your " + methodName + " method does not return the correct output. " +
+                            "Check that you are calling the correct constructor for the input given.");
         }
 
     }
