@@ -19,7 +19,7 @@ public class MainTest {
     private final String initialFieldName = "initial";
     private final String bonusFieldName = "bonus";
 
-    double initial = 0;
+    double initial = 200;
     double bonus = 0;
 
     @BeforeEach
