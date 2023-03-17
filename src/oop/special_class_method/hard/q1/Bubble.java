@@ -10,8 +10,7 @@ public class Bubble {
     }
 
     public String toString() {
-        String out = "" + size;
-        out = out + isPopped;
+        String out = "size: " + size + ", isPopped: " + isPopped;
         return out;
     }
 
