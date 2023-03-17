@@ -1,7 +1,6 @@
 package oop.creating_objects_from_classes.hard.q2;
 
 import global.ObjectTest;
-import oop.creating_objects_from_classes.hard.q1.Dog;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,10 +33,10 @@ public class MainTest {
 
     @Test
     public void summerFunClassHasInflateToyMethod() {
-        Class<?>[] classes = {String.class};
+        Class<?>[] classes = {int.class, double.class};
         assertTrue(summerFunClass.hasMethod(methodName, classes),
                 "Your " + summerFun + " class is missing the method " + methodName + ".");
-        assertTrue(summerFunClass.hasReturnType(methodName, classes, Dog.class),
+        assertTrue(summerFunClass.hasReturnType(methodName, classes, WaterToy.class),
                 "Your " + methodName + " method does not return the correct type.");
         assertTrue(summerFunClass.hasModifier(methodName, classes, "public"),
                 "Your " + methodName + " method does not have the correct visibility modifier.");
@@ -62,7 +61,7 @@ public class MainTest {
                 {size, double.class}
         };
         Object inflateToyOutput = summerFunClass.callMethod(methodName, arguments, summerFunInstance);
-        assertTrue(inflateToyOutput instanceof Dog, "Your " + methodName + " method does not return the correct type.");
+        assertTrue(inflateToyOutput instanceof WaterToy, "Your " + methodName + " method does not return the correct type.");
         _assertEquals(id, waterToyClass.getFieldValue(inflateToyOutput, waterToyStringFieldName1),
                 "Your " + methodName + " method does not return the correct output.");
         _assertEquals(size, waterToyClass.getFieldValue(inflateToyOutput, waterToyStringFieldName2),
