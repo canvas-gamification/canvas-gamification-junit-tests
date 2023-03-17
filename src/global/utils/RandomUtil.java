@@ -106,6 +106,15 @@ public class RandomUtil {
         return (count * 1.0) / numBins >= ACCEPTANCE_RATE;
     }
 
+    public static boolean frequenciesAreRandom(int[] frequencies, double percentageTrue) {
+        // This function is used exclusively for testing boolean randomness as the percentage error value is lower
+        // than what is in the normal function and only one bin needs to be tested
+        double expectedTrueFrequency = ArrayUtil.sum(frequencies) * percentageTrue;
+        // Bins should be within 10% of the target frequency
+        double errorAmount = 0.10;
+        return valueAlmostEquals(frequencies[1], expectedTrueFrequency, errorAmount);
+    }
+
     public static boolean valueAlmostEquals(double value, double target, double percentageError) {
         double upperBound = Math.ceil(target + target * percentageError);
         double lowerBound = Math.floor(target - target * percentageError);

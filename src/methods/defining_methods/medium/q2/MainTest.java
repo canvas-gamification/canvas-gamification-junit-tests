@@ -1,8 +1,8 @@
 package methods.defining_methods.medium.q2;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.StringLiteral;
@@ -39,8 +39,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("absCalcInputProvider")
     void correctAbsCalcMethod(double input, double absoluteValue) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(AbsoluteMethod.class, "absCalc",
-                new Object[]{input}, double.class);
+        Object[][] arguments = {
+                {input, double.class}
+        };
+        MethodTest m = new MethodTest(AbsoluteMethod.class, "absCalc", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(absoluteValue, output, 0.0000000001,
                 "Your method does not correctly calculate the absolute value of a number.");
     }

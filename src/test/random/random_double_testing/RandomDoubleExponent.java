@@ -1,4 +1,4 @@
-package test.random;
+package test.random.random_double_testing;
 
 import java.util.Random;
 
