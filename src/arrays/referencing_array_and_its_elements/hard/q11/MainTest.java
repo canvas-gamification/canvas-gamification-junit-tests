@@ -94,6 +94,6 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(MaxFinder.class, "findMax", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(ans, output, 0.0001, "Your findMax method does not correctly return the maximum value of the double array");
+        CustomAssertions._assertEquals(ans, output, 0.000001, "Your findMax method does not correctly return the maximum value of the double array");
     }
 }
