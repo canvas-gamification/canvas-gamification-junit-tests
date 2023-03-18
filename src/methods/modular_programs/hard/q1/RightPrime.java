@@ -29,7 +29,7 @@ public class RightPrime {
     }
 
     public static boolean isRightPrime(int num) {
-        if(num <= 0)
+        if (num <= 0)
             return false;
         while (num > 0) {
             int factors = 0;
@@ -42,5 +42,4 @@ public class RightPrime {
         }
         return true;
     }
-
 }
