@@ -89,9 +89,9 @@ public class MainTest extends BaseTest {
                 {arr, int[][].class}
         };
         MethodTest m = new MethodTest(SimpleDisplay.class, "even", arguments, methodSentence);
-        m.setIncorrectMethodStructureErrorMessage("Your even method does not print the count of even numbers.");
+        m.setIncorrectMethodStructureErrorMessage("Your even method does not print the correct output.");
         m.callMethod();
 
-        assertEquals(evens, Integer.parseInt(m.getMethodItemByName("even")), "Your even method does not correctly count and display number of even integers present in the array.");
+        assertEquals(evens, Integer.parseInt(m.getMethodItemByName("even")), "Your even method does not correctly count and display number of even integers present in the input array.");
     }
 }
