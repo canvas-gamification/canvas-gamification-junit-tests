@@ -69,14 +69,14 @@ public class MainTest extends BaseTest {
 
         for (int x = 0; x < size; x++) {
             if (x == indexOf) {
-                assertEquals(longest, Integer.parseInt(m.getMethodItemByName("num " + x)), "Your method does not print the correct word lengths.");
+                assertEquals(longest, Integer.parseInt(m.getMethodItemByName("num " + x)), "Your lengthFinder method does not print the correct word lengths.");
                 continue;
             }
 
-            assertEquals(arr[x].length(), Integer.parseInt(m.getMethodItemByName("num " + x)), "Your method does not print the correct word lengths.");
+            assertEquals(arr[x].length(), Integer.parseInt(m.getMethodItemByName("num " + x)), "Your lengthFinder method does not print the correct word lengths.");
         }
 
-        assertEquals("Supercalifragilisticexpialidocious", arr[indexOf], "Your method does not replace the longest word with Supercalifragilisticexpialidocious.");
+        assertEquals("Supercalifragilisticexpialidocious", arr[indexOf], "Your lengthFinder method does not replace the longest word with Supercalifragilisticexpialidocious.");
     }
 
     public Clause[] clauseBuilder(int size) {
