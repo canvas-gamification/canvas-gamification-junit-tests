@@ -45,12 +45,12 @@ public class MainTest extends BaseTest {
                 Arguments.of(4, 4, 1),
                 Arguments.of(8, 11, 1),
                 Arguments.of(56, 2, 1),
-                Arguments.of(41, 13, 1),
+                Arguments.of(39, 13, 1),
                 Arguments.of(2, 3, -1),
                 Arguments.of(4, 4, -1),
                 Arguments.of(8, 11, -1),
                 Arguments.of(56, 2, -1),
-                Arguments.of(41, 13, -1)
+                Arguments.of(39, 13, -1)
         );
     }
 
