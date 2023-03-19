@@ -1,9 +1,8 @@
-package test.random;
+package test.random.general_random_testing;
 
 import global.BaseRandomTest;
 import global.variables.Clause;
 import global.variables.clauses.*;
-import test.random.SomewhatRandomCode;
 
 public class SomewhatRandomCodeTest extends BaseRandomTest {
     public Clause[] testSentence() {

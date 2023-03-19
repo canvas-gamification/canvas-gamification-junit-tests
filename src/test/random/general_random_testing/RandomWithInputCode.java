@@ -1,4 +1,4 @@
-package test.random;
+package test.random.general_random_testing;
 
 import java.util.Random;
 import java.util.Scanner;

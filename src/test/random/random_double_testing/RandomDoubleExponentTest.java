@@ -1,10 +1,9 @@
-package test.random;
+package test.random.random_double_testing;
 
 import global.BaseRandomTest;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.RandomDouble;
-import test.random.RandomDoubleExponent;
 
 public class RandomDoubleExponentTest extends BaseRandomTest {
 
