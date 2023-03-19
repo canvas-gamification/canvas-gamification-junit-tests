@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
-    //Parsons with distractors
+    // Parsons with distractors
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("homecominghomecominghomecominghomecominghomecominghomecominghomecominghomecominghomecominghomecoming")
@@ -27,11 +27,11 @@ public class MainTest extends BaseTest {
     static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of((Object) ArrayUtil.generateRandomWordArray(7)),
-                Arguments.of((Object) ArrayUtil.generateRandomWordArray(10)),
                 Arguments.of((Object) ArrayUtil.generateRandomWordArray(14)),
-                Arguments.of((Object) ArrayUtil.generateRandomWordArray(48)),
                 Arguments.of((Object) ArrayUtil.generateRandomWordArray(200)),
-                Arguments.of((Object) ArrayUtil.generateRandomWordArray(1000))
+                Arguments.of((Object) ArrayUtil.generateRandomWordArray(1000)),
+                Arguments.of((Object) new String[]{}),
+                Arguments.of((Object) new String[]{"should"})
         );
     }
 
@@ -43,7 +43,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(DupeDupeDupeDupe.class, "stringRepeater", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(getSolution(in), output, "Your stringRepeater method does not return a string with enough repetitions of the longest word.");
+        CustomAssertions._assertEquals(getSolution(in), output, "Your stringRepeater method does not return a string with the correct number of repetitions of the longest word.");
     }
 
     public static String getSolution(String[] words) {
@@ -54,8 +54,10 @@ public class MainTest extends BaseTest {
                 greatestLength = i;
             }
         }
-        for (int j = 0; j < words[greatestLength].length(); j++)
-            newWord += words[greatestLength];
+        if(words.length > 0) {
+            for (int j = 0; j < words[greatestLength].length(); j++)
+                newWord += words[greatestLength];
+        }
         return newWord;
     }
 }
