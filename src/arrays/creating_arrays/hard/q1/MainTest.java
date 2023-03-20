@@ -11,6 +11,9 @@ import org.junit.jupiter.api.condition.EnabledIf;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -55,21 +58,19 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(RandomArray.class, "createRandomArray", arguments, "");
         Object output = m.callMethod();
+        try {
+            int[] arr = (int[]) output;
+            ArrayList<Integer> response = new ArrayList<Integer>((Collection<? extends Integer>) Arrays.asList(arr));
+            response.val
+        } catch (Exception e) {
+            fail("Your createRandomArray method does not return an array of integers.");
+        }
+
 
         assertNotNull(output, "Your createRandomArray method does not return anything.");
         boolean b = output.getClass().isArray();
         assertTrue(b, "Your createRandomArray method does not return an array.");
-        try {
-            int[] arr = (int[]) output;
-            boolean allInts = true;
-            for (int x : arr) {
-                if (x >= in + maxSizeIncrement)
-                    allInts = false;
-            }
-            assertTrue(allInts, "Your createRandomArray method generates numbers larger than the size of the array.");
-        } catch (Exception e) {
-            fail("Your createRandomArray method does not return an array of integers.");
-        }
+
 
     }
 
