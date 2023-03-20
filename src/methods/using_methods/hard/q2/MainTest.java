@@ -1,9 +1,9 @@
 package methods.using_methods.hard.q2;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.NewLine;
@@ -50,7 +50,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void correctDegreeCalcMethod(double degrees, double radians) throws Throwable {
-        Object result = MethodUtil.invokeIfMethodExists(Angles.class, "degreeCalc", new Object[]{degrees}, double.class);
+        Object[][] arguments = {
+                {degrees, double.class}
+        };
+        MethodTest m = new MethodTest(Angles.class, "degreeCalc", arguments);
+        Object result = m.callMethod();
         CustomAssertions._assertEquals(radians, result, 0.00000000001, "Your degreeCalc method does not correctly convert the angle.");
     }
 
