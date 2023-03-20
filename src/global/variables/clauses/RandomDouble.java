@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static global.tools.CustomAssertions._fail;
 import static global.tools.CustomAssertions.assertWithinRange;
 import static global.utils.RandomUtil.frequenciesAreRandom;
-import static global.utils.RegexUtil.orNegative;
 
 public class RandomDouble extends Clause implements RandomClause<Double> {
     static Map<Integer, ArrayList<Double>> valueStore = new HashMap<>();
@@ -66,7 +66,15 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
     public boolean validateRandom(int matchGroupNum) {
         if (valueStore.get(matchGroupNum) == null)
             return false;
-        ArrayList<Double> values = valueStore.get(matchGroupNum);
+        return validateRandom(valueStore.get(matchGroupNum));
+    }
+
+    public boolean validateRandom(ArrayList<Double> values) {
+        if (values.size() < 1000)
+            _fail("There is an error with the test definition. Please contact a test administrator.",
+                    "Error: invalid number of values provided. There must be more than 1000 values generated"
+            );
+
         final int numBins = RandomDouble.getNumBins(lower, upper);
 
         int[] observedCounts = new int[numBins];
