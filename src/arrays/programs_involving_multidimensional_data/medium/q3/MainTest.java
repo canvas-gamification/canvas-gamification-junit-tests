@@ -70,7 +70,7 @@ public class MainTest extends BaseRandomTest {
                 out[i][j] = Integer.parseInt(getItemByName(i + " " + j));
             }
         }
-        CustomAssertions._assertArrayEquals(ans, out, "Your program does not correctly multiply elements of the two 2D arrays.");
+        CustomAssertions._assertArrayEquals(ans, out, "Your program does not correctly multiply elements of the two 2D arrays and print the final result.");
     }
 
     static Stream<Arguments> inputProvider() {
@@ -116,7 +116,7 @@ public class MainTest extends BaseRandomTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void correctMultiplyMethod(int[][] a, int[][] b, int[][] ans) {
-        TestOption.incorrectStructureErrorMessage = "Your multiply method does not correctly multiply elements of the two 2D arrays.";
+        TestOption.incorrectStructureErrorMessage = "Your multiply method does not correctly multiply and print the elements of the two 2D arrays.";
         Clause[] c = new Clause[ans.length * ans.length + ans.length];
         int t = 0;
         for (int i = 0; i < ans.length; i++) {
