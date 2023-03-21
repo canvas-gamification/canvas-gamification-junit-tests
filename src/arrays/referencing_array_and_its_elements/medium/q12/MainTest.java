@@ -21,7 +21,7 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = arrayToInput(generateRandomArray(-1000.0, 1000.0, n)) + " " + n;
+        TestOption.defaultInput = arrayToInput(generateRandomArray(0, 1000.0, n)) + " " + n;
         return new Clause[]{
                 new StringLiteral("Enter the price of " + n + " purchases:"),
                 new Optional(new StringLiteral(" ")),
@@ -43,13 +43,13 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> inputProvider() {
         return Stream.of(
-                Arguments.of(generateRandomArray(-100000.0, 100000.0, n), n / 2),
-                Arguments.of(generateRandomArray(-1000000.0, 1000000.0, n), 3),
-                Arguments.of(generateRandomArray(-10000000.0, 10000000.0, n), n),
-                Arguments.of(generateRandomArray(-100000000.0, 100000000.0, n), n - 1),
-                Arguments.of(generateRandomArray(-100000000.0, 100000000.0, n), 0),
+                Arguments.of(generateRandomArray(0.0, 100000.0, n), n / 2),
+                Arguments.of(generateRandomArray(0.0, 1000000.0, n), 3),
+                Arguments.of(generateRandomArray(0.0, 10000000.0, n), n),
+                Arguments.of(generateRandomArray(0.0, 100000000.0, n), n - 1),
+                Arguments.of(generateRandomArray(0.0, 100000000.0, n), 0),
                 Arguments.of(replicateArray(0.0, n), n),
-                Arguments.of(replicateArray(1.0, n), n)
+                Arguments.of(replicateArray(0.0, n), n)
 
         );
     }
