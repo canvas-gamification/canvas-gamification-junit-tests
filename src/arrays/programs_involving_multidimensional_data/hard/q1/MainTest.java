@@ -115,7 +115,7 @@ public class MainTest extends BaseTest {
         }
 
         for (int x = 0; x < size; x++) {
-            assertEquals(sums[x], Integer.parseInt(getItemByName(String.valueOf(x))), "Your program does not print the correct sum of the elements in a row.");
+            assertEquals(sums[x], Integer.parseInt(getItemByName(String.valueOf(x))), "Your program does not print the correct sum of the elements in each row of the array.");
         }
     }
 
