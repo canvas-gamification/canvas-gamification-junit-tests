@@ -115,7 +115,7 @@ public class MainTest extends BaseRandomTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctAddMatrices(int[][] a, int[][] b, int[][] ans) {
+    public void correctMultiplyMethod(int[][] a, int[][] b, int[][] ans) {
         TestOption.incorrectStructureErrorMessage = "Your multiply method does not correctly multiply elements of the two 2D arrays.";
         Clause[] c = new Clause[ans.length * ans.length + ans.length];
         int t = 0;
