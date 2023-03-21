@@ -29,6 +29,7 @@ public class MainTest extends BaseTest {
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("The result of multiplied array is:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new PlaceHolder(),
                 new Optional(new StringLiteral(" "))
