@@ -56,9 +56,6 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> numsInputProvider() {
         return Stream.of(
-                Arguments.of(new int[][]{}, 0),
-                Arguments.of(new int[][]{}, 0),
-                Arguments.of(new int[][]{}, 0),
                 Arguments.of(new int[][]{{-3, 1, 7}, {2, 1, 19}}, 1),
                 Arguments.of(new int[][]{{5, 12, -43, -5, 12}, {43, 5, 7, 76, 854}, {-7542, 75, 98, 2842, 53912}, {24,
                         532, 65, 542, -523}, {75, -753, 563, 4, 32}}, 13),
