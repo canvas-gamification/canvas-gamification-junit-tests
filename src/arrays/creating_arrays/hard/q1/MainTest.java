@@ -11,9 +11,8 @@ import org.junit.jupiter.api.condition.EnabledIf;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,14 +53,15 @@ public class MainTest extends BaseTest {
     @MethodSource("createRandomArrayInputProvider")
     public void correctCreateRandomArrayMethod(int in) throws Throwable {
         Object[][] arguments = {
-                {in, int.class}
+                {1000, int.class}
         };
         MethodTest m = new MethodTest(RandomArray.class, "createRandomArray", arguments, "");
         Object output = m.callMethod();
         try {
             int[] arr = (int[]) output;
-            ArrayList<Integer> response = new ArrayList<Integer>((Collection<? extends Integer>) Arrays.asList(arr));
-            response.val
+            ArrayList<Integer> response = Arrays.stream(arr).boxed().collect(Collectors.toCollection(ArrayList::new));
+            RandomInteger randomInteger = new RandomInteger(0, 1000);
+            randomInteger.validateRandom(response);
         } catch (Exception e) {
             fail("Your createRandomArray method does not return an array of integers.");
         }
