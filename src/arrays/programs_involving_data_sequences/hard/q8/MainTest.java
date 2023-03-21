@@ -97,6 +97,6 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(MultItUp.class, "productMaker", arguments);
         m.callMethod();
-        CustomAssertions._assertArrayEquals(ans, input, "Your productMaker method does not return a correctly multiplied array");
+        CustomAssertions._assertArrayEquals(ans, input, "Your productMaker method does not correctly multiply the array parameter.");
     }
 }
