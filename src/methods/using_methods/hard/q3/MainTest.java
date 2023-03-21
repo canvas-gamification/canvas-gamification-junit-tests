@@ -1,10 +1,10 @@
 package methods.using_methods.hard.q3;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
     // Parsons
-    public Clause[] testSentence(){
+    public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "5";
         return new Clause[]{
@@ -28,20 +28,26 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){FavouriteNumber.main(new String[0]);}
+    public void runMain() {
+        FavouriteNumber.main(new String[0]);
+    }
 
-    static Stream<Arguments> evenOrOddInputProvider(){
+    static Stream<Arguments> evenOrOddInputProvider() {
         return Stream.of(Arguments.of(0, "even"), Arguments.of(1, "odd"), Arguments.of(2, "even"), Arguments.of(-1, "odd"), Arguments.of(157932, "even"), Arguments.of(732461, "odd"), Arguments.of(-2220, "even"));
     }
 
-    static Stream<Arguments> mainMethodInputProvider(){
+    static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(Arguments.of(2, "even"), Arguments.of(1, "odd"), Arguments.of(10, "even"), Arguments.of(31, "odd"));
     }
 
     @ParameterizedTest
     @MethodSource("evenOrOddInputProvider")
-    void correctEvenOrOddMethod(int in, String expected) throws Throwable{
-        Object output = MethodUtil.invokeIfMethodExists(FavouriteNumber.class, "evenOrOdd", new Object[]{in}, int.class);
+    void correctEvenOrOddMethod(int in, String expected) throws Throwable {
+        Object[][] arguments = {
+                {in, int.class}
+        };
+        MethodTest m = new MethodTest(FavouriteNumber.class, "evenOrOdd", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(expected, output, "Your evenOrOdd method does not correctly identify even or odd numbers.");
     }
 
