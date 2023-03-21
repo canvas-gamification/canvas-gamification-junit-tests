@@ -26,16 +26,18 @@ public class MainTest extends BaseTest {
                     new StringLiteral("Can't add the arrays because they are different sizes!")
             };
         } else {
-            Clause[] c = new Clause[2 * a.length];
-
+            Clause[] c = new Clause[2 * a.length + 2];
             int[][] ans = answerFor(a, b);
+            int t = 0;
+            c[t++] = new StringLiteral("The sum of the matrices are:");
+            c[t++] = new NewLine();
             for (int i = 0; i < a.length; i++) {
                 String st = "";
                 for (int j = 0; j < a[0].length; j++) {
                     st += ans[i][j] + " ";
                 }
-                c[2 * i] = new StringLiteral(st);
-                c[2 * i + 1] = new NewLine();
+                c[t++] = new StringLiteral(st);
+                c[t++] = new NewLine();
             }
             return c;
         }
