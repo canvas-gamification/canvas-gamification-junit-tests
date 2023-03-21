@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MainTest extends BaseRandomTest {
     // Java
 
-    public static final int n = 100;
+    public static final int n = 150;
 
     public Clause[] testSentence() {
         Clause[] c = new Clause[3 * n + 7];
