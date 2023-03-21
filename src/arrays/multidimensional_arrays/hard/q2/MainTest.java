@@ -77,7 +77,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("numsInputProvider")
-    void correctNumsMethod(int[][] arr, int evens) throws Throwable {
+    void correctEvenMethod(int[][] arr, int evens) throws Throwable {
         Clause[] methodSentence = new Clause[]{
                 new StringLiteral("The number of even integers in array is: "),
                 new IntegerLiteral("even")
