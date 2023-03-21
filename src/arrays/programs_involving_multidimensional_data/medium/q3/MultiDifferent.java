@@ -4,8 +4,8 @@ package arrays.programs_involving_multidimensional_data.medium.q3;
 Write a Java program that initializes two integer 2D arrays, size 5 by 5, with numbers randomly generated
 in the range of 1 to 5 (inclusive of both values), then prints both of them in each row in a line. Then, use a method called
 multiply to multiply every element in one array with the respective element in the second array, and display the elements
-in the resulting 2D array, your method should only display the multiplied numbers, everything else should be printed in
-the main method. Your multiply method should be general enough to work with any length of a 2D array.
+in the resulting 2D array. Your method should only display the multiplied numbers, everything else should be printed in
+the main method. Note that the multiply method should be general enough to work with any length of a 2D array.
 
 Sample Output:
     First array:
