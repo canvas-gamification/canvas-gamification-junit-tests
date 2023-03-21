@@ -78,7 +78,7 @@ public class MainTest extends BaseTest {
 
         for (int x = 0; x < rows; x++) {
             for (int y = 0; y < columns; y++) {
-                assertEquals(nums[x][y], Integer.parseInt(getItemByName("row" + x + "col" + y)), "Your program did not correctly print the array.");
+                assertEquals(nums[x][y], Integer.parseInt(getItemByName("row" + x + "col" + y)), "Your program did not correctly print the input array.");
             }
         }
     }
