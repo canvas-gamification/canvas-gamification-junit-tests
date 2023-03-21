@@ -1,9 +1,9 @@
 package arrays.programs_involving_data_sequences.medium.q1;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.utils.ArrayUtil;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -37,7 +37,11 @@ public class MainTest extends BaseTest {
     @MethodSource("methodInputProvider")
     void correctIntoStringMethod(int[] input) throws Throwable {
         String result = ArrayUtil.arrayToInput(input).replaceAll(" ", "");
-        Object output = MethodUtil.invokeIfMethodExists(Stringify.class, "intoString", new Object[]{input}, int[].class);
+        Object[][] arguments = {
+                {input, int[].class}
+        };
+        MethodTest m = new MethodTest(Stringify.class, "intoString", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(result, output, "Your intoString method does not correctly convert the integers in the array into a String.");
     }
 }
