@@ -1,4 +1,4 @@
-package arrays.programs_involving_data_sequences.programs_involving_multidimensional_data.medium.q2;
+package arrays.programs_involving_multidimensional_data.medium.q2;
 
 /*
 Write a Java program that initializes a 2 x 3 2D array with values {{2, 3, 4}, {4, 5, 1}}. Next, the program needs to
@@ -24,6 +24,8 @@ Distractors:
     arr[i][j] += mult;
     arr[i][j] /= mult;
     arr[i][j] = mult;
+    int mult = (int) (Math.random() * (5) + 10);
+    int mult = (int) (Math.random() * (5) + 6);
  */
 
 public class MultiplyArrays {

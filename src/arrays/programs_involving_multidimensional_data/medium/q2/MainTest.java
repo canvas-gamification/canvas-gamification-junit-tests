@@ -1,4 +1,4 @@
-package arrays.programs_involving_data_sequences.programs_involving_multidimensional_data.medium.q2;
+package arrays.programs_involving_multidimensional_data.medium.q2;
 
 import global.BaseTest;
 import global.MethodTest;
