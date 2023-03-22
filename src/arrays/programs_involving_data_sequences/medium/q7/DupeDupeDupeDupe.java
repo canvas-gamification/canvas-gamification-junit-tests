@@ -1,11 +1,11 @@
 package arrays.programs_involving_data_sequences.medium.q7;
 
 /*
-Make a Java program that calls a method that takes an array of words as input. Go through all the words and find the
-longest word in the array. Take the longest word and duplicate it as many times as the length of the word. For example,
-suppose the longest word is "cars" that is 4 characters long. Then the newly constructed word would be duplicate "cars"
-4 times to get "carscarscarscars". This newly constructed word is then returned as output which is printed in the main
-method.
+Make a Java program that calls a method called stringRepeater that takes an array of words as input. The method should
+go through the array and identify the longest word. The method should then create a new string consisting of the longest
+word repeated as many times as the length of the word. For example, suppose the longest word is "cars" that is 4
+characters long. Then the newly constructed string would be duplicate "cars" 4 times to get "carscarscarscars". This
+string should then be returned to the main method where it is printed.
 
 Distractors:
     return longestWord;
