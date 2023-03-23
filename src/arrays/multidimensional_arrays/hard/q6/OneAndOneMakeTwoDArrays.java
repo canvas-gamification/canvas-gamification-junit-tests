@@ -7,6 +7,7 @@ should check that the two arrays have the same dimensions, otherwise returning n
 elements at the same index, add them together, and place the new number at the same index in the new array. For the sake
 of simplicity, assume that the rows in an array have a consistent length. In the main method, if the method returned null,
 print an error message and otherwise print the newly created 2D array.
+
 Sample Output:
     The sum of the matrices are:
     4437 2321 9885
