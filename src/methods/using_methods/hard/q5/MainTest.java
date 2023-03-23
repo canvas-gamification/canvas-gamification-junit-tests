@@ -1,10 +1,10 @@
 package methods.using_methods.hard.q5;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
@@ -28,20 +28,26 @@ public class MainTest extends BaseTest {
         };
     }
 
-    public void runMain(){Standing.main(new String[0]);}
+    public void runMain() {
+        Standing.main(new String[0]);
+    }
 
-    static Stream<Arguments> designationCalcInputProvider(){
+    static Stream<Arguments> designationCalcInputProvider() {
         return Stream.of(Arguments.of(1, "freshmen"), Arguments.of(2, "sophomore"), Arguments.of(3, "junior"), Arguments.of(4, "senior"), Arguments.of(5, "senior"), Arguments.of(10, "senior"), Arguments.of(-1, "unknown year"), Arguments.of(-23, "unknown year"));
     }
 
-    static Stream<Arguments> mainMethodInputProvider(){
+    static Stream<Arguments> mainMethodInputProvider() {
         return Stream.of(Arguments.of("1", "freshmen"), Arguments.of("2", "sophomore"), Arguments.of("3", "junior"), Arguments.of("4", "senior"), Arguments.of("-5", "unknown year"));
     }
 
     @ParameterizedTest
     @MethodSource("designationCalcInputProvider")
     void correctDesignationCalcMethod(int in, String year) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(Standing.class, "designationCalc", new Object[]{in}, int.class);
+        Object[][] arguments = {
+                {in, int.class}
+        };
+        MethodTest m = new MethodTest(Standing.class, "designationCalc", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(year, output, "Your designationCalc method does not correctly identify which year the user is in.");
     }
 

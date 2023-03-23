@@ -1,6 +1,7 @@
 package test.methods;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
 import global.utils.MethodUtil;
@@ -11,7 +12,6 @@ import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import test.methods.MethodCode;
 
 import java.util.stream.Stream;
 
@@ -34,7 +34,7 @@ public class MethodCodeTest extends BaseTest {
         MethodCode.main(new String[0]);
     }
 
-    static Stream<String> inputProvider(){
+    static Stream<String> inputProvider() {
         return Stream.of("Git gud", "Dance until you are dead");
     }
 
@@ -69,5 +69,16 @@ public class MethodCodeTest extends BaseTest {
         double f = (double) MethodUtil.invokeIfMethodExists(MethodCode.class, "max", new Object[]{5, 9}, int.class, int.class);
         String s = MethodUtil.getMethodOutput();
         assertEquals(f, 9.0, "Assert failed");
+    }
+
+    @Test
+    public void checkMaxReturnType() {
+        Object[][] arguments = {
+                {4, int.class},
+                {5, int.class}
+        };
+        MethodTest methodTest = new MethodTest(MethodCode.class, "max", arguments);
+        assertEquals(double.class, methodTest.getMethodReturnType(),
+                "Return types were different.");
     }
 }

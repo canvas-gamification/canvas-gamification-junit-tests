@@ -1,9 +1,9 @@
 package methods.method_overloading.hard.q2;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -66,16 +66,23 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProviderString")
     void correctStringLengthMethod(String message, int stringLength) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(Overload101.class, "stringLength",
-                new Object[]{message}, String.class);
+        Object[][] arguments = {
+                {message, String.class}
+        };
+        MethodTest m = new MethodTest(Overload101.class, "stringLength", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(stringLength, output, "Your method does not correctly calculate the length of a string.");
     }
 
     @ParameterizedTest
     @MethodSource("inputProviderStringAndInt")
     void correctStringLengthMethodWithInteger(String message, int n, int stringLength) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(Overload101.class, "stringLength",
-                new Object[]{message, n}, String.class, int.class);
+        Object[][] arguments = {
+                {message, String.class},
+                {n, int.class}
+        };
+        MethodTest m = new MethodTest(Overload101.class, "stringLength", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(stringLength, output, "Your method does not correctly calculate the length of a string plus an integer.");
     }
 
