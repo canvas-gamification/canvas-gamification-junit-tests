@@ -42,7 +42,7 @@ public class MainTest extends BaseTest {
     }
 
     public static Stream<Integer> createRandomArrayInputProvider() {
-        return Stream.of(0, 1, 2, 3, 5, 10, 50, 100);
+        return Stream.of(1000, 1500, 2000, 3000);
     }
 
     public static Stream<Integer> mainMethodInputProvider() {
@@ -53,25 +53,18 @@ public class MainTest extends BaseTest {
     @MethodSource("createRandomArrayInputProvider")
     public void correctCreateRandomArrayMethod(int in) throws Throwable {
         Object[][] arguments = {
-                {1000, int.class}
+                {in, int.class}
         };
-        MethodTest m = new MethodTest(RandomArray.class, "createRandomArray", arguments, "");
+        MethodTest m = new MethodTest(RandomArray.class, "createRandomArray", arguments);
         Object output = m.callMethod();
         try {
             int[] arr = (int[]) output;
             ArrayList<Integer> response = Arrays.stream(arr).boxed().collect(Collectors.toCollection(ArrayList::new));
-            RandomInteger randomInteger = new RandomInteger(0, 1000);
+            RandomInteger randomInteger = new RandomInteger(0, in);
             randomInteger.validateRandom(response);
         } catch (Exception e) {
             fail("Your createRandomArray method does not return an array of integers.");
         }
-
-
-        assertNotNull(output, "Your createRandomArray method does not return anything.");
-        boolean b = output.getClass().isArray();
-        assertTrue(b, "Your createRandomArray method does not return an array.");
-
-
     }
 
     @ParameterizedTest
