@@ -2,7 +2,7 @@ package arrays.programs_involving_multidimensional_data.medium.q7;
 
 /*
 Write a Java program that initializes a 2D array of size 10 by 10, with randomly generated integers in the range of 1 to
-100 (inclusive of both values), and print each row in a line. Then use a method called addorSub, which adds 4 to
+100 (inclusive of both values), and prints each row on a separate line with spaces between the values. Then use a method called addorSub, which adds 4 to
 the element if it is even and subtracts 3 from it if it is odd. Display the resulting array as output.
 
 Sample Output:
