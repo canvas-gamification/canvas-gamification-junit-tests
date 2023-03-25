@@ -59,7 +59,7 @@ public class MainTest extends BaseRandomTest {
             }
         }
         CustomAssertions._assertArrayEquals(new int[]{ev, od}, new int[]{Integer.parseInt(getItemByName("Even")), Integer.parseInt(getItemByName("Odd"))},
-                "Your program does not correctly count the number of even and odd element in the 2D array.");
+                "Your program does not correctly count and print the number of even and odd elements in the 2D array.");
     }
 
     static Stream<Arguments> inputProvider() {
