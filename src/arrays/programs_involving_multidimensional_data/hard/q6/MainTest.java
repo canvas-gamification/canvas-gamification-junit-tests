@@ -27,8 +27,11 @@ public class MainTest extends BaseRandomTest {
     public static final int down = 0;
 
     public Clause[] testSentence() {
-        Clause[] c = new Clause[2 * n * m + n + 2];
+        Clause[] c = new Clause[2 * n * m + n + 6];
         int t = 0;
+        c[t++] = new StringLiteral("Generated array:");
+        c[t++] = new Optional(new StringLiteral(" "));
+        c[t++] = new NewLine();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 c[t++] = new RandomInteger(down, up, i + " " + j);
@@ -39,6 +42,7 @@ public class MainTest extends BaseRandomTest {
             }
             c[t++] = new NewLine();
         }
+        c[t++] = new StringLiteral("Maximum value is: ");
         c[t++] = new IntegerLiteral("max");
         c[t] = new Optional(new NewLine());
 
@@ -63,11 +67,15 @@ public class MainTest extends BaseRandomTest {
         CustomAssertions._assertEquals(max, out, "Your program does not correctly find the maximum value of the 2D array.");
     }
 
+    public static int[][] gen(int n, int m){
+        int[][] t = new int[n][m];
+        for (int i = 0; i < n; i++)
+            t[i] = generateRandomArray(down, up, m);
+        return  t;
+    }
 
     static Stream<Arguments> inputProvider() {
-        int[][] t = new int[10][15];
-        for (int i = 0; i < 10; i++)
-            t[i] = generateRandomArray(1, 100, 15);
+        int[][] t = gen(10, 15);
         int max = -1;
         for (int i = 0; i < 10; i++)
             for (int j = 0; j < 15; j++)
