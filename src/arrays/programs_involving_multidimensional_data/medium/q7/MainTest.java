@@ -3,7 +3,6 @@ package arrays.programs_involving_multidimensional_data.medium.q7;
 import global.BaseRandomTest;
 import global.MethodTest;
 import global.tools.CustomAssertions;
-import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -27,8 +26,10 @@ public class MainTest extends BaseRandomTest {
     public static final int sub = 3;
 
     public Clause[] testSentence() {
-        Clause[] c = new Clause[4 * n * n + 2 * n];
+        Clause[] c = new Clause[4 * n * n + 2 * n + 4];
         int t = 0;
+        c[t++] = new StringLiteral("Generated array:");
+        c[t++] = new NewLine();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 c[t++] = new RandomInteger(down, up + 1, i + " " + j);
@@ -36,6 +37,8 @@ public class MainTest extends BaseRandomTest {
             }
             c[t++] = new NewLine();
         }
+        c[t++] = new StringLiteral("Resulting array:");
+        c[t++] = new NewLine();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 c[t++] = new IntegerLiteral(i + "x" + j);
@@ -77,6 +80,13 @@ public class MainTest extends BaseRandomTest {
         CustomAssertions._assertArrayEquals(answerFor(arr), out, "Your program does not correctly add and subtract from the elements of the 2D array.");
     }
 
+    public static int[][] gen(int n) {
+        int[][] ans = new int[n][n];
+        for (int i = 0; i < n; i++)
+            ans[i] = generateRandomArray(down, up, n);
+        return ans;
+    }
+
     static Stream<int[][]> inputProvider() {
         int[][] t1 = {
                 {1, 0, 1, 0, 1},
@@ -104,12 +114,8 @@ public class MainTest extends BaseRandomTest {
                 {1, 0, 1},
                 {0, 1, 1}
         };
-        int[][] t7 = new int[50][50];
-        for(int i = 0; i < 50; i ++)
-            t7[i] = generateRandomArray(1, 101, 50);
-        int[][] t8 = new int[50][50];
-        for(int i = 0; i < 50; i ++)
-            t8[i] = generateRandomArray(1, 101, 50);
+        int[][] t7 = gen(50);
+        int[][] t8 = gen(50);
         return Stream.of(
                 t1, t2, t3, t4, t5, t6, t7, t8
         );

@@ -3,14 +3,17 @@ package arrays.programs_involving_multidimensional_data.medium.q7;
 /*
 Write a Java program that initializes a 2D array of size 10 by 10, with randomly generated integers in the range of 1 to
 100 (inclusive of both values), and prints each row on a separate line with spaces between the values. Then use a method called addorSub, which adds 4 to
-the element if it is even and subtracts 3 from it if it is odd. Display the resulting array as output.
+the element if it is even and subtracts 3 from it if it is odd, your method should only disply the
+resulting output, everything else should be printed in the main method.
 
 Sample Output:
+    Generated array:
     71 42 33 ... 24
     .            .
     .            .
     .            .
     36 65 34 ... 73
+    Resulting array:
     68 46 30 ... 28
     .            .
     .            .
@@ -29,6 +32,7 @@ Distractors:
 public class MultiDivide {
     public static void main(String[] args) {
         int[][] arr = new int[10][10];
+        System.out.println("Generated array:");
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
                 arr[i][j] = (int) (Math.random() * 100 + 1);
@@ -36,6 +40,7 @@ public class MultiDivide {
             }
             System.out.println();
         }
+        System.out.println("Resulting array:");
         addorSub(arr);
     }
 
