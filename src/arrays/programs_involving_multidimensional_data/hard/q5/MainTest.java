@@ -151,7 +151,7 @@ public class MainTest extends BaseRandomTest {
                 {a, int[][].class},
         };
         MethodTest m = new MethodTest(ChartoInt.class, "intToChar", arguments, c);
-        m.setIncorrectMethodStructureErrorMessage("Your intToChar program does not correctly convert the generated integers to characters and print them.");
+        m.setIncorrectMethodStructureErrorMessage("Your intToChar method does not correctly convert the integers in the input array to characters and print them.");
         m.callMethod();
     }
 }
