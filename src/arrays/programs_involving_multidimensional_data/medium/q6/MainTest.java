@@ -19,8 +19,10 @@ public class MainTest extends BaseRandomTest {
     public static final double div = 3.14;
 
     public Clause[] testSentence() {
-        Clause[] c = new Clause[4 * n * n + 2 * n];
+        Clause[] c = new Clause[4 * n * n + 2 * n + 4];
         int t = 0;
+        c[t++] = new StringLiteral("Generated array:");
+        c[t++] = new NewLine();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 c[t++] = new RandomInteger(down, up + 1, i + " " + j);
@@ -28,6 +30,8 @@ public class MainTest extends BaseRandomTest {
             }
             c[t++] = new NewLine();
         }
+        c[t++] = new StringLiteral("Multiplied array:");
+        c[t++] = new NewLine();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 c[t++] = new IntegerLiteral(i + "x" + j);
