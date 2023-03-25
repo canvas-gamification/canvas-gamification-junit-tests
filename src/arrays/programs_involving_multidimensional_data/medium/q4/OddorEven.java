@@ -7,13 +7,15 @@ with two elements, and count the number of even and odd numbers in the 2D array.
 index 1 for the odd numbers. Then, print out the resulting 1D array.
 
 Sample Output:
+    Generated Array:
     10 2 2 7 10
     7 6 1 3 6
     4 1 3 10 3
     9 5 8 5 4
     3 4 1 6 5
-    12
-    13
+    Number of even numbers: 12
+    Number of odd numbers: 13
+
 Distractors:
     oddEve[0]--;
     oddEve[1]--;
@@ -30,6 +32,7 @@ Distractors:
 public class OddorEven {
     public static void main(String[] args) {
         int[][] arr = new int[5][5];
+        System.out.println("Generated Array:");
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
                 arr[i][j] = (int) (Math.random() * 10 + 1);
@@ -45,8 +48,8 @@ public class OddorEven {
         for (int i = 0; i < arr.length; i++)
             for (int j = 0; j < arr[i].length; j++)
                 oddEve[arr[i][j] % 2]++;
-        for (int i = 0; i < oddEve.length; i++)
-            System.out.println(oddEve[i]);
+        System.out.println("Number of even numbers: " + oddEve[0]);
+        System.out.println("Number of odd numbers: " + oddEve[1]);
     }
 
 }
