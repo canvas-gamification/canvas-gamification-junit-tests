@@ -130,6 +130,6 @@ public class MainTest extends BaseRandomTest {
                 {arr, int[][].class}
         };
         MethodTest m = new MethodTest(MultiDivide.class, "addorSub", arguments, testSentence);
-        m.setIncorrectMethodStructureErrorMessage("Your addorSub method does not add and subtract the elements of the 2D array.");
+        m.setIncorrectMethodStructureErrorMessage("Your addorSub method does not correctly manipulate the elements of the 2D array.");
     }
 }
