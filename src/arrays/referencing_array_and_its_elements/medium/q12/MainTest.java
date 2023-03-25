@@ -48,9 +48,7 @@ public class MainTest extends BaseTest {
                 Arguments.of(generateRandomArray(0.0, 10000000.0, n), n),
                 Arguments.of(generateRandomArray(0.0, 100000000.0, n), n - 1),
                 Arguments.of(generateRandomArray(0.0, 100000000.0, n), 0),
-                Arguments.of(replicateArray(0.0, n), n),
                 Arguments.of(replicateArray(0.0, n), n)
-
         );
     }
 
