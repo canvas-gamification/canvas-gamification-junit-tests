@@ -2,7 +2,7 @@ package arrays.programs_involving_multidimensional_data.medium.q5;
 
 /*
 Write a Java program that defines a 2D array of characters of size 2 by 13, initialized with the character corresponding
-to the ASCII numbers starting at 97, then 98, 99, and so on until 122. The program also prints out all the characters in
+to the ASCII numbers starting at 97, then 98, 99, and so on until 122. Then, the program should print out all the characters in
 the array, printing each row on a seperate line with no spaces between the characters. 
 
 Sample Output:
