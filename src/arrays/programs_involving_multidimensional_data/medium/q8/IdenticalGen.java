@@ -1,10 +1,10 @@
 package arrays.programs_involving_multidimensional_data.medium.q8;
 
 /*
-Write a Java program that creates a random integer x in the range of 1 to 1000 (inclusive of both values), and print it.
-Then, the program will also create a 10 * 10 2D array, using a method called squareRoot that takes the number x, and
-two numbers n and m and return a 2D double array which all its elements are the square root of x, and finally print
-that 2D array in the main method. Your method should be general enough to work with any size of array.
+Write a Java program that creates a random integer x in the range of 1 to 1000 (inclusive of both values), and print it. 
+Then, the program will also create a 10 * 10 2D array, using a method called squareRoot that takes the number x and two 
+numbers n and m and return a 2D double array in which all its elements are the square root of x. Print the returned 2D 
+array in the main method. Note that your squareRoot method should be general enough to work with any array size.
 
 Sample Output:
     Random number: 16
