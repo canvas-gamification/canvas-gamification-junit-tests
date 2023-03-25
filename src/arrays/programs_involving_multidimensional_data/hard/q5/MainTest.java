@@ -25,8 +25,10 @@ public class MainTest extends BaseRandomTest {
     public static final int up = 122;
 
     public Clause[] testSentence() {
-        Clause[] c = new Clause[2 * n * m + n + n * m + n];
+        Clause[] c = new Clause[2 * n * m + n + n * m + n + 4];
         int t = 0;
+        c[t++] = new StringLiteral("Initialized array:");
+        c[t++] = new NewLine();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 c[t++] = new RandomInteger(down, up + 1, i + " " + j);
@@ -40,6 +42,8 @@ public class MainTest extends BaseRandomTest {
             else
                 c[t++] = new Optional(new NewLine());
         }
+        c[t++] = new StringLiteral("Converted to char:");
+        c[t++] = new NewLine();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++)
                 c[t++] = new RandomChar((char) down, (char) (up + 1), i + "c" + j);
@@ -68,12 +72,12 @@ public class MainTest extends BaseRandomTest {
 
     static Stream<Arguments> inputProvider() {
         char[][] t = new char[10][15];
-        for(int i = 0; i < 10; i ++){
+        for (int i = 0; i < 10; i++) {
             t[i] = generateRandomArray('a', 'z', 15);
         }
         int[][] a = new int[10][15];
-        for(int i = 0; i < 10; i ++){
-            for(int j = 0; j < 15; j ++)
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 15; j++)
                 a[i][j] = t[i][j];
         }
         return Stream.of(
