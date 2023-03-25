@@ -14,7 +14,7 @@ public class MainTest extends BaseRandomTest {
     public static final char start = 97;
 
     public Clause[] testSentence() {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct characters in the correct structure.";
+        TestOption.incorrectStructureErrorMessage = "Your program does correctly create and print the specified character array.";
         Clause[] c = new Clause[n * m + n];
         int t = 0;
         char ch = start;
