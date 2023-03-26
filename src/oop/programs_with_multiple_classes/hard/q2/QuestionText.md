@@ -21,16 +21,14 @@ Your `Blanket` class should have the following items:
     - A `String` called **size**
     - An `int` called **threadCount**
 - Constructors:
-    - A constructor which accepts a String and an int and initializes the **size** field with the passed String and the
-      **threadCount** field with the passed int
+    - A constructor which accepts a String to initialize the **size** field and an int to initialize the **threadCount**
     - This constructor should be accessible from other classes
 
 ## TestFort Class
 
 - Your `TestFort` class will have a `main` method which initializes two `Person` and one `Blanket` objects, and prints
-  out
-  the attributes of each object. Initialize the objects with the values shown in the sample output and print them out.
-  Use the `toString` method provided in each class to do this.
+  out the attributes of each object. Initialize the objects with the values shown in the sample output and print them
+  out. Use the `toString` method provided in each class to do this.
 - The sample output is as follows:
   ```
   Person 1: Person{height=75.0}
