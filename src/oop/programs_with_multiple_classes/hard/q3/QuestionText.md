@@ -12,8 +12,8 @@ Your `Book` class should have the following items:
     - An `int` called **count**
     - A `String` called **type**
 - Constructors:
-    - A `public Book(String, int)` constructor which initializes the **count** field with the passed integer and the
-      **type** field with the passed String
+    - A constructor which accepts a String to initialize the **count** field and an int to initialize the
+      **type** field and is accessible from other classes
 
 ## Bookcase Class
 
@@ -22,7 +22,7 @@ Your `Bookcase` class should have the following items:
 - Attributes:
     - A `int` called **sizeCapacity**
 - Constructors:
-    - A `public Bookcase(int)` constructor which initializes the **sizeCapacity** field with the passed integer
+    - A constructor which accepts an int to initialize the **sizeCapacity** field and is accessible from other classes
 
 ## TestFurniture Class
 
