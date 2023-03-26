@@ -250,4 +250,16 @@ public class MethodTest {
         }
         return "";
     }
+
+    public Class<?> getMethodReturnType() {
+        try {
+            return methodClass.getMethod(methodName, methodArgumentTypes).getReturnType();
+        } catch (NoSuchMethodException e) {
+            fail(Objects.requireNonNullElseGet(
+                    methodNotFoundErrorMessage,
+                    () -> String.join("", methodClass.getSimpleName(), " does not contain the method ", methodName, "."))
+            );
+            return null;
+        }
+    }
 }

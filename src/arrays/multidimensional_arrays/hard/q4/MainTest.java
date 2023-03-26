@@ -5,7 +5,7 @@ import global.variables.Clause;
 import global.variables.clauses.*;
 
 public class MainTest extends BaseTest {
-    // Parsons
+    // Parsons with Distractors
 
     public static int[][] arr = {{4, 5, 6}, {66, 54, 21}, {609, 998, 543}, {1111, 2342, 4583}};
 
