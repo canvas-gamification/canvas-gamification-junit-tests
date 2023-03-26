@@ -1,4 +1,4 @@
-package test.random;
+package test.random.general_random_testing;
 
 import global.BaseRandomTest;
 import global.exceptions.InvalidClauseException;
@@ -11,7 +11,6 @@ import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import test.random.RandomWithInputCode;
 
 import java.util.stream.Stream;
 
