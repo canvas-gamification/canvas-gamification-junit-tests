@@ -11,7 +11,7 @@ Your `Person` class should have the following items:
 - Attributes:
     - A `double` called **height**
 - Constructors:
-    - A `public Person(double)` constructor which initializes the **height** field with the passed double
+    - A constructor which accepts a double to initialize the **height** field and is accessible from other classes
 
 ## Blanket Class
 
@@ -21,8 +21,9 @@ Your `Blanket` class should have the following items:
     - A `String` called **size**
     - An `int` called **threadCount**
 - Constructors:
-    - A `public Blanket(String, int)` constructor which initializes the **size** field with the passed String and the
+    - A constructor which accepts a String and an int and initializes the **size** field with the passed String and the
       **threadCount** field with the passed int
+    - This constructor should be accessible from other classes
 
 ## TestFort Class
 

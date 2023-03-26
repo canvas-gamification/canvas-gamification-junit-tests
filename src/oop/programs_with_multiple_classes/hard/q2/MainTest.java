@@ -19,6 +19,7 @@ import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
+    // Java
 
     private ObjectTest person;
     private ObjectTest blanket;
@@ -130,7 +131,7 @@ public class MainTest extends BaseTest {
     @Test
     public void blanketClassHasCorrectFields() {
         String missingFieldMessage = "Your " + blanketLc + " class is missing a required field.";
-        String incorrectFieldModifierMessage = "A field in your " + blanketLc + " class has an incorrect modifier.";
+        String incorrectFieldModifierMessage = "A field in your " + blanketLc + " class has an incorrect  visibility modifier.";
         assertTrue(blanket.hasField(size, String.class), missingFieldMessage);
         assertTrue(blanket.hasModifier(size, "private"), incorrectFieldModifierMessage);
         assertTrue(blanket.hasField(threadCount, int.class), missingFieldMessage);
