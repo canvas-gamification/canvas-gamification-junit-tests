@@ -19,6 +19,8 @@ import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
+    // Java
+
     private ObjectTest book;
     private ObjectTest bookcase;
 

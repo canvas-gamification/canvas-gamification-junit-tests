@@ -12,11 +12,15 @@ Your `Book` class should have the following items:
     - An `int` called **year**
     - A `String` called **type**
 - Constructors:
-    - A `public Book(String, int)` constructor which initializes the **year** field with the passed integer and the
-      **type** field with the passed String
+    - A constructor which accepts a String to initialize the **type** field and an int to initialize the **year**
+      field (in this order)
+        - This constructor should be accessible from other classes
 - Methods:
-    - A `public int determineTime()` method which calculates the amount of years since the **year** when the book was
-      published
+    - A method called `determineTime`
+        - It should take no input and return an int
+        - Its purpose is to calculate the amount of years since the **year** when a book was
+          published
+        - This method should be accessible from other classes
 
 ## Bookcase Class
 
@@ -26,8 +30,9 @@ Your `Bookcase` class should have the following items:
     - A `int` called **sizeCapacity**
     - A `Book` called **b1**
 - Constructors:
-    - A `public Bookcase(int, Book)` constructor which initializes the **sizeCapacity** field with the passed integer
-      and the **b1** field with the passed Book
+    - A constructor which accepts an int to initialize the **sizeCapacity** field and a Book to initialize the **b1**
+      field (in this order)
+        - This constructor should be accessible from other classes
 
 ## TestFurniture Class
 
