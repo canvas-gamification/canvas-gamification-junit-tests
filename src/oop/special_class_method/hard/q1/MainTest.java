@@ -122,8 +122,21 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("twoBooleanInputProvider")
-    public void bubbleClassHasCorrectSetIsPoppedMethod(boolean initialValue, boolean updatedValue) {
-
+    public void bubbleClassHasCorrectSetIsPoppedMethod(boolean initialValue, boolean updatedValue) throws Throwable {
+        Object[][] arguments = {
+                {Math.PI, double.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        testClass.setFieldValue(classInstance, initialValue, booleanFieldName);
+        Object[][] setMethodArguments = {
+                {updatedValue, boolean.class}
+        };
+        String[] setMethodModifiers = {"public"};
+        String incorrectSetMethodMessage = String.join(" ",
+                "Your", setBooleanMethodName, "does not correctly set the value of the", booleanFieldName, "field.");
+        Object setMethodOutput = testClass.callMethod(setBooleanMethodName, setMethodArguments, setMethodModifiers, classInstance);
+        _assertEquals(updatedValue, testClass.getFieldValue(classInstance, booleanFieldName), incorrectSetMethodMessage);
+        assertNull(setMethodOutput, String.join(" ", "Your", setBooleanMethodName, "should not return any output"));
     }
 
     private static Stream<Boolean> booleanInputProvider() {
@@ -143,5 +156,64 @@ public class MainTest {
                 "Your", getBooleanMethodName, "does not correctly get the value of the", booleanFieldName, "field.");
         Object getMethodOutput = testClass.callMethod(getBooleanMethodName, getMethodModifiers, classInstance);
         _assertEquals(value, getMethodOutput, incorrectGetMethodMessage);
+    }
+
+
+    private static Stream<Arguments> doubleBooleanInputProvider() {
+        return Stream.of(
+                Arguments.of(556.8, false),
+                Arguments.of(0.941, true),
+                Arguments.of(339.5553323, true),
+                Arguments.of(0, false),
+                Arguments.of(34, true)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("doubleBooleanInputProvider")
+    public void bubbleClassHasCorrectToStringMethod(double value, boolean b) throws Throwable {
+        Object[][] arguments = {
+                {Math.random(), double.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        testClass.setFieldValue(classInstance, value, doubleFieldName);
+        testClass.setFieldValue(classInstance, b, booleanFieldName);
+        String[] methodModifiers = {"public"};
+        String expected = "size: " + value + ", isPopped: " + b;
+        String incorrectToStringMessage = String.join(" ",
+                "Your", className, " toString method does not return the correct String.");
+        Object output = testClass.callMethod("toString", methodModifiers, classInstance);
+        _assertEquals(expected, output, incorrectToStringMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("doubleBooleanInputProvider")
+    public void bubbleClassMethodsWorkTogether(double value, boolean b) throws Throwable {
+        double initialValue = Math.random() * 100;
+        Object[][] arguments = {
+                {initialValue, double.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        _assertEquals(initialValue, testClass.callMethod(getDoubleMethodName, classInstance),
+                "Your " + getDoubleMethodName + " method does not return the correct value.");
+        _assertEquals(false, testClass.callMethod(getBooleanMethodName, classInstance),
+                "Your " + getBooleanMethodName + " method does not return the correct value.");
+        Object[][] setDoubleArguments = {
+                {value, double.class}
+        };
+        testClass.callMethod(setDoubleMethodName, setDoubleArguments, classInstance);
+        _assertEquals(value, testClass.callMethod(getDoubleMethodName, classInstance),
+                "Your " + getDoubleMethodName + " method does not return the correct value calling the " + setDoubleMethodName + " method.");
+        Object[][] setBooleanArguments = {
+                {b, boolean.class}
+        };
+        testClass.callMethod(setBooleanMethodName, setBooleanArguments, classInstance);
+        _assertEquals(b, testClass.callMethod(getBooleanMethodName, classInstance),
+                "Your " + getBooleanMethodName + " method does not return the correct value calling the " + setBooleanMethodName + " method.");
+        String expectedToString = "size: " + value + ", isPopped: " + b;
+        String incorrectToStringMessage = String.join(" ",
+                "Your", className, " toString method does not return the correct String after updating the values of its fields using its setter methods.");
+        Object output = testClass.callMethod("toString", classInstance);
+        _assertEquals(expectedToString, output, incorrectToStringMessage);
     }
 }
