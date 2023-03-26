@@ -1,7 +1,9 @@
 package methods.modular_programs.hard.q10;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
+import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
@@ -74,4 +76,14 @@ public class MainTest extends BaseTest {
         });
     }
 
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    void correctZodiacSignMethod(int year, String sign) throws Throwable {
+        Object[][] arguments = {
+                {year, int.class}
+        };
+        MethodTest m = new MethodTest(GoatYear.class, "zodiacSign", arguments);
+        Object output = m.callMethod();
+        CustomAssertions._assertEquals(sign, output, "Your zodiacSign method does return the correct Chinese zodiac sign for the entered year.");
+    }
 }
