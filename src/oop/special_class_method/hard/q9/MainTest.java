@@ -1,4 +1,4 @@
-package oop.variable_scope.medium.q1;
+package oop.special_class_method.hard.q9;
 
 import global.ObjectTest;
 import global.tools.Logger;
