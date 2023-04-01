@@ -15,7 +15,7 @@ import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
-    // Parsons
+    // Parsons with Distractors
     public ObjectTest knife;
     public ObjectTest cupboard;
 
