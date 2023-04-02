@@ -7,7 +7,7 @@ import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 
 public class MainTest extends BaseTest {
-    // Parsons
+    // Parsons with Distractors
 
     public static final int[][] nums = {{41, 52, 63}, {66, 54, 21}, {90, 98, 53}, {1, 2, 3}};
 
