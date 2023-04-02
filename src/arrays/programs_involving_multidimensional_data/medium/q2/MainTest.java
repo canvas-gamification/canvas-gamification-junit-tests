@@ -7,6 +7,7 @@ import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.RandomInteger;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -22,7 +23,11 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         return new Clause[]{
+                new StringLiteral("Random Multiplier: "),
                 new RandomInteger(5, 11, "multiplier"),
+                new NewLine(),
+                new StringLiteral("Modified Array:"),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new IntegerLiteral("1 1"),
                 new StringLiteral(" "),
