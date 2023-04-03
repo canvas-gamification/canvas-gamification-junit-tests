@@ -10,6 +10,9 @@ public class GameNight {
     public static void main(String[] args) {
         String[] names = {"Travis", "Laura", "Liam", "Matthew", "Sam", "Marisha"};
         musicalChairs(names);
+        for(int x = 0; x < 6; x ++){
+            System.out.println(names[x]);
+        }
     }
 
     public static void musicalChairs(String[] names) {
