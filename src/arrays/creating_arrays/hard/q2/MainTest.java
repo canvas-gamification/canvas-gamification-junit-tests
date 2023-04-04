@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MainTest extends BaseTest {
     // Java
 
-    final static int num = 10;
+    final static int num = 500;
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
@@ -35,18 +35,14 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> reverseInputProvider() {
         return Stream.of(
-                Arguments.of(
-                        new int[]{0, 1, 1000, 24, 3109, 9, 73821, 73},
-                        new int[]{0, 1, 1, 42, 9013, 9, 12837, 37}
-                ),
-                Arguments.of(
-                        new int[]{78},
-                        new int[]{87}
-                ),
-                Arguments.of(
-                        new int[]{784, 4389, 573, 481294, 573, 444, 42, 2, 5, 6, 32, 535, 64, 32, 543, 6, 682746, 34, 23, 6, 44, 4, 6643, 2, 7, 542, 53, 7, 2, 3, 543, 52, 543, 52, 524,},
-                        new int[]{487, 9834, 375, 492184, 375, 444, 24, 2, 5, 6, 23, 535, 46, 23, 345, 6, 647286, 43, 32, 6, 44, 4, 3466, 2, 7, 245, 35, 7, 2, 3, 345, 25, 345, 25, 425}
-                )
+                Arguments.of(0, 0),
+                Arguments.of(1, 1),
+                Arguments.of(1000, 1),
+                Arguments.of(758932, 239857),
+                Arguments.of(444, 444),
+                Arguments.of(85903275, 57230958),
+                Arguments.of(24, 42),
+                Arguments.of(9010, 109)
         );
     }
 
@@ -61,13 +57,13 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("reverseInputProvider")
-    void correctReverseMethod(int[] in, int[] ans) throws Throwable {
+    void correctReverseMethod(int in, int ans) throws Throwable {
         Object[][] arguments = {
-                {in, int[].class}
+                {in, int.class}
         };
         MethodTest m = new MethodTest(RevdArray.class, "reverse", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertArrayEquals(ans, output, "Your reverse method does not correctly reverse each element in the input integer array.");
+        CustomAssertions._assertEquals(ans, output, "Your reverse method does not correctly reverse the provided integer.");
     }
 
     @ParameterizedTest
@@ -88,7 +84,7 @@ public class MainTest extends BaseTest {
         c[0] = new StringLiteral("Enter " + num + " numbers to add to the array:");
         c[1] = new Optional(new StringLiteral(" "));
         c[2] = new NewLine();
-        c[3] = new StringLiteral("The numbers in the array are:");
+        c[3] = new StringLiteral("The numbers in the reversed array are:");
         c[4] = new Optional(new StringLiteral(" "));
         c[5] = new NewLine();
 
