@@ -5,16 +5,14 @@ import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
+import global.utils.ArrayUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
-import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -22,15 +20,13 @@ import java.util.stream.Stream;
 public class MainTest extends BaseTest {
     // Java
 
-    int[] primes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101,
-            103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223,
-            227, 229};
+    static final int n = 10;
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "6";
+        TestOption.defaultInput = ArrayUtil.arrayToInput(ArrayUtil.generateRandomArray(0, 10000, n));
         return new Clause[]{
-                new StringLiteral("Enter the size of the array:"),
+                new StringLiteral("Enter an array of " + n + " integers:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new PlaceHolder()
@@ -41,47 +37,73 @@ public class MainTest extends BaseTest {
         ArrayngeOfPrimes.main(new String[0]);
     }
 
-    static Stream<Arguments> isPrimeInputProvider() {
+    static Stream<int[]> mainMethodInputProvider() {
         return Stream.of(
-                Arguments.of(0, false),
-                Arguments.of(1, false),
-                Arguments.of(2, true),
-                Arguments.of(4, false),
-                Arguments.of(17, true),
-                Arguments.of(35, false),
-                Arguments.of(53, true),
-                Arguments.of(67, true),
-                Arguments.of(100, false),
-                Arguments.of(101, true),
-                Arguments.of(5351, true),
-                Arguments.of(5506, false),
-                Arguments.of(6723, false),
-                Arguments.of(7883, true),
-                Arguments.of(27644437, true)
+                ArrayUtil.generateAscendingArray(1, n),
+                ArrayUtil.generateRandomArray(1, 10000, n),
+                ArrayUtil.generateRandomArray(1, 10, n)
+        );
+    }
+
+    static Stream<int[]> getPrimesInputProvider() {
+        return Stream.of(
+                ArrayUtil.generateAscendingArray(1, 100),
+                ArrayUtil.generateRandomArray(1, 10000, 35),
+                ArrayUtil.generateRandomArray(1, 10, 10000),
+                ArrayUtil.generateRandomArray(2, 5, 1),
+                ArrayUtil.generateRandomArray(2, 5, 2),
+                ArrayUtil.generateAscendingArray(1, 250, 2),
+                new int[]{5, 7, 5, 2},
+                new int[]{1, 4, 6, 8, 9, 10, 12, 14, 21, 66, 12, 4},
+                new int[]{15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1}
         );
     }
 
     @ParameterizedTest
-    @MethodSource("isPrimeInputProvider")
-    void correctIsPrimeMethod(int in, boolean expected) throws Throwable {
+    @MethodSource("getPrimesInputProvider")
+    void correctGetPrimesMethod(int[] in) throws Throwable {
+        int[] expected = solution(in);
         Object[][] arguments = {
-                {in, int.class}
+                {in, int[].class}
         };
-        MethodTest m = new MethodTest(ArrayngeOfPrimes.class, "isPrime", arguments);
+        MethodTest m = new MethodTest(ArrayngeOfPrimes.class, "getPrimes", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertEquals(expected, output, "Your isPrime method does not correctly identify primes.");
+        CustomAssertions._assertArrayEquals(expected, output, "Your getPrimes method does not correctly collect and return all prime numbers.");
     }
 
-    @RepeatedTest(50)
-    void correctMainMethodOutput(RepetitionInfo repetitionInfo) throws InvalidClauseException {
-        Clause[][] c = new Clause[1][repetitionInfo.getCurrentRepetition() * 2];
+    @ParameterizedTest
+    @MethodSource("mainMethodInputProvider")
+    void correctMainMethodOutput(int[] in) throws InvalidClauseException {
+        int[] ans = solution(in);
+        Clause[][] c = new Clause[1][ans.length * 2];
         int count = 0;
 
-        for (int x = 0; x < repetitionInfo.getCurrentRepetition(); x++) {
-            c[0][count++] = new IntegerLiteral(primes[x]);
+        for (int x = 0; x < ans.length; x++) {
+            c[0][count++] = new IntegerLiteral(ans[x]);
             c[0][count++] = new NewLine();
         }
 
-        runWithInput(String.valueOf(repetitionInfo.getCurrentRepetition()), c);
+        runWithInput(ArrayUtil.arrayToInput(in), c);
+    }
+
+    private static int[] solution(int[] arr) {
+        int[] hold = new int[arr.length];
+        int primeCount = 0;
+        int count = 0;
+        for (int x = 0; x < arr.length; x++) {
+            int n = arr[x];
+            int c = 0;
+            for (int i = 1; i <= n; i++)
+                if (n % i == 0)
+                    c++;
+            if (c == 2) {
+                primeCount++;
+                hold[count++] = n;
+            }
+        }
+
+        int[] primes = new int[primeCount];
+        System.arraycopy(hold, 0, primes, 0, primeCount);
+        return primes;
     }
 }
