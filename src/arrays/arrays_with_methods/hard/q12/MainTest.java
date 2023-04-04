@@ -31,7 +31,7 @@ public class MainTest extends BaseTest {
     }
 
     public void runMain() {
-        ArrayOfFacts.main(new String[0]);
+        ArrayOfMultiples.main(new String[0]);
     }
 
     @RepeatedTest(15)
@@ -39,7 +39,7 @@ public class MainTest extends BaseTest {
         Object[][] arguments = {
                 {repetitionInfo.getCurrentRepetition(), int.class}
         };
-        MethodTest m = new MethodTest(ArrayOfFacts.class, "factorial", arguments);
+        MethodTest m = new MethodTest(ArrayOfMultiples.class, "factorial", arguments);
         Object output = m.callMethod();
         CustomAssertions._assertEquals(factorials[repetitionInfo.getCurrentRepetition() - 1], output, "Your factorial method does not return the correct factorial value.");
     }
