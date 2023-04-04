@@ -1,12 +1,6 @@
 package oop.programs_with_multiple_classes.medium.q1;
 
-import global.BaseTest;
 import global.ObjectTest;
-import global.tools.TestOption;
-import global.variables.Clause;
-import global.variables.clauses.IntegerLiteral;
-import global.variables.clauses.NewLine;
-import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +13,7 @@ import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
-    // Parsons
+    // Java
     public ObjectTest chair;
     public ObjectTest table;
 
