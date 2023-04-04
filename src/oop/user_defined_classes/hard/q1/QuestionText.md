@@ -4,6 +4,7 @@
 
 - Vary both of the attributes for this question and the class name
 - Also vary the method name
+- Java question
 
 ## Question Text
 
