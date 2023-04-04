@@ -5,7 +5,7 @@
 You want to write a program that models food and different storage containers. Make a Java program with the following requirements:
 
 
-## Bed
+## Vegetable
 
 Your `Vegetable` class should have the following items:
 
@@ -13,11 +13,12 @@ Your `Vegetable` class should have the following items:
     - A `boolean` called **isSpoiled**
 
 - Constructors:
-    - A `public Vegetable(boolean)` constructor to set the
+    - A `constructor` that takes a boolean to set the
       **isSpoiled** field
 - Methods:
-  - A `public timePassed(boolean)` method that changes the value
+  - A `timePassed()` method that changes the value
   of **isSpoiled** to true
+  - A `toString` method is provided
 
 ## Cupboard
 
@@ -27,5 +28,6 @@ Your ``Cupboard`` class should have the following items:
     - An `int` called **size**
 
 - Constructors:
-    - A `public Cupboard(int)` constructor to set the
+    - A `constructor` that takes an int to set the
       **size** field
+    -  A `toString` method is provided
