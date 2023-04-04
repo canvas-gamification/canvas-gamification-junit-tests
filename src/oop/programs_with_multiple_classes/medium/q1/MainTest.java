@@ -38,7 +38,10 @@ public class MainTest {
         assertTrue(chair.hasField("longevity", int.class, new String[]{"private"}), modifiedChairMessage);
 
         // Make sure the students have not modified the Table constructor
-
+        Class<?>[] classArguments = {String.class, int.class};
+        String modifiedTableMessage =
+                "Your have modified the provided constructor of the Table class. Please revert it back to its original state.";
+        assertTrue(table.hasConstructor(classArguments, new String[]{"public"}), modifiedTableMessage);
     }
 
     @Test
@@ -58,15 +61,6 @@ public class MainTest {
                 "Your Chair constructor does not have the correct parameters.");
         assertTrue(chair.hasModifier(classArguments, "public"),
                 "Your Chair constructor does not have the correct modifiers.");
-    }
-
-    @Test
-    public void tableCLassHasRequiredConstructor() {
-        Class<?>[] classArguments = {String.class, int.class};
-        assertTrue(table.hasConstructor(classArguments),
-                "Your Table constructor does not have the correct parameters.");
-        assertTrue(table.hasModifier(classArguments, "public"),
-                "Your Table constructor does not have the correct modifiers.");
     }
 
     private static Stream<Arguments> chairInputProvider() {
@@ -92,73 +86,5 @@ public class MainTest {
                 "Your chair constructor does not correctly initialize the weightCapacity field.");
         _assertEquals(longevity, chair.getFieldValue(chairInstance, "longevity"),
                 "Your chair constructor does not correctly initialize the longevity field.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("chairInputProvider")
-    public void correctChairToStringMethod(String comfort, int weightCapacity, int longevity) throws Throwable {
-        Object[][] arguments = {
-                {comfort, String.class},
-                {weightCapacity, int.class},
-                {longevity, int.class}
-        };
-        Object chairInstance = chair.createInstance(arguments);
-        Object chairToStringOutput = chair.callMethod("toString", chairInstance);
-        _assertEquals(chairToStringResult(comfort, weightCapacity, longevity), chairToStringOutput,
-                "Your chair toString method does not return the correct string.");
-    }
-
-    private static String chairToStringResult(String comfort, int weightCapacity, int longevity) {
-        return "Chair{comfort='"
-                + comfort
-                + "', weightCapacity="
-                + weightCapacity
-                + ", longevity="
-                + longevity + "}";
-    }
-
-    private static Stream<Arguments> tableInputProvider() {
-        return Stream.of(
-                Arguments.of("Oak", 321),
-                Arguments.of("Birch", 2131),
-                Arguments.of("Not actually wood", 11)
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("tableInputProvider")
-    public void tableConstructorInitializesValuesCorrectly(String woodType, int numSeats) throws Throwable {
-        Object[][] arguments = {
-                {woodType, String.class},
-                {numSeats, int.class},
-        };
-        Object tableInstance = table.createInstance(arguments);
-        _assertEquals(woodType, table.getFieldValue(tableInstance, "woodType"),
-                "Your table constructor does not correctly initialize the woodType field.");
-        _assertEquals(numSeats, table.getFieldValue(tableInstance, "numSeats"),
-                "Your table constructor does not correctly initialize the numSeats field.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("tableInputProvider")
-    public void correctTableToStringMethod(String woodType, int numSeats) throws Throwable {
-        Object[][] arguments = {
-                {woodType, String.class},
-                {numSeats, int.class},
-        };
-        Object tableInstance = table.createInstance(arguments);
-        Object tableToStringOutput = table.callMethod("toString", tableInstance);
-        _assertEquals(tableToStringResult(woodType, numSeats), tableToStringOutput,
-                "Your table toString method does not return the correct string.");
-    }
-
-    private static String tableToStringResult(String woodType, int numSeats) {
-        return "Table{"
-                + "woodType='"
-                + woodType
-                + '\''
-                + ", numSeats="
-                + numSeats
-                + '}';
     }
 }
