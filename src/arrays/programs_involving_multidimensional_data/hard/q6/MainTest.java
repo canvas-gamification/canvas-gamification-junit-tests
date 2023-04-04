@@ -83,6 +83,14 @@ public class MainTest extends BaseRandomTest {
         return Stream.of(
                 Arguments.of(
                         new int[][]{
+                                {1, 4, 26, 494, 323},
+                                {333, 5, 4, 654, 33},
+                                {322, 241, 133, 345, 111}
+                        },
+                        654
+                ),
+                Arguments.of(
+                        new int[][]{
                                 {1, 2, 3},
                                 {4, 5, 4},
                                 {3, 2, 1}
@@ -99,11 +107,11 @@ public class MainTest extends BaseRandomTest {
                 ),
                 Arguments.of(
                         new int[][]{
-                                {12, 11, 10, 9},
-                                {8, 7, 6, 5},
+                                {12, 99999, 10, 9},
+                                {8, 999, 6, 1},
                                 {4, 3, 2, 1}
                         },
-                        12
+                        99999
                 ),
                 Arguments.of(
                         new int[][]{
