@@ -16,6 +16,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
     // Parsons with Distractors
+
+    private final String knifeClass = "Knife";
+    private final String cupboardClass = "Cupboard";
+    private final String varSize = "size";
+    private final String varMaterial = "materialType";
+    private final String varCapacity = "capacity";
+    private final String varFull = "isFull";
     public ObjectTest knife;
     public ObjectTest cupboard;
 
@@ -28,48 +35,48 @@ public class MainTest extends BaseTest {
 
     @BeforeEach
     public void setup() {
-        String knifeClassString = "oop.programs_with_multiple_classes.medium.q7.Knife";
-        String cupboardClassString = "oop.programs_with_multiple_classes.medium.q7.Cupboard";
+        String knifeClassString = "oop.programs_with_multiple_classes.medium.q7." + knifeClass;
+        String cupboardClassString = "oop.programs_with_multiple_classes.medium.q7." + cupboardClass;
         knife = new ObjectTest(knifeClassString);
         cupboard = new ObjectTest(cupboardClassString);
     }
 
     @Test
     public void knifeClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your Knife class is missing a required field.";
-        String incorrectModifierMessage = "One of your Knife class attributes does not have the correct modifier.";
-        assertTrue(knife.hasField("size", int.class), incorrectFieldMessage);
-        assertTrue(knife.hasModifier("size", "private"), incorrectModifierMessage);
-        assertTrue(knife.hasField("materialType", String.class), incorrectFieldMessage);
-        assertTrue(knife.hasModifier("materialType", "private"), incorrectModifierMessage);
+        String incorrectFieldMessage = "Your " + knifeClass + " class is missing a required field.";
+        String incorrectModifierMessage = "One of your " + knifeClass + " class attributes does not have the correct modifier.";
+        assertTrue(knife.hasField(varSize, int.class), incorrectFieldMessage);
+        assertTrue(knife.hasModifier(varSize, "private"), incorrectModifierMessage);
+        assertTrue(knife.hasField(varMaterial, String.class), incorrectFieldMessage);
+        assertTrue(knife.hasModifier(varMaterial, "private"), incorrectModifierMessage);
     }
 
     @Test
     public void cupboardClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your Cupboard class is missing a required field.";
-        String incorrectModifierMessage = "One of your Cupboard class attributes does not have the correct modifier.";
-        assertTrue(cupboard.hasField("capacity", int.class), incorrectFieldMessage);
-        assertTrue(cupboard.hasModifier("capacity", "private"), incorrectModifierMessage);
-        assertTrue(cupboard.hasField("isFull", boolean.class), incorrectFieldMessage);
-        assertTrue(cupboard.hasModifier("isFull", "private"), incorrectModifierMessage);
+        String incorrectFieldMessage = "Your " + cupboardClass + " class is missing a required field.";
+        String incorrectModifierMessage = "One of your " + cupboardClass + " class attributes does not have the correct modifier.";
+        assertTrue(cupboard.hasField(varCapacity, int.class), incorrectFieldMessage);
+        assertTrue(cupboard.hasModifier(varCapacity, "private"), incorrectModifierMessage);
+        assertTrue(cupboard.hasField(varFull, boolean.class), incorrectFieldMessage);
+        assertTrue(cupboard.hasModifier(varFull, "private"), incorrectModifierMessage);
     }
 
     @Test
     public void knifeClassHasRequiredConstructor() {
         Class<?>[] classArguments = {int.class, String.class};
         assertTrue(knife.hasConstructor(classArguments),
-                "Your Knife constructor does not have the correct parameters.");
+                "Your " + knifeClass + " constructor does not have the correct parameters.");
         assertTrue(knife.hasModifier(classArguments, "public"),
-                "Your Knife constructor does not have the correct modifier.");
+                "Your " + knifeClass + " constructor does not have the correct modifier.");
     }
 
     @Test
     public void cupboardCLassHasRequiredConstructor() {
         Class<?>[] classArguments = {int.class, boolean.class};
         assertTrue(cupboard.hasConstructor(classArguments),
-                "Your Cupboard constructor does not have the correct parameters.");
+                "Your " + cupboardClass + " constructor does not have the correct parameters.");
         assertTrue(cupboard.hasModifier(classArguments, "public"),
-                "Your Cupboard constructor does not have the correct modifier.");
+                "Your " + cupboardClass + " constructor does not have the correct modifier.");
     }
 
     private static Stream<Arguments> knifeInputProvider() {
@@ -89,10 +96,10 @@ public class MainTest extends BaseTest {
                 {materialType, String.class}
         };
         Object knifeInstance = knife.createInstance(arguments);
-        _assertEquals(size, knife.getFieldValue(knifeInstance, "size"),
-                "Your Knife constructor does not correctly initialize the size field.");
-        _assertEquals(materialType, knife.getFieldValue(knifeInstance, "materialType"),
-                "Your Knife constructor does not correctly initialize the materialType field.");
+        _assertEquals(size, knife.getFieldValue(knifeInstance, varSize),
+                "Your " + knifeClass + " constructor does not correctly initialize the " + varSize + " field.");
+        _assertEquals(materialType, knife.getFieldValue(knifeInstance, varMaterial),
+                "Your " + knifeClass + " constructor does not correctly initialize the " + varMaterial + " field.");
     }
 
     @ParameterizedTest
@@ -104,8 +111,8 @@ public class MainTest extends BaseTest {
         };
         Object knifeInstance = knife.createInstance(arguments);
         Object knifeToStringOutput = knife.callMethod("toString", knifeInstance);
-        String ans = "Knife{size = " + size + ", materialType = " + materialType + "}";
-        _assertEquals(ans, knifeToStringOutput, "Your Knife toString method does not return the correct string.");
+        String ans = knifeClass + "{" + varSize + " = " + size + ", " + varMaterial + " = " + materialType + "}";
+        _assertEquals(ans, knifeToStringOutput, "Your " + knifeClass + " toString method does not return the correct string.");
     }
 
     private static Stream<Arguments> cupboardInputProvider() {
@@ -124,10 +131,10 @@ public class MainTest extends BaseTest {
                 {isFull, boolean.class}
         };
         Object cupboardInstance = cupboard.createInstance(arguments);
-        _assertEquals(capacity, cupboard.getFieldValue(cupboardInstance, "capacity"),
-                "Your Cupboard constructor does not correctly initialize the capacity field.");
-        _assertEquals(isFull, cupboard.getFieldValue(cupboardInstance, "isFull"),
-                "Your Cupboard constructor does not correctly initialize the isFull field.");
+        _assertEquals(capacity, cupboard.getFieldValue(cupboardInstance, varCapacity),
+                "Your " + cupboardClass + " constructor does not correctly initialize the " + varCapacity + " field.");
+        _assertEquals(isFull, cupboard.getFieldValue(cupboardInstance, varFull),
+                "Your " + cupboardClass + " constructor does not correctly initialize the " + varFull + " field.");
     }
 
     @ParameterizedTest
@@ -139,8 +146,8 @@ public class MainTest extends BaseTest {
         };
         Object cupboardInstance = cupboard.createInstance(arguments);
         Object cupboardToStringOutput = cupboard.callMethod("toString", cupboardInstance);
-        String ans = "Cupboard{capacity = " + capacity + ", isFull = " + isFull + "}";
-        _assertEquals(ans, cupboardToStringOutput, "Your Cupboard toString method does not return the correct string.");
+        String ans = cupboardClass + "{" + varCapacity + " = " + capacity + ", " + varFull + " = " + isFull + "}";
+        _assertEquals(ans, cupboardToStringOutput, "Your " + cupboardClass + " toString method does not return the correct string.");
     }
 
 }
