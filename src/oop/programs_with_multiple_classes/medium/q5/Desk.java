@@ -8,6 +8,6 @@ public class Desk {
     }
 
     public String toString() {
-        return "Bed{materialType = " + materialType + "}";
+        return "Desk{materialType = " + materialType + "}";
     }
 }

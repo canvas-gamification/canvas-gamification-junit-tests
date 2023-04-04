@@ -2,10 +2,7 @@ package oop.programs_with_multiple_classes.medium.q5;
 
 import global.BaseTest;
 import global.ObjectTest;
-import global.tools.TestOption;
 import global.variables.Clause;
-import global.variables.clauses.NewLine;
-import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,66 +16,63 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
     // Parsons
+
+    private final String deskClass = "Desk";
+    private final String monitorClass = "Monitor";
+    private final String varMaterial = "materialType";
+    private final String varCount = "countSize";
+    private final String fallenMethod = "fallen";
+    private final int decreaseBy = 1;
     public ObjectTest desk;
     public ObjectTest monitor;
 
     @BeforeEach
     public void setup() {
-        String deskClassString = "oop.programs_with_multiple_classes.medium.q5.Desk";
-        String monitorClassString = "oop.programs_with_multiple_classes.medium.q5.Monitor";
+        String deskClassString = "oop.programs_with_multiple_classes.medium.q5." + deskClass;
+        String monitorClassString = "oop.programs_with_multiple_classes.medium.q5." + monitorClass;
         desk = new ObjectTest(deskClassString);
         monitor = new ObjectTest(monitorClassString);
     }
 
     public Clause[] testSentence() {
-        TestOption.incorrectStructureErrorMessage =
-                "Your program does not correctly print out the toString for each initialized object in the TestWorkSetUp class.";
-        return new Clause[]{
-                new StringLiteral("Monitor\\{countSize = 21}"),
-                new NewLine(),
-                new StringLiteral("Monitor\\{countSize = 27}"),
-                new NewLine(),
-                new StringLiteral("Bed\\{materialType = Milani}"),
-                new NewLine()
-        };
+        return new Clause[0];
     }
 
     public void runMain() {
-        TestWorkSetUp.main(new String[0]);
     }
 
     @Test
     public void deskClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your Desk class is missing a required field.";
-        String incorrectModifierMessage = "One of your Desk class attributes does not have the correct modifier.";
-        assertTrue(desk.hasField("materialType", String.class), incorrectFieldMessage);
-        assertTrue(desk.hasModifier("materialType", "private"), incorrectModifierMessage);
+        String incorrectFieldMessage = "Your " + deskClass + " class is missing a required field.";
+        String incorrectModifierMessage = "One of your " + deskClass + " class attributes does not have the correct modifier.";
+        assertTrue(desk.hasField(varMaterial, String.class), incorrectFieldMessage);
+        assertTrue(desk.hasModifier(varMaterial, "private"), incorrectModifierMessage);
     }
 
     @Test
     public void monitorClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your Monitor class is missing a required field.";
-        String incorrectModifierMessage = "One of your Monitor class attributes does not have the correct modifier.";
-        assertTrue(monitor.hasField("countSize", int.class), incorrectFieldMessage);
-        assertTrue(monitor.hasModifier("countSize", "private"), incorrectModifierMessage);
+        String incorrectFieldMessage = "Your " + monitorClass + " class is missing a required field.";
+        String incorrectModifierMessage = "One of your " + monitorClass + " class attributes does not have the correct modifier.";
+        assertTrue(monitor.hasField(varCount, int.class), incorrectFieldMessage);
+        assertTrue(monitor.hasModifier(varCount, "private"), incorrectModifierMessage);
     }
 
     @Test
     public void deskClassHasRequiredConstructor() {
         Class<?>[] classArguments = {String.class};
         assertTrue(desk.hasConstructor(classArguments),
-                "Your Desk constructor does not have the correct parameters.");
+                "Your " + deskClass + " constructor does not have the correct parameters.");
         assertTrue(desk.hasModifier(classArguments, "public"),
-                "Your Desk constructor does not have the correct modifier.");
+                "Your " + deskClass + " constructor does not have the correct modifier.");
     }
 
     @Test
     public void monitorCLassHasRequiredConstructor() {
         Class<?>[] classArguments = {int.class};
         assertTrue(monitor.hasConstructor(classArguments),
-                "Your Monitor constructor does not have the correct parameters.");
+                "Your " + monitorClass + " constructor does not have the correct parameters.");
         assertTrue(monitor.hasModifier(classArguments, "public"),
-                "Your Monitor constructor does not have the correct modifier.");
+                "Your " + monitorClass + " constructor does not have the correct modifier.");
     }
 
     private static Stream<Arguments> deskInputProvider() {
@@ -96,8 +90,8 @@ public class MainTest extends BaseTest {
                 {material, String.class}
         };
         Object chairInstance = desk.createInstance(arguments);
-        _assertEquals(material, desk.getFieldValue(chairInstance, "materialType"),
-                "Your Desk constructor does not correctly initialize the materialType field.");
+        _assertEquals(material, desk.getFieldValue(chairInstance, varMaterial),
+                "Your " + deskClass + " constructor does not correctly initialize the " + varMaterial + " field.");
     }
 
     @ParameterizedTest
@@ -108,8 +102,8 @@ public class MainTest extends BaseTest {
         };
         Object deskInstance = desk.createInstance(arguments);
         Object deskToStringOutput = desk.callMethod("toString", deskInstance);
-        String ans = "Bed{materialType = " + material + "}";
-        _assertEquals(ans, deskToStringOutput, "Your desk toString method does not return the correct string.");
+        String ans = deskClass + "{" + varMaterial + " = " + material + "}";
+        _assertEquals(ans, deskToStringOutput, "Your " + deskClass + " toString method does not return the correct string.");
     }
 
     private static Stream<Arguments> monitorInputProvider() {
@@ -127,8 +121,8 @@ public class MainTest extends BaseTest {
                 {count, int.class}
         };
         Object tableInstance = monitor.createInstance(arguments);
-        _assertEquals(count, monitor.getFieldValue(tableInstance, "countSize"),
-                "Your monitor constructor does not correctly initialize the countSize field.");
+        _assertEquals(count, monitor.getFieldValue(tableInstance, varCount),
+                "Your " + monitorClass + " constructor does not correctly initialize the " + varCount + " field.");
     }
 
     @ParameterizedTest
@@ -139,8 +133,8 @@ public class MainTest extends BaseTest {
         };
         Object monitorInstance = monitor.createInstance(arguments);
         Object monitorToStringOutput = monitor.callMethod("toString", monitorInstance);
-        String ans = "Monitor{countSize = " + count + "}";
-        _assertEquals(ans, monitorToStringOutput, "Your Monitor toString method does not return the correct string.");
+        String ans = monitorClass + "{" + varCount + " = " + count + "}";
+        _assertEquals(ans, monitorToStringOutput, "Your " + monitorClass + " toString method does not return the correct string.");
     }
 
     @ParameterizedTest
@@ -150,9 +144,9 @@ public class MainTest extends BaseTest {
                 {count, int.class}
         };
         Object monitorInstance = monitor.createInstance(arguments);
-        monitor.callMethod("fallen", monitorInstance);
-        _assertEquals(count - 1, monitor.getFieldValue(monitorInstance, "countSize"),
-                "Your Monitor fallen method does not decrease the countSize by 1.");
+        monitor.callMethod(fallenMethod, monitorInstance);
+        _assertEquals(count - decreaseBy, monitor.getFieldValue(monitorInstance, varCount),
+                "Your " + monitorClass + " " + fallenMethod + " method does not decrease the " + varCount + " by " + decreaseBy + ".");
     }
 
 }

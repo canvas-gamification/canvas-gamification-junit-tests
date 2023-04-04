@@ -13,10 +13,10 @@ Your `Monitor` class should have the following items:
     - An `int` called **countSize**
 
 - Constructors:
-    - A `public Monitor(int)` constructor to set the
+    - A `constructor` that takes an int to set the
       **countSize** field
 - Methodes:
-    - A `public void fallen()` method that decreases the value of
+    - A `fallen()` method that decreases the value of
       **countSize** by 1.
 
 ## Desk
@@ -27,17 +27,5 @@ Your ``Desk`` class should have the following items:
     - A `String` called **materialType**
 
 - Constructors:
-    - A `public Desk(String)` constructor to set the
+    - A `constructor` that takes a String to set the
       **materialType** field
-
-## TestWorkSetUp
-
-- Your `TestWorkSetUp` class will have a `main` method which initializes two Monitor and a Desk and prints out the
-  attributes of each object. Use the values in the sample output to initialize these objects. To print out the information about the objects,
-  use the `toString` method provided in each object.
-- The sample output is as follows:
-  ```
-    Monitor{countSize = 21}
-    Monitor{countSize = 27}
-    Bed{materialType = Milani}
-  ```
