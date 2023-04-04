@@ -1,6 +1,11 @@
 package oop.object_independence.medium.q1;
 
+import global.BaseTest;
 import global.ObjectTest;
+import global.variables.Clause;
+import global.variables.clauses.DoubleLiteral;
+import global.variables.clauses.IntegerLiteral;
+import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +17,7 @@ import java.util.stream.Stream;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MainTest {
+public class MainTest extends BaseTest {
     // Parsons question
     final String bankClassName = "BankAccount";
     final String testClassName = "TestAccount";
@@ -117,4 +122,25 @@ public class MainTest {
         _assertEquals(expectedAmount, bankAccount.getFieldValue(bankAccountInstance, doubleFieldName),
                 "Your " + withdrawMethodName + " method does not correctly update the " + doubleFieldName + " field based on the withdraw amount.");
     }
+
+    @ParameterizedTest
+    @MethodSource("bankAccountInputProvider")
+    public void bankAccountHasCorrectListBalanceMethod(double amount, long accountNum) throws Throwable {
+        Object[][] constructorArguments = {
+                {amount, double.class},
+                {accountNum, long.class}
+        };
+        Object accountInstance = bankAccount.createInstance(constructorArguments);
+        // "Account No. " + accountNumber + " currently has a balance of $" + currentBalance
+        Clause[] listBalanceOutput = {
+                new StringLiteral("Account No\\. "),
+                new DoubleLiteral(amount, amount),
+                new StringLiteral("  currently has a balance of \\$"),
+                new IntegerLiteral((int) accountNum)
+        };
+        String incorrectPrintOutput =
+                "Your " + listBalanceMethodName + " method does not correctly print the account number and balance.";
+    }
+
+
 }
