@@ -12,6 +12,7 @@ import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
+    // Java
     private ObjectTest circus;
     private ObjectTest member;
 
