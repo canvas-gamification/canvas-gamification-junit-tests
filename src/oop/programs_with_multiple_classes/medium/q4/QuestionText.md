@@ -12,7 +12,7 @@ Your `Wheel` class should have the following items:
     - A `String` called **manufacturer**
 
 - Constructors:
-    - A `public Wheel(double, String)` constructor to set the
+    - A `constructor` that takes a double and a String to set the
       **durability** and **manufacturer** in that order
 
 ## Chassis
@@ -25,16 +25,3 @@ Your ``Chassis`` class should have the following items:
 - Constructors:
     - A `public Chassis(String)` constructor to set the
     - **materialType** field
-
-## TestVehicle
-
-- Your `TestVehicle` class will have a `main` method which initializes one Chassis and four wheels, and prints out the
-  attributes of each object. Use the `toString` method provided in each class to do this.
-- The sample output is as follows:
-  ```
-  Chassis: Chassis{materialType = Steel}
-  Wheel 1: Wheel{durability = 5.5, manufacturer = Milani}
-  Wheel 2: Wheel{durability = 5.5, manufacturer = Milani}
-  Wheel 3: Wheel{durability = 6.9, manufacturer = TRX}
-  Wheel 4: Wheel{durability = 6.8, manufacturer = RTX}
-  ```
