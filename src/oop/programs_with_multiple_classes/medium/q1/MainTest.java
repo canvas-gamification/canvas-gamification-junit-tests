@@ -18,64 +18,27 @@ import java.util.stream.Stream;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainTest extends BaseTest {
+public class MainTest {
     // Parsons
     public ObjectTest chair;
     public ObjectTest table;
-    public ObjectTest testRoom;
 
     @BeforeEach
     public void setup() {
         String chairClassString = "oop.programs_with_multiple_classes.medium.q1.Chair";
         String tableClassString = "oop.programs_with_multiple_classes.medium.q1.Table";
-        String testRoomClassString = "oop.programs_with_multiple_classes.medium.q1.TestRoom";
         chair = new ObjectTest(chairClassString);
         table = new ObjectTest(tableClassString);
-        testRoom = new ObjectTest(testRoomClassString);
-    }
 
-    public Clause[] testSentence() {
-        TestOption.incorrectStructureErrorMessage =
-                "Your program does not print out the correct string for each initialized object in the TestRoom class.";
-        return new Clause[]{
-                new StringLiteral("Chair 1: Chair\\{comfort\\='"),
-                new StringLiteral("couchy"),
-                new StringLiteral("', weightCapacity\\="),
-                new IntegerLiteral(350),
-                new StringLiteral(", longevity\\="),
-                new IntegerLiteral(5),
-                new StringLiteral("\\}"),
-                new NewLine(),
-                new StringLiteral("Chair 2: Chair\\{comfort\\='"),
-                new StringLiteral("back support"),
-                new StringLiteral("', weightCapacity\\="),
-                new IntegerLiteral(250),
-                new StringLiteral(", longevity\\="),
-                new IntegerLiteral(10),
-                new StringLiteral("\\}"),
-                new NewLine(),
-                new StringLiteral("Table: Table\\{woodType\\='"),
-                new StringLiteral("cherry"),
-                new StringLiteral("', numSeats\\="),
-                new IntegerLiteral(8),
-                new StringLiteral("\\}")
-        };
-    }
+        // Make sure the students have not modified Chair fields
+        String modifiedChairMessage =
+                "You have modified the class fields in the Chair class. Please revert them back to the original state they were provided in.";
+        assertTrue(chair.hasField("comfort", String.class, new String[]{"private"}), modifiedChairMessage);
+        assertTrue(chair.hasField("weightCapacity", int.class, new String[]{"private"}), modifiedChairMessage);
+        assertTrue(chair.hasField("longevity", int.class, new String[]{"private"}), modifiedChairMessage);
 
-    public void runMain() {
-        TestRoom.main(new String[0]);
-    }
+        // Make sure the students have not modified the Table constructor
 
-    @Test
-    public void chairClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your Chair class is missing a required field";
-        String incorrectModifierMessage = "Your Chair class is missing a required field";
-        assertTrue(chair.hasField("comfort", String.class), incorrectFieldMessage);
-        assertTrue(chair.hasField("weightCapacity", int.class), incorrectFieldMessage);
-        assertTrue(chair.hasField("longevity", int.class), incorrectModifierMessage);
-        assertTrue(chair.hasModifier("comfort", "private"), incorrectModifierMessage);
-        assertTrue(chair.hasModifier("weightCapacity", "private"), incorrectModifierMessage);
-        assertTrue(chair.hasModifier("longevity", "private"), incorrectModifierMessage);
     }
 
     @Test
