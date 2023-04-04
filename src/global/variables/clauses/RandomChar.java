@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static global.tools.CustomAssertions._fail;
 import static global.utils.RandomUtil.*;
 
 public class RandomChar extends Clause implements RandomClause<Character> {
@@ -47,7 +48,15 @@ public class RandomChar extends Clause implements RandomClause<Character> {
     public boolean validateRandom(int matchGroupNum) {
         if (valueStore.get(matchGroupNum) == null)
             return false;
-        ArrayList<Character> values = valueStore.get(matchGroupNum);
+        return validateRandom(valueStore.get(matchGroupNum));
+    }
+
+    public boolean validateRandom(ArrayList<Character> values) {
+        if (values.size() < 1000)
+            _fail("There is an error with the test definition. Please contact a test administrator.",
+                    "Error: invalid number of values provided. There must be more than 1000 values generated"
+            );
+
         final int NUM_BINS = getNumBins(lower, upper);
         int[] observedCounts = new int[NUM_BINS];
         for (int value : values) {

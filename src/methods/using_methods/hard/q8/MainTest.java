@@ -1,9 +1,9 @@
 package methods.using_methods.hard.q8;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.NewLine;
@@ -44,7 +44,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("tempCalcInputProvider")
     void correctTempCalcMethod(double in, double con) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(Celverter.class, "tempCalc", new Object[]{in}, double.class);
+        Object[][] arguments = {
+                {in, double.class}
+        };
+        MethodTest m = new MethodTest(Celverter.class, "tempCalc", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(con, output, 0.01, "Your tempCalc method does not correctly convert the temperature to Fahrenheit.");
     }
 
