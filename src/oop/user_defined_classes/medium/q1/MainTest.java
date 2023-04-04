@@ -16,34 +16,25 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class MainTest {
-    // Parsons with distractors
+    // Java
 
     // Constants for Variation
     private final String className = "Circle";
     private final String intFieldName = "position";
     private final String stringFieldName = "colour";
-    private final String methodName = "moveLocation";
-    private final int lowerRandomBound = 0;
-    private final int upperRandomBound = 100;
     private ObjectTest classInstance;
 
     @BeforeEach
     public void setUp() {
         String classString = "oop.user_defined_classes.medium.q1." + className;
         classInstance = new ObjectTest(classString);
-    }
 
-    @Test
-    public void circleClassHasCorrectFields() {
-        assertTrue(classInstance.hasField(intFieldName, int.class),
-                "Your " + className + " class does not have the correct " + intFieldName + " field."
+        // Check to make sure they have not changed any of the fields
+        assertTrue(classInstance.hasField(intFieldName, int.class, new String[]{"private"}),
+                "You have modified the " + intFieldName + " field, please revert it back to the original state."
         );
-        assertTrue(classInstance.hasModifier(intFieldName, "private"),
-                "Your " + intFieldName + " field does not have the correct visibility modifier.");
-        assertTrue(classInstance.hasField(stringFieldName, String.class),
-                "Your " + className + " class does not have the correct " + stringFieldName + " field.");
-        assertTrue(classInstance.hasModifier(stringFieldName, "private"),
-                "Your " + stringFieldName + " field does not have the correct visibility modifier.");
+        assertTrue(classInstance.hasField(stringFieldName, String.class, new String[]{"private"}),
+                "You have modified the " + stringFieldName + " field, please revert it back to the original state.");
     }
 
     @Test
@@ -53,6 +44,8 @@ public class MainTest {
         };
         assertTrue(classInstance.hasConstructor(arguments),
                 "Your " + className + " class is missing a required constructor.");
+        assertTrue(classInstance.hasModifier(arguments, "public"),
+                "Your " + className + " class constructor does not have the correct visibility modifier.");
     }
 
     private static Stream<Arguments> constructorInputProvider() {
@@ -76,26 +69,5 @@ public class MainTest {
                 "Your " + className + " constructor does not correctly initialize the " + intFieldName + " field.");
         _assertEquals(string, classInstance.getFieldValue(instance, stringFieldName),
                 "Your " + className + " constructor does not correctly initialize the " + stringFieldName + " field.");
-    }
-
-    @Test
-    public void correctMoveLocationMethod() throws Throwable {
-        Object[][] arguments = {
-                {0, int.class},
-                {"string", String.class}
-        };
-        Object instance = classInstance.createInstance(arguments);
-        ArrayList<Integer> values = new ArrayList<>();
-        for (int i = 0; i < 1000; i ++) {
-            classInstance.callMethod(methodName, instance);
-            Object fieldValue = classInstance.getFieldValue(instance, intFieldName);
-            if (fieldValue instanceof Integer)
-                values.add((Integer) fieldValue);
-            else
-                fail("Your " + intFieldName + " field is not the correct type.");
-        }
-        RandomInteger randomInteger = new RandomInteger(lowerRandomBound, upperRandomBound);
-        assertTrue(randomInteger.validateRandom(values),
-                "Your " + methodName + " method does randomly set the " + intFieldName + " field.");
     }
 }

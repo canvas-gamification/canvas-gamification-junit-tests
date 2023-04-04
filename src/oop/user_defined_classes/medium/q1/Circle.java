@@ -8,8 +8,4 @@ public class Circle {
         position = pos;
         colour = col;
     }
-
-    public void moveLocation() {
-        position = (int) (Math.random() * 100);
-    }
 }
