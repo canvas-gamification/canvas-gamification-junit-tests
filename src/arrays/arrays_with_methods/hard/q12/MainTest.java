@@ -2,61 +2,117 @@ package arrays.arrays_with_methods.hard.q12;
 
 import global.BaseTest;
 import global.MethodTest;
-import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
+import global.utils.ArrayUtil;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
-import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
-import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.RepetitionInfo;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest extends BaseTest {
     // Java
 
-    int[] factorials = {1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800, 39916800, 479001600, 1932053504, 1278945280, 2004310016};
+    static final int n = 10;
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "5";
-        return new Clause[]{
-                new StringLiteral("Enter the size of the array:"),
-                new Optional(new StringLiteral(" ")),
-                new NewLine(),
-                new PlaceHolder()
-        };
+        TestOption.defaultInput = ArrayUtil.arrayToInput(ArrayUtil.generateRandomArray(1, 10000, n));
+        return clauseBuilder();
     }
 
     public void runMain() {
         ArrayOfMultiples.main(new String[0]);
     }
 
-    @RepeatedTest(15)
-    void correctFactorialMethod(RepetitionInfo repetitionInfo) throws Throwable {
-        Object[][] arguments = {
-                {repetitionInfo.getCurrentRepetition(), int.class}
-        };
-        MethodTest m = new MethodTest(ArrayOfMultiples.class, "factorial", arguments);
-        Object output = m.callMethod();
-        CustomAssertions._assertEquals(factorials[repetitionInfo.getCurrentRepetition() - 1], output, "Your factorial method does not return the correct factorial value.");
+    static Stream<int[]> mainMethodInputProvider(){
+        return Stream.of(
+                ArrayUtil.generateAscendingArray(1, n),
+                ArrayUtil.generateAscendingArray(-100, n, 5),
+                ArrayUtil.generateRandomArray(0, 10000, n),
+                ArrayUtil.generateRandomArray(-10000, 10000, n),
+                ArrayUtil.generateRandomArray(0, 5, n)
+        );
     }
 
-    @RepeatedTest(15)
-    void correctMainMethodOutput(RepetitionInfo repetitionInfo) throws InvalidClauseException {
-        int[] values = new int[repetitionInfo.getCurrentRepetition()];
-        System.arraycopy(factorials, 0, values, 0, repetitionInfo.getCurrentRepetition());
+    static Stream<int[]> multiplyElementsInputProvider(){
+        return Stream.of(
+                ArrayUtil.generateAscendingArray(1, n),
+                ArrayUtil.generateAscendingArray(-100, n, 5),
+                ArrayUtil.generateRandomArray(0, 10000, n),
+                ArrayUtil.generateRandomArray(-10000, 10000, n),
+                ArrayUtil.generateRandomArray(0, 5, n),
+                ArrayUtil.generateRandomArray(1, 100, 525),
+                new int[]{0, 1, 0, 1000, 0, 60, 0, 1327894267},
+                new int[]{77, -11, 23, 5, 7322, 654, 54},
+                new int[]{1},
+                new int[]{},
+                new int[]{2, 3290},
+                new int[]{-4738, -43, -64, -8124, -1, -43, -7, -237, -53}
+        );
+    }
 
-        Clause[][] c = new Clause[1][values.length * 2];
-        int count = 0;
+    @ParameterizedTest
+    @MethodSource("multiplyElementsInputProvider")
+    void correctMultiplyElementsMethod(int[] in) throws Throwable {
+        int[] expected = solution(in);
+        Object[][] arguments = {
+                {in, int[].class}
+        };
+        MethodTest m = new MethodTest(ArrayOfMultiples.class, "multiplyElements", arguments);
+        Object output = m.callMethod();
+        CustomAssertions._assertArrayEquals(expected, output, "Your multiplyElements method does not return the correct array of multiplied elements.");
+    }
 
-        for (int x = 0; x < values.length; x++) {
-            c[0][count++] = new IntegerLiteral(values[x]);
-            c[0][count++] = new NewLine();
+    @ParameterizedTest
+    @MethodSource("mainMethodInputProvider")
+    void correctMainMethodOutput(int[] arr) {
+        int[] expected = solution(arr);
+        runWithInput(ArrayUtil.arrayToInput(arr));
+
+        for (int x = 0; x < arr.length; x++) {
+            assertEquals(expected[x], Integer.parseInt(getItemByName("num" + x)), "Your program does not correctly print each element in the multiplied array.");
         }
+    }
 
-        runWithInput(String.valueOf(repetitionInfo.getCurrentRepetition()), c);
+    public Clause[] clauseBuilder() {
+        Clause[] c = new Clause[n * 2 + 6];
+
+        c[0] = new StringLiteral("Enter an array of " + n + " integers:");
+        c[1] = new Optional(new StringLiteral(" "));
+        c[2] = new NewLine();
+        c[3] = new StringLiteral("The multiplied elements are:");
+        c[4] = new Optional(new StringLiteral(" "));
+        c[5] = new NewLine();
+
+        int count = 6;
+
+        for (int x = 0; x < n-1; x++) {
+            c[count++] = new IntegerLiteral("num" + x);
+            c[count++] = new StringLiteral(" ");
+        }
+        c[count++] = new IntegerLiteral("num"+ (n-1));
+        c[count] = new Optional(new StringLiteral(" "));
+
+        return c;
+    }
+
+    private static int[] solution(int[] arr) {
+        int[] res = new int[arr.length];
+        for (int x = 0; x < arr.length; x++) {
+            if (x == 0) {
+                res[0] = arr[0] * arr[arr.length - 1];
+            } else {
+                res[x] = arr[x] * arr[x - 1];
+            }
+        }
+        return res;
     }
 }
