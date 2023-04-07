@@ -15,10 +15,11 @@ Your `Monitor` class should have the following items:
     - A `boolean` called **isRenewed**
 
 - Constructors:
-    - A `public Monitor(int, String, boolean)` constructor to set the
+    - A `constructor` that takes an `int`, `String`, and `boolean` to set the
       **countSize**, **typeScreen**, and **isRenewed** fields
 - Methods:
-    - A `public recycled()` method that sets the value of **isRenewed** to true.
+    - A `method` called **recycled** that sets the value of **isRenewed** to true.
+    - A **toString** `method` is provided
 
 
 ## Desk
@@ -30,18 +31,19 @@ Your ``Desk`` class should have the following items:
     - A `int` called **yearsOld**
 
 - Constructors:
-    - A `public Desk(String, int)` constructor to set the
+    - A `constructor` that takes a `String` and an `int` to set the
       **materialType** and **yearsOld** fields
-
+- Methods:
+    - A `toString` method is provided
 
 **Distractors**
-- d1.recycled();
-- Monitor m2 = new Monitor( "27" );
-- Monitor m1 = new Monitor( "21" );
-- Desk d1 = new Desk( Wood );
-- Monitor m2 = new Monitor( "27" , IPS );
-- Monitor m1 = new Monitor( "21" , VA );
-- Desk d1 = new Desk( Wood , 12 );
-- d1 = new Desk( Wood );
-- isRenewed = false;
-- Monitor m2 = new Monitor( false );
+- public String typeScreen;
+- public boolean isRenewed;
+- countSize = s;
+- typeScreen = b;
+- isRenewed = m;
+- public recycled()
+- public String materialType;
+- public int yearsOld;
+- materialType = i;
+- yearsOld = m;

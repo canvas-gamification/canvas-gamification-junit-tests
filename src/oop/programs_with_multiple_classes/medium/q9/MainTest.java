@@ -2,10 +2,7 @@ package oop.programs_with_multiple_classes.medium.q9;
 
 import global.BaseTest;
 import global.ObjectTest;
-import global.tools.TestOption;
 import global.variables.Clause;
-import global.variables.clauses.NewLine;
-import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,14 +15,23 @@ import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
-    // Parsons
+    // Parsons with Distractors
+
+    private final String classMonitor = "Monitor";
+    private final String classDesk = "Desk";
+    private final String varCount = "countSize";
+    private final String varType = "typeScreen";
+    private final String varRenewed = "isRenewed";
+    private final String varMaterial = "materialType";
+    private final String varOld = "yearsOld";
+    private final String methodName = "recycled";
     public ObjectTest desk;
     public ObjectTest monitor;
 
     @BeforeEach
     public void setup() {
-        String deskClassString = "oop.programs_with_multiple_classes.medium.q9.Desk";
-        String monitorClassString = "oop.programs_with_multiple_classes.medium.q9.Monitor";
+        String deskClassString = "oop.programs_with_multiple_classes.medium.q9." + classDesk;
+        String monitorClassString = "oop.programs_with_multiple_classes.medium.q9." + classMonitor;
         desk = new ObjectTest(deskClassString);
         monitor = new ObjectTest(monitorClassString);
     }
@@ -39,42 +45,42 @@ public class MainTest extends BaseTest {
 
     @Test
     public void deskClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your Desk class is missing a required field.";
-        String incorrectModifierMessage = "One of your Desk class attributes does not have the correct modifier.";
-        assertTrue(desk.hasField("materialType", String.class), incorrectFieldMessage);
-        assertTrue(desk.hasModifier("materialType", "private"), incorrectModifierMessage);
-        assertTrue(desk.hasField("yearsOld", int.class), incorrectFieldMessage);
-        assertTrue(desk.hasModifier("yearsOld", "private"), incorrectModifierMessage);
+        String incorrectFieldMessage = "Your " + classDesk + " class is missing a required field.";
+        String incorrectModifierMessage = "One of your " + classDesk + " class attributes does not have the correct modifier.";
+        assertTrue(desk.hasField(varMaterial, String.class), incorrectFieldMessage);
+        assertTrue(desk.hasModifier(varMaterial, "private"), incorrectModifierMessage);
+        assertTrue(desk.hasField(varOld, int.class), incorrectFieldMessage);
+        assertTrue(desk.hasModifier(varOld, "private"), incorrectModifierMessage);
     }
 
     @Test
     public void monitorClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your Monitor class is missing a required field.";
-        String incorrectModifierMessage = "One of your Monitor class attributes does not have the correct modifier.";
-        assertTrue(monitor.hasField("countSize", int.class), incorrectFieldMessage);
-        assertTrue(monitor.hasModifier("countSize", "private"), incorrectModifierMessage);
-        assertTrue(monitor.hasField("typeScreen", String.class), incorrectFieldMessage);
-        assertTrue(monitor.hasModifier("typeScreen", "private"), incorrectModifierMessage);
-        assertTrue(monitor.hasField("isRenewed", boolean.class), incorrectFieldMessage);
-        assertTrue(monitor.hasModifier("isRenewed", "private"), incorrectModifierMessage);
+        String incorrectFieldMessage = "Your " + classMonitor + " class is missing a required field.";
+        String incorrectModifierMessage = "One of your " + classMonitor + " class attributes does not have the correct modifier.";
+        assertTrue(monitor.hasField(varCount, int.class), incorrectFieldMessage);
+        assertTrue(monitor.hasModifier(varCount, "private"), incorrectModifierMessage);
+        assertTrue(monitor.hasField(varType, String.class), incorrectFieldMessage);
+        assertTrue(monitor.hasModifier(varType, "private"), incorrectModifierMessage);
+        assertTrue(monitor.hasField(varRenewed, boolean.class), incorrectFieldMessage);
+        assertTrue(monitor.hasModifier(varRenewed, "private"), incorrectModifierMessage);
     }
 
     @Test
     public void deskClassHasRequiredConstructor() {
         Class<?>[] classArguments = {String.class, int.class};
         assertTrue(desk.hasConstructor(classArguments),
-                "Your Desk constructor does not have the correct parameters.");
+                "Your " + classDesk + " constructor does not have the correct parameters.");
         assertTrue(desk.hasModifier(classArguments, "public"),
-                "Your Desk constructor does not have the correct modifier.");
+                "Your " + classDesk + " constructor does not have the correct modifier.");
     }
 
     @Test
     public void monitorCLassHasRequiredConstructor() {
         Class<?>[] classArguments = {int.class, String.class, boolean.class};
         assertTrue(monitor.hasConstructor(classArguments),
-                "Your Monitor constructor does not have the correct parameters.");
+                "Your " + classMonitor + " constructor does not have the correct parameters.");
         assertTrue(monitor.hasModifier(classArguments, "public"),
-                "Your Monitor constructor does not have the correct modifier.");
+                "Your " + classMonitor + " constructor does not have the correct modifier.");
     }
 
     private static Stream<Arguments> deskInputProvider() {
@@ -93,10 +99,10 @@ public class MainTest extends BaseTest {
                 {yearsOld, int.class}
         };
         Object chairInstance = desk.createInstance(arguments);
-        _assertEquals(materialType, desk.getFieldValue(chairInstance, "materialType"),
-                "Your Desk constructor does not correctly initialize the materialType field.");
-        _assertEquals(yearsOld, desk.getFieldValue(chairInstance, "yearsOld"),
-                "Your Desk constructor does not correctly initialize the yearsOld field.");
+        _assertEquals(materialType, desk.getFieldValue(chairInstance, varMaterial),
+                "Your " + classDesk + " constructor does not correctly initialize the " + varMaterial + " field.");
+        _assertEquals(yearsOld, desk.getFieldValue(chairInstance, varOld),
+                "Your " + classDesk + " constructor does not correctly initialize the " + varOld + " field.");
     }
 
     @ParameterizedTest
@@ -108,8 +114,8 @@ public class MainTest extends BaseTest {
         };
         Object deskInstance = desk.createInstance(arguments);
         Object deskToStringOutput = desk.callMethod("toString", deskInstance);
-        String ans = "Desk{materialType = " + materialType + ", yearsOld = " + yearsOld + "}";
-        _assertEquals(ans, deskToStringOutput, "Your desk toString method does not return the correct string.");
+        String ans = classDesk + "{" + varMaterial + " = " + materialType + ", " + varOld + " = " + yearsOld + "}";
+        _assertEquals(ans, deskToStringOutput, "Your " + classDesk + " toString method does not return the correct string.");
     }
 
     private static Stream<Arguments> monitorInputProvider() {
@@ -129,12 +135,12 @@ public class MainTest extends BaseTest {
                 {isRenewed, boolean.class}
         };
         Object tableInstance = monitor.createInstance(arguments);
-        _assertEquals(countSize, monitor.getFieldValue(tableInstance, "countSize"),
-                "Your monitor constructor does not correctly initialize the countSize field.");
-        _assertEquals(typeScreen, monitor.getFieldValue(tableInstance, "typeScreen"),
-                "Your monitor constructor does not correctly initialize the typeScreen field.");
-        _assertEquals(isRenewed, monitor.getFieldValue(tableInstance, "isRenewed"),
-                "Your monitor constructor does not correctly initialize the isRenewed field.");
+        _assertEquals(countSize, monitor.getFieldValue(tableInstance, varCount),
+                "Your " + classMonitor + " constructor does not correctly initialize the " + varCount + " field.");
+        _assertEquals(typeScreen, monitor.getFieldValue(tableInstance, varType),
+                "Your " + classMonitor + " constructor does not correctly initialize the " + varType + " field.");
+        _assertEquals(isRenewed, monitor.getFieldValue(tableInstance, varRenewed),
+                "Your " + classMonitor + " constructor does not correctly initialize the " + varRenewed + " field.");
     }
 
     @ParameterizedTest
@@ -147,8 +153,8 @@ public class MainTest extends BaseTest {
         };
         Object monitorInstance = monitor.createInstance(arguments);
         Object monitorToStringOutput = monitor.callMethod("toString", monitorInstance);
-        String ans = "Monitor{countSize = " + countSize + ", typeScreen = " + typeScreen + ", isRenewed = " + isRenewed + "}";
-        _assertEquals(ans, monitorToStringOutput, "Your Monitor toString method does not return the correct string.");
+        String ans = classMonitor + "{" + varCount + " = " + countSize + ", " + varType + " = " + typeScreen + ", " + varRenewed + " = " + isRenewed + "}";
+        _assertEquals(ans, monitorToStringOutput, "Your " + classMonitor + " toString method does not return the correct string.");
     }
 
     @ParameterizedTest
@@ -160,9 +166,9 @@ public class MainTest extends BaseTest {
                 {isRenewed, boolean.class}
         };
         Object monitorInstance = monitor.createInstance(arguments);
-        monitor.callMethod("recycled", monitorInstance);
-        _assertEquals(true, monitor.getFieldValue(monitorInstance, "isRenewed"),
-                "Your Monitor recycled method does not change the isRenewed value to true.");
+        monitor.callMethod(methodName, monitorInstance);
+        _assertEquals(true, monitor.getFieldValue(monitorInstance, varRenewed),
+                "Your " + classMonitor + " " + methodName + " method does not change the " + varRenewed + " value to true.");
     }
 
 }
