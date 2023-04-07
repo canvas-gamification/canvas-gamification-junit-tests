@@ -10,6 +10,6 @@ public class Kitchen {
     }
 
     public String toString() {
-        return "Kitchen{size= " + size + ", personCapacity = " + personCapacity + "}";
+        return "Kitchen{size = " + size + ", personCapacity = " + personCapacity + "}";
     }
 }

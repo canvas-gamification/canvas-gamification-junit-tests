@@ -14,8 +14,10 @@ Your `Light` class should have the following items:
     - A `String` called **type**
 
 - Constructors:
-    - A `public Light(boolean, String)` constructor to set the
+    - A `constructor` that takes a `boolean` and a `String` to set the
       **isOn** and **type** fields
+- Methods:
+    - A `toString` method is provided
 
 ## Kitchen
 
@@ -26,13 +28,20 @@ Your ``Kitchen`` class should have the following items:
     - A `int` called **personCapacity**
 
 - Constructors:
-    - A `public Kitchen(int, int)` constructor to set the
-    **size** and **personCapacity** fields
+    - A `constructor` that takes two `int` to set the
+    **size** and **personCapacity** fields in that order
+- Methods:
+    - A `toString` method is provided
 
 
 **Distractors**
-- Light l1 = new Light( "LCD", true );
-- Light l2 = new Light( false, "LED", 12 );
-- Kitchen k = new Kitchen( 100 , 4.0 );
-- Kitchen k = new Kitchen( 100 , 4, true );
-- Kitchen k = new Kitchen( 10.0 );
+- public boolean isOn;
+- public String type;
+- isOn = s;
+- type = b;
+- public int size;
+- public int personCapacity;
+- size = p;
+- personCapacity = s;
+- private Kitchen(int s, int p)
+- private String toString()
