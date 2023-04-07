@@ -15,10 +15,11 @@ Your `Vegetable` class should have the following items:
     - A `String` called **countryOfOrigin**
 
 - Constructors:
-    - A `public Vegetable(boolean, double, String)` constructor to set  values
+    - A `constructor` that takes a `boolean`, `double`, and `String` to set  values
       of **isSpoiled**, **weight**, **countryOfOrigin** and to trues
 - Methods:
-    - A `public eating()` method that decrements the **weight** variable by 0.5
+    - A `method` called **eating** that decrements the **weight** variable by 0.5
+    - A `toString` method is provided
 
   
 
@@ -31,8 +32,10 @@ Your ``Cupboard`` class should have the following items:
     - A `String` called **colour**
 
 - Constructors:
-    - A `public Cupboard(int, String)` constructor to set the
+    - A `constructor` that takes an `int` and a `String` to set the
       **size** and **colour** fields
+- Methods:
+    - A `toString` method is provided
   
 
 **Distractors**
