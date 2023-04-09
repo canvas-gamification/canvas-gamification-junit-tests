@@ -8,12 +8,4 @@ public class Bookcase {
         this.sizeCapacity = sizeCapacity;
         this.b1 = b1;
     }
-
-    @Override
-    public String toString() {
-        return "Bookcase{" +
-                "sizeCapacity=" + sizeCapacity +
-                ", b1=" + b1 +
-                '}';
-    }
 }
