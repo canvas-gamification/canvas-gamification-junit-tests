@@ -14,13 +14,5 @@ public class Book {
     public int determineTime() {
         return Year.now().getValue() - year;
     }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "year=" + year +
-                ", type='" + type + '\'' +
-                '}';
-    }
 }
 

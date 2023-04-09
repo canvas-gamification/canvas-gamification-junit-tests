@@ -1,11 +1,6 @@
 package oop.programs_with_multiple_classes.hard.q5;
 
-import global.BaseTest;
 import global.ObjectTest;
-import global.variables.Clause;
-import global.variables.clauses.IntegerLiteral;
-import global.variables.clauses.NewLine;
-import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,7 +13,7 @@ import java.util.stream.Stream;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainTest extends BaseTest {
+public class MainTest {
     // Java
 
     private ObjectTest book;
@@ -44,48 +39,6 @@ public class MainTest extends BaseTest {
         String bookcaseClassString = "oop.programs_with_multiple_classes.hard.q5." + bookcaseUc;
         book = new ObjectTest(bookClassString);
         bookcase = new ObjectTest(bookcaseClassString);
-    }
-
-    public Clause[] testSentence() {
-        return new Clause[]{
-                new StringLiteral(bookUc + " 1: " + bookUc + "\\{" + year + "="),
-                new IntegerLiteral(2005),
-                new StringLiteral(", " + type + "='"),
-                new StringLiteral("HardCover"),
-                new StringLiteral("'\\}"),
-                new NewLine(),
-                new StringLiteral(bookUc + " 2: " + bookUc + "\\{" + year + "="),
-                new IntegerLiteral(2019),
-                new StringLiteral(", " + type + "='"),
-                new StringLiteral("SoftCover"),
-                new StringLiteral("'\\}"),
-                new NewLine(),
-                new StringLiteral(bookcaseUc + " 1: " + bookcaseUc + "\\{" + sizeCapacity + "="),
-                new IntegerLiteral(40),
-                new StringLiteral(", b1=" + bookUc + "\\{" + year + "="),
-                new IntegerLiteral(2005),
-                new StringLiteral(", " + type + "='"),
-                new StringLiteral("HardCover"),
-                new StringLiteral("'\\}\\}"),
-                new NewLine(),
-                new StringLiteral(bookcaseUc + " 2: " + bookcaseUc + "\\{" + sizeCapacity + "="),
-                new IntegerLiteral(40),
-                new StringLiteral(", b1=" + bookUc + "\\{" + year + "="),
-                new IntegerLiteral(2019),
-                new StringLiteral(", " + type + "='"),
-                new StringLiteral("SoftCover"),
-                new StringLiteral("'\\}\\}"),
-                new NewLine(),
-                new StringLiteral("Do I need a new book for Bookcase 1\\? "),
-                new StringLiteral("Time to buy a new book"),
-                new NewLine(),
-                new StringLiteral("Do I need a new book for Bookcase 2\\? "),
-                new StringLiteral("The book will still last")
-        };
-    }
-
-    public void runMain() {
-        TestFurniture.main(new String[0]);
     }
 
     /**
@@ -135,20 +88,6 @@ public class MainTest extends BaseTest {
                 "Your " + book + " constructor does not correctly initialize the " + this.year + " field.");
         _assertEquals(type, book.getFieldValue(bookInstance, this.type),
                 "Your " + book + " constructor does not correctly initialize the " + this.type + " field.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("bookInputProvider")
-    public void correctBookToStringMethod(int year, String type) throws Throwable {
-        Object[][] arguments = new Object[][]{
-                {year, int.class},
-                {type, String.class}
-        };
-        Object bookInstance = book.createInstance(arguments);
-        Object toStringOutput = book.callMethod("toString", bookInstance);
-        String toStringExpected = bookUc + "{" + this.year + "=" + year + ", " + this.type + "='" + type + "'}";
-        String incorrectToString = "Your " + bookLc + " toString method does not return the correct String.";
-        _assertEquals(toStringExpected, toStringOutput, incorrectToString);
     }
 
     @ParameterizedTest
@@ -209,20 +148,6 @@ public class MainTest extends BaseTest {
                 "Your " + bookcaseLc + " constructor does not correctly initialize the " + this.sizeCapacity + " field.");
         _assertEquals(b1, bookcase.getFieldValue(bookcaseInstance, this.b1),
                 "Your " + bookcaseLc + " constructor does not correctly initialize the " + this.b1 + " field.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("bookcaseInputProvider")
-    public void correctBookcaseToStringMethod(int sizeCapacity, Book b1) throws Throwable {
-        Object[][] arguments = new Object[][]{
-                {sizeCapacity, int.class},
-                {b1, Book.class}
-        };
-        Object bookcaseInstance = bookcase.createInstance(arguments);
-        Object toStringOutput = bookcase.callMethod("toString", bookcaseInstance);
-        String toStringExpected = bookcaseUc + "{" + this.sizeCapacity + "=" + sizeCapacity + ", " + this.b1 + "=" + b1.toString() + "}";
-        String incorrectToString = "Your " + bookcaseLc + " toString method does not return the correct String.";
-        _assertEquals(toStringExpected, toStringOutput, incorrectToString);
     }
 
     @ParameterizedTest

@@ -15,13 +15,5 @@ public class Bookcase {
         else
             return "The book will still last";
     }
-
-    @Override
-    public String toString() {
-        return "Bookcase{" +
-                "sizeCapacity=" + sizeCapacity +
-                ", b1=" + b1 +
-                '}';
-    }
 }
 
