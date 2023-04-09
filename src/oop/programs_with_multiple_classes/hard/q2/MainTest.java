@@ -1,12 +1,6 @@
 package oop.programs_with_multiple_classes.hard.q2;
 
-import global.BaseTest;
 import global.ObjectTest;
-import global.variables.Clause;
-import global.variables.clauses.DoubleLiteral;
-import global.variables.clauses.IntegerLiteral;
-import global.variables.clauses.NewLine;
-import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,7 +12,7 @@ import java.util.stream.Stream;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainTest extends BaseTest {
+public class MainTest {
     // Java
 
     private ObjectTest person;
@@ -39,34 +33,6 @@ public class MainTest extends BaseTest {
         String blanketClassString = "oop.programs_with_multiple_classes.hard.q2." + blanketUc;
         person = new ObjectTest(personClassString);
         blanket = new ObjectTest(blanketClassString);
-    }
-
-    /*
-       Person 1: Person{height=75.0}
-       Person 2: Person{height=63.0}
-       Fort: Blanket{size='Large', threadCount=1500}
-     */
-
-    public Clause[] testSentence() {
-        return new Clause[]{
-                new StringLiteral(personUc + " 1: " + personUc + "\\{" + height + "="),
-                new StringLiteral("75.0"),
-                new StringLiteral("\\}"),
-                new NewLine(),
-                new StringLiteral(personUc + " 2: " + personUc + "\\{" + height + "="),
-                new DoubleLiteral(),
-                new StringLiteral("\\}"),
-                new NewLine(),
-                new StringLiteral("Fort: " + blanketUc + "\\{" + size + "="),
-                new StringLiteral("'Large', "),
-                new StringLiteral(threadCount + "="),
-                new IntegerLiteral(1500),
-                new StringLiteral("\\}"),
-        };
-    }
-
-    public void runMain() {
-        TestFort.main(new String[0]);
     }
 
     /**
@@ -110,19 +76,6 @@ public class MainTest extends BaseTest {
         Object personInstance = person.createInstance(arguments);
         _assertEquals(height, person.getFieldValue(personInstance, this.height),
                 "Your " + personLc + " constructor does not correctly initialize the " + this.height + " field.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("personInputProvider")
-    public void correctPersonToStringMethod(Double height) throws Throwable {
-        Object[][] arguments = new Object[][]{
-                {height, double.class}
-        };
-        Object personInstance = person.createInstance(arguments);
-        Object toStringOutput = person.callMethod("toString", personInstance);
-        String toStringExpected = personUc + "{" + this.height + "=" + height + "}";
-        String incorrectToString = "Your " + personLc + " toString method does not return the correct String.";
-        _assertEquals(toStringExpected, toStringOutput, incorrectToString);
     }
 
     /**
@@ -174,19 +127,4 @@ public class MainTest extends BaseTest {
         _assertEquals(threadCount, blanket.getFieldValue(blanketInstance, this.threadCount),
                 "Your " + blanketLc + " constructor does not correctly initialize the " + this.threadCount + " field.");
     }
-
-    @ParameterizedTest
-    @MethodSource("blanketInputProvider")
-    public void correctBlanketToStringMethod(String size, int threadCount) throws Throwable {
-        Object[][] arguments = new Object[][]{
-                {size, String.class},
-                {threadCount, int.class}
-        };
-        Object blanketInstance = blanket.createInstance(arguments);
-        Object toStringOutput = blanket.callMethod("toString", blanketInstance);
-        String toStringExpected = blanketUc + "{" + this.size + "='" + size + "', " + this.threadCount + "=" + threadCount + "}";
-        String incorrectToString = "Your " + blanketLc + " toString method does not return the correct String.";
-        _assertEquals(toStringExpected, toStringOutput, incorrectToString);
-    }
-
 }

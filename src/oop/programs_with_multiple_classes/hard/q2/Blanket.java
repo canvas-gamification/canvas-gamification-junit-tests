@@ -8,11 +8,4 @@ public class Blanket {
         this.size = size;
         this.threadCount = threadCount;
     }
-
-    public String toString() {
-        return "Blanket{" +
-                "size='" + size + '\'' +
-                ", threadCount=" + threadCount +
-                '}';
-    }
 }
