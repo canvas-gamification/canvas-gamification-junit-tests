@@ -8,11 +8,4 @@ public class Book {
         this.count = count;
         this.type = type;
     }
-
-    public String toString() {
-        return "Book{" +
-                "count=" + count +
-                ", type='" + type + '\'' +
-                '}';
-    }
 }

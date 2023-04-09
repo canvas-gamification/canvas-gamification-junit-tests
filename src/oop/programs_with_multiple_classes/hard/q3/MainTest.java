@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainTest extends BaseTest {
+public class MainTest {
     // Java
 
     private ObjectTest book;
@@ -38,36 +38,6 @@ public class MainTest extends BaseTest {
         book = new ObjectTest(bookClassString);
         bookcase = new ObjectTest(bookcaseClassString);
     }
-
-    public Clause[] testSentence() {
-        return new Clause[]{
-                new StringLiteral(bookUc + " 1: " + bookUc + "\\{" + count + "="),
-                new IntegerLiteral(1),
-                new StringLiteral(", " + type + "='"),
-                new StringLiteral("HardCover"),
-                new StringLiteral("'\\}"),
-                new NewLine(),
-                new StringLiteral(bookUc + " 2: " + bookUc + "\\{" + count + "="),
-                new IntegerLiteral(1),
-                new StringLiteral(", " + type + "='"),
-                new StringLiteral("SoftCover"),
-                new StringLiteral("'\\}"),
-                new NewLine(),
-                new StringLiteral(bookcaseUc + ": " + bookcaseUc + "\\{" + sizeCapacity + "="),
-                new IntegerLiteral(20),
-                new StringLiteral("\\}"),
-        };
-    }
-
-    public void runMain() {
-        TestFurniture.main(new String[0]);
-    }
-
-    /*
-    Book 1: Book{count=1, type='HardCover'}
-    Book 2: Book{count=1, type='SoftCover'}
-    Bookcase: Bookcase{sizeCapacity=20}
-    */
 
     /**
      * Book tests
@@ -118,20 +88,6 @@ public class MainTest extends BaseTest {
                 "Your " + book + " constructor does not correctly initialize the " + this.type + " field.");
     }
 
-    @ParameterizedTest
-    @MethodSource("bookInputProvider")
-    public void correctBookToStringMethod(int count, String type) throws Throwable {
-        Object[][] arguments = new Object[][]{
-                {count, int.class},
-                {type, String.class}
-        };
-        Object bookInstance = book.createInstance(arguments);
-        Object toStringOutput = book.callMethod("toString", bookInstance);
-        String toStringExpected = bookUc + "{" + this.count + "=" + count + ", " + this.type + "='" + type + "'}";
-        String incorrectToString = "Your " + bookLc + " toString method does not return the correct String.";
-        _assertEquals(toStringExpected, toStringOutput, incorrectToString);
-    }
-
     /**
      * Bookcase tests
      **/
@@ -171,18 +127,4 @@ public class MainTest extends BaseTest {
         _assertEquals(sizeCapacity, bookcase.getFieldValue(bookcaseInstance, this.sizeCapacity),
                 "Your " + bookcaseLc + " constructor does not correctly initialize the " + this.sizeCapacity + " field.");
     }
-
-    @ParameterizedTest
-    @MethodSource("bookcaseInputProvider")
-    public void correctBookcaseToStringMethod(int sizeCapacity) throws Throwable {
-        Object[][] arguments = new Object[][]{
-                {sizeCapacity, int.class}
-        };
-        Object bookcaseInstance = bookcase.createInstance(arguments);
-        Object toStringOutput = bookcase.callMethod("toString", bookcaseInstance);
-        String toStringExpected = bookcaseUc + "{" + this.sizeCapacity + "=" + sizeCapacity + "}";
-        String incorrectToString = "Your " + bookcaseLc + " toString method does not return the correct String.";
-        _assertEquals(toStringExpected, toStringOutput, incorrectToString);
-    }
-
 }

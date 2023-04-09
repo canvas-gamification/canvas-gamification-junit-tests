@@ -6,10 +6,4 @@ public class Bookcase {
     public Bookcase(int sizeCapacity) {
         this.sizeCapacity = sizeCapacity;
     }
-
-    public String toString() {
-        return "Bookcase{" +
-                "sizeCapacity=" + sizeCapacity +
-                '}';
-    }
 }
