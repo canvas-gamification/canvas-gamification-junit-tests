@@ -8,7 +8,7 @@
 
 In your math class, you have recently been learning about Circles. To model this, you write a Circle class in Java to
 help you study. You are given a partially complete Circle class and must complete the rest using the specifications
-below. Note that you should not modify the provided portion of the code. Only add the parts specified below.
+below. Note that you should not modify the provided portion of the code. Only add the parts specified below to the file.
 
 ## Circle Class
 
