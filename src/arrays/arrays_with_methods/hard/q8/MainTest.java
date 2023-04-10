@@ -16,7 +16,7 @@ public class MainTest {
                 result(3),
                 result(4),
                 result(10),
-                result(50),
+                result(37),
                 result(100),
                 result(1000)
         );
