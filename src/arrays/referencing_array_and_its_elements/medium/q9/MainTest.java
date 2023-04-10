@@ -16,7 +16,7 @@ public class MainTest extends BaseRandomTest {
     public static final int n = 150;
 
     public Clause[] testSentence() {
-        Clause[] c = new Clause[3 * n + 7];
+        Clause[] c = new Clause[2 * n + 2 * ((n + 1)/2) + 7];
         int t = 0;
         c[t++] = new StringLiteral("The random generated array:");
         c[t++] = new Optional(new StringLiteral(" "));
@@ -31,11 +31,11 @@ public class MainTest extends BaseRandomTest {
         c[t++] = new StringLiteral("The elements on even indices are:");
         c[t++] = new Optional(new StringLiteral(" "));
         c[t++] = new NewLine();
-        for (int i = 0; i < n / 2 - 1; i++) {
+        for (int i = 0; i < (n + 1)/ 2 - 1; i++) {
             c[t++] = new RandomInteger(1, 1001, "S" + i);
             c[t++] = new StringLiteral(" ");
         }
-        c[t++] = new RandomInteger(1, 1001, "S" + (n / 2 - 1));
+        c[t++] = new RandomInteger(1, 1001, "S" + ((n+1) / 2 - 1));
         c[t] = new Optional(new StringLiteral(" "));
         return c;
     }
@@ -48,10 +48,10 @@ public class MainTest extends BaseRandomTest {
     void printsCorrectOutput() {
         runMain();
         int[] a = new int[n];
-        int[] b = new int[n / 2];
+        int[] b = new int[(n +1)/ 2];
         for (int i = 0; i < n; i++)
             a[i] = Integer.parseInt(getItemByName("" + i));
-        for (int i = 0; i < n / 2; i++)
+        for (int i = 0; i < (n +  1)/ 2; i++)
             b[i] = Integer.parseInt(getItemByName("S" + i));
         boolean flg = true;
         for (int i = 0; i < n; i += 2) {
