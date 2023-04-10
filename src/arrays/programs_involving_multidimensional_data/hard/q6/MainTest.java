@@ -64,7 +64,7 @@ public class MainTest extends BaseRandomTest {
             }
         }
         int out = Integer.parseInt(getItemByName("max"));
-        CustomAssertions._assertEquals(max, out, "Your program does not correctly find the maximum value of the 2D array.");
+        CustomAssertions._assertEquals(max, out, "Your program does not correctly find and print the maximum value of the 2D array.");
     }
 
     public static int[][] gen(int n, int m){
@@ -81,6 +81,14 @@ public class MainTest extends BaseRandomTest {
             for (int j = 0; j < 15; j++)
                 max = Math.max(max, t[i][j]);
         return Stream.of(
+                Arguments.of(
+                        new int[][]{
+                                {1, 4, 26, 494, 323},
+                                {333, 5, 4, 654, 33},
+                                {322, 241, 133, 345, 111}
+                        },
+                        654
+                ),
                 Arguments.of(
                         new int[][]{
                                 {1, 2, 3},

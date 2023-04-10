@@ -3,8 +3,8 @@ package arrays.programs_involving_multidimensional_data.hard.q6;
 /*
 Write a Java program that initializes a 2D array of random integers of size 5 by 5. All random values generated will be
 in a range from 0 - 99 (inclusive of both ends). Print out that array in a 5x5 grid, with a space between each number
-and “\n” each row. Then write a method called maxValue that takes a 2D array and return the maximum value of that array.
-Then using the maxValue method print the maximum value in the generated 2D array. Your method should be general enough
+and a new line between each row. Then write a method called maxValue that takes a 2D array and returns the maximum value of that array.
+Using the maxValue method, print the maximum value in the generated 2D array. Note that your method should be general enough
 to work with any size of 2D array.
 
 Sample Output:
