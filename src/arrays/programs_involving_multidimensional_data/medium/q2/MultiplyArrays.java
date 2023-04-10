@@ -4,7 +4,7 @@ package arrays.programs_involving_multidimensional_data.medium.q2;
 Write a Java program that initializes a 2 x 3 2D array with values {{2, 3, 4}, {4, 5, 1}} and then randomly generates
 an integer multiplier in the range of 5 and 10 (inclusive of both values). The program prints the multiplier then calls
 a method increaseBy that takes the 2D array and the multiplier as input, multiplies all the elements in the 2D array by
-the multiplier, and then prints the array in the main method. The increaseBy method should not return the array. Note
+the multiplier. The increaseBy method should not return anything. Print the multiplied array in the main method. Note
 that you increaseBy method should be generalized to work with any 2D array length.
 
 Sample output:
