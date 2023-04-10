@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class MainTest {
     // Java
 
@@ -36,8 +38,8 @@ public class MainTest {
         int[] output = (int[]) m.callMethod();
         int[] oddNums = new int[7];
         int count = 0;
-        for(int x = 0; x < output.length; x++){
-            if(x%2 == 1)
+        for (int x = 0; x < output.length; x++) {
+            if (x % 2 == 1)
                 oddNums[count++] = output[x];
         }
         CustomAssertions._assertArrayEquals(solutions, oddNums, "Your program does not modify only every 2nd element.");
@@ -62,9 +64,11 @@ public class MainTest {
         int repetitions = 0;
 
         //runs the program 1000 times and stores all the even index numbers generated. Each are in their own array
-        //because each index has its own range the variables can fall in (I'm using ascending array to control that)
+        //because each index has its own range the variables can fall in (I'm effectively using ascending array to control that)
         for (int x = 0; x < 1000; x++) {
-            arr = ArrayUtil.generateAscendingArray(1, size);
+            for (int y = 0; y < size; y++) {
+                arr[y] = y + 1;
+            }
             int count = 0;
             int[] output = (int[]) m.callMethod();
             for (int y = 0; y < size; y++) {
@@ -80,9 +84,7 @@ public class MainTest {
             ArrayList<Integer> response = Arrays.stream(storeRandom).boxed().collect(Collectors.toCollection(ArrayList::new));
             RandomInteger randomInteger = new RandomInteger(0, index + 2);
             index += 2;
-            randomInteger.validateRandom(response);
+            assertTrue(randomInteger.validateRandom(response), "Your randomReplace method does not correctly randomize every 2nd number");
         }
-
     }
-
 }
