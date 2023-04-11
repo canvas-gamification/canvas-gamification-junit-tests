@@ -17,6 +17,8 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class MainTest extends BaseRandomTest {
     // Parsons
     public Clause[] testSentence() {
@@ -62,25 +64,28 @@ public class MainTest extends BaseRandomTest {
         };
         MethodTest m = new MethodTest(GameNight.class, "musicalChairs", arguments);
 
+        StringBuilder s = new StringBuilder();
+
         for(int a = 0; a < 1000; a++) {
             m.callMethod();
 
             for (int x = 0; x < size; x++) {
                 for (int y = 0; y < size; y++) {
-                    if (in[y].equals(answers[x]))
+                    if (in[y].equals(answers[x])) {
                         numbers[y][count] = x;
+                        s.append(x);
+                    }
                 }
             }
             count++;
             System.arraycopy(answers, 0, in, 0, answers.length);
+            s.append("\n");
         }
 
-        //I am unsure of how to change the error message to say it is about the strings being randomized properly
-        //I can only get the randomInteger error message not set it
         for (int[] storeRandom : numbers) {
             ArrayList<Integer> response = Arrays.stream(storeRandom).boxed().collect(Collectors.toCollection(ArrayList::new));
             RandomInteger randomInteger = new RandomInteger(0, size);
-            randomInteger.validateRandom(response);
+            assertTrue(randomInteger.validateRandom(response), s.toString());
         }
 
     }
