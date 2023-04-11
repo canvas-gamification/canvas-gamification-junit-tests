@@ -11,7 +11,4 @@ public class Car {
         yearMade = ym;
     }
 
-    public String printSpecs() {
-        return "I am " + colour + " with " + horsePower + " horsepower";
-    }
 }

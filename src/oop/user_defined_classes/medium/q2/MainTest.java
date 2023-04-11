@@ -44,15 +44,6 @@ public class MainTest {
                 "Your " + varPower + " field does not have the correct visibility modifier.");
     }
 
-    @Test
-    public void circleClassHasCorrectConstructor() {
-        Class<?>[] arguments = {
-                String.class, int.class, int.class
-        };
-        assertTrue(classInstance.hasConstructor(arguments),
-                "Your " + className + " class is missing a required constructor.");
-    }
-
     private static Stream<Arguments> constructorInputProvider() {
         return Stream.of(
                 Arguments.of("Red", 300, 2003),
@@ -79,18 +70,5 @@ public class MainTest {
                 "Your " + className + " constructor does not correctly initialize the " + varColour + " field.");
     }
 
-    @ParameterizedTest
-    @MethodSource("constructorInputProvider")
-    public void correctPrintSpecsMethod(String colour, int horsePower, int yearMade) throws Throwable {
-        Object[][] arguments = {
-                {colour, String.class},
-                {horsePower, int.class},
-                {yearMade, int.class}
-        };
-        Object instance = classInstance.createInstance(arguments);
-        Object methodOutput = classInstance.callMethod(methodName, instance);
-        String ans = "I am " + colour + " with " + horsePower + " horsepower";
-        _assertEquals(methodOutput, ans, "Your " + methodName + " method does not return the correct string");
-    }
 }
 
