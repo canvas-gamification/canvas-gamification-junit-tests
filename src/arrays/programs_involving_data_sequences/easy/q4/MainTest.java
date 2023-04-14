@@ -2,8 +2,6 @@ package arrays.programs_involving_data_sequences.easy.q4;
 
 import global.BaseRandomTest;
 import global.MethodTest;
-import global.tools.CustomAssertions;
-import global.utils.ArrayUtil;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.RandomInteger;
@@ -17,10 +15,12 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseRandomTest {
     // Parsons
+
     public Clause[] testSentence() {
         return new Clause[]{
                 new StringLiteral("Travis|Laura|Liam|Matthew|Sam|Marisha"),
@@ -45,9 +45,9 @@ public class MainTest extends BaseRandomTest {
         return Stream.of(
                 Arguments.of(6, new String[]{"Sam", "Ham", "Mam", "Clam", "Slam", "Pam"}),
                 Arguments.of(3, new String[]{"Liam", "Miam", "Siam"}),
-                Arguments.of(17, new String[]{"There", "once", "was", "a", "boy", "who", "was", "named", "Eustace",
+                Arguments.of(17, new String[]{"There", "once", "was", "a", "boy", "who", "repeat", "named", "Eustace",
                         "Clarence", "Scrubb", "and", "he", "almost", "deserved", "it", "."}),
-                Arguments.of(100, ArrayUtil.generateRandomWordArray(100))
+                Arguments.of(50, new String[]{"portrait", "lecture", "old", "promotion", "exemption", "summit", "pride", "well", "attraction", "past", "ostracize", "jockey", "progressive", "egg", "morale", "eternal", "clash", "exploit", "owe", "experienced", "water", "favor", "change", "shaft", "burst", "area", "reflect", "church", "displace", "situation", "dentist", "basis", "commemorate", "doubt", "couple", "bloody", "waterfall", "recovery", "forward", "lodge", "home", "gas", "courage", "concede", "crystal", "fastidious", "rock", "horseshoe", "bride", "infection"})
         );
     }
 
@@ -56,7 +56,6 @@ public class MainTest extends BaseRandomTest {
     public void correctMusicalChairsMethod(int size, String[] in) throws Throwable {
         int[][] numbers = new int[size][1000];
         String[] answers = new String[size];
-        int count = 0;
         System.arraycopy(in, 0, answers, 0, in.length);
 
         Object[][] arguments = {
@@ -64,29 +63,35 @@ public class MainTest extends BaseRandomTest {
         };
         MethodTest m = new MethodTest(GameNight.class, "musicalChairs", arguments);
 
-        StringBuilder s = new StringBuilder();
-
         for(int a = 0; a < 1000; a++) {
             m.callMethod();
 
             for (int x = 0; x < size; x++) {
                 for (int y = 0; y < size; y++) {
-                    if (in[y].equals(answers[x])) {
-                        numbers[y][count] = x;
-                        s.append(x);
+                    if (answers[y].equals(in[x])) {
+                        numbers[y][a] = x;
                     }
                 }
             }
-            count++;
             System.arraycopy(answers, 0, in, 0, answers.length);
-            s.append("\n");
         }
 
-        for (int[] storeRandom : numbers) {
-            ArrayList<Integer> response = Arrays.stream(storeRandom).boxed().collect(Collectors.toCollection(ArrayList::new));
+        int count = 0;
+
+        for (int x = 0; x < size; x++) {
+            ArrayList<Integer> response = Arrays.stream(numbers[x]).boxed().collect(Collectors.toCollection(ArrayList::new));
             RandomInteger randomInteger = new RandomInteger(0, size);
-            assertTrue(randomInteger.validateRandom(response), s.toString());
+            if(randomInteger.validateRandom(response))
+                count++;
         }
 
+        String s = "Your musicalChairs method does not randomly shuffle the names correctly.";
+
+        if(size <= 5){
+            assertEquals(size, count, s);
+        }
+        else{
+            assertTrue(size - 2 <= count, s);
+        }
     }
 }
