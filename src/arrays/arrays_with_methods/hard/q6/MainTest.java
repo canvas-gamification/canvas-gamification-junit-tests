@@ -42,7 +42,7 @@ public class MainTest {
             if (x % 2 == 1)
                 oddNums[count++] = output[x];
         }
-        CustomAssertions._assertArrayEquals(solutions, oddNums, "Your program does not modify only every 2nd element.");
+        CustomAssertions._assertArrayEquals(solutions, oddNums, "Your program does not modify only the even indexed elements.");
     }
 
     @ParameterizedTest
