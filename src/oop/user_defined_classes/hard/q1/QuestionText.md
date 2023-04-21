@@ -24,4 +24,4 @@ Your `Luggage` class should have the following items:
       set **numShirts** field and the second the **numPants** field.
 
 - Methods:
-    - A method called `sumItems` which another class can use to determine the total number of items in the luggage
+    - A method called `sumItems` which another class can use to determine the total number of items in the luggage (the sum of the items)
