@@ -84,7 +84,7 @@ public class MainTest {
             ArrayList<Integer> response = Arrays.stream(storeRandom).boxed().collect(Collectors.toCollection(ArrayList::new));
             RandomInteger randomInteger = new RandomInteger(0, index + 2);
             index += 2;
-            assertTrue(randomInteger.validateRandom(response), "Your randomReplace method does not correctly randomize every 2nd number");
+            assertTrue(randomInteger.validateRandom(response), "Your randomReplace method does not correctly randomize every even indexed number.");
         }
     }
 }
