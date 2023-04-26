@@ -8,9 +8,5 @@ public class Cupboard {
         capacity = m;
         isFull = b;
     }
-
-    public String toString() {
-        return "Cupboard{capacity = " + capacity + ", isFull = " + isFull + "}";
-    }
 }
 

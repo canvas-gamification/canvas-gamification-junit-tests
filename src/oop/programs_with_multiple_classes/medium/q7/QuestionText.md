@@ -1,45 +1,18 @@
 # oop-programs_with_multiple_classes-medium-q7
 
-**Parsons with Distractors**
+## Java
 
-You want to write a program that models kitchen utensils and kitchen tools. Make a Java program with the following requirements:
+You want to write a program that models kitchen utensils and kitchen tools. Make a Java program 
+consisting of a `Knife` and a `Cupboard`. See the requirements below for each class. Note that parts of each class are
+already provided, you only need to implement the other portions.
 
 
 ## Knife
 
-Your `Knife` class should have the following items:
-
-- Attributes:
-    - An `int` called **size**
-    - A `String` called **materialType**
-
-- Constructors:
-    - A `constructor` that takes an `int` and
-  a `String` to set the **size** and **materialType** fields
-- Methods:
-    - A `toString` method is provided
+Your `Knife` class currently has the attributes `int size` and `String materialType`. Create a
+constructor which is accessible from another class and initializes these fields in that order.
 
 ## Cupboard
 
-Your ``Cupboard`` class should have the following items:
-
-- Attributes:
-    - An `int` called **capacity**
-    - A `boolean` called **isFull**
-
-- Constructors:
-    - A `constructor` that takes an `int` and a `boolean` to set the
-  **filling** and **yearMade** field
-- Methods:
-    - A `toString` method is provided
-
-
-**Distractors**
-- public int capacity;
-- public boolean isFull;
-- capacity = b;
-- isFull = m;
-- public int size;
-- public String materialType;
-- size = s;
-- materialType = m;
+Your `Cupboard` class currently has a constructor, but is missing the fields the constructor sets. Based on the
+constructor, add the **capacity** and **isFull** fields of the appropriate type to the table class.

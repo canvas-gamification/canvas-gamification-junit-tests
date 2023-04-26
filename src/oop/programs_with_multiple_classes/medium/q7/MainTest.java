@@ -1,8 +1,6 @@
 package oop.programs_with_multiple_classes.medium.q7;
 
-import global.BaseTest;
 import global.ObjectTest;
-import global.variables.Clause;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,8 +12,8 @@ import java.util.stream.Stream;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainTest extends BaseTest {
-    // Parsons with Distractors
+public class MainTest {
+    // Java
 
     private final String knifeClass = "Knife";
     private final String cupboardClass = "Cupboard";
@@ -26,29 +24,38 @@ public class MainTest extends BaseTest {
     public ObjectTest knife;
     public ObjectTest cupboard;
 
-    public Clause[] testSentence() {
-        return new Clause[0];
-    }
-
-    public void runMain() {
-    }
-
     @BeforeEach
-    public void setup() {
+    public void setup() throws Throwable {
         String knifeClassString = "oop.programs_with_multiple_classes.medium.q7." + knifeClass;
         String cupboardClassString = "oop.programs_with_multiple_classes.medium.q7." + cupboardClass;
         knife = new ObjectTest(knifeClassString);
         cupboard = new ObjectTest(cupboardClassString);
-    }
+        String modifiedKnifeMessage =
+                "You have modified the class fields in the " + knifeClass + " class. Please revert them back to the original state they were provided in.";
+        assertTrue(knife.hasField(varSize, int.class), modifiedKnifeMessage);
+        assertTrue(knife.hasModifier(varSize, "private"), modifiedKnifeMessage);
+        assertTrue(knife.hasField(varMaterial, String.class), modifiedKnifeMessage);
+        assertTrue(knife.hasModifier(varMaterial, "private"), modifiedKnifeMessage);
+        String modifiedCupMessage =
+                "You have modified the class fields in the " + cupboardClass + " class. Please revert them back to the original state they were provided in.";
+        Class<?>[] classArguments = {int.class, boolean.class};
+        assertTrue(cupboard.hasConstructor(classArguments), modifiedCupMessage);
+        assertTrue(cupboard.hasModifier(classArguments, "public"), modifiedCupMessage);
 
-    @Test
-    public void knifeClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your " + knifeClass + " class is missing a required field.";
-        String incorrectModifierMessage = "One of your " + knifeClass + " class attributes does not have the correct modifier.";
-        assertTrue(knife.hasField(varSize, int.class), incorrectFieldMessage);
-        assertTrue(knife.hasModifier(varSize, "private"), incorrectModifierMessage);
-        assertTrue(knife.hasField(varMaterial, String.class), incorrectFieldMessage);
-        assertTrue(knife.hasModifier(varMaterial, "private"), incorrectModifierMessage);
+        Object[][] test = {{10, true}, {20, false}, {50, true}};
+        for (int testNum = 0; testNum < test.length; testNum++) {
+            int capacity = (int) test[testNum][0];
+            boolean isFull = (boolean) test[testNum][1];
+            Object[][] arguments = {
+                    {capacity, int.class},
+                    {isFull, boolean.class}
+            };
+            Object cupboardInstance = cupboard.createInstance(arguments);
+            _assertEquals(capacity, cupboard.getFieldValue(cupboardInstance, varCapacity),
+                    "Your " + cupboardClass + " constructor does not correctly initialize the " + varCapacity + " field.");
+            _assertEquals(isFull, cupboard.getFieldValue(cupboardInstance, varFull),
+                    "Your " + cupboardClass + " constructor does not correctly initialize the " + varFull + " field.");
+        }
     }
 
     @Test
@@ -70,14 +77,6 @@ public class MainTest extends BaseTest {
                 "Your " + knifeClass + " constructor does not have the correct modifier.");
     }
 
-    @Test
-    public void cupboardCLassHasRequiredConstructor() {
-        Class<?>[] classArguments = {int.class, boolean.class};
-        assertTrue(cupboard.hasConstructor(classArguments),
-                "Your " + cupboardClass + " constructor does not have the correct parameters.");
-        assertTrue(cupboard.hasModifier(classArguments, "public"),
-                "Your " + cupboardClass + " constructor does not have the correct modifier.");
-    }
 
     private static Stream<Arguments> knifeInputProvider() {
         return Stream.of(
@@ -100,54 +99,6 @@ public class MainTest extends BaseTest {
                 "Your " + knifeClass + " constructor does not correctly initialize the " + varSize + " field.");
         _assertEquals(materialType, knife.getFieldValue(knifeInstance, varMaterial),
                 "Your " + knifeClass + " constructor does not correctly initialize the " + varMaterial + " field.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("knifeInputProvider")
-    public void correctKnifeToStringMethod(int size, String materialType) throws Throwable {
-        Object[][] arguments = {
-                {size, int.class},
-                {materialType, String.class}
-        };
-        Object knifeInstance = knife.createInstance(arguments);
-        Object knifeToStringOutput = knife.callMethod("toString", knifeInstance);
-        String ans = knifeClass + "{" + varSize + " = " + size + ", " + varMaterial + " = " + materialType + "}";
-        _assertEquals(ans, knifeToStringOutput, "Your " + knifeClass + " toString method does not return the correct string.");
-    }
-
-    private static Stream<Arguments> cupboardInputProvider() {
-        return Stream.of(
-                Arguments.of(10, true),
-                Arguments.of(20, true),
-                Arguments.of(150, false)
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("cupboardInputProvider")
-    public void cupboardConstructorInitializesValuesCorrectly(int capacity, boolean isFull) throws Throwable {
-        Object[][] arguments = {
-                {capacity, int.class},
-                {isFull, boolean.class}
-        };
-        Object cupboardInstance = cupboard.createInstance(arguments);
-        _assertEquals(capacity, cupboard.getFieldValue(cupboardInstance, varCapacity),
-                "Your " + cupboardClass + " constructor does not correctly initialize the " + varCapacity + " field.");
-        _assertEquals(isFull, cupboard.getFieldValue(cupboardInstance, varFull),
-                "Your " + cupboardClass + " constructor does not correctly initialize the " + varFull + " field.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("cupboardInputProvider")
-    public void correctCupboardToStringMethod(int capacity, boolean isFull) throws Throwable {
-        Object[][] arguments = {
-                {capacity, int.class},
-                {isFull, boolean.class}
-        };
-        Object cupboardInstance = cupboard.createInstance(arguments);
-        Object cupboardToStringOutput = cupboard.callMethod("toString", cupboardInstance);
-        String ans = cupboardClass + "{" + varCapacity + " = " + capacity + ", " + varFull + " = " + isFull + "}";
-        _assertEquals(ans, cupboardToStringOutput, "Your " + cupboardClass + " toString method does not return the correct string.");
     }
 
 }

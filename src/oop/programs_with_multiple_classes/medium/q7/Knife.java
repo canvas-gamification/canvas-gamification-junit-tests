@@ -8,8 +8,4 @@ public class Knife {
         size = m;
         materialType = s;
     }
-
-    public String toString() {
-        return "Knife{size = " + size + ", materialType = " + materialType + "}";
-    }
 }
