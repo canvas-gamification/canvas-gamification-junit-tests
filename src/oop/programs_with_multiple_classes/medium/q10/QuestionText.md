@@ -1,52 +1,19 @@
 # oop-programs_with_multiple_classes-medium-q10
 
-**Parsons with Distractors**
+## Java
 
-You want to write a program that models food and different storage containers. Make a Java program with the following requirements:
-
+You want to write a program that models objects within a house and different rooms. Make a Java program
+consisting of a `Vegetable` and a `Cupboard`. See the requirements below for each class. Note that parts of each class are
+already provided, you only need to implement the other portions.
 
 ## Vegetable
 
-Your `Vegetable` class should have the following items:
-
-- Attributes:
-    - A `boolean` called **isSpoiled**
-    - A `double` called **weight**
-    - A `String` called **countryOfOrigin**
-
-- Constructors:
-    - A `constructor` that takes a `boolean`, `double`, and `String` to set  values
-      of **isSpoiled**, **weight**, **countryOfOrigin** and to trues
-- Methods:
-    - A `method` called **eating** that decrements the **weight** variable by 0.5
-    - A `toString` method is provided
-
-  
+our `Vegetable` class currently has the attributes `boolean isSpoiled`, `double weight`,
+and `String countryOfOrigin`. Create a constructor which is accessible from another class
+and initializes these fields in that order. Also, write a method called **eating** that
+decreases the value of **weight** by 0.5, and is accessible from other classes
 
 ## Cupboard
 
-Your ``Cupboard`` class should have the following items:
-
-- Attributes:
-    - An `int` called **size**
-    - A `String` called **colour**
-
-- Constructors:
-    - A `constructor` that takes an `int` and a `String` to set the
-      **size** and **colour** fields
-- Methods:
-    - A `toString` method is provided
-  
-
-**Distractors**
-- public boolean isSpoiled;
-- public double weight;
-- public String countryOfOrigin;
-- public int size;
-- public String colour;
-- size = s;
-- colour = m;
-- weight --;
-- isSpoiled = s;
-- weight = b;
-- countryOfOrigin = d;
+Your `Cupboard` class currently has a constructor, but is missing the fields the constructor sets. Based on the
+constructor, add the **size** and **colour** fields of the appropriate type to the table class.

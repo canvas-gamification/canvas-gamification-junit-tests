@@ -14,8 +14,8 @@ import java.util.stream.Stream;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainTest extends BaseTest {
-    // Parsons with Distractors
+public class MainTest {
+    // Java
 
     private final String classVegtable = "Vegetable";
     private final String classCupboard = "Cupboard";
@@ -28,31 +28,38 @@ public class MainTest extends BaseTest {
     public ObjectTest vegetable;
     public ObjectTest cupboard;
 
-    public Clause[] testSentence() {
-        return new Clause[0];
-    }
-
-    public void runMain() {
-    }
-
     @BeforeEach
-    public void setup() {
+    public void setup() throws Throwable {
         String vegetableClassString = "oop.programs_with_multiple_classes.medium.q10." + classVegtable;
         String cupboardClassString = "oop.programs_with_multiple_classes.medium.q10." + classCupboard;
         vegetable = new ObjectTest(vegetableClassString);
         cupboard = new ObjectTest(cupboardClassString);
-    }
+        String modifiedVegtableMessage =
+                "You have modified the class fields in the " + classVegtable + " class. Please revert them back to the original state they were provided in.";
+        assertTrue(vegetable.hasField(varSpoiled, boolean.class), modifiedVegtableMessage);
+        assertTrue(vegetable.hasModifier(varSpoiled, "private"), modifiedVegtableMessage);
+        assertTrue(vegetable.hasField(varWeight, double.class), modifiedVegtableMessage);
+        assertTrue(vegetable.hasModifier(varWeight, "private"), modifiedVegtableMessage);
+        assertTrue(vegetable.hasField(varOrigin, String.class), modifiedVegtableMessage);
+        assertTrue(vegetable.hasModifier(varOrigin, "private"), modifiedVegtableMessage);
+        String modifiedCupMessage =
+                "You have modified the class fields in the " + classCupboard + " class. Please revert them back to the original state they were provided in.";
+        Class<?>[] classArguments = {int.class, String.class};
+        assertTrue(cupboard.hasConstructor(classArguments), modifiedCupMessage);
+        assertTrue(cupboard.hasModifier(classArguments, "public"), modifiedCupMessage);
 
-    @Test
-    public void vegetableClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your " + classVegtable + " class is missing a required field.";
-        String incorrectModifierMessage = "One of your " + classVegtable + " class attributes does not have the correct modifier.";
-        assertTrue(vegetable.hasField(varSpoiled, boolean.class), incorrectFieldMessage);
-        assertTrue(vegetable.hasModifier(varSpoiled, "private"), incorrectModifierMessage);
-        assertTrue(vegetable.hasField(varWeight, double.class), incorrectFieldMessage);
-        assertTrue(vegetable.hasModifier(varWeight, "private"), incorrectModifierMessage);
-        assertTrue(vegetable.hasField(varOrigin, String.class), incorrectFieldMessage);
-        assertTrue(vegetable.hasModifier(varOrigin, "private"), incorrectModifierMessage);
+        Object[][] test = new Object[][]{{2, "Red"}, {10, "Black"}, {30, "Green"}};
+        for (int num = 0; num < test.length; num++) {
+            int size = (int) test[num][0];
+            String colour = (String) test[num][1];
+            Object[][] arguments = {
+                    {size, int.class},
+                    {colour, String.class}
+            };
+            Object tableInstance = cupboard.createInstance(arguments);
+            _assertEquals(size, cupboard.getFieldValue(tableInstance, varSize), modifiedCupMessage);
+            _assertEquals(colour, cupboard.getFieldValue(tableInstance, varColour), modifiedCupMessage);
+        }
     }
 
     @Test
@@ -72,15 +79,6 @@ public class MainTest extends BaseTest {
                 "Your " + classVegtable + " constructor does not have the correct parameters.");
         assertTrue(vegetable.hasModifier(classArguments, "public"),
                 "Your " + classVegtable + " constructor does not have the correct modifier.");
-    }
-
-    @Test
-    public void cupboardCLassHasRequiredConstructor() {
-        Class<?>[] classArguments = {int.class, String.class};
-        assertTrue(cupboard.hasConstructor(classArguments),
-                "Your " + classCupboard + " constructor does not have the correct parameters.");
-        assertTrue(cupboard.hasModifier(classArguments, "public"),
-                "Your " + classCupboard + " constructor does not have the correct modifier.");
     }
 
     private static Stream<Arguments> vegetableInputProvider() {
@@ -111,20 +109,6 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("vegetableInputProvider")
-    public void correctVegetableToStringMethod(boolean isSpoiled, double weight, String countryOfOrigin) throws Throwable {
-        Object[][] arguments = {
-                {isSpoiled, boolean.class},
-                {weight, double.class},
-                {countryOfOrigin, String.class}
-        };
-        Object vegetableInstance = vegetable.createInstance(arguments);
-        Object vegetableToStringOutput = vegetable.callMethod("toString", vegetableInstance);
-        String ans = classVegtable + "{" + varSpoiled + " = " + isSpoiled + ", " + varWeight + " = " + weight + ", " + varOrigin + " = " + countryOfOrigin + "}";
-        _assertEquals(ans, vegetableToStringOutput, "Your " + classVegtable + " toString method does not return the correct string.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("vegetableInputProvider")
     public void correctVegetableEatingMethod(boolean isSpoiled, double weight, String countryOfOrigin) throws Throwable {
         Object[][] arguments = {
                 {isSpoiled, boolean.class},
@@ -135,42 +119,6 @@ public class MainTest extends BaseTest {
         vegetable.callMethod("eating", vegetableInstance);
         _assertEquals(weight - 0.5, vegetable.getFieldValue(vegetableInstance, varWeight),
                 "Your " + classVegtable + " eating method does not decrement the " + varWeight + " by 0.5.");
-    }
-
-
-    private static Stream<Arguments> cupboardInputProvider() {
-        return Stream.of(
-                Arguments.of(10, "Red"),
-                Arguments.of(20, "Black"),
-                Arguments.of(150, "Green")
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("cupboardInputProvider")
-    public void cupboardConstructorInitializesValuesCorrectly(int size, String colour) throws Throwable {
-        Object[][] arguments = {
-                {size, int.class},
-                {colour, String.class}
-        };
-        Object tableInstance = cupboard.createInstance(arguments);
-        _assertEquals(size, cupboard.getFieldValue(tableInstance, varSize),
-                "Your " + classCupboard + " constructor does not correctly initialize the " + varSize + " field.");
-        _assertEquals(colour, cupboard.getFieldValue(tableInstance, varColour),
-                "Your " + classCupboard + " constructor does not correctly initialize the " + varColour + " field.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("cupboardInputProvider")
-    public void correctPillowToStringMethod(int size, String colour) throws Throwable {
-        Object[][] arguments = {
-                {size, int.class},
-                {colour, String.class}
-        };
-        Object cupboardInstance = cupboard.createInstance(arguments);
-        Object cupboardToStringOutput = cupboard.callMethod("toString", cupboardInstance);
-        String ans = classCupboard + "{" + varSize + " = " + size + ", " + varColour + " = " + colour + "}";
-        _assertEquals(ans, cupboardToStringOutput, "Your " + classCupboard + " toString method does not return the correct string.");
     }
 
 }

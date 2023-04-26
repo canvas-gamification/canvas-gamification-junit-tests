@@ -14,8 +14,4 @@ public class Vegetable {
     public void eating() {
         weight -= 0.5;
     }
-
-    public String toString() {
-        return "Vegetable{isSpoiled = " + isSpoiled + ", weight = " + weight + ", countryOfOrigin = " + countryOfOrigin + "}";
-    }
 }

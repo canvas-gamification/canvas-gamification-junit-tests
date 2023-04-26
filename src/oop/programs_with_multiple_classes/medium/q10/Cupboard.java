@@ -8,8 +8,4 @@ public class Cupboard {
         size = m;
         colour = s;
     }
-
-    public String toString() {
-        return "Cupboard{size = " + size + ", colour = " + colour + "}";
-    }
 }
