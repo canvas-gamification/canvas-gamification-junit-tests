@@ -6,8 +6,4 @@ public class Desk {
     public Desk(String m) {
         materialType = m;
     }
-
-    public String toString() {
-        return "Desk{materialType = " + materialType + "}";
-    }
 }

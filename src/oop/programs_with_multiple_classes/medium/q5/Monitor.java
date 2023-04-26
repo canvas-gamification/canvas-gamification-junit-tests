@@ -10,8 +10,4 @@ public class Monitor {
     public void fallen() {
         countSize = countSize - 1;
     }
-
-    public String toString() {
-        return "Monitor{countSize = " + countSize + "}";
-    }
 }
