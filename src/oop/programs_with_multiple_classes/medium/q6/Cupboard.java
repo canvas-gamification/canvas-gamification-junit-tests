@@ -6,8 +6,6 @@ public class Cupboard {
     public Cupboard(int m) {
         size = m;
     }
-    public String toString() {
-        return "Cupboard{size = " + size + "}";
-    }
+
 }
 

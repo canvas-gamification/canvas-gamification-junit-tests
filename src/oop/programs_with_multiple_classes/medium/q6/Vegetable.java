@@ -11,7 +11,4 @@ public class Vegetable {
         isSpoiled = true;
     }
 
-    public String toString() {
-        return "Vegetable{isSpoiled = " + isSpoiled + "}";
-    }
 }
