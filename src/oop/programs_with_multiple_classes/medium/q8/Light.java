@@ -8,8 +8,4 @@ public class Light {
         isOn = b;
         type = s;
     }
-
-    public String toString() {
-        return "Light{isOn = " + isOn + ", type = " + type + "}";
-    }
 }

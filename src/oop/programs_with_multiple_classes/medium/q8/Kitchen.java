@@ -8,8 +8,4 @@ public class Kitchen {
         size = s;
         personCapacity = p;
     }
-
-    public String toString() {
-        return "Kitchen{size = " + size + ", personCapacity = " + personCapacity + "}";
-    }
 }

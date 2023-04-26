@@ -15,7 +15,7 @@ import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
-    // Parsons with Distractors
+    // Java
 
     private final String classLight = "Light";
     private final String classKitchen = "Kitchen";
@@ -34,21 +34,37 @@ public class MainTest extends BaseTest {
     }
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws Throwable {
         String lightClassString = "oop.programs_with_multiple_classes.medium.q8." + classLight;
         String kitchenClassString = "oop.programs_with_multiple_classes.medium.q8." + classKitchen;
         light = new ObjectTest(lightClassString);
         kitchen = new ObjectTest(kitchenClassString);
-    }
+        String modifiedLightMessage =
+                "You have modified the class fields in the " + classLight + " class. Please revert them back to the original state they were provided in.";
+        assertTrue(light.hasField(varOn, boolean.class), modifiedLightMessage);
+        assertTrue(light.hasModifier(varOn, "private"), modifiedLightMessage);
+        assertTrue(light.hasField(varType, String.class), modifiedLightMessage);
+        assertTrue(light.hasModifier(varType, "private"), modifiedLightMessage);
+        String modifiedKitchenMessage =
+                "You have modified the class fields in the " + classKitchen + " class. Please revert them back to the original state they were provided in.";
+        Class<?>[] classArguments = {int.class, int.class};
+        assertTrue(kitchen.hasConstructor(classArguments), modifiedKitchenMessage);
+        assertTrue(kitchen.hasModifier(classArguments, "public"), modifiedKitchenMessage);
 
-    @Test
-    public void lightClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your " + classLight + " class is missing a required field.";
-        String incorrectModifierMessage = "One of your " + classLight + " class attributes does not have the correct modifier.";
-        assertTrue(light.hasField(varOn, boolean.class), incorrectFieldMessage);
-        assertTrue(light.hasModifier(varOn, "private"), incorrectModifierMessage);
-        assertTrue(light.hasField(varType, String.class), incorrectFieldMessage);
-        assertTrue(light.hasModifier(varType, "private"), incorrectModifierMessage);
+        Object[][] test = new Object[][]{{10, 15}, {20, 30}, {150, 40}};
+        for (int num = 0; num < test.length; num++) {
+            int size = (int) test[num][0];
+            int personCapacity = (int) test[num][1];
+            Object[][] arguments = {
+                    {size, int.class},
+                    {personCapacity, int.class}
+            };
+            Object kitchenInstance = kitchen.createInstance(arguments);
+            _assertEquals(size, kitchen.getFieldValue(kitchenInstance, varSize),
+                    "Your " + classKitchen + " constructor does not correctly initialize the " + varSize + " field.");
+            _assertEquals(personCapacity, kitchen.getFieldValue(kitchenInstance, varCap),
+                    "Your " + classKitchen + " constructor does not correctly initialize the " + varCap + " field.");
+        }
     }
 
     @Test
@@ -68,15 +84,6 @@ public class MainTest extends BaseTest {
                 "Your " + classLight + " constructor does not have the correct parameters.");
         assertTrue(light.hasModifier(classArguments, "public"),
                 "Your " + classLight + " constructor does not have the correct modifier.");
-    }
-
-    @Test
-    public void kitchenCLassHasRequiredConstructor() {
-        Class<?>[] classArguments = {int.class, int.class};
-        assertTrue(kitchen.hasConstructor(classArguments),
-                "Your " + classKitchen + " constructor does not have the correct parameters.");
-        assertTrue(kitchen.hasModifier(classArguments, "public"),
-                "Your " + classKitchen + " constructor does not have the correct modifier.");
     }
 
     private static Stream<Arguments> lightInputProvider() {
@@ -100,54 +107,6 @@ public class MainTest extends BaseTest {
                 "Your " + classLight + " constructor does not correctly initialize the " + varOn + " field.");
         _assertEquals(type, light.getFieldValue(lightInstance, varType),
                 "Your " + classLight + " constructor does not correctly initialize the " + varType + " field.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("lightInputProvider")
-    public void correctLightToStringMethod(boolean isOn, String type) throws Throwable {
-        Object[][] arguments = {
-                {isOn, boolean.class},
-                {type, String.class}
-        };
-        Object lightInstance = light.createInstance(arguments);
-        Object lightToStringOutput = light.callMethod("toString", lightInstance);
-        String ans = classLight + "{" + varOn + " = " + isOn + ", " + varType + " = " + type + "}";
-        _assertEquals(ans, lightToStringOutput, "Your " + classLight + " toString method does not return the correct string.");
-    }
-
-    private static Stream<Arguments> kitchenInputProvider() {
-        return Stream.of(
-                Arguments.of(10, 15),
-                Arguments.of(20, 30),
-                Arguments.of(150, 40)
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("kitchenInputProvider")
-    public void kitchenConstructorInitializesValuesCorrectly(int size, int personCapacity) throws Throwable {
-        Object[][] arguments = {
-                {size, int.class},
-                {personCapacity, int.class}
-        };
-        Object kitchenInstance = kitchen.createInstance(arguments);
-        _assertEquals(size, kitchen.getFieldValue(kitchenInstance, varSize),
-                "Your " + classKitchen + " constructor does not correctly initialize the " + varSize + " field.");
-        _assertEquals(personCapacity, kitchen.getFieldValue(kitchenInstance, varCap),
-                "Your " + classKitchen + " constructor does not correctly initialize the " + varCap + " field.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("kitchenInputProvider")
-    public void correctKitchenToStringMethod(int size, int personCapacity) throws Throwable {
-        Object[][] arguments = {
-                {size, int.class},
-                {personCapacity, int.class}
-        };
-        Object kitchenInstance = kitchen.createInstance(arguments);
-        Object kitchenToStringOutput = kitchen.callMethod("toString", kitchenInstance);
-        String ans = classKitchen + "{" + varSize + " = " + size + ", " + varCap + " = " + personCapacity + "}";
-        _assertEquals(ans, kitchenToStringOutput, "Your " + classKitchen + " toString method does not return the correct string.");
     }
 
 }

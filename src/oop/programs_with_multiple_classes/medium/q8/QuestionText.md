@@ -1,47 +1,18 @@
 # oop-programs_with_multiple_classes-medium-q8
 
-**Parsons with Distractors**
+## Java
 
-You want to write a program that models objects within a house and different rooms. Make a Java program with the following requirements:
+You want to write a program that models objects within a house and different rooms. Make a Java program
+consisting of a `Light` and a `Kitchen`. See the requirements below for each class. Note that parts of each class are
+already provided, you only need to implement the other portions.
 
 
 ## Light
 
-Your `Light` class should have the following items:
-
-- Attributes:
-    - An `boolean` called **isOn**
-    - A `String` called **type**
-
-- Constructors:
-    - A `constructor` that takes a `boolean` and a `String` to set the
-      **isOn** and **type** fields
-- Methods:
-    - A `toString` method is provided
+Your `Knife` class currently has the attributes `boolean isOn` and `String type`. Create a
+constructor which is accessible from another class and initializes these fields in that order.
 
 ## Kitchen
 
-Your ``Kitchen`` class should have the following items:
-
-- Attributes:
-    - An `int` called **size**
-    - A `int` called **personCapacity**
-
-- Constructors:
-    - A `constructor` that takes two `int` to set the
-    **size** and **personCapacity** fields in that order
-- Methods:
-    - A `toString` method is provided
-
-
-**Distractors**
-- public boolean isOn;
-- public String type;
-- isOn = s;
-- type = b;
-- public int size;
-- public int personCapacity;
-- size = p;
-- personCapacity = s;
-- private Kitchen(int s, int p)
-- private String toString()
+Your `Kitchen` class currently has a constructor, but is missing the fields the constructor sets. Based on the
+constructor, add the **size** and **personCapacity** fields of the appropriate type to the table class.
