@@ -18,33 +18,45 @@ public class MainTest {
     private final String varColour = "colour";
     private final String varPower = "horsePower";
     private final String varYear = "yearMade";
-    private final String methodName = "printSpecs";
 
     private ObjectTest classInstance;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Throwable {
         String classString = "oop.user_defined_classes.medium.q2." + className;
         classInstance = new ObjectTest(classString);
+        String modifiedClassMessage =
+                "You have modified the class fields in the " + className + " class. Please revert them back to the original state they were provided in.";
+        assertTrue(classInstance.hasField(varColour, String.class), modifiedClassMessage);
+        assertTrue(classInstance.hasModifier(varColour, "private"), modifiedClassMessage);
+        assertTrue(classInstance.hasField(varPower, int.class), modifiedClassMessage);
+        assertTrue(classInstance.hasModifier(varPower, "private"), modifiedClassMessage);
+        assertTrue(classInstance.hasField(varYear, int.class), modifiedClassMessage);
+        assertTrue(classInstance.hasModifier(varPower, "private"), modifiedClassMessage);
+
+        Object[][] test = new Object[][]{
+                {"Red", 300, 2003},
+                {"Blue", 200, 2014},
+                {"Black", 100, 1986},
+                {"Yellow", 250, 2001}
+        };
+        for (int num = 0; num < test.length; num++) {
+            String colour = (String) test[num][0];
+            int horsePower = (int) test[num][1];
+            int yearMade = (int) test[num][1];
+            Object[][] arguments = {
+                    {colour, String.class},
+                    {horsePower, int.class},
+                    {yearMade, int.class}
+            };
+            Object instance = classInstance.createInstance(arguments);
+            _assertEquals(horsePower, classInstance.getFieldValue(instance, varPower), modifiedClassMessage);
+            _assertEquals(yearMade, classInstance.getFieldValue(instance, varYear), modifiedClassMessage);
+            _assertEquals(colour, classInstance.getFieldValue(instance, varColour), modifiedClassMessage);
+        }
     }
 
-    @Test
-    public void circleClassHasCorrectFields() {
-        assertTrue(classInstance.hasField(varColour, String.class),
-                "Your " + className + " class does not have the correct " + varColour + " field.");
-        assertTrue(classInstance.hasModifier(varColour, "private"),
-                "Your " + varColour + " field does not have the correct visibility modifier.");
-        assertTrue(classInstance.hasField(varPower, int.class),
-                "Your " + className + " class does not have the correct " + varPower + " field.");
-        assertTrue(classInstance.hasModifier(varPower, "private"),
-                "Your " + varPower + " field does not have the correct visibility modifier.");
-        assertTrue(classInstance.hasField(varYear, int.class),
-                "Your " + className + " class does not have the correct " + varYear + " field.");
-        assertTrue(classInstance.hasModifier(varPower, "private"),
-                "Your " + varPower + " field does not have the correct visibility modifier.");
-    }
-
-    private static Stream<Arguments> constructorInputProvider() {
+    private static Stream<Arguments> methodInputProvider() {
         return Stream.of(
                 Arguments.of("Red", 300, 2003),
                 Arguments.of("Blue", 200, 2014),
@@ -54,20 +66,17 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("constructorInputProvider")
-    public void circleConstructorInitializesObjectCorrectly(String colour, int horsePower, int yearMade) throws Throwable {
+    @MethodSource("methodInputProvider")
+    public void correctVegetableEatingMethod(String colour, int horsePower, int yearMade) throws Throwable {
         Object[][] arguments = {
                 {colour, String.class},
                 {horsePower, int.class},
                 {yearMade, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
-        _assertEquals(horsePower, classInstance.getFieldValue(instance, varPower),
-                "Your " + className + " constructor does not correctly initialize the " + varPower + " field.");
-        _assertEquals(yearMade, classInstance.getFieldValue(instance, varYear),
-                "Your " + className + " constructor does not correctly initialize the " + varYear + " field.");
-        _assertEquals(colour, classInstance.getFieldValue(instance, varColour),
-                "Your " + className + " constructor does not correctly initialize the " + varColour + " field.");
+        classInstance.callMethod("improve", instance);
+        _assertEquals(horsePower * 2, classInstance.getFieldValue(instance, varPower),
+                "Your " + className + " improve method does not doubles the " + varPower + ".");
     }
 
 }

@@ -11,4 +11,8 @@ public class Car {
         yearMade = ym;
     }
 
+    public void improve(){
+        horsePower *= 2;
+    }
+
 }

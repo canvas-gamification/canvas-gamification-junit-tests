@@ -13,11 +13,6 @@ that displays the colour and horsepower of the vehicle.
 
 The `Car` class you are given has the following items:
 
-- A `Car` class name
-- An empty `Car` constructor
-
-You must add the following items to the class:
-
 - Attributes:
     - A `String` called **colour**
     - An `int` called **horsePower**
@@ -26,3 +21,5 @@ You must add the following items to the class:
 - Constructors:
     - Initializes **colour**, **horsePower**, and **yearMade**
       with the input values in the constructor.
+
+Create a method called **improve** that doubles the horsePower.
