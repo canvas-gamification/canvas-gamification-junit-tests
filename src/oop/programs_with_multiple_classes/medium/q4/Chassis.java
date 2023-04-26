@@ -7,8 +7,5 @@ public class Chassis {
         materialType = m;
     }
 
-    public String toString() {
-        return "Chassis{materialType = " + materialType + "}";
-    }
 }
 

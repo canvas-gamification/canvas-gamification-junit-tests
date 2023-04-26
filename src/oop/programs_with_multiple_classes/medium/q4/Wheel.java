@@ -9,7 +9,4 @@ public class Wheel {
         manufacturer = m;
     }
 
-    public String toString() {
-        return "Wheel{durability = " + durability + ", manufacturer = " + manufacturer + "}";
-    }
 }

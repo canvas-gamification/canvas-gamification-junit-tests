@@ -14,8 +14,8 @@ import java.util.stream.Stream;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainTest extends BaseTest {
-    // Parsons
+public class MainTest {
+    // Java
 
     private final String wheelClass = "Wheel";
     private final String chassisClass = "Chassis";
@@ -31,20 +31,17 @@ public class MainTest extends BaseTest {
         String chassisClassString = "oop.programs_with_multiple_classes.medium.q4." + chassisClass;
         wheel = new ObjectTest(wheelClassString);
         chassis = new ObjectTest(chassisClassString);
-    }
-
-    public Clause[] testSentence() {return new Clause[0];}
-
-    public void runMain() {}
-
-    @Test
-    public void wheelClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your "+ wheelClass + " class is missing a required field";
-        String incorrectModifierMessage = "One of your " + wheelClass + " class attributes does not have the correct modifier.";
-        assertTrue(wheel.hasField(varDurability, double.class), incorrectFieldMessage);
-        assertTrue(wheel.hasField(varManufacturer, String.class), incorrectModifierMessage);
-        assertTrue(wheel.hasModifier(varDurability, "private"), incorrectModifierMessage);
-        assertTrue(wheel.hasModifier(varManufacturer, "private"), incorrectModifierMessage);
+        String modifiedWheelMessage =
+                "You have modified the class fields in the " + wheelClass + " class. Please revert them back to the original state they were provided in.";
+        assertTrue(wheel.hasField(varDurability, double.class), modifiedWheelMessage);
+        assertTrue(wheel.hasField(varManufacturer, String.class), modifiedWheelMessage);
+        assertTrue(wheel.hasModifier(varDurability, "private"), modifiedWheelMessage);
+        assertTrue(wheel.hasModifier(varManufacturer, "private"), modifiedWheelMessage);
+        String modifiedChassisMessage =
+                "You have modified the class fields in the " + chassisClass + " class. Please revert them back to the original state they were provided in.";
+        Class<?>[] classArguments = {String.class};
+        assertTrue(chassis.hasConstructor(classArguments), modifiedChassisMessage);
+        assertTrue(chassis.hasModifier(classArguments, "public"), modifiedChassisMessage);
     }
 
     @Test
@@ -62,15 +59,6 @@ public class MainTest extends BaseTest {
                 "Your " + wheelClass + " constructor does not have the correct parameters.");
         assertTrue(wheel.hasModifier(classArguments, "public"),
                 "Your " + wheelClass + " constructor does not have the correct modifiers.");
-    }
-
-    @Test
-    public void chassisCLassHasRequiredConstructor() {
-        Class<?>[] classArguments = {String.class};
-        assertTrue(chassis.hasConstructor(classArguments),
-                "Your " + chassisClass + " constructor does not have the correct parameters.");
-        assertTrue(chassis.hasModifier(classArguments, "public"),
-                "Your " + chassisClass + " constructor does not have the correct modifiers.");
     }
 
     private static Stream<Arguments> wheelInputProvider() {
@@ -93,50 +81,6 @@ public class MainTest extends BaseTest {
                 "Your " + wheelClass + " constructor does not correctly initialize the " + varDurability + " field.");
         _assertEquals(m, wheel.getFieldValue(wheelInstance, varManufacturer),
                 "Your " + wheelClass + " constructor does not correctly initialize the " + varManufacturer + " field.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("wheelInputProvider")
-    public void correctWheelToStringMethod(double d, String m) throws Throwable {
-        Object[][] arguments = {
-                {d, double.class},
-                {m, String.class}
-        };
-        Object wheelInstance = wheel.createInstance(arguments);
-        Object wheelToStringOutput = wheel.callMethod("toString", wheelInstance);
-        String ans = wheelClass + "{" + varDurability + " = " + d + ", " + varManufacturer + " = " + m + "}";
-        _assertEquals(ans, wheelToStringOutput, "Your " + wheelClass + " toString method does not return the correct string.");
-    }
-
-    private static Stream<Arguments> chassisInputProvider() {
-        return Stream.of(
-                Arguments.of("Steel"),
-                Arguments.of("Wood"),
-                Arguments.of("Titanium")
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("chassisInputProvider")
-    public void chassisConstructorInitializesValuesCorrectly(String material) throws Throwable {
-        Object[][] arguments = {
-                {material, String.class}
-        };
-        Object chassisInstance = chassis.createInstance(arguments);
-        _assertEquals(material, chassis.getFieldValue(chassisInstance, varMaterialType),
-                "Your " + chassisClass + " constructor does not correctly initialize the " + varMaterialType + " field.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("chassisInputProvider")
-    public void chassisToStringMethod(String material) throws Throwable {
-        Object[][] arguments = {
-                {material, String.class}
-        };
-        Object chassisInstance = chassis.createInstance(arguments);
-        Object chassisToStringOutput = chassis.callMethod("toString", chassisInstance);
-        String ans = chassisClass + "{" + varMaterialType + " = " + material + "}";
-        _assertEquals(ans, chassisToStringOutput, "Your " + chassisClass + " toString method does not return the correct string.");
     }
 
 }
