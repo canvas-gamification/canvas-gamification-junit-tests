@@ -14,8 +14,4 @@ public class Monitor {
     public void recycled() {
         isRenewed = true;
     }
-
-    public String toString() {
-        return "Monitor{countSize = " + countSize + ", typeScreen = " + typeScreen + ", isRenewed = " + isRenewed + "}";
-    }
 }

@@ -8,8 +8,4 @@ public class Desk {
         materialType = m;
         yearsOld = i;
     }
-
-    public String toString() {
-        return "Desk{materialType = " + materialType + ", yearsOld = " + yearsOld + "}";
-    }
 }

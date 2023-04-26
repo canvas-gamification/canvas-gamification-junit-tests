@@ -1,49 +1,21 @@
 # oop-programs_with_multiple_classes-medium-q9
 
-**Parsons with Distractors**
+## Java
 
-You want to write a program that models technology and work surfaces. Make a Java program with the following requirements:
-
+You want to write a program that models objects within a house and different rooms. Make a Java program
+consisting of a `Monitor` and a `Desk`. See the requirements below for each class. Note that parts of each class are
+already provided, you only need to implement the other portions.
 
 ## Monitor
 
-Your `Monitor` class should have the following items:
-
-- Attributes:
-    - An `int` called **countSize**
-    - A `String` called **typeScreen**
-    - A `boolean` called **isRenewed**
-
-- Constructors:
-    - A `constructor` that takes an `int`, `String`, and `boolean` to set the
-      **countSize**, **typeScreen**, and **isRenewed** fields
-- Methods:
-    - A `method` called **recycled** that sets the value of **isRenewed** to true.
-    - A **toString** `method` is provided
-
+Your `Monitor` class currently has the attributes `int countSize`, `String typeScreen`,
+and `boolean isRenewed`. Create a constructor which is accessible from another class 
+and initializes these fields in that order. Also, write a method called **recycled** that
+sets the value of **isRenewed** to true, and is accessible from other classes.
 
 ## Desk
 
-Your ``Desk`` class should have the following items:
+Your `Desk` class currently has a constructor, but is missing the fields the constructor sets. Based on the
+constructor, add the **materialType** and **yearsOld** fields of the appropriate type to the table class.
 
-- Attributes:
-    - An `String` called **materialType**
-    - A `int` called **yearsOld**
 
-- Constructors:
-    - A `constructor` that takes a `String` and an `int` to set the
-      **materialType** and **yearsOld** fields
-- Methods:
-    - A `toString` method is provided
-
-**Distractors**
-- public String typeScreen;
-- public boolean isRenewed;
-- countSize = s;
-- typeScreen = b;
-- isRenewed = m;
-- public recycled()
-- public String materialType;
-- public int yearsOld;
-- materialType = i;
-- yearsOld = m;
