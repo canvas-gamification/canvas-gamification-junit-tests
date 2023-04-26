@@ -9,7 +9,4 @@ public class Pencil {
         isForSchool = school;
     }
 
-    public String toString() {
-        return "Pencil{hardness = " + hardness + ", isForSchool = " + isForSchool + "}";
-    }
 }

@@ -1,8 +1,6 @@
 package oop.programs_with_multiple_classes.medium.q3;
 
-import global.BaseTest;
 import global.ObjectTest;
-import global.variables.Clause;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,8 +12,8 @@ import java.util.stream.Stream;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainTest extends BaseTest {
-    // Parsons
+public class MainTest {
+    // Java
 
     private final String classPencil = "Pencil";
     private final String classEraser = "Eraser";
@@ -31,23 +29,17 @@ public class MainTest extends BaseTest {
         String eraserClassString = "oop.programs_with_multiple_classes.medium.q3." + classEraser;
         pencil = new ObjectTest(pencilClassString);
         eraser = new ObjectTest(eraserClassString);
-    }
-
-    public Clause[] testSentence() {
-        return new Clause[0];
-    }
-
-    public void runMain() {
-    }
-
-    @Test
-    public void pencilClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your " + classPencil + " class is missing a required field.";
-        String incorrectModifierMessage = "One of your " + classPencil + " class attributes does not have the correct modifier.";
-        assertTrue(pencil.hasField(varHardness, int.class), incorrectFieldMessage);
-        assertTrue(pencil.hasField(varSchool, boolean.class), incorrectModifierMessage);
-        assertTrue(pencil.hasModifier(varHardness, "private"), incorrectModifierMessage);
-        assertTrue(pencil.hasModifier(varSchool, "private"), incorrectModifierMessage);
+        String modifiedPencilMessage =
+                "You have modified the class fields in the " + classPencil + " class. Please revert them back to the original state they were provided in.";
+        assertTrue(pencil.hasField(varHardness, int.class), modifiedPencilMessage);
+        assertTrue(pencil.hasField(varSchool, boolean.class), modifiedPencilMessage);
+        assertTrue(pencil.hasModifier(varHardness, "private"), modifiedPencilMessage);
+        assertTrue(pencil.hasModifier(varSchool, "private"), modifiedPencilMessage);
+        String modifiedEraserMessage =
+                "You have modified the class fields in the " + classEraser + " class. Please revert them back to the original state they were provided in.";
+        Class<?>[] classArguments = {double.class};
+        assertTrue(eraser.hasConstructor(classArguments), modifiedEraserMessage);
+        assertTrue(eraser.hasModifier(classArguments, "public"), modifiedEraserMessage);
     }
 
     @Test
@@ -67,14 +59,6 @@ public class MainTest extends BaseTest {
                 "Your " + classPencil + " constructor does not have the correct modifiers.");
     }
 
-    @Test
-    public void eraserClassHasRequiredConstructor() {
-        Class<?>[] classArguments = {double.class};
-        assertTrue(eraser.hasConstructor(classArguments),
-                "Your " + classEraser + " constructor does not have the correct parameters.");
-        assertTrue(eraser.hasModifier(classArguments, "public"),
-                "Your " + classEraser + " constructor does not have the correct modifiers.");
-    }
 
     private static Stream<Arguments> pencilInputProvider() {
         return Stream.of(
@@ -96,50 +80,6 @@ public class MainTest extends BaseTest {
                 "Your " + classPencil + " constructor does not correctly initialize the " + varHardness + " field.");
         _assertEquals(school, pencil.getFieldValue(pencilInstance, varSchool),
                 "Your " + classPencil + " constructor does not correctly initialize the " + varSchool + " field.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("pencilInputProvider")
-    public void correctPencilToStringMethod(int hard, boolean school) throws Throwable {
-        Object[][] arguments = {
-                {hard, int.class},
-                {school, boolean.class},
-        };
-        Object pencilInstance = pencil.createInstance(arguments);
-        Object pencilToStringOutput = pencil.callMethod("toString", pencilInstance);
-        String ans = classPencil + "{" + varHardness + " = " + hard + ", " + varSchool + " = " + school + "}";
-        _assertEquals(ans, pencilToStringOutput, "Your " + classPencil + " toString method does not return the correct string.");
-    }
-
-    private static Stream<Arguments> eraserInputProvider() {
-        return Stream.of(
-                Arguments.of(5.5),
-                Arguments.of(110.0),
-                Arguments.of(0.01)
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("eraserInputProvider")
-    public void eraserConstructorInitializesValuesCorrectly(double size) throws Throwable {
-        Object[][] arguments = {
-                {size, double.class}
-        };
-        Object eraserInstance = eraser.createInstance(arguments);
-        _assertEquals(size, eraser.getFieldValue(eraserInstance, varSize),
-                "Your " + classEraser + " constructor does not correctly initialize the " + varSize + " field.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("eraserInputProvider")
-    public void correctEraserToStringMethod(double size) throws Throwable {
-        Object[][] arguments = {
-                {size, double.class}
-        };
-        Object eraserInstance = eraser.createInstance(arguments);
-        Object eraserToStringOutput = eraser.callMethod("toString", eraserInstance);
-        String ans = classEraser + "{" + varSize + " = " + size + "}";
-        _assertEquals(ans, eraserToStringOutput, "Your " + classEraser + " toString method does not return the correct string.");
     }
 
 }

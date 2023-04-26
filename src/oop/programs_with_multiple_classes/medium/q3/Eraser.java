@@ -7,7 +7,4 @@ public class Eraser {
         size = sz;
     }
 
-    public String toString() {
-        return "Eraser{size = " + size + "}";
-    }
 }
