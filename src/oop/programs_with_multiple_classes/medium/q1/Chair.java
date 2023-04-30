@@ -7,7 +7,13 @@ public class Chair {
 
     public Chair(String c, int wc, int lv) {
         comfort = c;
-        weightCapacity = wc;
-        longevity = lv;
+        if (wc < 0)
+            weightCapacity = 100;
+        else
+            weightCapacity = wc;
+        if (lv < 0)
+            longevity = 12;
+        else
+            longevity = lv;
     }
 }

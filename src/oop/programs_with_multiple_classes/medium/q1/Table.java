@@ -8,4 +8,8 @@ public class Table {
         woodType = wt;
         numSeats = ns;
     }
+
+    public void woodType() {
+        System.out.println("This table is made out of " + woodType);
+    }
 }
