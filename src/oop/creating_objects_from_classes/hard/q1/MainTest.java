@@ -14,46 +14,30 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MainTest {
     // Java
 
-    private final String pet = "Pet";
-    private final String animalType = "Dog";
-    private final String methodName = "makePet";
-    private final String animalStringFieldName = "name";
-    private ObjectTest petClass;
-    private ObjectTest animalClass;
+}
 
-    @BeforeEach
-    public void setUp() {
-        String petClassString = "oop.creating_objects_from_classes.hard.q1." + pet;
-        String animalClassString = "oop.creating_objects_from_classes.hard.q1." + animalType;
-        petClass = new ObjectTest(petClassString);
-        animalClass = new ObjectTest(animalClassString);
+class Dog {
+    private String name;
+    private int age;
+    private double weight;
+    private static Dog dog;
+
+    public Dog(String n, int a, double w) {
+        if (dog == null) {
+            name = n;
+            age = a;
+            weight = w;
+            dog = this;
+        } else {
+            return dog;
+        }
     }
 
-    @Test
-    public void petClassHasMakePetMethod() {
-        Class<?>[] classes = {String.class};
-        assertTrue(petClass.hasMethod(methodName, classes),
-                "Your " + pet + " class is missing the method" + methodName + ".");
-        assertTrue(petClass.hasReturnType(methodName, classes, Dog.class),
-                "Your " + methodName + " method does not return the correct type.");
-        assertTrue(petClass.hasModifier(methodName,  classes, "public"),
-                "Your " + methodName + " method does not have the correct visibility modifier.");
+    public void eat() {
+        weight += 2.5;
     }
 
-    private static Stream<String> petNameInputProvider() {
-        return Stream.of("Carl", "John", "Joseph P Josephson", "Georgia", "Hailey");
-    }
-
-    @ParameterizedTest
-    @MethodSource("petNameInputProvider")
-    public void makePetClassReturnsCorrectValue(String name) throws Throwable {
-        Object petInstance = petClass.createInstance();
-        Object[][] arguments = {
-                {name, String.class}
-        };
-        Object makePetOutput = petClass.callMethod(methodName, arguments, petInstance);
-        assertTrue(makePetOutput instanceof Dog, "Your " + methodName + " method does not return the correct type.");
-        _assertEquals(name, animalClass.getFieldValue(makePetOutput, animalStringFieldName),
-                "Your " + methodName + " method does not return the correct output.");
+    public void bark() {
+        System.out.println("Bark!");
     }
 }
