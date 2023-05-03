@@ -1,10 +1,10 @@
 package oop.object_independence.medium.q1;
 
-import global.BaseTest;
 import global.ObjectTest;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.IntegerLiteral;
+import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,17 +17,45 @@ import java.util.stream.Stream;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MainTest extends BaseTest {
+public class MainTest {
     // Parsons question
-    final String bankClassName = "BankAccount";
-    final String testClassName = "TestAccount";
-    ObjectTest bankAccount;
-    ObjectTest testAccount;
-    final String doubleFieldName = "currentBalance";
-    final String longFieldName = "accountNumber";
-    final String depositMethodName = "deposit";
-    final String withdrawMethodName = "withdraw";
-    final String listBalanceMethodName = "listBalance";
+    private final String bankClassName = "BankAccount";
+    private final String testClassName = "TestAccount";
+    private ObjectTest bankAccount;
+    private ObjectTest testAccount;
+    private final String doubleFieldName = "currentBalance";
+    private final String longFieldName = "accountNumber";
+    private final String depositMethodName = "deposit";
+    private final String withdrawMethodName = "withdraw";
+    private final String listBalanceMethodName = "listBalance";
+    private final int accountNumber1 = 123456789;
+    private final int accountNumber2 = 123456790;
+    private final double accountBalance1 = 100.0;
+    private final double accountBalance2 = 400.0;
+
+    @Test
+    public void correctTestAccountClass() throws Throwable {
+        Clause[] c = new Clause[]{
+                new StringLiteral("Account No\\. "),
+                new IntegerLiteral(accountNumber1, "accountNumber1"),
+                new StringLiteral(" currently has a balance of \\$"),
+                new DoubleLiteral(accountBalance1, accountBalance1, "accountBalance1"),
+                new NewLine(),
+                new StringLiteral("Account No\\. "),
+                new IntegerLiteral(accountNumber2, "accountNumber2"),
+                new StringLiteral(" currently has a balance of \\$"),
+                new DoubleLiteral(accountBalance2, accountBalance2, "accountBalance2"),
+        };
+        Object[][] arguments = {
+                {new String[0], String[].class}
+        };
+        String incorrectMethodOutputMessage = "Your main method in the " + testClassName + " class does not print the correct output for the two bank accounts.";
+        testAccount.callMethod("main", arguments, c, incorrectMethodOutputMessage);
+    }
+
+    public void runMain() {
+        TestAccount.main(new String[0]);
+    }
 
     @BeforeEach
     public void setUp() {
@@ -118,7 +146,7 @@ public class MainTest extends BaseTest {
         String[] depositModifiers = {"public"};
         Object output = bankAccount.callMethod(withdrawMethodName, withdrawArguments, depositModifiers, bankAccountInstance);
         assertNull(output, "Your " + withdrawMethodName + " method does not have the correct return type.");
-        double expectedAmount = withdrawAmount > 500.00 ? 500.00: 500.00 - withdrawAmount;
+        double expectedAmount = withdrawAmount > 500.00 ? 500.00 : 500.00 - withdrawAmount;
         _assertEquals(expectedAmount, bankAccount.getFieldValue(bankAccountInstance, doubleFieldName),
                 "Your " + withdrawMethodName + " method does not correctly update the " + doubleFieldName + " field based on the withdraw amount.");
     }
@@ -134,13 +162,13 @@ public class MainTest extends BaseTest {
         // "Account No. " + accountNumber + " currently has a balance of $" + currentBalance
         Clause[] listBalanceOutput = {
                 new StringLiteral("Account No\\. "),
+                new IntegerLiteral((int) accountNum),
+                new StringLiteral(" currently has a balance of \\$"),
                 new DoubleLiteral(amount, amount),
-                new StringLiteral("  currently has a balance of \\$"),
-                new IntegerLiteral((int) accountNum)
+                new NewLine()
         };
         String incorrectPrintOutput =
                 "Your " + listBalanceMethodName + " method does not correctly print the account number and balance.";
+        bankAccount.callMethod("listBalance", accountInstance, listBalanceOutput, incorrectPrintOutput);
     }
-
-
 }
