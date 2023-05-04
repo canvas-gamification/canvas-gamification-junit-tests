@@ -4,7 +4,10 @@ public class Cupboard {
     private int size;
 
     public Cupboard(int m) {
-        size = m;
+        if(m > 0)
+            size = m;
+        else
+            m = 0;
     }
 
 }

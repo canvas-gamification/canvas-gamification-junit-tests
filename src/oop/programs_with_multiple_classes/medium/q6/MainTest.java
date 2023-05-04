@@ -79,7 +79,10 @@ public class MainTest {
         return Stream.of(
                 Arguments.of(10),
                 Arguments.of(20),
-                Arguments.of(150)
+                Arguments.of(150),
+                Arguments.of(-10),
+                Arguments.of(-20),
+                Arguments.of(-150)
         );
     }
 
@@ -90,8 +93,14 @@ public class MainTest {
                 {size, int.class}
         };
         Object tableInstance = cupboard.createInstance(arguments);
-        _assertEquals(size, cupboard.getFieldValue(tableInstance, varSize),
-                "Your " + cupboardClass + " constructor does not correctly initialize the " + varSize + " field.");
+        if (size > 0) {
+            _assertEquals(size, cupboard.getFieldValue(tableInstance, varSize),
+                    "Your " + cupboardClass + " constructor does not correctly initialize the " + varSize + " field.");
+        }
+        else{
+            _assertEquals(0, cupboard.getFieldValue(tableInstance, varSize),
+                    "Your " + cupboardClass + " constructor does not correctly initialize the " + varSize + " field.");
+        }
     }
 
 }
