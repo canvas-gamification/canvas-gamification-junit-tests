@@ -31,13 +31,13 @@ public class MainTest {
         knife = new ObjectTest(knifeClassString);
         cupboard = new ObjectTest(cupboardClassString);
         String modifiedKnifeMessage =
-                "You have modified the class fields in the " + knifeClass + " class. Please revert them back to the original state they were provided in.";
+                "You have modified the provided portions of class " + knifeClass + ". Please revert them to the original state.";
         assertTrue(knife.hasField(varSize, int.class), modifiedKnifeMessage);
         assertTrue(knife.hasModifier(varSize, "private"), modifiedKnifeMessage);
         assertTrue(knife.hasField(varMaterial, String.class), modifiedKnifeMessage);
         assertTrue(knife.hasModifier(varMaterial, "private"), modifiedKnifeMessage);
         String modifiedCupMessage =
-                "You have modified the class fields in the " + cupboardClass + " class. Please revert them back to the original state they were provided in.";
+                "You have modified the provided portions of class " + cupboardClass + ". Please revert them to the original state.";
         Class<?>[] classArguments = {int.class, boolean.class};
         assertTrue(cupboard.hasConstructor(classArguments), modifiedCupMessage);
         assertTrue(cupboard.hasModifier(classArguments, "public"), modifiedCupMessage);
