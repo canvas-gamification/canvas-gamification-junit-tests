@@ -46,7 +46,11 @@ public class MainTest {
                 Arguments.of(534.32, "Good"),
                 Arguments.of(354.4, "Bad"),
                 Arguments.of(93828.12, "Fair"),
-                Arguments.of(2232.3, "Excellent")
+                Arguments.of(2232.3, "Excellent"),
+                Arguments.of(-534.32, "Good"),
+                Arguments.of(-354.4, "Bad"),
+                Arguments.of(-93828.12, "Fair"),
+                Arguments.of(-2232.3, "Excellent")
         );
     }
 
@@ -58,8 +62,12 @@ public class MainTest {
                 {quality, String.class}
         };
         Object instance = classInstance.createInstance(arguments);
-        _assertEquals(volume, classInstance.getFieldValue(instance, varVol),
+        if(volume > 0)
+            _assertEquals(volume, classInstance.getFieldValue(instance, varVol),
                 "Your " + className + " constructor does not correctly initialize the " + varVol + " field.");
+        else
+            _assertEquals(0.000, classInstance.getFieldValue(instance, varVol), 0.000001,
+                    "Your " + className + " constructor does not correctly initialize the " + varVol + " field.");
         _assertEquals(quality, classInstance.getFieldValue(instance, varQual),
                 "Your " + className + " constructor does not correctly initialize the " + varQual + " field.");
     }

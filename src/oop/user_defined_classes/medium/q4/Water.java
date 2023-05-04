@@ -6,7 +6,10 @@ public class Water
     private String quality;
     public Water( double amount, String level )
     {
-        volume = amount;
+        if(amount > 0)
+            volume = amount;
+        else
+            volume = 0;
         quality = level;
     }
 }
