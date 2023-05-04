@@ -25,7 +25,7 @@ public class MainTest {
         String classString = "oop.user_defined_classes.medium.q6." + className;
         classInstance = new ObjectTest(classString);
         String modifiedClassMessage =
-                "You have modified the class fields in the " + className + " class. Please revert them back to the original state they were provided in.";
+                "You have modified the provided portions of class " + className + ". Please revert them to the original state.";
         Class<?>[] classArguments = {double.class, int.class};
         assertTrue(classInstance.hasConstructor(classArguments), modifiedClassMessage);
         assertTrue(classInstance.hasModifier(classArguments, "public"), modifiedClassMessage);
