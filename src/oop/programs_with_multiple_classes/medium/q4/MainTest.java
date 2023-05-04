@@ -65,7 +65,10 @@ public class MainTest {
         return Stream.of(
                 Arguments.of(5.5, "Milani"),
                 Arguments.of(2.3, "Ford"),
-                Arguments.of(7.7, "Nissan")
+                Arguments.of(7.7, "Nissan"),
+                Arguments.of(-3.5, "Milani"),
+                Arguments.of(-2.6, "Martin"),
+                Arguments.of(-5.4, "Harley")
         );
     }
 
@@ -77,8 +80,13 @@ public class MainTest {
                 {m, String.class}
         };
         Object wheelInstance = wheel.createInstance(arguments);
-        _assertEquals(d, wheel.getFieldValue(wheelInstance, varDurability),
-                "Your " + wheelClass + " constructor does not correctly initialize the " + varDurability + " field.");
+        if (d >= 0) {
+            _assertEquals(d, wheel.getFieldValue(wheelInstance, varDurability),
+                    "Your " + wheelClass + " constructor does not correctly initialize the " + varDurability + " field.");
+        } else {
+            _assertEquals(0.00000, wheel.getFieldValue(wheelInstance, varDurability), 0.00001,
+                    "Your " + wheelClass + " constructor does not correctly initialize the " + varDurability + " field.");
+        }
         _assertEquals(m, wheel.getFieldValue(wheelInstance, varManufacturer),
                 "Your " + wheelClass + " constructor does not correctly initialize the " + varManufacturer + " field.");
     }

@@ -5,7 +5,10 @@ public class Wheel {
     private String manufacturer;
 
     public Wheel(double d, String m) {
-        durability = d;
+        if(d > 0)
+            durability = d;
+        else
+            durability = 0;
         manufacturer = m;
     }
 
