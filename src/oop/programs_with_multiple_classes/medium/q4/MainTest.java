@@ -1,8 +1,6 @@
 package oop.programs_with_multiple_classes.medium.q4;
 
-import global.BaseTest;
 import global.ObjectTest;
-import global.variables.Clause;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -32,13 +30,13 @@ public class MainTest {
         wheel = new ObjectTest(wheelClassString);
         chassis = new ObjectTest(chassisClassString);
         String modifiedWheelMessage =
-                "You have modified the class fields in the " + wheelClass + " class. Please revert them back to the original state they were provided in.";
+                "You have modified the provided portions of class " + wheelClass + ". Please revert them to the original state.";
         assertTrue(wheel.hasField(varDurability, double.class), modifiedWheelMessage);
         assertTrue(wheel.hasField(varManufacturer, String.class), modifiedWheelMessage);
         assertTrue(wheel.hasModifier(varDurability, "private"), modifiedWheelMessage);
         assertTrue(wheel.hasModifier(varManufacturer, "private"), modifiedWheelMessage);
         String modifiedChassisMessage =
-                "You have modified the class fields in the " + chassisClass + " class. Please revert them back to the original state they were provided in.";
+                "You have modified the provided portions of class " + chassisClass + ". Please revert them to the original state.";
         Class<?>[] classArguments = {String.class};
         assertTrue(chassis.hasConstructor(classArguments), modifiedChassisMessage);
         assertTrue(chassis.hasModifier(classArguments, "public"), modifiedChassisMessage);
