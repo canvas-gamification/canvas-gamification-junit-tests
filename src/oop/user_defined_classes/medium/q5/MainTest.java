@@ -30,13 +30,18 @@ public class MainTest {
                 "You have modified the class fields in the " + className + " class. Please revert them back to the original state they were provided in.";
         assertTrue(classInstance.hasField(var, double.class), modifiedClassMessage);
         assertTrue(classInstance.hasModifier(var, "private"), modifiedClassMessage);
+
+    }
+
+    @Test
+    void hasCorrectConstructor() throws Throwable {
+        String incorrectCons = "Your " + className + " class does not have the correct constructor.";
+        String incorrectModi = "Your " + className + " class does not have the correct modifiers for constructor.";
         Class<?>[] classArguments = {};
-        assertTrue(classInstance.hasConstructor(classArguments), modifiedClassMessage);
-        assertTrue(classInstance.hasModifier(classArguments, "public"), modifiedClassMessage);
+        assertTrue(classInstance.hasConstructor(classArguments), incorrectCons);
+        assertTrue(classInstance.hasModifier(classArguments, "public"), incorrectModi);
         Object instance = classInstance.createInstance();
-        _assertEquals(initialFee, classInstance.getFieldValue(instance, var), modifiedClassMessage);
-
-
+        _assertEquals(initialFee, classInstance.getFieldValue(instance, var), incorrectCons);
     }
 
     private static Stream<Arguments> methodInputProvider() {

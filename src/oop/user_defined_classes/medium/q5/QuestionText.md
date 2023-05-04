@@ -16,10 +16,12 @@ future.
 The `Bank` class you are given has the following items:
 
 - Attributes:
-    - A `double` called **fee** 
-- Constructor:
-    - A constructor to initialize the **fee** field to 5.25.
+    - A `double` called **fee**
 
-Create the method **increase** that takes an integer for number of months from today
-and calculate the future fee. The estimation is calculated using formula
-future fee = current fee * (number of moths in the future + 0.95).
+You need to add the following items:
+- Constructor:
+  - A constructor to initialize the **fee** field to 5.25.
+- Methods:
+    - Create the method **increase** that takes an integer for number of months from today
+  and calculate the future fee. The estimation is calculated using formula
+  future fee = current fee * (number of moths in the future + 0.95).
