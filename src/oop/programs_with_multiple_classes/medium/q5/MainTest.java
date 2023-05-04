@@ -33,12 +33,12 @@ public class MainTest {
         desk = new ObjectTest(deskClassString);
         monitor = new ObjectTest(monitorClassString);
         String modifiedDeskMessage =
-                "You have modified the class fields in the " + deskClass + " class. Please revert them back to the original state they were provided in.";
+                "You have modified the provided portions of class " + deskClass + ". Please revert them to the original state.";
         assertTrue(desk.hasField(varMaterial, String.class), modifiedDeskMessage);
         assertTrue(desk.hasModifier(varMaterial, "private"), modifiedDeskMessage);
 
         String modifiedMonitorMessage =
-                "You have modified the class fields in the " + monitorClass + " class. Please revert them back to the original state they were provided in.";
+                "You have modified the provided portions of class " + monitorClass + ". Please revert them to the original state.";
         assertTrue(monitor.hasField(varCount, int.class), modifiedMonitorMessage);
         assertTrue(monitor.hasModifier(varCount, "private"), modifiedMonitorMessage);
         Class<?>[] classArguments = {int.class};
