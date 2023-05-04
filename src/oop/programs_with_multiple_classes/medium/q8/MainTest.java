@@ -40,13 +40,13 @@ public class MainTest extends BaseTest {
         light = new ObjectTest(lightClassString);
         kitchen = new ObjectTest(kitchenClassString);
         String modifiedLightMessage =
-                "You have modified the class fields in the " + classLight + " class. Please revert them back to the original state they were provided in.";
+                "You have modified the provided portions of class " + classLight + ". Please revert them to the original state.";
         assertTrue(light.hasField(varOn, boolean.class), modifiedLightMessage);
         assertTrue(light.hasModifier(varOn, "private"), modifiedLightMessage);
         assertTrue(light.hasField(varType, String.class), modifiedLightMessage);
         assertTrue(light.hasModifier(varType, "private"), modifiedLightMessage);
         String modifiedKitchenMessage =
-                "You have modified the class fields in the " + classKitchen + " class. Please revert them back to the original state they were provided in.";
+                "You have modified the provided portions of class " + classKitchen + ". Please revert them to the original state.";
         Class<?>[] classArguments = {int.class, int.class};
         assertTrue(kitchen.hasConstructor(classArguments), modifiedKitchenMessage);
         assertTrue(kitchen.hasModifier(classArguments, "public"), modifiedKitchenMessage);
@@ -107,6 +107,26 @@ public class MainTest extends BaseTest {
                 "Your " + classLight + " constructor does not correctly initialize the " + varOn + " field.");
         _assertEquals(type, light.getFieldValue(lightInstance, varType),
                 "Your " + classLight + " constructor does not correctly initialize the " + varType + " field.");
+    }
+
+    private static Stream<Arguments> kitchenInputProvider() {
+        return Stream.of(
+                Arguments.of(-10, 15),
+                Arguments.of(-20, 30),
+                Arguments.of(-150, 40)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("kitchenInputProvider")
+    public void lightConstructorInitializesValuesCorrectly(int size, int personCapacity) throws Throwable {
+        Object[][] arguments = {
+                {size, int.class},
+                {personCapacity, int.class}
+        };
+        Object kitchenInstance = kitchen.createInstance(arguments);
+        _assertEquals(0, kitchen.getFieldValue(kitchenInstance, varSize),
+                "Your " + classKitchen + " constructor does not correctly initialize the " + varSize + " field when given a negative value.");
     }
 
 }

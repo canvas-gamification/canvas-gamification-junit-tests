@@ -5,7 +5,10 @@ public class Kitchen {
     private int personCapacity;
 
     public Kitchen(int s, int p) {
-        size = s;
+        if(s > 0)
+            size = s;
+        else
+            size = 0;
         personCapacity = p;
     }
 }
