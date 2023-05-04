@@ -1,4 +1,4 @@
-# oop-programs_with_multiple_classes-medium-q3
+# oop-programs_with_multiple_classes-medium-q5
 
 ## Question Information:
 
@@ -28,9 +28,6 @@ You must add the following items to complete the class:
       field.
 
 ## Desk
-
-Your `Desk` class currently has the attributes `String materialType`. Create a
-constructor which is accessible from another class and initializes this field.
 The `Desk` class currently has the following items:
 - Attributes:
     - A `String` called **materialType**
