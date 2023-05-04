@@ -35,7 +35,7 @@ public class MainTest {
         vegetable = new ObjectTest(vegetableClassString);
         cupboard = new ObjectTest(cupboardClassString);
         String modifiedVegtableMessage =
-                "You have modified the class fields in the " + classVegtable + " class. Please revert them back to the original state they were provided in.";
+                "You have modified the provided portions of class " + classVegtable + ". Please revert them to the original state.";
         assertTrue(vegetable.hasField(varSpoiled, boolean.class), modifiedVegtableMessage);
         assertTrue(vegetable.hasModifier(varSpoiled, "private"), modifiedVegtableMessage);
         assertTrue(vegetable.hasField(varWeight, double.class), modifiedVegtableMessage);
@@ -43,7 +43,7 @@ public class MainTest {
         assertTrue(vegetable.hasField(varOrigin, String.class), modifiedVegtableMessage);
         assertTrue(vegetable.hasModifier(varOrigin, "private"), modifiedVegtableMessage);
         String modifiedCupMessage =
-                "You have modified the class fields in the " + classCupboard + " class. Please revert them back to the original state they were provided in.";
+                "You have modified the provided portions of class " + classCupboard + ". Please revert them to the original state.";
         Class<?>[] classArguments = {int.class, String.class};
         assertTrue(cupboard.hasConstructor(classArguments), modifiedCupMessage);
         assertTrue(cupboard.hasModifier(classArguments, "public"), modifiedCupMessage);
