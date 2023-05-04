@@ -20,6 +20,7 @@ public class MainTest {
     private final String varSize = "size";
     private final String varHardness = "hardness";
     private final String varSchool = "isForSchool";
+    private final String varMethod = "erase";
     public ObjectTest pencil;
     public ObjectTest eraser;
 
@@ -30,13 +31,13 @@ public class MainTest {
         pencil = new ObjectTest(pencilClassString);
         eraser = new ObjectTest(eraserClassString);
         String modifiedPencilMessage =
-                "You have modified the class fields in the " + classPencil + " class. Please revert them back to the original state they were provided in.";
+                "You have modified the provided portions of class " + classPencil + ". Please revert them to the original state.";
         assertTrue(pencil.hasField(varHardness, int.class), modifiedPencilMessage);
         assertTrue(pencil.hasField(varSchool, boolean.class), modifiedPencilMessage);
         assertTrue(pencil.hasModifier(varHardness, "private"), modifiedPencilMessage);
         assertTrue(pencil.hasModifier(varSchool, "private"), modifiedPencilMessage);
         String modifiedEraserMessage =
-                "You have modified the class fields in the " + classEraser + " class. Please revert them back to the original state they were provided in.";
+                "You have modified the provided portions of class " + classEraser + ". Please revert them to the original state.";
         Class<?>[] classArguments = {double.class};
         assertTrue(eraser.hasConstructor(classArguments), modifiedEraserMessage);
         assertTrue(eraser.hasModifier(classArguments, "public"), modifiedEraserMessage);
@@ -80,6 +81,26 @@ public class MainTest {
                 "Your " + classPencil + " constructor does not correctly initialize the " + varHardness + " field.");
         _assertEquals(school, pencil.getFieldValue(pencilInstance, varSchool),
                 "Your " + classPencil + " constructor does not correctly initialize the " + varSchool + " field.");
+    }
+
+    private static Stream<Arguments> eraserInputProvider() {
+        return Stream.of(
+                Arguments.of(2),
+                Arguments.of(5),
+                Arguments.of(10)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("eraserInputProvider")
+    public void correctEraseMethod(double size) throws Throwable {
+        Object[][] arguments = {
+                {size, double.class}
+        };
+        Object eraerInstance = eraser.createInstance(arguments);
+        eraser.callMethod(varMethod, eraerInstance);
+        _assertEquals(size - 1, eraser.getFieldValue(eraerInstance, varSize),
+                "Your " + classEraser + " " + varMethod + " method does not correctly decrease the value of " + varSize + " by 1");
     }
 
 }

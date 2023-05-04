@@ -6,5 +6,6 @@ public class Eraser {
     public Eraser(double sz) {
         size = sz;
     }
+    public void erase(){ size --;}
 
 }
