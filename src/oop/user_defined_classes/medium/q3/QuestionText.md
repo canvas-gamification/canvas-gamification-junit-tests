@@ -23,6 +23,7 @@ You must add the following items to the class:
 - Constructors:
     - Initializes **weight**
       with the input values in the constructor.
+    - If the weight value is negative it should be initialized as 0.
 - Method:
     - Write a **makeSound** method that return a `String` that
   is `"Neigh!!"`

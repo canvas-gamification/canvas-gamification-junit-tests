@@ -38,7 +38,11 @@ public class MainTest {
                 Arguments.of(534.32),
                 Arguments.of(354.4),
                 Arguments.of(93828.12),
-                Arguments.of(2232.3)
+                Arguments.of(2232.3),
+                Arguments.of(-534.32),
+                Arguments.of(-354.4),
+                Arguments.of(-93828.12),
+                Arguments.of(-2232.3)
         );
     }
 
@@ -49,8 +53,12 @@ public class MainTest {
                 {number, double.class}
         };
         Object instance = classInstance.createInstance(arguments);
-        _assertEquals(number, classInstance.getFieldValue(instance, doubleFieldName),
-                "Your " + className + " constructor does not correctly initialize the " + doubleFieldName + " field.");
+        if (number > 0)
+            _assertEquals(number, classInstance.getFieldValue(instance, doubleFieldName),
+                    "Your " + className + " constructor does not correctly initialize the " + doubleFieldName + " field.");
+        else
+            _assertEquals(0.000, classInstance.getFieldValue(instance, doubleFieldName), 0.000001,
+                    "Your " + className + " constructor does not correctly initialize the " + doubleFieldName + " field.");
     }
 
     @ParameterizedTest
