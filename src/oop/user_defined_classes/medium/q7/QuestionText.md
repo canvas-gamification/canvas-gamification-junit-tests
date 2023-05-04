@@ -18,5 +18,7 @@ The `Highway` class you are given has the following items:
 - Constructor:
     - A constructor to initialize the **speedLimit** and initialize **fine** to 250.
 
-Create the method **issueTicket** that takes an int which is the current speed and
-return an `int` that is the fine needed to be paid for the input speed.
+You need to add the following items:
+- Methods:
+    - Create the method **issueTicket** that takes an int which is the current speed and
+  return an `int` that is the fine needed to be paid for the input speed.
