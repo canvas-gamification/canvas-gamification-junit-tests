@@ -33,7 +33,7 @@ public class MainTest {
         desk = new ObjectTest(deskClassString);
         monitor = new ObjectTest(monitorClassString);
         String modifiedMonitorMessage =
-                "You have modified the class fields in the " + classMonitor + " class. Please revert them back to the original state they were provided in.";
+                "You have modified the provided portions of class " + classMonitor + ". Please revert them to the original state.";
         assertTrue(monitor.hasField(varCount, int.class), modifiedMonitorMessage);
         assertTrue(monitor.hasModifier(varCount, "private"), modifiedMonitorMessage);
         assertTrue(monitor.hasField(varType, String.class), modifiedMonitorMessage);
@@ -41,7 +41,7 @@ public class MainTest {
         assertTrue(monitor.hasField(varRenewed, boolean.class), modifiedMonitorMessage);
         assertTrue(monitor.hasModifier(varRenewed, "private"), modifiedMonitorMessage);
         String modifiedDeskMessage =
-                "You have modified the class fields in the " + classDesk + " class. Please revert them back to the original state they were provided in.";
+                "You have modified the provided portions of class " + classDesk + ". Please revert them to the original state.";
         Class<?>[] classArguments = {String.class, int.class};
         assertTrue(desk.hasConstructor(classArguments), modifiedDeskMessage);
         assertTrue(desk.hasModifier(classArguments, "public"), modifiedDeskMessage);
