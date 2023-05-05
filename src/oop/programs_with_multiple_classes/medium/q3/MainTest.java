@@ -31,13 +31,13 @@ public class MainTest {
         pencil = new ObjectTest(pencilClassString);
         eraser = new ObjectTest(eraserClassString);
         String modifiedPencilMessage =
-                "You have modified the provided portions of class " + classPencil + ". Please revert them to the original state.";
+                "You have modified the provided portions of the "  + classPencil + " class. Please revert it back to the original state.";
         assertTrue(pencil.hasField(varHardness, int.class), modifiedPencilMessage);
         assertTrue(pencil.hasField(varSchool, boolean.class), modifiedPencilMessage);
         assertTrue(pencil.hasModifier(varHardness, "private"), modifiedPencilMessage);
         assertTrue(pencil.hasModifier(varSchool, "private"), modifiedPencilMessage);
         String modifiedEraserMessage =
-                "You have modified the provided portions of class " + classEraser + ". Please revert them to the original state.";
+                "You have modified the provided portions of the " + classEraser + " class. Please revert it back to the original state.";
         Class<?>[] classArguments = {double.class};
         assertTrue(eraser.hasConstructor(classArguments), modifiedEraserMessage);
         assertTrue(eraser.hasModifier(classArguments, "public"), modifiedEraserMessage);
