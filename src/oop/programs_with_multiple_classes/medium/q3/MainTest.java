@@ -46,7 +46,7 @@ public class MainTest {
     @Test
     public void eraserClassHasCorrectAttributes() {
         String incorrectFieldMessage = "Your " + classEraser + " class is missing a required field.";
-        String incorrectModifierMessage = "One of your " + classEraser + " class attributes does not have the correct visibility modifier.";
+        String incorrectModifierMessage = "The " + varSize + " field in the " + classEraser + " class attributes does not have the correct visibility modifier.";
         assertTrue(eraser.hasField(varSize, double.class), incorrectFieldMessage);
         assertTrue(eraser.hasModifier(varSize, "private"), incorrectModifierMessage);
     }
