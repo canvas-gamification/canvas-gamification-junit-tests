@@ -46,7 +46,7 @@ public class MainTest {
     @Test
     public void eraserClassHasCorrectAttributes() {
         String incorrectFieldMessage = "Your " + classEraser + " class is missing a required field.";
-        String incorrectModifierMessage = "One of your " + classEraser + " class attributes does not have the correct modifier.";
+        String incorrectModifierMessage = "One of your " + classEraser + " class attributes does not have the correct visibility modifier.";
         assertTrue(eraser.hasField(varSize, double.class), incorrectFieldMessage);
         assertTrue(eraser.hasModifier(varSize, "private"), incorrectModifierMessage);
     }
@@ -57,7 +57,7 @@ public class MainTest {
         assertTrue(pencil.hasConstructor(classArguments),
                 "Your " + classPencil + " constructor does not have the correct parameters.");
         assertTrue(pencil.hasModifier(classArguments, "public"),
-                "Your " + classPencil + " constructor does not have the correct modifiers.");
+                "Your " + classPencil + " constructor does not have the correct visibility modifier.");
     }
 
 
