@@ -65,7 +65,7 @@ public class MainTest {
         return Stream.of(
                 Arguments.of(2, true),
                 Arguments.of(5, false),
-                Arguments.of(10, true)
+                Arguments.of(170254, true)
         );
     }
 
