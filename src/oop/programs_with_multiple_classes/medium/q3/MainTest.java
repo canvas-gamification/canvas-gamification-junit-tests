@@ -31,7 +31,7 @@ public class MainTest {
         pencil = new ObjectTest(pencilClassString);
         eraser = new ObjectTest(eraserClassString);
         String modifiedPencilMessage =
-                "You have modified the provided portions of the "  + classPencil + " class. Please revert it back to the original state.";
+                "You have modified the provided portions of the " + classPencil + " class. Please revert it back to the original state.";
         assertTrue(pencil.hasField(varHardness, int.class), modifiedPencilMessage);
         assertTrue(pencil.hasField(varSchool, boolean.class), modifiedPencilMessage);
         assertTrue(pencil.hasModifier(varHardness, "private"), modifiedPencilMessage);
@@ -59,7 +59,6 @@ public class MainTest {
         assertTrue(pencil.hasModifier(classArguments, "public"),
                 "Your " + classPencil + " constructor does not have the correct visibility modifier.");
     }
-
 
     private static Stream<Arguments> pencilInputProvider() {
         return Stream.of(
