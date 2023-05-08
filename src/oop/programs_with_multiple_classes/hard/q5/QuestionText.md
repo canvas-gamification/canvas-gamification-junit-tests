@@ -27,13 +27,15 @@ Your `Bookcase` class should have the following items:
 
 - Attributes:
     - A `int` called **sizeCapacity**
-    - A `Book` called **b1**
+    - An array of `Book` objects called **books**
 - Constructors:
-    - A constructor which accepts an int to initialize the **sizeCapacity** field and a Book to initialize the **b1**
-      field (in this order)
+    - A constructor which accepts an int to initialize the **sizeCapacity** field and an array of Book objects to
+      initialize the **books** field (in this order)
         - This constructor should be accessible from other classes
 - Methods:
     - A method called `determineReplaced`
         - It should take no input and return a String
-        - Its purpose is to prompt the user to buy a new book if **b1** was published more than five years ago
+        - Its purpose is to prompt the user to buy a new book if one of the **books** was published more than five years
+          ago
+          - it will either return "You have enough new books!" or "Time to buy a new book!"
         - This method should be accessible from other classes
