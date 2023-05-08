@@ -8,7 +8,7 @@ two classes: `Person` and `Blanket`. See the requirements below for each class.
 Your `Person` class should have the following items:
 
 - Attributes:
-    - A `double` called **height**
+    - A `double` called **height**, which is not accessible from other classes
 - Constructors:
     - A constructor which accepts a double to initialize the **height** field and is accessible from other classes
 

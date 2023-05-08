@@ -41,7 +41,7 @@ public class MainTest {
     @Test
     public void personClassHasCorrectFields() {
         String missingFieldMessage = "Your " + personLc + " class is missing a required field.";
-        String incorrectFieldModifierMessage = "A field in your " + personLc + " class has an incorrect modifier.";
+        String incorrectFieldModifierMessage = "A field in your " + personLc + " class has the wrong visibility modifier.";
         assertTrue(person.hasField(height, double.class), missingFieldMessage);
         assertTrue(person.hasModifier(height, "private"), incorrectFieldModifierMessage);
     }
@@ -50,7 +50,7 @@ public class MainTest {
     public void personClassHasCorrectConstructors() {
         String missingConstructorMessage = "Your " + personLc + " class does not have a required constructor.";
         String incorrectConstructorModifierMessage =
-                "One of the constructors in your " + personLc + " class does not have the correct modifiers.";
+                "One of the constructors in your " + personLc + " class does not have the correct visibility modifier.";
         Class<?>[] constructorClasses = new Class[]{
                 double.class
         };
@@ -84,7 +84,7 @@ public class MainTest {
     @Test
     public void blanketClassHasCorrectFields() {
         String missingFieldMessage = "Your " + blanketLc + " class is missing a required field.";
-        String incorrectFieldModifierMessage = "A field in your " + blanketLc + " class has an incorrect  visibility modifier.";
+        String incorrectFieldModifierMessage = "A field in your " + blanketLc + " class has the wrong visibility modifier.";
         assertTrue(blanket.hasField(size, String.class), missingFieldMessage);
         assertTrue(blanket.hasModifier(size, "private"), incorrectFieldModifierMessage);
         assertTrue(blanket.hasField(threadCount, int.class), missingFieldMessage);
@@ -95,7 +95,7 @@ public class MainTest {
     public void blanketClassHasCorrectConstructors() {
         String missingConstructorMessage = "Your " + blanketLc + " class does not have a required constructor.";
         String incorrectConstructorModifierMessage =
-                "One of the constructors in your " + blanketLc + " class does not have the correct modifiers.";
+                "One of the constructors in your " + blanketLc + " class does not have the correct visibility modifier.";
         Class<?>[] constructorClasses = new Class[]{
                 String.class,
                 int.class
