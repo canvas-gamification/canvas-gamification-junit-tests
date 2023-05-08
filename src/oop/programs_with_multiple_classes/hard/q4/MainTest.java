@@ -28,7 +28,7 @@ public class MainTest {
     private final String sizeCapacity = "sizeCapacity";
     private final String b1 = "b1";
 
-    private final String determineTime = "determineTime";
+    private final String howManyYears = "howManyYears";
 
 
     @BeforeEach
@@ -45,7 +45,7 @@ public class MainTest {
     @Test
     public void bookClassHasCorrectFields() {
         String missingFieldMessage = "Your " + bookLc + " class is missing a required field.";
-        String incorrectFieldModifierMessage = "A field in your " + bookLc + " class has an incorrect modifier.";
+        String incorrectFieldModifierMessage = "A field in your " + bookLc + " class has an the wrong visibility modifier.";
         assertTrue(book.hasField(year, int.class), missingFieldMessage);
         assertTrue(book.hasField(type, String.class), missingFieldMessage);
         assertTrue(book.hasModifier(year, "private"), incorrectFieldModifierMessage);
@@ -56,7 +56,7 @@ public class MainTest {
     public void bookClassHasCorrectConstructors() {
         String missingConstructorMessage = "Your " + bookLc + " class does not have a required constructor.";
         String incorrectConstructorModifierMessage =
-                "One of the constructors in your " + bookLc + " class does not have the correct modifiers.";
+                "One of the constructors in your " + bookLc + " class does not have the correct visibility modifier.";
         Class<?>[] constructorClasses = new Class[]{
                 int.class,
                 String.class
@@ -90,16 +90,16 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("bookInputProvider")
-    public void correctDetermineTimeMethod(int year, String type) throws Throwable {
+    public void correctHowManyYearsMethod(int year, String type) throws Throwable {
         Object[][] arguments = new Object[][]{
                 {year, int.class},
                 {type, String.class}
         };
         Object bookInstance = book.createInstance(arguments);
-        Object determineTimeOutput = book.callMethod(determineTime, bookInstance);
-        int determineTimeExpected = Year.now().getValue() - year;
-        String incorrectDetermineTimeExpected = "Your " + bookLc + " " + determineTime + " method does not return the correct time.";
-        _assertEquals(determineTimeExpected, determineTimeOutput, incorrectDetermineTimeExpected);
+        Object howManyYearsOutput = book.callMethod(howManyYears, bookInstance);
+        int howManyYearsExpected = Year.now().getValue() - year;
+        String incorrectHowManyYearsExpected = "Your " + bookLc + " " + howManyYears + " method does not return the correct time.";
+        _assertEquals(howManyYearsExpected, howManyYearsOutput, incorrectHowManyYearsExpected);
     }
 
     /**
@@ -108,7 +108,7 @@ public class MainTest {
     @Test
     public void bookcaseClassHasCorrectFields() {
         String missingFieldMessage = "Your " + bookcaseLc + " class is missing a required field.";
-        String incorrectFieldModifierMessage = "A field in your " + bookcaseLc + " class has an incorrect modifier.";
+        String incorrectFieldModifierMessage = "A field in your " + bookcaseLc + " class has the wrong visibility modifier.";
         assertTrue(bookcase.hasField(sizeCapacity, int.class), missingFieldMessage);
         assertTrue(bookcase.hasModifier(sizeCapacity, "private"), incorrectFieldModifierMessage);
     }
@@ -117,7 +117,7 @@ public class MainTest {
     public void bookcaseClassHasCorrectConstructors() {
         String missingConstructorMessage = "Your " + bookcaseLc + " class does not have a required constructor.";
         String incorrectConstructorModifierMessage =
-                "One of the constructors in your " + bookcaseLc + " class does not have the correct modifiers.";
+                "One of the constructors in your " + bookcaseLc + " class does not have the correct visibility modifier.";
         Class<?>[] constructorClasses = new Class[]{
                 int.class,
                 Book.class

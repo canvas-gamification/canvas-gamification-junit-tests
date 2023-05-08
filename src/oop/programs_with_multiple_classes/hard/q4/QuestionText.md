@@ -8,14 +8,14 @@ classes: `Book` and `Bookcase`. See the requirements below for each class.
 Your `Book` class should have the following items:
 
 - Attributes:
-    - An `int` called **year**
-    - A `String` called **type**
+    - An `int` called **year**, which is not accessible from other classes
+    - A `String` called **type**, which is not accessible from other classes
 - Constructors:
     - A constructor which accepts a String to initialize the **type** field and an int to initialize the **year**
       field (in this order)
         - This constructor should be accessible from other classes
 - Methods:
-    - A method called `determineTime`
+    - A method called `howManyYears`
         - It should take no input and return an int
         - Its purpose is to calculate the amount of years since the **year** when a book was
           published
@@ -26,8 +26,8 @@ Your `Book` class should have the following items:
 Your `Bookcase` class should have the following items:
 
 - Attributes:
-    - A `int` called **sizeCapacity**
-    - A `Book` called **b1**
+    - A `int` called **sizeCapacity**, which is not accessible from other classes
+    - A `Book` called **b1**, which is not accessible from other classes
 - Constructors:
     - A constructor which accepts an int to initialize the **sizeCapacity** field and a Book to initialize the **b1**
       field (in this order)

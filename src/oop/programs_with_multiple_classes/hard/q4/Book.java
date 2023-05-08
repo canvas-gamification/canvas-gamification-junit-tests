@@ -11,7 +11,7 @@ public class Book {
         this.type = type;
     }
 
-    public int determineTime() {
+    public int howManyYears() {
         return Year.now().getValue() - year;
     }
 }
