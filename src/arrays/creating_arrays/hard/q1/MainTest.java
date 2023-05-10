@@ -88,7 +88,7 @@ public class MainTest extends BaseTest {
         int length = x * 2 - 1;
         if (x <= 0) {
             Clause[][] c = new Clause[1][1];
-            c[0][0] = new NewLine();
+            c[0][0] = new Optional(new NewLine());
             return c;
         }
         if (x == 1) {
@@ -110,7 +110,7 @@ public class MainTest extends BaseTest {
         int length = x * 2 - 1;
         if (x <= 0) {
             Clause[][] c = new Clause[1][1];
-            c[0][0] = new NewLine();
+            c[0][0] = new Optional(new NewLine());
             return c;
         }
         if (x == 1) {
