@@ -8,9 +8,11 @@ public class DishWasher {
         forks = a;
         knives = b;
     }
-    public void loadDishWasher( int a )
+    public void loadDishWasher( int a, int b )
     {
         forks = forks - a;
         System.out.println( forks + " forks are still clean");
+        knives = knives - b;
+        System.out.println( knives + " knives are still clean");
     }
 }

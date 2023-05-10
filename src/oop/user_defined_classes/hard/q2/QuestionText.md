@@ -7,7 +7,8 @@
 
 ## Question Text
 
-
+Dishwashers are convenient, but it can be easy to lose track of how much clean cutlery you have. Write a Java class 
+called `DishWasher` to track the contents of the dishwasher. See the description below for the requirements.
 
 ### DishWasher Class:
 
@@ -22,6 +23,8 @@ Your `DishWasher` class should have the following items:
       set **forks** field and the second the **knives** field.
 
 - Methods:
-    - A method called `loadDishWasher` which another class can give the number of dirty forks to be subtracted from the 
-      total number of **forks**. Then the method should print "**forks** forks are still clean" to the console.
+    - A method called `loadDishWasher` which another class can give the number of dirty forks and dirty knives to be
+      subtracted from the total number of **forks** and **knives**. The first int should set **forks** field and the
+      second the **knives** field. Then the method should print "**forks** forks are still clean" and "**knives** knives 
+      are still clean" to the console on separate lines.
   
