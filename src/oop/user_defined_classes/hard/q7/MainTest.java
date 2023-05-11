@@ -46,7 +46,7 @@ public class MainTest {
     @Test
     public void courseClassHasRequiredConstructor() {
         String missingConstructorMessage = "Your " + testClassName + " class is missing a required constructor.";
-        Class<?>[] arguments= {
+        Class<?>[] arguments = {
                 String.class, int.class
         };
         assertTrue(classInstance.hasConstructor(arguments), missingConstructorMessage);
@@ -65,14 +65,14 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void courseConstructorInitializesFieldsCorrectly(String attribute1, int attribute2) throws Throwable{
+    public void courseConstructorInitializesFieldsCorrectly(String attribute1, int attribute2) throws Throwable {
         Object[][] arguments = {
                 {attribute1, String.class},
                 {attribute2, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
         String incorrectFieldInstantiationMessage =
-                "Your " + testClassName + " constructor does not correctly initialize the object." ;
+                "Your " + testClassName + " constructor does not correctly initialize the object.";
         _assertEquals(attribute1, classInstance.getFieldValue(instance, stringAttributeName1),
                 incorrectFieldInstantiationMessage);
         _assertEquals(attribute2, classInstance.getFieldValue(instance, intAttributeName1),
@@ -93,7 +93,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
-    public void correctDetermineDifficultyMethod(String attribute1, int attribute2, int dif, String mssg) throws Throwable{
+    public void correctDetermineDifficultyMethod(String attribute1, int attribute2, int dif, String mssg) throws Throwable {
         Object[][] arguments = {
                 {attribute1, String.class},
                 {attribute2, int.class}

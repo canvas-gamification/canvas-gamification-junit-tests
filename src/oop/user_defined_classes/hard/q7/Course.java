@@ -1,22 +1,19 @@
 package oop.user_defined_classes.hard.q7;
 
-public class Course
-{
+public class Course {
     private String topic;
     private int difficulty;
-    public Course(String t, int d)
-    {
+
+    public Course(String t, int d) {
         topic = t;
         difficulty = d;
     }
 
-    public void determineDifficulty(int difficult){
-        if(difficulty >= difficult){
+    public void determineDifficulty(int difficult) {
+        if (difficulty >= difficult) {
             System.out.println(topic + " is a difficult course");
-        }
-        else {
+        } else {
             System.out.println(topic + " is not a difficult course");
         }
     }
 }
-
