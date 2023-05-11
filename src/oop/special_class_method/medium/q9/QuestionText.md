@@ -15,6 +15,8 @@ Your `Car` class must have the following items
     - An `String` called **maker**
     - An `double` called **topSpeed**
 
+You need to add the following items:
+
 - Constructor:
     - a `Car` constructor that is visible to other classes and accepts a `String` and a `double` and uses it to initialize the
       **maker** and **topSpeed** fields.

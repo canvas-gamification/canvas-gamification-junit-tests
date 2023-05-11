@@ -24,21 +24,14 @@ public class MainTest {
     public void setUp() {
         String classString = "oop.special_class_method.medium.q9." + className;
         this.testClass = new ObjectTest(classString);
+        String modifiedClassMessage =
+                "You have modified the provided portions of class " + className + ". Please revert them to the original state.";
+        assertTrue(testClass.hasField(attributeName1, String.class), modifiedClassMessage);
+        assertTrue(testClass.hasModifier(attributeName1, "private"), modifiedClassMessage);
+        assertTrue(testClass.hasField(attributeName2, double.class), modifiedClassMessage);
+        assertTrue(testClass.hasModifier(attributeName2, "private"), modifiedClassMessage);
     }
 
-    @Test
-    public void lufffyClassHasCorrectField() {
-        String missingFieldMessage = "Your " + className + " class is missing the " + attributeName1 + " field.";
-        String incorrectVisibilityModifierMessage =
-                "Your " + attributeName1 + " field does not have the correct visibility modifier.";
-        assertTrue(testClass.hasField(attributeName1, String.class), missingFieldMessage);
-        assertTrue(testClass.hasModifier(attributeName1, "private"), incorrectVisibilityModifierMessage);
-        String missingFieldMessage2 = "Your " + className + " class is missing the " + attributeName2 + " field.";
-        String incorrectVisibilityModifierMessage2 =
-                "Your " + attributeName2 + " field does not have the correct visibility modifier.";
-        assertTrue(testClass.hasField(attributeName2, double.class), missingFieldMessage2);
-        assertTrue(testClass.hasModifier(attributeName2, "private"), incorrectVisibilityModifierMessage2);
-    }
 
     private static Stream<Arguments> inputProvider() {
         return Stream.of(
