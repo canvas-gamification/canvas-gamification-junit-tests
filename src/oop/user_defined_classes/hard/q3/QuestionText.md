@@ -4,6 +4,7 @@
 
 - Vary both of the attributes for this question and the class name
 - Also vary the method name
+- Also vary the starting values of the attributes
 - Java question
 
 ## Question Text
