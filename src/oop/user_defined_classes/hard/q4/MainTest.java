@@ -70,7 +70,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
-    public void correctSumItemsMethods(int attribute1) throws Throwable {
+    public void correctDoLaundryMethod(int attribute1) throws Throwable {
         Object[][] arguments = {
                 {attribute1, int.class}
         };
