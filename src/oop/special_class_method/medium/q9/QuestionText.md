@@ -1,0 +1,24 @@
+# oop-special_class_method-medium-q9
+
+## Question Text
+
+Suppose you are an employee of a vehicle manufacturing company, and you want to impress your boss with your Java skills. 
+Make a Java class called **Car** with two attributes called **maker** and **topSpeed** that are initialized by 
+the constructor. You will need to compose the necessary methods so that these attributes can be accessed from outside 
+of the class but they cannot be modified.
+
+### Car Class:
+
+Your `Car` class must have the following items
+
+- Attributes:
+    - An `String` called **maker**
+    - An `double` called **topSpeed**
+
+- Constructor:
+    - a `Car` constructor that is visible to other classes and accepts a `String` and a `double` and uses it to initialize the
+      **maker** and **topSpeed** fields.
+
+- Methods:
+    - a `getMaker` method which returns the value stored in the **maker** field
+    - a `getTopSpeed` method which returns the value stored in the **topSpeed** field
