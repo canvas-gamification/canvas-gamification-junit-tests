@@ -36,7 +36,7 @@ public class MainTest {
         assertTrue(wheel.hasModifier(varDurability, "private"), modifiedWheelMessage);
         assertTrue(wheel.hasModifier(varManufacturer, "private"), modifiedWheelMessage);
         String modifiedChassisMessage =
-                "You have modified the provided portions of class " + chassisClass + ". Please revert them to the original state.";
+                "You have modified the provided portions of class " + chassisClass + ". Please revert it back to the original state.";
         Class<?>[] classArguments = {String.class};
         assertTrue(chassis.hasConstructor(classArguments), modifiedChassisMessage);
         assertTrue(chassis.hasModifier(classArguments, "public"), modifiedChassisMessage);
