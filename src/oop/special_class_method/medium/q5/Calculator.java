@@ -24,4 +24,7 @@ public class Calculator {
     public boolean getIsCorrect() {
         return isCorrect;
     }
+    public String toString(){
+        return "The sum is " + sum + " and it is " + isCorrect;
+    }
 }

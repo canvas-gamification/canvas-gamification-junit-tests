@@ -24,24 +24,34 @@ public class MainTest {
     private ObjectTest testClass;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Throwable {
         String classString = "oop.special_class_method.medium.q5." + className;
         this.testClass = new ObjectTest(classString);
-    }
-
-    @Test
-    public void calculatorClassHasCorrectField() {
-        String missingFieldMessage = "Your " + className + " class is missing the " + attributeName1 + " field.";
-        String incorrectVisibilityModifierMessage =
-                "Your " + attributeName1 + " field does not have the correct visibility modifier.";
-        assertTrue(testClass.hasField(attributeName1, double.class), missingFieldMessage);
-        assertTrue(testClass.hasModifier(attributeName1, "private"), incorrectVisibilityModifierMessage);
-
-        String missingFieldMessage2 = "Your " + className + " class is missing the " + attributeName2 + " field.";
-        String incorrectVisibilityModifierMessage2 =
-                "Your " + attributeName2 + " field does not have the correct visibility modifier.";
-        assertTrue(testClass.hasField(attributeName2, boolean.class), missingFieldMessage2);
-        assertTrue(testClass.hasModifier(attributeName2, "private"), incorrectVisibilityModifierMessage2);
+        String modifiedClassMessage =
+                "You have modified the provided portions of class " + className + ". Please revert them to the original state.";
+        assertTrue(testClass.hasField(attributeName1, double.class), modifiedClassMessage);
+        assertTrue(testClass.hasModifier(attributeName1, "private"), modifiedClassMessage);
+        assertTrue(testClass.hasField(attributeName2, boolean.class), modifiedClassMessage);
+        assertTrue(testClass.hasModifier(attributeName2, "private"), modifiedClassMessage);
+        Object[][] tests = new Object[][]{
+                {4.23232, false},
+                {343434.44364, true},
+                {5.67, true},
+                {Math.PI, false}
+        };
+        for (int i = 0; i < tests.length; i++) {
+            double value = (double) tests[i][0];
+            boolean on = (boolean) tests[i][1];
+            Object[][] arguments = {
+                    {value, double.class},
+                    {on, boolean.class}
+            };
+            Class<?>[] classes = {double.class, boolean.class};
+            Object testInstance = testClass.createInstance(arguments);
+            _assertEquals(value * 7, testClass.getFieldValue(testInstance, attributeName1), modifiedClassMessage);
+            _assertEquals(on, testClass.getFieldValue(testInstance, attributeName2), modifiedClassMessage);
+            assertTrue(testClass.hasModifier(classes, "public"), modifiedClassMessage);
+        }
     }
 
     private static Stream<Arguments> booleanDoublesInputProvider() {
@@ -100,25 +110,6 @@ public class MainTest {
                 incorrectSetterMessage);
     }
 
-    @ParameterizedTest
-    @MethodSource("booleanDoublesInputProvider")
-    public void correctCalculatorConstructor(double value, boolean on) throws Throwable {
-        String incorrectValueMessage = "Your " + className + " constructor does not correctly initialize the " +
-                attributeName1 + " field.";
-        String incorrectValueMessage2 = "Your " + className + " constructor does not correctly initialize the " +
-                attributeName2 + " field.";
-        String incorrectVisibilityModifier =
-                "Your " + className + " constructor does not have the correct visibility modifier.";
-        Object[][] arguments = {
-                {value, double.class},
-                {on, boolean.class}
-        };
-        Class<?>[] classes = {double.class, boolean.class};
-        Object testInstance = testClass.createInstance(arguments);
-        _assertEquals(value * 7, testClass.getFieldValue(testInstance, attributeName1), incorrectValueMessage);
-        _assertEquals(on, testClass.getFieldValue(testInstance, attributeName2), incorrectValueMessage2);
-        assertTrue(testClass.hasModifier(classes, "public"), incorrectVisibilityModifier);
-    }
 
     @ParameterizedTest
     @MethodSource("booleanDoublesInputProvider")
@@ -163,5 +154,19 @@ public class MainTest {
                 "Your " + setAttributeMethodName2 + " method does not correctly update the value of " + attributeName2 + ".";
         _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName2),
                 incorrectSetterMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("booleanDoublesInputProvider")
+    public void correctToStringMethod(double value1, boolean value2) throws Throwable {
+        Object[][] arguments = {
+                {value1, double.class},
+                {value2, boolean.class}
+        };
+        String incorrectToStringMessage = "Your toString method does not return the correct String.";
+        Object testInstance = testClass.createInstance(arguments);
+        String expectedOutput = "The sum is " + value1 * 7 + " and it is " + value2;
+        Object toStringOutput = testClass.callMethod("toString", testInstance);
+        _assertEquals(expectedOutput, toStringOutput, incorrectToStringMessage);
     }
 }
