@@ -24,49 +24,34 @@ public class MainTest {
     private ObjectTest testClass;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Throwable {
         String classString = "oop.special_class_method.medium.q2." + className;
         this.testClass = new ObjectTest(classString);
+        String modifiedClassMessage =
+                "You have modified the provided portions of class " + className + ". Please revert them to the original state.";
+        assertTrue(testClass.hasField(attributeName1, double.class), modifiedClassMessage);
+        assertTrue(testClass.hasModifier(attributeName1, "private"), modifiedClassMessage);
+        assertTrue(testClass.hasField(attributeName2, boolean.class), modifiedClassMessage);
+        assertTrue(testClass.hasModifier(attributeName2, "private"), modifiedClassMessage);
+        double[] tests = new double[]{0.0, 23.3233, 553233333.55655334324, -111111.333342, 3554 / 3.7};
+        for (int i = 0; i < tests.length; i++) {
+            double value = tests[i];
+            Object[][] arguments = {
+                    {value, double.class}
+            };
+            Class<?>[] classes = {double.class};
+            Object testInstance = testClass.createInstance(arguments);
+            _assertEquals(value, testClass.getFieldValue(testInstance, attributeName1), modifiedClassMessage);
+            _assertEquals(true, testClass.getFieldValue(testInstance, attributeName2), modifiedClassMessage);
+            assertTrue(testClass.hasModifier(classes, "public"), modifiedClassMessage);
+        }
     }
 
-    @Test
-    public void lampClassHasCorrectField() {
-        String missingFieldMessage = "Your " + className + " class is missing the " + attributeName1 + " field.";
-        String incorrectVisibilityModifierMessage =
-                "Your " + attributeName1 + " field does not have the correct visibility modifier.";
-        assertTrue(testClass.hasField(attributeName1, double.class), missingFieldMessage);
-        assertTrue(testClass.hasModifier(attributeName1, "private"), incorrectVisibilityModifierMessage);
-
-        String missingFieldMessage2 = "Your " + className + " class is missing the " + attributeName2 + " field.";
-        String incorrectVisibilityModifierMessage2 =
-                "Your " + attributeName2 + " field does not have the correct visibility modifier.";
-        assertTrue(testClass.hasField(attributeName2, boolean.class), missingFieldMessage2);
-        assertTrue(testClass.hasModifier(attributeName2, "private"), incorrectVisibilityModifierMessage2);
-    }
 
     private static Stream<Double> doubleInputProvider() {
         return Stream.of(
                 0.0, 23.3233, 553233333.55655334324, -111111.333342, 3554 / 3.7
         );
-    }
-
-    @ParameterizedTest
-    @MethodSource("doubleInputProvider")
-    public void correctLampConstructor(double value) throws Throwable {
-        String incorrectValueMessage = "Your " + className + " constructor does not correctly initialize the " +
-                attributeName1 + " field.";
-        String incorrectValueMessage2 = "Your " + className + " constructor does not correctly initialize the " +
-                attributeName2 + " field.";
-        String incorrectVisibilityModifier =
-                "Your " + className + " constructor does not have the correct visibility modifier.";
-        Object[][] arguments = {
-                {value, double.class}
-        };
-        Class<?>[] classes = {double.class};
-        Object testInstance = testClass.createInstance(arguments);
-        _assertEquals(value, testClass.getFieldValue(testInstance, attributeName1), incorrectValueMessage);
-        _assertEquals(true, testClass.getFieldValue(testInstance, attributeName2), incorrectValueMessage2);
-        assertTrue(testClass.hasModifier(classes, "public"), incorrectVisibilityModifier);
     }
 
     @ParameterizedTest
@@ -186,5 +171,19 @@ public class MainTest {
                 "Your " + setAttributeMethodName2 + " method does not correctly update the value of " + attributeName2 + ".";
         _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName2),
                 incorrectSetterMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("booleanDoublesInputProvider")
+    public void correctToStringMethod(double value1, boolean value2) throws Throwable {
+        Object[][] arguments = {
+                {value1, double.class},
+                {value2, boolean.class}
+        };
+        String incorrectToStringMessage = "Your toString method does not return the correct String.";
+        Object testInstance = testClass.createInstance(arguments);
+        String expectedOutput = "My brightness is " + value1 + " and isOn is " + value2;
+        Object toStringOutput = testClass.callMethod("toString", testInstance);
+        _assertEquals(expectedOutput, toStringOutput, incorrectToStringMessage);
     }
 }

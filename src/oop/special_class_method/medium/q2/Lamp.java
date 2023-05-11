@@ -29,5 +29,9 @@ public class Lamp {
     public boolean getIsOn() {
         return isOn;
     }
+
+    public String toString() {
+        return "My brightness is " + brightness + " and isOn is " + isOn;
+    }
 }
 
