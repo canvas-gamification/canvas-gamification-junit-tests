@@ -20,19 +20,26 @@ public class MainTest {
     private ObjectTest testClass;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Throwable {
         String classString = "oop.special_class_method.medium.q4." + className;
         this.testClass = new ObjectTest(classString);
+        String modifiedClassMessage =
+                "You have modified the provided portions of class " + className + ". Please revert them to the original state.";
+        assertTrue(testClass.hasField(attributeName, String.class), modifiedClassMessage);
+        assertTrue(testClass.hasModifier(attributeName, "private"), modifiedClassMessage);
+        String[] tests = new String[]{"Normal", "Exotic", "Green", "Flower", "Cactus"};
+        for (int i = 0; i < tests.length; i++) {
+            String value = tests[i];
+            Object[][] arguments = {
+                    {value, String.class}
+            };
+            Class<?>[] classes = {String.class};
+            Object testInstance = testClass.createInstance(arguments);
+            _assertEquals(value, testClass.getFieldValue(testInstance, attributeName), modifiedClassMessage);
+            assertTrue(testClass.hasModifier(classes, "public"), modifiedClassMessage);
+        }
     }
 
-    @Test
-    public void circleClassHasCorrectField() {
-        String missingFieldMessage = "Your " + className + " class is missing the " + attributeName + " field.";
-        String incorrectVisibilityModifierMessage =
-                "Your " + attributeName + " field does not have the correct visibility modifier.";
-        assertTrue(testClass.hasField(attributeName, String.class), missingFieldMessage);
-        assertTrue(testClass.hasModifier(attributeName, "private"), incorrectVisibilityModifierMessage);
-    }
 
     private static Stream<String> stringInputProvider() {
         return Stream.of(
@@ -40,21 +47,6 @@ public class MainTest {
         );
     }
 
-    @ParameterizedTest
-    @MethodSource("stringInputProvider")
-    public void correctCircleConstructor(String value) throws Throwable {
-        String incorrectValueMessage = "Your " + className + " constructor does not correctly initialize the " +
-                attributeName + " field.";
-        String incorrectVisibilityModifier =
-                "Your " + className + " constructor does not have the correct visibility modifier.";
-        Object[][] arguments = {
-                {value, String.class}
-        };
-        Class<?>[] classes = {String.class};
-        Object testInstance = testClass.createInstance(arguments);
-        _assertEquals(value, testClass.getFieldValue(testInstance, attributeName), incorrectValueMessage);
-        assertTrue(testClass.hasModifier(classes, "public"), incorrectVisibilityModifier);
-    }
 
     @ParameterizedTest
     @MethodSource("stringInputProvider")
@@ -115,5 +107,18 @@ public class MainTest {
         testClass.callMethod(setAttributeMethodName, setMethodArguments, testInstance);
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName, testInstance);
         _assertEquals(updatedValue, getMethodOutput, errorMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("stringInputProvider")
+    public void correctToStringMethod(String value) throws Throwable {
+        Object[][] arguments = {
+                {value, String.class}
+        };
+        String incorrectToStringMessage = "Your toString method does not return the correct String.";
+        Object testInstance = testClass.createInstance(arguments);
+        String expectedOutput = "My breed is " + value;
+        Object toStringOutput = testClass.callMethod("toString", testInstance);
+        _assertEquals(expectedOutput, toStringOutput, incorrectToStringMessage);
     }
 }

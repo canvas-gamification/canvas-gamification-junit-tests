@@ -18,6 +18,9 @@ Your ``Plant` class must have the following items
     - a `Plant` constructor that is visible to other classes and accepts a `String` and uses it to initialize the
       **breed** field
 
+You need to add the following items:
+
 - Methods:
     - a `setBreed` method which accepts a `String` and uses it to set the value of the **breed** field
     - a `getBreed` method which returns the value stored in the **breed** field
+    - a `toString` method which return the string `"My breed is " + breed`

@@ -14,4 +14,7 @@ public class Plant {
     public String getBreed() {
         return breed;
     }
+    public String toString(){
+        return "My breed is " + breed;
+    }
 }
