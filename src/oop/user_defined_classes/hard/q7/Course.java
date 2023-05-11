@@ -11,7 +11,7 @@ public class Course
     }
 
     public void determineDifficulty(int difficult){
-        if(difficult >= difficulty){
+        if(difficulty >= difficult){
             System.out.println(topic + " is a difficult course");
         }
         else {
