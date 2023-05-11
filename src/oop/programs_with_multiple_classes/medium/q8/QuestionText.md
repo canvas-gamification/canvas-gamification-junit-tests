@@ -33,7 +33,7 @@ the input values.
 
 Your `Kitchen` class currently has a constructor, but is missing the fields the 
 constructor sets. Based on the
-constructor, add the **size** and **personCapacity** fields of the appropriate 
+constructor, add the **size**, **personCapacity**, and **lights** fields of the appropriate 
 type to the table class.
 
 
@@ -43,9 +43,11 @@ The `Kitchen` class currently has the following items:
 - Constructors:
     - A constructor which is visible from another class
       and initialize the **size** and **personCapacity** fields.
+    - It should initialize **lights** to null.
 You must add the following items to complete the class:
 - Attributes:
     - based on the constructor write the **size** and **personCapacity**
   fields with the appropriate types.
     - Make it that is the constructor gets a negative value for size, it
   initializes it as 0.
+    - An array of `Light` called **lights**

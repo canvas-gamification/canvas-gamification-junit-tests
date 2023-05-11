@@ -23,6 +23,7 @@ public class MainTest extends BaseTest {
     private final String varType = "type";
     private final String varSize = "size";
     private final String varCap = "personCapacity";
+    private final String varLights = "lights";
     public ObjectTest light;
     public ObjectTest kitchen;
 
@@ -75,6 +76,8 @@ public class MainTest extends BaseTest {
         assertTrue(kitchen.hasModifier(varSize, "private"), incorrectModifierMessage);
         assertTrue(kitchen.hasField(varCap, int.class), incorrectFieldMessage);
         assertTrue(kitchen.hasModifier(varCap, "private"), incorrectModifierMessage);
+        assertTrue(kitchen.hasField(varLights, Light[].class), incorrectFieldMessage);
+        assertTrue(kitchen.hasModifier(varLights, "private"), incorrectModifierMessage);
     }
 
     @Test
@@ -127,6 +130,8 @@ public class MainTest extends BaseTest {
         Object kitchenInstance = kitchen.createInstance(arguments);
         _assertEquals(0, kitchen.getFieldValue(kitchenInstance, varSize),
                 "Your " + classKitchen + " constructor does not correctly initialize the " + varSize + " field when given a negative value.");
+        _assertEquals(personCapacity, kitchen.getFieldValue(kitchenInstance, varCap),
+                "Your " + classKitchen + " constructor does not correctly initialize the " + varCap+ " field when given a negative value.");
     }
 
 }
