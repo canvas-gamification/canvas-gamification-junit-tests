@@ -42,7 +42,7 @@ public class MainTest {
     }
 
     @Test
-    public void luggageClassHasRequiredConstructor() {
+    public void phoneClassHasRequiredConstructor() {
         String missingConstructorMessage = "Your " + testClassName + " class is missing a required constructor.";
         Class<?>[] arguments = {
                 double.class, double.class
@@ -60,7 +60,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void luggageConstructorInitializesFieldsCorrectly(double attribute1, double attribute2) throws Throwable {
+    public void phoneConstructorInitializesFieldsCorrectly(double attribute1, double attribute2) throws Throwable {
         Object[][] arguments = {
                 {attribute1, double.class},
                 {attribute2, double.class}
@@ -86,7 +86,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
-    public void correctSumItemsMethods(double attribute1, double attribute2, double diag) throws Throwable {
+    public void correctCalcScreenSizeMethod(double attribute1, double attribute2, double diag) throws Throwable {
         Object[][] arguments = {
                 {attribute1, double.class},
                 {attribute2, double.class}
