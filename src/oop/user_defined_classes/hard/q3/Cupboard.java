@@ -16,4 +16,3 @@ public class Cupboard
             anyClean = true;
     }
 }
-
