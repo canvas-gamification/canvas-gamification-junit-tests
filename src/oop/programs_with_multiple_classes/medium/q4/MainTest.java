@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -20,11 +21,12 @@ public class MainTest {
     private final String varDurability = "durability";
     private final String varManufacturer = "manufacturer";
     private final String varMaterialType = "materialType";
+    private final String varWheels = "wheels";
     public ObjectTest wheel;
     public ObjectTest chassis;
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws Throwable {
         String wheelClassString = "oop.programs_with_multiple_classes.medium.q4." + wheelClass;
         String chassisClassString = "oop.programs_with_multiple_classes.medium.q4." + chassisClass;
         wheel = new ObjectTest(wheelClassString);
@@ -40,6 +42,17 @@ public class MainTest {
         Class<?>[] classArguments = {String.class};
         assertTrue(chassis.hasConstructor(classArguments), modifiedChassisMessage);
         assertTrue(chassis.hasModifier(classArguments, "public"), modifiedChassisMessage);
+        String[] tests = new String[]{"Steel", "Iron", "Carbon", "Titanium"};
+        for (int i = 0; i < tests.length; i++) {
+            Object[][] arguments = {
+                    {tests[i], String.class}
+            };
+            Object chassisInstance = chassis.createInstance(arguments);
+            _assertEquals(tests[i], chassis.getFieldValue(chassisInstance, varMaterialType),
+                    "Your " + chassisClass + " constructor does not correctly initialize the " + varMaterialType + " field.");
+            assertEquals(null, chassis.getFieldValue(chassisInstance, varWheels),
+                    "Your " + chassisClass + " constructor does not correctly initialize the " + varWheels + " field.");
+        }
     }
 
     @Test
@@ -48,6 +61,8 @@ public class MainTest {
         String incorrectModifierMessage = "One of your " + chassisClass + " class attributes does not have the correct modifier.";
         assertTrue(chassis.hasField(varMaterialType, String.class), incorrectFieldMessage);
         assertTrue(chassis.hasModifier(varMaterialType, "private"), incorrectModifierMessage);
+        assertTrue(chassis.hasField(varWheels, Wheel[].class), incorrectFieldMessage);
+        assertTrue(chassis.hasModifier(varWheels, "private"), incorrectModifierMessage);
     }
 
     @Test
@@ -78,15 +93,9 @@ public class MainTest {
                 {m, String.class}
         };
         Object wheelInstance = wheel.createInstance(arguments);
-        if (d >= 0) {
-            _assertEquals(d, wheel.getFieldValue(wheelInstance, varDurability),
-                    "Your " + wheelClass + " constructor does not correctly initialize the " + varDurability + " field.");
-        } else {
-            _assertEquals(0.00000, wheel.getFieldValue(wheelInstance, varDurability), 0.00001,
-                    "Your " + wheelClass + " constructor does not correctly initialize the " + varDurability + " field.");
-        }
-        _assertEquals(m, wheel.getFieldValue(wheelInstance, varManufacturer),
-                "Your " + wheelClass + " constructor does not correctly initialize the " + varManufacturer + " field.");
+        _assertEquals((d >= 0) ? d : 0.0000, wheel.getFieldValue(wheelInstance, varDurability),
+                "Your " + wheelClass + " constructor does not correctly initialize the " + varDurability + " field.");
+
     }
 
 }

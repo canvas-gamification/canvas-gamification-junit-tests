@@ -27,10 +27,6 @@ You must add the following items to complete the class:
 
 ## Chassis
 
-Your `Chassis` class currently has a constructor, but is missing the fields the constructor sets. Based on the
-constructor, add the `String materialType` field of the appropriate type to the table class.
-
-
 The `Chassis` class currently has the following items:
 
 - Constructors:
