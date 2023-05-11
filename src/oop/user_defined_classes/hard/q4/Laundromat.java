@@ -9,10 +9,10 @@ public class Laundromat
     }
     public void doLaundry()
     {
-        int dirtyItems = 0;
+        int dirtyItems = 1;
         while( dirtyItems <= gymClothes )
         {
-            System.out.println( "Cleaning item " + gymClothes );
+            System.out.println( "Cleaning item " + dirtyItems );
             dirtyItems++;
         }
         gymClothes = 0;
