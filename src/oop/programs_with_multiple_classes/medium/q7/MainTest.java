@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -21,6 +22,7 @@ public class MainTest {
     private final String varMaterial = "materialType";
     private final String varCapacity = "capacity";
     private final String varFull = "isFull";
+    private final String varKnifes = "knifes";
     public ObjectTest knife;
     public ObjectTest cupboard;
 
@@ -55,6 +57,8 @@ public class MainTest {
                     "Your " + cupboardClass + " constructor does not correctly initialize the " + varCapacity + " field.");
             _assertEquals(isFull, cupboard.getFieldValue(cupboardInstance, varFull),
                     "Your " + cupboardClass + " constructor does not correctly initialize the " + varFull + " field.");
+            assertEquals(null, cupboard.getFieldValue(cupboardInstance, varKnifes),
+                    "Your " + cupboardClass + " constructor does not correctly initialize the " + varKnifes + " field.");
         }
     }
 
@@ -66,6 +70,8 @@ public class MainTest {
         assertTrue(cupboard.hasModifier(varCapacity, "private"), incorrectModifierMessage);
         assertTrue(cupboard.hasField(varFull, boolean.class), incorrectFieldMessage);
         assertTrue(cupboard.hasModifier(varFull, "private"), incorrectModifierMessage);
+        assertTrue(cupboard.hasField(varKnifes, Knife[].class), incorrectFieldMessage);
+        assertTrue(cupboard.hasModifier(varKnifes, "private"), incorrectModifierMessage);
     }
 
     @Test
