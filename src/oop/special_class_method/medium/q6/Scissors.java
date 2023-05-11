@@ -25,5 +25,9 @@ public class Scissors {
     public void setCanCut(boolean a) {
         canCut = a;
     }
+
+    public String toString(){
+        return "isSharp is " + isSharp + " and canCut is " + canCut;
+    }
 }
 

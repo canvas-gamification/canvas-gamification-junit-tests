@@ -24,24 +24,29 @@ public class MainTest {
     private ObjectTest testClass;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Throwable {
         String classString = "oop.special_class_method.medium.q6." + className;
         this.testClass = new ObjectTest(classString);
-    }
-
-    @Test
-    public void scissorsClassHasCorrectField() {
-        String missingFieldMessage = "Your " + className + " class is missing the " + attributeName1 + " field.";
-        String incorrectVisibilityModifierMessage =
-                "Your " + attributeName1 + " field does not have the correct visibility modifier.";
-        assertTrue(testClass.hasField(attributeName1, boolean.class), missingFieldMessage);
-        assertTrue(testClass.hasModifier(attributeName1, "private"), incorrectVisibilityModifierMessage);
-
-        String missingFieldMessage2 = "Your " + className + " class is missing the " + attributeName2 + " field.";
-        String incorrectVisibilityModifierMessage2 =
-                "Your " + attributeName2 + " field does not have the correct visibility modifier.";
-        assertTrue(testClass.hasField(attributeName2, boolean.class), missingFieldMessage2);
-        assertTrue(testClass.hasModifier(attributeName2, "private"), incorrectVisibilityModifierMessage2);
+        String modifiedClassMessage =
+                "You have modified the provided portions of class " + className + ". Please revert them to the original state.";
+        assertTrue(testClass.hasField(attributeName1, boolean.class), modifiedClassMessage);
+        assertTrue(testClass.hasModifier(attributeName1, "private"), modifiedClassMessage);
+        assertTrue(testClass.hasField(attributeName2, boolean.class), modifiedClassMessage);
+        assertTrue(testClass.hasModifier(attributeName2, "private"), modifiedClassMessage);
+        boolean[][] tests = new boolean[][]{{true, true}, {true, false}, {false, true}, {false, false}};
+        for (int i = 0; i < tests.length; i++) {
+            boolean sharp = tests[i][0];
+            boolean cut = tests[i][1];
+            Object[][] arguments = {
+                    {sharp, boolean.class},
+                    {cut, boolean.class}
+            };
+            Class<?>[] classes = {boolean.class, boolean.class};
+            Object testInstance = testClass.createInstance(arguments);
+            _assertEquals(sharp, testClass.getFieldValue(testInstance, attributeName1), modifiedClassMessage);
+            _assertEquals(cut, testClass.getFieldValue(testInstance, attributeName2), modifiedClassMessage);
+            assertTrue(testClass.hasModifier(classes, "public"), modifiedClassMessage);
+        }
     }
 
     private static Stream<Arguments> twoBooleanInputProvider() {
@@ -100,26 +105,6 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("twoBooleanInputProvider")
-    public void correctCalculatorConstructor(boolean sharp, boolean cut) throws Throwable {
-        String incorrectValueMessage = "Your " + className + " constructor does not correctly initialize the " +
-                attributeName1 + " field.";
-        String incorrectValueMessage2 = "Your " + className + " constructor does not correctly initialize the " +
-                attributeName2 + " field.";
-        String incorrectVisibilityModifier =
-                "Your " + className + " constructor does not have the correct visibility modifier.";
-        Object[][] arguments = {
-                {sharp, boolean.class},
-                {cut, boolean.class}
-        };
-        Class<?>[] classes = {boolean.class, boolean.class};
-        Object testInstance = testClass.createInstance(arguments);
-        _assertEquals(sharp, testClass.getFieldValue(testInstance, attributeName1), incorrectValueMessage);
-        _assertEquals(cut, testClass.getFieldValue(testInstance, attributeName2), incorrectValueMessage2);
-        assertTrue(testClass.hasModifier(classes, "public"), incorrectVisibilityModifier);
-    }
-
-    @ParameterizedTest
-    @MethodSource("twoBooleanInputProvider")
     public void correctGetCanCutMethod(boolean sharp, boolean cut) throws Throwable {
         Object[][] arguments = {
                 {sharp, boolean.class},
@@ -155,5 +140,19 @@ public class MainTest {
                 "Your " + setAttributeMethodName2 + " method does not correctly update the value of " + attributeName2 + ".";
         _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName2),
                 incorrectSetterMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("twoBooleanInputProvider")
+    public void correctToStringMethod(boolean value1, boolean value2) throws Throwable {
+        Object[][] arguments = {
+                {value1, boolean.class},
+                {value2, boolean.class}
+        };
+        String incorrectToStringMessage = "Your toString method does not return the correct String.";
+        Object testInstance = testClass.createInstance(arguments);
+        String expectedOutput = "isSharp is " + value1 + " and canCut is " + value2;
+        Object toStringOutput = testClass.callMethod("toString", testInstance);
+        _assertEquals(expectedOutput, toStringOutput, incorrectToStringMessage);
     }
 }
