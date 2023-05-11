@@ -21,6 +21,8 @@ Your `Luffy` class must have the following items
     - a `Luffy` constructor that is visible to other classes and accepts a `String` and an `int` and uses it to initialize the
       **skill** and **bounty** fields.
 
+You need to add the following items:
+
 - Methods:
     - a `setSkill` method which accepts a `String` and uses it to set the value of the **skill** field
     - a `getSkill` method which returns the value stored in the **skill** field

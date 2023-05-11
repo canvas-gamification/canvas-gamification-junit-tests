@@ -23,24 +23,37 @@ public class MainTest {
     private ObjectTest testClass;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Throwable {
         String classString = "oop.special_class_method.medium.q8." + className;
         this.testClass = new ObjectTest(classString);
+        String modifiedClassMessage =
+                "You have modified the provided portions of class " + className + ". Please revert them to the original state.";
+        assertTrue(testClass.hasField(attributeName1, String.class), modifiedClassMessage);
+        assertTrue(testClass.hasModifier(attributeName1, "private"), modifiedClassMessage);
+        assertTrue(testClass.hasField(attributeName2, int.class), modifiedClassMessage);
+        assertTrue(testClass.hasModifier(attributeName2, "private"), modifiedClassMessage);
+        Object[][] tests = new Object[][]{
+                {"Fire", 3},
+                {"Ice", 1323},
+                {"Battle", 213},
+                {"Fly", 434343},
+                {"Fight", 0}
+        };
+        for (int i = 0; i < tests.length; i++) {
+            String skill = (String) tests[i][0];
+            int bounty = (int) tests[i][1];
+            Object[][] arguments = {
+                    {skill, String.class},
+                    {bounty, int.class}
+            };
+            Class<?>[] classes = {String.class, int.class};
+            Object testInstance = testClass.createInstance(arguments);
+            _assertEquals(skill, testClass.getFieldValue(testInstance, attributeName1), modifiedClassMessage);
+            _assertEquals(bounty, testClass.getFieldValue(testInstance, attributeName2), modifiedClassMessage);
+            assertTrue(testClass.hasModifier(classes, "public"), modifiedClassMessage);
+        }
     }
 
-    @Test
-    public void lufffyClassHasCorrectField() {
-        String missingFieldMessage = "Your " + className + " class is missing the " + attributeName1 + " field.";
-        String incorrectVisibilityModifierMessage =
-                "Your " + attributeName1 + " field does not have the correct visibility modifier.";
-        assertTrue(testClass.hasField(attributeName1, String.class), missingFieldMessage);
-        assertTrue(testClass.hasModifier(attributeName1, "private"), incorrectVisibilityModifierMessage);
-        String missingFieldMessage2 = "Your " + className + " class is missing the " + attributeName2 + " field.";
-        String incorrectVisibilityModifierMessage2 =
-                "Your " + attributeName2 + " field does not have the correct visibility modifier.";
-        assertTrue(testClass.hasField(attributeName2, int.class), missingFieldMessage2);
-        assertTrue(testClass.hasModifier(attributeName2, "private"), incorrectVisibilityModifierMessage2);
-    }
 
     private static Stream<Arguments> inputProvider() {
         return Stream.of(
@@ -73,24 +86,6 @@ public class MainTest {
                 Arguments.of("Fight", "Run", 0)
 
         );
-    }
-
-    @ParameterizedTest
-    @MethodSource("inputProvider")
-    public void correctLuffyConstructor(String skill, int bounty) throws Throwable {
-        Object[][] arguments = {
-                {skill, String.class},
-                {bounty, int.class}
-        };
-        String incorrectValueMessage = "Your " + className + " constructor does not correctly initialize the " +
-                attributeName1 + " and " + attributeName2 + " fields.";
-        String incorrectVisibilityModifier =
-                "Your " + className + " constructor does not have the correct visibility modifier.";
-        Class<?>[] classes = {String.class, int.class};
-        Object testInstance = testClass.createInstance(arguments);
-        _assertEquals(skill, testClass.getFieldValue(testInstance, attributeName1), incorrectValueMessage);
-        _assertEquals(bounty, testClass.getFieldValue(testInstance, attributeName2), incorrectValueMessage);
-        assertTrue(testClass.hasModifier(classes, "public"), incorrectVisibilityModifier);
     }
 
     @ParameterizedTest
