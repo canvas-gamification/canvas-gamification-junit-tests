@@ -19,6 +19,8 @@ Your `PiggyBank` class must have the following items
     - a `PiggyBank` constructor that is visible to other classes and accepts two `int` and uses it to initialize the
       **numPennies** and **numNickels** fields.
 
+You need to add the following items:
+
 - Methods:
     - a `setNumPennies` method which accepts an `int` and uses it to set the value of the **numPennies** field
     - a `getNumPennies` method which returns the value stored in the **numPennies** field
