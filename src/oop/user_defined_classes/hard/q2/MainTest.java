@@ -17,6 +17,7 @@ import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
+    // Java
     private final String testClassName = "DishWasher";
     private final String intAttributeName1 = "forks";
     private final String intAttributeName2 = "knives";
