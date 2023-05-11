@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -24,6 +25,7 @@ public class MainTest {
     private final String varOrigin = "countryOfOrigin";
     private final String varSize = "size";
     private final String varColour = "colour";
+    private final String varVegtables = "vegetables";
     private final String methodName = "eating";
     public ObjectTest vegetable;
     public ObjectTest cupboard;
@@ -59,6 +61,7 @@ public class MainTest {
             Object tableInstance = cupboard.createInstance(arguments);
             _assertEquals(size, cupboard.getFieldValue(tableInstance, varSize), modifiedCupMessage);
             _assertEquals(colour, cupboard.getFieldValue(tableInstance, varColour), modifiedCupMessage);
+            assertEquals(null, cupboard.getFieldValue(tableInstance, varVegtables), modifiedCupMessage);
         }
     }
 
@@ -70,6 +73,8 @@ public class MainTest {
         assertTrue(cupboard.hasModifier(varSize, "private"), incorrectModifierMessage);
         assertTrue(cupboard.hasField(varColour, String.class), incorrectFieldMessage);
         assertTrue(cupboard.hasModifier(varColour, "private"), incorrectModifierMessage);
+        assertTrue(cupboard.hasField(varVegtables, Vegetable[].class), incorrectFieldMessage);
+        assertTrue(cupboard.hasModifier(varVegtables, "private"), incorrectModifierMessage);
     }
 
     @Test

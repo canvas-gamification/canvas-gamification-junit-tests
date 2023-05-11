@@ -35,9 +35,10 @@ The `Cupboard` class currently has the following items:
 
 - Constructors:
     - A constructor which is visible from another class
-      and initialize the **size** and **colour** field.
+      and initialize the **size** and **colour** field and **vegetables** to null.
 
 You must add the following items to complete the class:
 
 - Attributes:
     - The **size** and **colour** with appropriate types based on the constructor.
+    - An array of `Vegetable` objects called **vegetables**
