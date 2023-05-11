@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -21,6 +22,7 @@ public class MainTest {
     private final String cupboardClass = "Cupboard";
     private final String varSize = "size";
     private final String varSpoiled = "isSpoiled";
+    private final String varVeg = "vegetables";
     private final String methodName = "timePassed";
     public ObjectTest vegetable;
     public ObjectTest cupboard;
@@ -42,6 +44,8 @@ public class MainTest {
                 "You have modified the class fields in the " + cupboardClass + " class. Please revert them back to the original state they were provided in.";
         assertTrue(cupboard.hasField(varSize, int.class), modifiedCupMessage);
         assertTrue(cupboard.hasModifier(varSize, "private"), modifiedCupMessage);
+        assertTrue(cupboard.hasField(varVeg, Vegetable[].class), modifiedCupMessage);
+        assertTrue(cupboard.hasModifier(varVeg, "private"), modifiedCupMessage);
     }
 
     @Test
@@ -93,14 +97,10 @@ public class MainTest {
                 {size, int.class}
         };
         Object tableInstance = cupboard.createInstance(arguments);
-        if (size > 0) {
-            _assertEquals(size, cupboard.getFieldValue(tableInstance, varSize),
-                    "Your " + cupboardClass + " constructor does not correctly initialize the " + varSize + " field.");
-        }
-        else{
-            _assertEquals(0, cupboard.getFieldValue(tableInstance, varSize),
-                    "Your " + cupboardClass + " constructor does not correctly initialize the " + varSize + " field.");
-        }
+        _assertEquals((size > 0) ? size : 0, cupboard.getFieldValue(tableInstance, varSize),
+                "Your " + cupboardClass + " constructor does not correctly initialize the " + varSize + " field.");
+        assertEquals(null, cupboard.getFieldValue(tableInstance, varVeg),
+                "Your " + cupboardClass + " constructor does not correctly initialize the " + varVeg + " field.");
     }
 
 }
