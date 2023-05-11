@@ -1,13 +1,15 @@
 package oop.programs_with_multiple_classes.medium.q5;
 
 public class Monitor {
-    private int countSize;
+    private int size;
+    private boolean isOn;
 
-    public Monitor(int m) {
-        countSize = m;
+    public Monitor(int m, boolean n) {
+        size = m;
+        isOn = n;
     }
 
-    public void fallen() {
-        countSize = countSize - 1;
+    public void change() {
+       isOn = (isOn == false) ? true : false;
     }
 }
