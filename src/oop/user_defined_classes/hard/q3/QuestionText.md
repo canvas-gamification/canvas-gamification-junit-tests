@@ -17,11 +17,12 @@ Your `Cupboard` class should have the following items:
 
 - Attributes:
     - An `int` called **pots**
-    - A `boolean` called **allClean**
+    - A `boolean` called **anyClean**
 
 - Constructors:
-    - A default constructor which sets the **pots** field to be 0 and the **allClean** field to be false.
+    - A default constructor which sets the **pots** field to be 0 and the **anyClean** field to be false.
 
 - Methods:
     - A method called `washComplete` which takes as input the number of pots that are clean and are ready to be put back 
-      inside the cupboard. This value will be added to **pots** and the boolean variable will be set to **true**.
+      inside the cupboard. This value will be added to **pots** and the boolean variable will be set to **true** if the 
+      number of pots is therefore greater than 0.
