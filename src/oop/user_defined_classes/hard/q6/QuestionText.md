@@ -9,10 +9,7 @@
 ## Question Text
 
 Life is busy and there's always lots of work to do! Write a Java class called `UniversityStudent` to keep track of and
-complete work.
-
-
-See the description below for the requirements.
+complete work. See the description below for the requirements.
 
 ### UniversityStudent Class:
 
