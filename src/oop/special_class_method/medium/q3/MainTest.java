@@ -20,18 +20,24 @@ public class MainTest {
     private ObjectTest testClass;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Throwable {
         String classString = "oop.special_class_method.medium.q3." + className;
         this.testClass = new ObjectTest(classString);
-    }
-
-    @Test
-    public void circleClassHasCorrectField() {
-        String missingFieldMessage = "Your " + className + " class is missing the " + attributeName + " field.";
-        String incorrectVisibilityModifierMessage =
-                "Your " + attributeName + " field does not have the correct visibility modifier.";
-        assertTrue(testClass.hasField(attributeName, double.class), missingFieldMessage);
-        assertTrue(testClass.hasModifier(attributeName, "private"), incorrectVisibilityModifierMessage);
+        String modifiedClassMessage =
+                "You have modified the provided portions of class " + className + ". Please revert them to the original state.";
+        assertTrue(testClass.hasField(attributeName, double.class), modifiedClassMessage);
+        assertTrue(testClass.hasModifier(attributeName, "private"), modifiedClassMessage);
+        double[] tests = new double[]{0.0, 23.3233, 553233333.55655334324, -111111.333342, 3554 / 3.7};
+        for (int i = 0; i < tests.length; i++) {
+            double value = tests[i];
+            Object[][] arguments = {
+                    {value, double.class}
+            };
+            Class<?>[] classes = {double.class};
+            Object testInstance = testClass.createInstance(arguments);
+            _assertEquals(value, testClass.getFieldValue(testInstance, attributeName), modifiedClassMessage);
+            assertTrue(testClass.hasModifier(classes, "public"), modifiedClassMessage);
+        }
     }
 
     private static Stream<Double> doubleInputProvider() {
@@ -40,21 +46,6 @@ public class MainTest {
         );
     }
 
-    @ParameterizedTest
-    @MethodSource("doubleInputProvider")
-    public void correctCircleConstructor(double value) throws Throwable {
-        String incorrectValueMessage = "Your " + className + " constructor does not correctly initialize the " +
-                attributeName + " field.";
-        String incorrectVisibilityModifier =
-                "Your " + className + " constructor does not have the correct visibility modifier.";
-        Object[][] arguments = {
-                {value, double.class}
-        };
-        Class<?>[] classes = {double.class};
-        Object testInstance = testClass.createInstance(arguments);
-        _assertEquals(value, testClass.getFieldValue(testInstance, attributeName), incorrectValueMessage);
-        assertTrue(testClass.hasModifier(classes, "public"), incorrectVisibilityModifier);
-    }
 
     @ParameterizedTest
     @MethodSource("doubleInputProvider")
@@ -116,5 +107,19 @@ public class MainTest {
         testClass.callMethod(setAttributeMethodName, setMethodArguments, testInstance);
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName, testInstance);
         _assertEquals(updatedValue, getMethodOutput, errorMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("doubleInputProvider")
+    public void correctToStringMethod(double value) throws Throwable {
+        Object[][] arguments = {
+                {value, double.class},
+
+        };
+        String incorrectToStringMessage = "Your toString method does not return the correct String.";
+        Object testInstance = testClass.createInstance(arguments);
+        String expectedOutput = "My volume is " + value;
+        Object toStringOutput = testClass.callMethod("toString", testInstance);
+        _assertEquals(expectedOutput, toStringOutput, incorrectToStringMessage);
     }
 }

@@ -14,4 +14,7 @@ public class Speaker {
     public double getVolume() {
         return volume;
     }
+    public String toString(){
+        return "My volume is " + volume;
+    }
 }
