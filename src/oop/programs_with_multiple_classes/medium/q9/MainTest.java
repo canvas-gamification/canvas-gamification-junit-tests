@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -21,6 +22,7 @@ public class MainTest {
     private final String varType = "typeScreen";
     private final String varRenewed = "isRenewed";
     private final String varMaterial = "materialType";
+    private final String varMonitors = "monitors";
     private final String varOld = "yearsOld";
     private final String methodName = "recycled";
     public ObjectTest desk;
@@ -57,6 +59,7 @@ public class MainTest {
             Object chairInstance = desk.createInstance(arguments);
             _assertEquals(materialType, desk.getFieldValue(chairInstance, varMaterial), modifiedDeskMessage);
             _assertEquals(yearsOld, desk.getFieldValue(chairInstance, varOld), modifiedDeskMessage);
+            assertEquals(null, desk.getFieldValue(chairInstance, varMonitors), modifiedDeskMessage);
         }
     }
 
@@ -68,6 +71,8 @@ public class MainTest {
         assertTrue(desk.hasModifier(varMaterial, "private"), incorrectModifierMessage);
         assertTrue(desk.hasField(varOld, int.class), incorrectFieldMessage);
         assertTrue(desk.hasModifier(varOld, "private"), incorrectModifierMessage);
+        assertTrue(desk.hasField(varMonitors, Monitor[].class), incorrectFieldMessage);
+        assertTrue(desk.hasModifier(varMonitors, "private"), incorrectModifierMessage);
     }
 
     @Test

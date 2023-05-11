@@ -49,4 +49,5 @@ You must add the following items to complete the class:
 - Attributes:
     - Based on the constructor write the **materialType** and **yearsOld** fields with
   the appropriate types.
+    - An array of `Monitor` objects called **monitors**
 
