@@ -65,7 +65,7 @@ public class MainTest {
     }
 
     private static Stream<Integer> methodInputProvider() {
-        return Stream.of(0, 1, 2, 10, 16, 32, 489, 1392);
+        return Stream.of(0, 1, 2, 10, 16, 32, 489, 1092);
     }
 
     @ParameterizedTest
