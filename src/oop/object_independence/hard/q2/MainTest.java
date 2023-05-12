@@ -85,7 +85,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void courseConstructorInitializesFieldsCorrectly(String c, String g, int a) throws Throwable {
+    public void fishConstructorInitializesFieldsCorrectly(String c, String g, int a) throws Throwable {
         Object[][] arguments = {
                 {c, String.class},
                 {g, String.class},
