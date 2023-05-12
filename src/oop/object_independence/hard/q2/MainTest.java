@@ -208,7 +208,7 @@ public class MainTest {
     }
 
     @Test
-    public void testPlatformGameMainMethodProducesCorrectOutput() throws Throwable {
+    public void testAquariumMainMethodProducesCorrectOutput() throws Throwable {
         Object[][] arguments = {{new String[0], String[].class}};
         Clause[] clauses = new Clause[]{
                 new StringLiteral(String.format("This fish is %s, and is %s, and is %d years old",
