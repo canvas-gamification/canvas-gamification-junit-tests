@@ -114,7 +114,7 @@ public class MainTest {
                 {age, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
-        String incorrectGetMethods ="Your %s method does not return the value of the %s field.";
+        String incorrectGetMethods = "Your %s method does not return the value of the %s field.";
 
         Object output = classInstance.callMethod(getStringAttributeName1, new String[]{"public"}, instance);
         _assertEquals(colour, output, String.format(incorrectGetMethods, getStringAttributeName1, stringAttributeName1));
@@ -147,7 +147,7 @@ public class MainTest {
         classInstance.callMethod(setStringAttributeName2, new Object[][]{{newGender, String.class}}, instance);
         classInstance.callMethod(setIntAttributeName1, new Object[][]{{newAge, int.class}}, instance);
 
-        String incorrectSetMethods ="Your %s method does not update the %s field to the passed parameter.";
+        String incorrectSetMethods = "Your %s method does not update the %s field to the passed parameter.";
 
         _assertEquals(newColour, classInstance.getFieldValue(instance, stringAttributeName1),
                 String.format(incorrectSetMethods, setStringAttributeName1, stringAttributeName1));
@@ -170,7 +170,7 @@ public class MainTest {
                 {age, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
-        String expectedOutput = "This fish is " + colour + ", and is " + gender + ", and is "+ age+ " years old";
+        String expectedOutput = "This fish is " + colour + ", and is " + gender + ", and is " + age + " years old";
         Object output = classInstance.callMethod("toString", new String[]{"public"}, instance);
         String incorrectToString = String.format("Your toString method for the %s class does return the correct String.", objectClassName);
         _assertEquals(expectedOutput, output, incorrectToString);
@@ -192,7 +192,7 @@ public class MainTest {
         Object output2 = classInstance.callMethod(getStringAttributeName2, instance);
         Object output3 = classInstance.callMethod(getIntAttributeName1, instance);
         Object toStringOutput = classInstance.callMethod("toString", instance);
-        String expectedToStringOutput = "This fish is " + newColour + ", and is " + newGender + ", and is "+ newAge + " years old";
+        String expectedToStringOutput = "This fish is " + newColour + ", and is " + newGender + ", and is " + newAge + " years old";
         String incorrectSetGet =
                 "Your %s method does not return the correct value after updating the %s field using the %s method.";
         String incorrectToString = "Your toString method does not return the correct String after updating the %s, %s, and %s fields using the %s, %s, and %s methods.";
