@@ -4,9 +4,9 @@ public class TestAquarium
 {
     public static void main( String[] args )
     {
-        Fish f1 = new Fish ( "Male", "Blue", 2 );
-        Fish f2 = new Fish ( "Female", "White", 4 );
-        Fish f3 = new Fish ( "Female", "Red", 3 );
+        Fish f1 = new Fish ( "Blue", "Male", 2 );
+        Fish f2 = new Fish ( "White", "Female", 4 );
+        Fish f3 = new Fish ( "Red", "Female", 3 );
         System.out.println( f1.toString() );
         System.out.println( f2.toString() );
         System.out.println( f3.toString() );

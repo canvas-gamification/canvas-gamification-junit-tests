@@ -19,7 +19,7 @@ public class Fish
     public void setColour( String col ){ colour = col; }
     public String toString()
     {
-        return "This fish is " + colour + ", and is a " + gender + ", and is "+ age+ " years old";
+        return "This fish is " + colour + ", and is " + gender + ", and is "+ age+ " years old";
     }
 }
 
