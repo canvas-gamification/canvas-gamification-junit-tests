@@ -230,7 +230,7 @@ public class MainTest {
                         testStringAttributeName3a, testStringAttributeName3b, testIntAttributeName3 + testIntAttributeNameUpdate)),
         };
         String incorrectOutput =
-                String.format("Your %s class main method does correctly initialize, update, and print the values of the two %s objects.",
+                String.format("Your %s class main method does not correctly initialize, update, and print the values of the two %s objects.",
                         testClassName, objectClassName);
         testInstance.callMethod("main", arguments, clauses, incorrectOutput);
     }
