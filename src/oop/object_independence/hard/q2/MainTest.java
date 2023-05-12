@@ -136,7 +136,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("setMethodsInputProvider")
-    public void platformGameClassHasCorrectSetNumLevelsMethod(String colour, String gender, int age, String newColour, String newGender, int newAge) throws Throwable {
+    public void fishHasCorrectSetMethods(String colour, String gender, int age, String newColour, String newGender, int newAge) throws Throwable {
         Object[][] arguments = {
                 {colour, String.class},
                 {gender, String.class},
