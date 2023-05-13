@@ -32,5 +32,5 @@ Your `Glasses` class must have the following items:
 
 ### Test Class:
 
-Your `Test` class will have a main method which initializes a `Glasses` of **size** 7.5 and **type** "long". Then,
+Your `Test` class will have a main method which initializes a `Glasses` of **size** 7.5 and **type** "Long". Then,
 print the toString for this class.

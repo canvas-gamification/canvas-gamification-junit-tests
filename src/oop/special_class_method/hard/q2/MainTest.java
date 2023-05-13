@@ -1,6 +1,5 @@
 package oop.special_class_method.hard.q2;
 
-import global.BaseTest;
 import global.ObjectTest;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
@@ -12,14 +11,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.lang.invoke.StringConcatException;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainTest extends BaseTest {
+public class MainTest {
     // Java
     private final String className = "Glasses";
     private final String doubleFieldName = "size";
@@ -28,26 +26,32 @@ public class MainTest extends BaseTest {
     private final String getStringMethodName = "getType";
     private final String getDoubleMethodName = "getSize";
     private final String setDoubleMethodName = "setSize";
+    private final String testClassName = "TestClass";
+    private final double outputSize = 7.5;
+    private final String outputType = "Long";
     private ObjectTest testClass;
-
-
-    public Clause[] testSentence() {
-        return new Clause[]{
-                new StringLiteral("Glasses{size: 7.5, type: Long}"),
-                new Optional(new StringLiteral(" ")),
-                new Optional(new NewLine())
-        };
-    }
-
-
-    public void runMain() {
-        TestClass.main(new String[0]);
-    }
+    private ObjectTest outputClass;
 
     @BeforeEach
     public void setUp() {
         String classString = "oop.special_class_method.hard.q2." + className;
         testClass = new ObjectTest(classString);
+        String outputClassString = "oop.special_class_method.hard.q2." + testClassName;
+        outputClass = new ObjectTest(outputClassString);
+    }
+
+    @Test
+    public void correctTestClass() throws Throwable {
+        Object classInstance = outputClass.createInstance();
+        String[] methodModifiers = {"public"};
+        Object[][] arguments = {
+                {new String[0], String[].class}
+        };
+        outputClass.callMethod("main", arguments, methodModifiers, classInstance, new Clause[]{
+                new StringLiteral("Glasses\\{size: " + outputSize * 10 + ", type: " + outputType + "\\}"),
+                new Optional(new StringLiteral(" ")),
+                new Optional(new NewLine())
+        });
     }
 
     @Test
