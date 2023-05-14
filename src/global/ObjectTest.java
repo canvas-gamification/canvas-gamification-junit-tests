@@ -373,7 +373,8 @@ public class ObjectTest {
         Class<?>[] argsClass = getArgumentClasses(arguments);
         Object[] args = getArguments(arguments);
         try {
-            Method objectMethodInvoke = objectClass.getMethod(methodName, argsClass);
+            Method objectMethodInvoke = objectClass.getDeclaredMethod(methodName, argsClass);
+            objectMethodInvoke.setAccessible(true);
             if (!Objects.isNull(modifiers)) {
                 for (String modifier : modifiers) {
                     assertTrue(hasModifier(objectMethodInvoke, modifier),
