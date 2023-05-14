@@ -25,8 +25,10 @@ Your `Passport` class must have the following items:
     - Note that unless otherwise specified, the following methods should be visible from another class
     - A `getName` method which returns the **name** attribute of the passport
     - A `getDob` method which returns the **dob** attribute of the passport
-    - A `setName` method which takes a `String` parameter and updates the **name** field to that value
-    - A `setDob` method which takes a `String` parameter and updates the **dob** field to that value
+    - A `setName` method which takes a `String` parameter and updates the **name** field to that value. This method
+      should not be visible from other classes
+    - A `setDob` method which takes a `String` parameter and updates the **dob** field to that value. This method should
+      not be visible from other classes.
     - A `toString` method which returns a `String` describing the Passport object. It should be of the format "My name
       is x, and I was born on y." where x is the **name** attribute and y is the **dob** attribute of the passport
     - A `steal` method that accepts a `Passport` as a parameter and copies the passed passports **name** and **dob**
