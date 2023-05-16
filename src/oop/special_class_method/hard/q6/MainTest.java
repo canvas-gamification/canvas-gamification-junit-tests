@@ -1,0 +1,254 @@
+package oop.special_class_method.hard.q6;
+
+import global.ObjectTest;
+import global.variables.Clause;
+import global.variables.clauses.NewLine;
+import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
+
+import static global.tools.CustomAssertions._assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class MainTest {
+    // Java
+    private final String className = "Car";
+    private final String doubleFieldName = "topSpeed";
+    private final String StringFieldName = "type";
+    private final String setStringMethodName = "setType";
+    private final String getStringMethodName = "getType";
+    private final String getDoubleMethodName = "getTopSpeed";
+    private final String setDoubleMethodName = "setTopSpeed";
+    private final String testClassName = "TestClass";
+    private final double outputTopSpeed = 220;
+    private final String outputType = "Ford";
+    private ObjectTest testClass;
+    private ObjectTest outputClass;
+
+    @BeforeEach
+    public void setUp() {
+        String classString = "oop.special_class_method.hard.q6." + className;
+        testClass = new ObjectTest(classString);
+        String outputClassString = "oop.special_class_method.hard.q6." + testClassName;
+        outputClass = new ObjectTest(outputClassString);
+    }
+
+    @Test
+    public void correctTestClass() throws Throwable {
+        Object classInstance = outputClass.createInstance();
+        String[] methodModifiers = {"public"};
+        Object[][] arguments = {
+                {new String[0], String[].class}
+        };
+        outputClass.callMethod("main", arguments, methodModifiers, classInstance, new Clause[]{
+                new StringLiteral(className + "\\{" + doubleFieldName + ": " + outputTopSpeed + ", " + StringFieldName + ": " + outputType + "\\}"),
+                new Optional(new StringLiteral(" ")),
+                new Optional(new NewLine())
+        });
+    }
+
+    @Test
+    public void carClassHasCorrectFields() {
+        assertTrue(testClass.hasField(doubleFieldName, double.class),
+                "Your " + className + " class is missing the " + doubleFieldName + " field.");
+        assertTrue(testClass.hasModifier(doubleFieldName, "private"),
+                "Your " + doubleFieldName + " does not have the correct visibility modifier.");
+        assertTrue(testClass.hasField(StringFieldName, String.class),
+                "Your " + className + " class is missing the " + doubleFieldName + " field.");
+        assertTrue(testClass.hasModifier(StringFieldName, "private"),
+                "Your " + StringFieldName + " does not have the correct visibility modifier.");
+    }
+
+    private static Stream<Arguments> constructorInputProvider() {
+        return Stream.of(
+                Arguments.of(4535.4, "Long"),
+                Arguments.of(234.4, "Round"),
+                Arguments.of(654.45, "Second"),
+                Arguments.of(43.3, "Fourth")
+
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void carClassHasCorrectConstructor(double value1, String value2) throws Throwable {
+        Object[][] arguments = {
+                {value1, double.class},
+                {value2, String.class}
+        };
+        Class<?>[] constructorClasses = {double.class, String.class};
+        Object classInstance = testClass.createInstance(arguments);
+        String incorrectDoubleValueMessage =
+                "Your " + className + " constructor does not initialize the " + doubleFieldName + " filed to the correct value.";
+        String incorrectStringValueMessage =
+                "Your " + className + " constructor does not initialize the " + StringFieldName + " filed to the correct value.";
+        String incorrectConstructorVisibilityModifier =
+                "Your " + className + " constructor does not have the correct visibility modifier.";
+        _assertEquals(value1, testClass.getFieldValue(classInstance, doubleFieldName),
+                incorrectDoubleValueMessage);
+        _assertEquals(value2, testClass.getFieldValue(classInstance, StringFieldName),
+                incorrectStringValueMessage);
+        assertTrue(testClass.hasModifier(constructorClasses, "public"), incorrectConstructorVisibilityModifier);
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void carClassHasCorrectConstructor2(double value1, String value2) throws Throwable {
+        Class<?>[] constructorClasses = {double.class, String.class};
+        Object classInstance = testClass.createInstance();
+        String incorrectDoubleValueMessage =
+                "Your " + className + " constructor does not initialize the " + doubleFieldName + " filed to the correct value.";
+        String incorrectStringValueMessage =
+                "Your " + className + " constructor does not initialize the " + StringFieldName + " filed to the correct value.";
+        String incorrectConstructorVisibilityModifier =
+                "Your " + className + " constructor does not have the correct visibility modifier.";
+        _assertEquals(180.0, testClass.getFieldValue(classInstance, doubleFieldName),
+                incorrectDoubleValueMessage);
+        assertEquals(null, testClass.getFieldValue(classInstance, StringFieldName),
+                incorrectStringValueMessage);
+        assertTrue(testClass.hasModifier(constructorClasses, "public"), incorrectConstructorVisibilityModifier);
+    }
+
+    private static Stream<Arguments> doubleInputProvider() {
+        return Stream.of(
+                Arguments.of(4535.4, 432.2),
+                Arguments.of(234.4, 655.3),
+                Arguments.of(654.45, 453.3),
+                Arguments.of(43.3, 654.2)
+
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("doubleInputProvider")
+    public void carClassHasCorrectSetTopSpeedMethod(double initialValue, double setValue) throws Throwable {
+        Object[][] arguments = {
+                {initialValue, double.class},
+                {"Initial String", String.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        Object[][] setSizeArguments = {
+                {setValue, double.class}
+        };
+        String[] setMethodModifiers = {"public"};
+        String incorrectSetMethodMessage = String.join(" ",
+                "Your", setDoubleMethodName, "does not correctly set the value of the", doubleFieldName, "field.");
+        Object setMethodOutput = testClass.callMethod(setDoubleMethodName, setSizeArguments, setMethodModifiers, classInstance);
+        _assertEquals(setValue, testClass.getFieldValue(classInstance, doubleFieldName), incorrectSetMethodMessage);
+        assertNull(setMethodOutput, String.join(" ", "Your", setDoubleMethodName, "should not return any output"));
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void carClassHasCorrectGetTopSpeedMethod(double value1, String value2) throws Throwable {
+        Object[][] arguments = {
+                {value1, double.class},
+                {value2, String.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        String[] getMethodModifiers = {"public"};
+        String incorrectGetMethodMessage = String.join(" ",
+                "Your", getDoubleMethodName, "does not correctly get the value of the", doubleFieldName, "field.");
+        Object getMethodOutput = testClass.callMethod(getDoubleMethodName, getMethodModifiers, classInstance);
+        _assertEquals(value1, getMethodOutput, incorrectGetMethodMessage);
+    }
+
+    private static Stream<Arguments> twoStringInputProvider() {
+        return Stream.of(
+                Arguments.of("Short", "Tall"),
+                Arguments.of("Window", "Cup"),
+                Arguments.of("Blue", "Red"),
+                Arguments.of("Horizontal", "Vertical")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("twoStringInputProvider")
+    public void carClassHasCorrectSetTypeMethod(String initialValue, String updatedValue) throws Throwable {
+        Object[][] arguments = {
+                {Math.random() * 1000, double.class},
+                {initialValue, String.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        testClass.setFieldValue(classInstance, initialValue, StringFieldName);
+        Object[][] setMethodArguments = {
+                {updatedValue, String.class}
+        };
+        String[] setMethodModifiers = {"public"};
+        String incorrectSetMethodMessage = String.join(" ",
+                "Your", setStringMethodName, "does not correctly set the value of the", StringFieldName, "field.");
+        Object setMethodOutput = testClass.callMethod(setStringMethodName, setMethodArguments, setMethodModifiers, classInstance);
+        _assertEquals(updatedValue, testClass.getFieldValue(classInstance, StringFieldName), incorrectSetMethodMessage);
+        assertNull(setMethodOutput, String.join(" ", "Your", setStringMethodName, "should not return any output"));
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void chairClassHasCorrectGetTypeMethod(double value1, String value2) throws Throwable {
+        Object[][] arguments = {
+                {value1, double.class},
+                {value2, String.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        testClass.setFieldValue(classInstance, value2, StringFieldName);
+        String[] getMethodModifiers = {"public"};
+        String incorrectGetMethodMessage = String.join(" ",
+                "Your", getStringMethodName, "does not correctly get the value of the", StringFieldName, "field.");
+        Object getMethodOutput = testClass.callMethod(getStringMethodName, getMethodModifiers, classInstance);
+        _assertEquals(value2, getMethodOutput, incorrectGetMethodMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void carClassHasCorrectToStringMethod(double value, String b) throws Throwable {
+        Object[][] arguments = {
+                {value, double.class},
+                {b, String.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        String[] methodModifiers = {"public"};
+        String expected = className + "{" + doubleFieldName + ": " + value + ", " + StringFieldName + ": " + b + "}";
+        String incorrectToStringMessage = String.join(" ",
+                "Your", className, " toString method does not return the correct String.");
+        Object output = testClass.callMethod("toString", methodModifiers, classInstance);
+        _assertEquals(expected, output, incorrectToStringMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void carClassMethodsWorkTogether(double value, String b) throws Throwable {
+        double initialValue = Math.random() * 100;
+        Object[][] arguments = {
+                {initialValue, double.class},
+                {"First String", String.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        _assertEquals(initialValue, testClass.callMethod(getDoubleMethodName, classInstance),
+                "Your " + getDoubleMethodName + " method does not return the correct value.");
+        _assertEquals("First String", testClass.callMethod(getStringMethodName, classInstance),
+                "Your " + getStringMethodName + " method does not return the correct value.");
+        Object[][] setDoubleArguments = {
+                {value, double.class}
+        };
+        testClass.callMethod(setDoubleMethodName, setDoubleArguments, classInstance);
+        _assertEquals(value, testClass.callMethod(getDoubleMethodName, classInstance),
+                "Your " + getDoubleMethodName + " method does not return the correct value calling the " + setDoubleMethodName + " method.");
+        Object[][] setBooleanArguments = {
+                {b, String.class}
+        };
+        testClass.callMethod(setStringMethodName, setBooleanArguments, classInstance);
+        _assertEquals(b, testClass.callMethod(getStringMethodName, classInstance),
+                "Your " + getStringMethodName + " method does not return the correct value calling the " + setStringMethodName + " method.");
+        String expectedToString = className + "{" + doubleFieldName + ": " + value + ", " + StringFieldName + ": " + b + "}";
+        String incorrectToStringMessage = String.join(" ",
+                "Your", className, " toString method does not return the correct String after updating the values of its fields using its setter methods.");
+        Object output = testClass.callMethod("toString", classInstance);
+        _assertEquals(expectedToString, output, incorrectToStringMessage);
+    }
+}
