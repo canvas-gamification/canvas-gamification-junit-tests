@@ -19,12 +19,12 @@ Your `DishWasher` class should have the following items:
     - An `int` called **knives**
 
 - Constructors:
-    - A constructor which accepts two ints and sets the **forks** and **knives** fields. The first int should
-      set **forks** field and the second the **knives** field.
+    - A constructor which accepts two ints and sets the **forks** and **knives** attributes. The first int should
+      set **forks** attribute and the second the **knives** attribute.
 
 - Methods:
     - A method called `loadDishWasher` which another class can give the number of dirty forks and dirty knives to be
-      subtracted from the total number of **forks** and **knives**. The first int should set **forks** field and the
-      second the **knives** field. Then the method should print "**forks** forks are still clean" and "**knives** knives 
-      are still clean" to the console on separate lines.
+      subtracted from the total number of **forks** and **knives**. The first int should set **forks** attribute and the
+      second the **knives** attribute. Then the method should print "**forks** forks are still clean" and "**knives** 
+      knives are still clean" to the console on separate lines.
   

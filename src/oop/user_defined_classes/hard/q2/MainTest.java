@@ -31,16 +31,16 @@ public class MainTest {
     }
 
     @Test
-    public void dishWasherClassHasCorrectFields() {
-        String missingFieldMessage = "Your " + testClassName + " is missing a required field";
-        String incorrectModifierMessage = "One of your fields in the " + testClassName +
+    public void dishWasherClassHasCorrectAttributes() {
+        String missingAttributeMessage = "Your " + testClassName + " is missing a required attribute";
+        String incorrectModifierMessage = "One of your attributes in the " + testClassName +
                 " class does not have the correct visibility modifier.";
         assertTrue(classInstance.hasField(intAttributeName1, int.class),
-                missingFieldMessage);
+                missingAttributeMessage);
         assertTrue(classInstance.hasModifier(intAttributeName1, "private"),
                 incorrectModifierMessage);
         assertTrue(classInstance.hasField(intAttributeName2, int.class),
-                missingFieldMessage);
+                missingAttributeMessage);
         assertTrue(classInstance.hasModifier(intAttributeName2, "private"),
                 incorrectModifierMessage);
     }
@@ -64,18 +64,18 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void dishWasherConstructorInitializesFieldsCorrectly(int attribute1, int attribute2) throws Throwable{
+    public void dishWasherConstructorInitializesAttributesCorrectly(int attribute1, int attribute2) throws Throwable{
         Object[][] arguments = {
                 {attribute1, int.class},
                 {attribute2, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
-        String incorrectFieldInstantiationMessage =
+        String incorrectAttributeInstantiationMessage =
                 "Your " + testClassName + " constructor does not correctly initialize the object." ;
         _assertEquals(attribute1, classInstance.getFieldValue(instance, intAttributeName1),
-                incorrectFieldInstantiationMessage);
+                incorrectAttributeInstantiationMessage);
         _assertEquals(attribute2, classInstance.getFieldValue(instance, intAttributeName2),
-                incorrectFieldInstantiationMessage);
+                incorrectAttributeInstantiationMessage);
     }
 
     private static Stream<Arguments> methodInputProvider() {
@@ -104,8 +104,7 @@ public class MainTest {
                         new StringLiteral(" " + intAttributeName1 + " are still clean"),
                         new NewLine(),
                         new IntegerLiteral(remainder2),
-                        new StringLiteral(" " + intAttributeName2 + " are still clean"),
-                        new NewLine()
+                        new StringLiteral(" " + intAttributeName2 + " are still clean")
                 }, "Your " + methodName + " method does not print the correct messages."
                 );
         _assertEquals(remainder1, classInstance.getFieldValue(instance, intAttributeName1),
