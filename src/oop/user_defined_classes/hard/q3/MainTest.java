@@ -26,16 +26,16 @@ public class MainTest {
     }
 
     @Test
-    public void cupboardClassHasCorrectFields() {
-        String missingFieldMessage = "Your " + testClassName + " is missing a required field";
-        String incorrectModifierMessage = "One of your fields in the " + testClassName +
+    public void cupboardClassHasCorrectAttributes() {
+        String missingAttributeMessage = "Your " + testClassName + " is missing a required attribute";
+        String incorrectModifierMessage = "One of your attributes in the " + testClassName +
                 " class does not have the correct visibility modifier.";
         assertTrue(classInstance.hasField(intAttributeName1, int.class),
-                missingFieldMessage);
+                missingAttributeMessage);
         assertTrue(classInstance.hasModifier(intAttributeName1, "private"),
                 incorrectModifierMessage);
         assertTrue(classInstance.hasField(booleanAttributeName1, boolean.class),
-                missingFieldMessage);
+                missingAttributeMessage);
         assertTrue(classInstance.hasModifier(booleanAttributeName1, "private"),
                 incorrectModifierMessage);
     }
@@ -47,14 +47,14 @@ public class MainTest {
     }
 
     @Test
-    public void cupboardConstructorInitializesFieldsCorrectly() throws Throwable {
+    public void cupboardConstructorInitializesAttributesCorrectly() throws Throwable {
         Object instance = classInstance.createInstance();
-        String incorrectFieldInstantiationMessage =
+        String incorrectAttributeInstantiationMessage =
                 "Your " + testClassName + " default constructor does not correctly initialize the object.";
         _assertEquals(0, classInstance.getFieldValue(instance, intAttributeName1),
-                incorrectFieldInstantiationMessage);
+                incorrectAttributeInstantiationMessage);
         _assertEquals(false, classInstance.getFieldValue(instance, booleanAttributeName1),
-                incorrectFieldInstantiationMessage);
+                incorrectAttributeInstantiationMessage);
     }
 
     private static Stream<Integer> methodInputProvider() {
@@ -71,7 +71,8 @@ public class MainTest {
         classInstance.callMethod(methodName, new Object[][]{{attribute1, int.class}}, instance, null);
         _assertEquals(attribute1, classInstance.getFieldValue(instance, intAttributeName1),
                 "Your " + methodName + " method does not produce the correct output.");
-        _assertEquals(attribute1 != 0, classInstance.getFieldValue(instance, booleanAttributeName1),
+        int x = (int) classInstance.getFieldValue(instance, intAttributeName1);
+        _assertEquals(x > 0, classInstance.getFieldValue(instance, booleanAttributeName1),
                 "Your " + methodName + " method does not produce the correct output.");
     }
 }

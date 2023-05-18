@@ -21,7 +21,7 @@ Your `Cupboard` class should have the following items:
     - A `boolean` called **anyClean**
 
 - Constructors:
-    - A default constructor which sets the **pots** field to be 0 and the **anyClean** field to be false.
+    - A default constructor which sets the **pots** attribute to be 0 and the **anyClean** attribute to be false.
 
 - Methods:
     - A method called `washComplete` which takes as input the number of pots that are clean and are ready to be put back 
