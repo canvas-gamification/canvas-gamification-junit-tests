@@ -14,10 +14,10 @@ clean. See the description below for the requirements.
 
 ### Laundromat Class:
 
-Your `Laundromat` class should have the following items which should not be accessible from another class:
+Your `Laundromat` class should have the following items:
 
 - Attributes:
-    - An `int` called **gymClothes**
+    - An `int` called **gymClothes** which should not be accessible from another class
 
 - Constructors:
     - A constructor which accepts one int and sets the **gymClothes** attribute.
