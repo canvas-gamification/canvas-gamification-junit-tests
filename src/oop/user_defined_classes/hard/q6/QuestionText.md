@@ -13,11 +13,11 @@ complete work. See the description below for the requirements.
 
 ### UniversityStudent Class:
 
-Your `UniversityStudent` class should have the following items which should not be accessible from another class:
+Your `UniversityStudent` class should have the following items:
 
 - Attributes:
-    - An `int` called **fatigueLevel**
-    - An `int` called **workload**
+    - An `int` called **fatigueLevel** which should not be accessible from another class
+    - An `int` called **workload** which should not be accessible from another class
 
 - Constructors:
     - A constructor which accepts two ints and sets the **fatigueLevel** and **workload** attributes. The first int 
