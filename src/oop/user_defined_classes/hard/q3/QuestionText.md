@@ -14,7 +14,7 @@ your supplies. See the description below for the requirements.
 
 ### Cupboard Class:
 
-Your `Cupboard` class should have the following items:
+Your `Cupboard` class should have the following items which should not be accessible from another class:
 
 - Attributes:
     - An `int` called **pots**
@@ -25,6 +25,6 @@ Your `Cupboard` class should have the following items:
 
 - Methods:
     - A method called `washComplete` which takes as input the number of pots that are clean and are ready to be put back 
-      inside the cupboard. This value will be added to **pots** and the boolean variable will be set to **true** if the 
-      number of pots is greater than zero.
+      inside the cupboard from another class. This value will be added to **pots** and the boolean variable will be set 
+      to **true** if the number of pots is greater than zero.
   
