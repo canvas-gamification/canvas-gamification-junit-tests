@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest {
     // Java
@@ -29,18 +29,18 @@ public class MainTest {
     }
 
     @Test
-    public void universityStudentClassHasCorrectFields() {
-        String missingFieldMessage = "Your " + testClassName + " is missing a required field";
-        String incorrectModifierMessage = "One of your fields in the " + testClassName +
-                " class does not have the correct visibility modifier.";
+    public void universityStudentClassHasCorrectAttributes() {
+        String missingAttributeMessage =
+                "The %s attribute could not be found in your %s class. Please make sure you have added it, it is spelled correctly, and it is of the correct type";
+        String incorrectModifierMessage = "Your %s attribute in the %s class does not have the correct visibility modifier.";
         assertTrue(classInstance.hasField(intAttributeName1, int.class),
-                missingFieldMessage);
+                String.format(missingAttributeMessage, intAttributeName1, testClassName));
         assertTrue(classInstance.hasModifier(intAttributeName1, "private"),
-                incorrectModifierMessage);
+                String.format(incorrectModifierMessage, intAttributeName1, testClassName));
         assertTrue(classInstance.hasField(intAttributeName2, int.class),
-                missingFieldMessage);
+                String.format(missingAttributeMessage, intAttributeName2, testClassName));
         assertTrue(classInstance.hasModifier(intAttributeName2, "private"),
-                incorrectModifierMessage);
+                String.format(incorrectModifierMessage, intAttributeName2, testClassName));
     }
 
     @Test
@@ -63,18 +63,18 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void universityStudentConstructorInitializesFieldsCorrectly(int attribute1, int attribute2) throws Throwable {
+    public void universityStudentConstructorInitializesAttributesCorrectly(int attribute1, int attribute2) throws Throwable {
         Object[][] arguments = {
                 {attribute1, int.class},
                 {attribute2, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
-        String incorrectFieldInstantiationMessage =
+        String incorrectAttributeInstantiationMessage =
                 "Your " + testClassName + " constructor does not correctly initialize the object.";
         _assertEquals(attribute1, classInstance.getFieldValue(instance, intAttributeName1),
-                incorrectFieldInstantiationMessage);
+                incorrectAttributeInstantiationMessage);
         _assertEquals(attribute2, classInstance.getFieldValue(instance, intAttributeName2),
-                incorrectFieldInstantiationMessage);
+                incorrectAttributeInstantiationMessage);
     }
 
     private static Stream<Arguments> methodInputProvider() {
@@ -90,7 +90,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
-    public void correctWorkAllDayMethods(int attribute1, int attribute2, int stress) throws Throwable {
+    public void correctWorkAllDayMethod(int attribute1, int attribute2, int stress) throws Throwable {
         Object[][] arguments = {
                 {attribute1, int.class},
                 {attribute2, int.class}
@@ -98,8 +98,11 @@ public class MainTest {
         Object instance = classInstance.createInstance(arguments);
         assertTrue(classInstance.hasMethod(methodName, null),
                 "Your " + testClassName + " class is missing the method " + methodName + ".");
-        classInstance.callMethod(methodName, instance, new Clause[]{
+        Object output = classInstance.callMethod(methodName, instance, new Clause[]{
                 new StringLiteral("Fatigue level is " + stress)
         }, "Your " + methodName + " method does not produce the correct output.");
+        assertNull(output, "Your " + methodName + " method should not return anything.");
+        assertEquals(0, (int) classInstance.getFieldValue(instance, intAttributeName2),
+                intAttributeName2 + " should be zero after " + methodName + " is called.");
     }
 }

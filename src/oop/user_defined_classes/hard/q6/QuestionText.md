@@ -13,15 +13,15 @@ complete work. See the description below for the requirements.
 
 ### UniversityStudent Class:
 
-Your `UniversityStudent` class should have the following items:
+Your `UniversityStudent` class should have the following items which should not be accessible from another class:
 
 - Attributes:
     - An `int` called **fatigueLevel**
     - An `int` called **workload**
 
 - Constructors:
-    - A constructor which accepts two ints and sets the **fatigueLevel** and **workload** fields. The first int should
-      set **fatigueLevel** field and the second the **workload** field.
+    - A constructor which accepts two ints and sets the **fatigueLevel** and **workload** attributes. The first int 
+      should set **fatigueLevel** attribute and the second the **workload** attribute.
 
 - Methods:
     - A method called `workAllDay` which another class can use to complete the workload, however for every piece of work
