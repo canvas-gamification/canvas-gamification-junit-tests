@@ -50,7 +50,7 @@ public class MainTest {
     public void cupboardConstructorInitializesAttributesCorrectly() throws Throwable {
         Object instance = classInstance.createInstance();
         String incorrectAttributeInstantiationMessage =
-                "Your " + testClassName + " default constructor does not correctly initialize the object.";
+                "Your " + testClassName + " constructor does not correctly initialize the object.";
         _assertEquals(0, classInstance.getFieldValue(instance, intAttributeName1),
                 incorrectAttributeInstantiationMessage);
         _assertEquals(false, classInstance.getFieldValue(instance, booleanAttributeName1),
