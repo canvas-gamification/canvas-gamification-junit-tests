@@ -13,11 +13,11 @@ diagonal of the screen. See the description below for the requirements.
 
 ### Phone Class:
 
-Your `Phone` class should have the following items which should not be accessible from another class:
+Your `Phone` class should have the following items:
 
 - Attributes:
-    - An `double` called **width**
-    - An `double` called **height**
+    - An `double` called **width** which should not be accessible from another class
+    - An `double` called **height** which should not be accessible from another class
 
 - Constructors:
     - A constructor which accepts two doubles from another class and sets the **width** and **height** attributes. The 
