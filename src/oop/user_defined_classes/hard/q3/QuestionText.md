@@ -26,5 +26,5 @@ Your `Cupboard` class should have the following items:
 - Methods:
     - A method called `washComplete` which takes as input the number of pots that are clean and are ready to be put back 
       inside the cupboard. This value will be added to **pots** and the boolean variable will be set to **true** if the 
-      number of pots is therefore greater than 0.
+      number of pots is greater than zero.
   
