@@ -14,7 +14,7 @@ clean. See the description below for the requirements.
 
 ### Laundromat Class:
 
-Your `Laundromat` class should have the following items:
+Your `Laundromat` class should have the following items which should not be accessible from another class:
 
 - Attributes:
     - An `int` called **gymClothes**

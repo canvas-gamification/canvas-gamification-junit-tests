@@ -30,13 +30,13 @@ public class MainTest {
 
     @Test
     public void laundromatClassHasCorrectAttributes() {
-        String missingAttributeMessage = "Your " + testClassName + " is missing a required attribute";
-        String incorrectModifierMessage = "One of your attributes in the " + testClassName +
-                " class does not have the correct visibility modifier.";
+        String missingAttributeMessage =
+                "The %s attribute could not be found in your %s class. Please make sure you have added it, it is spelled correctly, and is of the correct type";
+        String incorrectModifierMessage = "Your %s attribute in the %s class does not have the correct visibility modifier.";
         assertTrue(classInstance.hasField(intAttributeName1, int.class),
-                missingAttributeMessage);
+                String.format(missingAttributeMessage, intAttributeName1, testClassName));
         assertTrue(classInstance.hasModifier(intAttributeName1, "private"),
-                incorrectModifierMessage);
+                String.format(incorrectModifierMessage, intAttributeName1, testClassName));
     }
 
     @Test
