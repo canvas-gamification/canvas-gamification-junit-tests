@@ -4,6 +4,7 @@ import global.ObjectTest;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,12 +29,12 @@ public class MainTest {
     }
 
     @Test
-    public void laundromatClassHasCorrectFields() {
-        String missingFieldMessage = "Your " + testClassName + " is missing a required field";
-        String incorrectModifierMessage = "One of your fields in the " + testClassName +
+    public void laundromatClassHasCorrectAttributes() {
+        String missingAttributeMessage = "Your " + testClassName + " is missing a required attribute";
+        String incorrectModifierMessage = "One of your attributes in the " + testClassName +
                 " class does not have the correct visibility modifier.";
         assertTrue(classInstance.hasField(intAttributeName1, int.class),
-                missingFieldMessage);
+                missingAttributeMessage);
         assertTrue(classInstance.hasModifier(intAttributeName1, "private"),
                 incorrectModifierMessage);
     }
@@ -53,15 +54,15 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void laundromatConstructorInitializesFieldsCorrectly(int attribute1) throws Throwable {
+    public void laundromatConstructorInitializesAttributesCorrectly(int attribute1) throws Throwable {
         Object[][] arguments = {
                 {attribute1, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
-        String incorrectFieldInstantiationMessage =
+        String incorrectAttributeInstantiationMessage =
                 "Your " + testClassName + " constructor does not correctly initialize the object.";
         _assertEquals(attribute1, classInstance.getFieldValue(instance, intAttributeName1),
-                incorrectFieldInstantiationMessage);
+                incorrectAttributeInstantiationMessage);
     }
 
     private static Stream<Integer> methodInputProvider() {
@@ -77,15 +78,19 @@ public class MainTest {
         Object instance = classInstance.createInstance(arguments);
         assertTrue(classInstance.hasMethod(methodName, null),
                 "Your " + testClassName + " class is missing the method " + methodName + ".");
-        Clause[] c = new Clause[attribute1 * 2 + 1];
+        Clause[] c = new Clause[attribute1 * 3 + 2];
         int count = 0;
-        for (int x = 0; x < c.length - 1; x += 2) {
-            int num = (x + 1) / 2;
+        for (int x = 0; x < c.length - 2; x += 3) {
+            int num = (x + 2) / 3;
             c[count++] = new StringLiteral("Cleaning item " + (num + 1));
+            c[count++] = new Optional(new StringLiteral(" "));
             c[count++] = new NewLine();
         }
-        c[count] = new StringLiteral("Your laundry is done!");
+        c[count++] = new StringLiteral("Your laundry is done!");
+        c[count] = new Optional(new StringLiteral(" "));
         classInstance.callMethod(methodName, instance, c,
                 "Your " + methodName + " method does not correctly print the items being cleaned.");
+        _assertEquals(0, classInstance.getFieldValue(instance, intAttributeName1),
+                "Your " + methodName + " method does not set " + intAttributeName1 + " to zero.");
     }
 }
