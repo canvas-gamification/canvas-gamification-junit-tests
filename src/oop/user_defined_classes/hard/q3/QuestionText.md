@@ -14,11 +14,11 @@ your supplies. See the description below for the requirements.
 
 ### Cupboard Class:
 
-Your `Cupboard` class should have the following items which should not be accessible from another class:
+Your `Cupboard` class should have the following items:
 
 - Attributes:
-    - An `int` called **pots**
-    - A `boolean` called **anyClean**
+    - An `int` called **pots** which should not be accessible from another class
+    - A `boolean` called **anyClean** which should not be accessible from another class
 
 - Constructors:
     - A constructor which sets the **pots** attribute to be 0 and the **anyClean** attribute to be false.
