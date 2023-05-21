@@ -50,15 +50,15 @@ public class MainTest {
     }
 
     @Test
-    public void fishClassHasCorrectFields() {
-        String missingFieldMessage = "Your %s class is missing the %s field.";
+    public void fishClassHasCorrectAttributes() {
+        String missingAttributeMessage = "Your %s class is missing the %s attribute. Please make sure you have added it, it is spelled correctly, and is of the correct type.";
         assertTrue(classInstance.hasField(stringAttributeName1, String.class),
-                String.format(missingFieldMessage, objectClassName, stringAttributeName1));
+                String.format(missingAttributeMessage, objectClassName, stringAttributeName1));
         assertTrue(classInstance.hasField(stringAttributeName2, String.class),
-                String.format(missingFieldMessage, objectClassName, stringAttributeName2));
+                String.format(missingAttributeMessage, objectClassName, stringAttributeName2));
         assertTrue(classInstance.hasField(intAttributeName1, int.class),
-                String.format(missingFieldMessage, objectClassName, intAttributeName1));
-        String incorrectVisibilityModifier = "Your %s class %s field has the wrong visibility modifier.";
+                String.format(missingAttributeMessage, objectClassName, intAttributeName1));
+        String incorrectVisibilityModifier = "Your %s class %s attribute has the wrong visibility modifier.";
         assertTrue(classInstance.hasModifier(stringAttributeName1, "private"),
                 String.format(incorrectVisibilityModifier, objectClassName, stringAttributeName1));
         assertTrue(classInstance.hasModifier(stringAttributeName2, "private"),
@@ -85,7 +85,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void fishConstructorInitializesFieldsCorrectly(String c, String g, int a) throws Throwable {
+    public void fishConstructorInitializesAttributesCorrectly(String c, String g, int a) throws Throwable {
         Object[][] arguments = {
                 {c, String.class},
                 {g, String.class},
@@ -95,14 +95,14 @@ public class MainTest {
         assertTrue(classInstance.hasModifier(new Class[]{String.class, String.class, int.class}, "public"),
                 String.format(incorrectVisibilityModifier, objectClassName));
         Object instance = classInstance.createInstance(arguments);
-        String incorrectFieldValue =
-                "Your %s constructor does not correctly initialize the %s field based on the passed parameters.";
+        String incorrectAttributeValue =
+                "Your %s constructor does not correctly initialize the %s attribute based on the passed parameters.";
         _assertEquals(c, classInstance.getFieldValue(instance, stringAttributeName1),
-                String.format(incorrectFieldValue, objectClassName, stringAttributeName1));
+                String.format(incorrectAttributeValue, objectClassName, stringAttributeName1));
         _assertEquals(g, classInstance.getFieldValue(instance, stringAttributeName2),
-                String.format(incorrectFieldValue, objectClassName, stringAttributeName2));
+                String.format(incorrectAttributeValue, objectClassName, stringAttributeName2));
         _assertEquals(a, classInstance.getFieldValue(instance, intAttributeName1),
-                String.format(incorrectFieldValue, objectClassName, intAttributeName1));
+                String.format(incorrectAttributeValue, objectClassName, intAttributeName1));
     }
 
     @ParameterizedTest
@@ -114,7 +114,7 @@ public class MainTest {
                 {age, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
-        String incorrectGetMethods = "Your %s method does not return the value of the %s field.";
+        String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
 
         Object output = classInstance.callMethod(getStringAttributeName1, new String[]{"public"}, instance);
         _assertEquals(colour, output, String.format(incorrectGetMethods, getStringAttributeName1, stringAttributeName1));
@@ -147,7 +147,7 @@ public class MainTest {
         classInstance.callMethod(setStringAttributeName2, new Object[][]{{newGender, String.class}}, instance);
         classInstance.callMethod(setIntAttributeName1, new Object[][]{{newAge, int.class}}, instance);
 
-        String incorrectSetMethods = "Your %s method does not update the %s field to the passed parameter.";
+        String incorrectSetMethods = "Your %s method does not update the %s attribute to the passed parameter.";
 
         _assertEquals(newColour, classInstance.getFieldValue(instance, stringAttributeName1),
                 String.format(incorrectSetMethods, setStringAttributeName1, stringAttributeName1));
@@ -194,8 +194,8 @@ public class MainTest {
         Object toStringOutput = classInstance.callMethod("toString", instance);
         String expectedToStringOutput = "This fish is " + newColour + ", and is " + newGender + ", and is " + newAge + " years old";
         String incorrectSetGet =
-                "Your %s method does not return the correct value after updating the %s field using the %s method.";
-        String incorrectToString = "Your toString method does not return the correct String after updating the %s, %s, and %s fields using the %s, %s, and %s methods.";
+                "Your %s method does not return the correct value after updating the %s attribute using the %s method.";
+        String incorrectToString = "Your toString method does not return the correct String after updating the %s, %s, and %s attributes using the %s, %s, and %s methods.";
         _assertEquals(newColour, output1,
                 String.format(incorrectSetGet, getStringAttributeName1, stringAttributeName1, setStringAttributeName1));
         _assertEquals(newGender, output2,
