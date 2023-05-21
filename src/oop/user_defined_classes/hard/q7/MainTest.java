@@ -3,6 +3,7 @@ package oop.user_defined_classes.hard.q7;
 import global.ObjectTest;
 import global.variables.Clause;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,18 +30,18 @@ public class MainTest {
     }
 
     @Test
-    public void courseClassHasCorrectFields() {
-        String missingFieldMessage = "Your " + testClassName + " is missing a required field";
-        String incorrectModifierMessage = "One of your fields in the " + testClassName +
-                " class does not have the correct visibility modifier.";
+    public void courseClassHasCorrectAttributes() {
+        String missingAttributeMessage =
+                "The %s attribute could not be found in your %s class. Please make sure you have added it, it is spelled correctly, and it is of the correct type";
+        String incorrectModifierMessage = "Your %s attribute in the %s class does not have the correct visibility modifier.";
         assertTrue(classInstance.hasField(stringAttributeName1, String.class),
-                missingFieldMessage);
+                String.format(missingAttributeMessage, stringAttributeName1, testClassName));
         assertTrue(classInstance.hasModifier(stringAttributeName1, "private"),
-                incorrectModifierMessage);
+                String.format(incorrectModifierMessage, stringAttributeName1, testClassName));
         assertTrue(classInstance.hasField(intAttributeName1, int.class),
-                missingFieldMessage);
+                String.format(missingAttributeMessage, intAttributeName1, testClassName));
         assertTrue(classInstance.hasModifier(intAttributeName1, "private"),
-                incorrectModifierMessage);
+                String.format(incorrectModifierMessage, intAttributeName1, testClassName));
     }
 
     @Test
@@ -65,18 +66,18 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void courseConstructorInitializesFieldsCorrectly(String attribute1, int attribute2) throws Throwable {
+    public void courseConstructorInitializesAttributesCorrectly(String attribute1, int attribute2) throws Throwable {
         Object[][] arguments = {
                 {attribute1, String.class},
                 {attribute2, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
-        String incorrectFieldInstantiationMessage =
+        String incorrectAttributeInstantiationMessage =
                 "Your " + testClassName + " constructor does not correctly initialize the object.";
         _assertEquals(attribute1, classInstance.getFieldValue(instance, stringAttributeName1),
-                incorrectFieldInstantiationMessage);
+                incorrectAttributeInstantiationMessage);
         _assertEquals(attribute2, classInstance.getFieldValue(instance, intAttributeName1),
-                incorrectFieldInstantiationMessage);
+                incorrectAttributeInstantiationMessage);
     }
 
     private static Stream<Arguments> methodInputProvider() {
@@ -102,7 +103,8 @@ public class MainTest {
         assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class}),
                 "Your " + testClassName + " class is missing the method " + methodName + ".");
         classInstance.callMethod(methodName, new Object[][]{{dif, int.class}}, null, instance, new Clause[]{
-                new StringLiteral(mssg)
+                new StringLiteral(mssg),
+                new Optional(new StringLiteral(" "))
         }, "Your " + methodName + " method does not produce the correct output.");
     }
 }

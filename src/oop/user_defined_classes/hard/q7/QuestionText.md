@@ -6,9 +6,6 @@
 - Also vary the method name
 - Java question
 
--maybe have a method that asks the user what they consider to be a difficult course and check the difficulty number against that and print
-either "topic is a difficult course" or "topic is not a difficult course"
-
 ## Question Text
 
 There are many ways that a teacher can assess the material of a course. Write a Java class called `Course` that keeps 
@@ -19,12 +16,12 @@ track of course metrics. See the description below for the requirements.
 Your `Course` class should have the following items:
 
 - Attributes:
-    - A `String` called **topic**
-    - An `int` called **difficulty**
+    - A `String` called **topic** which should not be accessible from another class
+    - An `int` called **difficulty** which should not be accessible from another class
 
 - Constructors:
-    - A constructor which accepts a String and an int and sets the **topic** and **difficulty** fields. The first field
-      should set **topic** and the second should set **difficulty**.
+    - A constructor which accepts a String and an int and sets the **topic** and **difficulty** attributes. The first 
+      attribute should set **topic** and the second should set **difficulty**.
 
 - Methods:
     - A method called `determineDifficulty` which another class can give an integer of a considered difficulty and 
