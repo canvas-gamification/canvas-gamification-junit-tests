@@ -42,13 +42,13 @@ public class MainTest {
     }
 
     @Test
-    public void treeClassHasCorrectFields() {
-        String missingFieldMessage = "Your %s class is missing the %s field.";
+    public void treeClassHasCorrectAttributes() {
+        String missingAttributeMessage = "Your %s class is missing the %s attribute. Please make sure you have added it, it is spelled correctly, and has the correct type";
         assertTrue(classInstance.hasField(booleanAttributeName1, boolean.class),
-                String.format(missingFieldMessage, objectClassName, booleanAttributeName1));
+                String.format(missingAttributeMessage, objectClassName, booleanAttributeName1));
         assertTrue(classInstance.hasField(doubleAttributeName1, double.class),
-                String.format(missingFieldMessage, objectClassName, doubleAttributeName1));
-        String incorrectVisibilityModifier = "Your %s class %s field has the wrong visibility modifier.";
+                String.format(missingAttributeMessage, objectClassName, doubleAttributeName1));
+        String incorrectVisibilityModifier = "Your %s class %s attribute has the wrong visibility modifier.";
         assertTrue(classInstance.hasModifier(booleanAttributeName1, "private"),
                 String.format(incorrectVisibilityModifier, objectClassName, booleanAttributeName1));
         assertTrue(classInstance.hasModifier(doubleAttributeName1, "private"),
@@ -73,7 +73,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void treeConstructorInitializesFieldsCorrectly(boolean b, double d) throws Throwable {
+    public void treeConstructorInitializesAttributesCorrectly(boolean b, double d) throws Throwable {
         Object[][] arguments = {
                 {b, boolean.class},
                 {d, double.class}
@@ -82,12 +82,12 @@ public class MainTest {
         assertTrue(classInstance.hasModifier(new Class[]{boolean.class, double.class}, "public"),
                 String.format(incorrectVisibilityModifier, objectClassName));
         Object instance = classInstance.createInstance(arguments);
-        String incorrectFieldValue =
-                "Your %s constructor does not correctly initialize the %s field based on the passed parameters.";
+        String incorrectAttributeValue =
+                "Your %s constructor does not correctly initialize the %s attribute based on the passed parameters.";
         _assertEquals(b, classInstance.getFieldValue(instance, booleanAttributeName1),
-                String.format(incorrectFieldValue, objectClassName, booleanAttributeName1));
+                String.format(incorrectAttributeValue, objectClassName, booleanAttributeName1));
         _assertEquals(d, classInstance.getFieldValue(instance, doubleAttributeName1),
-                String.format(incorrectFieldValue, objectClassName, doubleAttributeName1));
+                String.format(incorrectAttributeValue, objectClassName, doubleAttributeName1));
     }
 
     @ParameterizedTest
@@ -98,7 +98,7 @@ public class MainTest {
                 {d, double.class}
         };
         Object instance = classInstance.createInstance(arguments);
-        String incorrectGetMethods = "Your %s method does not return the value of the %s field.";
+        String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
 
         Object output = classInstance.callMethod(getBooleanAttributeName1, new String[]{"public"}, instance);
         _assertEquals(b, output, String.format(incorrectGetMethods, getBooleanAttributeName1, booleanAttributeName1));
@@ -126,7 +126,7 @@ public class MainTest {
         classInstance.callMethod(setBooleanAttributeName1, new Object[][]{{newB, boolean.class}}, instance);
         classInstance.callMethod(setDoubleAttributeName1, new Object[][]{{newD, double.class}}, instance);
 
-        String incorrectSetMethods = "Your %s method does not update the %s field to the passed parameter.";
+        String incorrectSetMethods = "Your %s method does not update the %s attribute to the passed parameter.";
 
         _assertEquals(newB, classInstance.getFieldValue(instance, booleanAttributeName1),
                 String.format(incorrectSetMethods, setBooleanAttributeName1, booleanAttributeName1));
@@ -166,8 +166,8 @@ public class MainTest {
         Object toStringOutput = classInstance.callMethod("toString", instance);
         String expectedToStringOutput = "This tree’s rarity is " + newB + ", and is " + newD + "m tall";
         String incorrectSetGet =
-                "Your %s method does not return the correct value after updating the %s field using the %s method.";
-        String incorrectToString = "Your toString method does not return the correct String after updating the %s and %s fields using the %s and %s methods.";
+                "Your %s method does not return the correct value after updating the %s attribute using the %s method.";
+        String incorrectToString = "Your toString method does not return the correct String after updating the %s and %s attributes using the %s and %s methods.";
         _assertEquals(newB, output1,
                 String.format(incorrectSetGet, getBooleanAttributeName1, booleanAttributeName1, setBooleanAttributeName1));
         _assertEquals(newD, output2,
