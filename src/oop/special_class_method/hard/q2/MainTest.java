@@ -86,7 +86,7 @@ public class MainTest {
         Class<?>[] constructorClasses = {double.class, String.class};
         Object classInstance = testClass.createInstance(arguments);
         String incorrectDoubleValueMessage =
-                "Your " + className + " constructor does not initialize the " + doubleFieldName + " filed to the correct value.";
+                "Your " + className + " constructor does not initialize the " + doubleFieldName + " attribute to the correct value.";
         String incorrectStringValueMessage =
                 "Your " + className + " constructor does not initialize the " + StringFieldName + " filed to the correct value.";
         String incorrectConstructorVisibilityModifier =
