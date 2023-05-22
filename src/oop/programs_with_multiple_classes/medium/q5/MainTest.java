@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -69,6 +70,29 @@ public class MainTest {
     }
 
     @Test
+    public void monitorClassHasRequiredConstructor() {
+        Class<?>[] classArguments = {int.class, boolean.class};
+        assertTrue(monitor.hasConstructor(classArguments),
+                "Your " + monitorClass + " constructor does not have the correct parameters.");
+        assertTrue(monitor.hasModifier(classArguments, "public"),
+                "Your " + monitorClass + " constructor does not have the correct modifier.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("monitorInputProvider")
+    public void monitorConstructorInitializesValuesCorrectly(int value1, boolean value2) throws Throwable {
+        Object[][] arguments = {
+                {value1, int.class},
+                {value2, boolean.class}
+        };
+        Object chairInstance = monitor.createInstance(arguments);
+        _assertEquals(value1, monitor.getFieldValue(chairInstance, varCount),
+                "Your " + monitorClass + " constructor does not correctly initialize the " + varCount + " field.");
+        _assertEquals(value2, monitor.getFieldValue(chairInstance, varOn),
+                "Your " + monitorClass + " constructor does not correctly initialize the " + varOn + " field.");
+    }
+
+    @Test
     public void deskClassHasRequiredConstructor() {
         Class<?>[] classArguments = {String.class};
         assertTrue(desk.hasConstructor(classArguments),
@@ -94,7 +118,7 @@ public class MainTest {
         Object chairInstance = desk.createInstance(arguments);
         _assertEquals(material, desk.getFieldValue(chairInstance, varMaterial),
                 "Your " + deskClass + " constructor does not correctly initialize the " + varMaterial + " field.");
-        assertEquals(null, desk.getFieldValue(chairInstance, varMonitors),
+        _assertArrayEquals(new Monitor[2], desk.getFieldValue(chairInstance, varMonitors),
                 "Your " + deskClass + " constructor does not correctly initialize the " + varMonitors + " field.");
     }
 
@@ -115,6 +139,7 @@ public class MainTest {
         };
         Object monitorInstance = monitor.createInstance(arguments);
         monitor.callMethod(fallenMethod, monitorInstance);
+        monitor.hasMethod(fallenMethod, new Class[]{int.class, boolean.class}, Void.TYPE);
         _assertEquals((on == false) ? true : false, monitor.getFieldValue(monitorInstance, varOn),
                 "Your " + monitorClass + " " + fallenMethod + " method does not changes the " + varOn + " truth value.");
     }

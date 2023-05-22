@@ -15,29 +15,30 @@ already provided, you only need to implement the other portions.
 The `Monitor` class currently has the following items:
 
 - Attributes:
-    - An `int` called **size**
-    - A `boolean` called **isOn**
-
-- Constructors:
-    - A constructor which is visible from another class and accepts an `int` and a `boolean` as parameters
-      and initializes the **size** and **isOn** fields with the input value.
+    - An `int` called **size** that is not accessible from other classes.
+    - A `boolean` called **isOn** that is not accessible from other classes.
 
 You must add the following items to complete the class:
 
+- Constructors:
+    - A constructor which is visible from another classes and accepts an `int` and a `boolean` as parameters
+      and initializes the **size** and **isOn** fields with the input value.
+
 - Methods:
-    - A method called **change** that changes the truth value of **isOn**;
+    - A method called **change** that changes the value of **isOn** that is accessible from other classes and
+      does not return anything;
 
 ## Desk
 
 The `Desk` class currently has the following items:
 
 - Attributes:
-    - A `String` called **materialType**
-    - An array of `Monitor` objects called **monitors**  
+    - A `String` called **materialType** that is not accessible from other classes.
+    - An array of `Monitor` objects called **monitors** that is not accessible from other classes.
 
 You must add the following items to complete the class:
 
 - Constructors:
-    - A constructor which is visible from another class and accepts a `String`
+    - A constructor which is visible from another classes and accepts a `String`
       and initialize the **materialType** field and initializes the **monitors**
-  fields to null.
+      fields to an uninitialized array of size 2.

@@ -6,6 +6,6 @@ public class Desk {
 
     public Desk(String m) {
         materialType = m;
-        monitors = null;
+        monitors = new Monitor[2];
     }
 }
