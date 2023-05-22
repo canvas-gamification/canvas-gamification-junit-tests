@@ -88,7 +88,7 @@ public class MainTest {
         String incorrectDoubleValueMessage =
                 "Your " + className + " constructor does not initialize the " + doubleFieldName + " attribute to the correct value.";
         String incorrectStringValueMessage =
-                "Your " + className + " constructor does not initialize the " + StringFieldName + " filed to the correct value.";
+                "Your " + className + " constructor does not initialize the " + StringFieldName + " attribute to the correct value.";
         String incorrectConstructorVisibilityModifier =
                 "Your " + className + " constructor does not have the correct visibility modifier.";
         _assertEquals(value1 * 10, testClass.getFieldValue(classInstance, doubleFieldName),
