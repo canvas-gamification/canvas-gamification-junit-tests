@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -61,23 +62,26 @@ public class MainTest extends BaseTest {
                     {personCapacity, int.class}
             };
             Object kitchenInstance = kitchen.createInstance(arguments);
-            _assertEquals(size, kitchen.getFieldValue(kitchenInstance, varSize),
-                    "Your " + classKitchen + " constructor does not correctly initialize the " + varSize + " field.");
-            _assertEquals(personCapacity, kitchen.getFieldValue(kitchenInstance, varCap),
-                    "Your " + classKitchen + " constructor does not correctly initialize the " + varCap + " field.");
+            _assertEquals(size, kitchen.getFieldValue(kitchenInstance, varSize), modifiedKitchenMessage);
+            _assertEquals(personCapacity, kitchen.getFieldValue(kitchenInstance, varCap), modifiedKitchenMessage);
+            _assertArrayEquals(new Light[size], kitchen.getFieldValue(kitchenInstance, varLights), modifiedKitchenMessage);
         }
     }
 
     @Test
     public void kitchenClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your " + classKitchen + " class is missing a required field.";
-        String incorrectModifierMessage = "One of your " + classKitchen + " class attributes does not have the correct modifier.";
-        assertTrue(kitchen.hasField(varSize, int.class), incorrectFieldMessage);
-        assertTrue(kitchen.hasModifier(varSize, "private"), incorrectModifierMessage);
-        assertTrue(kitchen.hasField(varCap, int.class), incorrectFieldMessage);
-        assertTrue(kitchen.hasModifier(varCap, "private"), incorrectModifierMessage);
-        assertTrue(kitchen.hasField(varLights, Light[].class), incorrectFieldMessage);
-        assertTrue(kitchen.hasModifier(varLights, "private"), incorrectModifierMessage);
+        assertTrue(kitchen.hasField(varSize, int.class),
+                "Your " + classKitchen + " class is missing the " + varSize + " attribute.");
+        assertTrue(kitchen.hasModifier(varSize, "private"),
+                "Your " + classKitchen + " class attributes does not have the correct modifier for " + varSize + " attribute.");
+        assertTrue(kitchen.hasField(varCap, int.class),
+                "Your " + classKitchen + " class is missing the " + varCap + " attribute.");
+        assertTrue(kitchen.hasModifier(varCap, "private"),
+                "Your " + classKitchen + " class attributes does not have the correct modifier for " + varCap + " attribute.");
+        assertTrue(kitchen.hasField(varLights, Light[].class),
+                "Your " + classKitchen + " class is missing the " + varLights + " attribute.");
+        assertTrue(kitchen.hasModifier(varLights, "private"),
+                "Your " + classKitchen + " class attributes does not have the correct modifier for " + varLights + " attribute.");
     }
 
     @Test
@@ -86,7 +90,7 @@ public class MainTest extends BaseTest {
         assertTrue(light.hasConstructor(classArguments),
                 "Your " + classLight + " constructor does not have the correct parameters.");
         assertTrue(light.hasModifier(classArguments, "public"),
-                "Your " + classLight + " constructor does not have the correct modifier.");
+                "Your " + classLight + " constructor does not have the correct visibility modifier.");
     }
 
     private static Stream<Arguments> lightInputProvider() {
@@ -131,7 +135,7 @@ public class MainTest extends BaseTest {
         _assertEquals(0, kitchen.getFieldValue(kitchenInstance, varSize),
                 "Your " + classKitchen + " constructor does not correctly initialize the " + varSize + " field when given a negative value.");
         _assertEquals(personCapacity, kitchen.getFieldValue(kitchenInstance, varCap),
-                "Your " + classKitchen + " constructor does not correctly initialize the " + varCap+ " field when given a negative value.");
+                "Your " + classKitchen + " constructor does not correctly initialize the " + varCap + " field when given a negative value.");
     }
 
 }

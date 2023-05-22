@@ -11,6 +11,6 @@ public class Kitchen {
         else
             size = 0;
         personCapacity = p;
-        lights = null;
+        lights = new Light[size];
     }
 }
