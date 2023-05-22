@@ -208,7 +208,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void bubbleClassMethodsWorkTogether(double value, String b) throws Throwable {
+    public void glassesClassMethodsWorkTogether(double value, String b) throws Throwable {
         double initialValue = Math.random() * 100;
         Object[][] arguments = {
                 {initialValue, double.class},
