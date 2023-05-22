@@ -8,7 +8,7 @@ public class Cupboard {
     public Cupboard(int m, boolean b) {
         capacity = m;
         isFull = b;
-        knifes = null;
+        knifes = new Knife[capacity];
     }
 }
 

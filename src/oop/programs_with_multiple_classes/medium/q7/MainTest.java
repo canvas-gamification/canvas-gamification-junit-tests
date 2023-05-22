@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -57,7 +58,7 @@ public class MainTest {
                     "Your " + cupboardClass + " constructor does not correctly initialize the " + varCapacity + " field.");
             _assertEquals(isFull, cupboard.getFieldValue(cupboardInstance, varFull),
                     "Your " + cupboardClass + " constructor does not correctly initialize the " + varFull + " field.");
-            assertEquals(null, cupboard.getFieldValue(cupboardInstance, varKnifes),
+            _assertArrayEquals(new Knife[capacity], cupboard.getFieldValue(cupboardInstance, varKnifes),
                     "Your " + cupboardClass + " constructor does not correctly initialize the " + varKnifes + " field.");
         }
     }
