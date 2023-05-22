@@ -167,7 +167,7 @@ public class MainTest {
                 "Your", setStringMethodName, "method does not correctly set the value of the", StringFieldName, "field.");
         Object setMethodOutput = testClass.callMethod(setStringMethodName, setMethodArguments, setMethodModifiers, classInstance);
         _assertEquals(updatedValue, testClass.getFieldValue(classInstance, StringFieldName), incorrectSetMethodMessage);
-        assertNull(setMethodOutput, String.join(" ", "Your", setStringMethodName, "should not return any output"));
+        assertNull(setMethodOutput, String.join(" ", "Your", setStringMethodName, "method should not return any output"));
     }
 
     private static Stream<String> stringInputProvider() {
