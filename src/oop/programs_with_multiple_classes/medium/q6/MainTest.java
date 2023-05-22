@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static global.tools.CustomAssertions._assertEquals;
+import static global.tools.CustomAssertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -74,6 +74,8 @@ public class MainTest {
         };
         Object vegetableInstance = vegetable.createInstance(arguments);
         vegetable.callMethod(methodName, vegetableInstance);
+        assertTrue(vegetable.hasMethod(methodName, new Class<?>[]{}, Void.TYPE, new String[]{"public"}),
+                "Your " + vegetableClass + " does not have a correct " + methodName + " method");
         _assertEquals(true, vegetable.getFieldValue(vegetableInstance, varSpoiled),
                 "Your " + vegetableClass + " " + methodName + " method does not change the " + varSpoiled + " value to true.");
     }
@@ -99,7 +101,7 @@ public class MainTest {
         Object tableInstance = cupboard.createInstance(arguments);
         _assertEquals((size > 0) ? size : 0, cupboard.getFieldValue(tableInstance, varSize),
                 "Your " + cupboardClass + " constructor does not correctly initialize the " + varSize + " field.");
-        assertEquals(null, cupboard.getFieldValue(tableInstance, varVeg),
+        _assertArrayEquals(new Vegetable[(size > 0) ? size : 0], cupboard.getFieldValue(tableInstance, varVeg),
                 "Your " + cupboardClass + " constructor does not correctly initialize the " + varVeg + " field.");
     }
 

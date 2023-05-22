@@ -15,16 +15,16 @@ already provided, you only need to implement the other portions.
 The `Vegetable` class currently has the following items:
 
 - Attributes:
-    - A `boolean` called **isSpoiled**
+    - A `boolean` called **isSpoiled** that is not accessible from other classes.
 - Constructors:
     - A constructor which is visible from another class and accepts a `boolean` as parameter
-      and initializes the **isSpoiled** field with the input value.
+      and initializes the **isSpoiled** field with the input value that is accessible from other classes.
 
 You must add the following items to complete the class:
 
 - Methods:
-    - A **timePassed** method that change the value of **countSize** to true and is accessible from another class.
-      field.
+    - A **timePassed** method that change the value of **isSpoiled** to true and is accessible from another classes
+      and does not return anything.
 
 ## Cupboard
 
@@ -34,13 +34,13 @@ constructor which is accessible from another class and initializes this field.
 The `Cupboard` class currently has the following items:
 
 - Attributes:
-    - A `int` called **size**
-    - An array of `Vegetable` objects called **vegetables**.
+    - A `int` called **size** that is not accessible from other classes.
+    - An array of `Vegetable` objects called **vegetables** that is not accessible from other classes.
 
 You must add the following items to complete the class:
 
 - Constructors:
     - A constructor which is visible from another class and accepts a `int`
       and initialize the **size** field.
-    - If the value of size is negative it should initialize it as 0.
-    - Initializes the value of **vegtables** to null.
+    - If the value of the input for size is negative it should initialize it as 0.
+    - Initializes the value of **vegtables** to an array of **Vegtable** classes with the size of **size**.

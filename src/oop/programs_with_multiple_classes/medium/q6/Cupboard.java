@@ -9,7 +9,7 @@ public class Cupboard {
             size = m;
         else
             m = 0;
-        vegetables = null;
+        vegetables = new Vegetable[size];
     }
 
 }
