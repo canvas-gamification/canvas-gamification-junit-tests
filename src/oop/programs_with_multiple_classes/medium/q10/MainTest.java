@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -61,20 +62,24 @@ public class MainTest {
             Object tableInstance = cupboard.createInstance(arguments);
             _assertEquals(size, cupboard.getFieldValue(tableInstance, varSize), modifiedCupMessage);
             _assertEquals(colour, cupboard.getFieldValue(tableInstance, varColour), modifiedCupMessage);
-            assertEquals(null, cupboard.getFieldValue(tableInstance, varVegtables), modifiedCupMessage);
+            _assertArrayEquals(new Vegetable[size], cupboard.getFieldValue(tableInstance, varVegtables), modifiedCupMessage);
         }
     }
 
     @Test
     public void cupboardClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your " + classCupboard + " class is missing a required field.";
-        String incorrectModifierMessage = "One of your " + classCupboard + " class attributes does not have the correct modifier.";
-        assertTrue(cupboard.hasField(varSize, int.class), incorrectFieldMessage);
-        assertTrue(cupboard.hasModifier(varSize, "private"), incorrectModifierMessage);
-        assertTrue(cupboard.hasField(varColour, String.class), incorrectFieldMessage);
-        assertTrue(cupboard.hasModifier(varColour, "private"), incorrectModifierMessage);
-        assertTrue(cupboard.hasField(varVegtables, Vegetable[].class), incorrectFieldMessage);
-        assertTrue(cupboard.hasModifier(varVegtables, "private"), incorrectModifierMessage);
+        assertTrue(cupboard.hasField(varSize, int.class),
+                "Your " + classCupboard + " class is missing the " + varSize + " attribute.");
+        assertTrue(cupboard.hasModifier(varSize, "private"),
+                "Your " + classCupboard + " class " + varSize + " attributes does not have the correct modifier.");
+        assertTrue(cupboard.hasField(varColour, String.class),
+                "Your " + classCupboard + " class is missing the " + varColour + " attribute.");
+        assertTrue(cupboard.hasModifier(varColour, "private"),
+                "Your " + classCupboard + " class " + varColour + " attributes does not have the correct modifier.");
+        assertTrue(cupboard.hasField(varVegtables, Vegetable[].class),
+                "Your " + classCupboard + " class is missing the " + varVegtables + " attribute.");
+        assertTrue(cupboard.hasModifier(varVegtables, "private"),
+                "Your " + classCupboard + " class " + varVegtables + " attributes does not have the correct modifier.");
     }
 
     @Test

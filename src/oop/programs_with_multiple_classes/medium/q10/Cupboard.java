@@ -8,5 +8,6 @@ public class Cupboard {
     public Cupboard(int m, String s) {
         size = m;
         colour = s;
+        vegetables = new Vegetable[size];
     }
 }
