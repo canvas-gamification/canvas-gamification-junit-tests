@@ -192,7 +192,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void bubbleClassHasCorrectToStringMethod(double value, String b) throws Throwable {
+    public void glassesClassHasCorrectToStringMethod(double value, String b) throws Throwable {
         Object[][] arguments = {
                 {value, double.class},
                 {b, String.class}
