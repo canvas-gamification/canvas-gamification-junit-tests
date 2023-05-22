@@ -32,13 +32,13 @@ public class MainTest {
         wheel = new ObjectTest(wheelClassString);
         chassis = new ObjectTest(chassisClassString);
         String modifiedWheelMessage =
-                "You have modified the provided portions of class " + wheelClass + ". Please revert it back to the original state.";
+                "You have modified the provided portions of the " + wheelClass + " class. Please revert it back to the original state.";
         assertTrue(wheel.hasField(varDurability, double.class), modifiedWheelMessage);
         assertTrue(wheel.hasField(varManufacturer, String.class), modifiedWheelMessage);
         assertTrue(wheel.hasModifier(varDurability, "private"), modifiedWheelMessage);
         assertTrue(wheel.hasModifier(varManufacturer, "private"), modifiedWheelMessage);
         String modifiedChassisMessage =
-                "You have modified the provided portions of class " + chassisClass + ". Please revert it back to the original state.";
+                "You have modified the provided portions of the " + chassisClass + " class. Please revert it back to the original state.";
         Class<?>[] classArguments = {String.class};
         assertTrue(chassis.hasConstructor(classArguments), modifiedChassisMessage);
         assertTrue(chassis.hasModifier(classArguments, "public"), modifiedChassisMessage);
