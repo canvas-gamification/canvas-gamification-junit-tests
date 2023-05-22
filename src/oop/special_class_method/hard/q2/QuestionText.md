@@ -2,7 +2,7 @@
 
 ## Question Text
 
-You are writing a Java program about objects that can grow different sizes and have different types. Write a Java class
+You are writing a Java program about objects that can be different sizes and different types. Write a Java class
 called **Glasses** that has an attributes called **size** of type `double` and `String` variable called **type**. Write
 a constructor for this class that accepts a `double` value and a `String` value, then sets the variables **size**
 and **type** to those values (but for **size** set the value to the input value * 10). Also, write a **toString** method
