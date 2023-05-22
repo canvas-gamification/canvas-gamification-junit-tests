@@ -34,10 +34,10 @@ The `Chassis` class currently has the following items:
 - Constructors:
     - A constructor which is visible from another class
       and initialize the **materialType** and **wheels** attributes.
-    -
+    - It should initialize the **wheels** attribute as an array of 4 null *Wheel** classes.
 
 You must add the following items to complete the class:
 
 - Attributes:
     - The  **materialType** attribute according to the given constructor.
-    - tThe **wheels** attribute that is a array of **Wheel** instances.
+    - The **wheels** attribute that is an array of four **Wheel** instances.

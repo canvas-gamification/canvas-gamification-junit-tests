@@ -4,9 +4,9 @@ public class Chassis {
     private String materialType;
     private Wheel[] wheels;
 
-    public Chassis(String m, Wheel[] w) {
+    public Chassis(String m) {
         materialType = m;
-        wheels = w;
+        wheels = new Wheel[4];
     }
 
 }

@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -50,7 +51,7 @@ public class MainTest {
             Object chassisInstance = chassis.createInstance(arguments);
             _assertEquals(tests[i], chassis.getFieldValue(chassisInstance, varMaterialType),
                     "Your " + chassisClass + " constructor does not correctly initialize the " + varMaterialType + " field.");
-            assertEquals(null, chassis.getFieldValue(chassisInstance, varWheels),
+            _assertArrayEquals(new Wheel[4], chassis.getFieldValue(chassisInstance, varWheels),
                     "Your " + chassisClass + " constructor does not correctly initialize the " + varWheels + " field.");
         }
     }
