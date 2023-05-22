@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -59,20 +60,24 @@ public class MainTest {
             Object chairInstance = desk.createInstance(arguments);
             _assertEquals(materialType, desk.getFieldValue(chairInstance, varMaterial), modifiedDeskMessage);
             _assertEquals(yearsOld, desk.getFieldValue(chairInstance, varOld), modifiedDeskMessage);
-            assertEquals(null, desk.getFieldValue(chairInstance, varMonitors), modifiedDeskMessage);
+            _assertArrayEquals(new Monitor[3], desk.getFieldValue(chairInstance, varMonitors), modifiedDeskMessage);
         }
     }
 
     @Test
     public void deskClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your " + classDesk + " class is missing a required field.";
-        String incorrectModifierMessage = "One of your " + classDesk + " class attributes does not have the correct modifier.";
-        assertTrue(desk.hasField(varMaterial, String.class), incorrectFieldMessage);
-        assertTrue(desk.hasModifier(varMaterial, "private"), incorrectModifierMessage);
-        assertTrue(desk.hasField(varOld, int.class), incorrectFieldMessage);
-        assertTrue(desk.hasModifier(varOld, "private"), incorrectModifierMessage);
-        assertTrue(desk.hasField(varMonitors, Monitor[].class), incorrectFieldMessage);
-        assertTrue(desk.hasModifier(varMonitors, "private"), incorrectModifierMessage);
+        assertTrue(desk.hasField(varMaterial, String.class),
+                "Your " + classDesk + " class is missing the " + varMaterial + " attribute.");
+        assertTrue(desk.hasModifier(varMaterial, "private"),
+                "Your " + classDesk + " class " + varMaterial + " attributes does not have the correct modifier.");
+        assertTrue(desk.hasField(varOld, int.class),
+                "Your " + classDesk + " class is missing the " + varMaterial + " attribute.");
+        assertTrue(desk.hasModifier(varOld, "private"),
+                "Your " + classDesk + " class " + varMaterial + " attributes does not have the correct modifier.");
+        assertTrue(desk.hasField(varMonitors, Monitor[].class),
+                "Your " + classDesk + " class is missing the " + varMaterial + " attribute.");
+        assertTrue(desk.hasModifier(varMonitors, "private"),
+                "Your " + classDesk + " class " + varMaterial + " attributes does not have the correct modifier.");
     }
 
     @Test

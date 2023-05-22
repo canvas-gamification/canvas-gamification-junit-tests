@@ -8,6 +8,6 @@ public class Desk {
     public Desk(String m, int i) {
         materialType = m;
         yearsOld = i;
-        monitors = null;
+        monitors = new Monitor[3];
     }
 }
