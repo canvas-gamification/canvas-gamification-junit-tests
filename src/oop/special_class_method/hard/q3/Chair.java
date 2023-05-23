@@ -10,7 +10,7 @@ public class Chair {
     }
 
     public String toString() {
-        return "Chair{size: " + size + ", softness: " + softness + "}";
+        return "This Chair's size is " + size + ", and it's softness is " + softness;
     }
 
     public void setSize(double a) {
