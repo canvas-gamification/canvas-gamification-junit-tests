@@ -199,7 +199,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void chairClassMethodsWorkTogether(String value, String b) throws Throwable {
+    public void detergentClassMethodsWorkTogether(String value, String b) throws Throwable {
         String initialValue = "" + Math.random() * 100;
         Object[][] arguments = {
                 {initialValue, String.class},
