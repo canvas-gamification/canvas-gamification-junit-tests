@@ -167,7 +167,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("stringInputProvider")
-    public void chairClassHasCorrectGetSoftnessMethod(String value) throws Throwable {
+    public void detergentClassHasCorrectGetStrengthMethod(String value) throws Throwable {
         Object[][] arguments = {
                 {"Value", String.class},
                 {value, String.class}
