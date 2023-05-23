@@ -242,7 +242,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void chairClassHasCorrectToStringMethod(int value1, String value2, int value3) throws Throwable {
+    public void roadClassHasCorrectToStringMethod(int value1, String value2, int value3) throws Throwable {
         Object[][] arguments = {
                 {value1, int.class},
                 {value2, String.class},
