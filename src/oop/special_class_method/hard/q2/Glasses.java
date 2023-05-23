@@ -10,7 +10,7 @@ public class Glasses {
     }
 
     public String toString() {
-        return "Glasses{size: " + size + ", type: " + type + "}";
+        return "This Glasses class have a size of " + size + ", and are type " + type;
     }
 
     public void setSize(double a) {

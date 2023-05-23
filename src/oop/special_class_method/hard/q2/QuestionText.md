@@ -3,10 +3,7 @@
 ## Question Text
 
 You are writing a Java program about objects that can be different sizes and different types. Write a Java class
-called **Glasses** that has an attributes called **size** of type `double` and `String` variable called **type**. Write
-a constructor for this class that accepts a `double` value and a `String` value, then sets the variables **size**
-and **type** to those values (but for **size** set the value to the input value * 10). Also, write a **toString** method
-that summarizes the attributes of that object. Also, write accessor and mutator for the necessary variables.
+called **Glasses** that has an attributes called **size** of type `double` and `String` variable called **type**. 
 
 ### Glasses Class:
 
@@ -19,6 +16,7 @@ Your `Glasses` class must have the following items:
 - Constructors:
     - A constructor which is accessible from other classes and accepts a `double` and a `String` value to initialize the
       **size** and **type** fields.
+    - You should initialize the **size** attribute as 10 times of the `double` input.
 
 - Methods:
     - a `setSize` method which accepts a `double` value, updates the **size** field with it, and is accessible from
@@ -28,7 +26,7 @@ Your `Glasses` class must have the following items:
       from other classes
     - a `getType` method which is accessible from other classes and returns the value of the **type** field
     - a `toString` method which returns a String of the information about the `Glasses` class of the form
-      `"Glasses{size: " + size +", type: " + type + "}"`.
+      `"These glasses have a size of x, and are type y"` where x is the value of the size attribute, y is the value of the type attribute.
 
 ### Test Class:
 
