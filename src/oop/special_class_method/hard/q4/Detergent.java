@@ -10,7 +10,7 @@ public class Detergent {
     }
 
     public String toString() {
-        return "Detergent{name: " + name + ", strength: " + strength + "}";
+        return "The Detergent instance name is " + name + " and its strength is " + strength + ".";
     }
 
     public void setName(String a) {
