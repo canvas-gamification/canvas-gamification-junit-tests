@@ -119,7 +119,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void detergentClassHasCorrectGetSizeMethod(String value) throws Throwable {
+    public void detergentClassHasCorrectGetNameMethod(String value) throws Throwable {
         Object[][] arguments = {
                 {value, String.class},
                 {"Initial String", String.class}
