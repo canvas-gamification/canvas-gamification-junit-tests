@@ -143,7 +143,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("twoStringInputProvider")
-    public void chairClassHasCorrectSetSoftnessMethod(String initialValue, String updatedValue) throws Throwable {
+    public void detergentClassHasCorrectSetStrengthMethod(String initialValue, String updatedValue) throws Throwable {
         Object[][] arguments = {
                 {"Constant Value", String.class},
                 {initialValue, String.class}
