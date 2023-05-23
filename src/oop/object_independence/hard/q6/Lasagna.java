@@ -35,4 +35,3 @@ public class Lasagna {
         return "The dish was made " + hoursSinceMade + " hours ago. Is it bad? " + isBad + ". Has it been thrown out? " + inGarbage + ".";
     }
 }
-

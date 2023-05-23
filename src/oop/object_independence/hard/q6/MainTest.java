@@ -4,6 +4,7 @@ import global.ObjectTest;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -42,6 +43,7 @@ public class MainTest {
     private final double testDoubleAttributeName3 = 3.8;
     private final double testDoubleAttributeName4 = 2.76;
     private final double testDoubleAttributeName5 = 1.8;
+    private final boolean testBooleanUpdate = true;
     private ObjectTest classInstance;
     private ObjectTest testInstance;
 
@@ -152,34 +154,29 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(arguments);
         if (m1)
-            classInstance.callMethod(methodName1, new Object[][]{{newColour, String.class}}, instance);
+            classInstance.callMethod(methodName1, instance);
         if (m2)
-            classInstance.callMethod(methodName2, new Object[][]{{newGender, String.class}}, instance);
+            classInstance.callMethod(methodName2, instance);
 
-        String incorrectSetMethods = "Your %s method does not update the %s attribute to the passed parameter.";
+        String incorrectMethods = "Your %s method does not correctly update the %s attribute.";
 
-        _assertEquals(newColour, classInstance.getFieldValue(instance, booleanAttributeName1),
-                String.format(incorrectSetMethods, methodName1, booleanAttributeName1));
-        _assertEquals(newGender, classInstance.getFieldValue(instance, booleanAttributeName2),
-                String.format(incorrectSetMethods, methodName2, booleanAttributeName2));
-        _assertEquals(newAge, classInstance.getFieldValue(instance, doubleAttributeName1),
-                String.format(incorrectSetMethods, setIntAttributeName1, doubleAttributeName1));
-
-        assertTrue(classInstance.hasReturnType(methodName1, new Class[]{String.class}, void.class));
-        assertTrue(classInstance.hasReturnType(methodName2, new Class[]{String.class}, void.class));
-        assertTrue(classInstance.hasReturnType(setIntAttributeName1, new Class[]{int.class}, void.class));
+        _assertEquals(newBad, classInstance.getFieldValue(instance, booleanAttributeName1),
+                String.format(incorrectMethods, methodName1, booleanAttributeName1));
+        _assertEquals(newGarbage, classInstance.getFieldValue(instance, booleanAttributeName2),
+                String.format(incorrectMethods, methodName2, booleanAttributeName2));
     }
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void fishClassHasCorrectToStringMethod(String colour, String gender, int age) throws Throwable {
+    public void lasagnaClassHasCorrectToStringMethod(boolean bad, boolean garbage, double hours) throws Throwable {
         Object[][] arguments = {
-                {colour, String.class},
-                {gender, String.class},
-                {age, int.class}
+                {bad, boolean.class},
+                {garbage, boolean.class},
+                {hours, double.class}
         };
         Object instance = classInstance.createInstance(arguments);
-        String expectedOutput = "This fish is " + colour + ", and is " + gender + ", and is " + age + " years old";
+        String expectedOutput =
+                "The dish was made " + hours + " hours ago. Is it bad? " + bad + ". Has it been thrown out? " + garbage + ".";
         Object output = classInstance.callMethod("toString", new String[]{"public"}, instance);
         String incorrectToString = String.format("Your toString method for the %s class does return the correct String.", objectClassName);
         _assertEquals(expectedOutput, output, incorrectToString);
@@ -187,59 +184,98 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("setMethodsInputProvider")
-    public void fishMethodsWorkCorrectlyWorkTogether(String colour, String gender, int age, String newColour, String newGender, int newAge) throws Throwable {
+    public void lasagnaMethodsWorkCorrectlyWorkTogether(boolean bad, boolean garbage, double hours, boolean m1, boolean m2, boolean newBad, boolean newGarbage) throws Throwable {
         Object[][] constructorArguments = {
-                {colour, String.class},
-                {gender, String.class},
-                {age, int.class}
+                {bad, boolean.class},
+                {garbage, boolean.class},
+                {hours, double.class}
         };
         Object instance = classInstance.createInstance(constructorArguments);
-        classInstance.callMethod(methodName1, new Object[][]{{newColour, String.class}}, instance);
-        classInstance.callMethod(methodName2, new Object[][]{{newGender, String.class}}, instance);
-        classInstance.callMethod(setIntAttributeName1, new Object[][]{{newAge, int.class}}, instance);
+        if (m1)
+            classInstance.callMethod(methodName1, instance);
+        if (m2)
+            classInstance.callMethod(methodName2, instance);
         Object output1 = classInstance.callMethod(getBooleanAttributeName1, instance);
         Object output2 = classInstance.callMethod(getBooleanAttributeName2, instance);
         Object output3 = classInstance.callMethod(getDoubleAttributeName1, instance);
         Object toStringOutput = classInstance.callMethod("toString", instance);
-        String expectedToStringOutput = "This fish is " + newColour + ", and is " + newGender + ", and is " + newAge + " years old";
+        String expectedToStringOutput =
+                "The dish was made " + hours + " hours ago. Is it bad? " + newBad + ". Has it been thrown out? " + newGarbage + ".";
         String incorrectSetGet =
                 "Your %s method does not return the correct value after updating the %s attribute using the %s method.";
-        String incorrectToString = "Your toString method does not return the correct String after updating the %s, %s, and %s attributes using the %s, %s, and %s methods.";
-        _assertEquals(newColour, output1,
+        String incorrectToString = "Your toString method does not return the correct String after updating the %s and %s attributes using the %s and %s methods.";
+        _assertEquals(newBad, output1,
                 String.format(incorrectSetGet, getBooleanAttributeName1, booleanAttributeName1, methodName1));
-        _assertEquals(newGender, output2,
+        _assertEquals(newGarbage, output2,
                 String.format(incorrectSetGet, getBooleanAttributeName2, booleanAttributeName2, methodName2));
-        _assertEquals(newAge, output3,
-                String.format(incorrectSetGet, getDoubleAttributeName1, doubleAttributeName1, setIntAttributeName1));
+        _assertEquals(hours, output3,
+                "Your " + doubleAttributeName1 + " attribute does not remain unchanged after calling other methods.");
         _assertEquals(expectedToStringOutput, toStringOutput,
-                String.format(incorrectToString, booleanAttributeName1, booleanAttributeName2, doubleAttributeName1,
-                        methodName1, methodName2, setIntAttributeName1));
+                String.format(incorrectToString, booleanAttributeName1, booleanAttributeName2, methodName1, methodName2));
     }
 
     @Test
-    public void testAquariumMainMethodProducesCorrectOutput() throws Throwable {
+    public void testFoodMainMethodProducesCorrectOutput() throws Throwable {
         Object[][] arguments = {{new String[0], String[].class}};
         Clause[] clauses = new Clause[]{
-                new StringLiteral(String.format("This fish is %s, and is %s, and is %d years old",
-                        testBooleanAttributeName1a, testBooleanAttributeName1b, testDoubleAttributeName1)),
+                new StringLiteral("The dish was made " + testDoubleAttributeName1 + " hours ago\\. Is it bad\\? " +
+                        testBooleanAttributeName1a + "\\. Has it been thrown out\\? " + testBooleanAttributeName1b +
+                        "\\."),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral(String.format("This fish is %s, and is %s, and is %d years old",
-                        testBooleanAttributeName2a, testBooleanAttributeName2b, testDoubleAttributeName2)),
+                new StringLiteral("The dish was made " + testDoubleAttributeName2 + " hours ago\\. Is it bad\\? " +
+                        testBooleanAttributeName2a + "\\. Has it been thrown out\\? " + testBooleanAttributeName2b +
+                        "\\."),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral(String.format("This fish is %s, and is %s, and is %d years old",
-                        testBooleanAttributeName3a, testBooleanAttributeName3b, testDoubleAttributeName3)),
+                new StringLiteral("The dish was made " + testDoubleAttributeName3 + " hours ago\\. Is it bad\\? " +
+                        testBooleanAttributeName3a + "\\. Has it been thrown out\\? " + testBooleanAttributeName3b +
+                        "\\."),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral(String.format("This fish is %s, and is %s, and is %d years old",
-                        testBooleanAttributeName1a, testBooleanAttributeName1b, testDoubleAttributeName1 + testIntAttributeNameUpdate)),
+                new StringLiteral("The dish was made " + testDoubleAttributeName4 + " hours ago\\. Is it bad\\? " +
+                        testBooleanAttributeName4a + "\\. Has it been thrown out\\? " + testBooleanAttributeName4b +
+                        "\\."),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral(String.format("This fish is %s, and is %s, and is %d years old",
-                        testBooleanAttributeName2a, testBooleanAttributeName2b, testDoubleAttributeName2 + testIntAttributeNameUpdate)),
+                new StringLiteral("The dish was made " + testDoubleAttributeName5 + " hours ago\\. Is it bad\\? " +
+                        testBooleanAttributeName5a + "\\. Has it been thrown out\\? " + testBooleanAttributeName5b +
+                        "\\."),
+                new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral(String.format("This fish is %s, and is %s, and is %d years old",
-                        testBooleanAttributeName3a, testBooleanAttributeName3b, testDoubleAttributeName3 + testIntAttributeNameUpdate)),
+
+                new StringLiteral("Some time passed\\.\\.\\."),
+                new Optional(new StringLiteral(" ")),
+                new NewLine(),
+
+                new StringLiteral("The dish was made " + testDoubleAttributeName1 + " hours ago\\. Is it bad\\? " +
+                        testBooleanUpdate + "\\. Has it been thrown out\\? " + testBooleanUpdate +
+                        "\\."),
+                new Optional(new StringLiteral(" ")),
+                new NewLine(),
+                new StringLiteral("The dish was made " + testDoubleAttributeName2 + " hours ago\\. Is it bad\\? " +
+                        testBooleanAttributeName2a + "\\. Has it been thrown out\\? " + testBooleanAttributeName2b +
+                        "\\."),
+                new Optional(new StringLiteral(" ")),
+                new NewLine(),
+                new StringLiteral("The dish was made " + testDoubleAttributeName3 + " hours ago\\. Is it bad\\? " +
+                        testBooleanUpdate + "\\. Has it been thrown out\\? " + testBooleanUpdate +
+                        "\\."),
+                new Optional(new StringLiteral(" ")),
+                new NewLine(),
+                new StringLiteral("The dish was made " + testDoubleAttributeName4 + " hours ago\\. Is it bad\\? " +
+                        testBooleanAttributeName4a + "\\. Has it been thrown out\\? " + testBooleanAttributeName4b +
+                        "\\."),
+                new Optional(new StringLiteral(" ")),
+                new NewLine(),
+                new StringLiteral("The dish was made " + testDoubleAttributeName5 + " hours ago\\. Is it bad\\? " +
+                        testBooleanAttributeName5a + "\\. Has it been thrown out\\? " + testBooleanAttributeName5b +
+                        "\\."),
+                new Optional(new StringLiteral(" ")),
+                new NewLine(),
         };
         String incorrectOutput =
-                String.format("Your %s class main method does not correctly initialize, update, and print the values of the three %s objects.",
+                String.format("Your %s class main method does not correctly initialize, update, and print the values of the five %s objects.",
                         testClassName, objectClassName);
         testInstance.callMethod("main", arguments, clauses, incorrectOutput);
     }
