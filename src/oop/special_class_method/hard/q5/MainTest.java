@@ -168,7 +168,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("twoStringInputProvider")
-    public void chairClassHasCorrectSetTypeOfRoadMethod(String initialValue, String updatedValue) throws Throwable {
+    public void roadClassHasCorrectSetTypeOfRoadMethod(String initialValue, String updatedValue) throws Throwable {
         Object[][] arguments = {
                 {2, int.class},
                 {initialValue, String.class},
