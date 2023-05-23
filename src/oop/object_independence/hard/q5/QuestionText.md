@@ -23,6 +23,7 @@ Your `Glass` class must have the following items:
 - Methods (all the following methods should be visible from another class):
     - A method called `broken` that sets the value of the **isBroken** attribute to true
     - A method called `fix` that sets the value of the **isBroken** attribute to false
+    - A method called `getIsBroken` that returns the value of the **isBroken** attribute
     - A `toString` method which returns a `String` of the form `"The item is x, and its weight is y and is it broken? 
       z"` where x is the value of the **condition** attribute, y is the value of the **weight** attribute, and z is the
       value of the **isBroken** attribute

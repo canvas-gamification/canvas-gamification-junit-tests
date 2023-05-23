@@ -2,7 +2,7 @@ package oop.object_independence.hard.q5;
 
 public class Glass {
     private String condition;
-    public boolean isBroken;
+    private boolean isBroken;
     private double weight;
 
     public Glass(String s, boolean b, double w) {
@@ -17,6 +17,10 @@ public class Glass {
 
     public void fix() {
         isBroken = false;
+    }
+
+    public boolean getIsBroken() {
+        return isBroken;
     }
 
     public String toString() {

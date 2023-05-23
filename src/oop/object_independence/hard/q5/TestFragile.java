@@ -10,9 +10,12 @@ public class TestFragile {
         System.out.println(g3.toString());
         g1.broken();
         g3.broken();
+        System.out.println(g1.toString());
+        System.out.println(g2.toString());
+        System.out.println(g3.toString());
         Glass[] homeInventory = {g1, g2, g3};
         for (int i = 0; i < homeInventory.length; i++) {
-            if (homeInventory[i].isBroken)
+            if (homeInventory[i].getIsBroken())
                 homeInventory[i].fix();
         }
         System.out.println(g1.toString());
