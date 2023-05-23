@@ -183,7 +183,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void chairClassHasCorrectToStringMethod(String value, String b) throws Throwable {
+    public void detergentClassHasCorrectToStringMethod(String value, String b) throws Throwable {
         Object[][] arguments = {
                 {value, String.class},
                 {b, String.class}
