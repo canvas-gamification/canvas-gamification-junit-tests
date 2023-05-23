@@ -100,7 +100,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void chairClassHasCorrectSetSizeMethod(String initialValue, String setValue) throws Throwable {
+    public void detergentClassHasCorrectSetNameMethod(String initialValue, String setValue) throws Throwable {
         Object[][] arguments = {
                 {initialValue, String.class},
                 {"Initial String", String.class}
