@@ -18,7 +18,7 @@ Your `Detergent` class must have the following items:
     - a `String` field named **strength** which is not accessible from other classes
 
 - Constructors:
-    - A constructor which is accessible from other classes and accepts two`String` value to initialize the
+    - A constructor which is accessible from other classes and accepts two `String` values to initialize the
       **name** and **strength** fields.
 
 - Methods:
