@@ -127,7 +127,7 @@ public class MainTest {
         Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
-                "Your", getString2MethodName, "does not correctly get the value of the", String2FieldName, "field.");
+                "Your", getString2MethodName, "method does not correctly get the value of the", String2FieldName, "field.");
         Object getMethodOutput = testClass.callMethod(getString2MethodName, getMethodModifiers, classInstance);
         _assertEquals(value, getMethodOutput, incorrectGetMethodMessage);
     }
