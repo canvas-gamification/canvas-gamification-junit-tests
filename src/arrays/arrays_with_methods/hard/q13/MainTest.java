@@ -57,7 +57,7 @@ public class MainTest extends BaseTest {
                 new int[]{1, 4, 6, 8, 9, 10, 12, 14, 21, 66, 12, 4},
                 new int[]{15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1},
                 new int[]{3169, 1999, 4793, 5783, 7919, 6311, 672832, 733},
-                new int[]{5, 53, 157, 173, 211, 257, 263, 3731367, 1511, 1747, 1753, 1907, 2287, 2417, 3637, 3733, 4013, 4409, 4457, 4597, 4657, 4691, 4993, 5107, 5113, 5393},
+                new int[]{5, 53, 157, 173, 211, 257, 263, 3731367, 1511, 1747, 1753, 1907, 2287, 2417, 3635, 3733, 4013, 4409, 4457, 4597, 4657, 4691, 4993, 5107, 5113, 5393},
                 new int[]{2, 5, 877, 27644437},
                 new int[]{8269, 9242, 10267, 11718, 12097, 13260, 13669, 16653, 19441, 19929, 22447, 23427, 24571, 25117, 26228, 27361, 33391, 35317}
         );
@@ -72,19 +72,26 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(ArrayngeOfPrimes.class, "getPrimes", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertArrayEquals(expected, output, "Your getPrimes method does not correctly collect and return all prime numbers.");
+        CustomAssertions._assertArrayEquals(expected, output, "Your getPrimes method does not correctly gather all the prime numbers in an array and return it.");
     }
 
     @ParameterizedTest
     @MethodSource("mainMethodInputProvider")
     void correctMainMethodOutput(int[] in) throws InvalidClauseException {
         int[] ans = solution(in);
-        Clause[][] c = new Clause[1][ans.length * 2];
+        Clause[][] c = new Clause[1][ans.length * 2 + 3];
         int count = 0;
 
-        for (int x = 0; x < ans.length; x++) {
+        c[0][count++] = new StringLiteral("The prime numbers are:");
+        c[0][count++] = new Optional(new StringLiteral(" "));
+        c[0][count++] = new NewLine();
+        for (int x = 0; x < ans.length - 1; x++) {
             c[0][count++] = new IntegerLiteral(ans[x]);
-            c[0][count++] = new NewLine();
+            c[0][count++] = new StringLiteral(" ");
+        }
+        if(ans.length > 0) {
+            c[0][count++] = new IntegerLiteral(ans[ans.length - 1]);
+            c[0][count] = new Optional(new StringLiteral(" "));
         }
 
         runWithInput(ArrayUtil.arrayToInput(in), c);

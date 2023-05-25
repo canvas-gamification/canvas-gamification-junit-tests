@@ -9,6 +9,7 @@ divisible only by 1 and themselves. Your getPrimes method should be generalized 
 Sample output:
     Enter an array of 10 integers:
     1 2 3 4 5 6 7 8 9 10
+    The prime numbers are:
     2
     3
     5
@@ -21,13 +22,14 @@ public class ArrayngeOfPrimes {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter an array of 10 integers: ");
-        int[] arr = new int[10];
-        for(int x = 0; x < 10; x++){
+        int[] arr = new int[26];
+        for(int x = 0; x < 26; x++){
             arr[x] = input.nextInt();
         }
+        System.out.println("The prime numbers are: ");
         int[] primes = getPrimes(arr);
         for (int i = 0; i < primes.length; i++) {
-            System.out.println(primes[i]);
+            System.out.print(primes[i] + " ");
         }
     }
 
