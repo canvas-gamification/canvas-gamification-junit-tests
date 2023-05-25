@@ -42,7 +42,7 @@ public class MainTest extends BaseTest {
     }
 
     public static Stream<Integer> createRandomArrayInputProvider() {
-        return Stream.of(1000, 1500, 2000, 3000);
+        return Stream.of(1000, 1001, 1010, 1100, 1250, 1500);
     }
 
     public static Stream<Integer> mainMethodInputProvider() {
