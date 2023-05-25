@@ -7,6 +7,12 @@ public class RandomBooleanQuestion {
         Random r = new Random();
         System.out.println(r.nextBoolean());
         System.out.println("Next random value: ");
-        System.out.println(r.nextInt(2) == 0 ? "X" : "O");
+        System.out.println(r.nextInt(2) == 0 ? "O" : "X");
     }
+
+    public static String random() {
+        Random r = new Random();
+        return r.nextInt(2) == 0 ? "O" : "X";
+    }
+
 }
