@@ -5,8 +5,8 @@ import global.tools.CustomAssertions;
 import global.utils.ArrayUtil;
 import global.variables.clauses.RandomInteger;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
@@ -20,14 +20,21 @@ public class MainTest {
     // Java
 
     public static Stream<Integer> randomReplaceInput() {
-        return Stream.of(3, 4, 5, 6, 7, 50);
+        return Stream.of(3, 4, 5, 6, 7, 40);
     }
 
-    @Test
-    public void randomReplaceMethodKeepsOddIndexNumber() throws Throwable {
+    public static Stream<Arguments> oddIndexInput(){
+        return Stream.of(
+                Arguments.of(new int[]{1, 38, 42, 35, 5, 124, 4352, 54, 8, 43245, 79}, new int[]{38, 35, 124, 54, 43245}),
+                Arguments.of(new int[]{2, 43, 342, 5, 324, 543, 543, 6, 43, 634, 49, 236, 246, 2673653, 7653}, new int[]{43, 5, 543, 6, 634, 236, 2673653}),
+                Arguments.of(new int[]{10, 8, 6, 4, 2, 0}, new int[]{8, 4, 0})
+        );
+    }
+
+    @MethodSource("oddIndexInput")
+    @ParameterizedTest
+    public void randomReplaceMethodKeepsOddIndexNumber(int[] arr, int[] solutions) throws Throwable {
         //this checks that the odd index numbers are not modified
-        int[] arr = {2, 43, 342, 5, 324, 543, 543, 6, 43, 634, 49, 236, 246, 2673653, 7653};
-        int[] solutions = {43, 5, 543, 6, 634, 236, 2673653};
         Object[][] arguments = {
                 {arr, int[].class}
         };
@@ -36,7 +43,7 @@ public class MainTest {
             Assertions.fail("Your createRandomArray method does not return an array of integers.");
         }
         int[] output = (int[]) m.callMethod();
-        int[] oddNums = new int[7];
+        int[] oddNums = new int[output.length/2];
         int count = 0;
         for (int x = 0; x < output.length; x++) {
             if (x % 2 == 1)
