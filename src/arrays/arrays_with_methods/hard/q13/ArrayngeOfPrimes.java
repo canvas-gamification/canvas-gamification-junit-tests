@@ -22,8 +22,8 @@ public class ArrayngeOfPrimes {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter an array of 10 integers: ");
-        int[] arr = new int[26];
-        for(int x = 0; x < 26; x++){
+        int[] arr = new int[10];
+        for(int x = 0; x < 10; x++){
             arr[x] = input.nextInt();
         }
         System.out.println("The prime numbers are: ");
