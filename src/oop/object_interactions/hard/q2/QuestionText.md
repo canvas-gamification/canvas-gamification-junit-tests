@@ -1,5 +1,3 @@
-The class should also include the necessary accessor, mutator, and <tt>toString()</tt> methods so that the class works as intended.
-
 # oop-object_interactions-hard-q2
 
 - Parsons question
@@ -7,8 +5,8 @@ The class should also include the necessary accessor, mutator, and <tt>toString(
 ## Question Text
 
 Modern married couples often combine each other's last names to create a new last name for their family. Design a 
-`Partner` class using the requirements below, and create a steal method that takes the attributes from one passport and 
-copies them to another.
+`Partner` class using the requirements below, and create a marryMe method that takes the last name of another partner
+and creates a hyphenated last name.
 
 ### Partner Class:
 
