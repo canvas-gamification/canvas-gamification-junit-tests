@@ -4,15 +4,13 @@
 
 You are writing a Java program that describes different types of roads and their attributes. Write a Java class called
 **Road** that has an `int` variable called **lanes**, a `String` variable called **typeOfRoad**, and an
-`int` variable called **maxCapacity**. For this class, write a constructor that accepts two `int` values
-and a String value, and sets the value of the class variables to those input values. Also, write a **toString** method
-that summarizes the attributes of the object. Also, write accessor and mutator methods for the necessary variables.
+`int` variable called **maxCapacity**.
 
 ### Road Class:
 
 Your `Road` class must have the following items:
 
-- Fields :
+- Attributes:
     - a `int` attribute named **lanes** which is not accessible from other classes
     - a `String` attribute named **typeOfRoad** which is not accessible from other classes
     - a `int` attribute named **maxCapacity** which is not accessible from other classes
@@ -24,18 +22,18 @@ Your `Road` class must have the following items:
 - Methods:
     - a `setLanes` method which accepts a `int` value, updates the **lanes** field with it, and is accessible from
       other classes
-    - a `getLanes` method which is accessible from other classes and returns the value of the **lanes** field
-    - a `setTypeOfRoad` method which accepts a `String` value, updates the **typeOfRoad** field with it, and is
-      accessible
-      from other classes
-    - a `getTypeOfRoad` method which is accessible from other classes and returns the value of the **typeOfRoad** field
-    - a `setMaxCapacity` method which accepts a `int` value, updates the **maxCapacity** field with it, and is
-      accessible from
-      other classes
+    - a `getLanes` method which is accessible from other classes and returns the value of the **lanes** attribute
+    - a `setTypeOfRoad` method which accepts a `String` value, updates the **typeOfRoad** attribute with it, and is
+      accessible from other classes
+    - a `getTypeOfRoad` method which is accessible from other classes and returns the value of the **typeOfRoad**
+      attribute
+    - a `setMaxCapacity` method which accepts a `int` value, updates the **maxCapacity** attribute with it, and is
+      accessible from other classes
     - a `getMaxCapacity` method which is accessible from other classes and returns the value of the **maxCapacity**
-      field
+      attribute
     - a `toString` method which returns a String of the information about the `Road` class of the form
-      `"Road{lanes: " + lanes + ", typeOfRoad: " + typeOfRoad + ", maxCapacity: " + maxCapacity + "}"`.
+      `"The Road instance lanes is " + lanes + ", its typeOfRoad is " + typeOfRoad + ", and its maxCapacity is " + maxCapacity + "."`
+      .
 
 ### Test Class:
 

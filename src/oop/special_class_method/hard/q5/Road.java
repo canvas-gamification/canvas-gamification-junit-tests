@@ -12,7 +12,7 @@ public class Road {
     }
 
     public String toString() {
-        return "Road{lanes: " + lanes + ", typeOfRoad: " + typeOfRoad + ", maxCapacity: " + maxCapacity + "}";
+        return "The Road instance lanes is " + lanes + ", its typeOfRoad is " + typeOfRoad + ", and its maxCapacity is " + maxCapacity + ".";
     }
 
     public void setLanes(int a) {
