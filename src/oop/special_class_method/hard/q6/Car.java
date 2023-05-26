@@ -15,7 +15,7 @@ public class Car {
     }
 
     public String toString() {
-        return "Car{topSpeed: " + topSpeed + ", type: " + type + "}";
+        return "This Car has a topSpeed of " + topSpeed + " with the type " + type + ".";
     }
 
     public void setTopSpeed(double a) {

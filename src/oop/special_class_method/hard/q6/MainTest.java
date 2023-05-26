@@ -20,7 +20,7 @@ public class MainTest {
     // Java
     private final String className = "Car";
     private final String doubleFieldName = "topSpeed";
-    private final String StringFieldName = "type";
+    private final String stringFieldName = "type";
     private final String setStringMethodName = "setType";
     private final String getStringMethodName = "getType";
     private final String getDoubleMethodName = "getTopSpeed";
@@ -47,22 +47,32 @@ public class MainTest {
                 {new String[0], String[].class}
         };
         outputClass.callMethod("main", arguments, methodModifiers, classInstance, new Clause[]{
-                new StringLiteral(className + "\\{" + doubleFieldName + ": " + outputTopSpeed + ", " + StringFieldName + ": " + outputType + "\\}"),
+                new StringLiteral("This " + className + " has a " + doubleFieldName + " of " + outputTopSpeed + " with the " + stringFieldName + " " + outputType),
+                new Optional(new StringLiteral(".")),
                 new Optional(new StringLiteral(" ")),
                 new Optional(new NewLine())
         });
     }
 
     @Test
-    public void carClassHasCorrectFields() {
+    public void carClassHasCorrectAttributes() {
         assertTrue(testClass.hasField(doubleFieldName, double.class),
-                "Your " + className + " class is missing the " + doubleFieldName + " field.");
+                "The attribute " + doubleFieldName + " could not be found in your class. Please make sure you have added it, it is spelled correctly, and has the correct type");
         assertTrue(testClass.hasModifier(doubleFieldName, "private"),
                 "Your " + doubleFieldName + " does not have the correct visibility modifier.");
-        assertTrue(testClass.hasField(StringFieldName, String.class),
-                "Your " + className + " class is missing the " + doubleFieldName + " field.");
-        assertTrue(testClass.hasModifier(StringFieldName, "private"),
-                "Your " + StringFieldName + " does not have the correct visibility modifier.");
+        assertTrue(testClass.hasField(stringFieldName, String.class),
+                "The attribute " + stringFieldName + " could not be found in your class. Please make sure you have added it, it is spelled correctly, and has the correct type");
+        assertTrue(testClass.hasModifier(stringFieldName, "private"),
+                "Your " + stringFieldName + " does not have the correct visibility modifier.");
+    }
+
+    @Test
+    public void carClassHasRequiredConstructor() {
+        Class<?>[] classArguments = {double.class, String.class};
+        assertTrue(testClass.hasConstructor(classArguments),
+                "Your " + className + " constructor does not have the correct parameters.");
+        assertTrue(testClass.hasModifier(classArguments, "public"),
+                "Your " + className + " constructor does not have the correct modifier.");
     }
 
     private static Stream<Arguments> constructorInputProvider() {
@@ -85,14 +95,14 @@ public class MainTest {
         Class<?>[] constructorClasses = {double.class, String.class};
         Object classInstance = testClass.createInstance(arguments);
         String incorrectDoubleValueMessage =
-                "Your " + className + " constructor does not initialize the " + doubleFieldName + " filed to the correct value.";
+                "Your " + className + " constructor does not initialize the " + doubleFieldName + " attribute to the correct value.";
         String incorrectStringValueMessage =
-                "Your " + className + " constructor does not initialize the " + StringFieldName + " filed to the correct value.";
+                "Your " + className + " constructor does not initialize the " + stringFieldName + " attribute to the correct value.";
         String incorrectConstructorVisibilityModifier =
                 "Your " + className + " constructor does not have the correct visibility modifier.";
         _assertEquals(value1, testClass.getFieldValue(classInstance, doubleFieldName),
                 incorrectDoubleValueMessage);
-        _assertEquals(value2, testClass.getFieldValue(classInstance, StringFieldName),
+        _assertEquals(value2, testClass.getFieldValue(classInstance, stringFieldName),
                 incorrectStringValueMessage);
         assertTrue(testClass.hasModifier(constructorClasses, "public"), incorrectConstructorVisibilityModifier);
     }
@@ -103,14 +113,14 @@ public class MainTest {
         Class<?>[] constructorClasses = {double.class, String.class};
         Object classInstance = testClass.createInstance();
         String incorrectDoubleValueMessage =
-                "Your " + className + " constructor does not initialize the " + doubleFieldName + " filed to the correct value.";
+                "Your " + className + " constructor does not initialize the " + doubleFieldName + " attribute to the correct value.";
         String incorrectStringValueMessage =
-                "Your " + className + " constructor does not initialize the " + StringFieldName + " filed to the correct value.";
+                "Your " + className + " constructor does not initialize the " + stringFieldName + " attribute to the correct value.";
         String incorrectConstructorVisibilityModifier =
                 "Your " + className + " constructor does not have the correct visibility modifier.";
         _assertEquals(180.0, testClass.getFieldValue(classInstance, doubleFieldName),
                 incorrectDoubleValueMessage);
-        assertEquals(null, testClass.getFieldValue(classInstance, StringFieldName),
+        assertEquals(null, testClass.getFieldValue(classInstance, stringFieldName),
                 incorrectStringValueMessage);
         assertTrue(testClass.hasModifier(constructorClasses, "public"), incorrectConstructorVisibilityModifier);
     }
@@ -138,7 +148,7 @@ public class MainTest {
         };
         String[] setMethodModifiers = {"public"};
         String incorrectSetMethodMessage = String.join(" ",
-                "Your", setDoubleMethodName, "does not correctly set the value of the", doubleFieldName, "field.");
+                "Your", setDoubleMethodName, "does not correctly set the value of the", doubleFieldName, "attribute.");
         Object setMethodOutput = testClass.callMethod(setDoubleMethodName, setSizeArguments, setMethodModifiers, classInstance);
         _assertEquals(setValue, testClass.getFieldValue(classInstance, doubleFieldName), incorrectSetMethodMessage);
         assertNull(setMethodOutput, String.join(" ", "Your", setDoubleMethodName, "should not return any output"));
@@ -154,7 +164,7 @@ public class MainTest {
         Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
-                "Your", getDoubleMethodName, "does not correctly get the value of the", doubleFieldName, "field.");
+                "Your", getDoubleMethodName, "does not correctly get the value of the", doubleFieldName, "attribute.");
         Object getMethodOutput = testClass.callMethod(getDoubleMethodName, getMethodModifiers, classInstance);
         _assertEquals(value1, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -176,30 +186,30 @@ public class MainTest {
                 {initialValue, String.class}
         };
         Object classInstance = testClass.createInstance(arguments);
-        testClass.setFieldValue(classInstance, initialValue, StringFieldName);
+        testClass.setFieldValue(classInstance, initialValue, stringFieldName);
         Object[][] setMethodArguments = {
                 {updatedValue, String.class}
         };
         String[] setMethodModifiers = {"public"};
         String incorrectSetMethodMessage = String.join(" ",
-                "Your", setStringMethodName, "does not correctly set the value of the", StringFieldName, "field.");
+                "Your", setStringMethodName, "does not correctly set the value of the", stringFieldName, "attribute.");
         Object setMethodOutput = testClass.callMethod(setStringMethodName, setMethodArguments, setMethodModifiers, classInstance);
-        _assertEquals(updatedValue, testClass.getFieldValue(classInstance, StringFieldName), incorrectSetMethodMessage);
+        _assertEquals(updatedValue, testClass.getFieldValue(classInstance, stringFieldName), incorrectSetMethodMessage);
         assertNull(setMethodOutput, String.join(" ", "Your", setStringMethodName, "should not return any output"));
     }
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void chairClassHasCorrectGetTypeMethod(double value1, String value2) throws Throwable {
+    public void carClassHasCorrectGetTypeMethod(double value1, String value2) throws Throwable {
         Object[][] arguments = {
                 {value1, double.class},
                 {value2, String.class}
         };
         Object classInstance = testClass.createInstance(arguments);
-        testClass.setFieldValue(classInstance, value2, StringFieldName);
+        testClass.setFieldValue(classInstance, value2, stringFieldName);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
-                "Your", getStringMethodName, "does not correctly get the value of the", StringFieldName, "field.");
+                "Your", getStringMethodName, "does not correctly get the value of the", stringFieldName, "attribute.");
         Object getMethodOutput = testClass.callMethod(getStringMethodName, getMethodModifiers, classInstance);
         _assertEquals(value2, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -213,7 +223,7 @@ public class MainTest {
         };
         Object classInstance = testClass.createInstance(arguments);
         String[] methodModifiers = {"public"};
-        String expected = className + "{" + doubleFieldName + ": " + value + ", " + StringFieldName + ": " + b + "}";
+        String expected = "This " + className + " has a " + doubleFieldName + " of " + value + " with the " + stringFieldName + " " + b + ".";
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, " toString method does not return the correct String.");
         Object output = testClass.callMethod("toString", methodModifiers, classInstance);
@@ -245,7 +255,7 @@ public class MainTest {
         testClass.callMethod(setStringMethodName, setBooleanArguments, classInstance);
         _assertEquals(b, testClass.callMethod(getStringMethodName, classInstance),
                 "Your " + getStringMethodName + " method does not return the correct value calling the " + setStringMethodName + " method.");
-        String expectedToString = className + "{" + doubleFieldName + ": " + value + ", " + StringFieldName + ": " + b + "}";
+        String expectedToString = "This " + className + " has a " + doubleFieldName + " of " + value + " with the " + stringFieldName + " " + b + ".";
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, " toString method does not return the correct String after updating the values of its fields using its setter methods.");
         Object output = testClass.callMethod("toString", classInstance);
