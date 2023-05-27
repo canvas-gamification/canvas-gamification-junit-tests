@@ -1,6 +1,6 @@
 # oop-object_interactions-hard-q2
 
-- Parsons question
+- Java question
 
 ## Question Text
 
