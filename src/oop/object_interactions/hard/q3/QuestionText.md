@@ -45,5 +45,5 @@ Your `TestBlood` class must have the following items:
     - After initializing both objects, print the `toString` value of each object, starting with the first object
     - Next, using the `canReceiveBloodFrom` method, check if the first object can receive blood from the second and 
       print either "They are compatible" or "They are incompatible"
-    - Make sure that each of the four `toString` results are printed on their own line
+    - Make sure that each of the messages are printed on their own line
     
