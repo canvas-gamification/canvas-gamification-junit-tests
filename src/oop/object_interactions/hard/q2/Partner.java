@@ -5,7 +5,7 @@ public class Partner
     private String firstName;
     private String lastName;
 
-    public Partner ( String firstName, String lastName, int age )
+    public Partner ( String firstName, String lastName)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,6 +34,6 @@ public class Partner
     }
     public String toString()
     {
-        return "My name is: " + firstName + " " + lastName;
+        return "My name is: " + firstName + " " + lastName + ".";
     }
 }

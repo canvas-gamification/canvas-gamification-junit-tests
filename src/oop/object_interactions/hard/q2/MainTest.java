@@ -85,108 +85,133 @@ public class MainTest {
         _assertEquals(lName, output, String.format(incorrectGetMethods, getStringAttribute2, stringAttribute2));
     }
 
-    private static Stream<Arguments> setNameInputProvider() {
+    private static Stream<Arguments> setInputProvider() {
         return Stream.of(
-                Arguments.of("Joe", "Not Joe"),
-                Arguments.of("Initial Name", "Updated Name Right Here$$$"),
-                Arguments.of("1245B$53", "dwdn842")
+                Arguments.of("Joe", "Hammock", "Not Joe", "Not Hammock"),
+                Arguments.of("Bob", "Dod", "Dod", "Bob"),
+                Arguments.of("Julie", "Novik", "Sterling", "Novak"),
+                Arguments.of("Null", "null", "Richard", "Kessler")
         );
     }
 
     @ParameterizedTest
-    @MethodSource("setNameInputProvider")
-    public void correctSetNameMethod(String nameInitial, String nameFinal) throws Throwable {
+    @MethodSource("setInputProvider")
+    public void correctSetNameMethod(String fName, String lName, String newFName, String newLName) throws Throwable {
         Object[][] constructorArguments = {
-                {nameInitial, String.class},
-                {"Dob", String.class}
+                {fName, String.class},
+                {lName, String.class}
         };
-        Object passportInstance = classInstance.createInstance(constructorArguments);
-        assertTrue(classInstance.hasMethod(setStringAttribute2, new Class[]{String.class}, Void.TYPE, new String[]{"private"}),
+        Object instance = classInstance.createInstance(constructorArguments);
+
+        assertTrue(classInstance.hasMethod(setStringAttribute1, new Class[]{String.class}, Void.TYPE, new String[]{"public"}),
                 String.format("Your %s class is missing the %s method, or the method name was spelt incorrectly.",
                         objectClassName, setStringAttribute1));
-        Object[][] setArguments = {{nameFinal, String.class}};
-        classInstance.callMethod(setStringAttribute1, setArguments, passportInstance);
-        _assertEquals(nameFinal, classInstance.getFieldValue(passportInstance, stringAttribute1),
+        Object[][] setArguments = {{newFName, String.class}};
+        classInstance.callMethod(setStringAttribute1, setArguments, instance);
+        _assertEquals(newFName, classInstance.getFieldValue(instance, stringAttribute1),
                 String.format("Your %s method does not update the %s attribute with the correct value.", setStringAttribute1, stringAttribute1));
-    }
 
-    private static Stream<Arguments> setDobInputProvider() {
-        return Stream.of(
-                Arguments.of("July 1st, 1867", "Today"),
-                Arguments.of("14/11/1976", "31/04/2004"),
-                Arguments.of("Null", "Null"),
-                Arguments.of("My birthdate", "")
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("setDobInputProvider")
-    public void correctSetDobMethod(String dobInitial, String dobFinal) throws Throwable {
-        Object[][] constructorArguments = {
-                {"Joe", String.class},
-                {dobInitial, String.class}
-        };
-        Object passportInstance = classInstance.createInstance(constructorArguments);
-        assertTrue(classInstance.hasMethod(setStringAttribute2, new Class[]{String.class}, Void.TYPE, new String[]{"private"}),
+        assertTrue(classInstance.hasMethod(setStringAttribute2, new Class[]{String.class}, Void.TYPE, new String[]{"public"}),
                 String.format("Your %s class is missing the %s method, or the method name was spelt incorrectly.",
                         objectClassName, setStringAttribute2));
-        Object[][] setArguments = {{dobFinal, String.class}};
-        classInstance.callMethod(setStringAttribute2, setArguments, passportInstance);
-        _assertEquals(dobFinal, classInstance.getFieldValue(passportInstance, stringAttribute2),
+        setArguments = new Object[][]{{newLName, String.class}};
+        classInstance.callMethod(setStringAttribute2, setArguments, instance);
+        _assertEquals(newLName, classInstance.getFieldValue(instance, stringAttribute2),
                 String.format("Your %s method does not update the %s attribute with the correct value.", setStringAttribute2, stringAttribute2));
     }
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void correctToStringMethod(String name, String dob) throws Throwable {
+    public void correctToStringMethod(String fName, String lName) throws Throwable {
         Object[][] constructorArguments = {
-                {name, String.class},
-                {dob, String.class}
+                {fName, String.class},
+                {lName, String.class}
         };
-        Object passportInstance = classInstance.createInstance(constructorArguments);
-        Object output = classInstance.callMethod("toString", passportInstance);
-        String expected = String.format("My name is %s, and I was born on %s.", name, dob);
+        Object instance = classInstance.createInstance(constructorArguments);
+        Object output = classInstance.callMethod("toString", instance);
+        String expected = String.format("My name is: %s %s.", fName, lName);
         _assertEquals(expected, output,
                 String.format("Your toString method for the %s class does not return the correct output. Please ensure you match the sample exactly and have not misspelled anything.", objectClassName));
     }
 
-    private static Stream<Arguments> stealMethodInputProvider() {
+    private static Stream<Arguments> methodInputProvider() {
         return Stream.of(
-                Arguments.of("Linda Johnson", "June 3, 1945", "Linda Jonson", "June 3, 1945 "),
-                Arguments.of("Joseph P. Borrington III", "14/05/2023", "Joey", "I forgot my birthday :("),
-                Arguments.of("Chicken Little $$$", "3rd August, 1242,24", "Chicken Big %%%", "01/01/345")
+                Arguments.of("Linda", "Johnson", "June", "Mayfield", "Johnson-Mayfield"),
+                Arguments.of("Joseph", "Borrington", "Percy", "Borringson", "Borrington-Borringson"),
+                Arguments.of("Colline", "Fisher", "Mina", "Harker", "Fisher-Harker"),
+                Arguments.of("Real Name", "Last Name", "Realer First Name", "null", "Last Name-null")
         );
     }
 
     @ParameterizedTest
-    @MethodSource("stealMethodInputProvider")
-    public void correctStealMethod(String name1, String dob1, String name2, String dob2) throws Throwable {
-        Object[][] passport1Arguments = {
-                {name1, String.class},
-                {dob1, String.class}
+    @MethodSource("methodInputProvider")
+    public void correctMarryMeMethod(String fName1, String lName1, String fName2, String lName2, String conjoined) throws Throwable {
+        Object[][] person1Arguments = {
+                {fName1, String.class},
+                {lName1, String.class}
         };
-        Object[][] passport2Arguments = {
-                {name2, String.class},
-                {dob2, String.class}
+        Object[][] person2Arguments = {
+                {fName2, String.class},
+                {lName2, String.class}
         };
-        Object passportInstance1 = classInstance.createInstance(passport1Arguments);
-        Object passportInstance2 = classInstance.createInstance(passport2Arguments);
+        Object instance1 = classInstance.createInstance(person1Arguments);
+        Object instance2 = classInstance.createInstance(person2Arguments);
         assertTrue(classInstance.hasMethod(methodName1, new Class[]{classInstance.getObjectClass()}, Void.TYPE, new String[]{"public"}),
                 String.format(
                         "Your %s class is missing the %s method. Please check that the name is spelled correctly, the parameters and return type are correct, and it has the correct visibility modifier.",
-                        objectClassName,
-                        methodName1
+                        objectClassName, methodName1
                 ));
-        Object[][] stealArguments = {{passportInstance2, classInstance.getObjectClass()}};
-        classInstance.callMethod(methodName1, stealArguments, passportInstance1);
-        _assertEquals(name2, classInstance.getFieldValue(passportInstance1, stringAttribute1),
+        Object[][] methodArguments = {{instance2, classInstance.getObjectClass()}};
+        classInstance.callMethod(methodName1, methodArguments, instance1);
+        _assertEquals(fName1, classInstance.getFieldValue(instance1, stringAttribute1),
                 String.format("Your %s method does not copy the %s value from the input %s.", methodName1, stringAttribute1, objectClassName));
-        _assertEquals(dob2, classInstance.getFieldValue(passportInstance1, stringAttribute2),
+        _assertEquals(conjoined, classInstance.getFieldValue(instance1, stringAttribute2),
                 String.format("Your %s method does not copy the %s value from the input %s.", methodName1, stringAttribute2, objectClassName));
-        _assertEquals(name2, classInstance.getFieldValue(passportInstance2, stringAttribute1),
+        _assertEquals(fName2, classInstance.getFieldValue(instance2, stringAttribute1),
                 String.format("Your %s method should not modify the %s value from the input %s.", methodName1, stringAttribute1, objectClassName));
-        _assertEquals(dob2, classInstance.getFieldValue(passportInstance2, stringAttribute2),
+        _assertEquals(conjoined, classInstance.getFieldValue(instance2, stringAttribute2),
                 String.format("Your %s method should not modify the %s value from the input %s.", methodName1, stringAttribute2, objectClassName));
+    }
+
+    private static Stream<Arguments> workTogetherInputProvider() {
+        return Stream.of(
+                Arguments.of("Kathy", "Saints", "Max", "Gladstone", "Emma", "Straub", "Straub-Gladstone"),
+                Arguments.of("Catherynne", "Valente", "Steven", "Barnes", "Tananarive", "Due", "Due-Barnes"),
+                Arguments.of("Brooke", "Bolander", "Rachel", "Swirsky", "null", "Rickert", "Rickert-Swirsky")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("workTogetherInputProvider")
+    public void partnerMethodsWorkCorrectlyWorkTogether(String fName1, String lName1, String fName2, String lName2, String newFName, String newLName, String conjoined) throws Throwable {
+        Object[][] person1Arguments = {
+                {fName1, String.class},
+                {lName1, String.class}
+        };
+        Object[][] person2Arguments = {
+                {fName2, String.class},
+                {lName2, String.class}
+        };
+        Object instance1 = classInstance.createInstance(person1Arguments);
+        Object instance2 = classInstance.createInstance(person2Arguments);
+
+        classInstance.callMethod(setStringAttribute1, new Object[][]{{newFName, String.class}}, instance1);
+        classInstance.callMethod(setStringAttribute2, new Object[][]{{newLName, String.class}}, instance1);
+        Object output1 = classInstance.callMethod(getStringAttribute1, instance1);
+        Object output2 = classInstance.callMethod(getStringAttribute2, instance1);
+        classInstance.callMethod(methodName1, new Object[][]{{instance2, classInstance.getObjectClass()}}, instance1);
+        Object toStringOutput = classInstance.callMethod("toString", instance1);
+        String expectedToStringOutput = "My name is: " + newFName + " " + conjoined + ".";
+        String incorrectSetGet =
+                "Your %s method does not return the correct value after updating the %s attribute using the %s method.";
+        String incorrectToString = "Your toString method does not return the correct String after updating the %s and %s attributes using the %s, %s and %s methods.";
+        _assertEquals(newFName, output1,
+                String.format(incorrectSetGet, getStringAttribute1, stringAttribute1, setStringAttribute1));
+        _assertEquals(newLName, output2,
+                String.format(incorrectSetGet, getStringAttribute2, stringAttribute2, setStringAttribute2));
+        _assertEquals(expectedToStringOutput, toStringOutput,
+                String.format(incorrectToString, stringAttribute1, stringAttribute2, setStringAttribute1,
+                        setStringAttribute2, methodName1));
     }
 }
 
