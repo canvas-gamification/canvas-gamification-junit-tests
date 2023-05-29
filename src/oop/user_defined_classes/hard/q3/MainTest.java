@@ -42,8 +42,8 @@ public class MainTest {
 
     @Test
     public void cupboardClassHasRequiredConstructor() {
-        String missingConstructorMessage = "Your " + testClassName + " class is missing a required constructor.";
-        assertTrue(classInstance.hasConstructor(null), missingConstructorMessage);
+        assertTrue(classInstance.hasConstructor(null, new String[]{"public"}),
+                String.format("Your %s class is missing a required constructor or has the incorrect visibility modifier.", testClassName));
     }
 
     @Test
@@ -65,8 +65,8 @@ public class MainTest {
     @MethodSource("methodInputProvider")
     public void correctWashCompleteMethod(int attribute1) throws Throwable {
         Object instance = classInstance.createInstance();
-        assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class}),
-                "Your " + testClassName + " class is missing the method " + methodName + "."
+        assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class}, Void.TYPE, new String[]{"public"}),
+                "Your " + testClassName + " class is missing the method " + methodName + " or it does not have the correct return type or visibility modifier."
         );
         classInstance.callMethod(methodName, new Object[][]{{attribute1, int.class}}, instance, null);
         _assertEquals(attribute1, classInstance.getFieldValue(instance, intAttributeName1),
