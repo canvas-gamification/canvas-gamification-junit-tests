@@ -41,12 +41,11 @@ public class MainTest {
 
     @Test
     public void laundromatClassHasRequiredConstructor() {
-        String missingConstructorMessage = "Your " + testClassName + " class is missing a required constructor.";
         Class<?>[] arguments = {
                 int.class
         };
-        assertTrue(classInstance.hasConstructor(arguments), missingConstructorMessage);
-    }
+        assertTrue(classInstance.hasConstructor(arguments, new String[]{"public"}),
+                String.format("Your %s class is missing a required constructor or has the incorrect visibility modifier.", testClassName));    }
 
     private static Stream<Integer> constructorInputProvider() {
         return Stream.of(0, 2, 15, 42, 532789, 473, 123);
@@ -76,8 +75,8 @@ public class MainTest {
                 {attribute1, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
-        assertTrue(classInstance.hasMethod(methodName, null),
-                "Your " + testClassName + " class is missing the method " + methodName + ".");
+        assertTrue(classInstance.hasMethod(methodName, null, Void.TYPE, new String[]{"public"}),
+                "Your " + testClassName + " class is missing the method " + methodName + " or it does not have the correct return type or visibility modifier.");
         Clause[] c = new Clause[attribute1 * 3 + 2];
         int count = 0;
         for (int x = 0; x < c.length - 2; x += 3) {
