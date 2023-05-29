@@ -15,8 +15,8 @@ called `DishWasher` to track the contents of the dishwasher. See the description
 Your `DishWasher` class should have the following items:
 
 - Attributes:
-    - An `int` called **forks**
-    - An `int` called **knives**
+    - An `int` called **forks** which is not visible from other classes
+    - An `int` called **knives** which is not visible from other classes
 
 - Constructors:
     - A constructor which accepts two ints and sets the **forks** and **knives** attributes. The first int should

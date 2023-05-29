@@ -32,26 +32,26 @@ public class MainTest {
 
     @Test
     public void dishWasherClassHasCorrectAttributes() {
-        String missingAttributeMessage = "Your " + testClassName + " is missing a required attribute";
-        String incorrectModifierMessage = "One of your attributes in the " + testClassName +
-                " class does not have the correct visibility modifier.";
+        String missingAttributeMessage =
+                "The attribute %s could not be found in your class. Please make sure you have added it, it is spelled correctly, and has the correct type";
+        String incorrectModifierMessage = "Your %s attribute in the %s class does not have the correct visibility modifier.";
         assertTrue(classInstance.hasField(intAttributeName1, int.class),
-                missingAttributeMessage);
+                String.format(missingAttributeMessage, intAttributeName1));
         assertTrue(classInstance.hasModifier(intAttributeName1, "private"),
-                incorrectModifierMessage);
+                String.format(incorrectModifierMessage, intAttributeName1, testClassName));
         assertTrue(classInstance.hasField(intAttributeName2, int.class),
-                missingAttributeMessage);
+                String.format(missingAttributeMessage, intAttributeName2));
         assertTrue(classInstance.hasModifier(intAttributeName2, "private"),
-                incorrectModifierMessage);
+                String.format(incorrectModifierMessage, intAttributeName2, testClassName));
     }
 
     @Test
     public void dishWasherClassHasRequiredConstructor() {
-        String missingConstructorMessage = "Your " + testClassName + " class is missing a required constructor.";
         Class<?>[] arguments= {
                 int.class, int.class
         };
-        assertTrue(classInstance.hasConstructor(arguments), missingConstructorMessage);
+        assertTrue(classInstance.hasConstructor(arguments, new String[]{"public"}),
+                String.format("Your %s class is missing a required constructor or has the incorrect visibility modifier.", testClassName));
     }
 
     private static Stream<Arguments> constructorInputProvider() {
@@ -96,8 +96,8 @@ public class MainTest {
                 {attribute2, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
-        assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class, int.class}),
-                "Your " + testClassName + " class is missing the method " + methodName + ".");
+        assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class, int.class}, Void.TYPE, new String[]{"public"}),
+                "Your " + testClassName + " class is missing the method " + methodName + " or it does not have the correct return type or visibility modifier.");
         classInstance.callMethod(
                 methodName, new Object[][]{{remove1, int.class}, {remove2, int.class}}, null, instance, new Clause[]{
                         new IntegerLiteral(remainder1),
