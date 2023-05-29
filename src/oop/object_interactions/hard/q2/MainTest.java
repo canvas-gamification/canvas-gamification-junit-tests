@@ -163,14 +163,12 @@ public class MainTest {
                 ));
         Object[][] methodArguments = {{instance2, classInstance.getObjectClass()}};
         classInstance.callMethod(methodName1, methodArguments, instance1);
-        _assertEquals(fName1, classInstance.getFieldValue(instance1, stringAttribute1),
-                String.format("Your %s method does not copy the %s value from the input %s.", methodName1, stringAttribute1, objectClassName));
         _assertEquals(conjoined, classInstance.getFieldValue(instance1, stringAttribute2),
-                String.format("Your %s method does not copy the %s value from the input %s.", methodName1, stringAttribute2, objectClassName));
-        _assertEquals(fName2, classInstance.getFieldValue(instance2, stringAttribute1),
-                String.format("Your %s method should not modify the %s value from the input %s.", methodName1, stringAttribute1, objectClassName));
+                String.format("Your %s method does not correctly update the last name of the %s calling the %s method.",
+                        methodName1, objectClassName, methodName1));
         _assertEquals(conjoined, classInstance.getFieldValue(instance2, stringAttribute2),
-                String.format("Your %s method should not modify the %s value from the input %s.", methodName1, stringAttribute2, objectClassName));
+                String.format("Your %s method does not correctly update the last name of the %s passed to the %s method.",
+                        methodName1, objectClassName, methodName1));
     }
 
     private static Stream<Arguments> workTogetherInputProvider() {
