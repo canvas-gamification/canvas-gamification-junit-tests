@@ -43,12 +43,11 @@ public class MainTest {
 
     @Test
     public void phoneClassHasRequiredConstructor() {
-        String missingConstructorMessage = "Your " + testClassName + " class is missing a required constructor.";
         Class<?>[] arguments = {
                 double.class, double.class
         };
-        assertTrue(classInstance.hasConstructor(arguments), missingConstructorMessage);
-    }
+        assertTrue(classInstance.hasConstructor(arguments, new String[]{"public"}),
+                String.format("Your %s class is missing a required constructor or has the incorrect visibility modifier.", testClassName));    }
 
     private static Stream<Arguments> constructorInputProvider() {
         return Stream.of(
@@ -93,8 +92,8 @@ public class MainTest {
         };
         double diag = Math.sqrt(Math.pow(attribute1, 2) + Math.pow(attribute2, 2));
         Object instance = classInstance.createInstance(arguments);
-        assertTrue(classInstance.hasMethod(methodName, null, double.class),
-                "Your " + testClassName + " class is missing the method " + methodName + ".");
+        assertTrue(classInstance.hasMethod(methodName, null, double.class, new String[]{"public"}),
+                "Your " + testClassName + " class is missing the method " + methodName + " or it does not have the correct return type or visibility modifier.");
         Object methodOutput = classInstance.callMethod(methodName, instance, null);
         _assertEquals(diag, methodOutput,
                 "Your " + methodName + " method does not produce the correct output.");
