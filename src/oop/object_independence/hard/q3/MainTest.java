@@ -57,10 +57,9 @@ public class MainTest {
 
     @Test
     public void treeClassHasRequiredConstructor() {
-        String missingConstructorMessage = "Your " + testClassName + " class is missing a required constructor.";
         Class<?>[] arguments = {boolean.class, double.class};
-        assertTrue(classInstance.hasConstructor(arguments), missingConstructorMessage);
-    }
+        assertTrue(classInstance.hasConstructor(arguments, new String[]{"public"}),
+                String.format("Your %s class is missing a required constructor or has the incorrect visibility modifier.", testClassName));    }
 
     private static Stream<Arguments> constructorInputProvider() {
         return Stream.of(
@@ -92,7 +91,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void treeHasCorrectGetMethods(boolean b, double d) throws Throwable {
+    public void treeHasCorrectGetIsRareMethod(boolean b, double d) throws Throwable {
         Object[][] arguments = {
                 {b, boolean.class},
                 {d, double.class}
@@ -102,7 +101,19 @@ public class MainTest {
 
         Object output = classInstance.callMethod(getBooleanAttributeName1, new String[]{"public"}, instance);
         _assertEquals(b, output, String.format(incorrectGetMethods, getBooleanAttributeName1, booleanAttributeName1));
-        output = classInstance.callMethod(getDoubleAttributeName1, new String[]{"public"}, instance);
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void treeHasCorrectGetHeightMethod(boolean b, double d) throws Throwable {
+        Object[][] arguments = {
+                {b, boolean.class},
+                {d, double.class}
+        };
+        Object instance = classInstance.createInstance(arguments);
+        String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
+
+        Object output = classInstance.callMethod(getDoubleAttributeName1, new String[]{"public"}, instance);
         _assertEquals(d, output, String.format(incorrectGetMethods, getDoubleAttributeName1, doubleAttributeName1));
     }
 
@@ -117,23 +128,37 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("setMethodsInputProvider")
-    public void treeHasCorrectSetMethods(boolean b, double d, boolean newB, double newD) throws Throwable {
+    public void treeHasCorrectSetIsRareMethod(boolean b, double d, boolean newB, double newD) throws Throwable {
         Object[][] arguments = {
                 {b, boolean.class},
                 {d, double.class}
         };
         Object instance = classInstance.createInstance(arguments);
         classInstance.callMethod(setBooleanAttributeName1, new Object[][]{{newB, boolean.class}}, instance);
-        classInstance.callMethod(setDoubleAttributeName1, new Object[][]{{newD, double.class}}, instance);
 
         String incorrectSetMethods = "Your %s method does not update the %s attribute to the passed parameter.";
 
         _assertEquals(newB, classInstance.getFieldValue(instance, booleanAttributeName1),
                 String.format(incorrectSetMethods, setBooleanAttributeName1, booleanAttributeName1));
+
+        assertTrue(classInstance.hasReturnType(setBooleanAttributeName1, new Class[]{boolean.class}, void.class));
+    }
+
+    @ParameterizedTest
+    @MethodSource("setMethodsInputProvider")
+    public void treeHasCorrectSetHeightMethod(boolean b, double d, boolean newB, double newD) throws Throwable {
+        Object[][] arguments = {
+                {b, boolean.class},
+                {d, double.class}
+        };
+        Object instance = classInstance.createInstance(arguments);
+        classInstance.callMethod(setDoubleAttributeName1, new Object[][]{{newD, double.class}}, instance);
+
+        String incorrectSetMethods = "Your %s method does not update the %s attribute to the passed parameter.";
+
         _assertEquals(newD, classInstance.getFieldValue(instance, doubleAttributeName1),
                 String.format(incorrectSetMethods, setDoubleAttributeName1, doubleAttributeName1));
 
-        assertTrue(classInstance.hasReturnType(setBooleanAttributeName1, new Class[]{boolean.class}, void.class));
         assertTrue(classInstance.hasReturnType(setDoubleAttributeName1, new Class[]{double.class}, void.class));
     }
 
