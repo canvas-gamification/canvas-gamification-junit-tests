@@ -58,10 +58,9 @@ public class MainTest {
 
     @Test
     public void paintingClassHasRequiredConstructor() {
-        String missingConstructorMessage = "Your " + testClassName + " class is missing a required constructor.";
         Class<?>[] arguments = {String.class, String.class};
-        assertTrue(classInstance.hasConstructor(arguments), missingConstructorMessage);
-    }
+        assertTrue(classInstance.hasConstructor(arguments, new String[]{"public"}),
+                String.format("Your %s class is missing a required constructor or has the incorrect visibility modifier.", testClassName));    }
 
     private static Stream<Arguments> constructorInputProvider() {
         return Stream.of(
@@ -93,7 +92,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void paintingHasCorrectGetMethods(String name, String quality) throws Throwable {
+    public void paintingHasCorrectGetNameMethod(String name, String quality) throws Throwable {
         Object[][] arguments = {
                 {name, String.class},
                 {quality, String.class}
@@ -103,7 +102,19 @@ public class MainTest {
 
         Object output = classInstance.callMethod(getStringAttributeName1, new String[]{"public"}, instance);
         _assertEquals(name, output, String.format(incorrectGetMethods, getStringAttributeName1, stringAttributeName1));
-        output = classInstance.callMethod(getStringAttributeName2, new String[]{"public"}, instance);
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void paintingHasCorrectGetQualityMethod(String name, String quality) throws Throwable {
+        Object[][] arguments = {
+                {name, String.class},
+                {quality, String.class}
+        };
+        Object instance = classInstance.createInstance(arguments);
+        String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
+
+        Object output = classInstance.callMethod(getStringAttributeName2, new String[]{"public"}, instance);
         _assertEquals(quality, output, String.format(incorrectGetMethods, getStringAttributeName2, stringAttributeName2));
     }
 
@@ -118,23 +129,37 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("setMethodsInputProvider")
-    public void paintingHasCorrectSetMethods(String name, String quality, String newName, String newQuality) throws Throwable {
+    public void paintingHasCorrectSetNameMethod(String name, String quality, String newName, String newQuality) throws Throwable {
         Object[][] arguments = {
                 {name, String.class},
                 {quality, String.class}
         };
         Object instance = classInstance.createInstance(arguments);
         classInstance.callMethod(setStringAttributeName1, new Object[][]{{newName, String.class}}, instance);
-        classInstance.callMethod(setStringAttributeName2, new Object[][]{{newQuality, String.class}}, instance);
 
         String incorrectSetMethods = "Your %s method does not update the %s attribute to the passed parameter.";
 
         _assertEquals(newName, classInstance.getFieldValue(instance, stringAttributeName1),
                 String.format(incorrectSetMethods, setStringAttributeName1, stringAttributeName1));
+
+        assertTrue(classInstance.hasReturnType(setStringAttributeName1, new Class[]{String.class}, void.class));
+    }
+
+    @ParameterizedTest
+    @MethodSource("setMethodsInputProvider")
+    public void paintingHasCorrectSetQualityMethod(String name, String quality, String newName, String newQuality) throws Throwable {
+        Object[][] arguments = {
+                {name, String.class},
+                {quality, String.class}
+        };
+        Object instance = classInstance.createInstance(arguments);
+        classInstance.callMethod(setStringAttributeName2, new Object[][]{{newQuality, String.class}}, instance);
+
+        String incorrectSetMethods = "Your %s method does not update the %s attribute to the passed parameter.";
+
         _assertEquals(newQuality, classInstance.getFieldValue(instance, stringAttributeName2),
                 String.format(incorrectSetMethods, setStringAttributeName2, stringAttributeName2));
 
-        assertTrue(classInstance.hasReturnType(setStringAttributeName1, new Class[]{String.class}, void.class));
         assertTrue(classInstance.hasReturnType(setStringAttributeName2, new Class[]{String.class}, void.class));
     }
 
