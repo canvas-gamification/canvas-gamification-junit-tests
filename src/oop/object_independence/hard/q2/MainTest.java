@@ -69,10 +69,9 @@ public class MainTest {
 
     @Test
     public void fishClassHasRequiredConstructor() {
-        String missingConstructorMessage = "Your " + testClassName + " class is missing a required constructor.";
         Class<?>[] arguments = {String.class, String.class, int.class};
-        assertTrue(classInstance.hasConstructor(arguments), missingConstructorMessage);
-    }
+        assertTrue(classInstance.hasConstructor(arguments, new String[]{"public"}),
+                String.format("Your %s class is missing a required constructor or has the incorrect visibility modifier.", testClassName));    }
 
     private static Stream<Arguments> constructorInputProvider() {
         return Stream.of(
@@ -91,9 +90,6 @@ public class MainTest {
                 {g, String.class},
                 {a, int.class}
         };
-        String incorrectVisibilityModifier = "Your %s constructor has the incorrect visibility modifier.";
-        assertTrue(classInstance.hasModifier(new Class[]{String.class, String.class, int.class}, "public"),
-                String.format(incorrectVisibilityModifier, objectClassName));
         Object instance = classInstance.createInstance(arguments);
         String incorrectAttributeValue =
                 "Your %s constructor does not correctly initialize the %s attribute based on the passed parameters.";
@@ -107,7 +103,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void fishHasCorrectGetMethods(String colour, String gender, int age) throws Throwable {
+    public void fishHasCorrectGetColourMethod(String colour, String gender, int age) throws Throwable {
         Object[][] arguments = {
                 {colour, String.class},
                 {gender, String.class},
@@ -118,9 +114,35 @@ public class MainTest {
 
         Object output = classInstance.callMethod(getStringAttributeName1, new String[]{"public"}, instance);
         _assertEquals(colour, output, String.format(incorrectGetMethods, getStringAttributeName1, stringAttributeName1));
-        output = classInstance.callMethod(getStringAttributeName2, new String[]{"public"}, instance);
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void fishHasCorrectGetGenderMethod(String colour, String gender, int age) throws Throwable {
+        Object[][] arguments = {
+                {colour, String.class},
+                {gender, String.class},
+                {age, int.class}
+        };
+        Object instance = classInstance.createInstance(arguments);
+        String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
+
+        Object output = classInstance.callMethod(getStringAttributeName2, new String[]{"public"}, instance);
         _assertEquals(gender, output, String.format(incorrectGetMethods, getStringAttributeName2, stringAttributeName2));
-        output = classInstance.callMethod(getIntAttributeName1, new String[]{"public"}, instance);
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void fishHasCorrectGetAgeMethod(String colour, String gender, int age) throws Throwable {
+        Object[][] arguments = {
+                {colour, String.class},
+                {gender, String.class},
+                {age, int.class}
+        };
+        Object instance = classInstance.createInstance(arguments);
+        String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
+
+        Object output = classInstance.callMethod(getIntAttributeName1, new String[]{"public"}, instance);
         _assertEquals(age, output, String.format(incorrectGetMethods, getIntAttributeName1, intAttributeName1));
     }
 
@@ -136,7 +158,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("setMethodsInputProvider")
-    public void fishHasCorrectSetMethods(String colour, String gender, int age, String newColour, String newGender, int newAge) throws Throwable {
+    public void fishHasCorrectSetColourMethod(String colour, String gender, int age, String newColour, String newGender, int newAge) throws Throwable {
         Object[][] arguments = {
                 {colour, String.class},
                 {gender, String.class},
@@ -144,20 +166,50 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(arguments);
         classInstance.callMethod(setStringAttributeName1, new Object[][]{{newColour, String.class}}, instance);
-        classInstance.callMethod(setStringAttributeName2, new Object[][]{{newGender, String.class}}, instance);
-        classInstance.callMethod(setIntAttributeName1, new Object[][]{{newAge, int.class}}, instance);
 
         String incorrectSetMethods = "Your %s method does not update the %s attribute to the passed parameter.";
 
         _assertEquals(newColour, classInstance.getFieldValue(instance, stringAttributeName1),
                 String.format(incorrectSetMethods, setStringAttributeName1, stringAttributeName1));
+
+        assertTrue(classInstance.hasReturnType(setStringAttributeName1, new Class[]{String.class}, void.class));
+    }
+
+    @ParameterizedTest
+    @MethodSource("setMethodsInputProvider")
+    public void fishHasCorrectSetGenderMethod(String colour, String gender, int age, String newColour, String newGender, int newAge) throws Throwable {
+        Object[][] arguments = {
+                {colour, String.class},
+                {gender, String.class},
+                {age, int.class}
+        };
+        Object instance = classInstance.createInstance(arguments);
+        classInstance.callMethod(setStringAttributeName2, new Object[][]{{newGender, String.class}}, instance);
+
+        String incorrectSetMethods = "Your %s method does not update the %s attribute to the passed parameter.";
+
         _assertEquals(newGender, classInstance.getFieldValue(instance, stringAttributeName2),
                 String.format(incorrectSetMethods, setStringAttributeName2, stringAttributeName2));
+
+        assertTrue(classInstance.hasReturnType(setStringAttributeName2, new Class[]{String.class}, void.class));
+    }
+
+    @ParameterizedTest
+    @MethodSource("setMethodsInputProvider")
+    public void fishHasCorrectSetAgeMethod(String colour, String gender, int age, String newColour, String newGender, int newAge) throws Throwable {
+        Object[][] arguments = {
+                {colour, String.class},
+                {gender, String.class},
+                {age, int.class}
+        };
+        Object instance = classInstance.createInstance(arguments);
+        classInstance.callMethod(setIntAttributeName1, new Object[][]{{newAge, int.class}}, instance);
+
+        String incorrectSetMethods = "Your %s method does not update the %s attribute to the passed parameter.";
+
         _assertEquals(newAge, classInstance.getFieldValue(instance, intAttributeName1),
                 String.format(incorrectSetMethods, setIntAttributeName1, intAttributeName1));
 
-        assertTrue(classInstance.hasReturnType(setStringAttributeName1, new Class[]{String.class}, void.class));
-        assertTrue(classInstance.hasReturnType(setStringAttributeName2, new Class[]{String.class}, void.class));
         assertTrue(classInstance.hasReturnType(setIntAttributeName1, new Class[]{int.class}, void.class));
     }
 
