@@ -42,8 +42,10 @@ public class MainTest {
 
     @Test
     public void cupboardClassHasRequiredConstructor() {
+        assertTrue(classInstance.hasConstructor(null),
+                String.format("Your %s class is missing a required constructor.", testClassName));
         assertTrue(classInstance.hasConstructor(null, new String[]{"public"}),
-                String.format("Your %s class is missing a required constructor or has the incorrect visibility modifier.", testClassName));
+                String.format("Your %s class constructor has the incorrect visibility modifier.", testClassName));
     }
 
     @Test
