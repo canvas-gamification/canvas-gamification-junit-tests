@@ -68,8 +68,11 @@ public class MainTest {
     @Test
     public void glassClassHasRequiredConstructor() {
         Class<?>[] arguments = {String.class, boolean.class, double.class};
+        assertTrue(classInstance.hasConstructor(arguments),
+                String.format("Your %s class is missing a required constructor.", testClassName));
         assertTrue(classInstance.hasConstructor(arguments, new String[]{"public"}),
-                String.format("Your %s class is missing a required constructor or has the incorrect visibility modifier.", testClassName));    }
+                String.format("Your %s class constructor has the incorrect visibility modifier.", testClassName));
+    }
 
     private static Stream<Arguments> constructorInputProvider() {
         return Stream.of(
