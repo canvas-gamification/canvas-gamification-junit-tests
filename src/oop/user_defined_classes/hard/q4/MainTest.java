@@ -44,8 +44,11 @@ public class MainTest {
         Class<?>[] arguments = {
                 int.class
         };
+        assertTrue(classInstance.hasConstructor(arguments),
+                String.format("Your %s class is missing a required constructor.", testClassName));
         assertTrue(classInstance.hasConstructor(arguments, new String[]{"public"}),
-                String.format("Your %s class is missing a required constructor or has the incorrect visibility modifier.", testClassName));    }
+                String.format("Your %s class constructor has the incorrect visibility modifier.", testClassName));
+    }
 
     private static Stream<Integer> constructorInputProvider() {
         return Stream.of(0, 2, 15, 42, 532789, 473, 123);
