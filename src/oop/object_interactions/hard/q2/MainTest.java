@@ -56,8 +56,10 @@ public class MainTest {
                 {fName, String.class},
                 {lName, String.class}
         };
+        assertTrue(classInstance.hasConstructor(new Class[]{String.class, String.class}),
+                String.format("Your %s class is missing a required constructor.", objectClassName));
         assertTrue(classInstance.hasConstructor(new Class[]{String.class, String.class}, new String[]{"public"}),
-                String.format("Your %s class is missing a required constructor or has the incorrect visibility modifier.", objectClassName));
+                String.format("Your %s class constructor has the incorrect visibility modifier.", objectClassName));
         Object instance = classInstance.createInstance(arguments);
         _assertEquals(fName, classInstance.getFieldValue(instance, stringAttribute1),
                 String.format("Your %s constructor does not correctly initialize the %s attribute.", objectClassName, stringAttribute1));
@@ -67,7 +69,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void correctGetMethods(String fName, String lName) throws Throwable {
+    public void correctGetFirstNameMethod(String fName, String lName) throws Throwable {
         Object[][] constructorArguments = {
                 {fName, String.class},
                 {lName, String.class}
@@ -76,12 +78,24 @@ public class MainTest {
         String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
         assertTrue(classInstance.hasMethod(getStringAttribute1, null, String.class, new String[]{"public"}),
                 String.format("Your %s class is missing the %s method, or the %s method has the wrong return type.", objectClassName, getStringAttribute1, getStringAttribute1));
-        assertTrue(classInstance.hasMethod(getStringAttribute2, null, String.class, new String[]{"public"}),
-                String.format("Your %s class is missing the %s method, or the %s method has the wrong return type.", objectClassName, getStringAttribute2, getStringAttribute2));
 
         Object output = classInstance.callMethod(getStringAttribute1, new String[]{"public"}, instance);
         _assertEquals(fName, output, String.format(incorrectGetMethods, getStringAttribute1, stringAttribute1));
-        output = classInstance.callMethod(getStringAttribute2, new String[]{"public"}, instance);
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void correctGetLastNameMethod(String fName, String lName) throws Throwable {
+        Object[][] constructorArguments = {
+                {fName, String.class},
+                {lName, String.class}
+        };
+        Object instance = classInstance.createInstance(constructorArguments);
+        String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
+        assertTrue(classInstance.hasMethod(getStringAttribute2, null, String.class, new String[]{"public"}),
+                String.format("Your %s class is missing the %s method, or the %s method has the wrong return type.", objectClassName, getStringAttribute2, getStringAttribute2));
+
+        Object output = classInstance.callMethod(getStringAttribute2, new String[]{"public"}, instance);
         _assertEquals(lName, output, String.format(incorrectGetMethods, getStringAttribute2, stringAttribute2));
     }
 
@@ -96,7 +110,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("setInputProvider")
-    public void correctSetNameMethod(String fName, String lName, String newFName, String newLName) throws Throwable {
+    public void correctSetFirstNameMethod(String fName, String lName, String newFName, String newLName) throws Throwable {
         Object[][] constructorArguments = {
                 {fName, String.class},
                 {lName, String.class}
@@ -111,10 +125,21 @@ public class MainTest {
         _assertEquals(newFName, classInstance.getFieldValue(instance, stringAttribute1),
                 String.format("Your %s method does not update the %s attribute with the correct value.", setStringAttribute1, stringAttribute1));
 
+   }
+
+    @ParameterizedTest
+    @MethodSource("setInputProvider")
+    public void correctSetLastNameMethod(String fName, String lName, String newFName, String newLName) throws Throwable {
+        Object[][] constructorArguments = {
+                {fName, String.class},
+                {lName, String.class}
+        };
+        Object instance = classInstance.createInstance(constructorArguments);
+
         assertTrue(classInstance.hasMethod(setStringAttribute2, new Class[]{String.class}, Void.TYPE, new String[]{"public"}),
                 String.format("Your %s class is missing the %s method, or the method name was spelt incorrectly.",
                         objectClassName, setStringAttribute2));
-        setArguments = new Object[][]{{newLName, String.class}};
+        Object[][] setArguments = new Object[][]{{newLName, String.class}};
         classInstance.callMethod(setStringAttribute2, setArguments, instance);
         _assertEquals(newLName, classInstance.getFieldValue(instance, stringAttribute2),
                 String.format("Your %s method does not update the %s attribute with the correct value.", setStringAttribute2, stringAttribute2));
