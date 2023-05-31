@@ -75,10 +75,11 @@ public class MainTest {
 
     @Test
     public void lasagnaClassHasRequiredConstructor() {
-        String missingConstructorMessage = "Your " + testClassName + " class is missing a required constructor.";
         Class<?>[] arguments = {boolean.class, boolean.class, double.class};
-        assertTrue(classInstance.hasConstructor(arguments), missingConstructorMessage);
-    }
+        assertTrue(classInstance.hasConstructor(arguments),
+                String.format("Your %s class is missing a required constructor.", testClassName));
+        assertTrue(classInstance.hasConstructor(arguments, new String[]{"public"}),
+                String.format("Your %s class constructor has the incorrect visibility modifier.", testClassName));    }
 
     private static Stream<Arguments> constructorInputProvider() {
         return Stream.of(
@@ -113,7 +114,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void lasagnaHasCorrectGetMethods(boolean bad, boolean garbage, double hours) throws Throwable {
+    public void lasagnaHasCorrectGetIsBadMethod(boolean bad, boolean garbage, double hours) throws Throwable {
         Object[][] arguments = {
                 {bad, boolean.class},
                 {garbage, boolean.class},
@@ -124,9 +125,35 @@ public class MainTest {
 
         Object output = classInstance.callMethod(getBooleanAttributeName1, new String[]{"public"}, instance);
         _assertEquals(bad, output, String.format(incorrectGetMethods, getBooleanAttributeName1, booleanAttributeName1));
-        output = classInstance.callMethod(getBooleanAttributeName2, new String[]{"public"}, instance);
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void lasagnaHasCorrectGetInGarbageMethod(boolean bad, boolean garbage, double hours) throws Throwable {
+        Object[][] arguments = {
+                {bad, boolean.class},
+                {garbage, boolean.class},
+                {hours, double.class}
+        };
+        Object instance = classInstance.createInstance(arguments);
+        String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
+
+        Object output = classInstance.callMethod(getBooleanAttributeName2, new String[]{"public"}, instance);
         _assertEquals(garbage, output, String.format(incorrectGetMethods, getBooleanAttributeName2, booleanAttributeName2));
-        output = classInstance.callMethod(getDoubleAttributeName1, new String[]{"public"}, instance);
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void lasagnaHasCorrectGetHoursSinceMadeMethods(boolean bad, boolean garbage, double hours) throws Throwable {
+        Object[][] arguments = {
+                {bad, boolean.class},
+                {garbage, boolean.class},
+                {hours, double.class}
+        };
+        Object instance = classInstance.createInstance(arguments);
+        String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
+
+        Object output = classInstance.callMethod(getDoubleAttributeName1, new String[]{"public"}, instance);
         _assertEquals(hours, output, String.format(incorrectGetMethods, getDoubleAttributeName1, doubleAttributeName1));
     }
 
@@ -146,7 +173,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("setMethodsInputProvider")
-    public void lasagnaHasCorrectValueChangeMethods(boolean bad, boolean garbage, double hours, boolean m1, boolean m2, boolean newBad, boolean newGarbage) throws Throwable {
+    public void lasagnaHasCorrectGettingOldMethod(boolean bad, boolean garbage, double hours, boolean m1, boolean m2, boolean newBad, boolean newGarbage) throws Throwable {
         Object[][] arguments = {
                 {bad, boolean.class},
                 {garbage, boolean.class},
@@ -155,13 +182,27 @@ public class MainTest {
         Object instance = classInstance.createInstance(arguments);
         if (m1)
             classInstance.callMethod(methodName1, instance);
-        if (m2)
-            classInstance.callMethod(methodName2, instance);
 
         String incorrectMethods = "Your %s method does not correctly update the %s attribute.";
 
         _assertEquals(newBad, classInstance.getFieldValue(instance, booleanAttributeName1),
                 String.format(incorrectMethods, methodName1, booleanAttributeName1));
+    }
+
+    @ParameterizedTest
+    @MethodSource("setMethodsInputProvider")
+    public void lasagnaHasCorrectThrowFoodMethod(boolean bad, boolean garbage, double hours, boolean m1, boolean m2, boolean newBad, boolean newGarbage) throws Throwable {
+        Object[][] arguments = {
+                {bad, boolean.class},
+                {garbage, boolean.class},
+                {hours, double.class}
+        };
+        Object instance = classInstance.createInstance(arguments);
+        if (m2)
+            classInstance.callMethod(methodName2, instance);
+
+        String incorrectMethods = "Your %s method does not correctly update the %s attribute.";
+
         _assertEquals(newGarbage, classInstance.getFieldValue(instance, booleanAttributeName2),
                 String.format(incorrectMethods, methodName2, booleanAttributeName2));
     }
