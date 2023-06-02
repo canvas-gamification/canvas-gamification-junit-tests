@@ -22,8 +22,7 @@ Your `Chair` class must have the following items:
       other classes
     - a `getSize` method which is accessible from other classes and returns the value of the **size** attribute
     - a `setSoftness` method which accepts a `String` value, updates the **softness** attribute with it, and is
-      accessible
-      from other classes
+      accessible from other classes
     - a `getSoftness` method which is accessible from other classes and returns the value of the **softness** attribute
     - a `toString` method which returns a String of the information about the `Chair` class of the form
       `"This Chair's size is x, and it's softness is y"` where x is the value of the size attribute, y is the value of
