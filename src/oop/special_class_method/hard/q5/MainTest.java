@@ -60,7 +60,7 @@ public class MainTest {
     }
 
     @Test
-    public void detergentClassHasRequiredConstructor() {
+    public void roadClassHasRequiredConstructor() {
         Class<?>[] classArguments = {int.class, String.class, int.class};
         assertTrue(testClass.hasConstructor(classArguments),
                 "Your " + className + " constructor does not have the correct parameters.");
