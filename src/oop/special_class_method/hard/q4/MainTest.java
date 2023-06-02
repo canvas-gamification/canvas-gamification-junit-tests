@@ -70,7 +70,7 @@ public class MainTest {
         assertTrue(testClass.hasModifier(string2FieldName, "private"),
                 "Your " + string2FieldName + " does not have the correct visibility modifier.");
         assertTrue(testClass.hasField(stringFieldName, String.class),
-                "The attribute " +  string2FieldName + " could not be found in your class. Please make sure you have added it, it is spelled correctly, and has the correct type");
+                "The attribute " +  stringFieldName + " could not be found in your class. Please make sure you have added it, it is spelled correctly, and has the correct type");
         assertTrue(testClass.hasModifier(stringFieldName, "private"),
                 "Your " + stringFieldName + " does not have the correct visibility modifier.");
     }
