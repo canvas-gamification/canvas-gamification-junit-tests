@@ -20,7 +20,7 @@ Your `Road` class must have the following items:
       another `int` value to initialize the **lanes**, **typeOfRoad**, and **maxCapacity** attributes.
 
 - Methods:
-    - a `setLanes` method which accepts a `int` value, updates the **lanes** field with it, and is accessible from
+    - a `setLanes` method which accepts a `int` value, updates the **lanes** attribute with it, and is accessible from
       other classes
     - a `getLanes` method which is accessible from other classes and returns the value of the **lanes** attribute
     - a `setTypeOfRoad` method which accepts a `String` value, updates the **typeOfRoad** attribute with it, and is
