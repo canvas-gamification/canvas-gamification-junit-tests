@@ -305,7 +305,7 @@ public class MainTest {
 
         String expectedToString = "The " + className + " instance " + intFieldName + " is " + value1 + ", its " + stringFieldName + " is " + value2 + ", and its " + int2FieldName + " is " + value3 + ".";
         String incorrectToStringMessage = String.join(" ",
-                "Your", className, " toString method does not return the correct String after updating the values of its fields using its setter methods.");
+                "Your", className, " toString method does not return the correct String after updating the values of its attributes using its setter methods.");
         Object output = testClass.callMethod("toString", classInstance);
         _assertEquals(expectedToString, output, incorrectToStringMessage);
     }
