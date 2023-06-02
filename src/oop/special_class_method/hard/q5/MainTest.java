@@ -105,7 +105,7 @@ public class MainTest {
         Class<?>[] constructorClasses = {int.class, String.class, int.class};
         Object classInstance = testClass.createInstance(arguments);
         String incorrectIntValueMessage =
-                "Your " + className + " constructor does not initialize the " + intFieldName + " filed to the correct value.";
+                "Your " + className + " constructor does not initialize the " + intFieldName + " attribute to the correct value.";
         String incorrectStringValueMessage =
                 "Your " + className + " constructor does not initialize the " + stringFieldName + " filed to the correct value.";
         String incorrectInt2ValueMessage =
