@@ -269,7 +269,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void detergentClassMethodsWorkTogether(int value1, String value2, int value3) throws Throwable {
+    public void roadClassMethodsWorkTogether(int value1, String value2, int value3) throws Throwable {
         int in1 = (int) (Math.random() * 100);
         int in2 = (int) (Math.random() * 100);
         Object[][] arguments = {
