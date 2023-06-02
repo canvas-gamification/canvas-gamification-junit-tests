@@ -2,7 +2,6 @@ package oop.special_class_method.hard.q5;
 
 import global.ObjectTest;
 import global.variables.Clause;
-import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,8 +53,7 @@ public class MainTest {
         outputClass.callMethod("main", arguments, methodModifiers, classInstance, new Clause[]{
                 new StringLiteral("The " + className + " instance " + intFieldName + " is " + outputLanes + ", its " + stringFieldName + " is " + outputTypeOfRoad + ", and its " + int2FieldName + " is " + outputMaxCapacity),
                 new Optional(new StringLiteral(".")),
-                new Optional(new StringLiteral(" ")),
-                new Optional(new NewLine())
+                new Optional(new StringLiteral(" "))
         });
     }
 
@@ -107,9 +105,9 @@ public class MainTest {
         String incorrectIntValueMessage =
                 "Your " + className + " constructor does not initialize the " + intFieldName + " attribute to the correct value.";
         String incorrectStringValueMessage =
-                "Your " + className + " constructor does not initialize the " + stringFieldName + " filed to the correct value.";
+                "Your " + className + " constructor does not initialize the " + stringFieldName + " attribute to the correct value.";
         String incorrectInt2ValueMessage =
-                "Your " + className + " constructor does not initialize the " + int2FieldName + " filed to the correct value.";
+                "Your " + className + " constructor does not initialize the " + int2FieldName + " attribute to the correct value.";
         String incorrectConstructorVisibilityModifier =
                 "Your " + className + " constructor does not have the correct visibility modifier.";
         _assertEquals(value1, testClass.getFieldValue(classInstance, intFieldName),
@@ -162,7 +160,7 @@ public class MainTest {
         Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
-                "Your", getIntMethodName, "method does not correctly get the value of the", intFieldName, "field.");
+                "Your", getIntMethodName, "method does not correctly get the value of the", intFieldName, "attribute.");
         Object getMethodOutput = testClass.callMethod(getIntMethodName, getMethodModifiers, classInstance);
         _assertEquals(value1, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -185,13 +183,12 @@ public class MainTest {
                 {100, int.class}
         };
         Object classInstance = testClass.createInstance(arguments);
-        testClass.setFieldValue(classInstance, initialValue, stringFieldName);
         Object[][] setMethodArguments = {
                 {updatedValue, String.class}
         };
         String[] setMethodModifiers = {"public"};
         String incorrectSetMethodMessage = String.join(" ",
-                "Your", setStringMethodName, "method does not correctly set the value of the", stringFieldName, "field.");
+                "Your", setStringMethodName, "method does not correctly set the value of the", stringFieldName, "attribute.");
         Object setMethodOutput = testClass.callMethod(setStringMethodName, setMethodArguments, setMethodModifiers, classInstance);
         _assertEquals(updatedValue, testClass.getFieldValue(classInstance, stringFieldName), incorrectSetMethodMessage);
         assertNull(setMethodOutput, String.join(" ", "Your", setStringMethodName, "method should not return any output"));
@@ -206,10 +203,9 @@ public class MainTest {
                 {value3, int.class}
         };
         Object classInstance = testClass.createInstance(arguments);
-        testClass.setFieldValue(classInstance, value2, stringFieldName);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
-                "Your", getStringMethodName, "method does not correctly get the value of the", stringFieldName, "field.");
+                "Your", getStringMethodName, "method does not correctly get the value of the", stringFieldName, "attribute.");
         Object getMethodOutput = testClass.callMethod(getStringMethodName, getMethodModifiers, classInstance);
         _assertEquals(value2, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -228,7 +224,7 @@ public class MainTest {
         };
         String[] setMethodModifiers = {"public"};
         String incorrectSetMethodMessage = String.join(" ",
-                "Your", setInt2MethodName, "method does not correctly set the value of the", int2FieldName, "field.");
+                "Your", setInt2MethodName, "method does not correctly set the value of the", int2FieldName, "attribute.");
         Object setMethodOutput = testClass.callMethod(setInt2MethodName, setSizeArguments, setMethodModifiers, classInstance);
         _assertEquals(setValue, testClass.getFieldValue(classInstance, int2FieldName), incorrectSetMethodMessage);
         assertNull(setMethodOutput, String.join(" ", "Your", setInt2MethodName, "method should not return any output"));
@@ -245,7 +241,7 @@ public class MainTest {
         Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
-                "Your", getInt2MethodName, "method does not correctly get the value of the", int2FieldName, "field.");
+                "Your", getInt2MethodName, "method does not correctly get the value of the", int2FieldName, "attribute.");
         Object getMethodOutput = testClass.callMethod(getInt2MethodName, getMethodModifiers, classInstance);
         _assertEquals(value3, getMethodOutput, incorrectGetMethodMessage);
     }
