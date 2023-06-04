@@ -233,7 +233,7 @@ public class MainTest {
         _assertEquals(String.format(expectedToStringOutput, name1, dna1), toStringOutput, format);
         toStringOutput = classInstance.callMethod("toString", instance2);
         _assertEquals(String.format(expectedToStringOutput, name2, dna2), toStringOutput, format);
-         toStringOutput = classInstance.callMethod("toString", instance3);
+        toStringOutput = classInstance.callMethod("toString", instance3);
         _assertEquals(String.format(expectedToStringOutput, "mixture", dna3), toStringOutput, format);
     }
 
