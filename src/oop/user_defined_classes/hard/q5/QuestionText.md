@@ -22,6 +22,7 @@ Your `Phone` class should have the following items:
 - Constructors:
     - A constructor which accepts two doubles from another class and sets the **width** and **height** attributes. The 
       first double should set **width** attribute and the second the **height** attribute.
+    - This constructor should be visible to other classes
 
 - Methods:
     - A method called `calcScreenSize` which another class can use to compute the diagonal of the screen using the 
