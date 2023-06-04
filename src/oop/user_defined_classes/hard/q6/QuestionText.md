@@ -22,6 +22,7 @@ Your `UniversityStudent` class should have the following items:
 - Constructors:
     - A constructor which accepts two ints and sets the **fatigueLevel** and **workload** attributes. The first int 
       should set **fatigueLevel** attribute and the second the **workload** attribute.
+    - This constructor should be visible to other classes
 
 - Methods:
     - A method called `workAllDay` which another class can use to complete the workload, however for every piece of work
