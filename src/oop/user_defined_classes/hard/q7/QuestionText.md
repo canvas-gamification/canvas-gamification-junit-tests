@@ -22,6 +22,7 @@ Your `Course` class should have the following items:
 - Constructors:
     - A constructor which accepts a String and an int and sets the **topic** and **difficulty** attributes. The first 
       attribute should set **topic** and the second should set **difficulty**.
+    - This constructor should be visible to other classes
 
 - Methods:
     - A method called `determineDifficulty` which another class can give an integer of a considered difficulty and 
