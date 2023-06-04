@@ -21,6 +21,7 @@ Your `Laundromat` class should have the following items:
 
 - Constructors:
     - A constructor which accepts one int and sets the **gymClothes** attribute.
+    - This constructor should be visible to other classes
 
 - Methods:
     - A method called `doLaundry` which another class can use to clean the **gymClothes** one by one. It displays a 
