@@ -21,6 +21,7 @@ Your `DishWasher` class should have the following items:
 - Constructors:
     - A constructor which accepts two ints and sets the **forks** and **knives** attributes. The first int should
       set **forks** attribute and the second the **knives** attribute.
+    - This constructor should be visible to other classes
 
 - Methods:
     - A method called `loadDishWasher` which another class can give the number of dirty forks and dirty knives to be
