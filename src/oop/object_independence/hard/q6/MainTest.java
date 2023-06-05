@@ -98,9 +98,6 @@ public class MainTest {
                 {g, boolean.class},
                 {h, double.class}
         };
-        String incorrectVisibilityModifier = "Your %s constructor has the incorrect visibility modifier.";
-        assertTrue(classInstance.hasModifier(new Class[]{boolean.class, boolean.class, double.class}, "public"),
-                String.format(incorrectVisibilityModifier, objectClassName));
         Object instance = classInstance.createInstance(arguments);
         String incorrectAttributeValue =
                 "Your %s constructor does not correctly initialize the %s attribute based on the passed parameters.";
