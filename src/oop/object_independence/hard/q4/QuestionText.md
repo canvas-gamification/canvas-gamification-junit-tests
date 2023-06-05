@@ -1,4 +1,4 @@
-# oop-object_independence-hard-q2
+# oop-object_independence-hard-q4
 
 - Java question
 
@@ -20,6 +20,7 @@ Your `Painting` class must have the following items:
 - Constructor:
     - A constructor visible from another class which accepts the parameters `String, String` and sets the **name**
       and **quality** attributes with the passed values.
+    - This constructor should be visible to other classes
 
 - Methods (all the following methods should be visible from another class):
     - A method called `getName` that returns the value of the **name** attribute
