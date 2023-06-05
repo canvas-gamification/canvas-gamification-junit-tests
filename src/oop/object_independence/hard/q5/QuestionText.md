@@ -19,6 +19,7 @@ Your `Glass` class must have the following items:
 - Constructor:
     - A constructor visible from another class which accepts the parameters `String, boolean, weight` and sets the 
       **condition**, **isBroken**, and **weight** attributes with the passed values.
+    - This constructor should be visible to other classes
 
 - Methods (all the following methods should be visible from another class):
     - A method called `broken` that sets the value of the **isBroken** attribute to true
