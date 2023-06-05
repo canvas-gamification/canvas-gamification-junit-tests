@@ -19,6 +19,7 @@ Your `Tree` class must have the following items:
 - Constructor:
     - A constructor visible from another class which accepts the parameters `boolean, double` and sets the **isRare** 
       and **height** attributes with the passed values.
+    - This constructor should be visible to other classes
 
 - Methods (all the following methods should be visible from another class):
     - A method called `getIsRare` that returns the value of the **isRare** attribute
