@@ -20,6 +20,7 @@ Your `Fish` class must have the following items:
 - Constructor:
     - A constructor visible from another class which accepts the parameters `String, String, int` and sets the 
       **colour**, **gender**, and **age** attributes with the passed values.
+    - This constructor should be visible to other classes
 
 - Methods (all the following methods should be visible from another class):
     - A method called `getAge` that returns the value of the **age** attribute
