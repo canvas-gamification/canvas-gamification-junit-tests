@@ -59,7 +59,7 @@ public class MainTest {
         assertTrue(testClass.hasModifier(getAttributeMethodName, null, "public"),
                 "Your " + getAttributeMethodName + " method does not have the correct visibility modifier.");
         _assertEquals(value, getMethodOutput,
-                "Your " + getAttributeMethodName + " method does not return the value of the size field.");
+                "Your " + getAttributeMethodName + " method does not return the value of the " + attributeName + " attribute.");
     }
 
     private static Stream<Arguments> twoStringsInputProvider() {
