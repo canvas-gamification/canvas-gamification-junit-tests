@@ -1,8 +1,6 @@
 package oop.programs_with_multiple_classes.medium.q5;
 
-import global.BaseTest;
 import global.ObjectTest;
-import global.variables.Clause;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,7 +11,6 @@ import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -62,10 +59,8 @@ public class MainTest {
                     {tests[i][1], boolean.class}
             };
             Object chairInstance = monitor.createInstance(arguments);
-            _assertEquals(tests[i][0], monitor.getFieldValue(chairInstance, varCount),
-                    "Your " + monitorClass + " constructor does not correctly initialize the " + varCount + " field.");
-            _assertEquals(tests[i][1], monitor.getFieldValue(chairInstance, varOn),
-                    "Your " + monitorClass + " constructor does not correctly initialize the " + varOn + " field.");
+            _assertEquals(tests[i][0], monitor.getFieldValue(chairInstance, varCount),modifiedMonitorMessage);
+            _assertEquals(tests[i][1], monitor.getFieldValue(chairInstance, varOn),modifiedMonitorMessage);
         }
     }
 
@@ -75,7 +70,7 @@ public class MainTest {
         assertTrue(monitor.hasConstructor(classArguments),
                 "Your " + monitorClass + " constructor does not have the correct parameters.");
         assertTrue(monitor.hasModifier(classArguments, "public"),
-                "Your " + monitorClass + " constructor does not have the correct modifier.");
+                "Your " + monitorClass + " constructor does not have the correct visibility modifier.");
     }
 
     @ParameterizedTest
@@ -87,9 +82,9 @@ public class MainTest {
         };
         Object chairInstance = monitor.createInstance(arguments);
         _assertEquals(value1, monitor.getFieldValue(chairInstance, varCount),
-                "Your " + monitorClass + " constructor does not correctly initialize the " + varCount + " field.");
+                "Your " + monitorClass + " constructor does not correctly initialize the " + varCount + " attribute.");
         _assertEquals(value2, monitor.getFieldValue(chairInstance, varOn),
-                "Your " + monitorClass + " constructor does not correctly initialize the " + varOn + " field.");
+                "Your " + monitorClass + " constructor does not correctly initialize the " + varOn + " attribute.");
     }
 
     @Test
@@ -98,7 +93,7 @@ public class MainTest {
         assertTrue(desk.hasConstructor(classArguments),
                 "Your " + deskClass + " constructor does not have the correct parameters.");
         assertTrue(desk.hasModifier(classArguments, "public"),
-                "Your " + deskClass + " constructor does not have the correct modifier.");
+                "Your " + deskClass + " constructor does not have the correct visibility modifier.");
     }
 
     private static Stream<Arguments> deskInputProvider() {
@@ -117,9 +112,9 @@ public class MainTest {
         };
         Object chairInstance = desk.createInstance(arguments);
         _assertEquals(material, desk.getFieldValue(chairInstance, varMaterial),
-                "Your " + deskClass + " constructor does not correctly initialize the " + varMaterial + " field.");
+                "Your " + deskClass + " constructor does not correctly initialize the " + varMaterial + " attribute.");
         _assertArrayEquals(new Monitor[2], desk.getFieldValue(chairInstance, varMonitors),
-                "Your " + deskClass + " constructor does not correctly initialize the " + varMonitors + " field.");
+                "Your " + deskClass + " constructor does not correctly initialize the " + varMonitors + " attribute.");
     }
 
     private static Stream<Arguments> monitorInputProvider() {
