@@ -23,9 +23,10 @@ You must add the following items to complete the class:
 
 - Constructors:
     - A constructor which is visible from another class and accepts an `double` and a `String` in that order as
-      parameters
-      and initializes the **durability** and **manufacturer** attributes with the input values.
-    - The constructor should check that the **durability** attribute is non-negative, if not initialize it 0.
+      parameters and initializes the **durability** and **manufacturer** attributes with the input values.
+    - The constructor should check that the `double` passed to initialize the **durability** field is not
+      negative. If it is, initilize the field to zero, and if it is positive, use the value to initialize 
+      the field.
 
 ## Chassis
 
@@ -40,4 +41,4 @@ You must add the following items to complete the class:
 
 - Attributes:
     - The  **materialType** attribute according to the given constructor.
-    - The **wheels** attribute that is an array of four **Wheel** instances.
+    - The **wheels** attribute that is an array of **Wheel** objects.
