@@ -2,7 +2,6 @@ package oop.special_class_method.medium.q6;
 
 import global.ObjectTest;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -10,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -70,7 +70,7 @@ public class MainTest {
         assertTrue(testClass.hasModifier(getAttributeMethodName1, null, "public"),
                 "Your " + getAttributeMethodName1 + " method does not have the correct visibility modifier.");
         _assertEquals(sharp, getMethodOutput,
-                "Your " + getAttributeMethodName1 + " method does not return the value of the size field.");
+                "Your " + getAttributeMethodName1 + " method does not return the value of the size attribute.");
     }
 
     private static Stream<Arguments> threeBooleanInputProvider() {
@@ -94,13 +94,14 @@ public class MainTest {
         Class<?>[] methodModifierClasses = {
                 boolean.class
         };
-        testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
+        Object setMethodOutput = testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
         assertTrue(testClass.hasModifier(setAttributeMethodName1, methodModifierClasses, "public"),
                 "Your " + setAttributeMethodName1 + " method does not have the correct visibility modifier.");
         String incorrectSetterMessage =
                 "Your " + setAttributeMethodName1 + " method does not correctly update the value of " + attributeName1 + ".";
         _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName1),
                 incorrectSetterMessage);
+        assertNull(setMethodOutput, String.join(" ", "Your", setAttributeMethodName1, "method should not return any output"));
     }
 
     @ParameterizedTest
@@ -115,7 +116,7 @@ public class MainTest {
         assertTrue(testClass.hasModifier(getAttributeMethodName2, null, "public"),
                 "Your " + getAttributeMethodName2 + " method does not have the correct visibility modifier.");
         _assertEquals(cut, getMethodOutput,
-                "Your " + getAttributeMethodName2 + " method does not return the value of the size field.");
+                "Your " + getAttributeMethodName2 + " method does not return the value of the size attribute.");
     }
 
 
@@ -133,13 +134,14 @@ public class MainTest {
         Class<?>[] methodModifierClasses = {
                 boolean.class
         };
-        testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
+        Object setMethodOutput = testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
         assertTrue(testClass.hasModifier(setAttributeMethodName2, methodModifierClasses, "public"),
                 "Your " + setAttributeMethodName2 + " method does not have the correct visibility modifier.");
         String incorrectSetterMessage =
                 "Your " + setAttributeMethodName2 + " method does not correctly update the value of " + attributeName2 + ".";
         _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName2),
                 incorrectSetterMessage);
+        assertNull(setMethodOutput, String.join(" ", "Your", setAttributeMethodName2, "method should not return any output"));
     }
 
     @ParameterizedTest
