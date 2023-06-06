@@ -61,7 +61,7 @@ public class MainTest extends BaseTest {
             int[] arr = (int[]) output;
             ArrayList<Integer> response = Arrays.stream(arr).boxed().collect(Collectors.toCollection(ArrayList::new));
             RandomInteger randomInteger = new RandomInteger(0, in);
-            randomInteger.validateRandom(response);
+            assertTrue(randomInteger.validateRandom(response), "Your program does not correctly create a random array.");
         } catch (Exception e) {
             fail("Your createRandomArray method does not return an array of integers.");
         }
