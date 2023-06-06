@@ -17,5 +17,5 @@ The `Water` class you are given has the following items:
 You need to add the following items:
 
 - Constructor:
-    - Create a constructor that initializes these fields in that order. Also, if the input
+    - Create a constructor that initializes these attributes in that order. Also, if the input
       for volume is negative it should be initialized 0.
