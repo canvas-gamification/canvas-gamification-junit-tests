@@ -11,8 +11,8 @@ accessor and mutator methods for each attribute.
 Your `Scissors` class must have the following items
 
 - Attributes:
-    - a `boolean` called **isSharp**
-    - a `boolean` called **canCut**
+    - a `boolean` called **isSharp** that is not accessible from another class.
+    - a `boolean` called **canCut** that is not accessible from another class.
 
 - Constructor:
     - a `Scissors` constructor that is visible to other classes and accepts two `boolean` and uses it to initialize the
@@ -21,8 +21,9 @@ Your `Scissors` class must have the following items
 You need to add the following items to the class:
 
 - Methods:
-    - a `setIsSharp` method which accepts a `boolean` and uses it to set the value of the **isSharp** field
-    - a `getIsSharp` method which returns the value stored in the **isSharp** field
-    - a `setCanCut` method which accepts a `boolean` and uses it to set the value of the **canCut** field
-    - a `getCanCut` method which returns the value stored in the **canCut** field
+    - a `setIsSharp` method which accepts a `boolean` and uses it to set the value of the **isSharp** attribute
+    - a `getIsSharp` method which returns the value stored in the **isSharp** attribute
+    - a `setCanCut` method which accepts a `boolean` and uses it to set the value of the **canCut** attribute
+    - a `getCanCut` method which returns the value stored in the **canCut** attribute
     - a `toString` method which returns the string `"isSharp is " + isSharp + " and canCut is " + canCut`
+    - All of these methods must be accessible from another class.
