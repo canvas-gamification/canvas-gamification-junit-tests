@@ -106,11 +106,11 @@ public class MainTest {
         };
         Object tableInstance = monitor.createInstance(arguments);
         _assertEquals(countSize, monitor.getFieldValue(tableInstance, varCount),
-                "Your " + classMonitor + " constructor does not correctly initialize the " + varCount + " field.");
+                "Your " + classMonitor + " constructor does not correctly initialize the " + varCount + " attribute.");
         _assertEquals(typeScreen, monitor.getFieldValue(tableInstance, varType),
-                "Your " + classMonitor + " constructor does not correctly initialize the " + varType + " field.");
+                "Your " + classMonitor + " constructor does not correctly initialize the " + varType + " attribute.");
         _assertEquals(isRenewed, monitor.getFieldValue(tableInstance, varRenewed),
-                "Your " + classMonitor + " constructor does not correctly initialize the " + varRenewed + " field.");
+                "Your " + classMonitor + " constructor does not correctly initialize the " + varRenewed + " attribute.");
     }
 
     @ParameterizedTest
