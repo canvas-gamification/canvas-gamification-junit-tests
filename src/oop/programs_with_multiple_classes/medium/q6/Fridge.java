@@ -1,16 +1,15 @@
 package oop.programs_with_multiple_classes.medium.q6;
 
-public class Cupboard {
+public class Fridge {
     private int size;
-    private Vegetable[] vegetables;
+    private Meat[] meats;
 
-    public Cupboard(int m) {
+    public Fridge(int m) {
         if(m > 0)
             size = m;
         else
             m = 0;
-        vegetables = new Vegetable[size];
+        meats = new Meat[size];
     }
 
 }
-

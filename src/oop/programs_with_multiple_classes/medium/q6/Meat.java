@@ -1,9 +1,9 @@
 package oop.programs_with_multiple_classes.medium.q6;
 
-public class Vegetable {
+public class Meat {
     private boolean isSpoiled;
 
-    public Vegetable(boolean b) {
+    public Meat(boolean b) {
         isSpoiled = b;
     }
 

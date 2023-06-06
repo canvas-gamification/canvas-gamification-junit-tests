@@ -1,8 +1,6 @@
 package oop.programs_with_multiple_classes.medium.q6;
 
-import global.BaseTest;
 import global.ObjectTest;
-import global.variables.Clause;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,52 +10,51 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
     // Java
 
-    private final String vegetableClass = "Vegetable";
-    private final String cupboardClass = "Cupboard";
+    private final String meatClass = "Meat";
+    private final String fridgeClass = "Fridge";
     private final String varSize = "size";
     private final String varSpoiled = "isSpoiled";
-    private final String varVeg = "vegetables";
+    private final String varMeat = "meats";
     private final String methodName = "timePassed";
-    public ObjectTest vegetable;
-    public ObjectTest cupboard;
+    public ObjectTest meat;
+    public ObjectTest fridge;
 
     @BeforeEach
     public void setup() {
-        String vegetableClassString = "oop.programs_with_multiple_classes.medium.q6." + vegetableClass;
-        String cupboardClassString = "oop.programs_with_multiple_classes.medium.q6." + cupboardClass;
-        vegetable = new ObjectTest(vegetableClassString);
-        cupboard = new ObjectTest(cupboardClassString);
+        String meatClassString = "oop.programs_with_multiple_classes.medium.q6." + meatClass;
+        String fridgeClassString = "oop.programs_with_multiple_classes.medium.q6." + fridgeClass;
+        meat = new ObjectTest(meatClassString);
+        fridge = new ObjectTest(fridgeClassString);
         String modifiedVegMessage =
-                "You have modified the class fields in the " + vegetableClass + " class. Please revert them back to the original state they were provided in.";
-        assertTrue(vegetable.hasField(varSpoiled, boolean.class), modifiedVegMessage);
-        assertTrue(vegetable.hasModifier(varSpoiled, "private"), modifiedVegMessage);
+                "You have modified the class fields in the " + meatClass + " class. Please revert them back to the original state they were provided in.";
+        assertTrue(meat.hasField(varSpoiled, boolean.class), modifiedVegMessage);
+        assertTrue(meat.hasModifier(varSpoiled, "private"), modifiedVegMessage);
         Class<?>[] classArguments = {boolean.class};
-        assertTrue(vegetable.hasConstructor(classArguments), modifiedVegMessage);
-        assertTrue(vegetable.hasModifier(classArguments, "public"), modifiedVegMessage);
+        assertTrue(meat.hasConstructor(classArguments), modifiedVegMessage);
+        assertTrue(meat.hasModifier(classArguments, "public"), modifiedVegMessage);
         String modifiedCupMessage =
-                "You have modified the class fields in the " + cupboardClass + " class. Please revert them back to the original state they were provided in.";
-        assertTrue(cupboard.hasField(varSize, int.class), modifiedCupMessage);
-        assertTrue(cupboard.hasModifier(varSize, "private"), modifiedCupMessage);
-        assertTrue(cupboard.hasField(varVeg, Vegetable[].class), modifiedCupMessage);
-        assertTrue(cupboard.hasModifier(varVeg, "private"), modifiedCupMessage);
+                "You have modified the class fields in the " + fridgeClass + " class. Please revert them back to the original state they were provided in.";
+        assertTrue(fridge.hasField(varSize, int.class), modifiedCupMessage);
+        assertTrue(fridge.hasModifier(varSize, "private"), modifiedCupMessage);
+        assertTrue(fridge.hasField(varMeat, Meat[].class), modifiedCupMessage);
+        assertTrue(fridge.hasModifier(varMeat, "private"), modifiedCupMessage);
     }
 
     @Test
-    public void cupboardCLassHasRequiredConstructor() {
+    public void fridgeCLassHasRequiredConstructor() {
         Class<?>[] classArguments = {int.class};
-        assertTrue(cupboard.hasConstructor(classArguments),
-                "Your " + cupboardClass + " constructor does not have the correct parameters.");
-        assertTrue(cupboard.hasModifier(classArguments, "public"),
-                "Your " + cupboardClass + " constructor does not have the correct modifier.");
+        assertTrue(fridge.hasConstructor(classArguments),
+                "Your " + fridgeClass + " constructor does not have the correct parameters.");
+        assertTrue(fridge.hasModifier(classArguments, "public"),
+                "Your " + fridgeClass + " constructor does not have the correct visibility modifier.");
     }
 
-    private static Stream<Arguments> vegetableInputProvider() {
+    private static Stream<Arguments> meatInputProvider() {
         return Stream.of(
                 Arguments.of(true),
                 Arguments.of(false),
@@ -67,17 +64,17 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("vegetableInputProvider")
-    public void correctVegetableTimePassedMethod(boolean isSpoiled) throws Throwable {
+    @MethodSource("meatInputProvider")
+    public void correctMeatTimePassedMethod(boolean isSpoiled) throws Throwable {
         Object[][] arguments = {
                 {isSpoiled, boolean.class}
         };
-        Object vegetableInstance = vegetable.createInstance(arguments);
-        vegetable.callMethod(methodName, vegetableInstance);
-        assertTrue(vegetable.hasMethod(methodName, new Class<?>[]{}, Void.TYPE, new String[]{"public"}),
-                "Your " + vegetableClass + " does not have a correct " + methodName + " method");
-        _assertEquals(true, vegetable.getFieldValue(vegetableInstance, varSpoiled),
-                "Your " + vegetableClass + " " + methodName + " method does not change the " + varSpoiled + " value to true.");
+        Object vegetableInstance = meat.createInstance(arguments);
+        meat.callMethod(methodName, vegetableInstance);
+        assertTrue(meat.hasMethod(methodName, new Class<?>[]{}, Void.TYPE, new String[]{"public"}),
+                "Your " + meatClass + " does not have a correct " + methodName + " method");
+        _assertEquals(true, meat.getFieldValue(vegetableInstance, varSpoiled),
+                "Your " + meatClass + " " + methodName + " method does not change the " + varSpoiled + " value to true.");
     }
 
 
@@ -94,15 +91,15 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("cupboardInputProvider")
-    public void cupboardConstructorInitializesValuesCorrectly(int size) throws Throwable {
+    public void fridgeConstructorInitializesValuesCorrectly(int size) throws Throwable {
         Object[][] arguments = {
                 {size, int.class}
         };
-        Object tableInstance = cupboard.createInstance(arguments);
-        _assertEquals((size > 0) ? size : 0, cupboard.getFieldValue(tableInstance, varSize),
-                "Your " + cupboardClass + " constructor does not correctly initialize the " + varSize + " field.");
-        _assertArrayEquals(new Vegetable[(size > 0) ? size : 0], cupboard.getFieldValue(tableInstance, varVeg),
-                "Your " + cupboardClass + " constructor does not correctly initialize the " + varVeg + " field.");
+        Object tableInstance = fridge.createInstance(arguments);
+        _assertEquals((size > 0) ? size : 0, fridge.getFieldValue(tableInstance, varSize),
+                "Your " + fridgeClass + " constructor does not correctly initialize the " + varSize + " field.");
+        _assertArrayEquals(new Meat[(size > 0) ? size : 0], fridge.getFieldValue(tableInstance, varMeat),
+                "Your " + fridgeClass + " constructor does not correctly initialize the " + varMeat + " field.");
     }
 
 }
