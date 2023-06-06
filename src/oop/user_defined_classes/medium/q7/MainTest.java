@@ -45,10 +45,8 @@ public class MainTest {
                     {speed, int.class}
             };
             Object instance = classInstance.createInstance(arguments);
-            _assertEquals(speed, classInstance.getFieldValue(instance, var1),
-                    "Your " + className + " constructor does not correctly initialize the " + var1 + " field.");
-            _assertEquals(initialFee, classInstance.getFieldValue(instance, var2),
-                    "Your " + className + " constructor does not correctly initialize the " + var2 + " field.");
+            _assertEquals(speed, classInstance.getFieldValue(instance, var1), modifiedClassMessage);
+            _assertEquals(initialFee, classInstance.getFieldValue(instance, var2), modifiedClassMessage);
         }
 
 
