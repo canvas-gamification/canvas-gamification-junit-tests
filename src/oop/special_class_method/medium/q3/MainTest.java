@@ -2,7 +2,6 @@ package oop.special_class_method.medium.q3;
 
 import global.ObjectTest;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -10,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -58,7 +58,7 @@ public class MainTest {
         assertTrue(testClass.hasModifier(getAttributeMethodName, null, "public"),
                 "Your " + getAttributeMethodName + " method does not have the correct visibility modifier.");
         _assertEquals(value, getMethodOutput,
-                "Your " + getAttributeMethodName + " method does not return the value of the size field.");
+                "Your " + getAttributeMethodName + " method does not return the value of the " + attributeName + " attribute.");
     }
 
     private static Stream<Arguments> twoDoublesInputProvider() {
@@ -83,13 +83,14 @@ public class MainTest {
         Class<?>[] methodModifierClasses = {
                 double.class
         };
-        testClass.callMethod(setAttributeMethodName, setMethodArguments, testInstance);
+        Object setMethodOutput = testClass.callMethod(setAttributeMethodName, setMethodArguments, testInstance);
         assertTrue(testClass.hasModifier(setAttributeMethodName, methodModifierClasses, "public"),
                 "Your " + setAttributeMethodName + " method does not have the correct visibility modifier.");
         String incorrectSetterMessage =
                 "Your " + setAttributeMethodName + " method does not correctly update the value of " + attributeName + ".";
         _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName),
                 incorrectSetterMessage);
+        assertNull(setMethodOutput, String.join(" ", "Your", setAttributeMethodName, "method should not return any output"));
     }
 
     @ParameterizedTest
