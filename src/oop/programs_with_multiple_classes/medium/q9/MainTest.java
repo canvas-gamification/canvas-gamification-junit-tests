@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -69,15 +68,15 @@ public class MainTest {
         assertTrue(desk.hasField(varMaterial, String.class),
                 "Your " + classDesk + " class is missing the " + varMaterial + " attribute.");
         assertTrue(desk.hasModifier(varMaterial, "private"),
-                "Your " + classDesk + " class " + varMaterial + " attributes does not have the correct modifier.");
+                "Your " + classDesk + " class " + varMaterial + " attributes does not have the correct visibility modifier.");
         assertTrue(desk.hasField(varOld, int.class),
                 "Your " + classDesk + " class is missing the " + varMaterial + " attribute.");
         assertTrue(desk.hasModifier(varOld, "private"),
-                "Your " + classDesk + " class " + varMaterial + " attributes does not have the correct modifier.");
+                "Your " + classDesk + " class " + varMaterial + " attributes does not have the correct visibility modifier.");
         assertTrue(desk.hasField(varMonitors, Monitor[].class),
                 "Your " + classDesk + " class is missing the " + varMaterial + " attribute.");
         assertTrue(desk.hasModifier(varMonitors, "private"),
-                "Your " + classDesk + " class " + varMaterial + " attributes does not have the correct modifier.");
+                "Your " + classDesk + " class " + varMaterial + " attributes does not have the correct visibility modifier.");
     }
 
     @Test
@@ -86,7 +85,7 @@ public class MainTest {
         assertTrue(monitor.hasConstructor(classArguments),
                 "Your " + classMonitor + " constructor does not have the correct parameters.");
         assertTrue(monitor.hasModifier(classArguments, "public"),
-                "Your " + classMonitor + " constructor does not have the correct modifier.");
+                "Your " + classMonitor + " constructor does not have the correct visibility modifier.");
     }
 
     private static Stream<Arguments> monitorInputProvider() {

@@ -24,7 +24,7 @@ You must add the following items to complete the class:
 - Constructors:
     - A constructor which is visible from another class and accepts an `int`, a `String`, and a `boolean`
       in that order as parameters and initializes the **countSize**,  **typeScreen**,
-      and **isRenewed** fields with the input values.
+      and **isRenewed** attributes with the input values.
 
 - Methods
     - Write a method called **recycled** that sets the value of **isRenewed** to true, and is accessible from other
@@ -42,7 +42,7 @@ The `Desk` class currently has the following items:
 You must add the following items to complete the class:
 
 - Attributes:
-    - Based on the constructor write the **materialType** and **yearsOld** fields with
+    - Based on the constructor write the **materialType** and **yearsOld** attributes with
       the appropriate types that are not accessible from other classes.
     - An array of `Monitor` objects called **monitors** that is not accessible from other classes.
   
