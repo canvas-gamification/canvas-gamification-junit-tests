@@ -52,12 +52,18 @@ public class MainTest {
     public void classHasRequiredFields() {
         String wrongFieldMessage = "Your " + className + " class is missing some of the required fields.";
         String wrongModifierMessage = "Your " + className + " class does not have some of the required modifiers.";
-        assertTrue(classInstance.hasField(varColour, String.class), wrongFieldMessage);
-        assertTrue(classInstance.hasModifier(varColour, "private"), wrongModifierMessage);
-        assertTrue(classInstance.hasField(varPower, int.class), wrongFieldMessage);
-        assertTrue(classInstance.hasModifier(varPower, "private"), wrongModifierMessage);
-        assertTrue(classInstance.hasField(varYear, int.class), wrongFieldMessage);
-        assertTrue(classInstance.hasModifier(varPower, "private"), wrongModifierMessage);
+        assertTrue(classInstance.hasField(varColour, String.class),
+                "Your " + className + " class is missing the " + varColour + " attribute.");
+        assertTrue(classInstance.hasModifier(varColour, "private"),
+                "Your " + varColour + " attribute does not have the correct visibility modifier.");
+        assertTrue(classInstance.hasField(varPower, int.class),
+                "Your " + className + " class is missing the " + varPower + " attribute.");
+        assertTrue(classInstance.hasModifier(varPower, "private"),
+                "Your " + varPower + " attribute does not have the correct visibility modifier.");
+        assertTrue(classInstance.hasField(varYear, int.class),
+                "Your " + className + " class is missing the " + varYear+ " attribute.");
+        assertTrue(classInstance.hasModifier(varYear, "private"),
+                "Your " + varYear + " attribute does not have the correct visibility modifier.");
     }
     private static Stream<Arguments> methodInputProvider() {
         return Stream.of(
