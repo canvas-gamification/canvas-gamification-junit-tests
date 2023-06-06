@@ -38,7 +38,7 @@ public class MainTest {
         assertTrue(classInstance.hasConstructor(classArguments),
                 "Your " + className + " constructor does not have the correct parameters.");
         assertTrue(classInstance.hasModifier(classArguments, "public"),
-                "Your " + className + " constructor does not have the correct modifier.");
+                "Your " + className + " constructor does not have the correct visibility modifier.");
     }
 
     private static Stream<Arguments> constructorInputProvider() {
@@ -64,11 +64,11 @@ public class MainTest {
         Object instance = classInstance.createInstance(arguments);
         if(volume > 0)
             _assertEquals(volume, classInstance.getFieldValue(instance, varVol),
-                "Your " + className + " constructor does not correctly initialize the " + varVol + " field.");
+                "Your " + className + " constructor does not correctly initialize the " + varVol + " attribute.");
         else
             _assertEquals(0.000, classInstance.getFieldValue(instance, varVol), 0.000001,
-                    "Your " + className + " constructor does not correctly initialize the " + varVol + " field.");
+                    "Your " + className + " constructor does not correctly initialize the " + varVol + " attribute.");
         _assertEquals(quality, classInstance.getFieldValue(instance, varQual),
-                "Your " + className + " constructor does not correctly initialize the " + varQual + " field.");
+                "Your " + className + " constructor does not correctly initialize the " + varQual + " attribute.");
     }
 }
