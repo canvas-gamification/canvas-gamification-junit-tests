@@ -25,4 +25,4 @@ You need to add the following items:
     - a `setBreed` method which accepts a `String` and uses it to set the value of the **breed** attribute
     - a `getBreed` method which returns the value stored in the **breed** attribute
     - a `toString` method which return the string `"My breed is " + breed`
-    - None of these methods should be visible from another class.
+    - All of these methods should be visible from another class.
