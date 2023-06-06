@@ -3,10 +3,10 @@
 ## Java
 
 Teaching young children to make animal sounds is fun and helps them 
-improve their language skills. Make a Java class called Horse
-that has an attribute called weight, a constructor that 
-initializes the weight, and one method called makeSound 
-that returns "Neigh!!".
+improve their language skills. Make a Java class called `Horse`
+that has an attribute called **weight**, a constructor that 
+initializes the **weight**, and one method called **makeSound **
+that returns `Neigh!!`.
 
 
 
@@ -14,9 +14,10 @@ that returns "Neigh!!".
 
 The `Horse` class you are given has the following items:
 
-- A `Horse` class name
-- An empty `Horse` constructor 
-- A `double` called **weight**
+- Attributes:
+    - A `double` called **weight** that is not accessible from other classes
+- Constructors:
+    - An empty constructor with its parameters.
 
 You must add the following items to the class:
 

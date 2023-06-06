@@ -10,6 +10,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
+import static global.tools.CustomAssertions._assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
     // Java
@@ -27,10 +29,12 @@ public class MainTest {
                 double.class
         };
         String classString = "oop.user_defined_classes.medium.q3." + className;
+        String modifiedClassMessage =
+                "You have modified the provided portions of class " + className + ". Please revert them to the original state.";
         classInstance = new ObjectTest(classString);
-        classInstance.hasField(doubleFieldName, double.class);
-        classInstance.hasModifier(doubleFieldName, "private");
-        classInstance.hasConstructor(arguments);
+        assertTrue(classInstance.hasField(doubleFieldName, double.class), modifiedClassMessage);
+        assertTrue(classInstance.hasModifier(doubleFieldName, "private"), modifiedClassMessage);
+        assertTrue(classInstance.hasConstructor(arguments), modifiedClassMessage);
     }
 
     private static Stream<Arguments> constructorInputProvider() {
@@ -55,10 +59,10 @@ public class MainTest {
         Object instance = classInstance.createInstance(arguments);
         if (number > 0)
             _assertEquals(number, classInstance.getFieldValue(instance, doubleFieldName),
-                    "Your " + className + " constructor does not correctly initialize the " + doubleFieldName + " field.");
+                    "Your " + className + " constructor does not correctly initialize the " + doubleFieldName + " attribute.");
         else
             _assertEquals(0.000, classInstance.getFieldValue(instance, doubleFieldName), 0.000001,
-                    "Your " + className + " constructor does not correctly initialize the " + doubleFieldName + " field.");
+                    "Your " + className + " constructor does not correctly initialize the " + doubleFieldName + " attribute.");
     }
 
     @ParameterizedTest
