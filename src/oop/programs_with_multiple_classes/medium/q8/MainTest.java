@@ -1,8 +1,6 @@
 package oop.programs_with_multiple_classes.medium.q8;
 
-import global.BaseTest;
 import global.ObjectTest;
-import global.variables.Clause;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,7 +13,7 @@ import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainTest extends BaseTest {
+public class MainTest {
     // Java
 
     private final String classLight = "Light";
@@ -27,13 +25,6 @@ public class MainTest extends BaseTest {
     private final String varLights = "lights";
     public ObjectTest light;
     public ObjectTest kitchen;
-
-    public Clause[] testSentence() {
-        return new Clause[0];
-    }
-
-    public void runMain() {
-    }
 
     @BeforeEach
     public void setup() throws Throwable {
@@ -111,9 +102,9 @@ public class MainTest extends BaseTest {
         };
         Object lightInstance = light.createInstance(arguments);
         _assertEquals(isOn, light.getFieldValue(lightInstance, varOn),
-                "Your " + classLight + " constructor does not correctly initialize the " + varOn + " field.");
+                "Your " + classLight + " constructor does not correctly initialize the " + varOn + " attribute.");
         _assertEquals(type, light.getFieldValue(lightInstance, varType),
-                "Your " + classLight + " constructor does not correctly initialize the " + varType + " field.");
+                "Your " + classLight + " constructor does not correctly initialize the " + varType + " attribute.");
     }
 
     private static Stream<Arguments> kitchenInputProvider() {
