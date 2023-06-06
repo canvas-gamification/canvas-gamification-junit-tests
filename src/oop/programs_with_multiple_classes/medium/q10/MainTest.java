@@ -1,8 +1,6 @@
 package oop.programs_with_multiple_classes.medium.q10;
 
-import global.BaseTest;
 import global.ObjectTest;
-import global.variables.Clause;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,7 +11,6 @@ import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -71,15 +68,15 @@ public class MainTest {
         assertTrue(cupboard.hasField(varSize, int.class),
                 "Your " + classCupboard + " class is missing the " + varSize + " attribute.");
         assertTrue(cupboard.hasModifier(varSize, "private"),
-                "Your " + classCupboard + " class " + varSize + " attributes does not have the correct modifier.");
+                "Your " + classCupboard + " class " + varSize + " attributes does not have the correct visibility modifier.");
         assertTrue(cupboard.hasField(varColour, String.class),
                 "Your " + classCupboard + " class is missing the " + varColour + " attribute.");
         assertTrue(cupboard.hasModifier(varColour, "private"),
-                "Your " + classCupboard + " class " + varColour + " attributes does not have the correct modifier.");
+                "Your " + classCupboard + " class " + varColour + " attributes does not have the correct visibility modifier.");
         assertTrue(cupboard.hasField(varVegtables, Vegetable[].class),
                 "Your " + classCupboard + " class is missing the " + varVegtables + " attribute.");
         assertTrue(cupboard.hasModifier(varVegtables, "private"),
-                "Your " + classCupboard + " class " + varVegtables + " attributes does not have the correct modifier.");
+                "Your " + classCupboard + " class " + varVegtables + " attributes does not have the correct visibility modifier.");
     }
 
     @Test
@@ -88,7 +85,7 @@ public class MainTest {
         assertTrue(vegetable.hasConstructor(classArguments),
                 "Your " + classVegtable + " constructor does not have the correct parameters.");
         assertTrue(vegetable.hasModifier(classArguments, "public"),
-                "Your " + classVegtable + " constructor does not have the correct modifier.");
+                "Your " + classVegtable + " constructor does not have the correct visibility modifier.");
     }
 
     private static Stream<Arguments> vegetableInputProvider() {
@@ -110,11 +107,11 @@ public class MainTest {
         };
         Object vegetableInstance = vegetable.createInstance(arguments);
         _assertEquals(isSpoiled, vegetable.getFieldValue(vegetableInstance, varSpoiled),
-                "Your " + classVegtable + " constructor does not correctly initialize the " + varSpoiled + " field.");
+                "Your " + classVegtable + " constructor does not correctly initialize the " + varSpoiled + " attribute.");
         _assertEquals(weight, vegetable.getFieldValue(vegetableInstance, varWeight),
-                "Your " + classVegtable + " constructor does not correctly initialize the " + varWeight + " field.");
+                "Your " + classVegtable + " constructor does not correctly initialize the " + varWeight + " attribute.");
         _assertEquals(countryOfOrigin, vegetable.getFieldValue(vegetableInstance, varOrigin),
-                "Your " + classVegtable + " constructor does not correctly initialize the " + varOrigin + " field.");
+                "Your " + classVegtable + " constructor does not correctly initialize the " + varOrigin + " attribute.");
     }
 
     @ParameterizedTest
