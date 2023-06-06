@@ -11,39 +11,38 @@ import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
     // Java
 
     private final String knifeClass = "Knife";
-    private final String cupboardClass = "Cupboard";
+    private final String cabinetClass = "Cabinet";
     private final String varSize = "size";
     private final String varMaterial = "materialType";
     private final String varCapacity = "capacity";
     private final String varFull = "isFull";
     private final String varKnifes = "knifes";
     public ObjectTest knife;
-    public ObjectTest cupboard;
+    public ObjectTest cabinet;
 
     @BeforeEach
     public void setup() throws Throwable {
         String knifeClassString = "oop.programs_with_multiple_classes.medium.q7." + knifeClass;
-        String cupboardClassString = "oop.programs_with_multiple_classes.medium.q7." + cupboardClass;
+        String cabinetClassString = "oop.programs_with_multiple_classes.medium.q7." + cabinetClass;
         knife = new ObjectTest(knifeClassString);
-        cupboard = new ObjectTest(cupboardClassString);
+        cabinet = new ObjectTest(cabinetClassString);
         String modifiedKnifeMessage =
                 "You have modified the provided portions of class " + knifeClass + ". Please revert them to the original state.";
         assertTrue(knife.hasField(varSize, int.class), modifiedKnifeMessage);
         assertTrue(knife.hasModifier(varSize, "private"), modifiedKnifeMessage);
         assertTrue(knife.hasField(varMaterial, String.class), modifiedKnifeMessage);
         assertTrue(knife.hasModifier(varMaterial, "private"), modifiedKnifeMessage);
-        String modifiedCupMessage =
-                "You have modified the provided portions of class " + cupboardClass + ". Please revert them to the original state.";
+        String modifiedCabMessage =
+                "You have modified the provided portions of class " + cabinetClass + ". Please revert them to the original state.";
         Class<?>[] classArguments = {int.class, boolean.class};
-        assertTrue(cupboard.hasConstructor(classArguments), modifiedCupMessage);
-        assertTrue(cupboard.hasModifier(classArguments, "public"), modifiedCupMessage);
+        assertTrue(cabinet.hasConstructor(classArguments), modifiedCabMessage);
+        assertTrue(cabinet.hasModifier(classArguments, "public"), modifiedCabMessage);
 
         Object[][] test = {{10, true}, {20, false}, {50, true}};
         for (int testNum = 0; testNum < test.length; testNum++) {
@@ -53,26 +52,27 @@ public class MainTest {
                     {capacity, int.class},
                     {isFull, boolean.class}
             };
-            Object cupboardInstance = cupboard.createInstance(arguments);
-            _assertEquals(capacity, cupboard.getFieldValue(cupboardInstance, varCapacity),
-                    "Your " + cupboardClass + " constructor does not correctly initialize the " + varCapacity + " field.");
-            _assertEquals(isFull, cupboard.getFieldValue(cupboardInstance, varFull),
-                    "Your " + cupboardClass + " constructor does not correctly initialize the " + varFull + " field.");
-            _assertArrayEquals(new Knife[capacity], cupboard.getFieldValue(cupboardInstance, varKnifes),
-                    "Your " + cupboardClass + " constructor does not correctly initialize the " + varKnifes + " field.");
+            Object cabinetInstance = cabinet.createInstance(arguments);
+            _assertEquals(capacity, cabinet.getFieldValue(cabinetInstance, varCapacity),modifiedCabMessage);
+            _assertEquals(isFull, cabinet.getFieldValue(cabinetInstance, varFull),modifiedCabMessage);
+            _assertArrayEquals(new Knife[capacity], cabinet.getFieldValue(cabinetInstance, varKnifes),modifiedCabMessage);
         }
     }
 
     @Test
-    public void cupboardClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your " + cupboardClass + " class is missing a required field.";
-        String incorrectModifierMessage = "One of your " + cupboardClass + " class attributes does not have the correct modifier.";
-        assertTrue(cupboard.hasField(varCapacity, int.class), incorrectFieldMessage);
-        assertTrue(cupboard.hasModifier(varCapacity, "private"), incorrectModifierMessage);
-        assertTrue(cupboard.hasField(varFull, boolean.class), incorrectFieldMessage);
-        assertTrue(cupboard.hasModifier(varFull, "private"), incorrectModifierMessage);
-        assertTrue(cupboard.hasField(varKnifes, Knife[].class), incorrectFieldMessage);
-        assertTrue(cupboard.hasModifier(varKnifes, "private"), incorrectModifierMessage);
+    public void cabinetClassHasCorrectAttributes() {
+        assertTrue(cabinet.hasField(varCapacity, int.class),
+                "Your " + cabinetClass + " class is missing the " + varCapacity + " attribute.");
+        assertTrue(cabinet.hasModifier(varCapacity, "private"),
+                "Your " + varCapacity + " attribute does not have the correct visibility modifier.");
+        assertTrue(cabinet.hasField(varFull, boolean.class),
+                "Your " + cabinetClass + " class is missing the " + varFull + " attribute.");
+        assertTrue(cabinet.hasModifier(varFull, "private"),
+                "Your " + varFull + " attribute does not have the correct visibility modifier.");
+        assertTrue(cabinet.hasField(varKnifes, Knife[].class),
+                "Your " + cabinetClass + " class is missing the " + varKnifes + " attribute.");
+        assertTrue(cabinet.hasModifier(varKnifes, "private"),
+                "Your " + varKnifes + " attribute does not have the correct visibility modifier.");
     }
 
     @Test
@@ -81,7 +81,7 @@ public class MainTest {
         assertTrue(knife.hasConstructor(classArguments),
                 "Your " + knifeClass + " constructor does not have the correct parameters.");
         assertTrue(knife.hasModifier(classArguments, "public"),
-                "Your " + knifeClass + " constructor does not have the correct modifier.");
+                "Your " + knifeClass + " constructor does not have the correct visibility modifier.");
     }
 
 
