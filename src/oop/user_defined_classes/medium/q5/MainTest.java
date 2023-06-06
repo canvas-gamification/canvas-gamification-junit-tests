@@ -1,7 +1,6 @@
 package oop.user_defined_classes.medium.q5;
 
 import global.ObjectTest;
-import global.variables.Clause;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
