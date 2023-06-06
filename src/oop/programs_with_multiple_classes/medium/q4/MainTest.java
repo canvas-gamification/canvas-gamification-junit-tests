@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -49,21 +48,21 @@ public class MainTest {
                     {tests[i], String.class}
             };
             Object chassisInstance = chassis.createInstance(arguments);
-            _assertEquals(tests[i], chassis.getFieldValue(chassisInstance, varMaterialType),
-                    "Your " + chassisClass + " constructor does not correctly initialize the " + varMaterialType + " field.");
-            _assertArrayEquals(new Wheel[4], chassis.getFieldValue(chassisInstance, varWheels),
-                    "Your " + chassisClass + " constructor does not correctly initialize the " + varWheels + " field.");
+            _assertEquals(tests[i], chassis.getFieldValue(chassisInstance, varMaterialType),modifiedChassisMessage);
+            _assertArrayEquals(new Wheel[4], chassis.getFieldValue(chassisInstance, varWheels),modifiedChassisMessage);
         }
     }
 
     @Test
     public void chassisClassHasCorrectAttributes() {
-        String incorrectFieldMessage = "Your " + chassisClass + " class is missing a required field";
-        String incorrectModifierMessage = "One of your " + chassisClass + " class attributes does not have the correct modifier.";
-        assertTrue(chassis.hasField(varMaterialType, String.class), incorrectFieldMessage);
-        assertTrue(chassis.hasModifier(varMaterialType, "private"), incorrectModifierMessage);
-        assertTrue(chassis.hasField(varWheels, Wheel[].class), incorrectFieldMessage);
-        assertTrue(chassis.hasModifier(varWheels, "private"), incorrectModifierMessage);
+        assertTrue(chassis.hasField(varMaterialType, String.class),
+                "Your " + chassisClass + " class is missing the " + varMaterialType + " attribute.");
+        assertTrue(chassis.hasModifier(varMaterialType, "private"),
+                "Your " + varMaterialType + " attribute does not have the correct visibility modifier.");
+        assertTrue(chassis.hasField(varWheels, Wheel[].class),
+                "Your " + chassisClass + " class is missing the " + varWheels + " attribute.");
+        assertTrue(chassis.hasModifier(varWheels, "private"),
+                "Your " + varWheels + " attribute does not have the correct visibility modifier.");
     }
 
     @Test
@@ -72,7 +71,7 @@ public class MainTest {
         assertTrue(wheel.hasConstructor(classArguments),
                 "Your " + wheelClass + " constructor does not have the correct parameters.");
         assertTrue(wheel.hasModifier(classArguments, "public"),
-                "Your " + wheelClass + " constructor does not have the correct modifiers.");
+                "Your " + wheelClass + " constructor does not have the correct visibility modifiers.");
     }
 
     private static Stream<Arguments> wheelInputProvider() {
