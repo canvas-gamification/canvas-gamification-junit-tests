@@ -55,7 +55,7 @@ public class MainTest {
 
     @RepeatedTest(3)
     public void laptopClassHasCorrectConstructor(RepetitionInfo repetitionInfo) throws Throwable {
-        if(repetitionInfo.getCurrentRepetition() == 1){
+        if (repetitionInfo.getCurrentRepetition() == 1) {
             classInstance.setFieldValue(null, initialStart, intAttribute2);
         }
         Object instance = classInstance.createInstance();
@@ -71,7 +71,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("countInputProvider")
-    public void laptopClassHasCorrectGetIdentificationMethod(int n) throws Throwable{
+    public void laptopClassHasCorrectGetIdentificationMethod(int n) throws Throwable {
         Object instance = classInstance.createInstance();
         classInstance.setFieldValue(instance, n, intAttribute1);
         String missingMethodMessage =
@@ -85,7 +85,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("countInputProvider")
-    public void laptopClassHasCorrectSetIdentificationMethod(int n) throws Throwable{
+    public void laptopClassHasCorrectSetIdentificationMethod(int n) throws Throwable {
         Object instance = classInstance.createInstance();
         String missingMethodMessage =
                 "Your %s class is missing the %s method. Make sure that the method name is spelt correctly, has the " +
@@ -103,9 +103,9 @@ public class MainTest {
         Object instance = classInstance.createInstance();
         classInstance.setFieldValue(null, n, intAttribute2);
         Object output = classInstance.callMethod(methodName, instance);
-        _assertEquals(n+incrementAmount, classInstance.getFieldValue(null, intAttribute2),
+        _assertEquals(n + incrementAmount, classInstance.getFieldValue(null, intAttribute2),
                 String.format("Your %s method does not correctly increment the value of the %s attribute.", methodName, intAttribute2));
-        _assertEquals(n+incrementAmount, output,
+        _assertEquals(n + incrementAmount, output,
                 String.format("Your %s method does not return the correct value of the %s attribute.", methodName, intAttribute2));
     }
 
