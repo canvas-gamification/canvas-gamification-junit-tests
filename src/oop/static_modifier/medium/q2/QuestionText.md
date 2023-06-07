@@ -17,7 +17,7 @@ Your `Laptop` class must have the following items:
     - Note that all attributes in this class should be private
 
 - Constructors:
-    - A contractor that calls the `incrementer` method to initialize the **identification** attribute of the `Laptop`
+    - A constructor that calls the `incrementer` method to initialize the **identification** attribute of the `Laptop`
 
 - Methods:
     - A `getIdentification` method which returns the **identification** field and should be visible from another class
