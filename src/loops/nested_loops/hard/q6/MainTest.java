@@ -65,7 +65,9 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("invalidInputProvider")
     void identifiesInvalidInput(String n) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify invalid input";
+        TestOption.incorrectStructureErrorMessage = "Your program does not correctly identify invalid input.";
+        //0 case added in here as well so that if the user marks 0 as invalid input this test will fail and users will
+        //have a clearer idea of where the issue is
         String s = n.equals("0") ? "" : "Invalid input!";
         runWithInput(n, new Clause[]{
                 new StringLiteral(s)
