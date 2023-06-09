@@ -3,8 +3,9 @@ package arrays.arrays_with_methods.hard.q13;
 /*
 Write a program that asks the user to enter an array of 10 integers. Then, the program passes the array to a method
 called getPrimes which identifies all the primes in the given array as an integer n and returns them in a new array of
-size n. The main method should then print the array of primes. Note that prime numbers start from 2 since they must be
-divisible only by 1 and themselves. Your getPrimes method should be generalized to work with an array of any size.
+size n. The main method should then print the array of primes with each number in the array on a seperate line. Note 
+that prime numbers start from 2 since they must be divisible only by 1 and themselves. Your getPrimes method should be 
+generalized to work with an array of any size.
 
 Sample output:
     Enter an array of 10 integers:
