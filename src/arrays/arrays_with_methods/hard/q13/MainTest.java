@@ -72,7 +72,7 @@ public class MainTest extends BaseTest {
         };
         MethodTest m = new MethodTest(ArrayngeOfPrimes.class, "getPrimes", arguments);
         Object output = m.callMethod();
-        CustomAssertions._assertArrayEquals(expected, output, "Your getPrimes method does not correctly gather all the prime numbers in an array and return it.");
+        CustomAssertions._assertArrayEquals(expected, output, "Your getPrimes method does not correctly identify all the prime numbers in an array and copy them into a new array.");
     }
 
     @ParameterizedTest
