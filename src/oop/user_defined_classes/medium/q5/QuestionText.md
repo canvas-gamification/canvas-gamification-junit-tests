@@ -21,5 +21,5 @@ You need to add the following items:
     - A constructor, which is accessible from other classes, to initialize the **fee** attribute to 5.25.
 - Methods:
     - Create the method **increase**, which is accessible from other classes and takes an integer for number of months
-      from today to calculates the future fee. The estimation is calculated using formula
-      future fee = current fee * (number of months in the future + 0.95).
+      from today to calculates the future fee, and returns the value as a double. The estimation is calculated using 
+      formula future fee = current fee * (number of months in the future + 0.95).
