@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import static global.tools.CustomAssertions._fail;
 import static global.utils.RandomUtil.frequenciesAreRandom;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class RandomBoolean extends Clause implements RandomClause<Object> {
     static Map<Integer, ArrayList<Integer>> valueStore = new HashMap<>();
@@ -52,10 +53,10 @@ public class RandomBoolean extends Clause implements RandomClause<Object> {
     public boolean validateRandom(int matchGroupNum) {
         if (valueStore.get(matchGroupNum) == null)
             return false;
-        return validateRandom(valueStore.get(matchGroupNum));
+        return this.validateRandomInts(valueStore.get(matchGroupNum));
     }
 
-    public boolean validateRandom(ArrayList<Integer> values) {
+    public boolean validateRandomInts(ArrayList<Integer> values) {
         if (values.size() < 1000)
             _fail("There is an error with the test definition. Please contact a test administrator.",
                     "Error: invalid number of values provided. There must be more than 1000 values generated"
@@ -65,6 +66,25 @@ public class RandomBoolean extends Clause implements RandomClause<Object> {
         for (int value : values) {
             observedCounts[value]++;
         }
+        return frequenciesAreRandom(observedCounts, percentageOutput1);
+    }
+
+    public boolean validateRandom(ArrayList<String> values) {
+        if (values.size() < 1000)
+            _fail("There is an error with the test definition. Please contact a test administrator.",
+                    "Error: invalid number of values provided. There must be more than 1000 values generated"
+            );
+
+        int[] observedCounts = new int[NUM_BINS];
+        for (String value : values) {
+            if (value.equals(output1))
+                observedCounts[1]++;
+            else if (value.equals(output2))
+                observedCounts[0]++;
+            else
+                fail("One of your randomly generated values was not one of the accepted inputs. Please make sure that you are generating values correctly.");
+        }
+
         return frequenciesAreRandom(observedCounts, percentageOutput1);
     }
 

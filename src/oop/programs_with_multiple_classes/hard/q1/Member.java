@@ -6,10 +6,4 @@ public class Member {
     public Member(String s) {
         title = s;
     }
-
-    public String toString() {
-        return "Member{" +
-                "title='" + title + '\'' +
-                '}';
-    }
 }
