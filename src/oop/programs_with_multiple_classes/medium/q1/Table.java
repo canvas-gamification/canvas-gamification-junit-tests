@@ -9,10 +9,7 @@ public class Table {
         numSeats = ns;
     }
 
-    public String toString() {
-        return "Table{" +
-                "woodType='" + woodType + '\'' +
-                ", numSeats=" + numSeats +
-                '}';
+    public void woodType() {
+        System.out.println("This table is made out of " + woodType);
     }
 }

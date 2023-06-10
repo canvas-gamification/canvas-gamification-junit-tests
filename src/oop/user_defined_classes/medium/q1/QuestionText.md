@@ -2,35 +2,24 @@
 
 ## Question Information:
 
-- Question Type: Parsons with distractors
-- Distractors:
-    - private class Circle
-    - public int position;
-    - public String colour;
-    - public void Circle()
-    - public Circle()
-    - return position;
-    - int position = -1;
-    - String colour = "";
-    - position = gen.nextInt();
+- Question Type: Java
 
 ## Question Text:
 
-You want to write a program that models certain objects and where they are located. Make a Java class called `Circle`
-with the specifications described bellow to accomplish this.
+In your math class, you have recently been learning about Circles. To model this, you write a Circle class in Java to
+help you study. You are given a partially complete Circle class and must complete the rest using the specifications
+below. Note that you should not modify the provided portion of the code. Only add the parts specified below to the file.
 
-### Circle Class
+## Circle Class
 
-Your `Circle` class should have the following items:
+The `Circle` class currently has the following items:
 
 - Attributes:
     - An `int` called **position**
     - A `String` called **colour**
 
-- Constructors:
-    - A constructor which accepts an `int` and a `String` in that order and initializes **position** and **colour**
-      with the input values.
+You must add the following items to complete the class:
 
-- Methods:
-    - A method called `moveLocation` which another class can access to randomly set the value of **position** to be a
-      number from 0 (inclusive) to 100 (exclusive) and returns nothing.
+- Constructors:
+    - A constructor which is visible from another class and accepts an `int` and a `String` in that order as parameters
+      and initializes the **position** and **colour** fields with the input values.
