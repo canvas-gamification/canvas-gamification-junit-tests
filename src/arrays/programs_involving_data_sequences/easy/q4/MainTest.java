@@ -1,6 +1,6 @@
 package arrays.programs_involving_data_sequences.easy.q4;
 
-import global.BaseRandomTest;
+import global.BaseTest;
 import global.MethodTest;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainTest extends BaseRandomTest {
+public class MainTest extends BaseTest {
     // Parsons
 
     public Clause[] testSentence() {
@@ -41,7 +41,7 @@ public class MainTest extends BaseRandomTest {
         GameNight.main(new String[0]);
     }
 
-    static Stream<Arguments> inputProvider(){
+    static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of(6, new String[]{"Sam", "Ham", "Mam", "Clam", "Slam", "Pam"}),
                 Arguments.of(3, new String[]{"Liam", "Miam", "Siam"}),
@@ -63,7 +63,7 @@ public class MainTest extends BaseRandomTest {
         };
         MethodTest m = new MethodTest(GameNight.class, "musicalChairs", arguments);
 
-        for(int a = 0; a < 1000; a++) {
+        for (int a = 0; a < 1000; a++) {
             m.callMethod();
 
             for (int x = 0; x < size; x++) {
@@ -81,16 +81,15 @@ public class MainTest extends BaseRandomTest {
         for (int x = 0; x < size; x++) {
             ArrayList<Integer> response = Arrays.stream(numbers[x]).boxed().collect(Collectors.toCollection(ArrayList::new));
             RandomInteger randomInteger = new RandomInteger(0, size);
-            if(randomInteger.validateRandom(response))
+            if (randomInteger.validateRandom(response))
                 count++;
         }
 
         String s = "Your musicalChairs method does not randomly shuffle the names correctly.";
 
-        if(size <= 5){
+        if (size <= 5) {
             assertEquals(size, count, s);
-        }
-        else{
+        } else {
             assertTrue(size - 2 <= count, s);
         }
     }
