@@ -12,51 +12,47 @@ public String noise = "Neigh!";
 public static String noise = "Neigh!";
  */
 
-public class Horse
-{
+public class Horse {
     private static String noise = "Neigh!";
     private String name;
 
-    public Horse(String n )
-    {
+    public Horse(String n) {
         name = n;
     }
-    public static void lengthenSound()
-    {
+
+    public static void lengthenSound() {
         String newNoise = "";
         boolean firstVowel = true;
-        for(int i = 0; i < noise.length(); i++)
-        {
+        for (int i = 0; i < noise.length(); i++) {
             char c = noise.charAt(i);
-            if(( c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' ) && firstVowel)
-            {
-                for(int j = 0; j < 5; j++)
+            if ((c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') && firstVowel) {
+                for (int j = 0; j < 5; j++)
                     newNoise += c;
                 firstVowel = false;
-            }
-            else
+            } else
                 newNoise += c;
         }
         noise = newNoise;
     }
-    public static void shortenSound()
-    {
+
+    public static void shortenSound() {
         String newNoise = "";
         boolean firstVowel = true;
-        for(int i = 0; i < noise.length(); i++)
-        {
+        for (int i = 0; i < noise.length(); i++) {
             char c = noise.charAt(i);
-            if(( c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' ) && firstVowel) {
+            if ((c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') && firstVowel) {
                 if (noise.contains(c + "" + c + "" + c + "" + c + "" + c)) {
                     i += 4;
                 }
                 firstVowel = false;
                 newNoise += c;
-            }
-            else
+            } else
                 newNoise += c;
         }
         noise = newNoise;
     }
-    public String toString() { return name + " calls out " + noise; }
+
+    public String toString() {
+        return name + " calls out " + noise;
+    }
 }

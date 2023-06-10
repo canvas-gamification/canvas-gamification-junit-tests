@@ -2,7 +2,6 @@ package oop.static_modifier.medium.q3;
 
 import global.ObjectTest;
 import global.variables.Clause;
-import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +25,7 @@ public class MainTest {
     private final String methodName1 = "lengthenSound";
     private final String methodName2 = "shortenSound";
     private final String startNoise = "Neigh!";
+    private final String startVowel = "e";
     private final int repetitionAmount = 4;
     private final String testName1 = "Marly";
     private final String testName2 = "Darling";
@@ -55,7 +55,7 @@ public class MainTest {
     private static Stream<String> constructorInputProvider() {
         return Stream.of("Mary", "Jane", "Jeremy");
     }
-    
+
     @Test
     public void horseClassHasCorrectConstructor() throws Throwable {
         Class<?>[] arguments = {String.class};
@@ -109,9 +109,8 @@ public class MainTest {
     public void horseClassHasCorrectLengthenSoundMethod(int one, int two, String noise, String vowel) throws Throwable {
         classInstance.setFieldValue(null, noise, stringAttribute1);
         StringBuilder series = new StringBuilder();
-        series.append(vowel.repeat(repetitionAmount));
 
-        for(int x = 0; x < one; x ++){
+        for (int x = 0; x < one; x++) {
             series.append(vowel.repeat(repetitionAmount));
             classInstance.callMethod(methodName1);
         }
@@ -125,7 +124,7 @@ public class MainTest {
     @MethodSource("methodInputProvider")
     public void horseClassHasCorrectShortenSoundMethod(int one, int two, String noise, String vowel) throws Throwable {
         StringBuilder series = new StringBuilder();
-        for(int x = 0; x < Math.random()*50 + repetitionAmount; x++) {
+        for (int x = 0; x < Math.random() * 50 + repetitionAmount; x++) {
             series.append(vowel);
         }
         String substring = noise.substring(0, noise.indexOf(vowel));
@@ -133,9 +132,9 @@ public class MainTest {
         classInstance.setFieldValue(null, longNoise, stringAttribute1);
 
         series.delete(0, series.length());
-        series.append(vowel.repeat(repetitionAmount+1));
+        series.append(vowel.repeat(repetitionAmount + 1));
 
-        for(int x = 0; x < two; x ++) {
+        for (int x = 0; x < two; x++) {
             classInstance.callMethod(methodName2);
             if (longNoise.contains(series)) {
                 longNoise = substring + longNoise.substring(longNoise.indexOf(vowel) + repetitionAmount);
@@ -148,35 +147,57 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
-    public void horseMethodsWorkCorrectlyWorkTogether(int one, int two, String noise, String vowel){
+    public void horseMethodsWorkCorrectlyWorkTogether(int one, int two, String noise, String vowel) throws Throwable {
+        classInstance.setFieldValue(null, noise, stringAttribute1);
+        StringBuilder series = new StringBuilder();
+        String name = "horse name";
+        Object[][] constructorArguments = {
+                {name, String.class}
+        };
+        Object instance = classInstance.createInstance(constructorArguments);
 
+        for (int x = 0; x < one; x++) {
+            series.append(vowel.repeat(repetitionAmount));
+            classInstance.callMethod(methodName1);
+        }
+
+        String substring = noise.substring(0, noise.indexOf(vowel));
+        String newNoise = substring + series + noise.substring(noise.indexOf(vowel));
+
+        series.delete(0, series.length());
+        series.append(vowel.repeat(repetitionAmount + 1));
+
+        for (int x = 0; x < two; x++) {
+            classInstance.callMethod(methodName2);
+            if (newNoise.contains(series)) {
+                newNoise = substring + newNoise.substring(newNoise.indexOf(vowel) + repetitionAmount);
+            }
+        }
+
+        _assertEquals(newNoise, classInstance.getFieldValue(null, stringAttribute1),
+                String.format("Your %s method does not properly shorten the %s attribute after it has been lengthened.", methodName2, stringAttribute1));
+
+        Object toStringOutput = classInstance.callMethod("toString", instance);
+        String expectedToStringOutput = name + " calls out " + newNoise;
+        String incorrectToString =
+                "Your toString method does not return the correct String after updating the %s attribute using the %s and %s methods.";
+        _assertEquals(expectedToStringOutput, toStringOutput,
+                String.format(incorrectToString, stringAttribute1, methodName1, methodName2));
     }
 
-//    @ParameterizedTest
-//    @MethodSource("countInputProvider")
-//    public void laptopClassHasCorrectIncrementerMethod(int n) throws Throwable {
-//        Object instance = classInstance.createInstance();
-//        classInstance.setFieldValue(null, n, stringAttribute2);
-//        Object output = classInstance.callMethod(methodName, instance);
-//        _assertEquals(n + repetitionAmount, classInstance.getFieldValue(null, stringAttribute2),
-//                String.format("Your %s method does not correctly increment the value of the %s attribute.", methodName, stringAttribute2));
-//        _assertEquals(n + repetitionAmount, output,
-//                String.format("Your %s method does not return the correct value of the %s attribute.", methodName, stringAttribute2));
-//    }
-
     @Test
-    public void testPlatformGameMainMethodProducesCorrectOutput() throws Throwable {
-        classInstance.setFieldValue(null, startNoise, stringAttribute2);
+    public void testAnimalMainMethodProducesCorrectOutput() throws Throwable {
+        classInstance.setFieldValue(null, startNoise, stringAttribute1);
+        String series = startVowel.repeat(repetitionAmount);
+        String newNoise = startNoise.substring(0, startNoise.indexOf(startVowel)) + series + startNoise.substring(startNoise.indexOf(startVowel));
         Object[][] arguments = {{new String[0], String[].class}};
         Clause[] clauses = new Clause[]{
-                new StringLiteral("The first laptop id is "),
-                new IntegerLiteral(startNoise + repetitionAmount),
+                new StringLiteral(testName1 + " calls out " + newNoise + " " + testName2 + " calls out " + newNoise),
                 new NewLine(),
-                new StringLiteral("The second laptop id is "),
-                new IntegerLiteral(startNoise + (repetitionAmount * 2))
+                new StringLiteral(testName1 + " calls out " + startNoise + " " + testName2 + " calls out " + startNoise),
         };
         String incorrectOutput =
-                String.format("Your %s class main method does correctly initialize and print the values of the two %s objects.", testName, objectName);
+                String.format("Your %s class main method does correctly initialize and print the two updated values of the two %s objects.", testName, objectName);
         testInstance.callMethod("main", arguments, clauses, incorrectOutput);
     }
 }
