@@ -39,14 +39,17 @@ public class MainTest extends BaseTest {
         runWithInput(String.valueOf(n), clauseBuilder(n));
     }
 
-    static Stream<Integer> invalidInputProvider(){return Stream.of(-1, -47, -300);}
+    static Stream<Integer> invalidInputProvider(){return Stream.of(0, -1, -47, -300);}
 
     @ParameterizedTest
     @MethodSource("invalidInputProvider")
     void identifiesInvalidInput(int in) throws InvalidClauseException{
         TestOption.incorrectStructureErrorMessage = "Your program does not identify invalid input.";
+        //0 case added in here as well so that if the user marks 0 as invalid input this test will fail and users will
+        //have a clearer idea of where the issue is
+        String s = in == 0 ? "" : "Invalid input!";
         runWithInput(String.valueOf(in), new Clause[]{
-                new StringLiteral("Invalid input!")
+                new StringLiteral(s)
         });
     }
 
