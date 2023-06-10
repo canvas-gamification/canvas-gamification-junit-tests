@@ -1,7 +1,9 @@
 package arrays.programs_involving_data_sequences.easy.q4;
 /*
-Make a program that calls a method that takes an array of names as input and returns a randomly ordered list of names
-that mimics the game of musical chairs.
+You want to create a Java program to model the game of musical chairs. Create a main method which initializes an array of strings with
+the player's names, and call a method called musicalChairs. This method should randomly shuffle the names in the array. To do this, 
+for each item in the array, randomly generate an index and swap the item with the item at the generated index. After randomizing the
+array, print out the resulting array in the main method with each name on its own line.
  */
 
 import java.util.Random;
