@@ -6,10 +6,4 @@ public class Circus {
     public Circus(int i) {
         numMembers = i;
     }
-
-    public String toString() {
-        return "Circus{" +
-                "numMembers=" + numMembers +
-                '}';
-    }
 }
