@@ -85,7 +85,7 @@ public class MainTest extends BaseTest {
                 count++;
         }
 
-        String s = "Your musicalChairs method does not randomly shuffle the names correctly.";
+        String s = "Your musicalChairs method does not randomly shuffle the names in the array.";
 
         if (size <= 5) {
             assertEquals(size, count, s);
