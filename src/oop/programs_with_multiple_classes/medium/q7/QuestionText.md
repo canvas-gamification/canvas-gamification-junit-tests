@@ -12,9 +12,6 @@ already provided, you only need to implement the other portions.
 
 ## Knife
 
-Your `Knife` class currently has the attributes `int size` and `String materialType`. Create a
-constructor which is accessible from another class and initializes these fields in that order.
-
 The `Knife` class currently has the following items:
 
 - Attributes:
@@ -28,9 +25,6 @@ You must add the following items to complete the class:
       and initializes the **size** and **materialType** attributes with the input values.
 
 ## Cabinet
-
-Your `Cabinet` class currently has a constructor, but is missing the attributes the constructor sets. Based on the
-constructor, add the **capacity** and **isFull** attributes of the appropriate type to the table class.
 
 The `Cabinet` class currently has the following items:
 
