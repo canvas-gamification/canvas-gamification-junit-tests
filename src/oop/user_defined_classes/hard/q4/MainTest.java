@@ -45,7 +45,7 @@ public class MainTest {
                 int.class
         };
         assertTrue(classInstance.hasConstructor(arguments),
-                String.format("Your %s class is missing a required constructor.", testClassName));
+                String.format("Your %s class is missing a required constructor. Please check that it exists and has the correct parameters.", testClassName));
         assertTrue(classInstance.hasConstructor(arguments, new String[]{"public"}),
                 String.format("Your %s class constructor has the incorrect visibility modifier.", testClassName));
     }
@@ -78,8 +78,12 @@ public class MainTest {
                 {attribute1, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
+        assertTrue(classInstance.hasMethod(methodName, null),
+                "Your " + testClassName + " class is missing the method " + methodName + ".");
+        assertTrue(classInstance.hasMethod(methodName, null, Void.TYPE),
+                "Your " + testClassName + " class method " + methodName + " does not have the correct return type.");
         assertTrue(classInstance.hasMethod(methodName, null, Void.TYPE, new String[]{"public"}),
-                "Your " + testClassName + " class is missing the method " + methodName + " or it does not have the correct return type or visibility modifier.");
+                "Your " + testClassName + " class method " + methodName + " does not have the correct visibility modifier.");
         Clause[] c = new Clause[attribute1 * 3 + 2];
         int count = 0;
         for (int x = 0; x < c.length - 2; x += 3) {

@@ -26,8 +26,8 @@ Your `Laundromat` class should have the following items:
 - Methods:
     - A method called `doLaundry` which another class can use to clean the **gymClothes** one by one. It displays a 
       message to let the user know that each item is being cleaned. When all the items have been cleaned, the method 
-      displays that the laundry is done. **gymClothes** should be set to 0 afterwards. Sample output of this method when 
-      there are 5 dirty **gymClothes** is shown:
+      displays that the laundry is done. **gymClothes** should be set to 0 afterwards. The sample output of this method 
+      when there are 5 dirty **gymClothes** is shown:
 
       Cleaning item 1
   
