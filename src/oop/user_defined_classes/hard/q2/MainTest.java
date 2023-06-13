@@ -47,7 +47,7 @@ public class MainTest {
 
     @Test
     public void dishWasherClassHasRequiredConstructor() {
-        Class<?>[] arguments= {
+        Class<?>[] arguments = {
                 int.class, int.class
         };
         assertTrue(classInstance.hasConstructor(arguments),
@@ -66,14 +66,14 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void dishWasherConstructorInitializesAttributesCorrectly(int attribute1, int attribute2) throws Throwable{
+    public void dishWasherConstructorInitializesAttributesCorrectly(int attribute1, int attribute2) throws Throwable {
         Object[][] arguments = {
                 {attribute1, int.class},
                 {attribute2, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
         String incorrectAttributeInstantiationMessage =
-                "Your " + testClassName + " constructor does not correctly initialize the object." ;
+                "Your " + testClassName + " constructor does not correctly initialize the object.";
         _assertEquals(attribute1, classInstance.getFieldValue(instance, intAttributeName1),
                 incorrectAttributeInstantiationMessage);
         _assertEquals(attribute2, classInstance.getFieldValue(instance, intAttributeName2),
@@ -92,7 +92,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
-    public void correctLoadDishWasherMethod(int attribute1, int attribute2, int remove1, int remove2, int remainder1, int remainder2) throws Throwable{
+    public void correctLoadDishWasherMethod(int attribute1, int attribute2, int remove1, int remove2, int remainder1, int remainder2) throws Throwable {
         Object[][] arguments = {
                 {attribute1, int.class},
                 {attribute2, int.class}
@@ -108,7 +108,7 @@ public class MainTest {
                         new IntegerLiteral(remainder2),
                         new StringLiteral(" " + intAttributeName2 + " are still clean")
                 }, "Your " + methodName + " method does not print the correct messages."
-                );
+        );
         _assertEquals(remainder1, classInstance.getFieldValue(instance, intAttributeName1),
                 "Your " + methodName + " method does not correctly modify the " + intAttributeName1 + " attribute.");
         _assertEquals(remainder2, classInstance.getFieldValue(instance, intAttributeName2),
