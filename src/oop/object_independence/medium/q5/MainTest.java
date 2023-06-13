@@ -38,7 +38,7 @@ public class MainTest {
         assertTrue(testClass.hasModifier(firstFieldName, "private"),
                 "Your " + firstFieldName + " attribute does not have the correct visibility modifier.");
         assertTrue(testClass.hasField(secondFieldName, int.class),
-                "Your " + className + " class is missing the " + secondFieldName + " attributes.");
+                "Your " + className + " class is missing the " + secondFieldName + " attribute.");
         assertTrue(testClass.hasModifier(secondFieldName, "private"),
                 "Your " + secondFieldName + " does not have the correct visibility modifier.");
     }
