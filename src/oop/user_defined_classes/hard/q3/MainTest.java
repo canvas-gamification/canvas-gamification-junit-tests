@@ -4,6 +4,7 @@ import global.ObjectTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -17,6 +18,8 @@ public class MainTest {
     private final String intAttributeName1 = "pots";
     private final String booleanAttributeName1 = "anyClean";
     private final String methodName = "washComplete";
+    private final int startPotsValue = 0;
+    private final boolean startCleanValue = false;
     private ObjectTest classInstance;
 
     @BeforeEach
@@ -41,40 +44,96 @@ public class MainTest {
     }
 
     @Test
-    public void cupboardClassHasRequiredConstructor() {
+    public void cupboardClassHasFirstRequiredConstructor() {
         assertTrue(classInstance.hasConstructor(null),
-                String.format("Your %s class is missing a required constructor.", testClassName));
+                String.format("Your %s class is missing the parameterless required constructor.", testClassName));
         assertTrue(classInstance.hasConstructor(null, new String[]{"public"}),
-                String.format("Your %s class constructor has the incorrect visibility modifier.", testClassName));
+                String.format("Your parameterless %s class constructor has the incorrect visibility modifier.", testClassName));
     }
 
     @Test
-    public void cupboardConstructorInitializesAttributesCorrectly() throws Throwable {
+    public void cupboardClassHasSecondRequiredConstructor() {
+        assertTrue(classInstance.hasConstructor(null),
+                String.format("Your %s class is missing the required constructor with parameters.", testClassName));
+        assertTrue(classInstance.hasConstructor(null, new String[]{"public"}),
+                String.format("Your %s class constructor with parameters has the incorrect visibility modifier.", testClassName));
+    }
+
+    @Test
+    public void cupboardFirstConstructorInitializesAttributesCorrectly() throws Throwable {
         Object instance = classInstance.createInstance();
         String incorrectAttributeInstantiationMessage =
-                "Your " + testClassName + " constructor does not correctly initialize the object.";
-        _assertEquals(0, classInstance.getFieldValue(instance, intAttributeName1),
+                "Your " + testClassName + " parameterless constructor does not correctly initialize the object.";
+        _assertEquals(startPotsValue, classInstance.getFieldValue(instance, intAttributeName1),
                 incorrectAttributeInstantiationMessage);
-        _assertEquals(false, classInstance.getFieldValue(instance, booleanAttributeName1),
+        _assertEquals(startCleanValue, classInstance.getFieldValue(instance, booleanAttributeName1),
                 incorrectAttributeInstantiationMessage);
     }
 
-    private static Stream<Integer> methodInputProvider() {
-        return Stream.of(1, 4, 5, 78, 16, 47839, 3213467, 0);
+    private static Stream<Arguments> constructorInputProvider() {
+        return Stream.of(
+                Arguments.of(1, false),
+                Arguments.of(100, true),
+                Arguments.of(-5, true)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void cupboardSecondConstructorInitializesAttributesCorrectly(int a, boolean b) throws Throwable {
+        Object[][] arguments = {
+                {a, int.class},
+                {b, boolean.class}
+        };
+        Object instance = classInstance.createInstance(arguments);
+        String incorrectAttributeInstantiationMessage =
+                "Your " + testClassName + " constructor with parameters does not correctly initialize the object.";
+        _assertEquals(a, classInstance.getFieldValue(instance, intAttributeName1),
+                incorrectAttributeInstantiationMessage);
+        _assertEquals(b, classInstance.getFieldValue(instance, booleanAttributeName1),
+                incorrectAttributeInstantiationMessage);
+    }
+
+    private static Stream<Arguments> methodInputProvider() {
+        return Stream.of(
+                Arguments.of(1, 0, false, true),
+                Arguments.of(4, 12, true, true),
+                Arguments.of(5, 16, true, true),
+                Arguments.of(78, 1, false, true),
+                Arguments.of(16, 137820, false, true),
+                Arguments.of(47839, 72, true, true),
+                Arguments.of(3213467, 0, true, true),
+                Arguments.of(0, 3, false, true),
+                Arguments.of(0, 0, false, false)
+        );
     }
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
-    public void correctWashCompleteMethod(int attribute1) throws Throwable {
+    public void correctWashCompleteMethod(int attribute1, int pots, boolean clean, boolean result) throws Throwable {
+        Object[][] arguments = {
+                {pots, int.class},
+                {clean, boolean.class}
+        };
         Object instance = classInstance.createInstance();
+        Object instance2 = classInstance.createInstance();
+        assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class}),
+                "Your " + testClassName + " class is missing the method " + methodName + ".");
+        assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class}, Void.TYPE),
+                "Your " + testClassName + " class method " + methodName + " does not have the correct return type.");
         assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class}, Void.TYPE, new String[]{"public"}),
-                "Your " + testClassName + " class is missing the method " + methodName + " or it does not have the correct return type or visibility modifier."
-        );
+                "Your " + testClassName + " class method " + methodName + " does not have the correct visibility modifier.");
         classInstance.callMethod(methodName, new Object[][]{{attribute1, int.class}}, instance, null);
         _assertEquals(attribute1, classInstance.getFieldValue(instance, intAttributeName1),
                 "Your " + methodName + " method does not produce the correct output.");
         int x = (int) classInstance.getFieldValue(instance, intAttributeName1);
         _assertEquals(x > 0, classInstance.getFieldValue(instance, booleanAttributeName1),
+                "Your " + methodName + " method does not produce the correct output.");
+
+        classInstance.callMethod(methodName, new Object[][]{{attribute1, int.class}}, instance2, null);
+        _assertEquals(attribute1, classInstance.getFieldValue(instance2, intAttributeName1),
+                "Your " + methodName + " method does not produce the correct output.");
+        _assertEquals(result, classInstance.getFieldValue(instance2, booleanAttributeName1),
                 "Your " + methodName + " method does not produce the correct output.");
     }
 }

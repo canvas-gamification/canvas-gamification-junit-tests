@@ -9,6 +9,11 @@ public class Cupboard {
         anyClean = false;
     }
 
+    public Cupboard(int p, boolean c){
+        pots = p;
+        anyClean = c;
+    }
+
     public void washComplete(int a) {
         pots = pots + a;
         if (pots > 0)

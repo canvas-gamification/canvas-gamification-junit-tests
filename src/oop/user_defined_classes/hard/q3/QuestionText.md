@@ -22,7 +22,9 @@ Your `Cupboard` class should have the following items:
 
 - Constructors:
     - A constructor which sets the **pots** attribute to be 0 and the **anyClean** attribute to be false.
-    - This constructor should be visible to other classes
+    - A constructor which accepts an `int` and a `boolean` from another class and uses the `int` to set the **pots** 
+      attribute and the `boolean` to set the **anyClean** attribute.
+    - Both constructors should be visible to other classes
 
 - Methods:
     - A method called `washComplete` which takes as input the number of pots that are clean and are ready to be put back 
