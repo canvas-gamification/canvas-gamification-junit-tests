@@ -116,7 +116,7 @@ public class MainTest {
                 {clean, boolean.class}
         };
         Object instance = classInstance.createInstance();
-        Object instance2 = classInstance.createInstance();
+        Object instance2 = classInstance.createInstance(arguments);
         assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class}),
                 "Your " + testClassName + " class is missing the method " + methodName + ".");
         assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class}, Void.TYPE),
@@ -131,7 +131,7 @@ public class MainTest {
                 "Your " + methodName + " method does not produce the correct output.");
 
         classInstance.callMethod(methodName, new Object[][]{{attribute1, int.class}}, instance2, null);
-        _assertEquals(attribute1, classInstance.getFieldValue(instance2, intAttributeName1),
+        _assertEquals(attribute1 + pots, classInstance.getFieldValue(instance2, intAttributeName1),
                 "Your " + methodName + " method does not produce the correct output.");
         _assertEquals(result, classInstance.getFieldValue(instance2, booleanAttributeName1),
                 "Your " + methodName + " method does not produce the correct output.");
