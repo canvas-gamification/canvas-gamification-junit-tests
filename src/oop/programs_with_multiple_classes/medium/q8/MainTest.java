@@ -62,17 +62,17 @@ public class MainTest {
     @Test
     public void kitchenClassHasCorrectAttributes() {
         assertTrue(kitchen.hasField(varSize, int.class),
-                "Your " + classKitchen + " class is missing the " + varSize + " attribute.");
+                "Your " + classKitchen + " class is missing the " + varSize + " attribute, or is spelled incorrectly.");
         assertTrue(kitchen.hasModifier(varSize, "private"),
-                "Your " + classKitchen + " class attributes does not have the correct modifier for " + varSize + " attribute.");
+                "Your " + classKitchen + " class does not have the correct visibility modifier for " + varSize + " attribute.");
         assertTrue(kitchen.hasField(varCap, int.class),
-                "Your " + classKitchen + " class is missing the " + varCap + " attribute.");
+                "Your " + classKitchen + " class is missing the " + varCap + " attribute, or is spelled incorrectly..");
         assertTrue(kitchen.hasModifier(varCap, "private"),
-                "Your " + classKitchen + " class attributes does not have the correct modifier for " + varCap + " attribute.");
+                "Your " + classKitchen + " class does not have the correct visibility modifier for " + varCap + " attribute.");
         assertTrue(kitchen.hasField(varLights, Light[].class),
-                "Your " + classKitchen + " class is missing the " + varLights + " attribute.");
+                "Your " + classKitchen + " class is missing the " + varLights + " attribute, or is spelled incorrectly..");
         assertTrue(kitchen.hasModifier(varLights, "private"),
-                "Your " + classKitchen + " class attributes does not have the correct modifier for " + varLights + " attribute.");
+                "Your " + classKitchen + " class does not have the correct visibility modifier for " + varLights + " attribute.");
     }
 
     @Test
@@ -117,7 +117,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("kitchenInputProvider")
-    public void lightConstructorInitializesValuesCorrectly(int size, int personCapacity) throws Throwable {
+    public void kitchenConstructorInitializesValuesCorrectly(int size, int personCapacity) throws Throwable {
         Object[][] arguments = {
                 {size, int.class},
                 {personCapacity, int.class}

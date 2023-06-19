@@ -22,7 +22,7 @@ You must add the following items to complete the class:
 
 - Constructors:
     - A constructor which is visible from another class and accepts an `boolean` and a `String` in
-      that order as parameters and initializes the **isOn** and **type** fields with
+      that order as parameters and initializes the **isOn** and **type** attributes with
       the input values.
 
 ## Kitchen
@@ -31,12 +31,14 @@ The `Kitchen` class currently has the following items:
 
 - Constructors:
     - A constructor which is visible from another class
-      and initialize the **size** and **personCapacity** fields.
+      and initialize the **size** and **personCapacity** attributes.
     - It should initialize **lights** to an array of **Light** classes with the size of **size** attribute value.
-      You must add the following items to complete the class:
+
+You must add the following items to complete the class:
+
 - Attributes:
-    - based on the constructor write the **size** and **personCapacity**
-      fields with the appropriate types.
+    - based on the constructor write the **size** and **personCapacity** attributes with the appropriate types.
+    - An array of `Light` called **lights**
+- Constructors:
     - Change the constructor so that if it gets a negative value for **size** it should initialize it to zero.
     - They should not be accessible from other classes.
-    - An array of `Light` called **lights**
