@@ -68,7 +68,7 @@ public class MainTest {
         assertTrue(desk.hasField(varMaterial, String.class),
                 "Your " + classDesk + " class is missing the " + varMaterial + " attribute.");
         assertTrue(desk.hasModifier(varMaterial, "private"),
-                "Your " + classDesk + " class " + varMaterial + " attributes does not have the correct visibility modifier.");
+                "Your " + classDesk + " class " + varMaterial + " attribute does not have the correct visibility modifier.");
         assertTrue(desk.hasField(varOld, int.class),
                 "Your " + classDesk + " class is missing the " + varMaterial + " attribute.");
         assertTrue(desk.hasModifier(varOld, "private"),
