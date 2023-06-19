@@ -38,7 +38,7 @@ You must add the following items to complete the class:
 
 - Constructors:
     - A constructor which is visible from another class and accepts an `int`
-      and initialize the **size** attribute.
+      and initialize the **size** attribute with the `int`.
     - If the value of the input for size is negative it should initialize it as 0.
     - Initializes the value of **meats** to an array of **Meat** objects with the size of **size** (make sure
       you initialize the **size** field first).
