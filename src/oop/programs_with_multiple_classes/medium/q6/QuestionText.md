@@ -7,7 +7,7 @@
 ## Question Text:
 
 You want to write a program that models food and different storage containers. Make a Java program consisting of
-a `Meat` and a `Fridge`. See the requirements below for each class. Note that parts of each class are
+a `Meat` class and a `Fridge` class. See the requirements below for each class. Note that parts of each class are
 already provided, you only need to implement the other portions.
 
 ## Meat
