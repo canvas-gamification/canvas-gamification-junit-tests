@@ -23,7 +23,7 @@ The `Meat` class currently has the following items:
 You must add the following items to complete the class:
 
 - Methods:
-    - A **timePassed** method that change the value of **isSpoiled** to true and is accessible from another classes
+    - A **timePassed** method that change the value of **isSpoiled** to true, is accessible from another class,
       and does not return anything.
 
 ## Fridge
