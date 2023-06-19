@@ -59,8 +59,8 @@ public class MainTest {
                     {tests[i][1], boolean.class}
             };
             Object chairInstance = monitor.createInstance(arguments);
-            _assertEquals(tests[i][0], monitor.getFieldValue(chairInstance, varCount),modifiedMonitorMessage);
-            _assertEquals(tests[i][1], monitor.getFieldValue(chairInstance, varOn),modifiedMonitorMessage);
+            _assertEquals(tests[i][0], monitor.getFieldValue(chairInstance, varCount), modifiedMonitorMessage);
+            _assertEquals(tests[i][1], monitor.getFieldValue(chairInstance, varOn), modifiedMonitorMessage);
         }
     }
 
@@ -133,8 +133,9 @@ public class MainTest {
                 {on, boolean.class}
         };
         Object monitorInstance = monitor.createInstance(arguments);
+        assertTrue(monitor.hasMethod(fallenMethod, null, Void.TYPE),
+                "Your " + monitorClass + " does not include the correct " + fallenMethod);
         monitor.callMethod(fallenMethod, monitorInstance);
-        monitor.hasMethod(fallenMethod, new Class[]{int.class, boolean.class}, Void.TYPE);
         _assertEquals((on == false) ? true : false, monitor.getFieldValue(monitorInstance, varOn),
                 "Your " + monitorClass + " " + fallenMethod + " method does not changes the " + varOn + " truth value.");
     }
