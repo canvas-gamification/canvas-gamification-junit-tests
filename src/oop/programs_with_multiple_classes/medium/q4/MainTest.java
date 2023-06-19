@@ -94,7 +94,9 @@ public class MainTest {
         };
         Object wheelInstance = wheel.createInstance(arguments);
         _assertEquals((d >= 0) ? d : 0.0000, wheel.getFieldValue(wheelInstance, varDurability),
-                "Your " + wheelClass + " constructor does not correctly initialize the " + varDurability + " field.");
+                "Your " + wheelClass + " constructor does not correctly initialize the " + varDurability + " attribute.");
+        _assertEquals(m, wheel.getFieldValue(wheelInstance, varManufacturer),
+                "Your " + wheelClass + " constructor does not correctly initialize the " + varManufacturer + " attribute.");
 
     }
 
