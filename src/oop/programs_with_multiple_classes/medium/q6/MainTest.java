@@ -46,7 +46,7 @@ public class MainTest {
     }
 
     @Test
-    public void fridgeCLassHasRequiredConstructor() {
+    public void fridgeClassHasRequiredConstructor() {
         Class<?>[] classArguments = {int.class};
         assertTrue(fridge.hasConstructor(classArguments),
                 "Your " + fridgeClass + " constructor does not have the correct parameters.");
