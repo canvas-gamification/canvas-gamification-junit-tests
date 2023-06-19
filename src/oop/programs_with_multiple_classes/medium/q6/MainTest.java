@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions.*;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -54,12 +55,9 @@ public class MainTest {
                 "Your " + fridgeClass + " constructor does not have the correct visibility modifier.");
     }
 
-    private static Stream<Arguments> meatInputProvider() {
+    private static Stream<Boolean> meatInputProvider() {
         return Stream.of(
-                Arguments.of(true),
-                Arguments.of(false),
-                Arguments.of(true),
-                Arguments.of(false)
+                true, false
         );
     }
 
@@ -70,27 +68,21 @@ public class MainTest {
                 {isSpoiled, boolean.class}
         };
         Object vegetableInstance = meat.createInstance(arguments);
-        meat.callMethod(methodName, vegetableInstance);
-        assertTrue(meat.hasMethod(methodName, new Class<?>[]{}, Void.TYPE, new String[]{"public"}),
-                "Your " + meatClass + " does not have a correct " + methodName + " method");
+        Object output = meat.callMethod(methodName, vegetableInstance);
+        assertTrue(meat.hasModifier(methodName, null, "public"),
+                "Your " + meatClass + " " + methodName + " does not have a correct visibility modifier.");
         _assertEquals(true, meat.getFieldValue(vegetableInstance, varSpoiled),
                 "Your " + meatClass + " " + methodName + " method does not change the " + varSpoiled + " value to true.");
+        assertNull(output, "Your " + methodName + " method should not return anything.");
     }
 
 
-    private static Stream<Arguments> cupboardInputProvider() {
-        return Stream.of(
-                Arguments.of(10),
-                Arguments.of(20),
-                Arguments.of(150),
-                Arguments.of(-10),
-                Arguments.of(-20),
-                Arguments.of(-150)
-        );
+    private static Stream<Integer> fridgeInputProvider() {
+        return Stream.of( 10, 20, 150, -10, -20, -15);
     }
 
     @ParameterizedTest
-    @MethodSource("cupboardInputProvider")
+    @MethodSource("fridgeInputProvider")
     public void fridgeConstructorInitializesValuesCorrectly(int size) throws Throwable {
         Object[][] arguments = {
                 {size, int.class}
