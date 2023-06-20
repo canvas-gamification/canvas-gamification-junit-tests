@@ -63,6 +63,14 @@ public class MainTest {
         );
     }
 
+    @Test
+    public void animalClassHasConstructor() {
+        assertTrue(classInstance.hasConstructor(new Class[]{String.class, String.class}),
+                String.format("Your %s class is missing a required constructor.", objectClassName));
+        assertTrue(classInstance.hasConstructor(new Class[]{String.class, String.class}, new String[]{"public"}),
+                String.format("Your %s class constructor has the incorrect visibility modifier.", objectClassName));
+    }
+
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
     public void animalClassHasCorrectConstructor(String name, String dna) throws Throwable {
