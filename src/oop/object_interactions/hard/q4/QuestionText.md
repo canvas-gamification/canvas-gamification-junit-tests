@@ -15,15 +15,14 @@ Your `CryptBox` class currently has the following items:
 - Attributes:
     - A `String` attribute called **lockedData**
     - An `int` attribute called **cryptKey**
-    - Both of these attributes should not be accessible from another class
+    - Both of these attributes are not accessible from another class
 
 - Constructor:
     - A constructor visible from another class that accepts a `String` and an `int` parameter, and initializes the 
       **lockedData** attribute with the `String` and the **cryptKey** attribute with the `int`
-    - This constructor should be visible from another class
 
 - Methods
-    - A `getCryptKey` method which returns the **cryptKey** attribute of the `CryptBox`
+    - A `getCryptKey` method which is visible from another class and returns the **cryptKey** attribute of the `CryptBox`
 
 You must add the following item to the class:
 
