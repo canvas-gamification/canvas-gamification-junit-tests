@@ -24,8 +24,8 @@ Your `Partner` class must have the following items:
 
 - Methods
     - The following methods should be visible from another class
-    - A `marryMe` method which takes a `Partner` object and changes the last names of both objects to a hyphenated 
-      version of their unmarried names.
+      - A `marryMe` method which takes a `Partner` object and changes the last names of both objects to a hyphenated 
+        version of their unmarried names. Where the format is `lastName-passedLastName`.
     - A `getFirstName` method which returns the **firstName** attribute of the partner
     - A `getLastName` method which returns the **lastName** attribute of the partner
     - A `setFirstName` method which takes a `String` parameter and updates the **firstName** attribute to that value. 
