@@ -52,7 +52,7 @@ public class MainTest {
                 {topSpeed, double.class}
         };
         String incorrectValueMessage = "Your " + className + " constructor does not correctly initialize the " +
-                attributeName1 + " and " + attributeName2 + " fields.";
+                attributeName1 + " and " + attributeName2 + " attributes.";
         String incorrectVisibilityModifier =
                 "Your " + className + " constructor does not have the correct visibility modifier.";
         Class<?>[] classes = {String.class, double.class};
