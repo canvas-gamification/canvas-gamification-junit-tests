@@ -29,6 +29,7 @@ You must add the following items to complete the class:
 - Methods
     - Write a method called **recycled** that sets the value of **isRenewed** to true, and is accessible from other
       classes.
+    - This method should not return anything.
 
 ## Desk
 
