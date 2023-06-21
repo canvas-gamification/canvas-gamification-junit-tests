@@ -27,4 +27,3 @@ You must add the following items to the class:
     - If the weight value is negative it should be initialized as 0.
 - Method:
     - Write a **makeSound** method that returns the `String` "Neigh!!"
-  is `"Neigh!!"`
