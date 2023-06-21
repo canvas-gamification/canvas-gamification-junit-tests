@@ -4,7 +4,7 @@
 
 Suppose you are an employee of a vehicle manufacturing company, and you want to impress your boss with your Java skills. 
 Make a Java class called **Car** with two attributes called **maker** and **topSpeed** that are initialized by 
-the constructor. You will need to compose the necessary methods so that these attributes can be accessed from outside 
+the constructor. The necessary methods must be set up so that these attributes can be accessed from outside 
 of the class but they cannot be modified.
 
 ### Car Class:
