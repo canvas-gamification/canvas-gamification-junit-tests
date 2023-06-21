@@ -73,6 +73,6 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(arguments);
         Object output = classInstance.callMethod(methodName, instance);
-        _assertEquals(methodSound, Output, "Your " + className + " " + methodName + " method does not return the correct string.");
+        _assertEquals(methodSound, output, "Your " + className + " " + methodName + " method does not return the correct string.");
     }
 }
