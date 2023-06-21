@@ -27,6 +27,7 @@ You must add the following items to complete the class:
 - Methods:
     - Write a method called **eating** that decreases the value of **weight** by 0.5, and is accessible from other
       classes
+    - The method should not return anything.
 
 ## Cupboard
 

@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -68,15 +69,15 @@ public class MainTest {
         assertTrue(cupboard.hasField(varSize, int.class),
                 "Your " + classCupboard + " class is missing the " + varSize + " attribute.");
         assertTrue(cupboard.hasModifier(varSize, "private"),
-                "Your " + classCupboard + " class " + varSize + " attributes does not have the correct visibility modifier.");
+                "The " + varSize + " attribute in your " + classCupboard + " class does not have the correct visibility modifier.");
         assertTrue(cupboard.hasField(varColour, String.class),
                 "Your " + classCupboard + " class is missing the " + varColour + " attribute.");
         assertTrue(cupboard.hasModifier(varColour, "private"),
-                "Your " + classCupboard + " class " + varColour + " attributes does not have the correct visibility modifier.");
+                "The " + varColour + " attribute in your " + classCupboard + " class does not have the correct visibility modifier.");
         assertTrue(cupboard.hasField(varVegtables, Vegetable[].class),
                 "Your " + classCupboard + " class is missing the " + varVegtables + " attribute.");
         assertTrue(cupboard.hasModifier(varVegtables, "private"),
-                "Your " + classCupboard + " class " + varVegtables + " attributes does not have the correct visibility modifier.");
+                "The " + varVegtables + " attribute in your " + classCupboard + " class does not have the correct visibility modifier.");
     }
 
     @Test
@@ -123,9 +124,10 @@ public class MainTest {
                 {countryOfOrigin, String.class}
         };
         Object vegetableInstance = vegetable.createInstance(arguments);
-        vegetable.callMethod("eating", vegetableInstance);
+        Object output = vegetable.callMethod(methodName, vegetableInstance);
         _assertEquals(weight - 0.5, vegetable.getFieldValue(vegetableInstance, varWeight),
-                "Your " + classVegtable + " eating method does not decrement the " + varWeight + " by 0.5.");
+                "Your " + classVegtable + " " + methodName + " method does not decrement the " + varWeight + " by 0.5.");
+        assertNull(output, "Your " + methodName + " method should not return anything.");
     }
 
 }
