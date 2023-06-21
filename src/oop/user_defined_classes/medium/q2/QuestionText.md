@@ -24,4 +24,5 @@ You need to add the following items:
     - An `int` called **horsePower** that is not accessible from other classes
     - An `int` called **yearMade** that is not accessible from other classes
 - Methods:
-    - Create a method called **improve** that doubles the **horsePower**.
+    - Create a method called **improve** that doubles the **horsePower**
+    - The method should not return anything.

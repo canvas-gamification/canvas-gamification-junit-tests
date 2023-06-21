@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -18,6 +19,7 @@ public class MainTest {
     private final String varColour = "colour";
     private final String varPower = "horsePower";
     private final String varYear = "yearMade";
+    private final String methodName = "improve";
 
     private ObjectTest classInstance;
 
@@ -83,9 +85,10 @@ public class MainTest {
                 {yearMade, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
-        classInstance.callMethod("improve", instance);
+        Object output = classInstance.callMethod(methodName, instance);
         _assertEquals(horsePower * 2, classInstance.getFieldValue(instance, varPower),
                 "Your " + className + " improve method does not doubles the " + varPower + ".");
+        assertNull(output, "Your " + methodName + " method must not return anything.");
     }
 
 }
