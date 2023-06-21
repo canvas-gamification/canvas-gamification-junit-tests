@@ -2,7 +2,6 @@ package oop.user_defined_classes.medium.q3;
 
 import global.ObjectTest;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -10,7 +9,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
-import static global.tools.CustomAssertions._assertTrue;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -73,6 +71,7 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(arguments);
         Object output = classInstance.callMethod(methodName, instance);
+        assertTrue(classInstance.hasMethod(methodName, null, String.class, new String[]{"public"}));
         _assertEquals(methodSound, output, "Your " + className + " " + methodName + " method does not return the correct string.");
     }
 }
