@@ -72,7 +72,7 @@ public class MainTest {
                 {number, double.class}
         };
         Object instance = classInstance.createInstance(arguments);
-        Object Output = classInstance.callMethod(methodName, instance);
+        Object output = classInstance.callMethod(methodName, instance);
         _assertEquals(methodSound, Output, "Your " + className + " " + methodName + " method does not return the correct string.");
     }
 }
