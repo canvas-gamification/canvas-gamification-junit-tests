@@ -73,6 +73,7 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(arguments);
         Object Output = classInstance.callMethod(methodName, instance);
+        assertTrue(classInstance.hasMethod(methodName, null, String.class, new String[] {"public"}));
         _assertEquals(methodSound, Output, "Your " + className + " " + methodName + " method does not return the correct string.");
     }
 }
