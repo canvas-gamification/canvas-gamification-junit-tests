@@ -16,14 +16,14 @@ The `Horse` class you are given has the following items:
 
 - Attributes:
     - A `double` called **weight** that is not accessible from other classes
+- Constructors:
+    - An empty constructor with its parameters.
 
 You must add the following items to the class:
 
 - Constructors:
-    - Initializes **weight** with the input values in the constructor.
+    - Initializes **weight**
+      with the input values in the constructor.
     - If the weight value is negative it should be initialized as 0.
-    - It should be accessible from other classes.
 - Method:
-    - Write a **makeSound** method that return a `String` that
-  is `"Neigh!!"`
-    - It should be accessible from other classes.
+    - Write a **makeSound** method that returns the `String` "Neigh!!"
