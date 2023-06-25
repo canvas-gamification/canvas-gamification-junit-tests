@@ -72,7 +72,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("twoStringsInputProvider")
-    public void correctSetSizeMethod(String initialValue, String updatedValue) throws Throwable {
+    public void correctSetBreedMethod(String initialValue, String updatedValue) throws Throwable {
         Object[][] instantiationArguments = {
                 {initialValue, String.class}
         };
