@@ -13,6 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
+    // Java
+
     private final String className = "Speaker";
     private final String attributeName = "volume";
     private final String getAttributeMethodName = "getVolume";
