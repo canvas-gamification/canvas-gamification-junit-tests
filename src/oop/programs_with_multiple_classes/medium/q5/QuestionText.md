@@ -41,4 +41,4 @@ You must add the following items to complete the class:
 - Constructors:
     - A constructor which is visible from another classes and accepts a `String`
       and initialize the **materialType** attribute and initializes the **monitors**
-      fields to an uninitialized array of size 2.
+      fields to an array of size 2.
