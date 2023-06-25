@@ -72,6 +72,8 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(arguments1);
         Object output = classInstance.callMethod(methodName, arguments2, (new String[]{"public"}), instance);
+        assertTrue(classInstance.hasMethod(methodName, new Class<?>[]{int.class}, int.class, new String[]{"public"}),
+                "Your " + methodName + " method does not have the currect visibility modifier, or signature.");
         _assertEquals(ans, output,
                 "Your " + className + " " + methodName + " does not correctly calculate the fine.");
 

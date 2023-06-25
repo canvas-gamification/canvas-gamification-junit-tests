@@ -13,13 +13,16 @@ than the speedLimit.
 The `Highway` class you are given has the following items:
 
 - Attributes:
-    - An `int` called **speedLimit**
-    - An `int` called **fine**
+    - An `int` called **speedLimit** that is not accessible from other classes.
+    - An `int` called **fine** that is not accessible from other classes.
 - Constructor:
-    - A constructor to initialize the **speedLimit** and initialize **fine** to 250.
+    - A constructor to initialize the **speedLimit** and initialize **fine** to 250. It is
+      accessible from other classes.
 
 You need to add the following items:
 
 - Methods:
     - Create the method **issueTicket** that takes an int which is the current speed and
       return an `int` that is the fine needed to be paid for the input speed.
+    - This method should check to see if the current speed is more that **speedLimit**, and
+      if it is it should return the value of **fine** otherwise it should return 0.
