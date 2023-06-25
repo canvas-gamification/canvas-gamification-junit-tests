@@ -72,7 +72,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("twoDoublesInputProvider")
-    public void correctSetSizeMethod(double initialValue, double updatedValue) throws Throwable {
+    public void correctSetVolumeMethod(double initialValue, double updatedValue) throws Throwable {
         Object[][] instantiationArguments = {
                 {initialValue, double.class}
         };
