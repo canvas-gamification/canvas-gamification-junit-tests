@@ -17,7 +17,7 @@ Your `Calculator` class must have the following items
 
 - Constructor:
     - a `Calculator` constructor that is visible to other classes and accepts a `double` and a `boolean` and uses it to
-      initialize the **sum** and **isCorrect** attributes with **sum** being 7 times of the input value.
+      initialize the **sum** and **isCorrect** attributes with **sum** being 7 multiplied by the input value.
 
 You need to add the following items:
 
