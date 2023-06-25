@@ -6,7 +6,7 @@ You are about to start writing a program that involves luminous objects. Make a 
 attributes called **brightness** and **isOn**. The class also has two constructors, on with 2 parameters to initialize
 two attributes and one with 1 parameter and set the second attribute to the default value.
 
-### Circle Class:
+### Lamp Class:
 
 Your `Lamp` class must have the following items
 
