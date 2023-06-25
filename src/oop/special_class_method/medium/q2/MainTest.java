@@ -20,6 +20,7 @@ public class MainTest {
     private final String attributeName2 = "isOn";
     private final String getAttributeMethodName2 = "getIsOn";
     private final String setAttributeMethodName2 = "setIsOn";
+    private final boolean isOnValue = true;
 
     private ObjectTest testClass;
 
@@ -42,7 +43,7 @@ public class MainTest {
             Class<?>[] classes = {double.class};
             Object testInstance = testClass.createInstance(arguments);
             _assertEquals(value, testClass.getFieldValue(testInstance, attributeName1), modifiedClassMessage);
-            _assertEquals(true, testClass.getFieldValue(testInstance, attributeName2), modifiedClassMessage);
+            _assertEquals(isOnValue, testClass.getFieldValue(testInstance, attributeName2), modifiedClassMessage);
             assertTrue(testClass.hasModifier(classes, "public"), modifiedClassMessage);
         }
     }
@@ -61,6 +62,8 @@ public class MainTest {
                 {value, double.class}
         };
         Object testInstance = testClass.createInstance(arguments);
+        assertTrue(testClass.hasMethod(getAttributeMethodName1, null, double.class, new String[]{"public"}),
+                "Your " + className + " class does not include the correct " + getAttributeMethodName1 + " method.");
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName1, testInstance);
         assertTrue(testClass.hasModifier(getAttributeMethodName1, null, "public"),
                 "Your " + getAttributeMethodName1 + " method does not have the correct visibility modifier.");
@@ -90,11 +93,13 @@ public class MainTest {
         Class<?>[] methodModifierClasses = {
                 double.class
         };
-        Object setMethodOutput = testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
         assertTrue(testClass.hasModifier(setAttributeMethodName1, methodModifierClasses, "public"),
                 "Your " + setAttributeMethodName1 + " method does not have the correct visibility modifier.");
+        assertTrue(testClass.hasMethod(setAttributeMethodName1, methodModifierClasses, Void.TYPE, new String[]{"public"}),
+                "Your " + className + " class does not include the correct " + setAttributeMethodName1 + " method.");
         String incorrectSetterMessage =
                 "Your " + setAttributeMethodName1 + " method does not correctly update the value of " + attributeName1 + ".";
+        Object setMethodOutput = testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
         _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName1),
                 incorrectSetterMessage);
         assertNull(setMethodOutput, String.join(" ", "Your", setAttributeMethodName1, "method should not return any output"));
@@ -113,9 +118,9 @@ public class MainTest {
     @MethodSource("booleanDoublesInputProvider")
     public void correctLampConstructor(double value, boolean on) throws Throwable {
         String incorrectValueMessage = "Your " + className + " constructor does not correctly initialize the " +
-                attributeName1 + " field.";
+                attributeName1 + " attribute.";
         String incorrectValueMessage2 = "Your " + className + " constructor does not correctly initialize the " +
-                attributeName2 + " field.";
+                attributeName2 + " attribute.";
         String incorrectVisibilityModifier =
                 "Your " + className + " constructor does not have the correct visibility modifier.";
         Object[][] arguments = {
@@ -137,6 +142,8 @@ public class MainTest {
                 {on, boolean.class}
         };
         Object testInstance = testClass.createInstance(arguments);
+        assertTrue(testClass.hasMethod(getAttributeMethodName2, null, boolean.class, new String[]{"public"}),
+                "Your " + className + " class does not include the correct " + getAttributeMethodName2 + " method.");
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName2, testInstance);
         assertTrue(testClass.hasModifier(getAttributeMethodName2, null, "public"),
                 "Your " + getAttributeMethodName2 + " method does not have the correct visibility modifier.");

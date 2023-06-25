@@ -6,9 +6,11 @@ You are about to start writing a program that involves luminous objects. Make a 
 attributes called **brightness** and **isOn**. The class also has two constructors, on with 2 parameters to initialize
 two attributes and one with 1 parameter and set the second attribute to the default value.
 
-### Lamp Class:
+### Question Type:
 
-Your `Lamp` class must have the following items
+- Java question
+
+### Lamp Class:
 
 You are already given the following items:
 
@@ -31,6 +33,7 @@ You need to add the following items to the class:
     - a `getBrightness` method which returns the value stored in the **brightness** attribute
     - a `setIsOn` method which accepts a `boolean` and uses it to set the value of the **isOn** attribute
     - a `getIsOn` method which returns the value stored in the **isOn** attribute
-    - a `toString` method which returns the string `"My brightness is " + brightness + " and isOn is " + isOn`.
+    - a `toString` method which returns the string `"My brightness is " + x + " and isOn is " + y`, where x is **
+      brightness** attribute and y is the **isOn** attribute.
     - All of these methods must be acessible from other classes.
   
