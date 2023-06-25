@@ -33,38 +33,6 @@ public class MainTest {
         classInstance = new ObjectTest(objectString);
         String testString = "oop.object_interactions.hard.q4." + testClassName;
         testInstance = new ObjectTest(testString);
-
-//        assertTrue(testClass.hasModifier("public"),
-//                "You have changed the visibility modifier on the " + className + " class. Please revert it to the original state.");
-//        assertTrue(testClass.hasField(myYearAttributeName, int.class, new String[]{"private"}),
-//                String.format("You have modified the provided %s attribute. Please revert it to the original state.", myYearAttributeName));
-//        assertTrue(testClass.hasField(myMonthAttributeName, int.class, new String[]{"private"}),
-//                String.format("You have modified the provided %s attribute. Please revert it to the original state.", myMonthAttributeName));
-//        assertTrue(testClass.hasField(myDayAttributeName, int.class, new String[]{"private"}),
-//                String.format("You have modified the provided %s attribute. Please revert it to the original state.", myDayAttributeName));
-//        assertTrue(testClass.hasField(myStoryAttributeName, String.class, new String[]{"private"}),
-//                String.format("You have modified the provided %s attribute. Please revert it to the original state.", myStoryAttributeName));
-//        assertTrue(testClass.hasConstructor(null, new String[]{"public"}),
-//                "You have modified the provided constructor on the " + className + " class. Please revert it to the original state.");
-//        Object classInstance = testClass.createInstance();
-//        _assertEquals(-1, testClass.getFieldValue(classInstance, myYearAttributeName),
-//                "You have modified the provided constructor on the " + className + " class. Please revert it to the original state.");
-//        _assertEquals(-1, testClass.getFieldValue(classInstance, myMonthAttributeName),
-//                "You have modified the provided constructor on the " + className + " class. Please revert it to the original state.");
-//        _assertEquals(-1, testClass.getFieldValue(classInstance, myDayAttributeName),
-//                "You have modified the provided constructor on the " + className + " class. Please revert it to the original state.");
-//        _assertEquals("", testClass.getFieldValue(classInstance, myStoryAttributeName),
-//                "You have modified the provided constructor on the " + className + " class. Please revert it to the original state.");
-//
-//        assertTrue(testClass.hasMethod(getMyYearMethodName, null, int.class, new String[]{"public"}),
-//                String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyYearMethodName));
-//        assertTrue(testClass.hasMethod(getMyMonthMethodName, null, int.class, new String[]{"public"}),
-//                String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyMonthMethodName));
-//        assertTrue(testClass.hasMethod(getMyDayMethodName, null, int.class, new String[]{"public"}),
-//                String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyDayMethodName));
-//        assertTrue(testClass.hasMethod(getMyStoryMethodName, null, String.class, new String[]{"public"}),
-//                String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyStoryMethodName));
-
     }
 
     @Test
