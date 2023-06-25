@@ -21,7 +21,7 @@ The `Monitor` class currently has the following items:
 You must add the following items to complete the class:
 
 - Constructors:
-    - A constructor which is visible from another classes and accepts an `int` and a `boolean` as parameters
+    - A constructor which is visible from another class and accepts an `int` and a `boolean` as parameters
       and initializes the **size** and **isOn** fields with the input value.
 
 - Methods:
