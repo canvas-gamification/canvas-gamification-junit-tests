@@ -49,7 +49,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("doubleInputProvider")
-    public void correctGetSizeMethod(double value) throws Throwable {
+    public void correctGetVolumeMethod(double value) throws Throwable {
         Object[][] arguments = {
                 {value, double.class}
         };
