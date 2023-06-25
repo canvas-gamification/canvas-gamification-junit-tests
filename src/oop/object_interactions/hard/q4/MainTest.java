@@ -3,7 +3,6 @@ package oop.object_interactions.hard.q4;
 import global.ObjectTest;
 import global.variables.Clause;
 import global.variables.clauses.StringLiteral;
-import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,7 +23,6 @@ public class MainTest {
     private final String intAttribute1 = "cryptKey";
     private final String getIntAttribute1 = "getCryptKey";
     private final String methodName1 = "crossEncrypt";
-    private final String testStringMessage = "Olssv'{olyl";
     private final String testStringRegexMessage = "Olssv'\\{olyl";
 
     @BeforeEach
@@ -54,6 +52,14 @@ public class MainTest {
                 Arguments.of("ip address", 5),
                 Arguments.of("aliens are real the government told me so", 17)
         );
+    }
+
+    @Test
+    public void cryptBoxClassHasConstructor() {
+        assertTrue(classInstance.hasConstructor(new Class[]{String.class, int.class}),
+                String.format("Your %s class is missing a required constructor.", objectClassName));
+        assertTrue(classInstance.hasConstructor(new Class[]{String.class, int.class}, new String[]{"public"}),
+                String.format("Your %s class constructor has the incorrect visibility modifier.", objectClassName));
     }
 
     @ParameterizedTest
@@ -126,8 +132,7 @@ public class MainTest {
     public void testEncryptionMainMethodProducesCorrectOutput() throws Throwable {
         Object[][] arguments = {{new String[0], String[].class}};
         Clause[] clauses = new Clause[]{
-                new StringLiteral("Encrypted message is\\: " + testStringRegexMessage),
-                new Optional(new StringLiteral(" "))
+                new StringLiteral("Encrypted message is\\: " + testStringRegexMessage)
         };
         String incorrectOutput =
                 String.format("Your %s class main method does not correctly initialize the values of the two %s objects and encrypt the data of the first.",
