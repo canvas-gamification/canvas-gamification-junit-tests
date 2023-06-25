@@ -50,7 +50,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("stringInputProvider")
-    public void correctGetSizeMethod(String value) throws Throwable {
+    public void correctGetBreedMethod(String value) throws Throwable {
         Object[][] arguments = {
                 {value, String.class}
         };
