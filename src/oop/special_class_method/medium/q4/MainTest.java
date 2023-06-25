@@ -94,7 +94,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("twoStringsInputProvider")
-    public void correctGetSetMethods(String initialValue, String updatedValue) throws Throwable {
+    public void plantMethodsWorkCorrectlyWorkTogether(String initialValue, String updatedValue) throws Throwable {
         String errorMessage = "Your " + className + " class " + getAttributeMethodName +
                 " method does not return the updated value after calling the " + setAttributeMethodName + " method.";
         Object[][] instantiationArguments = {
