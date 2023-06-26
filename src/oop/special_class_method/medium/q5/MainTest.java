@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
+    // Java
     private final String className = "Calculator";
     private final String attributeName1 = "sum";
     private final String getAttributeMethodName1 = "getSum";
@@ -101,9 +102,11 @@ public class MainTest {
         Class<?>[] methodModifierClasses = {
                 double.class
         };
-        Object setMethodOutput = testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
+        assertTrue(testClass.hasMethod(setAttributeMethodName1, methodModifierClasses),
+                "Your " + setAttributeMethodName1 + " method does not have the correct arguments.");
         assertTrue(testClass.hasModifier(setAttributeMethodName1, methodModifierClasses, "public"),
                 "Your " + setAttributeMethodName1 + " method does not have the correct visibility modifier.");
+        Object setMethodOutput = testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
         String incorrectSetterMessage =
                 "Your " + setAttributeMethodName1 + " method does not correctly update the value of " + attributeName1 + ".";
         _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName1),
@@ -148,9 +151,11 @@ public class MainTest {
         Class<?>[] methodModifierClasses = {
                 boolean.class
         };
-        Object setMethodOutput = testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
+        assertTrue(testClass.hasMethod(setAttributeMethodName2, methodModifierClasses),
+                "Your " + setAttributeMethodName2 + " method does not have the correct arguments.");
         assertTrue(testClass.hasModifier(setAttributeMethodName2, methodModifierClasses, "public"),
                 "Your " + setAttributeMethodName2 + " method does not have the correct visibility modifier.");
+        Object setMethodOutput = testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
         String incorrectSetterMessage =
                 "Your " + setAttributeMethodName2 + " method does not correctly update the value of " + attributeName2 + ".";
         _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName2),
@@ -170,5 +175,38 @@ public class MainTest {
         String expectedOutput = "The sum is " + value1 * 7 + " and it is " + value2;
         Object toStringOutput = testClass.callMethod("toString", testInstance);
         _assertEquals(expectedOutput, toStringOutput, incorrectToStringMessage);
+    }
+    @ParameterizedTest
+    @MethodSource("booleanDoublesInputProvider")
+    public void methodsWorkingTogether(double value1, boolean value2) throws Throwable {
+        Object[][] initialArguments = {
+                {1.23, double.class},
+                {true, boolean.class}
+        };
+        Object testInstance = testClass.createInstance(initialArguments);
+        Object getMethodOutput = testClass.callMethod(getAttributeMethodName1, testInstance);
+        _assertEquals(1.23 * 7.0, getMethodOutput, 0.001,
+                "Your " + getAttributeMethodName1 + " method does not return the value of the " + attributeName1 + " attribute.");
+        getMethodOutput = testClass.callMethod(getAttributeMethodName2, testInstance);
+        _assertEquals(true, getMethodOutput,
+                "Your " + getAttributeMethodName2 + " method does not return the value of the " + attributeName2 + " attribute.");
+        Object[][] setMethodArguments = {
+                {value1, double.class}
+        };
+        Object setMethodOutput = testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
+        _assertEquals(value1, testClass.getFieldValue(testInstance, attributeName1),
+                "Your " + setAttributeMethodName1 + " method does not correctly update the value of " + attributeName1 + " after using the " + getAttributeMethodName1 + " method.");
+        assertNull(setMethodOutput, String.join(" ", "Your", setAttributeMethodName1, "method should not return any output"));
+        setMethodArguments = new Object[][]{
+                {value2, boolean.class}
+        };
+        setMethodOutput = testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
+        _assertEquals(value2, testClass.getFieldValue(testInstance, attributeName2),
+                "Your " + setAttributeMethodName2 + " method does not correctly update the value of " + attributeName2 + " after using the " + getAttributeMethodName2 + " method.");
+        assertNull(setMethodOutput, String.join(" ", "Your", setAttributeMethodName2, "method should not return any output"));
+        String expectedOutput = "The sum is " + value1  + " and it is " + value2;
+        Object toStringOutput = testClass.callMethod("toString", testInstance);
+        _assertEquals(expectedOutput, toStringOutput,
+                "Your toString method does not print the correct String after using the getter and setter methods.");
     }
 }
