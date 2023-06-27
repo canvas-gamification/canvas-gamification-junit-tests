@@ -7,7 +7,6 @@ public class Scissors {
     public Scissors(boolean isp, boolean cct) {
         isSharp = isp;
         canCut = cct;
-        ;
     }
 
     public boolean getIsSharp() {
