@@ -151,7 +151,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void piggyBankClassMethodsWorkTogether(int value) throws Throwable {
+    public void phoneWaitListClassMethodsWorkTogether(int value) throws Throwable {
         int initialValue = (int) (Math.random() * 100);
         Object[][] arguments = {
                 {initialValue, int.class}
