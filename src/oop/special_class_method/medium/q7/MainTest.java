@@ -58,7 +58,7 @@ public class MainTest {
     }
 
     @Test
-    public void correctGetNickelMethod() throws Throwable {
+    public void correctGetNumNickelsMethod() throws Throwable {
         Object testInstance = testClass.createInstance();
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName2, testInstance);
         assertTrue(testClass.hasModifier(getAttributeMethodName2, null, "public"),
