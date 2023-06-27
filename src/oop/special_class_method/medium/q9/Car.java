@@ -16,4 +16,8 @@ public class Car {
     public double getTopSpeed() {
         return topSpeed;
     }
+
+    public String toString(){
+        return "I was made by " + maker + " with top speed of " + topSpeed;
+    }
 }

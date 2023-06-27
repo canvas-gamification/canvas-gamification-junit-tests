@@ -9,11 +9,12 @@ of the class but they cannot be modified.
 
 ### Car Class:
 
-Your `Car` class must have the following items
+Your `Car` class already has the following items
 
 - Attributes:
     - An `String` called **maker**
     - An `double` called **topSpeed**
+    - These are not visible from other classes
 
 You need to add the following items:
 
@@ -22,5 +23,7 @@ You need to add the following items:
       **maker** and **topSpeed** fields.
 
 - Methods:
-    - a `getMaker` method which returns the value stored in the **maker** field
-    - a `getTopSpeed` method which returns the value stored in the **topSpeed** field
+    - a `getMaker` method which returns the value stored in the **maker** attribute
+    - a `getTopSpeed` method which returns the value stored in the **topSpeed** attribute
+    - a `toString` method which return a `String` of the object information with the format
+      `"I was made by " + x + " with top speed of " + y` where x is the value of **maker** and y is the value of **topSpeed**

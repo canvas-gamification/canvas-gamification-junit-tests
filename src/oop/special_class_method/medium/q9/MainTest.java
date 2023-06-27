@@ -13,6 +13,7 @@ import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
+    // Java
     private final String className = "Car";
     private final String attributeName1 = "maker";
     private final String getAttributeMethodName1 = "getMaker";
@@ -90,6 +91,20 @@ public class MainTest {
                 "Your " + getAttributeMethodName2 + " method does not have the correct visibility modifier.");
         _assertEquals(topSpeed, getMethodOutput,
                 "Your " + getAttributeMethodName2 + " method does not return the value of the " + attributeName2 + " attribute.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void correctToStringMethod(String value1, double value2) throws Throwable {
+        Object[][] arguments = {
+                {value1, String.class},
+                {value2, double.class}
+        };
+        String incorrectToStringMessage = "Your toString method does not return the correct String.";
+        Object testInstance = testClass.createInstance(arguments);
+        String expectedOutput = "I was made by " + value1 + " with top speed of " + value2;
+        Object toStringOutput = testClass.callMethod("toString", testInstance);
+        _assertEquals(expectedOutput, toStringOutput, incorrectToStringMessage);
     }
 
 }
