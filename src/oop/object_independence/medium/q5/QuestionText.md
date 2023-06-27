@@ -20,7 +20,7 @@ Your `Team` class must have the following items:
     - Note that neither of these attributes should be visible from another class
 
 - Constructors:
-    - A single constructor with parameters of a `String` and an `itn` that initialises the **name** and
+    - A single constructor with parameters of a `String` and an `int` that initializes the **name** and
       **totalWins** attributes
     - This constructor should be visible from another class
 
