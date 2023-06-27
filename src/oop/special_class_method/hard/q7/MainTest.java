@@ -137,7 +137,7 @@ public class MainTest {
         };
         String[] setMethodModifiers = {"public"};
         String incorrectSetMethodMessage = String.join(" ",
-                "Your", setDoubleMethodName, "does not correctly set the value of the", doubleFieldName, "attribute.");
+                "Your", setDoubleMethodName, "method does not correctly set the value of the", doubleFieldName, "attribute.");
         Object setMethodOutput = testClass.callMethod(setDoubleMethodName, setSizeArguments, setMethodModifiers, classInstance);
         _assertEquals(setValue, testClass.getFieldValue(classInstance, doubleFieldName), incorrectSetMethodMessage);
         assertNull(setMethodOutput, String.join(" ", "Your", setDoubleMethodName, "should not return any output"));
@@ -153,7 +153,7 @@ public class MainTest {
         Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
-                "Your", getDoubleMethodName, "does not correctly get the value of the", doubleFieldName, "attribute.");
+                "Your", getDoubleMethodName, "method does not correctly get the value of the", doubleFieldName, "attribute.");
         Object getMethodOutput = testClass.callMethod(getDoubleMethodName, getMethodModifiers, classInstance);
         _assertEquals(value1, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -181,7 +181,7 @@ public class MainTest {
         };
         String[] setMethodModifiers = {"public"};
         String incorrectSetMethodMessage = String.join(" ",
-                "Your", setIntMethodName, "does not correctly set the value of the", intFieldName, "attribute.");
+                "Your", setIntMethodName, "method does not correctly set the value of the", intFieldName, "attribute.");
         Object setMethodOutput = testClass.callMethod(setIntMethodName, setMethodArguments, setMethodModifiers, classInstance);
         _assertEquals(updatedValue, testClass.getFieldValue(classInstance, intFieldName), incorrectSetMethodMessage);
         assertNull(setMethodOutput, String.join(" ", "Your", setIntMethodName, "should not return any output"));
@@ -198,7 +198,7 @@ public class MainTest {
         testClass.setFieldValue(classInstance, value2, intFieldName);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
-                "Your", getIntMethodName, "does not correctly get the value of the", intFieldName, "attribute.");
+                "Your", getIntMethodName, "method does not correctly get the value of the", intFieldName, "attribute.");
         Object getMethodOutput = testClass.callMethod(getIntMethodName, getMethodModifiers, classInstance);
         _assertEquals(value2, getMethodOutput, incorrectGetMethodMessage);
     }
