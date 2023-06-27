@@ -176,7 +176,7 @@ public class MainTest {
         };
         testClass.callMethod(setFirstMethodName, setDoubleArguments, classInstance);
         _assertEquals(value, testClass.callMethod(getFirstMethodName, classInstance),
-                "Your " + getFirstMethodName + " method does not return the correct value calling the " + setFirstMethodName + " method.");
+                "Your " + getFirstMethodName + " method does not return the correct value after calling the " + setFirstMethodName + " method.");
         Object[][] setBooleanArguments = {
                 {b, String.class}
         };
