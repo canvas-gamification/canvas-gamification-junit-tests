@@ -9,7 +9,7 @@ Chemistry tells us a lot about the properties of different liquids. Write a Java
 
 Your `Detergent` class must have the following items:
 
-- Fields :
+- Attributes:
     - a `String` attribute named **name** which is not accessible from other classes
     - a `String` attribute named **strength** which is not accessible from other classes
 
