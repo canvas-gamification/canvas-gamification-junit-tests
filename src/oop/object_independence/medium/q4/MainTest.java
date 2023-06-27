@@ -133,7 +133,7 @@ public class MainTest {
                 String.join(" ", "Your", firstMethod, "method does not print the correct output."));
         assertNull(output, String.join(" ", "Your", firstMethod, "method should not return any output"));
         _assertEquals((current - 1 + playlist.length) % playlist.length, testClass.getFieldValue(classInstance, secondFieldName),
-                String.join(" ", "Your", className, firstMethod, "method does not decrease the", secondFieldName));
+                String.join(" ", "Your", firstMethod, "method does not decrease the", secondFieldName, "attribute"));
     }
 
 }
