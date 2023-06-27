@@ -9,13 +9,15 @@ that has a `double` variable called **topSpeed** and another `String` variable c
 
 Your `Car` class must have the following items:
 
-- Fields :
+- Attributes :
     - a `double` attribute named **topSpeed** which is not accessible from other classes
     - a `String` attribute named **type** which is not accessible from other classes
 
 - Constructors:
     - A constructor which is accessible from other classes and accepts a`double` and a `String` to initialize the
       **topSpeed** and **type** attributes.
+    - A constructor which is accessible from other classes without input to initialize the
+      **topSpeed** and **type** attributes to 180 and null.
 
 - Methods:
     - a `setTopSpeed` method which accepts a `double` value, updates the **topSpeed** attribute with it, and is
@@ -25,7 +27,8 @@ Your `Car` class must have the following items:
       from other classes
     - a `getType` method which is accessible from other classes and returns the value of the **type** attribute
     - a `toString` method which returns a String of the information about the `Car` class of the form
-      `"This Car has a topSpeed of " + topSpeed " with the type " + type + "."`.
+      `"This Car has a topSpeed of " + x " with the type " + y + "."` where x is the value of the **topSpeed** attribute
+      and y is the value of the **type** attribute.
 
 ### Test Class:
 
