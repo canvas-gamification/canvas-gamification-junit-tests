@@ -3,7 +3,7 @@
 ## Question Text
 
 You want to make a battle game with characters that are modeled after the characters from the well-known anime called 
-One Piece who ate the devil fruit to gain a special ability. Make a Java class called **Luffy** that has several 
+One Piece who ate the devil fruit to gain a special ability. Make a Java class called **Luffy** that has  
 attributes called  **skill** and **bounty**. This class has the basic constructor that initializes the attributes, 
 accessors and mutators for each attribute, and a **toString()** method that returns the total amount of money available 
 as a String.
