@@ -21,7 +21,7 @@ Your `PortableMusicPlayer` class must have the following items:
     - Note that neither of these attributes should be visible from another class
 
 - Constructors:
-    - A single constructor with a parameter of an array of `String` that initalzies the **ingredients** attribute
+    - A single constructor with a parameter of an array of `String` that initializes the **playlist** attribute
     - It should initialize the **current** attribute to zero
     - This constructor should be visible from another class
 
