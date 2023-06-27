@@ -90,7 +90,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("intInputProvider")
-    public void correctSetNickelMethod(int updatedValue) throws Throwable {
+    public void correctSetNumNickelsMethod(int updatedValue) throws Throwable {
         Object[][] instantiationArguments = {
         };
         Object testInstance = testClass.createInstance(instantiationArguments);
