@@ -56,7 +56,7 @@ public class MainTest {
     @Test
     public void bankAccountClassHasRequiredFields() {
         assertTrue(testClass.hasField(firstFieldName, int.class),
-                "Your " + className + " class is missing the " + firstFieldName + " attributes.");
+                "Your " + className + " class is missing the " + firstFieldName + " attribute.");
         assertTrue(testClass.hasModifier(firstFieldName, "private"),
                 "Your " + firstFieldName + " does not have the correct visibility modifier.");
     }
