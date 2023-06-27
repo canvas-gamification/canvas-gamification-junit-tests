@@ -6,7 +6,7 @@
 
 ## Question Text
 
-Your goal is to become a master chef. So, you make a mobile app to keep track of all your secret recipes. Make a class
+You want to become a master chef so you make a mobile app to keep track of all your secret recipes. Make a class
 called **Cocktail** with one attribute called **ingredients** which represents a list of ingredients and are initialized
 in the constructor. The method also has an accessor, mutator, and a **toString()** method.
 
