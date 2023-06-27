@@ -107,6 +107,12 @@ public class MainTest {
                 {friend, String.class},
                 {friendSecret, String.class}
         };
+        assertTrue(testClass.hasMethod(hearSecretMethodName, new Class<?>[]{String.class, String.class}),
+                "Your " + hearSecretMethodName + " method does not have the correct name of arguments.");
+        assertTrue(testClass.hasMethod(hearSecretMethodName, new Class<?>[]{String.class, String.class}, Void.TYPE),
+                "Your " + hearSecretMethodName + " method does not have the correct return type.");
+        assertTrue(testClass.hasMethod(hearSecretMethodName, new Class<?>[]{String.class, String.class}, Void.TYPE, new String[] {"public"}),
+                "Your " + hearSecretMethodName + " method does not have the correct modifier.");
         Object output = testClass.callMethod(hearSecretMethodName, methodArguments, new String[]{"public"}, classInstance);
         String[] ans = new String[allFriends.length];
         for (int i = 0; i < allFriends.length; i++) {
@@ -137,6 +143,12 @@ public class MainTest {
             if (friend.equals(allFriends[i]))
                 ans[i] = friendSecret;
         }
+        assertTrue(testClass.hasMethod(writeInDiaryMethodName, null),
+                "Your " + writeInDiaryMethodName + " method does not have the correct name of arguments.");
+        assertTrue(testClass.hasMethod(writeInDiaryMethodName, null, Void.TYPE),
+                "Your " + writeInDiaryMethodName + " method does not have the correct return type.");
+        assertTrue(testClass.hasMethod(writeInDiaryMethodName, null, Void.TYPE, new String[] {"public"}),
+                "Your " + writeInDiaryMethodName + " method does not have the correct modifier.");
         Object output = testClass.callMethod(writeInDiaryMethodName, null, new String[]{"public"}, classInstance, new Clause[]{
                 new StringLiteral("I have the following secrets:"),
                 new Optional(new StringLiteral(" ")),
