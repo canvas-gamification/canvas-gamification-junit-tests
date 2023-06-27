@@ -119,7 +119,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void portableMusicPlayerClassHasCorrectPlaypREVMethod(String[] value) throws Throwable {
+    public void portableMusicPlayerClassHasCorrectPlayPrevMethod(String[] value) throws Throwable {
         Object[][] arguments = {
                 {value, String[].class}
         };
