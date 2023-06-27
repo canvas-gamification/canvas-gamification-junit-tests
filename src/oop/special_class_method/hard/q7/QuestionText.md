@@ -3,12 +3,7 @@
 ## Question Text
 
 You are writing a Java program that mimics different financial institutions or personal banks. Write a Java class called
-**PiggyBank** that has a `double` variable called **money** and another `int` variable called **time**. 
-For this class, write a constructor that accepts no parameters, but sets the variables **money** and **time** to 0 and 0, 
-respectively. Also, write a constructor that accepts a `double` and an `int` value, and sets the values of 
-the **money** and **time** variable to those values, respectively. Also, write a **toString** method that returns a 
-summary of the attributes of the object. Also, write accessor and mutator methods for the necessary variables.
-
+**PiggyBank** that has a `double` variable called **money** and another `int` variable called **time**.
 
 ### PiggyBak Class:
 
@@ -19,8 +14,10 @@ Your `PiggyBank` class must have the following items:
     - An `int` attribute named **time** which is not accessible from other classes
 
 - Constructors:
-    - A constructor which is accessible from other classes and accepts a`double` and a `String` to initialize the
-      **topSpeed** and **type** attributes.
+    - A constructor which is accessible from other classes and accepts a`double` and a `int` to initialize the
+      **money** and **time** attributes.
+    - A constructor which is accessible from other classes without any input to initialize the
+      **money** and **time** attributes to zero.
 
 - Methods:
     - a `setMoney` method which accepts a `double` value, updates the **money** attribute with it, and is accessible
@@ -30,7 +27,8 @@ Your `PiggyBank` class must have the following items:
       from other classes
     - a `getTime` method which is accessible from other classes and returns the value of the **time** attribute
     - a `toString` method which returns a String of the information about the `PiggyBank` class of the form
-      `"I have " + money + " dollars in me after " + time + " days."`.
+      `"I have " + x + " dollars in me after " + y + " days."` where x is the value of the **money** attribute
+      and y is the value of the **time** attribute
 
 ### Test Class:
 
