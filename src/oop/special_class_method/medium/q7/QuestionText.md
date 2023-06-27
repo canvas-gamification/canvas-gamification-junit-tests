@@ -26,5 +26,5 @@ You need to add the following items:
     - a `getNumPennies` method which returns the value stored in the **numPennies** field
     - a `setNumNickels` method which accepts an `int` and uses it to set the value of the **numNickels** field
     - a `getNumNickels` method which returns the value stored in the **numNickels** field
-    - a `toString` method which returns the string `"The total amount is $" + dollars` where dollars the sum of
+    - a `toString` method which returns the string `"The total amount is $x"` where x is the sum of
   money that we have in dollors.
