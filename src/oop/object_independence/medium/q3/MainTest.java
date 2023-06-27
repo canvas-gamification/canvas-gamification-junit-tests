@@ -121,7 +121,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("set1InputProvider")
-    public void cocktailClassHasCorrectSetNumAheadMethod(String[] value, String[] update) throws Throwable {
+    public void cocktailClassHasCorrectSetIngrediantsMethod(String[] value, String[] update) throws Throwable {
         Object[][] arguments = {
                 {value, String[].class}
         };
