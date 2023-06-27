@@ -51,28 +51,28 @@ public class MainTest {
     }
 
     @Test
-    public void correctGetNumPennyMethod() throws Throwable {
+    public void correctGetNumPenniesMethod() throws Throwable {
         Object testInstance = testClass.createInstance();
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName1, testInstance);
         assertTrue(testClass.hasModifier(getAttributeMethodName1, null, "public"),
                 "Your " + getAttributeMethodName1 + " method does not have the correct visibility modifier.");
         _assertEquals(0, getMethodOutput,
-                "Your " + getAttributeMethodName1 + " method does not return the value of the size field.");
+                "Your " + getAttributeMethodName1 + " method does not return the value of the " + attributeName1+ " attribute.");
     }
 
     @Test
-    public void correctGetNickelMethod() throws Throwable {
+    public void correctGetNumNickelsMethod() throws Throwable {
         Object testInstance = testClass.createInstance();
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName2, testInstance);
         assertTrue(testClass.hasModifier(getAttributeMethodName2, null, "public"),
                 "Your " + getAttributeMethodName2 + " method does not have the correct visibility modifier.");
         _assertEquals(0, getMethodOutput,
-                "Your " + getAttributeMethodName2 + " method does not return the value of the size field.");
+                "Your " + getAttributeMethodName2 + " method does not return the value of the " + attributeName2 + " attribute.");
     }
 
     @ParameterizedTest
     @MethodSource("intInputProvider")
-    public void correctSetPennyMethod(int updatedValue) throws Throwable {
+    public void correctSetNumPenniesMethod(int updatedValue) throws Throwable {
         Object[][] instantiationArguments = {
         };
         Object testInstance = testClass.createInstance(instantiationArguments);
@@ -94,7 +94,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("intInputProvider")
-    public void correctSetNickelMethod(int updatedValue) throws Throwable {
+    public void correctSetNumNickelsMethod(int updatedValue) throws Throwable {
         Object[][] instantiationArguments = {
         };
         Object testInstance = testClass.createInstance(instantiationArguments);
