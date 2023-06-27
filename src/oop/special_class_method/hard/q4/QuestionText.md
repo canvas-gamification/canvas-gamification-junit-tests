@@ -21,14 +21,15 @@ Your `Detergent` class must have the following items:
     - a `setName` method which is accessible from other classes, accepts a `String` value, and updates the **name**
       attribute with it
     - a `getName` method which is accessible from other classes and returns the value of the **name** attribute
-    - a `setStrength` method which is accessible from other classes, accepts a `String` value, and updates the **
-      strength** attribute with it
+    - a `setStrength` method which is accessible from other classes, accepts a `String` value, and updates the
+      **strength** attribute with it
     - a `getStrength` method which is accessible from other classes and returns the value of the **strength** attribute
     - a `toString` method which returns a String of the information about the `Detergent` class of the form
-      `"The Detergent instance name is " + name + " and its strength is " + strength + "."`.
+      `"The Detergent instance name is " + x + " and its strength is " + y + "."` where x is the value of the **name**
+      attribute and y is the value of the **strength** attribute.
 
 ### Test Class:
 
-Your `Test` class will have a main method which initializes a `Detergent` with the **name** "Bleach" and of **
-strength** "High". Then,
+Your `Test` class will have a main method which initializes a `Detergent` with the **name** "Bleach" and of
+**strength** "High". Then,
 print the toString for this class.

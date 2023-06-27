@@ -94,16 +94,16 @@ public class MainTest {
         };
         Class<?>[] constructorClasses = {String.class, String.class};
         Object classInstance = testClass.createInstance(arguments);
-        String incorrectDoubleValueMessage =
+        String incorrectString1ValueMessage =
                 "Your " + className + " constructor does not initialize the " + string2FieldName + " attribute to the correct value.";
-        String incorrectStringValueMessage =
+        String incorrectString2ValueMessage =
                 "Your " + className + " constructor does not initialize the " + stringFieldName + " attribute to the correct value.";
         String incorrectConstructorVisibilityModifier =
                 "Your " + className + " constructor does not have the correct visibility modifier.";
         _assertEquals(value1, testClass.getFieldValue(classInstance, string2FieldName),
-                incorrectDoubleValueMessage);
+                incorrectString1ValueMessage);
         _assertEquals(value2, testClass.getFieldValue(classInstance, stringFieldName),
-                incorrectStringValueMessage);
+                incorrectString2ValueMessage);
         assertTrue(testClass.hasModifier(constructorClasses, "public"), incorrectConstructorVisibilityModifier);
     }
 
@@ -164,7 +164,7 @@ public class MainTest {
         };
         String[] setMethodModifiers = {"public"};
         String incorrectSetMethodMessage = String.join(" ",
-                "Your", setStringMethodName, "method does not correctly set the value of the", stringFieldName, "field.");
+                "Your", setStringMethodName, "method does not correctly set the value of the", stringFieldName, "attribute.");
         Object setMethodOutput = testClass.callMethod(setStringMethodName, setMethodArguments, setMethodModifiers, classInstance);
         _assertEquals(updatedValue, testClass.getFieldValue(classInstance, stringFieldName), incorrectSetMethodMessage);
         assertNull(setMethodOutput, String.join(" ", "Your", setStringMethodName, "method should not return any output"));
@@ -225,10 +225,10 @@ public class MainTest {
         testClass.callMethod(setString2MethodName, setDoubleArguments, classInstance);
         _assertEquals(value, testClass.callMethod(getString2MethodName, classInstance),
                 "Your " + getString2MethodName + " method does not return the correct value calling the " + setString2MethodName + " method.");
-        Object[][] setBooleanArguments = {
+        Object[][] setArguments = {
                 {b, String.class}
         };
-        testClass.callMethod(setStringMethodName, setBooleanArguments, classInstance);
+        testClass.callMethod(setStringMethodName, setArguments, classInstance);
         _assertEquals(b, testClass.callMethod(getStringMethodName, classInstance),
                 "Your " + getStringMethodName + " method does not return the correct value calling the " + setStringMethodName + " method.");
         String expectedToString = "The " + className + " instance " + string2FieldName + " is " + value + " and its " + stringFieldName + " is " + b + ".";
