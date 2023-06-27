@@ -7,7 +7,7 @@
 ## Question Text
 
 You've noticed that there are line-ups everywhere. So, you decided to write a program that predicts how long you need to
-wait in them. Make a program called  **PhoneWaitList** that has an attribute called **umAhead**, with a basic accessor
+wait in them. Make a program called  **PhoneWaitList** that has an attribute called **numAhead**, with a basic accessor
 and mutator method and a **toString()** method.
 
 ### PhoneWaitList Class
