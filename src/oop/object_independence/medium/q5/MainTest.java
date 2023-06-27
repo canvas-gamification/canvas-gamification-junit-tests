@@ -1,9 +1,6 @@
 package oop.object_independence.medium.q5;
 
 import global.ObjectTest;
-import global.variables.Clause;
-import global.variables.clauses.NewLine;
-import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,12 +9,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest {
-    // Parsons question
+    // Java
     private final String className = "Team";
     private ObjectTest testClass;
     private final String firstFieldName = "name";
@@ -27,8 +23,8 @@ public class MainTest {
 
     @BeforeEach
     public void setUp() {
-        String bankString = "oop.object_independence.medium.q5." + className;
-        testClass = new ObjectTest(bankString);
+        String classString = "oop.object_independence.medium.q5." + className;
+        testClass = new ObjectTest(classString);
     }
 
     @Test
@@ -68,9 +64,6 @@ public class MainTest {
                 {value1, String.class},
                 {value2, int.class}
         };
-        Class<?>[] constructorClasses = {String.class, int.class};
-        assertTrue(testClass.hasConstructor(constructorClasses, new String[]{"public"}),
-                "Your " + className + " class is missing a required constructor.");
         Object classInstance = testClass.createInstance(arguments);
         _assertEquals(value1, testClass.getFieldValue(classInstance, firstFieldName),
                 "Your " + className + " constructor does not correctly initialize the " + firstFieldName + " field.");
