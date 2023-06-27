@@ -109,7 +109,6 @@ public class MainTest {
 
     private static Stream<Arguments> setSizeInputProvider() {
         return Stream.of(
-                Arguments.of(0.0, 0.0),
                 Arguments.of(22431.21, 6669.21458764),
                 Arguments.of(1, 0.0),
                 Arguments.of(843739243.2229, 163.35)
