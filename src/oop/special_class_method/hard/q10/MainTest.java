@@ -182,7 +182,7 @@ public class MainTest {
         };
         testClass.callMethod(setSecondMethodName, setBooleanArguments, classInstance);
         _assertEquals(b, testClass.callMethod(getSecondMethodName, classInstance),
-                "Your " + getSecondMethodName + " method does not return the correct value calling the " + setSecondMethodName + " method.");
+                "Your " + getSecondMethodName + " method does not return the correct value after calling the " + setSecondMethodName + " method.");
         String expectedToString = "The award for " + b + " category goes to " + value;
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, " toString method does not return the correct String after updating the values of its attributes using its setter methods.");
