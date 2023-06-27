@@ -8,7 +8,7 @@
 
 You want to become a master chef so you make a mobile app to keep track of all your secret recipes. Make a class
 called **Cocktail** with one attribute called **ingredients** which represents a list of ingredients and are initialized
-in the constructor. The method also has an accessor, mutator, and a **toString()** method.
+in the constructor. The method also has setter, getter, and a **toString()** method.
 
 ### Cocktail Class
 
@@ -16,7 +16,7 @@ Your `Cocktail` class must have the following items:
 
 - Attributes:
     - An array of `String` called **ingredients**
-    - Note that neither of these attributes should be visible from another class
+    - Note that this attribute should not be visible from another class
 
 - Constructors:
     - A single constructor with a parameter of an array of `String` that initalzies the **ingredients** attribute
@@ -30,10 +30,10 @@ Your `Cocktail` class must have the following items:
       `My ingredients are: A B C D ...` ,where A, B, C, and D represent the strings in order in the **ingredients**
       attribute, and is visible from other classes.
 
-### TestWaitList Class
+### TestRecipe Class
 
-Your `TestWaitList` class must have the following items:
+Your `TestRecipe` class must have the following items:
 
 - Methods:
-    - A `main` method which initializes two PhoneWaitList objects, one with a **numAhead** of 5 and
-      the other with a **numAhead** of 2 and print them using **toString** method.
+    - A `main` method which initializes two **Cocktail** objects, one with **ingredients** Pineapple Juice and Coconut Milk
+      the other with Apple Juice and Almond Milk. Print them in order using **toString** method.

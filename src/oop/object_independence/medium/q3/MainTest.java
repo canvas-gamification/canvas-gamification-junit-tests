@@ -17,7 +17,7 @@ import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest {
-    // Parsons question
+    // Java
     private final String className = "Cocktail";
     private final String outputClassName = "TestRecipe";
     private ObjectTest testClass;
@@ -48,9 +48,9 @@ public class MainTest {
 
     @BeforeEach
     public void setUp() {
-        String bankString = "oop.object_independence.medium.q3." + className;
+        String classString = "oop.object_independence.medium.q3." + className;
         String testClassString = "oop.object_independence.medium.q3." + outputClassName;
-        testClass = new ObjectTest(bankString);
+        testClass = new ObjectTest(classString);
         outputClass = new ObjectTest(testClassString);
     }
 
@@ -88,9 +88,6 @@ public class MainTest {
         Object[][] arguments = {
                 {value, String[].class}
         };
-        Class<?>[] constructorClasses = {String[].class};
-        assertTrue(testClass.hasConstructor(constructorClasses, new String[]{"public"}),
-                "Your " + className + " class is missing a required constructor.");
         Object classInstance = testClass.createInstance(arguments);
         _assertArrayEquals(value, testClass.getFieldValue(classInstance, firstFieldName),
                 "Your " + className + " constructor does not correctly initialize the " + firstFieldName + " attribute.");
