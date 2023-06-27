@@ -105,7 +105,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctGetNickelMethod(String skill, int bounty) throws Throwable {
+    public void correctGetBountyMethod(String skill, int bounty) throws Throwable {
         Object[][] arguments = {
                 {skill, String.class},
                 {bounty, int.class}
