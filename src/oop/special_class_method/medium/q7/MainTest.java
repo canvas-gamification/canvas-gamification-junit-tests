@@ -69,7 +69,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("intInputProvider")
-    public void correctSetPennyMethod(int updatedValue) throws Throwable {
+    public void correctSetNumPenniesMethod(int updatedValue) throws Throwable {
         Object[][] instantiationArguments = {
         };
         Object testInstance = testClass.createInstance(instantiationArguments);
