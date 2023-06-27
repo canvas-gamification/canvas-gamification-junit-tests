@@ -155,7 +155,7 @@ public class MainTest {
                 "Your " + getSecondField + " method does not return the correct value after calling the " + setSecondField + " method.");
         String expected = "Team " + value1 + " has won " + value2 + " games";
         String incorrectToStringMessage = String.join(" ",
-                "Your", className, " toString method does not return the correct String after updating the values of its attributes using its setter methods.");
+                "Your", className, " toString method does not return the correct String after updating the values of its attributes using its setter method.");
         Object output = testClass.callMethod("toString", classInstance);
         _assertEquals(expected, output, incorrectToStringMessage);
     }
