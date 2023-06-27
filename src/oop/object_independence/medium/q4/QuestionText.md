@@ -30,5 +30,5 @@ Your `PortableMusicPlayer` class must have the following items:
       at index **current**
     - a `playNext` method which is accessible from other classes, increments **current** by one and takes the remainder by the
       size of **playlist** and prints `"Now Playing : "` followed by the String in **playlist** at index **current**
-    - a `playPrev` method which is accessible from other classes and subtract one to current and takes it remainder for
+    - a `playPrev` method which is accessible from other classes and decrements **current** by one and takes the remainder by
       the size of **playlist** and prints `"Now Playing : "` + the string in **playlist**at index **current**
