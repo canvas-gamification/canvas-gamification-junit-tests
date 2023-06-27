@@ -16,18 +16,19 @@ Your `PhoneWaitList` class must have the following items:
 
 - Attributes:
     - An `int` called **numAhead**
-    - Note that neither of these attributes should be visible from another class
+    - This attribute should be visible from another class
 
 - Constructors:
     - A single constructor with a parameter `int` that initalzies the **numAhead** attribute
     - This constructor should be visible from another class
 
 - Methods:
-    - a `getNumAhead` method which is accessible from other classes and returns the value of the **numAhead** attribute
+    - a `getNumAhead` method which is visible from other classes and returns the value of the **numAhead** attribute
     - a `setNumAhead` method which accepts an `int` value, updates the **numAhead** attribute with it, and
-      is accessible from other classes
+      is visible from other classes
     - a `toString` method which returns a String of the information about the `PhoneWaitList` class of the form
-      `There are " + numAhead + " people ahead of you`, and is visible from other classes.
+      `There are " + x + " people ahead of you`, where x is the value of the **numAhead** attribute, and is visible from
+      other classes.
 
 ### TestWaitList Class
 
