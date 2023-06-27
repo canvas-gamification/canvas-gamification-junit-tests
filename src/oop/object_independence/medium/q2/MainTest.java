@@ -131,7 +131,7 @@ public class MainTest {
                 "Your", setFirstField, "method does not correctly set the value of the", firstFieldName, "attribute.");
         Object setMethodOutput = testClass.callMethod(setFirstField, setArguments, setMethodModifiers, classInstance);
         _assertEquals(update, testClass.getFieldValue(classInstance, firstFieldName), incorrectSetMethodMessage);
-        assertNull(setMethodOutput, String.join(" ", "Your", setFirstField, "should not return any output"));
+        assertNull(setMethodOutput, String.join(" ", "Your", setFirstField, "method should not return any output"));
     }
 
     @ParameterizedTest
