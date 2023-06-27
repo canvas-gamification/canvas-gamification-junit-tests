@@ -21,7 +21,7 @@ Your `Circle` class must have the following items:
       **radius** and **colour** attributes.
 
 - Methods:
-    - a `setRadius` method which accepts a `double` value, updates the *radius** attribute with it, and is accessible
+    - a `setRadius` method which accepts a `double` value, updates the **radius** attribute with it, and is accessible
       from other classes
     - a `getRadius` method which is accessible from other classes and returns the value of the **radius** attribute
     - a `setColour` method which accepts an `int` value, updates the **colour** attribute with it, and is accessible
