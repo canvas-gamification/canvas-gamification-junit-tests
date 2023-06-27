@@ -66,9 +66,9 @@ public class MainTest {
         };
         Object classInstance = testClass.createInstance(arguments);
         _assertEquals(value1, testClass.getFieldValue(classInstance, firstFieldName),
-                "Your " + className + " constructor does not correctly initialize the " + firstFieldName + " field.");
+                "Your " + className + " constructor does not correctly initialize the " + firstFieldName + " attribute.");
         _assertEquals(value2, testClass.getFieldValue(classInstance, secondFieldName),
-                "Your " + className + " constructor does not correctly initialize the " + secondFieldName + " field.");
+                "Your " + className + " constructor does not correctly initialize the " + secondFieldName + " attribute.");
     }
 
     @ParameterizedTest
@@ -81,7 +81,7 @@ public class MainTest {
         Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
-                "Your", getSecondField, "does not correctly get the value of the", secondFieldName, "attribute.");
+                "Your", getSecondField, "method does not correctly get the value of the", secondFieldName, "attribute.");
         Object getMethodOutput = testClass.callMethod(getSecondField, getMethodModifiers, classInstance);
         _assertEquals(value2, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -108,10 +108,10 @@ public class MainTest {
         };
         String[] setMethodModifiers = {"public"};
         String incorrectSetMethodMessage = String.join(" ",
-                "Your", setSecondField, "does not correctly set the value of the", secondFieldName, "attribute.");
+                "Your", setSecondField, "method does not correctly set the value of the", secondFieldName, "attribute.");
         Object setMethodOutput = testClass.callMethod(setSecondField, setArguments, setMethodModifiers, classInstance);
         _assertEquals(update, testClass.getFieldValue(classInstance, secondFieldName), incorrectSetMethodMessage);
-        assertNull(setMethodOutput, String.join(" ", "Your", setSecondField, "should not return any output"));
+        assertNull(setMethodOutput, String.join(" ", "Your", setSecondField, "method should not return any output"));
     }
 
     @ParameterizedTest
@@ -145,10 +145,10 @@ public class MainTest {
         };
         testClass.callMethod(setSecondField, setArguments, classInstance);
         _assertEquals(value2, testClass.callMethod(getSecondField, classInstance),
-                "Your " + getSecondField + " method does not return the correct value calling the " + setSecondField + " method.");
+                "Your " + getSecondField + " method does not return the correct value after calling the " + setSecondField + " method.");
         String expected = "Team " + value1 + " has won " + value2 + " games";
         String incorrectToStringMessage = String.join(" ",
-                "Your", className, " toString method does not return the correct String after updating the values of its attributes using its setter methods.");
+                "Your", className, " toString method does not return the correct String after updating the values of its attributes using its setter method.");
         Object output = testClass.callMethod("toString", classInstance);
         _assertEquals(expected, output, incorrectToStringMessage);
     }
