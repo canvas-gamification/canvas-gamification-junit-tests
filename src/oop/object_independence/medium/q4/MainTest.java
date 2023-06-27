@@ -74,7 +74,7 @@ public class MainTest {
                 "Your " + className + " class is missing a required constructor.");
         Object classInstance = testClass.createInstance(arguments);
         _assertArrayEquals(value, testClass.getFieldValue(classInstance, firstFieldName),
-                "Your " + className + " constructor does not correctly initialize the " + firstFieldName + " field.");
+                "Your " + className + " constructor does not correctly initialize the " + firstFieldName + " attribute.");
         _assertEquals(0, testClass.getFieldValue(classInstance, secondFieldName),
                 "Your " + className + " constructor does not correctly initialize the " + secondFieldName + " field.");
     }
