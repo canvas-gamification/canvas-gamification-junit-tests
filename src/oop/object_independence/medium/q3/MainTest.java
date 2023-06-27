@@ -105,7 +105,7 @@ public class MainTest {
         Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
-                "Your", getFirstField, "does not correctly get the value of the", firstFieldName, "attribute.");
+                "Your", getFirstField, "method does not correctly get the value of the", firstFieldName, "attribute.");
         Object getMethodOutput = testClass.callMethod(getFirstField, getMethodModifiers, classInstance);
         _assertArrayEquals(value, getMethodOutput, incorrectGetMethodMessage);
     }
