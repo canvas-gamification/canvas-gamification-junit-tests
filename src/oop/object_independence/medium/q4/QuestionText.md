@@ -26,7 +26,7 @@ Your `PortableMusicPlayer` class must have the following items:
     - This constructor should be visible from another class
 
 - Methods:
-    - a `play` method which is accessible from other classes and prints `"Now Playing : "` + the string in **playlist**
+    - a `play` method which is accessible from other classes and prints `"Now Playing : "` followed by the String in **playlist**
       at index **current**
     - a `playNext` method which is accessible from other classes and add one to current and takes it remainder for the
       size of **playlist** and prints `"Now Playing : "` + the string in **playlist**at index **current**
