@@ -3,10 +3,7 @@
 ## Question Text
 
 You are writing a Java program that details various round objects. Write a Java class called **Circle** that has a
-`double` variable called **radius** and another `String` variable called **colour**. Write a constructor
-for this class that accepts a `double` value and a `String` value, then sets the class variables to those
-values. Also, write a **toString()** that summarizes the attributes of the object. Also, write accessor and mutator
-methods for the necessary variables.
+`double` variable called **radius** and another `String` variable called **colour**. 
 
 ### Circle Class:
 
@@ -28,7 +25,8 @@ Your `Circle` class must have the following items:
       from other classes
     - a `getColour` method which is accessible from other classes and returns the value of the **colour** attribute
     - a `toString` method which returns a String of the information about the `Circle` class of the form
-      `"I have a " + radius + " radius and my colour is " + colour`.
+      `"I have a " + x + " radius and my colour is " + y` where x is the value of **radius** attribute and y is the
+      value of **colour** attribute
 
 ### Test Class:
 
