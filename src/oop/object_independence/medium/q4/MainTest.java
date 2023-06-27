@@ -111,7 +111,7 @@ public class MainTest {
         Object output = testClass.callMethod(secondMethod, methodModifiers, classInstance, new Clause[]{
                         new StringLiteral("Now Playing : " + playlist[(current + 1) % playlist.length])
                 },
-                String.join(" ", "Your", className, firstMethod, "method does not print the correct output."));
+                String.join(" ", "Your", firstMethod, "method does not print the correct output."));
         assertNull(output, String.join(" ", "Your", firstMethod, "should not return any output"));
         _assertEquals((current + 1) % playlist.length, testClass.getFieldValue(classInstance, secondFieldName),
                 String.join(" ", "Your", className, firstMethod, "method does not increase the", secondFieldName));
