@@ -76,7 +76,7 @@ public class MainTest {
         _assertArrayEquals(value, testClass.getFieldValue(classInstance, firstFieldName),
                 "Your " + className + " constructor does not correctly initialize the " + firstFieldName + " attribute.");
         _assertEquals(0, testClass.getFieldValue(classInstance, secondFieldName),
-                "Your " + className + " constructor does not correctly initialize the " + secondFieldName + " field.");
+                "Your " + className + " constructor does not correctly initialize the " + secondFieldName + " attribute.");
     }
 
     @ParameterizedTest
