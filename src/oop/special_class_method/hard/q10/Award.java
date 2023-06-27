@@ -14,7 +14,7 @@ public class Award {
     }
 
     public String getAwardRecipient() {
-        return this.awardRecipient;
+        return awardRecipient;
     }
 
     public void setAwardCategory(String awardCategory) {
@@ -22,7 +22,7 @@ public class Award {
     }
 
     public String getAwardCategory() {
-        return this.awardCategory;
+        return awardCategory;
     }
 
     public String toString(){
