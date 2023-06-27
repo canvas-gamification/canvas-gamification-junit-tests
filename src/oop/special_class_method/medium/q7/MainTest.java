@@ -48,7 +48,7 @@ public class MainTest {
     }
 
     @Test
-    public void correctGetNumPennyMethod() throws Throwable {
+    public void correctGetNumPenniesMethod() throws Throwable {
         Object testInstance = testClass.createInstance();
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName1, testInstance);
         assertTrue(testClass.hasModifier(getAttributeMethodName1, null, "public"),
