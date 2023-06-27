@@ -5,7 +5,7 @@
 ## Question Text
 
 Many people keep secrets that they only share with a trusted friend. Make a class called **Person** that has a secret
-and potentially knows about the secrets of his/her friends. This class has several attributes: **myName**, **mySecret**,
+and potentially knows about the secrets of their friends. This class has several attributes: **myName**, **mySecret**,
 a list of names of **friends**, and a list of **secrets** from those friends.
 
 ## Person Class
