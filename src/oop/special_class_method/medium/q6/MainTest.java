@@ -13,13 +13,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
+    // Java
     private final String className = "Scissors";
     private final String attributeName1 = "isSharp";
     private final String getAttributeMethodName1 = "getIsSharp";
     private final String setAttributeMethodName1 = "setIsSharp";
-    private final String attributeName2 = "canCut";
-    private final String getAttributeMethodName2 = "getCanCut";
-    private final String setAttributeMethodName2 = "setCanCut";
+    private final String attributeName2 = "outOfReach";
+    private final String getAttributeMethodName2 = "getOutOfReach";
+    private final String setAttributeMethodName2 = "setOutOfReach";
 
     private ObjectTest testClass;
 
@@ -108,7 +109,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("twoBooleanInputProvider")
-    public void correctGetCanCutMethod(boolean sharp, boolean cut) throws Throwable {
+    public void correctGetOutOfReachMethod(boolean sharp, boolean cut) throws Throwable {
         Object[][] arguments = {
                 {sharp, boolean.class},
                 {cut, boolean.class}
@@ -124,7 +125,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("threeBooleanInputProvider")
-    public void correctSetCanCutMethod(boolean initialValue, boolean updatedValue, boolean c) throws Throwable {
+    public void correctSetOutOfReachMethod(boolean initialValue, boolean updatedValue, boolean c) throws Throwable {
         Object[][] instantiationArguments = {
                 {c, boolean.class},
                 {initialValue, boolean.class}
@@ -157,7 +158,7 @@ public class MainTest {
         };
         String incorrectToStringMessage = "Your toString method does not return the correct String.";
         Object testInstance = testClass.createInstance(arguments);
-        String expectedOutput = "isSharp is " + value1 + " and canCut is " + value2;
+        String expectedOutput = "isSharp is " + value1 + " and outOfReach is " + value2;
         Object toStringOutput = testClass.callMethod("toString", testInstance);
         _assertEquals(expectedOutput, toStringOutput, incorrectToStringMessage);
     }
@@ -190,7 +191,7 @@ public class MainTest {
         _assertEquals(value2, testClass.getFieldValue(testInstance, attributeName2),
                 "Your " + setAttributeMethodName2 + " method does not correctly update the value of " + attributeName2 + " after using the " + getAttributeMethodName2 + " method.");
         assertNull(setMethodOutput, String.join(" ", "Your", setAttributeMethodName2, "method should not return any output"));
-        String expectedOutput = "isSharp is " + value1 + " and canCut is " + value2;
+        String expectedOutput = "isSharp is " + value1 + " and outOfReach is " + value2;
         Object toStringOutput = testClass.callMethod("toString", testInstance);
         _assertEquals(expectedOutput, toStringOutput,
                 "Your toString method does not print the correct String after using the getter and setter methods.");
