@@ -22,7 +22,7 @@ Your `PortableMusicPlayer` class must have the following items:
 
 - Constructors:
     - A single constructor with a parameter of an array of `String` that initalzies the **ingredients** attribute
-    - It should initialize the **current** to zero
+    - It should initialize the **current** attribute to zero
     - This constructor should be visible from another class
 
 - Methods:
