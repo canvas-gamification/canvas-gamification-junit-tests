@@ -145,7 +145,7 @@ public class MainTest {
                 new Optional(new StringLiteral(".")),
                 new Optional(new StringLiteral(" "))
         });
-        assertNull(output, String.join(" ", "Your", hearSecretMethodName, "should not return any output"));
+        assertNull(output, String.join(" ", "Your", hearSecretMethodName, "method should not return any output."));
     }
 
     @Test
