@@ -70,7 +70,7 @@ public class MainTest {
         assertTrue(testClass.hasModifier(getAttributeMethodName1, null, "public"),
                 "Your " + getAttributeMethodName1 + " method does not have the correct visibility modifier.");
         _assertEquals(sharp, getMethodOutput,
-                "Your " + getAttributeMethodName1 + " method does not return the value of the size attribute.");
+                "Your " + getAttributeMethodName1 + " method does not return the value of the " + attributeName1 + " attribute.");
     }
 
     private static Stream<Arguments> threeBooleanInputProvider() {
@@ -118,7 +118,7 @@ public class MainTest {
         assertTrue(testClass.hasModifier(getAttributeMethodName2, null, "public"),
                 "Your " + getAttributeMethodName2 + " method does not have the correct visibility modifier.");
         _assertEquals(cut, getMethodOutput,
-                "Your " + getAttributeMethodName2 + " method does not return the value of the size attribute.");
+                "Your " + getAttributeMethodName2 + " method does not return the value of the " + attributeName2 + " attribute.");
     }
 
 
