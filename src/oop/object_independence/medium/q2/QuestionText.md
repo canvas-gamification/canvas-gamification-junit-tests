@@ -35,5 +35,5 @@ Your `TestWaitList` class must have the following items:
 
 - Methods:
     - A `main` method which initializes two PhoneWaitList objects, one with a **numAhead** of 5 and
-      the other with a **numAhead** of 2 and print them using **toString** method.
+      the other with a **numAhead** of 2, and prints them using the **toString** method.
 
