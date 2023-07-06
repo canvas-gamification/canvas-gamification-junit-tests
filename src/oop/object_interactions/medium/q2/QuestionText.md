@@ -38,8 +38,7 @@ You must add the following items to the class:
     - A `writeInDiary` method which prints `I have the following secrets:` and then prints each secret that the
       **Person** knows on a separate line. Given a friend `Ginger` and a secret `she is scared of bears` it should write
       the secret in the following format:
-      if friend `Ginger` has the secret `she is scared of bears` it should be
-      like `Ginger told me she is scared of bears.`
+      `Ginger told me she is scared of bears.`
 
 ## TestFriendship Class
 

@@ -108,7 +108,7 @@ public class MainTest {
                 {friendSecret, String.class}
         };
         assertTrue(testClass.hasMethod(hearSecretMethodName, new Class<?>[]{String.class, String.class}),
-                "Your " + hearSecretMethodName + " method does not have the correct name of arguments.");
+                "Your " + hearSecretMethodName + " method does not have the correct name or arguments.");
         assertTrue(testClass.hasMethod(hearSecretMethodName, new Class<?>[]{String.class, String.class}, Void.TYPE),
                 "Your " + hearSecretMethodName + " method does not have the correct return type.");
         assertTrue(testClass.hasMethod(hearSecretMethodName, new Class<?>[]{String.class, String.class}, Void.TYPE, new String[] {"public"}),
