@@ -22,7 +22,7 @@ public class MainTest {
     private final String varMonitors = "monitors";
     private final String varCount = "size";
     private final String varOn = "isOn";
-    private final String fallenMethod = "change";
+    private final String methodName = "change";
     public ObjectTest desk;
     public ObjectTest monitor;
 
@@ -127,17 +127,21 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("monitorInputProvider")
-    public void correctFallenMethod(int count, boolean on) throws Throwable {
+    public void correctChangeMethod(int count, boolean on) throws Throwable {
         Object[][] arguments = {
                 {count, int.class},
                 {on, boolean.class}
         };
         Object monitorInstance = monitor.createInstance(arguments);
-        assertTrue(monitor.hasMethod(fallenMethod, null, Void.TYPE),
-                "Your " + monitorClass + " does not include the correct " + fallenMethod);
-        monitor.callMethod(fallenMethod, monitorInstance);
+        assertTrue(monitor.hasMethod(methodName, null),
+                "Your " + monitorClass + " " + methodName + " method does not have the correct header.");
+        assertTrue(monitor.hasMethod(methodName, null, Void.TYPE),
+                "Your " + monitorClass + " " + methodName + " method does not have the correct return type.");
+        assertTrue(monitor.hasMethod(methodName, null, Void.TYPE, new String[]{"public"}),
+                "Your " + monitorClass + " " + methodName + " method does not have the correct visibility modifier.");
+        monitor.callMethod(methodName, monitorInstance);
         _assertEquals((on == false) ? true : false, monitor.getFieldValue(monitorInstance, varOn),
-                "Your " + monitorClass + " " + fallenMethod + " method does not changes the " + varOn + " truth value.");
+                "Your " + monitorClass + " " + methodName + " method does not changes the " + varOn + " truth value.");
     }
 
 }
