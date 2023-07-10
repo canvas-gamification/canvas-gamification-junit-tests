@@ -4,7 +4,6 @@ import global.ObjectTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -68,9 +67,11 @@ public class MainTest {
                 {isSpoiled, boolean.class}
         };
         Object vegetableInstance = meat.createInstance(arguments);
-        Object output = meat.callMethod(methodName, vegetableInstance);
+        assertTrue(meat.hasMethod(methodName, null, Void.TYPE),
+                "Your " + meatClass + " " + methodName + " does not have a correct name, arguments, or return type.");
         assertTrue(meat.hasModifier(methodName, null, "public"),
                 "Your " + meatClass + " " + methodName + " does not have a correct visibility modifier.");
+        Object output = meat.callMethod(methodName, vegetableInstance);
         _assertEquals(true, meat.getFieldValue(vegetableInstance, varSpoiled),
                 "Your " + meatClass + " " + methodName + " method does not change the " + varSpoiled + " value to true.");
         assertNull(output, "Your " + methodName + " method should not return anything.");
