@@ -4,7 +4,7 @@
 
 You are about to start writing a program that involves luminous objects. Make a Java class called `Lamp` that has two
 attributes called **brightness** and **isOn**. The class also has two constructors, on with 2 parameters to initialize
-two attributes and one with 1 parameter and set the second attribute to the default value.
+two attributes and one with 1 parameter that sets the second attribute to the default value.
 
 ### Question Type:
 
