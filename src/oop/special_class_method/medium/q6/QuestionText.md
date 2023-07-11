@@ -3,7 +3,7 @@
 ## Question Text
 
 Teaching children to stay away from sharp objects is an important lesson. Make a Java class called `Scissors` that has
-two attributes called **isSharp** and **canCut**. This class has a constructor that initializes the two attributes,
+two attributes called **isSharp** and **outOfReach**. This class has a constructor that initializes the two attributes,
 accessor and mutator methods for each attribute.
 
 ### Scissors:
