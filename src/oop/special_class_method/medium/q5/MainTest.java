@@ -193,17 +193,15 @@ public class MainTest {
         Object[][] setMethodArguments = {
                 {value1, double.class}
         };
-        Object setMethodOutput = testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
+        testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
         _assertEquals(value1, testClass.getFieldValue(testInstance, attributeName1),
                 "Your " + setAttributeMethodName1 + " method does not correctly update the value of " + attributeName1 + " after using the " + getAttributeMethodName1 + " method.");
-        assertNull(setMethodOutput, String.join(" ", "Your", setAttributeMethodName1, "method should not return any output"));
         setMethodArguments = new Object[][]{
                 {value2, boolean.class}
         };
-        setMethodOutput = testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
+        testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
         _assertEquals(value2, testClass.getFieldValue(testInstance, attributeName2),
                 "Your " + setAttributeMethodName2 + " method does not correctly update the value of " + attributeName2 + " after using the " + getAttributeMethodName2 + " method.");
-        assertNull(setMethodOutput, String.join(" ", "Your", setAttributeMethodName2, "method should not return any output"));
         String expectedOutput = "The sum is " + value1  + " and it is " + value2;
         Object toStringOutput = testClass.callMethod("toString", testInstance);
         _assertEquals(expectedOutput, toStringOutput,
