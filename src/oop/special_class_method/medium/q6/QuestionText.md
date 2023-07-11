@@ -16,7 +16,7 @@ Your `Scissors` class already has the following items:
 
 - Constructor:
     - a `Scissors` constructor that is visible to other classes and accepts two `boolean` and uses it to initialize the
-      **isSharp** and **canCut** attributes in that order.
+      **isSharp** and **outOfReach** attributes in that order.
 
 You need to add the following items to the class:
 
