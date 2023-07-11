@@ -85,10 +85,10 @@ public class MainTest {
                 String.class
         };
         testClass.callMethod(setAttributeMethodName, setMethodArguments, testInstance);
-        assertTrue(testClass.hasModifier(setAttributeMethodName, methodModifierClasses, "public"),
-                "Your " + setAttributeMethodName + " method does not have the correct visibility modifier.");
         assertTrue((testClass.hasMethod(setAttributeMethodName, methodModifierClasses)),
                 "Your " + setAttributeMethodName + " does nor have the correct parameters.");
+        assertTrue(testClass.hasModifier(setAttributeMethodName, methodModifierClasses, "public"),
+                "Your " + setAttributeMethodName + " method does not have the correct visibility modifier.");
         String incorrectSetterMessage =
                 "Your " + setAttributeMethodName + " method does not correctly update the value of " + attributeName + ".";
         _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName),
@@ -110,6 +110,10 @@ public class MainTest {
         testClass.callMethod(setAttributeMethodName, setMethodArguments, testInstance);
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName, testInstance);
         _assertEquals(updatedValue, getMethodOutput, errorMessage);
+        String expectedOutput = "My breed is " + updatedValue;
+        Object toStringOutput = testClass.callMethod("toString", testInstance);
+        _assertEquals(expectedOutput, toStringOutput,
+                "Your toString method does not return the correct String after using the accessors and mutators.");
     }
 
     @ParameterizedTest
