@@ -93,16 +93,15 @@ public class MainTest {
         Class<?>[] methodModifierClasses = {
                 double.class
         };
+        assertTrue(testClass.hasMethod(setAttributeMethodName1, methodModifierClasses, Void.TYPE),
+                "Your " + className + " class does not include the correct " + setAttributeMethodName1 + " method.");
         assertTrue(testClass.hasModifier(setAttributeMethodName1, methodModifierClasses, "public"),
                 "Your " + setAttributeMethodName1 + " method does not have the correct visibility modifier.");
-        assertTrue(testClass.hasMethod(setAttributeMethodName1, methodModifierClasses, Void.TYPE, new String[]{"public"}),
-                "Your " + className + " class does not include the correct " + setAttributeMethodName1 + " method.");
         String incorrectSetterMessage =
                 "Your " + setAttributeMethodName1 + " method does not correctly update the value of " + attributeName1 + ".";
-        Object setMethodOutput = testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
+        testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
         _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName1),
                 incorrectSetterMessage);
-        assertNull(setMethodOutput, String.join(" ", "Your", setAttributeMethodName1, "method should not return any output"));
     }
 
     private static Stream<Arguments> booleanDoublesInputProvider() {
@@ -195,4 +194,37 @@ public class MainTest {
         Object toStringOutput = testClass.callMethod("toString", testInstance);
         _assertEquals(expectedOutput, toStringOutput, incorrectToStringMessage);
     }
+
+    @ParameterizedTest
+    @MethodSource("booleanDoublesInputProvider")
+    public void speakerMethodsWorkCorrectlyWorkTogether(double firstValue, boolean secondValue) throws Throwable {
+        Object[][] instantiationArguments = {
+                {1.234, double.class},
+                {false, boolean.class}
+        };
+        Object testInstance = testClass.createInstance(instantiationArguments);
+        _assertEquals(1.234, testClass.getFieldValue(testInstance, attributeName1),
+                "Your " + className + " constructor does not initializes values correctly.");
+        _assertEquals(false, testClass.getFieldValue(testInstance, attributeName2),
+                "Your " + className + " constructor does not initializes values correctly.");
+        Object[][] setMethodArguments = {
+                {firstValue, double.class}
+        };
+        Object[][] setMethodArguments2 = {
+                {secondValue, boolean.class}
+        };
+        testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
+        testClass.callMethod(setAttributeMethodName2, setMethodArguments2, testInstance);
+        Object output1 = testClass.callMethod(getAttributeMethodName1, testInstance);
+        Object output2 = testClass.callMethod(getAttributeMethodName2, testInstance);
+        _assertEquals(firstValue, output1,
+                "Your " + getAttributeMethodName1 + " does not return the correct value after using " + setAttributeMethodName1);
+        _assertEquals(secondValue, output2,
+                "Your " + getAttributeMethodName2 + " does not return the correct value after using " + setAttributeMethodName2);
+        String expectedOutput = "My brightness is " + firstValue + " and isOn is " + secondValue;
+        Object toStringOutput = testClass.callMethod("toString", testInstance);
+        _assertEquals(expectedOutput, toStringOutput,
+                "Your toString method does not return the correct value after using the accessor and mutators.");
+    }
+
 }

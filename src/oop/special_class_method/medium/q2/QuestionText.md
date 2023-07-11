@@ -33,7 +33,7 @@ You need to add the following items to the class:
     - a `getBrightness` method which returns the value stored in the **brightness** attribute
     - a `setIsOn` method which accepts a `boolean` and uses it to set the value of the **isOn** attribute
     - a `getIsOn` method which returns the value stored in the **isOn** attribute
-    - a `toString` method which returns the string `"My brightness is x and isOn is y"`, where x is the **
-      brightness** attribute and y is the **isOn** attribute.
+    - a `toString` method which returns the string `"My brightness is x and isOn is y"`, where x is the
+      **brightness** attribute and y is the **isOn** attribute.
     - All of these methods must be acessible from other classes.
   
