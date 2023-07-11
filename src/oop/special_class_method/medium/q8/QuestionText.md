@@ -28,6 +28,6 @@ You need to add the following items:
     - a `getSkill` method which returns the value stored in the **skill** attribute
     - a `setBounty` method which accepts an `int` and uses it to set the value of the **bounty** attribute
     - a `getBounty` method which returns the value stored in the **bounty** attribute
-    - a `toString` method which returns the string `"My special skill is " + x + " and my bounty is " + y` where x is
+    - a `toString` method which returns the string `"My special skill is x and my bounty is y"` where x is
       the value of **skill** and y is the value of **bounty**.
     - These methods must be visible from other classes.
