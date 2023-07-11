@@ -4,9 +4,9 @@ public class Scissors {
     private boolean isSharp;
     private boolean outOfReach;
 
-    public Scissors(boolean isp, boolean cct) {
-        isSharp = isp;
-        outOfReach = cct;
+    public Scissors(boolean isSharp, boolean outOfReach) {
+        this.isSharp = isSharp;
+        this.outOfReach = outOfReach;
     }
 
     public boolean getIsSharp() {

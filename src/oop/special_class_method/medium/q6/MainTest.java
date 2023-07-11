@@ -95,16 +95,15 @@ public class MainTest {
         Class<?>[] methodModifierClasses = {
                 boolean.class
         };
-        assertTrue(testClass.hasMethod(setAttributeMethodName1, methodModifierClasses),
+        assertTrue(testClass.hasMethod(setAttributeMethodName1, methodModifierClasses, Void.TYPE),
                 "Your " + setAttributeMethodName1 + " method does not have the correct name or arguments.");
-        Object setMethodOutput = testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
+        testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
         assertTrue(testClass.hasModifier(setAttributeMethodName1, methodModifierClasses, "public"),
                 "Your " + setAttributeMethodName1 + " method does not have the correct visibility modifier.");
         String incorrectSetterMessage =
                 "Your " + setAttributeMethodName1 + " method does not correctly update the value of " + attributeName1 + ".";
         _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName1),
                 incorrectSetterMessage);
-        assertNull(setMethodOutput, String.join(" ", "Your", setAttributeMethodName1, "method should not return any output"));
     }
 
     @ParameterizedTest
@@ -137,16 +136,15 @@ public class MainTest {
         Class<?>[] methodModifierClasses = {
                 boolean.class
         };
-        assertTrue(testClass.hasMethod(setAttributeMethodName2, methodModifierClasses),
+        assertTrue(testClass.hasMethod(setAttributeMethodName2, methodModifierClasses, Void.TYPE),
                 "Your " + setAttributeMethodName2 + " method does not have the correct name or arguments.");
-        Object setMethodOutput = testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
+        testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
         assertTrue(testClass.hasModifier(setAttributeMethodName2, methodModifierClasses, "public"),
                 "Your " + setAttributeMethodName2 + " method does not have the correct visibility modifier.");
         String incorrectSetterMessage =
                 "Your " + setAttributeMethodName2 + " method does not correctly update the value of " + attributeName2 + ".";
         _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName2),
                 incorrectSetterMessage);
-        assertNull(setMethodOutput, String.join(" ", "Your", setAttributeMethodName2, "method should not return any output"));
     }
 
     @ParameterizedTest
@@ -180,17 +178,15 @@ public class MainTest {
         Object[][] setMethodArguments = {
                 {value1, boolean.class}
         };
-        Object setMethodOutput = testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
+        testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
         _assertEquals(value1, testClass.getFieldValue(testInstance, attributeName1),
                 "Your " + setAttributeMethodName1 + " method does not correctly update the value of " + attributeName1 + " after using the " + getAttributeMethodName1 + " method.");
-        assertNull(setMethodOutput, String.join(" ", "Your", setAttributeMethodName1, "method should not return any output"));
         setMethodArguments = new Object[][]{
                 {value2, boolean.class}
         };
-        setMethodOutput = testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
+        testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
         _assertEquals(value2, testClass.getFieldValue(testInstance, attributeName2),
                 "Your " + setAttributeMethodName2 + " method does not correctly update the value of " + attributeName2 + " after using the " + getAttributeMethodName2 + " method.");
-        assertNull(setMethodOutput, String.join(" ", "Your", setAttributeMethodName2, "method should not return any output"));
         String expectedOutput = "isSharp is " + value1 + " and outOfReach is " + value2;
         Object toStringOutput = testClass.callMethod("toString", testInstance);
         _assertEquals(expectedOutput, toStringOutput,
