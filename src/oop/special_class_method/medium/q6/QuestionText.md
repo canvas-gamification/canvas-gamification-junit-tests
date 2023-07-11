@@ -23,7 +23,7 @@ You need to add the following items to the class:
 - Methods:
     - a `setIsSharp` method which accepts a `boolean` and uses it to set the value of the **isSharp** attribute
     - a `getIsSharp` method which returns the value stored in the **isSharp** attribute
-    - a `setOutOfReacht` method which accepts a `boolean` and uses it to set the value of the **outOfReach** attribute
+    - a `setOutOfReach` method that accepts a `boolean` and uses it to set the value of the **outOfReach** attribute
     - a `getOutOfReach` method which returns the value stored in the **outOfReach** attribute
     - a `toString` method which returns the string `"isSharp is x and outOfReach is y"` where x is the isSharp attribute and y is the outOfReach attribute.
     - All of these methods must be accessible from another class.
