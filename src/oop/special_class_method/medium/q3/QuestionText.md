@@ -22,5 +22,5 @@ You need to add the following items:
 - Methods:
     - a `setVolume` method which accepts a `double` and uses it to set the value of the **volume** attribute
     - a `getVolume` method which returns the value stored in the **volume** attribute
-    - a `toString` method which returns the string `"My volume is " + x` where x is the value of **volume**
+    - a `toString` method which returns the string `"My volume is x"` where x is the value of **volume**
     - all these methods should be visible from other classes.
