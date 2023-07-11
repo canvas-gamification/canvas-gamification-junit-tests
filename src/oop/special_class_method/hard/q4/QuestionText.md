@@ -25,7 +25,7 @@ Your `Detergent` class must have the following items:
       **strength** attribute with it
     - a `getStrength` method which is accessible from other classes and returns the value of the **strength** attribute
     - a `toString` method which returns a String of the information about the `Detergent` class of the form
-      `"The Detergent instance name is " + x + " and its strength is " + y + "."` where x is the value of the **name**
+      `"The Detergent instance name is  x and its strength is y."` where x is the value of the **name**
       attribute and y is the value of the **strength** attribute.
 
 ### Test Class:
