@@ -160,7 +160,7 @@ public class MainTest {
                 int.class
         };
         assertTrue(testClass.hasMethod(setAttributeMethodName2, methodModifierClasses),
-                "Your " + setAttributeMethodName2 + " method does ont have the correct name or parameters.");
+                "Your " + setAttributeMethodName2 + " method does not have the correct name or parameters.");
         testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
         assertTrue(testClass.hasModifier(setAttributeMethodName2, methodModifierClasses, "public"),
                 "Your " + setAttributeMethodName2 + " method does not have the correct visibility modifier.");
