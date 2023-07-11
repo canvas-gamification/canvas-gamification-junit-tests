@@ -35,7 +35,7 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Integer> invalidInputProvider() {
-        return Stream.of(-1, -2, -10, -12643);
+        return Stream.of(0, -1, -2, -10, -12643);
     }
 
     @ParameterizedTest
@@ -49,8 +49,11 @@ public class MainTest extends BaseTest {
     @MethodSource("invalidInputProvider")
     void printsErrorMessageForInvalidInput(int input) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print an error message for invalid input.";
+        //0 case added in here as well so that if the user marks 0 as invalid input this test will fail and users will
+        //have a clearer idea of where the issue is
+        String s = input == 0 ? "" : "Invalid input!";
         runWithInput(String.valueOf(input), new Clause[]{
-                new StringLiteral("Invalid input!")
+                new StringLiteral(s)
         });
     }
 
