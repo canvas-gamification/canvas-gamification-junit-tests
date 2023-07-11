@@ -20,7 +20,7 @@ You need to add the following items:
 
 - Constructor:
     - a `Car` constructor that is visible to other classes and accepts a `String` and a `double` and uses it to initialize the
-      **maker** and **topSpeed** fields.
+      **maker** and **topSpeed** attributes.
 
 - Methods:
     - a `getMaker` method which returns the value stored in the **maker** attribute
