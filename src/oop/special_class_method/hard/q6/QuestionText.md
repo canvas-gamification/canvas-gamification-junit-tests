@@ -27,7 +27,7 @@ Your `Car` class must have the following items:
       from other classes
     - a `getType` method which is accessible from other classes and returns the value of the **type** attribute
     - a `toString` method which returns a String of the information about the `Car` class of the form
-      `"This Car has a topSpeed of " + x " with the type " + y + "."` where x is the value of the **topSpeed** attribute
+      `"This Car has a topSpeed of x with the type y."` where x is the value of the **topSpeed** attribute
       and y is the value of the **type** attribute.
 
 ### Test Class:
