@@ -9,7 +9,7 @@ of the class but they cannot be modified.
 
 ### Car Class:
 
-Your `Car` class already has the following items
+Your `Car` class already has the following items:
 
 - Attributes:
     - An `String` called **maker**
