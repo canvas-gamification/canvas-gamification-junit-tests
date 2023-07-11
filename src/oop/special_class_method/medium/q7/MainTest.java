@@ -50,23 +50,27 @@ public class MainTest {
         );
     }
 
-    @Test
-    public void correctGetNumPenniesMethod() throws Throwable {
+    @ParameterizedTest
+    @MethodSource("intInputProvider")
+    public void correctGetNumPenniesMethod(int value) throws Throwable {
         Object testInstance = testClass.createInstance();
+        testClass.setFieldValue(testInstance, value, attributeName1);
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName1, testInstance);
         assertTrue(testClass.hasModifier(getAttributeMethodName1, null, "public"),
                 "Your " + getAttributeMethodName1 + " method does not have the correct visibility modifier.");
-        _assertEquals(0, getMethodOutput,
+        _assertEquals(value, getMethodOutput,
                 "Your " + getAttributeMethodName1 + " method does not return the value of the " + attributeName1+ " attribute.");
     }
 
-    @Test
-    public void correctGetNumNickelsMethod() throws Throwable {
+    @ParameterizedTest
+    @MethodSource("intInputProvider")
+    public void correctGetNumNickelsMethod(int value) throws Throwable {
         Object testInstance = testClass.createInstance();
+        testClass.setFieldValue(testInstance, value, attributeName2);
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName2, testInstance);
         assertTrue(testClass.hasModifier(getAttributeMethodName2, null, "public"),
                 "Your " + getAttributeMethodName2 + " method does not have the correct visibility modifier.");
-        _assertEquals(0, getMethodOutput,
+        _assertEquals(value, getMethodOutput,
                 "Your " + getAttributeMethodName2 + " method does not return the value of the " + attributeName2 + " attribute.");
     }
 
@@ -129,48 +133,14 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("intInputProvider2")
     public void correctToStringMethod(int value1, int value2) throws Throwable {
-        Object[][] arguments1 = {
-                {value1, int.class}
-        };
-        Object[][] arguments2 = {
-                {value2, int.class}
-        };
         double value = (value1 * 1 + value2 * 5) / 100.0;
         String incorrectToStringMessage = "Your toString method does not return the correct String.";
         Object testInstance = testClass.createInstance(null);
-        testClass.callMethod(setAttributeMethodName1, arguments1, testInstance);
-        testClass.callMethod(setAttributeMethodName2, arguments2, testInstance);
+        testClass.setFieldValue(testInstance, value1, attributeName1);
+        testClass.setFieldValue(testInstance, value2, attributeName2);
         String expectedOutput = toStringMessage + value;
         Object toStringOutput = testClass.callMethod("toString", testInstance);
         _assertEquals(expectedOutput, toStringOutput, incorrectToStringMessage);
-    }
-
-    @ParameterizedTest
-    @MethodSource("intInputProvider")
-    public void correctGetSetMethods(int updatedValue) throws Throwable {
-        String errorMessage = "Your " + className + " class " + getAttributeMethodName1 +
-                " method does not return the updated value after calling the " + setAttributeMethodName1 + " method.";
-        Object testInstance = testClass.createInstance();
-        Object[][] setMethodArguments = {
-                {updatedValue, int.class}
-        };
-        testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
-        Object getMethodOutput = testClass.callMethod(getAttributeMethodName1, testInstance);
-        _assertEquals(updatedValue, getMethodOutput, errorMessage);
-    }
-
-    @ParameterizedTest
-    @MethodSource("intInputProvider")
-    public void correctGetSetMethods2(int updatedValue) throws Throwable {
-        String errorMessage = "Your " + className + " class " + getAttributeMethodName2 +
-                " method does not return the updated value after calling the " + setAttributeMethodName2 + " method.";
-        Object testInstance = testClass.createInstance();
-        Object[][] setMethodArguments = {
-                {updatedValue, int.class}
-        };
-        testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
-        Object getMethodOutput = testClass.callMethod(getAttributeMethodName2, testInstance);
-        _assertEquals(updatedValue, getMethodOutput, errorMessage);
     }
 
     @ParameterizedTest
@@ -180,23 +150,15 @@ public class MainTest {
         Object[][] setMethodArguments = {
                 {value1, int.class}
         };
-        Object setMethodOutput = testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
-        _assertEquals(value1, testClass.getFieldValue(testInstance, attributeName1),
-                "Your " + setAttributeMethodName1 + " method does not correctly update the value of " + attributeName1 + " after using the " + getAttributeMethodName1 + " method.");
-        assertNull(setMethodOutput, String.join(" ", "Your", setAttributeMethodName1, "method should not return any output"));
+        testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
+        _assertEquals(value1, testClass.callMethod(getAttributeMethodName1, testInstance),
+                "Your " + getAttributeMethodName1 + " method does not correctly update the value of " + setAttributeMethodName1 + " after using the " + getAttributeMethodName1 + " method.");
         setMethodArguments = new Object[][]{
                 {value2, int.class}
         };
-        setMethodOutput = testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
-        _assertEquals(value2, testClass.getFieldValue(testInstance, attributeName2),
-                "Your " + setAttributeMethodName2 + " method does not correctly update the value of " + attributeName2 + " after using the " + getAttributeMethodName2 + " method.");
-        assertNull(setMethodOutput, String.join(" ", "Your", setAttributeMethodName2, "method should not return any output"));
-        Object getMethodOutput = testClass.callMethod(getAttributeMethodName1, testInstance);
-        _assertEquals(value1, getMethodOutput,
-                "Your " + getAttributeMethodName1 + " method does not return the value of the " + attributeName1 + " attribute.");
-        getMethodOutput = testClass.callMethod(getAttributeMethodName2, testInstance);
-        _assertEquals(value2, getMethodOutput,
-                "Your " + getAttributeMethodName2 + " method does not return the value of the " + attributeName2 + " attribute.");
+        testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
+        _assertEquals(value2, testClass.callMethod(getAttributeMethodName2, testInstance),
+                "Your " + getAttributeMethodName2 + " method does not correctly update the value of " + setAttributeMethodName2 + " after using the " + getAttributeMethodName2 + " method.");
         String expectedOutput = "The total amount is $" + ((value1 * 1 + value2 * 5) / 100.0);
         Object toStringOutput = testClass.callMethod("toString", testInstance);
         _assertEquals(expectedOutput, toStringOutput,
