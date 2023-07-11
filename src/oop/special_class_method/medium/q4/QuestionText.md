@@ -17,7 +17,7 @@ Your `Plant` class already has the following items:
 - Constructor:
     - a `Plant` constructor that is visible to other classes and accepts a `String` and uses it to initialize the
       **breed** attribute
-    - It is not visible from another class.
+    - It is visible from another class.
 
 You need to add the following items:
 
