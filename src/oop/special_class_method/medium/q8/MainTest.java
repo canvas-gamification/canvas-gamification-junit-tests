@@ -102,7 +102,7 @@ public class MainTest {
         assertTrue(testClass.hasModifier(getAttributeMethodName1, null, "public"),
                 "Your " + getAttributeMethodName1 + " method does not have the correct visibility modifier.");
         _assertEquals(skill, getMethodOutput,
-                "Your " + getAttributeMethodName1 + " method does not return the value of the size attribute.");
+                "Your " + getAttributeMethodName1 + " method does not return the value of the " + attributeName1 + " attribute.");
     }
 
     @ParameterizedTest
