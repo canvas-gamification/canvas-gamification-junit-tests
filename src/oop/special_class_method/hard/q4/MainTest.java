@@ -158,7 +158,6 @@ public class MainTest {
                 {initialValue, String.class}
         };
         Object classInstance = testClass.createInstance(arguments);
-        testClass.setFieldValue(classInstance, initialValue, stringFieldName);
         Object[][] setMethodArguments = {
                 {updatedValue, String.class}
         };
@@ -182,7 +181,6 @@ public class MainTest {
                 {value, String.class}
         };
         Object classInstance = testClass.createInstance(arguments);
-        testClass.setFieldValue(classInstance, value, stringFieldName);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
                 "Your", getStringMethodName, "method does not correctly get the value of the", stringFieldName, "attribute.");

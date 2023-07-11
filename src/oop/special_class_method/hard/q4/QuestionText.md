@@ -31,5 +31,4 @@ Your `Detergent` class must have the following items:
 ### Test Class:
 
 Your `Test` class will have a main method which initializes a `Detergent` with the **name** "Bleach" and of
-**strength** "High". Then,
-print the toString for this class.
+**strength** "High". Then, print the toString for this class.
