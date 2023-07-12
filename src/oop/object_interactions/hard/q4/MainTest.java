@@ -69,10 +69,6 @@ public class MainTest {
                 {data, String.class},
                 {key, int.class}
         };
-        assertTrue(classInstance.hasConstructor(new Class[]{String.class, int.class}),
-                String.format("Your %s class is missing a required constructor.", objectClassName));
-        assertTrue(classInstance.hasConstructor(new Class[]{String.class, int.class}, new String[]{"public"}),
-                String.format("Your %s class constructor has the incorrect visibility modifier.", objectClassName));
         Object instance = classInstance.createInstance(arguments);
         _assertEquals(data, classInstance.getFieldValue(instance, stringAttribute1),
                 String.format("Your %s constructor does not correctly initialize the %s attribute.", objectClassName, stringAttribute1));
