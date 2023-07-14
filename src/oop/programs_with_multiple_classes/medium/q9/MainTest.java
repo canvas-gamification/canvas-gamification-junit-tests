@@ -80,7 +80,7 @@ public class MainTest {
     }
 
     @Test
-    public void monitorCLassHasRequiredConstructor() {
+    public void monitorClassHasRequiredConstructor() {
         Class<?>[] classArguments = {int.class, String.class, boolean.class};
         assertTrue(monitor.hasConstructor(classArguments),
                 "Your " + classMonitor + " constructor does not have the correct parameters.");
