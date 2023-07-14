@@ -1,9 +1,9 @@
 package methods.defining_methods.hard.q1;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.NewLine;
@@ -54,8 +54,12 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("bmiCalcInputProvider")
     void correctBMICalcMethod(double height, int weight, double bmi) throws Throwable {
-        Object output = MethodUtil.invokeIfMethodExists(BMIMethodTime.class, "bmiCalculator", new Object[]{height, weight},
-                double.class, int.class);
+        Object[][] arguments = {
+                {height, double.class},
+                {weight, int.class}
+        };
+        MethodTest m = new MethodTest(BMIMethodTime.class, "bmiCalculator", arguments);
+        Object output = m.callMethod();
         CustomAssertions._assertEquals(bmi, output, 0.0000001, "Your bmiCalc method does not correctly calculate BMI.");
     }
 
