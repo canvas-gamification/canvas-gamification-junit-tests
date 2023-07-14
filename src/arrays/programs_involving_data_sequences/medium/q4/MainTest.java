@@ -1,11 +1,11 @@
 package arrays.programs_involving_data_sequences.medium.q4;
 
 import global.BaseTest;
+import global.MethodTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.CustomAssertions;
 import global.tools.TestOption;
 import global.utils.ArrayUtil;
-import global.utils.MethodUtil;
 import global.variables.Clause;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
@@ -42,8 +42,12 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     void correctAddThisOneMethod(int[] array, int number, int[] replaced) throws Throwable {
-        Object result = MethodUtil.invokeIfMethodExists(Replacements.class, "addThisOne",
-                new Object[]{array, number}, int[].class, int.class);
+        Object[][] arguments = {
+                {array, int[].class},
+                {number, int.class}
+        };
+        MethodTest m = new MethodTest(Replacements.class, "addThisOne", arguments);
+        Object result = m.callMethod();
         CustomAssertions._assertArrayEquals(replaced, result, "Your addThisOne method does not insert the number at the correct index.");
     }
 

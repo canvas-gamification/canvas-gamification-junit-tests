@@ -9,14 +9,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static global.tools.CustomAssertions._fail;
 import static global.tools.CustomAssertions.assertWithinRange;
 import static global.utils.RandomUtil.frequenciesAreRandom;
-import static global.utils.RegexUtil.orNegative;
 
 public class RandomDouble extends Clause implements RandomClause<Double> {
     static Map<Integer, ArrayList<Double>> valueStore = new HashMap<>();
     private final double lower, upper;
     private int precision = 16;  // max double precision
+
+    /**
+     * This constant is equal to the minimum number of bins for random checking with RandomDouble
+     */
+    private static final int MIN_BINS = 10;
 
     public RandomDouble(double lower, double upper) {
         super();
@@ -61,7 +66,15 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
     public boolean validateRandom(int matchGroupNum) {
         if (valueStore.get(matchGroupNum) == null)
             return false;
-        ArrayList<Double> values = valueStore.get(matchGroupNum);
+        return validateRandom(valueStore.get(matchGroupNum));
+    }
+
+    public boolean validateRandom(ArrayList<Double> values) {
+        if (values.size() < 1000)
+            _fail("There is an error with the test definition. Please contact a test administrator.",
+                    "Error: invalid number of values provided. There must be more than 1000 values generated"
+            );
+
         final int numBins = RandomDouble.getNumBins(lower, upper);
 
         int[] observedCounts = new int[numBins];
@@ -78,7 +91,7 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
         int upperCeil = (int) (upper + 1);
         int lowerFloor = (int) lower;
         // Ensures that there will be at least 10 bins
-        return (upperCeil - lowerFloor <= 10) ? RandomUtil.getNumBins(0, 10) :
+        return (upperCeil - lowerFloor <= MIN_BINS) ? RandomUtil.getNumBins(0, 10) :
                 RandomUtil.getNumBins(lowerFloor, upperCeil); // TODO: do properly
     }
 
@@ -113,9 +126,6 @@ public class RandomDouble extends Clause implements RandomClause<Double> {
 
     @Override
     public String getRegex() {
-        int lowSplit = RegexUtil.getSplitDecimal(lower)[0];
-        int highSplit = RegexUtil.getSplitDecimal(upper)[0];
-        String regexContent = RegexUtil.getRegexInt(lowSplit, highSplit);
-        return "(" + orNegative(regexContent + "\\.\\d+") + ")";
+        return "([-+]?[0-9]+\\.[0-9]+(?:[eE][-+]?[0-9]+)?)";
     }
 }
