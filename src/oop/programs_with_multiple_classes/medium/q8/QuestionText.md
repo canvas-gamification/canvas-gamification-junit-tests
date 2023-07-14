@@ -38,7 +38,6 @@ You must add the following items to complete the class:
 
 - Attributes:
     - based on the constructor write the **size** and **personCapacity** attributes with the appropriate types.
-    - An array of `Light` called **lights**
+    - An array of `Light` objects called **lights**
 - Constructors:
     - Change the constructor so that if it gets a negative value for **size** it should initialize it to zero.
-    - They should not be accessible from other classes.
