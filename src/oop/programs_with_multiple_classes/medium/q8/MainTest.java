@@ -62,11 +62,11 @@ public class MainTest {
     @Test
     public void kitchenClassHasCorrectAttributes() {
         assertTrue(kitchen.hasField(varSize, int.class),
-                "Your " + classKitchen + " class is missing the " + varSize + " attribute, or is spelled incorrectly.");
+                "Your " + classKitchen + " class is missing the " + varSize + " attribute, or it is spelt incorrectly.");
         assertTrue(kitchen.hasModifier(varSize, "private"),
                 "Your " + classKitchen + " class does not have the correct visibility modifier for " + varSize + " attribute.");
         assertTrue(kitchen.hasField(varCap, int.class),
-                "Your " + classKitchen + " class is missing the " + varCap + " attribute, or is spelled incorrectly..");
+                "Your " + classKitchen + " class is missing the " + varCap + " attribute, or it is spelt incorrectly.");
         assertTrue(kitchen.hasModifier(varCap, "private"),
                 "Your " + classKitchen + " class does not have the correct visibility modifier for " + varCap + " attribute.");
         assertTrue(kitchen.hasField(varLights, Light[].class),
