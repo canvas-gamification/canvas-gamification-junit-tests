@@ -68,15 +68,14 @@ public class MainTest {
         };
         Object vegetableInstance = meat.createInstance(arguments);
         assertTrue(meat.hasMethod(methodName, null, Void.TYPE),
-                "Your " + meatClass + " " + methodName + " does not have a correct name, arguments, or return type.");
+                "Your " + meatClass + " " + methodName + " does not have the correct name, arguments, or return type.");
         assertTrue(meat.hasModifier(methodName, null, "public"),
-                "Your " + meatClass + " " + methodName + " does not have a correct visibility modifier.");
+                "Your " + meatClass + " " + methodName + " does not have the correct visibility modifier.");
         Object output = meat.callMethod(methodName, vegetableInstance);
         _assertEquals(true, meat.getFieldValue(vegetableInstance, varSpoiled),
                 "Your " + meatClass + " " + methodName + " method does not change the " + varSpoiled + " value to true.");
         assertNull(output, "Your " + methodName + " method should not return anything.");
     }
-
 
     private static Stream<Integer> fridgeInputProvider() {
         return Stream.of( 10, 20, 150, -10, -20, -15);
