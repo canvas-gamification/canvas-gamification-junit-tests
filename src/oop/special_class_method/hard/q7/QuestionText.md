@@ -9,7 +9,7 @@ You are writing a Java program that mimics different financial institutions or p
 
 Your `PiggyBank` class must have the following items:
 
-- Fields :
+- Attributes:
     - A `double` attribute named **money** which is not accessible from other classes
     - An `int` attribute named **time** which is not accessible from other classes
 
