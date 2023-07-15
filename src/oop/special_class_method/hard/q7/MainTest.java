@@ -140,7 +140,7 @@ public class MainTest {
                 "Your", setDoubleMethodName, "method does not correctly set the value of the", doubleFieldName, "attribute.");
         Object setMethodOutput = testClass.callMethod(setDoubleMethodName, setSizeArguments, setMethodModifiers, classInstance);
         _assertEquals(setValue, testClass.getFieldValue(classInstance, doubleFieldName), incorrectSetMethodMessage);
-        assertNull(setMethodOutput, String.join(" ", "Your", setDoubleMethodName, "should not return any output"));
+        assertNull(setMethodOutput, String.join(" ", "Your", setDoubleMethodName, "method should not return any output"));
     }
 
     @ParameterizedTest
@@ -183,7 +183,7 @@ public class MainTest {
                 "Your", setIntMethodName, "method does not correctly set the value of the", intFieldName, "attribute.");
         Object setMethodOutput = testClass.callMethod(setIntMethodName, setMethodArguments, setMethodModifiers, classInstance);
         _assertEquals(updatedValue, testClass.getFieldValue(classInstance, intFieldName), incorrectSetMethodMessage);
-        assertNull(setMethodOutput, String.join(" ", "Your", setIntMethodName, "should not return any output"));
+        assertNull(setMethodOutput, String.join(" ", "Your", setIntMethodName, "method should not return any output"));
     }
 
     @ParameterizedTest
@@ -212,7 +212,7 @@ public class MainTest {
         String[] methodModifiers = {"public"};
         String expected = "I have " + value + " dollars in me after " + b + " days.";
         String incorrectToStringMessage = String.join(" ",
-                "Your", className, " toString method does not return the correct String.");
+                "Your", className, "toString method does not return the correct String.");
         Object output = testClass.callMethod("toString", methodModifiers, classInstance);
         _assertEquals(expected, output, incorrectToStringMessage);
     }
