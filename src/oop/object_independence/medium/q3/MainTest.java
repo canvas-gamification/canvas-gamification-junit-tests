@@ -166,7 +166,7 @@ public class MainTest {
         };
         testClass.callMethod(setFirstField, setArguments, classInstance);
         _assertArrayEquals(value, testClass.callMethod(getFirstField, classInstance),
-                "Your " + getFirstField + " method does not return the correct value calling the " + setFirstField + " method.");
+                "Your " + getFirstField + " method does not return the correct value after calling the " + setFirstField + " method.");
         String expected = "My ingredients are: ";
         for (int i = 0; i < value.length; i++)
             expected += value[i] + " ";
