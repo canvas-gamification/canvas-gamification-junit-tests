@@ -29,7 +29,7 @@ Your `Award` class must have the following items:
     - a `getAwardCategory` method which is accessible from other classes and returns the value of the **awardCategory**
       attribute
     - a `toString` method which returns a String of the information about the `Award` class of the form
-      `"The award for " + x + " category goes to " + y`. where is is the value of **awardCategory** attribute and y
+      `"The award for x category goes to y"`. where x is the value of **awardCategory** attribute and y
       is the value of **awardRecipient** attribute
 
 ### Distractors:
