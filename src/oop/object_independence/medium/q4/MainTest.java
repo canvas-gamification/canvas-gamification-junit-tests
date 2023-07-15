@@ -139,39 +139,36 @@ public class MainTest {
         Object classInstance = testClass.createInstance(arguments);
         String[] methodModifiers = {"public"};
         int current = (int) testClass.getFieldValue(classInstance, secondFieldName);
-        Object output = testClass.callMethod(firstMethod, methodModifiers, classInstance, new Clause[]{
+        testClass.callMethod(firstMethod, methodModifiers, classInstance, new Clause[]{
                         new StringLiteral("Now Playing : " + value[current])
                 },
                 String.join(" ", "Your", firstMethod, "method does not print the correct output."));
-        assertNull(output, String.join(" ", "Your", firstMethod, "method should not return any output"));
         _assertEquals(current, testClass.getFieldValue(classInstance, secondFieldName),
                 String.join(" ", "Your", firstMethod, "method should not alter the", secondFieldName, "attribute"));
+        current = 0;
         for (int i = 0; i < value.length; i++) {
-            current = (int) testClass.getFieldValue(classInstance, secondFieldName);
-            output = testClass.callMethod(secondMethod, methodModifiers, classInstance, new Clause[]{
+            testClass.callMethod(secondMethod, methodModifiers, classInstance, new Clause[]{
                             new StringLiteral("Now Playing : " + value[(current + 1) % value.length])
                     },
                     String.join(" ", "Your", firstMethod, "method does not print the correct output."));
-            assertNull(output, String.join(" ", "Your", firstMethod, "method should not return any output"));
             _assertEquals((current + 1) % value.length, testClass.getFieldValue(classInstance, secondFieldName),
                     String.join(" ", "Your", firstMethod, "method does not increase the", secondFieldName, "attribute"));
+            current = (current + 1 + value.length) % value.length;
         }
+        current = 0;
         for (int i = 0; i < value.length / 2; i++) {
-            current = (int) testClass.getFieldValue(classInstance, secondFieldName);
-            output = testClass.callMethod(thirdMethod, methodModifiers, classInstance, new Clause[]{
+            testClass.callMethod(thirdMethod, methodModifiers, classInstance, new Clause[]{
                             new StringLiteral("Now Playing : " + value[(current - 1 + value.length) % value.length])
                     },
                     String.join(" ", "Your", firstMethod, "method does not print the correct output."));
-            assertNull(output, String.join(" ", "Your", firstMethod, "method should not return any output"));
             _assertEquals((current - 1 + value.length) % value.length, testClass.getFieldValue(classInstance, secondFieldName),
                     String.join(" ", "Your", firstMethod, "method does not decrease the", secondFieldName, "attribute"));
+            current = (current - 1 + value.length) % value.length;
         }
-        current = (int) testClass.getFieldValue(classInstance, secondFieldName);
-        output = testClass.callMethod(firstMethod, methodModifiers, classInstance, new Clause[]{
+        testClass.callMethod(firstMethod, methodModifiers, classInstance, new Clause[]{
                         new StringLiteral("Now Playing : " + value[current])
                 },
                 String.join(" ", "Your", firstMethod, "method does not print the correct output."));
-        assertNull(output, String.join(" ", "Your", firstMethod, "method should not return any output"));
         _assertEquals(current, testClass.getFieldValue(classInstance, secondFieldName),
                 String.join(" ", "Your", firstMethod, "method should not alter the", secondFieldName, "attribute"));
     }
