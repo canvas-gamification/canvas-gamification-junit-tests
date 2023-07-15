@@ -132,7 +132,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void carClassMethodsWorkTogether(String[] value) throws Throwable {
+    public void portableMusicPlayerClassMethodsWorkTogether(String[] value) throws Throwable {
         Object[][] arguments = {
                 {value, String[].class}
         };
