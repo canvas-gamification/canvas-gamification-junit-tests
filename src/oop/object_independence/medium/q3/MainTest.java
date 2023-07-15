@@ -146,7 +146,7 @@ public class MainTest {
         for (int i = 0; i < value.length; i++)
             expected += value[i] + " ";
         String incorrectToStringMessage = String.join(" ",
-                "Your", className, " toString method does not return the correct String.");
+                "Your", className, "toString method does not return the correct String.");
         Object output = testClass.callMethod("toString", methodModifiers, classInstance);
         _assertEquals(expected, output, incorrectToStringMessage);
     }
