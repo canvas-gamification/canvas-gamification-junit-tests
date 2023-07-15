@@ -27,7 +27,7 @@ Your `PiggyBank` class must have the following items:
       from other classes
     - a `getTime` method which is accessible from other classes and returns the value of the **time** attribute
     - a `toString` method which returns a String of the information about the `PiggyBank` class of the form
-      `"I have " + x + " dollars in me after " + y + " days."` where x is the value of the **money** attribute
+      `"I have x dollars in me after y days."` where x is the value of the **money** attribute
       and y is the value of the **time** attribute
 
 ### Test Class:
