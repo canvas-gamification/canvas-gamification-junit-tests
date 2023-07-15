@@ -2,7 +2,7 @@
 
 ## Question Info
 
-- Question type: Parsons
+- Question type: Java
 
 ## Question Text
 
