@@ -29,5 +29,5 @@ Your `Team` class must have the following items:
     - a `setTotalWins` method which accepts an `int` value, updates the **totalWins** attribute with it,
       and is accessible from other classes
     - a `toString` method which returns a String of the information about the `Team` class of the form
-      `"Team " + x + " has won " + y + " games"`, where x is the value of **name** and y is the value of **totalWins**,
+      `"Team x has won y games"`, where x is the value of **name** and y is the value of **totalWins**,
       and is visible from other classes.
