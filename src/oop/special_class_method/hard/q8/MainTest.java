@@ -56,11 +56,11 @@ public class MainTest {
     @Test
     public void circleClassHasCorrectAttributes() {
         assertTrue(testClass.hasField(doubleFieldName, double.class),
-                "Your " + className + " class is missing the " + doubleFieldName + " attributes.");
+                "Your " + className + " class is missing the " + doubleFieldName + " attribute.");
         assertTrue(testClass.hasModifier(doubleFieldName, "private"),
                 "Your " + doubleFieldName + " attribute does not have the correct visibility modifier.");
         assertTrue(testClass.hasField(stringFieldName, String.class),
-                "Your " + className + " class is missing the " + stringFieldName + " attributes.");
+                "Your " + className + " class is missing the " + stringFieldName + " attribute.");
         assertTrue(testClass.hasModifier(stringFieldName, "private"),
                 "Your " + stringFieldName + " attribute does not have the correct visibility modifier.");
     }
