@@ -26,7 +26,7 @@ Your `Earth` class must have the following items:
     - a `getPopulation` method which is accessible from other classes and returns the value of the **population**
       attribute
     - a `toString` method which returns a String of the information about the `Earth` class of the form
-      `"Here " + x + "people live on a " + y + "kg planet."` where x is the value of **population** attribute and
+      `"Here x people live on a ykg planet."` where x is the value of **population** attribute and
       y is the value of **landMass** attribute.
 
 ### Distractors:
