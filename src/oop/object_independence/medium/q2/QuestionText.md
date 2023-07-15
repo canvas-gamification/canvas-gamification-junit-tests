@@ -16,7 +16,7 @@ Your `PhoneWaitList` class must have the following items:
 
 - Attributes:
     - An `int` called **numAhead**
-    - This attribute should be visible from another class
+    - This attribute should not be visible from another class
 
 - Constructors:
     - A single constructor with a parameter `int` that initalzies the **numAhead** attribute
