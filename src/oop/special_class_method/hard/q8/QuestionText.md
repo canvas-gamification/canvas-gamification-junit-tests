@@ -25,7 +25,7 @@ Your `Circle` class must have the following items:
       from other classes
     - a `getColour` method which is accessible from other classes and returns the value of the **colour** attribute
     - a `toString` method which returns a String of the information about the `Circle` class of the form
-      `"I have a " + x + " radius and my colour is " + y` where x is the value of **radius** attribute and y is the
+      `"I have a x radius and my colour is y"` where x is the value of **radius** attribute and y is the
       value of **colour** attribute
 
 ### Test Class:
