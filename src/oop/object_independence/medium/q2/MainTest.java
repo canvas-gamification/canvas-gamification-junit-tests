@@ -54,7 +54,7 @@ public class MainTest {
 
     // Field Tests
     @Test
-    public void bankAccountClassHasRequiredFields() {
+    public void phoneWaitListClassHasRequiredFields() {
         assertTrue(testClass.hasField(firstFieldName, int.class),
                 "Your " + className + " class is missing the " + firstFieldName + " attribute.");
         assertTrue(testClass.hasModifier(firstFieldName, "private"),
