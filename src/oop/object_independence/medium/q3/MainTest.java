@@ -171,7 +171,7 @@ public class MainTest {
         for (int i = 0; i < value.length; i++)
             expected += value[i] + " ";
         String incorrectToStringMessage = String.join(" ",
-                "Your", className, " toString method does not return the correct String after updating the values of its attribute using its setter method.");
+                "Your", className, "toString method does not return the correct String after updating the value of its attribute using its setter method.");
         Object output = testClass.callMethod("toString", classInstance);
         _assertEquals(expected, output, incorrectToStringMessage);
     }
