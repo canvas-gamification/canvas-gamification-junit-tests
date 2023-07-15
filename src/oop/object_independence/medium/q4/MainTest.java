@@ -32,7 +32,7 @@ public class MainTest {
     }
 
     @Test
-    public void portableMusicPlayerClassHasRequiredFields() {
+    public void portableMusicPlayerClassHasRequiredAttributes() {
         assertTrue(testClass.hasField(firstFieldName, String[].class),
                 "Your " + className + " class is missing the " + firstFieldName + " attribute.");
         assertTrue(testClass.hasModifier(firstFieldName, "private"),
