@@ -27,7 +27,7 @@ Your `PhoneWaitList` class must have the following items:
     - a `setNumAhead` method which accepts an `int` value, updates the **numAhead** attribute with it, and
       is visible from other classes
     - a `toString` method which returns a String of the information about the `PhoneWaitList` class of the form
-      `There are " + x + " people ahead of you`, where x is the value of the **numAhead** attribute, and is visible from
+      `There are x people ahead of you"`, where x is the value of the **numAhead** attribute, and is visible from
       other classes.
 
 ### TestWaitList Class
