@@ -110,7 +110,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctHearSecretMethod(int year, int month, int day, String story) throws Throwable {
+    public void correctMakeCopyMethod(int year, int month, int day, String story) throws Throwable {
         Object classInstance = testClass.createInstance();
         Object[][] methodArguments = {
                 {new Newspaper(year, month, day, story), Newspaper.class}
