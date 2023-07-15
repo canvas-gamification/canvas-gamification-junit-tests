@@ -47,8 +47,7 @@ public class MainTest {
                 {new String[0], String[].class}
         };
         outputClass.callMethod("main", arguments, methodModifiers, classInstance, new Clause[]{
-                new StringLiteral("This " + className + " has a " + doubleFieldName + " of " + outputTopSpeed + " with the " + stringFieldName + " " + outputType),
-                new Optional(new StringLiteral(".")),
+                new StringLiteral("This " + className + " has a " + doubleFieldName + " of " + outputTopSpeed + " with the " + stringFieldName + " " + outputType + "."),
                 new Optional(new StringLiteral(" ")),
                 new Optional(new NewLine())
         });
@@ -69,6 +68,15 @@ public class MainTest {
     @Test
     public void carClassHasRequiredConstructor() {
         Class<?>[] classArguments = {double.class, String.class};
+        assertTrue(testClass.hasConstructor(classArguments),
+                "Your " + className + " constructor does not have the correct parameters.");
+        assertTrue(testClass.hasModifier(classArguments, "public"),
+                "Your " + className + " constructor does not have the correct modifier.");
+    }
+
+    @Test
+    public void carClassHasRequiredConstructor2() {
+        Class<?>[] classArguments = {};
         assertTrue(testClass.hasConstructor(classArguments),
                 "Your " + className + " constructor does not have the correct parameters.");
         assertTrue(testClass.hasModifier(classArguments, "public"),
@@ -109,19 +117,15 @@ public class MainTest {
 
     @Test
     public void carClassHasCorrectConstructor2() throws Throwable {
-        Class<?>[] constructorClasses = {double.class, String.class};
         Object classInstance = testClass.createInstance();
         String incorrectDoubleValueMessage =
                 "Your " + className + " constructor without input does not initialize the " + doubleFieldName + " attribute to the correct value.";
         String incorrectStringValueMessage =
                 "Your " + className + " constructor without input does not initialize the " + stringFieldName + " attribute to the correct value.";
-        String incorrectConstructorVisibilityModifier =
-                "Your " + className + " constructor does not have the correct visibility modifier.";
         _assertEquals(180.0, testClass.getFieldValue(classInstance, doubleFieldName),
                 incorrectDoubleValueMessage);
         assertEquals(null, testClass.getFieldValue(classInstance, stringFieldName),
                 incorrectStringValueMessage);
-        assertTrue(testClass.hasModifier(constructorClasses, "public"), incorrectConstructorVisibilityModifier);
     }
 
     private static Stream<Arguments> doubleInputProvider() {
