@@ -22,8 +22,8 @@ Your `Award` class must have the following items:
 - Methods:
     - a `setAwardRecipient` method which accepts a `String` value, updates the **awardRecipient** attribute with it, and
       is accessible from other classes
-    - a `getAwardRecipient` method which is accessible from other classes and returns the value of the **
-      awardRecipient** attribute
+    - a `getAwardRecipient` method which is accessible from other classes and returns the value of the
+      **awardRecipient** attribute
     - a `setAwardCategory` method which accepts a `String` value, updates the **awardCategory** attribute with it, and
       is accessible from other classes
     - a `getAwardCategory` method which is accessible from other classes and returns the value of the **awardCategory**
@@ -33,9 +33,6 @@ Your `Award` class must have the following items:
       is the value of **awardRecipient** attribute
 
 ### Distractors:
-
-- setAwardRecipient(awardRecipient);
-- setAwardCategory(awardCategory);
 - return AwardCategory;
 - return awardCategory = awardCategory;
 - public String awardCategory;
