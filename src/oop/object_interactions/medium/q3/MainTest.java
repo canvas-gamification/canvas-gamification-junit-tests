@@ -2,6 +2,7 @@ package oop.object_interactions.medium.q3;
 
 import global.ObjectTest;
 import global.variables.Clause;
+import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
@@ -115,7 +116,13 @@ public class MainTest {
         Object[][] methodArguments = {
                 {new Newspaper(year, month, day, story), Newspaper.class}
         };
-        Object output = testClass.callMethod(makeCopyMethodName, methodArguments, new String[]{"public"}, classInstance);
+        assertTrue(testClass.hasMethod(makeCopyMethodName, new Class<?>[]{Newspaper.class}),
+                "Your " + className + " class does not have the " + makeCopyMethodName + " method or is misspelled");
+        assertTrue(testClass.hasMethod(makeCopyMethodName, new Class<?>[]{Newspaper.class}, Void.TYPE),
+                "Your " + makeCopyMethodName + " method should not return anything.");
+        assertTrue(testClass.hasMethod(makeCopyMethodName, new Class<?>[]{Newspaper.class}, Void.TYPE, new String[]{"public"}),
+                "Your " + makeCopyMethodName + " method does not have the correct visibility modifier.");
+        testClass.callMethod(makeCopyMethodName, methodArguments, new String[]{"public"}, classInstance);
         _assertEquals(year, testClass.getFieldValue(classInstance, myYearAttributeName),
                 "Your " + makeCopyMethodName + " method does not make a copy of the " + myYearAttributeName + " attribute correctly.");
         _assertEquals(month, testClass.getFieldValue(classInstance, myMonthAttributeName),
@@ -124,7 +131,6 @@ public class MainTest {
                 "Your " + makeCopyMethodName + " method does not make a copy of the " + myDayAttributeName + " attribute correctly.");
         _assertEquals(story, testClass.getFieldValue(classInstance, myStoryAttributeName),
                 "Your " + makeCopyMethodName + " method does not make a copy of the " + myStoryAttributeName + " attribute correctly.");
-        assertNull(output, String.join(" ", "Your", makeCopyMethodName, "should not return any output"));
     }
 
     @ParameterizedTest
@@ -148,6 +154,12 @@ public class MainTest {
     @Test
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
+                new StringLiteral("2021/12/5:The story is: The votes are in!"),
+                new Optional(new StringLiteral(" ")),
+                new NewLine(),
+                new StringLiteral("-1/-1/-1:The story is:"),
+                new Optional(new StringLiteral(" ")),
+                new NewLine(),
                 new StringLiteral("2021/12/5:The story is: The votes are in!"),
                 new Optional(new StringLiteral(" "))
         };

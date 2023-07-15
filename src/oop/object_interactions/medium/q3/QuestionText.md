@@ -5,7 +5,7 @@
 ## Question Text
 
 You work at a printing company and your summer job is to make copies of original works. Make a **Newspaper** class that
-has attributes to store the year, month, and day of the print as well as an attribute called **myStory**.
+has attributes to store the year, month, and day of the print as well as the story.
 
 ## Newspaper Class
 
@@ -49,3 +49,5 @@ Your `TestNewspaper` class must have the following items:
 - Main Method:
     - A `main` method which initializes one **Newspaper** class with the date 2021/12/5 and the story of
       `The votes are in!` and print it using **toString** method.
+    - Then initialize a new **Newspaper** object without parameters, and print it, and use the `makeCopy` method to copy the previous
+      object into the new one and finally print it again.
