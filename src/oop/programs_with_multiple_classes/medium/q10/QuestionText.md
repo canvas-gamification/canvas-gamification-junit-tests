@@ -40,6 +40,6 @@ The `Cupboard` class currently has the following items:
 You must add the following items to complete the class:
 
 - Attributes:
-    - The **size** and **colour** with appropriate types based on the constructor that is not visible from other
-      classes.
+    - The **size** and **colour** with appropriate types based on the constructor
     - An array of `Vegetable` objects called **vegetables**
+    - None of the attributes should be visible from another class
