@@ -23,7 +23,7 @@ The `Person` class currently has the following items:
     - It is accessible from other classes.
 
 - Methods:
-    - Getter and Setter methods for **myEyes** and **numEyes** attributes
+    - Getter and Setter methods for **myName** and **numEyes** attributes
     - These methods are accessible from other classes.
 
 You must add the following items to the class:
