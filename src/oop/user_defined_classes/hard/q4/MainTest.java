@@ -31,10 +31,12 @@ public class MainTest {
     @Test
     public void laundromatClassHasCorrectAttributes() {
         String missingAttributeMessage =
-                "The %s attribute could not be found in your %s class. Please make sure you have added it, it is spelled correctly, and is of the correct type";
+                "The %s attribute could not be found in your %s class. Please make sure you have added it and that it is spelled correctly.";
+        String wrongTypeMessage = "The %s attribute does not have the correct type.";
         String incorrectModifierMessage = "Your %s attribute in the %s class does not have the correct visibility modifier.";
-        assertTrue(classInstance.hasField(intAttributeName1, int.class),
+        assertTrue(classInstance.hasField(intAttributeName1),
                 String.format(missingAttributeMessage, intAttributeName1, testClassName));
+        assertTrue(classInstance.hasField(intAttributeName1, int.class), String.format(wrongTypeMessage, intAttributeName1));
         assertTrue(classInstance.hasModifier(intAttributeName1, "private"),
                 String.format(incorrectModifierMessage, intAttributeName1, testClassName));
     }
