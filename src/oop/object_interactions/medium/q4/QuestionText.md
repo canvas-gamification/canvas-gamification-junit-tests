@@ -43,7 +43,7 @@ You must add the following items to the class:
 
 ## TestTransfusion Class
 
-Your `TestNewspaper` class must have the following items:
+Your `TestTransfusion` class must have the following items:
 
 - Main Method:
     - A `main` method which initializes three **Snail** objects called Sarah, Jones, and Cindy who respectively have
