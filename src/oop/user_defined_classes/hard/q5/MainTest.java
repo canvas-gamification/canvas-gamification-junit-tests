@@ -28,15 +28,20 @@ public class MainTest {
 
     @Test
     public void phoneClassHasCorrectAttributes() {
-        String missingAttributeMessage = "The attribute %s could not be found in the %s class. Please make sure you " +
-                "have added it, it is spelled correctly, and that it is of the correct type";
+        String missingAttributeMessage =
+                "The attribute %s could not be found in the %s class. Please make sure you have added it and that it is spelled correctly.";
+        String wrongTypeMessage = "The attribute %s does not have the correct type.";
         String incorrectModifierMessage = "Your %s attribute in the %s class does not have the correct visibility modifier.";
-        assertTrue(classInstance.hasField(doubleAttributeName1, double.class),
+        assertTrue(classInstance.hasField(doubleAttributeName1),
                 String.format(missingAttributeMessage, doubleAttributeName1, testClassName));
+        assertTrue(classInstance.hasField(doubleAttributeName1, double.class),
+                String.format(wrongTypeMessage, doubleAttributeName1));
         assertTrue(classInstance.hasModifier(doubleAttributeName1, "private"),
                 String.format(incorrectModifierMessage, doubleAttributeName1, testClassName));
-        assertTrue(classInstance.hasField(doubleAttributeName2, double.class),
+        assertTrue(classInstance.hasField(doubleAttributeName2),
                 String.format(missingAttributeMessage, doubleAttributeName2, testClassName));
+        assertTrue(classInstance.hasField(doubleAttributeName2, double.class),
+                String.format(wrongTypeMessage, doubleAttributeName2));
         assertTrue(classInstance.hasModifier(doubleAttributeName2, "private"),
                 String.format(incorrectModifierMessage, doubleAttributeName2, testClassName));
     }
