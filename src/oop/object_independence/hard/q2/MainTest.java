@@ -51,13 +51,20 @@ public class MainTest {
 
     @Test
     public void fishClassHasCorrectAttributes() {
-        String missingAttributeMessage = "Your %s class is missing the %s attribute. Please make sure you have added it, it is spelled correctly, and is of the correct type.";
+        String missingAttributeMessage = "Your %s class is missing the %s attribute. Please make sure you have added it and that it is spelled correctly.";
         assertTrue(classInstance.hasField(stringAttributeName1, String.class),
                 String.format(missingAttributeMessage, objectClassName, stringAttributeName1));
         assertTrue(classInstance.hasField(stringAttributeName2, String.class),
                 String.format(missingAttributeMessage, objectClassName, stringAttributeName2));
         assertTrue(classInstance.hasField(intAttributeName1, int.class),
                 String.format(missingAttributeMessage, objectClassName, intAttributeName1));
+        String wrongTypeMethod = "Your %s attribute does not have the correct type.";
+        assertTrue(classInstance.hasField(stringAttributeName1, String.class),
+                String.format(wrongTypeMethod, stringAttributeName1));
+        assertTrue(classInstance.hasField(stringAttributeName2, String.class),
+                String.format(wrongTypeMethod, stringAttributeName2));
+        assertTrue(classInstance.hasField(intAttributeName1, int.class),
+                String.format(wrongTypeMethod, intAttributeName1));
         String incorrectVisibilityModifier = "Your %s class %s attribute has the wrong visibility modifier.";
         assertTrue(classInstance.hasModifier(stringAttributeName1, "private"),
                 String.format(incorrectVisibilityModifier, objectClassName, stringAttributeName1));
