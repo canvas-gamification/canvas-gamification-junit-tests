@@ -42,5 +42,5 @@ Your `TestTransplant` class must have the following items:
 
 - Main Method:
     - A `main` method that initializes two **Person** objects named Tom and Jim, where Tom has 2 eyes and Jim has zero, and prints
-      them using **toString()** Tom first, and then do a transplant for Jim from Tom.
+      them using **toString()**. Print Tom's information first and Jim's second. Then have Jim recieve a transplant from Tom.
     - Then print the information of the two **Person**, Tom and Jim in that order, with **toString()**.
