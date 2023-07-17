@@ -5,7 +5,7 @@
 ## Question Text
 
 You are working as a vet assistant in an animal hospital, and sometimes you encounter an animal that requires a blood
-transfusion in order to save its life. Suppose you were given the following test class. Make a class called **Snail**
+transfusion in order to save its life. Make a class called **Snail**
 with attributes **bloodType** and **volume** that are initialized by the constructor. This class has a method called
 **transfusionFrom()** that checks if the two animals have the same blood type and whether the donor has enough blood
 before starting the transfusion. If both conditions pass, then 1L of blood is transferred from the donor to the
