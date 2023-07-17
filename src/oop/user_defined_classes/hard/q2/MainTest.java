@@ -33,14 +33,17 @@ public class MainTest {
     @Test
     public void dishWasherClassHasCorrectAttributes() {
         String missingAttributeMessage =
-                "The attribute %s could not be found in your class. Please make sure you have added it, it is spelled correctly, and has the correct type";
+                "The attribute %s could not be found in your class. Please make sure you have added it and that it is spelled correctly.";
+        String wrongTypeMessage = "The attribute %s does not have the correct type.";
         String incorrectModifierMessage = "Your %s attribute in the %s class does not have the correct visibility modifier.";
+        assertTrue(classInstance.hasField(intAttributeName1), String.format(missingAttributeMessage, intAttributeName1));
         assertTrue(classInstance.hasField(intAttributeName1, int.class),
-                String.format(missingAttributeMessage, intAttributeName1));
+                String.format(wrongTypeMessage, intAttributeName1));
         assertTrue(classInstance.hasModifier(intAttributeName1, "private"),
                 String.format(incorrectModifierMessage, intAttributeName1, testClassName));
+        assertTrue(classInstance.hasField(intAttributeName2), String.format(missingAttributeMessage, intAttributeName2));
         assertTrue(classInstance.hasField(intAttributeName2, int.class),
-                String.format(missingAttributeMessage, intAttributeName2));
+                String.format(wrongTypeMessage, intAttributeName2));
         assertTrue(classInstance.hasModifier(intAttributeName2, "private"),
                 String.format(incorrectModifierMessage, intAttributeName2, testClassName));
     }
