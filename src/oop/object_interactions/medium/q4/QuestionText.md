@@ -28,7 +28,6 @@ The `Snail` class currently has the following items:
     - Getter and Setter methods for **bloodType**, **volume**, and  **toString** method that prints the object
       information.
     - These methods are accessible from other classes.
-    -
 
 You must add the following items to the class:
 
