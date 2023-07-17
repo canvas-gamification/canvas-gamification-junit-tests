@@ -29,7 +29,6 @@ public class MainTest {
     private final String getNumEyesMethodName = "getNumEyes";
     private final String setNumEyesMethodName = "setNumEyes";
     private final String receiveDonationMethodName = "receiveDonation";
-    private static final int minBlood = 5;
 
     @BeforeEach
     public void setup() throws Throwable {
@@ -41,11 +40,7 @@ public class MainTest {
                 "You have changed the visibility modifier on the " + className + " class. Please revert it to the original state.");
         assertTrue(testClass.hasField(myNameAttributeName, String.class, new String[]{"private"}),
                 String.format("You have modified the provided %s attribute. Please revert it to the original state.", myNameAttributeName));
-        assertTrue(testClass.hasModifier(myNameAttributeName, "private"),
-                String.format("You have modified the provided %s attribute. Please revert it to the original state.", myNameAttributeName));
         assertTrue(testClass.hasField(numEyesAttributeName, int.class, new String[]{"private"}),
-                String.format("You have modified the provided %s attribute. Please revert it to the original state.", numEyesAttributeName));
-        assertTrue(testClass.hasModifier(numEyesAttributeName, "private"),
                 String.format("You have modified the provided %s attribute. Please revert it to the original state.", numEyesAttributeName));
         Class<?>[] classArguments = {String.class, int.class};
         assertTrue(testClass.hasConstructor(classArguments),
@@ -88,11 +83,13 @@ public class MainTest {
             output = testClass.callMethod(setMyNameMethodName, new Object[][]{{updateName, String.class}}, classInstance);
             _assertEquals(updateName, testClass.getFieldValue(classInstance, myNameAttributeName),
                     "You have modified the provided " + setMyNameMethodName + "method  on the " + className + " class. Please revert it to the original state.");
-            assertNull(output, String.join(" ", "Your", setMyNameMethodName, "should not return any output"));
+            assertNull(output,
+                    "You have modified the provided " + setMyNameMethodName + "method  on the " + className + " class. Please revert it to the original state.");
             output = testClass.callMethod(setNumEyesMethodName, new Object[][]{{updateEyes, int.class}}, classInstance);
             _assertEquals(updateEyes, testClass.getFieldValue(classInstance, numEyesAttributeName),
                     "You have modified the provided " + setNumEyesMethodName + "method  on the " + className + " class. Please revert it to the original state.");
-            assertNull(output, String.join(" ", "Your", setNumEyesMethodName, "should not return any output"));
+            assertNull(output,
+                    "You have modified the provided " + setNumEyesMethodName + "method  on the " + className + " class. Please revert it to the original state.");
         }
     }
 
