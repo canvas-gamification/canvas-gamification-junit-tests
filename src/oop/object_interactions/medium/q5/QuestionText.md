@@ -36,7 +36,7 @@ You must add the following items to the class:
     - A `toString` method that return the `String` of information in the format
       of `myName + " has " + numEyes + " eyes"`
 
-## TestTransfusion Class
+## TestTransplant Class
 
 Your `TestTransplant` class must have the following items:
 
