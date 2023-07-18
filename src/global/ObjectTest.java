@@ -107,6 +107,15 @@ public class ObjectTest {
         return createInstance(null);
     }
 
+    public boolean hasField(String fieldName) {
+        try {
+            Field f = objectClass.getDeclaredField(fieldName);
+            return true;
+        } catch (NoSuchFieldException e) {
+            return false;
+        }
+    }
+
     public boolean hasField(String fieldName, Class<?> fieldClass) {
         try {
             Field f = objectClass.getDeclaredField(fieldName);
@@ -250,7 +259,7 @@ public class ObjectTest {
         // Returns the value of the specified field from the passed object
         Object fieldValue = null;
         try {
-            Field field = testObject.getClass().getDeclaredField(fieldName);
+            Field field = objectClass.getDeclaredField(fieldName);
             field.setAccessible(true);
             fieldValue = field.get(testObject);
         } catch (NoSuchFieldException e) {
@@ -267,7 +276,7 @@ public class ObjectTest {
     public void setFieldValue(Object testObject, Object value, String fieldName) {
         // Sets the value of the specified field of the passed object
         try {
-            Field field = testObject.getClass().getDeclaredField(fieldName);
+            Field field = objectClass.getDeclaredField(fieldName);
             field.setAccessible(true);
             field.set(testObject, value);
         } catch (NoSuchFieldException e) {
