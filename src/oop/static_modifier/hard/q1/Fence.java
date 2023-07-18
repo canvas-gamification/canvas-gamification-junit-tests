@@ -25,6 +25,7 @@ public class Fence {
     }
 
     public String toString() {
-        return "My paint colour is " + this.colour;
+        return "My paint colour is " + this.colour + ".";
     }
+
 }

@@ -16,7 +16,7 @@ Your `Fence` class must have the following requirements:
     - Note that all attributes should not be visible from another class
     - A _static_ `String[]` called **colours** which is initialized to length eight and has strings "Red", "Blue",
       "Green", "Yellow", "Black", "White", "Purple", and "Brown". These represent the potential colours of the fence,
-      and should be set without having to call the constructor.
+      and should be set without having to call the constructor. The colours must be in the order specified above.
     - A _static_ `double[]` called **leftoverAmount** which is initialized to length eight and each item in the array
       should have a starting value of 100.0. These values should be set without having to call the constructor.
     - A `String` called **colour** that represents the colour of hts current `Fence` object
@@ -37,7 +37,7 @@ Your `Fence` class must have the following requirements:
       subtract **neededVolume** from the value in **leftoverAmount**, and update the value of the **attribute** to **
       colourName**. If not, print out the string "There is not enough x paint for this job", where x is the value of **
       colourName**. This method should not return anything.
-    - A `toString` method which returns the `String` "My paint colour is y", where y is the value of the **colour**
+    - A `toString` method which returns the `String` "My paint colour is y.", where y is the value of the **colour**
       attribute of the `Fence` object
 
 ## TestPainting Class
