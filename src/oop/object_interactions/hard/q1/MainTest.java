@@ -56,9 +56,9 @@ public class MainTest {
                 {name, String.class},
                 {birthday, String.class}
         };
-        Object passportInstance = passport.createInstance(arguments);
         assertTrue(passport.hasConstructor(new Class[]{String.class, String.class}, new String[]{"public"}),
                 String.format("Your %s class is missing a required constructor or has the incorrect visibility modifier.", passportName));
+        Object passportInstance = passport.createInstance(arguments);
         _assertEquals(name, passport.getFieldValue(passportInstance, nameAttribute),
                 String.format("Your %s constructor does not correctly initialize the %s attribute.", passportName, nameAttribute));
         _assertEquals(birthday, passport.getFieldValue(passportInstance, dobAttribute),
