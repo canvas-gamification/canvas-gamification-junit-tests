@@ -42,14 +42,18 @@ public class MainTest {
 
     @Test
     public void bloodDonorClassHasRequiredAttributes() {
-        assertTrue(classInstance.hasField(stringAttribute1, String.class),
+        assertTrue(classInstance.hasField(stringAttribute1),
                 String.format("We expected an attribute named %s in your code but it was not found or was misspelled.", stringAttribute1));
-        assertTrue(classInstance.hasField(stringAttribute2, String.class),
+        assertTrue(classInstance.hasField(stringAttribute2),
                 String.format("We expected an attribute named %s in your code but it was not found or was misspelled.", stringAttribute2));
+        assertTrue(classInstance.hasField(stringAttribute1, String.class),
+                String.format("The %s attribute does not have the correct type.", stringAttribute1));
+        assertTrue(classInstance.hasField(stringAttribute2, String.class),
+                String.format("The %s attribute does not have the correct type.", stringAttribute2));
         assertTrue(classInstance.hasModifier(stringAttribute1, "private"),
-                String.format("The %s field does not have the correct visibility modifier.", stringAttribute1));
+                String.format("The %s attribute does not have the correct visibility modifier.", stringAttribute1));
         assertTrue(classInstance.hasModifier(stringAttribute2, "private"),
-                String.format("The %s field does not have the correct visibility modifier.", stringAttribute2));
+                String.format("The %s attribute does not have the correct visibility modifier.", stringAttribute2));
     }
 
     private static Stream<Arguments> constructorInputProvider() {
