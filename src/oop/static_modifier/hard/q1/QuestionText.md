@@ -23,12 +23,12 @@ Your `Fence` class must have the following requirements:
 
 - Constructors:
     - A constructor that is accessible from other methods, and accepts a `String` as a parameter to set the **colour**
-      attribute of the object, but before setting the colour attribute, it must check that the passed colour is in the
+      attribute of the object. Before setting the colour attribute, it must check that the passed colour is in the
       is also one of the strings in the **colours** array. Note that this must be an exact match (case-sensitive), and
       if no match is found, initialize the **colour** attribute to "Blue".
 
 - Methods:
-    - A `paintColour` method accepts the parameters: a `String` called **colourName** and a `double` called
+    - A `paintColour` method accepts these parameters: a `String` called **colourName** and a `double` called
       **neededVolume**. The method is used to check if there is enough of the **colourName** colour to paint the fence.
       To do this, check if passed **colourName** matches any of the colours in the **colours** array. If it does, check
       the value in the **leftoverAmount** array corresponding to the same index as the matching colour, and see if the
@@ -49,7 +49,7 @@ Your `TestPainting` class must have the following items:
       and the third should be "Yellow". Then, call the `paintColour` method on each of the fences to paint each fence
       brown. Each fence takes a different amount of paint. The first takes 25.5, the second 68.8, and the third 38.5.
       After calling the paint Colour method, print the colours of the three fences, from first to last, each on their
-      own line.
+      own line using the `toString` method you coded.
     - Sample Output:
        ```
         My paint colour is Brown
