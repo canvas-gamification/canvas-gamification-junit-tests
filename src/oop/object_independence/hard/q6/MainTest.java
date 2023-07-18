@@ -57,13 +57,20 @@ public class MainTest {
 
     @Test
     public void lasagnaClassHasCorrectAttributes() {
-        String missingAttributeMessage = "Your %s class is missing the %s attribute. Please make sure you have added it, it is spelled correctly, and is of the correct type.";
-        assertTrue(classInstance.hasField(booleanAttributeName1, boolean.class),
+        String missingAttributeMessage = "Your %s class is missing the %s attribute. Please make sure you have added it and that it is spelled correctly.";
+        assertTrue(classInstance.hasField(booleanAttributeName1),
                 String.format(missingAttributeMessage, objectClassName, booleanAttributeName1));
-        assertTrue(classInstance.hasField(booleanAttributeName2, boolean.class),
+        assertTrue(classInstance.hasField(booleanAttributeName2),
                 String.format(missingAttributeMessage, objectClassName, booleanAttributeName2));
-        assertTrue(classInstance.hasField(doubleAttributeName1, double.class),
+        assertTrue(classInstance.hasField(doubleAttributeName1),
                 String.format(missingAttributeMessage, objectClassName, doubleAttributeName1));
+        String wrongTypeMessage = "Your %s attribute does not have the correct type.";
+        assertTrue(classInstance.hasField(booleanAttributeName1, boolean.class),
+                String.format(wrongTypeMessage, booleanAttributeName1));
+        assertTrue(classInstance.hasField(booleanAttributeName2, boolean.class),
+                String.format(wrongTypeMessage, booleanAttributeName2));
+        assertTrue(classInstance.hasField(doubleAttributeName1, double.class),
+                String.format(wrongTypeMessage, doubleAttributeName1));
         String incorrectVisibilityModifier = "Your %s class %s attribute has the wrong visibility modifier.";
         assertTrue(classInstance.hasModifier(booleanAttributeName1, "private"),
                 String.format(incorrectVisibilityModifier, objectClassName, booleanAttributeName1));
