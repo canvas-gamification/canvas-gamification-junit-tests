@@ -49,14 +49,6 @@ public class MainTest {
         );
     }
 
-    @Test
-    public void passportClassHasConstructor() throws Throwable {
-        assertTrue(passport.hasConstructor(new Class[]{String.class, String.class}),
-                String.format("Your %s class is missing a required constructor.", passportName));
-        assertTrue(passport.hasConstructor(new Class[]{String.class, String.class}, new String[]{"public"}),
-                String.format("Your %s class does not have the correct visibility modifier.", passportName));
-    }
-
     @ParameterizedTest
     @MethodSource("passportConstructorInputProvider")
     public void passportClassHasCorrectConstructor(String name, String birthday) throws Throwable {
@@ -65,6 +57,8 @@ public class MainTest {
                 {birthday, String.class}
         };
         Object passportInstance = passport.createInstance(arguments);
+        assertTrue(passport.hasConstructor(new Class[]{String.class, String.class}, new String[]{"public"}),
+                String.format("Your %s class is missing a required constructor or has the incorrect visibility modifier.", passportName));
         _assertEquals(name, passport.getFieldValue(passportInstance, nameAttribute),
                 String.format("Your %s constructor does not correctly initialize the %s attribute.", passportName, nameAttribute));
         _assertEquals(birthday, passport.getFieldValue(passportInstance, dobAttribute),

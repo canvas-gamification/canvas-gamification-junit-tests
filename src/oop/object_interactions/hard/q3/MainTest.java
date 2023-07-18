@@ -65,6 +65,14 @@ public class MainTest {
         );
     }
 
+    @Test
+    public void bloodDonorClassHasConstructor() {
+        assertTrue(classInstance.hasConstructor(new Class[]{String.class, String.class}),
+                String.format("Your %s class is missing a required constructor.", objectClassName));
+        assertTrue(classInstance.hasConstructor(new Class[]{String.class, String.class}, new String[]{"public"}),
+                String.format("Your %s class does not have the correct visibility modifier.", objectClassName));
+    }
+
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
     public void bloodDonorClassHasCorrectConstructor(String name, String blood) throws Throwable {
@@ -72,10 +80,6 @@ public class MainTest {
                 {name, String.class},
                 {blood, String.class}
         };
-        assertTrue(classInstance.hasConstructor(new Class[]{String.class, String.class}),
-                String.format("Your %s class is missing a required constructor.", objectClassName));
-        assertTrue(classInstance.hasConstructor(new Class[]{String.class, String.class}, new String[]{"public"}),
-                String.format("Your %s class constructor has the incorrect visibility modifier.", objectClassName));
         Object instance = classInstance.createInstance(arguments);
         _assertEquals(name, classInstance.getFieldValue(instance, stringAttribute1),
                 String.format("Your %s constructor does not correctly initialize the %s attribute.", objectClassName, stringAttribute1));
