@@ -41,16 +41,20 @@ public class MainTest {
 
     @Test
     public void laptopClassHasRequiredAttributes() {
+        assertTrue(classInstance.hasField(intAttribute1),
+                String.format("Your %s class is missing the %s attribute. Please make sure that is is spelt correctly.", objectName, intAttribute1));
+        assertTrue(classInstance.hasField(intAttribute2),
+                String.format("Your %s class is missing the %s attribute. Please make sure that is is spelt correctly.", objectName, intAttribute2));
         assertTrue(classInstance.hasField(intAttribute1, int.class),
-                String.format("Your %s class is missing the %s field. Please make sure that is is spelt correctly and has the correct type.", objectName, intAttribute1));
+                String.format("Your %s attribute does not have the correct type.", intAttribute1));
         assertTrue(classInstance.hasField(intAttribute2, int.class),
-                String.format("Your %s class is missing the %s field. Please make sure that is is spelt correctly, has the correct type, and has the correct visibility modifier.", objectName, intAttribute2));
+                String.format("Your %s attribute does not have the correct type.", intAttribute2));
         assertTrue(classInstance.hasModifier(intAttribute1, "private"),
-                String.format("Your %s field does not have the correct visibility modifier.", intAttribute1));
+                String.format("Your %s attribute does not have the correct visibility modifier.", intAttribute1));
         assertTrue(classInstance.hasModifier(intAttribute2, "private"),
-                String.format("Your %s field does not have the correct visibility modifier.", intAttribute2));
+                String.format("Your %s attribute does not have the correct visibility modifier.", intAttribute2));
         assertTrue(classInstance.hasModifier(intAttribute2, "static"),
-                String.format("Your %s field is missing the static modifier.", intAttribute2));
+                String.format("Your %s attribute is missing the static modifier.", intAttribute2));
     }
 
     @RepeatedTest(3)

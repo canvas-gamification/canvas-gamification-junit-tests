@@ -20,7 +20,7 @@ Your `Laptop` class must have the following items:
     - A constructor that calls the `incrementer` method to initialize the **identification** attribute of the `Laptop`
 
 - Methods:
-    - A `getIdentification` method which returns the **identification** field and should be visible from another class
+    - A `getIdentification` method which returns the **identification** attribute and should be visible from another class
     - A `setIdentification` method which takes an `int` parameter and updates the **identification** attribute to that 
       value. It should be visible from another class
     - An `incrementer` method which increments the value of the initial by 5 and returns that value. It should be 
