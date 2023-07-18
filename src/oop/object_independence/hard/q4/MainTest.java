@@ -44,11 +44,16 @@ public class MainTest {
 
     @Test
     public void paintingClassHasCorrectAttributes() {
-        String missingAttributeMessage = "Your %s class is missing the %s attribute. Please make sure you have added it, it is spelled correctly, and it is of the correct type.";
-        assertTrue(classInstance.hasField(stringAttributeName1, String.class),
+        String missingAttributeMessage = "Your %s class is missing the %s attribute. Please make sure you have added it and that it is spelled correctly.";
+        assertTrue(classInstance.hasField(stringAttributeName1),
                 String.format(missingAttributeMessage, objectClassName, stringAttributeName1));
-        assertTrue(classInstance.hasField(stringAttributeName2, String.class),
+        assertTrue(classInstance.hasField(stringAttributeName2),
                 String.format(missingAttributeMessage, objectClassName, stringAttributeName2));
+        String wrongTypeMessage = "Your %s attribute does not have the correct type.";
+        assertTrue(classInstance.hasField(stringAttributeName1, String.class),
+                String.format(wrongTypeMessage, stringAttributeName1));
+        assertTrue(classInstance.hasField(stringAttributeName2, String.class),
+                String.format(wrongTypeMessage, stringAttributeName2));
         String incorrectVisibilityModifier = "Your %s class %s attribute has the wrong visibility modifier.";
         assertTrue(classInstance.hasModifier(stringAttributeName1, "private"),
                 String.format(incorrectVisibilityModifier, objectClassName, stringAttributeName1));
