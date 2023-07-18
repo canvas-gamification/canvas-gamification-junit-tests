@@ -35,14 +35,18 @@ public class MainTest {
 
     @Test
     public void cryptBoxClassHasRequiredAttributes() {
-        assertTrue(classInstance.hasField(stringAttribute1, String.class),
+        assertTrue(classInstance.hasField(stringAttribute1),
                 String.format("We expected an attribute named %s in your code but it was not found or was misspelled.", stringAttribute1));
-        assertTrue(classInstance.hasField(intAttribute1, int.class),
+        assertTrue(classInstance.hasField(intAttribute1),
                 String.format("We expected an attribute named %s in your code but it was not found or was misspelled.", intAttribute1));
+        assertTrue(classInstance.hasField(stringAttribute1, String.class),
+                String.format("The %s attribute does not have the correct type.", stringAttribute1));
+        assertTrue(classInstance.hasField(intAttribute1, int.class),
+                String.format("The %s attribute does not have the correct type.", intAttribute1));
         assertTrue(classInstance.hasModifier(stringAttribute1, "private"),
-                String.format("The %s field does not have the correct visibility modifier.", stringAttribute1));
+                String.format("The %s attribute does not have the correct visibility modifier.", stringAttribute1));
         assertTrue(classInstance.hasModifier(intAttribute1, "private"),
-                String.format("The %s field does not have the correct visibility modifier.", intAttribute1));
+                String.format("The %s attribute does not have the correct visibility modifier.", intAttribute1));
     }
 
     private static Stream<Arguments> constructorInputProvider() {
