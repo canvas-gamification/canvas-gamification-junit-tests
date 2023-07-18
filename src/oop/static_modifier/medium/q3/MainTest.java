@@ -40,16 +40,20 @@ public class MainTest {
 
     @Test
     public void horseClassHasRequiredAttributes() {
+        assertTrue(classInstance.hasField(stringAttribute1),
+                String.format("Your %s class is missing the %s attribute. Please make sure that is is spelt correctly.", objectName, stringAttribute1));
+        assertTrue(classInstance.hasField(stringAttribute2),
+                String.format("Your %s class is missing the %s attribute. Please make sure that is is spelt correctly.", objectName, stringAttribute2));
         assertTrue(classInstance.hasField(stringAttribute1, String.class),
-                String.format("Your %s class is missing the %s field. Please make sure that is is spelt correctly and has the correct type.", objectName, stringAttribute1));
+                String.format("Your %s attribute does not have the correct type.", stringAttribute1));
         assertTrue(classInstance.hasField(stringAttribute2, String.class),
-                String.format("Your %s class is missing the %s field. Please make sure that is is spelt correctly, has the correct type, and has the correct visibility modifier.", objectName, stringAttribute2));
+                String.format("Your %s attribute does not have the correct type.", stringAttribute2));
         assertTrue(classInstance.hasModifier(stringAttribute1, "private"),
-                String.format("Your %s field does not have the correct visibility modifier.", stringAttribute1));
+                String.format("Your %s attribute does not have the correct visibility modifier.", stringAttribute1));
         assertTrue(classInstance.hasModifier(stringAttribute1, "static"),
-                String.format("Your %s field is missing the static modifier.", stringAttribute1));
+                String.format("Your %s attribute is missing the static modifier.", stringAttribute1));
         assertTrue(classInstance.hasModifier(stringAttribute2, "private"),
-                String.format("Your %s field does not have the correct visibility modifier.", stringAttribute2));
+                String.format("Your %s attribute does not have the correct visibility modifier.", stringAttribute2));
     }
 
     private static Stream<String> constructorInputProvider() {
