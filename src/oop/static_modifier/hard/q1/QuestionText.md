@@ -6,7 +6,7 @@
 
 You are working as a painter for your summer job. You bought some paint with your personal savings, and now you need to
 paint some fences with that paint supply; however, painting each fence takes some of this supply. Using the requirements
-below, write a `Fence` and `TestPainting` class.
+below, write a `Fence` and `TestPainting` class to model this problem.
 
 ## Fence Class
 
