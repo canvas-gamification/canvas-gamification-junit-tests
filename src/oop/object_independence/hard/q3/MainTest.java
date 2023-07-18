@@ -43,7 +43,7 @@ public class MainTest {
 
     @Test
     public void treeClassHasCorrectAttributes() {
-        String missingAttributeMessage = "Your %s class is missing the %s attribute. Please make sure you have added it, it is spelled correctly, and has the correct type";
+        String missingAttributeMessage = "Your %s class is missing the %s attribute. Please make sure you have added it and that it is spelled correctly.";
         assertTrue(classInstance.hasField(booleanAttributeName1),
                 String.format(missingAttributeMessage, objectClassName, booleanAttributeName1));
         assertTrue(classInstance.hasField(doubleAttributeName1),
