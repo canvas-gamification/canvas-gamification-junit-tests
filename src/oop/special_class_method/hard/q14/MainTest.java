@@ -13,7 +13,7 @@ import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
-    // Java
+    // Parsons with Distractors
 
     private final String className = "Bottle";
     private final String attributeName = "isFull";
