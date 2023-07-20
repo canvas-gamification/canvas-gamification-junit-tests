@@ -1,6 +1,10 @@
 package oop.static_modifier.hard.q1;
 
 import global.ObjectTest;
+import global.variables.Clause;
+import global.variables.clauses.NewLine;
+import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,6 +28,7 @@ public class MainTest {
     private static final String defaultColour = "Blue";
     private final String[] coloursArray = new String[]{"Red", "Blue", "Green", "Yellow", "Black", "White", "Purple", "Brown"};
     private final double[] amountLeftArray = new double[]{100, 100, 100, 100, 100, 100, 100, 100};
+    private final String paintMethodName = "paintColour";
 
     @BeforeEach
     public void setup() {
@@ -116,4 +121,54 @@ public class MainTest {
         _assertEquals(expectedToStringOutput, actualToStringOutput, String.format(incorrectToString, fenceName));
     }
 
+    private static Stream<Arguments> paintColourInputProvider() {
+        return Stream.of(
+                Arguments.of("Red", "blue", 35.64, "Red"),
+                Arguments.of("Yellow", "Blue", 100.01, "Yellow"),
+                Arguments.of("Green", "White", 25.00, "White"),
+                Arguments.of("Purple", "Purple", 0.0, "Purple"),
+                Arguments.of("Brown", "White", 48.21, "White"),
+                Arguments.of("Black", "White", 26.92, "Black"),
+                Arguments.of("Green", "Blue", 100.00, "Blue"),
+                Arguments.of("White", "Blue", 43.12, "Blue")
+        );
+    }
+
+    @Test
+    public void paintColourMethodIsCorrectlyDefined() {
+        String missingMethod = "The %s class is missing the %s method. Make sure it is defined, spelt correctly, and accepts the required parameters.";
+        Class<?>[] parameterClasses = new Class[]{String.class, double.class};
+        assertTrue(fence.hasMethod(paintMethodName, parameterClasses),
+                String.format(missingMethod, fenceName, paintMethodName));
+        String wrongVisibilityModifier = "The %s method in the %s class has the wrong visibility modifier.";
+        assertTrue(fence.hasModifier(paintMethodName, parameterClasses, "public"),
+                String.format(wrongVisibilityModifier, paintMethodName, fenceName));
+        String wrongReturnType = "The %s method in the %s method does not have the correct return type.";
+        assertTrue(fence.hasReturnType(paintMethodName, parameterClasses, Void.TYPE),
+                String.format(wrongReturnType, fenceName, paintMethodName));
+    }
+
+    @ParameterizedTest
+    @MethodSource("paintColourInputProvider")
+    public void paintColourMethodPaintsFencesCorrectly(String initialColour, String inputColour, double amountToUse, String outputColour)  throws Throwable {
+        Object[][] constructorInput = {{initialColour, String.class}};
+        Object fenceInstance = fence.createInstance(constructorInput);
+        Object [][] paintArguments = {{initialColour, String.class}, {amountToUse, double.class}};
+        Clause[] clauses;
+        String resultColour = outputColour;
+        if (!inputColour.equals(outputColour)){
+            clauses = new Clause[] {
+                    new StringLiteral("There is not enough "),
+                    new StringLiteral(inputColour),
+                    new StringLiteral(" paint for this job"),
+                    new Optional(new NewLine())
+            };
+            resultColour = initialColour;
+        } else
+            clauses = null;
+        String notEnoughPaintMessage = String.format("The %s method does not correctly detect and print that there is not enough paint to perform the paint job.", paintMethodName);
+        fence.callMethod(paintMethodName, paintArguments, null, fenceInstance, clauses, notEnoughPaintMessage);
+        String incorrectColour = "The %s method does not change the %s attribute to the correct value when there is enough paint for the fence";
+        _assertEquals(resultColour, fence.getFieldValue(fenceInstance, colourAttributeName), String.format(incorrectColour, paintMethodName, colourAttributeName));
+    }
 }

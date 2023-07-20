@@ -28,17 +28,18 @@ Your `Fence` class must have the following requirements:
       if no match is found, initialize the **colour** attribute to "Blue".
 
 - Methods:
-    - A `paintColour` method accepts these parameters: a `String` called **colourName** and a `double` called
-      **neededVolume**. The method is used to check if there is enough of the **colourName** colour to paint the fence.
-      To do this, check if passed **colourName** matches any of the colours in the **colours** array. If it does, check
-      the value in the **leftoverAmount** array corresponding to the same index as the matching colour, and see if the
-      amount is greater than or equal to the **neededVolume** parameter. For example, if the string "Brown" is passed, a
-      match would be found at index seven, and the value at `leftoverAmount[7]` checked. If there is enough paint, then
-      subtract **neededVolume** from the value in **leftoverAmount**, and update the value of the **attribute** to **
-      colourName**. If not, print out the string "There is not enough x paint for this job", where x is the value of **
-      colourName**. This method should not return anything.
-    - A `toString` method which returns the `String` "My paint colour is y.", where y is the value of the **colour**
-      attribute of the `Fence` object
+  - Note that all methods in this class should be visible from another class
+  - A `paintColour` method accepts these parameters: a `String` called **colourName** and a `double` called
+        **neededVolume**. The method is used to check if there is enough of the **colourName** colour to paint the fence.
+        To do this, check if passed **colourName** matches any of the colours in the **colours** array. If it does, check
+        the value in the **leftoverAmount** array corresponding to the same index as the matching colour, and see if the
+        amount is greater than or equal to the **neededVolume** parameter. For example, if the string "Brown" is passed, a
+        match would be found at index seven, and the value at `leftoverAmount[7]` checked. If there is enough paint, then
+        subtract **neededVolume** from the value in **leftoverAmount**, and update the value of the **attribute** to **
+        colourName**. If not, print out the string "There is not enough x paint for this job", where x is the value of **
+        colourName**. This method should not return anything.
+  - A `toString` method which returns the `String` "My paint colour is y.", where y is the value of the **colour**
+    attribute of the `Fence` object
 
 ## TestPainting Class
 
