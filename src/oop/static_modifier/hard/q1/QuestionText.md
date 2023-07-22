@@ -23,23 +23,25 @@ Your `Fence` class must have the following requirements:
 
 - Constructors:
     - A constructor that is accessible from other methods, and accepts a `String` as a parameter to set the **colour**
-      attribute of the object. Before setting the colour attribute, it must check that the passed colour is in the
-      is also one of the strings in the **colours** array. Note that this must be an exact match (case-sensitive), and
-      if no match is found, initialize the **colour** attribute to "Blue".
+      attribute of the object. Before setting the colour attribute, it must check that the passed colour is in the is
+      also one of the strings in the **colours** array. Note that this must be an exact match (case-sensitive), and if
+      no match is found, initialize the **colour** attribute to "Blue".
 
 - Methods:
-  - Note that all methods in this class should be visible from another class
-  - A `paintColour` method accepts these parameters: a `String` called **colourName** and a `double` called
-        **neededVolume**. The method is used to check if there is enough of the **colourName** colour to paint the fence.
-        To do this, check if passed **colourName** matches any of the colours in the **colours** array. If it does, check
-        the value in the **leftoverAmount** array corresponding to the same index as the matching colour, and see if the
-        amount is greater than or equal to the **neededVolume** parameter. For example, if the string "Brown" is passed, a
-        match would be found at index seven, and the value at `leftoverAmount[7]` checked. If there is enough paint, then
-        subtract **neededVolume** from the value in **leftoverAmount**, and update the value of the **attribute** to **
-        colourName**. If not, print out the string "There is not enough x paint for this job", where x is the value of **
-        colourName**. This method should not return anything.
-  - A `toString` method which returns the `String` "My paint colour is y.", where y is the value of the **colour**
-    attribute of the `Fence` object
+    - Note that all methods in this class should be visible from another class
+    - A `paintColour` method to change the colour of the Fence with the requirements below:
+        - It accepts two parameters, a `String` called **colourName** and a `double` called **neededVolume**.
+        - The method checks if the passed **colourName** matches any of the colours in the **colours** array.
+        - If there is a match, check the value in the **leftoverAmount** array corresponding to the same index as the
+          matching colour, and see if the amount is greater than or equal to the **neededVolume** parameter.
+        - If there is enough paint, then subtract **neededVolume** from the value in **leftoverAmount**, and update the
+          value of the **attribute** to **colourName**. If not, print out the string "There is not enough x paint for
+          this job", where x is the value of **colourName**.
+        - If the input **colourName** did not match any of the colours in the **colours** array, print out the string
+          "The input colour does not match any of the paint colours."
+        -  This method should not return anything.
+    - A `toString` method which returns the `String` "My paint colour is y.", where y is the value of the **colour**
+      attribute of the `Fence` object
 
 ## TestPainting Class
 

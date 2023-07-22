@@ -14,14 +14,19 @@ public class Fence {
     }
 
     public void paintColour(String colourName, double neededVolume) {
-        for (int i = 0; i < colours.length; i++) {
-            if (colourName.equals(colours[i]))
-                if (leftoverAmount[i] > neededVolume) {
+        int i;
+        for (i = 0; i < colours.length; i++) {
+            if (colourName.equals(colours[i])) {
+                if (leftoverAmount[i] >= neededVolume) {
                     leftoverAmount[i] -= neededVolume;
                     this.colour = colourName;
-                } else
+                } else {
                     System.out.println("There is not enough " + colours[i] + " paint for this job");
+                }
+                break;
+            }
         }
+        System.out.println("The input colour does not match any of the paint colours.");
     }
 
     public String toString() {

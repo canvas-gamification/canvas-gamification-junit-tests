@@ -123,14 +123,15 @@ public class MainTest {
 
     private static Stream<Arguments> paintColourInputProvider() {
         return Stream.of(
-                Arguments.of("Red", "blue", 35.64, "Red"),
-                Arguments.of("Yellow", "Blue", 100.01, "Yellow"),
-                Arguments.of("Green", "White", 25.00, "White"),
-                Arguments.of("Purple", "Purple", 0.0, "Purple"),
-                Arguments.of("Brown", "White", 48.21, "White"),
-                Arguments.of("Black", "White", 26.92, "Black"),
-                Arguments.of("Green", "Blue", 100.00, "Blue"),
-                Arguments.of("White", "Blue", 43.12, "Blue")
+                Arguments.of("Red", "blue", 35.64, "Red", true),
+                Arguments.of("Yellow", "Blue", 100.01, "Yellow", false),
+                Arguments.of("Green", "White", 25.00, "White", true),
+                Arguments.of("Purple", "Purple", 0.0, "Purple", true),
+                Arguments.of("Brown", "White", 48.21, "White", true),
+                Arguments.of("Black", "White", 26.92, "Black", false),
+                Arguments.of("Green", "Blue", 100.00, "Blue", true),
+                Arguments.of("White", "Brown", 43.12, "Brown", true),
+                Arguments.of("Purple", "Red", 68.312, "Red", true)
         );
     }
 
@@ -150,13 +151,13 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("paintColourInputProvider")
-    public void paintColourMethodPaintsFencesCorrectly(String initialColour, String inputColour, double amountToUse, String outputColour)  throws Throwable {
+    public void paintColourMethodPaintsFencesCorrectly(String initialColour, String inputColour, double amountToUse, String outputColour, boolean colourChange)  throws Throwable {
         Object[][] constructorInput = {{initialColour, String.class}};
         Object fenceInstance = fence.createInstance(constructorInput);
-        Object [][] paintArguments = {{initialColour, String.class}, {amountToUse, double.class}};
+        Object [][] paintArguments = {{inputColour, String.class}, {amountToUse, double.class}};
         Clause[] clauses;
         String resultColour = outputColour;
-        if (!inputColour.equals(outputColour)){
+        if (!colourChange){
             clauses = new Clause[] {
                     new StringLiteral("There is not enough "),
                     new StringLiteral(inputColour),
