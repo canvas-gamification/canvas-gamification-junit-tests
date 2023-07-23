@@ -21,9 +21,9 @@ public class Fence {
                     leftoverAmount[i] -= neededVolume;
                     this.colour = colourName;
                 } else {
-                    System.out.println("There is not enough " + colours[i] + " paint for this job");
+                    System.out.println("There is not enough " + colours[i] + " paint for this job.");
                 }
-                break;
+                return;
             }
         }
         System.out.println("The input colour does not match any of the paint colours.");

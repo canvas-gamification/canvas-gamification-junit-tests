@@ -5,8 +5,7 @@ import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -17,6 +16,7 @@ import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MainTest {
     private final String fenceName = "Fence";
     private final String testFenceName = "TestPainting";
@@ -39,6 +39,7 @@ public class MainTest {
     }
 
     @Test
+    @Order(1)
     public void fenceClassHasRequiredAttributes() {
         String missingAttributeMessage = "The %s class is missing the %s attribute or it is spelt incorrectly.";
         String wrongAttributeTypeMessage = "The %s attribute in the %s class has the wrong type.";
@@ -88,6 +89,7 @@ public class MainTest {
     }
 
     @Test
+    @Order(2)
     public void fenceClassInitializesStaticAttributesCorrectly() {
         String notNullArrayMessage = "The %s array in the %s class was not initialized. Make sure it is not initialized in the constructor.";
         assertNotNull(fence.getFieldValue(null, colourArrayAttributeName), String.format(notNullArrayMessage, colourArrayAttributeName, fenceName));
@@ -102,6 +104,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
+    @Order(3)
     public void fenceConstructorInitializesAttributesCorrectly(String input, String value) throws Throwable {
         Object[][] constructorInput = {{input, String.class}};
         Object fenceInstance = fence.createInstance(constructorInput);
@@ -110,6 +113,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
+    @Order(4)
     public void fenceClassHasCorrectToStringMethod(String input, String value) throws Throwable {
         assertTrue(fence.hasMethod("toString", null, String.class, new String[]{"public"}),
                 String.format("The %s class is missing the toString method.", fenceName));
@@ -123,19 +127,30 @@ public class MainTest {
 
     private static Stream<Arguments> paintColourInputProvider() {
         return Stream.of(
-                Arguments.of("Red", "blue", 35.64, "Red", true),
-                Arguments.of("Yellow", "Blue", 100.01, "Yellow", false),
-                Arguments.of("Green", "White", 25.00, "White", true),
-                Arguments.of("Purple", "Purple", 0.0, "Purple", true),
-                Arguments.of("Brown", "White", 48.21, "White", true),
-                Arguments.of("Black", "White", 26.92, "Black", false),
-                Arguments.of("Green", "Blue", 100.00, "Blue", true),
-                Arguments.of("White", "Brown", 43.12, "Brown", true),
-                Arguments.of("Purple", "Red", 68.312, "Red", true)
+                Arguments.of("Yellow", "Blue", 100.01, "Yellow", false, new double[]{100.00, 100.00, 100.00, 100.00, 100.00, 100.00, 100.00, 100.00}),
+                Arguments.of("Green", "White", 25.00, "White", true, new double[]{100.00, 100.00, 100.00, 100.00, 100.00, 75.00, 100.00, 100.00}),
+                Arguments.of("Purple", "Green", 0.0, "Green", true, new double[]{100.00, 100.00, 100.00, 100.00, 100.00, 75.00, 100.00, 100.00}),
+                Arguments.of("Brown", "White", 48.21, "White", true, new double[]{100.00, 100.00, 100.00, 100.00, 100.00, 26.79, 100.00, 100.00}),
+                Arguments.of("Black", "White", 26.92, "Black", false, new double[]{100.00, 100.00, 100.00, 100.00, 100.00, 26.79, 100.00, 100.00}),
+                Arguments.of("Green", "Blue", 100.00, "Blue", true, new double[]{100.00, 0, 100.00, 100.00, 100.00, 26.79, 100.00, 100.00}),
+                Arguments.of("White", "Brown", 43.12, "Brown", true, new double[]{100.00, 0, 100.00, 100.00, 100.00, 26.79, 100.00, 56.88}),
+                Arguments.of("Purple", "Red", 68.312, "Red", true, new double[]{31.688, 0, 100.00, 100.00, 100.00, 26.79, 100.00, 56.88}),
+                Arguments.of("Black", "Purple", 78.55468, "Purple", true, new double[]{31.688, 0, 100.00, 100.00, 100.00, 26.79, 21.44532, 56.88})
+        );
+    }
+
+    private static Stream<Arguments> invalidPaintColourInputProvider() {
+        return Stream.of(
+                Arguments.of("Red", "blue", 35.64),
+                Arguments.of("Brown", "Purples", 23.23),
+                Arguments.of("Blue", "", 12.31),
+                Arguments.of("White", "Blck", 23.24)
         );
     }
 
     @Test
+    @Order(5)
+    @Tag("dependent1")
     public void paintColourMethodIsCorrectlyDefined() {
         String missingMethod = "The %s class is missing the %s method. Make sure it is defined, spelt correctly, and accepts the required parameters.";
         Class<?>[] parameterClasses = new Class[]{String.class, double.class};
@@ -150,26 +165,76 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @MethodSource("paintColourInputProvider")
-    public void paintColourMethodPaintsFencesCorrectly(String initialColour, String inputColour, double amountToUse, String outputColour, boolean colourChange)  throws Throwable {
+    @MethodSource("invalidPaintColourInputProvider")
+    @Order(7)
+    @Tag("dependent1")
+    public void paintCourMethodCorrectlyIdentifiesInvalidInput(String initialColour, String inputColour, double amountToUse) throws Throwable {
+        resetLeftover();
         Object[][] constructorInput = {{initialColour, String.class}};
         Object fenceInstance = fence.createInstance(constructorInput);
-        Object [][] paintArguments = {{inputColour, String.class}, {amountToUse, double.class}};
+        Object[][] paintArguments = {{inputColour, String.class}, {amountToUse, double.class}};
+        Clause[] clauses = {
+                new StringLiteral("The input colour does not match any of the paint colours\\."),
+                new Optional(new NewLine())
+        };
+        String incorrectMessage = String.format("The %s method does not correctly identify and print that the input colour is not a valid option.", paintMethodName);
+        fence.callMethod(paintMethodName, paintArguments, null, fenceInstance, clauses, incorrectMessage);
+        _assertArrayEquals(amountLeftArray, fence.getFieldValue(null, amountLeftAttributeName),
+                String.format("The %s method should not update the %s attribute if invalid input is detected.", paintMethodName, amountLeftAttributeName));
+    }
+
+    @ParameterizedTest
+    @MethodSource("paintColourInputProvider")
+    @Order(6)
+    @Tag("dependent1")
+    public void paintColourMethodPaintsFencesCorrectly(String initialColour, String inputColour, double amountToUse, String outputColour, boolean colourChange, double[] leftoverAmount) throws Throwable {
+        Object[][] constructorInput = {{initialColour, String.class}};
+        Object fenceInstance = fence.createInstance(constructorInput);
+        Object[][] paintArguments = {{inputColour, String.class}, {amountToUse, double.class}};
         Clause[] clauses;
         String resultColour = outputColour;
-        if (!colourChange){
-            clauses = new Clause[] {
+        String incorrectLeftover;
+        if (!colourChange) {
+            clauses = new Clause[]{
                     new StringLiteral("There is not enough "),
                     new StringLiteral(inputColour),
-                    new StringLiteral(" paint for this job"),
+                    new StringLiteral(" paint for this job\\."),
                     new Optional(new NewLine())
             };
             resultColour = initialColour;
-        } else
+            incorrectLeftover = String.format("The %s method should not modify the %s field if there is not enough paint for the job.", paintMethodName, amountLeftAttributeName);
+        } else {
             clauses = null;
+            incorrectLeftover = String.format("The %s method does not correctly update the %s field when a %s is painted.", paintMethodName, amountLeftAttributeName, fenceName);
+        }
         String notEnoughPaintMessage = String.format("The %s method does not correctly detect and print that there is not enough paint to perform the paint job.", paintMethodName);
         fence.callMethod(paintMethodName, paintArguments, null, fenceInstance, clauses, notEnoughPaintMessage);
         String incorrectColour = "The %s method does not change the %s attribute to the correct value when there is enough paint for the fence";
         _assertEquals(resultColour, fence.getFieldValue(fenceInstance, colourAttributeName), String.format(incorrectColour, paintMethodName, colourAttributeName));
+        _assertArrayEquals(leftoverAmount, fence.getFieldValue(null, amountLeftAttributeName), 0.001, incorrectLeftover);
+    }
+
+    @Test
+    @Order(8)
+    @Tag("dependency1")
+    public void testPaintingMainMethodProducesCorrectOutput() throws Throwable{
+        resetLeftover();
+        Clause[] clauses = {
+                new StringLiteral("My paint colour is Brown\\."),
+                new NewLine(),
+                new StringLiteral("My paint colour is Brown\\."),
+                new NewLine(),
+                new StringLiteral("There is not enough Brown paint for this job\\."),
+                new NewLine(),
+                new StringLiteral("My paint colour is Yellow\\.")
+        };
+        String incorrectMainOutput = "Your main method in the %s class does not print the correct output.";
+        Object[][] mainArguments = {{new String[0], String[].class}};
+        testFence.callMethod("main", mainArguments, clauses, String.format(incorrectMainOutput, testFenceName));
+    }
+
+    private void resetLeftover() {
+        double[] resetArray = new double[]{100.00, 100.00, 100.00, 100.00, 100.00, 100.00, 100.00, 100.00};
+        fence.setFieldValue(null, resetArray, amountLeftAttributeName);
     }
 }

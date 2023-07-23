@@ -36,10 +36,10 @@ Your `Fence` class must have the following requirements:
           matching colour, and see if the amount is greater than or equal to the **neededVolume** parameter.
         - If there is enough paint, then subtract **neededVolume** from the value in **leftoverAmount**, and update the
           value of the **attribute** to **colourName**. If not, print out the string "There is not enough x paint for
-          this job", where x is the value of **colourName**.
+          this job.", where x is the value of **colourName**.
         - If the input **colourName** did not match any of the colours in the **colours** array, print out the string
           "The input colour does not match any of the paint colours."
-        -  This method should not return anything.
+        - This method should not return anything.
     - A `toString` method which returns the `String` "My paint colour is y.", where y is the value of the **colour**
       attribute of the `Fence` object
 
@@ -51,11 +51,11 @@ Your `TestPainting` class must have the following items:
     - A `main` method which initializes three `Fence` objects. The first should be coloured "Red", the second "Green",
       and the third should be "Yellow". Then, call the `paintColour` method on each of the fences to paint each fence
       brown. Each fence takes a different amount of paint. The first takes 25.5, the second 68.8, and the third 38.5.
-      After calling the paint Colour method, print the colours of the three fences, from first to last, each on their
-      own line using the `toString` method you coded.
-    - Sample Output:
+      After each call to the paint colour method, print the colour of the fence object.
+    - Expected Output:
        ```
-        My paint colour is Brown
-        My paint colour is Brown
-        My paint colour is Yellow
+        My paint colour is Brown.
+        My paint colour is Brown.
+        There is not enough Brown paint for this job.
+        My paint colour is Yellow.
       ```
