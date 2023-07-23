@@ -65,6 +65,7 @@ public class MainTest {
     }
 
     @Test
+    @Order(2)
     public void fenceClassHasRequiredConstructor() {
         String missingConstructorMessage = "The %s class is missing a required constructor.";
         String incorrectVisibilityModifierMessage = "The constructor for the %s class has the wrong visibility modifier";
@@ -89,7 +90,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(2)
+    @Order(3)
     public void fenceClassInitializesStaticAttributesCorrectly() {
         String notNullArrayMessage = "The %s array in the %s class was not initialized. Make sure it is not initialized in the constructor.";
         assertNotNull(fence.getFieldValue(null, colourArrayAttributeName), String.format(notNullArrayMessage, colourArrayAttributeName, fenceName));
@@ -104,7 +105,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    @Order(3)
+    @Order(4)
     public void fenceConstructorInitializesAttributesCorrectly(String input, String value) throws Throwable {
         Object[][] constructorInput = {{input, String.class}};
         Object fenceInstance = fence.createInstance(constructorInput);
@@ -113,7 +114,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    @Order(4)
+    @Order(5)
     public void fenceClassHasCorrectToStringMethod(String input, String value) throws Throwable {
         assertTrue(fence.hasMethod("toString", null, String.class, new String[]{"public"}),
                 String.format("The %s class is missing the toString method.", fenceName));
@@ -149,7 +150,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(5)
+    @Order(6)
     @Tag("dependent1")
     public void paintColourMethodIsCorrectlyDefined() {
         String missingMethod = "The %s class is missing the %s method. Make sure it is defined, spelt correctly, and accepts the required parameters.";
@@ -166,7 +167,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("invalidPaintColourInputProvider")
-    @Order(7)
+    @Order(8)
     @Tag("dependent1")
     public void paintCourMethodCorrectlyIdentifiesInvalidInput(String initialColour, String inputColour, double amountToUse) throws Throwable {
         resetLeftover();
@@ -185,7 +186,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("paintColourInputProvider")
-    @Order(6)
+    @Order(7)
     @Tag("dependent1")
     public void paintColourMethodPaintsFencesCorrectly(String initialColour, String inputColour, double amountToUse, String outputColour, boolean colourChange, double[] leftoverAmount) throws Throwable {
         Object[][] constructorInput = {{initialColour, String.class}};
@@ -215,7 +216,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(8)
+    @Order(9)
     @Tag("dependency1")
     public void testPaintingMainMethodProducesCorrectOutput() throws Throwable{
         resetLeftover();
