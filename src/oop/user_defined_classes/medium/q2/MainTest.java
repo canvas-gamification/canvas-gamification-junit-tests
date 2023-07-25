@@ -52,18 +52,22 @@ public class MainTest {
     }
     @Test
     public void classHasRequiredFields() {
-        String wrongFieldMessage = "Your " + className + " class is missing some of the required fields.";
-        String wrongModifierMessage = "Your " + className + " class does not have some of the required modifiers.";
+        assertTrue(classInstance.hasField(varColour),
+                "Your " + className + " class is missing the " + varColour + " attribute, or it is spelled incorrectly.");
         assertTrue(classInstance.hasField(varColour, String.class),
-                "Your " + className + " class is missing the " + varColour + " attribute.");
+                "Your " + varColour + " attribute does not have the correct return type.");
         assertTrue(classInstance.hasModifier(varColour, "private"),
                 "Your " + varColour + " attribute does not have the correct visibility modifier.");
+        assertTrue(classInstance.hasField(varPower),
+                "Your " + className + " class is missing the " + varPower + " attribute, or it is spelled incorrectly.");
         assertTrue(classInstance.hasField(varPower, int.class),
-                "Your " + className + " class is missing the " + varPower + " attribute.");
+                "Your " + varPower + " attribute does not have the correct return type.");
         assertTrue(classInstance.hasModifier(varPower, "private"),
                 "Your " + varPower + " attribute does not have the correct visibility modifier.");
+        assertTrue(classInstance.hasField(varYear),
+                "Your " + className + " class is missing the " + varYear+ " attribute, or it is spelled incorrectly..");
         assertTrue(classInstance.hasField(varYear, int.class),
-                "Your " + className + " class is missing the " + varYear+ " attribute.");
+                "Your " + varYear + " attribute does not have the correct return type.");
         assertTrue(classInstance.hasModifier(varYear, "private"),
                 "Your " + varYear + " attribute does not have the correct visibility modifier.");
     }
