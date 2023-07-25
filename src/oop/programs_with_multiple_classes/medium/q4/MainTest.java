@@ -55,12 +55,16 @@ public class MainTest {
 
     @Test
     public void chassisClassHasCorrectAttributes() {
+        assertTrue(chassis.hasField(varMaterialType),
+                "Your " + chassisClass + " class is missing the " + varMaterialType + " attribute, or it is spelled incorrectly..");
         assertTrue(chassis.hasField(varMaterialType, String.class),
-                "Your " + chassisClass + " class is missing the " + varMaterialType + " attribute.");
+                "Your " + varMaterialType + " attribute does not have the correct return type.");
         assertTrue(chassis.hasModifier(varMaterialType, "private"),
                 "Your " + varMaterialType + " attribute does not have the correct visibility modifier.");
+        assertTrue(chassis.hasField(varWheels),
+                "Your " + chassisClass + " class is missing the " + varWheels + " attribute, or it is spelled incorrectly..");
         assertTrue(chassis.hasField(varWheels, Wheel[].class),
-                "Your " + chassisClass + " class is missing the " + varWheels + " attribute.");
+                "Your " + varWheels + " attribute does not have the correct return type.");
         assertTrue(chassis.hasModifier(varWheels, "private"),
                 "Your " + varWheels + " attribute does not have the correct visibility modifier.");
     }
