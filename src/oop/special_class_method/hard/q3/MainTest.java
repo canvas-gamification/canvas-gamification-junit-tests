@@ -55,12 +55,16 @@ public class MainTest {
 
     @Test
     public void chairClassHasCorrectFields() {
+        assertTrue(testClass.hasField(doubleFieldName),
+                "Your " + className + " class is missing the " + doubleFieldName + " attribute, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(doubleFieldName, double.class),
-                "Your " + className + " class is missing the " + doubleFieldName + " attribute.");
+                "Your " + doubleFieldName + " does not have the correct return type.");
         assertTrue(testClass.hasModifier(doubleFieldName, "private"),
                 "Your " + doubleFieldName + " does not have the correct visibility modifier.");
+        assertTrue(testClass.hasField(stringFieldName),
+                "Your " + className + " class is missing the " + stringFieldName + " attribute, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(stringFieldName, String.class),
-                "Your " + className + " class is missing the " + stringFieldName + " attribute.");
+                "Your " + stringFieldName + " does not have the correct return type.");
         assertTrue(testClass.hasModifier(stringFieldName, "private"),
                 "Your " + stringFieldName + " does not have the correct visibility modifier.");
     }
