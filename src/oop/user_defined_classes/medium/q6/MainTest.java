@@ -44,12 +44,16 @@ public class MainTest {
 
     @Test
     public void cupboardClassHasCorrectAttributes() {
+        assertTrue(classInstance.hasField(varMark),
+                "Your " + className + " class is missing the " + varMark + " attribute, or it is spelled incorrectly.");
         assertTrue(classInstance.hasField(varMark, double.class),
-                "Your " + className + " class is missing the " + varMark + " attribute.");
+                "Your " + varMark + " attribute does not have the correct return type.");
         assertTrue(classInstance.hasModifier(varMark, "private"),
                 "Your " + varMark + " attribute does not have the correct visibility modifier.");
+        assertTrue(classInstance.hasField(varNum),
+                "Your " + className + " class is missing the " + varNum + " attribute, or it is spelled incorrectly.");
         assertTrue(classInstance.hasField(varNum, int.class),
-                "Your " + className + " class is missing the " + varNum + " attribute.");
+                "Your " + varMark + " attribute does not have the correct return type.");
         assertTrue(classInstance.hasModifier(varNum, "private"),
                 "Your " + varMark + " attribute does not have the correct visibility modifier.");
     }
