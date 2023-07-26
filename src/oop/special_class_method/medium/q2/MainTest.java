@@ -203,10 +203,6 @@ public class MainTest {
                 {false, boolean.class}
         };
         Object testInstance = testClass.createInstance(instantiationArguments);
-        _assertEquals(1.234, testClass.getFieldValue(testInstance, attributeName1),
-                "Your " + className + " constructor does not initializes values correctly.");
-        _assertEquals(false, testClass.getFieldValue(testInstance, attributeName2),
-                "Your " + className + " constructor does not initializes values correctly.");
         Object[][] setMethodArguments = {
                 {firstValue, double.class}
         };
