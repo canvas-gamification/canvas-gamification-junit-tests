@@ -73,18 +73,18 @@ public class MainTest {
     public void carClassHasRequiredConstructor() {
         Class<?>[] classArguments = {double.class, String.class};
         assertTrue(testClass.hasConstructor(classArguments),
-                "Your " + className + " constructor does not have the correct parameters.");
+                "Your " + className + " constructor with parameters does not have the correct parameters.");
         assertTrue(testClass.hasModifier(classArguments, "public"),
-                "Your " + className + " constructor does not have the correct modifier.");
+                "Your " + className + " constructor with parameters does not have the correct modifier.");
     }
 
     @Test
     public void carClassHasRequiredConstructor2() {
         Class<?>[] classArguments = {};
         assertTrue(testClass.hasConstructor(classArguments),
-                "Your " + className + " constructor does not have the correct parameters.");
+                "Your " + className + " constructor without parameters does not have the correct parameters.");
         assertTrue(testClass.hasModifier(classArguments, "public"),
-                "Your " + className + " constructor does not have the correct modifier.");
+                "Your " + className + " constructor without parameters does not have the correct modifier.");
     }
 
     private static Stream<Arguments> constructorInputProvider() {
