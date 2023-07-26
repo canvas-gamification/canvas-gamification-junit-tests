@@ -40,5 +40,5 @@ Your `Earth` class must have the following items:
 - int population;
 - double landMass;
 - public static void setLandMass(double a)
-- private Earth( double landMass, int population)
+- private Earth(double landMass, int population)
 - public Earth(int population, double landMass)
