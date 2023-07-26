@@ -262,7 +262,7 @@ public class MainTest {
                 "Your " + getStringMethodName + " method does not return the correct value after calling the " + setStringMethodName + " method.");
         String expectedToString = "This " + className + " has a " + doubleFieldName + " of " + value + " with the " + stringFieldName + " " + b + ".";
         String incorrectToStringMessage = String.join(" ",
-                "Your", className, " toString method does not return the correct String after updating the values of its attributes using its setter methods.");
+                "Your", className, "toString method does not return the correct String after updating the values of its attributes using its setter methods.");
         Object output = testClass.callMethod("toString", classInstance);
         _assertEquals(expectedToString, output, incorrectToStringMessage);
     }
