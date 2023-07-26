@@ -58,13 +58,13 @@ public class MainTest {
         assertTrue(testClass.hasField(doubleFieldName),
                 "The attribute " + doubleFieldName + " could not be found in your class. Please make sure you have added it, it is spelled correctly.");
         assertTrue(testClass.hasField(doubleFieldName, double.class),
-                "Your " + doubleFieldName + " does not have the correct return type.");
+                "Your " + doubleFieldName + " does not have the correct type.");
         assertTrue(testClass.hasModifier(doubleFieldName, "private"),
                 "Your " + doubleFieldName + " does not have the correct visibility modifier.");
         assertTrue(testClass.hasField(stringFieldName),
                 "The attribute " + stringFieldName + " could not be found in your class. Please make sure you have added it, it is spelled correctly.");
         assertTrue(testClass.hasField(stringFieldName, String.class),
-                "Your " + stringFieldName + " does not have the correct return type.");
+                "Your " + stringFieldName + " does not have the correct type.");
         assertTrue(testClass.hasModifier(stringFieldName, "private"),
                 "Your " + stringFieldName + " does not have the correct visibility modifier.");
     }
