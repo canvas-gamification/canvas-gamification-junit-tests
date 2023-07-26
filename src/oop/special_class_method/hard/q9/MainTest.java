@@ -55,6 +55,15 @@ public class MainTest {
         );
     }
 
+    @Test
+    public void earthClassHasRequiredConstructor() {
+        Class<?>[] classArguments = {double.class, int.class};
+        assertTrue(testClass.hasConstructor(classArguments),
+                "Your " + className + " constructor does not have the correct parameters.");
+        assertTrue(testClass.hasModifier(classArguments, "public"),
+                "Your " + className + " constructor does not have the correct modifier.");
+    }
+
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
     public void earthClassHasCorrectConstructor(double value1, int value2) throws Throwable {
@@ -62,19 +71,15 @@ public class MainTest {
                 {value1, double.class},
                 {value2, int.class}
         };
-        Class<?>[] constructorClasses = {double.class, int.class};
         Object classInstance = testClass.createInstance(arguments);
         String incorrectDoubleValueMessage =
                 "Your " + className + " constructor does not initialize the " + doubleFieldName + " attribute to the correct value.";
         String incorrectIntValueMessage =
                 "Your " + className + " constructor does not initialize the " + intFieldName + " attribute to the correct value.";
-        String incorrectConstructorVisibilityModifier =
-                "Your " + className + " constructor does not have the correct visibility modifier.";
         _assertEquals(value1, testClass.getFieldValue(classInstance, doubleFieldName),
                 incorrectDoubleValueMessage);
         _assertEquals(value2, testClass.getFieldValue(classInstance, intFieldName),
                 incorrectIntValueMessage);
-        assertTrue(testClass.hasModifier(constructorClasses, "public"), incorrectConstructorVisibilityModifier);
     }
 
     private static Stream<Arguments> doubleInputProvider() {
