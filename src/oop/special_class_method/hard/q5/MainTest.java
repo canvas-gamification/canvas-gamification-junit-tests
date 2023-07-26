@@ -68,16 +68,22 @@ public class MainTest {
 
     @Test
     public void roadClassHasCorrectAttributes() {
+        assertTrue(testClass.hasField(intFieldName),
+                "The attribute " + intFieldName + " could not be found in your class. Please make sure you have added it, it is spelled correctly.");
         assertTrue(testClass.hasField(intFieldName, int.class),
-                "The attribute " + intFieldName + " could not be found in your class. Please make sure you have added it, it is spelled correctly, and has the correct type");
+                "Your " + intFieldName + " does not have the correct return type.");
         assertTrue(testClass.hasModifier(intFieldName, "private"),
                 "Your " + intFieldName + " does not have the correct visibility modifier.");
+        assertTrue(testClass.hasField(stringFieldName),
+                "The attribute " + stringFieldName + " could not be found in your class. Please make sure you have added it, it is spelled correctly.");
         assertTrue(testClass.hasField(stringFieldName, String.class),
-                "The attribute " + stringFieldName + " could not be found in your class. Please make sure you have added it, it is spelled correctly, and has the correct type");
+                "Your " + stringFieldName + " does not have the correct return type.");
         assertTrue(testClass.hasModifier(stringFieldName, "private"),
                 "Your " + stringFieldName + " does not have the correct visibility modifier.");
+        assertTrue(testClass.hasField(int2FieldName),
+                "The attribute " + int2FieldName + " could not be found in your class. Please make sure you have added it, it is spelled correctly.");
         assertTrue(testClass.hasField(int2FieldName, int.class),
-                "The attribute " + int2FieldName + " could not be found in your class. Please make sure you have added it, it is spelled correctly, and has the correct type");
+                "Your " + int2FieldName + " does not have the correct return type.");
         assertTrue(testClass.hasModifier(int2FieldName, "private"),
                 "Your " + int2FieldName + " does not have the correct visibility modifier.");
     }
