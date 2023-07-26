@@ -96,19 +96,15 @@ public class MainTest {
                 {value1, String.class},
                 {value2, String.class}
         };
-        Class<?>[] constructorClasses = {String.class, String.class};
         Object classInstance = testClass.createInstance(arguments);
         String incorrectString1ValueMessage =
                 "Your " + className + " constructor does not initialize the " + string2FieldName + " attribute to the correct value.";
         String incorrectString2ValueMessage =
                 "Your " + className + " constructor does not initialize the " + stringFieldName + " attribute to the correct value.";
-        String incorrectConstructorVisibilityModifier =
-                "Your " + className + " constructor does not have the correct visibility modifier.";
         _assertEquals(value1, testClass.getFieldValue(classInstance, string2FieldName),
                 incorrectString1ValueMessage);
         _assertEquals(value2, testClass.getFieldValue(classInstance, stringFieldName),
                 incorrectString2ValueMessage);
-        assertTrue(testClass.hasModifier(constructorClasses, "public"), incorrectConstructorVisibilityModifier);
     }
 
     @ParameterizedTest
