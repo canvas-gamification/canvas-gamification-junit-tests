@@ -155,7 +155,7 @@ public class MainTest {
         };
         String[] setMethodModifiers = {"public"};
         String incorrectSetMethodMessage = String.join(" ",
-                "Your", setDoubleMethodName, " method does not correctly set the value of the", doubleFieldName, "attribute.");
+                "Your", setDoubleMethodName, "method does not correctly set the value of the", doubleFieldName, "attribute.");
         Object setMethodOutput = testClass.callMethod(setDoubleMethodName, setSizeArguments, setMethodModifiers, classInstance);
         _assertEquals(setValue, testClass.getFieldValue(classInstance, doubleFieldName), incorrectSetMethodMessage);
         assertNull(setMethodOutput, String.join(" ", "Your", setDoubleMethodName, "method should not return any output"));
