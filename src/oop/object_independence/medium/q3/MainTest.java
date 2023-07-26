@@ -56,8 +56,10 @@ public class MainTest {
 
     @Test
     public void cocktailClassHasRequiredFields() {
+        assertTrue(testClass.hasField(firstFieldName),
+                "Your " + className + " class is missing the " + firstFieldName + " attribute, or it is spelled incorrevtly..");
         assertTrue(testClass.hasField(firstFieldName, String[].class),
-                "Your " + className + " class is missing the " + firstFieldName + " attribute.");
+                "Your " + firstFieldName + " does not have the correct type.");
         assertTrue(testClass.hasModifier(firstFieldName, "private"),
                 "Your " + firstFieldName + " does not have the correct visibility modifier.");
     }
