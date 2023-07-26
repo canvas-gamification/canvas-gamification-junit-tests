@@ -79,6 +79,15 @@ public class MainTest {
         );
     }
 
+    @Test
+    public void circleClassHasRequiredConstructor() {
+        Class<?>[] classArguments = {double.class, String.class};
+        assertTrue(testClass.hasConstructor(classArguments),
+                "Your " + className + " constructor does not have the correct parameters.");
+        assertTrue(testClass.hasModifier(classArguments, "public"),
+                "Your " + className + " constructor does not have the correct modifier.");
+    }
+
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
     public void circleClassHasCorrectConstructor(double value1, String value2) throws Throwable {
