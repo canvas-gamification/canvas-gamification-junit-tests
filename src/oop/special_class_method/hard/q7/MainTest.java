@@ -55,12 +55,16 @@ public class MainTest {
 
     @Test
     public void piggyBankClassHasCorrectAttributes() {
+        assertTrue(testClass.hasField(doubleFieldName),
+                "Your " + className + " class is missing the " + doubleFieldName + " attributes, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(doubleFieldName, double.class),
-                "Your " + className + " class is missing the " + doubleFieldName + " attributes.");
+                "Your " + doubleFieldName + " does not have the correct return type.");
         assertTrue(testClass.hasModifier(doubleFieldName, "private"),
                 "Your " + doubleFieldName + " does not have the correct visibility modifier.");
+        assertTrue(testClass.hasField(intFieldName),
+                "Your " + className + " class is missing the " + intFieldName + " attributes, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(intFieldName, int.class),
-                "Your " + className + " class is missing the " + intFieldName + " attributes.");
+                "Your " + intFieldName + " does not have the correct return type.");
         assertTrue(testClass.hasModifier(intFieldName, "private"),
                 "Your " + intFieldName + " does not have the correct visibility modifier.");
     }
