@@ -14,7 +14,7 @@ Your `Earth` class must have the following items:
     - An `int` attribute named **population** which is not accessible from other classes
 
 - Constructors:
-    - A constructor which is accessible from other classes and accepts a`double` and a `int` to initialize the
+    - A constructor which is accessible from other classes and accepts a `double` and an `int` to initialize the
       **landMass** and **population** attributes.
 
 - Methods:
