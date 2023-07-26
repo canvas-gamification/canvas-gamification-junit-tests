@@ -226,7 +226,7 @@ public class MainTest {
         };
         testClass.callMethod(setString2MethodName, setDoubleArguments, classInstance);
         _assertEquals(value, testClass.callMethod(getString2MethodName, classInstance),
-                "Your " + getString2MethodName + " method does not return the correct value calling the " + setString2MethodName + " method.");
+                "Your " + getString2MethodName + " method does not return the correct value after calling the " + setString2MethodName + " method.");
         Object[][] setArguments = {
                 {b, String.class}
         };
