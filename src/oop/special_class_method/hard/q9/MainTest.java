@@ -207,7 +207,7 @@ public class MainTest {
                 "Your " + getIntMethodName + " method does not return the correct value calling the " + setIntMethodName + " method.");
         String expectedToString = "Here " + b + "people live on a " + value + "kg planet.";
         String incorrectToStringMessage = String.join(" ",
-                "Your", className, " toString method does not return the correct String after updating the values of its attributes using its setter methods.");
+                "Your", className, "toString method does not return the correct String after updating the values of its attributes using its setter methods.");
         Object output = testClass.callMethod("toString", classInstance);
         _assertEquals(expectedToString, output, incorrectToStringMessage);
     }
