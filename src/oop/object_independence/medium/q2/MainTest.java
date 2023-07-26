@@ -55,8 +55,10 @@ public class MainTest {
     // Field Tests
     @Test
     public void phoneWaitListClassHasRequiredFields() {
+        assertTrue(testClass.hasField(firstFieldName),
+                "Your " + className + " class is missing the " + firstFieldName + " attribute, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(firstFieldName, int.class),
-                "Your " + className + " class is missing the " + firstFieldName + " attribute.");
+                "Your " + firstFieldName + " does not have the correct type.");
         assertTrue(testClass.hasModifier(firstFieldName, "private"),
                 "Your " + firstFieldName + " does not have the correct visibility modifier.");
     }
