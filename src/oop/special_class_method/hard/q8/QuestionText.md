@@ -14,7 +14,7 @@ Your `Circle` class must have the following items:
     - A `String` attribute named **colour** which is not accessible from other classes
 
 - Constructors:
-    - A constructor which is accessible from other classes and accepts a`double` and a `String` to initialize the
+    - A constructor which is accessible from other classes and accepts a `double` and a `String` to initialize the
       **radius** and **colour** attributes.
 
 - Methods:
