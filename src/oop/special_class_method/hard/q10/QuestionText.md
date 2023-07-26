@@ -40,3 +40,5 @@ Your `Award` class must have the following items:
 - private class Award
 - public Award()
 - public void setAwardRecipient(String)	
+- awardCategory = awardCategory;
+- awardRecipient = awardRecipient;

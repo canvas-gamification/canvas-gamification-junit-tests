@@ -55,6 +55,15 @@ public class MainTest {
         );
     }
 
+    @Test
+    public void awardClassHasRequiredConstructor() {
+        Class<?>[] classArguments = {String.class, String.class};
+        assertTrue(testClass.hasConstructor(classArguments),
+                "Your " + className + " constructor does not have the correct parameters.");
+        assertTrue(testClass.hasModifier(classArguments, "public"),
+                "Your " + className + " constructor does not have the correct modifier.");
+    }
+
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void awardClassHasCorrectConstructor(String value1, String value2) throws Throwable {
@@ -62,19 +71,15 @@ public class MainTest {
                 {value1, String.class},
                 {value2, String.class}
         };
-        Class<?>[] constructorClasses = {String.class, String.class};
         Object classInstance = testClass.createInstance(arguments);
         String incorrectString1ValueMessage =
                 "Your " + className + " constructor does not initialize the " + firstFieldName + " attribute to the correct value.";
         String incorrectString2ValueMessage =
                 "Your " + className + " constructor does not initialize the " + secondFieldName + " attribute to the correct value.";
-        String incorrectConstructorVisibilityModifier =
-                "Your " + className + " constructor does not have the correct visibility modifier.";
         _assertEquals(value1, testClass.getFieldValue(classInstance, firstFieldName),
                 incorrectString1ValueMessage);
         _assertEquals(value2, testClass.getFieldValue(classInstance, secondFieldName),
                 incorrectString2ValueMessage);
-        assertTrue(testClass.hasModifier(constructorClasses, "public"), incorrectConstructorVisibilityModifier);
     }
 
     @ParameterizedTest
