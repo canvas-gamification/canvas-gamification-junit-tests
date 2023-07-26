@@ -28,7 +28,7 @@ public class MainTest {
     }
 
     @Test
-    public void teamClassHasRequiredFields() {
+    public void teamClassHasRequiredAttributes() {
         assertTrue(testClass.hasField(firstFieldName),
                 "Your " + className + " class is missing the " + firstFieldName + " attribute, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(firstFieldName, String.class),
