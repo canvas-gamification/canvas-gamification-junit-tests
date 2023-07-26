@@ -232,7 +232,7 @@ public class MainTest {
         };
         testClass.callMethod(setStringMethodName, setArguments, classInstance);
         _assertEquals(b, testClass.callMethod(getStringMethodName, classInstance),
-                "Your " + getStringMethodName + " method does not return the correct value calling the " + setStringMethodName + " method.");
+                "Your " + getStringMethodName + " method does not return the correct value after calling the " + setStringMethodName + " method.");
         String expectedToString = "The " + className + " instance " + string2FieldName + " is " + value + " and its " + stringFieldName + " is " + b + ".";
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, " toString method does not return the correct String after updating the values of its attributes using its setter methods.");
