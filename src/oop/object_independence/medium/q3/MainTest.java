@@ -55,7 +55,7 @@ public class MainTest {
     }
 
     @Test
-    public void cocktailClassHasRequiredFields() {
+    public void cocktailClassHasRequiredAttributes() {
         assertTrue(testClass.hasField(firstFieldName),
                 "Your " + className + " class is missing the " + firstFieldName + " attribute, or it is spelled incorrevtly..");
         assertTrue(testClass.hasField(firstFieldName, String[].class),
