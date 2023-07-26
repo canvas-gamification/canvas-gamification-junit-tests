@@ -58,13 +58,13 @@ public class MainTest {
         assertTrue(testClass.hasField(doubleFieldName),
                 "Your " + className + " class is missing the " + doubleFieldName + " attribute, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(doubleFieldName, double.class),
-                "Your " + doubleFieldName + " attribute does not have the correct return type.");
+                "Your " + doubleFieldName + " attribute does not have the correct type.");
         assertTrue(testClass.hasModifier(doubleFieldName, "private"),
                 "Your " + doubleFieldName + " attribute does not have the correct visibility modifier.");
         assertTrue(testClass.hasField(stringFieldName),
                 "Your " + className + " class is missing the " + stringFieldName + " attribute, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(stringFieldName, String.class),
-                "Your " + stringFieldName + " attribute does not have the correct return type.");
+                "Your " + stringFieldName + " attribute does not have the correct type.");
         assertTrue(testClass.hasModifier(stringFieldName, "private"),
                 "Your " + stringFieldName + " attribute does not have the correct visibility modifier.");
     }
