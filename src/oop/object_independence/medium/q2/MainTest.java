@@ -54,7 +54,7 @@ public class MainTest {
 
     // Field Tests
     @Test
-    public void phoneWaitListClassHasRequiredFields() {
+    public void phoneWaitListClassHasRequiredAttributes() {
         assertTrue(testClass.hasField(firstFieldName),
                 "Your " + className + " class is missing the " + firstFieldName + " attribute, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(firstFieldName, int.class),
