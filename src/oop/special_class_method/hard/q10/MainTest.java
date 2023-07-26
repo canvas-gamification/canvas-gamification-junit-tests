@@ -31,12 +31,16 @@ public class MainTest {
 
     @Test
     public void awardClassHasCorrectAttributes() {
+        assertTrue(testClass.hasField(firstFieldName),
+                "Your " + className + " class is missing the " + firstFieldName + " attributes, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(firstFieldName, String.class),
-                "Your " + className + " class is missing the " + firstFieldName + " attributes.");
+                "Your " + firstFieldName + " does not have the correct type.");
         assertTrue(testClass.hasModifier(firstFieldName, "private"),
                 "Your " + firstFieldName + " does not have the correct visibility modifier.");
+        assertTrue(testClass.hasField(secondFieldName),
+                "Your " + className + " class is missing the " + secondFieldName + " attributes, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(secondFieldName, String.class),
-                "Your " + className + " class is missing the " + secondFieldName + " attributes.");
+                "Your " + secondFieldName + " does not have the correct type.");
         assertTrue(testClass.hasModifier(secondFieldName, "private"),
                 "Your " + secondFieldName + " does not have the correct visibility modifier.");
     }
