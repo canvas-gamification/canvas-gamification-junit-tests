@@ -33,12 +33,16 @@ public class MainTest {
 
     @Test
     public void portableMusicPlayerClassHasRequiredAttributes() {
+        assertTrue(testClass.hasField(firstFieldName),
+                "Your " + className + " class is missing the " + firstFieldName + " attribute, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(firstFieldName, String[].class),
-                "Your " + className + " class is missing the " + firstFieldName + " attribute.");
+                "Your " + firstFieldName + " attribute does not have the correct type.");
         assertTrue(testClass.hasModifier(firstFieldName, "private"),
                 "Your " + firstFieldName + " attribute does not have the correct visibility modifier.");
+        assertTrue(testClass.hasField(secondFieldName),
+                "Your " + className + " class is missing the " + secondFieldName + " attribute, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(secondFieldName, int.class),
-                "Your " + className + " class is missing the " + secondFieldName + " attribute.");
+                "Your " + secondFieldName + " attribute does not have the correct type.");
         assertTrue(testClass.hasModifier(secondFieldName, "private"),
                 "Your " + secondFieldName + " attribute does not have the correct visibility modifier.");
     }
