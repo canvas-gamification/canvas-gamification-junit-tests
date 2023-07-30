@@ -53,7 +53,14 @@ public class MainTest {
 
     private static Stream<Arguments> checkupInputProvider() {
         return Stream.of(
-
+                Arguments.of("John", 364),
+                Arguments.of("Edward", 1),
+                Arguments.of("Sam", 0),
+                Arguments.of("Steward", 365),
+                Arguments.of("Joseph", 366),
+                Arguments.of("Steven Stren", 364),
+                Arguments.of("Hailey", 366),
+                Arguments.of("Elliot", 235632)
         );
     }
 
@@ -71,8 +78,10 @@ public class MainTest {
     public void remindMeMethodIsDefinedCorrectly() {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(checkup.hasMethod(remindMethodName, null), String.format(incorrectMethodDefinition, remindMethodName, checkupClassName));
         assertTrue(checkup.hasModifier(remindMethodName, null, "public"), String.format(incorrectModifierMessage, remindMethodName, checkupClassName));
+        assertTrue(checkup.hasReturnType(remindMethodName, null, Void.TYPE), String.format(incorrectReturnType, remindMethodName, checkupClassName));
     }
 
     @ParameterizedTest
@@ -82,17 +91,26 @@ public class MainTest {
         Object checkupInstance = checkup.createInstance(constructorArgs);
         Clause[] clauses;
         int expectedNumDays = 0;
+        String incorrectOutput;
+        String incorrectNumDays;
         if (numDays >= 365) {
             clauses = new Clause[]{
-                new StringLiteral(String.format("Patient %s is due for a checkup\\.", name))
+                    new StringLiteral(String.format("Patient %s is due for a checkup\\.", name))
             };
+            incorrectOutput = "The %s method in the %s class does not print the correct output when the patient is due for a checkup.";
+            incorrectNumDays = "The %s method in the %s class does not reset the %s attribute after the patient is due for a checkup.";
         } else {
             expectedNumDays = numDays + 1;
             clauses = new Clause[]{
-                    new StringLiteral(String.format("%s still has ")),
+                    new StringLiteral(String.format("%s still has ", name)),
                     new IntegerLiteral("days"),
                     new StringLiteral(" day\\(s\\) until the checkup is due\\.")
             };
+            incorrectOutput = "The %s method in the %s class does not print the correct output when the patient is not due for a checkup.";
+            incorrectNumDays = "The %s method in the %s class does not correctly increment the %s attribute when the patient is not due for a checkup.";
         }
+        checkup.callMethod(remindMethodName, checkupInstance, clauses, String.format(incorrectOutput, remindMethodName, checkupClassName));
+        _assertEquals(expectedNumDays, checkup.getFieldValue(checkupInstance, daysAttributeName),
+                String.format(incorrectNumDays, remindMethodName, checkupClassName, daysAttributeName));
     }
 }
