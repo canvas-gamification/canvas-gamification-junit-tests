@@ -4,11 +4,7 @@
 
 Teaching young children to make animal sounds is fun and helps them 
 improve their language skills. Make a Java class called `Horse`
-that has an attribute called **weight**, a constructor that 
-initializes the **weight**, and one method called **makeSound **
-that returns `Neigh!!`.
-
-
+to model a horse.
 
 ### Horse Class
 
@@ -20,8 +16,8 @@ The `Horse` class you are given has the following items:
 You must add the following items to the class:
 
 - Constructors:
-    - Initializes **weight** with the input values in the constructor.
-    - If the weight value is negative it should be initialized as 0.
+    - A constructor that accepts a `double` as a parameter and uses it to initialize the **weight** attribute. If the input double parameter is negative, initialize the **weight** attribute to zero. This constructor must be visible from other classes.
+    
 - Method:
     - Write a **makeSound** method that returns the `String` "Neigh!!"
     - It should be accessible from other classes.
