@@ -7,7 +7,7 @@
 ## Question Text:
 
 You want to write a program that models objects within a house and different rooms. Make a Java program
-consisting of a `Vegetable` and a `Cupboard`. See the requirements below for each class. Note that parts of each class
+consisting of a `Vegetable` and a `Cupboard` class. See the requirements below for each class. Note that parts of each class
 are already provided, you only need to implement the other portions.
 
 ## Vegetable
@@ -34,7 +34,7 @@ You must add the following items to complete the class:
 The `Cupboard` class currently has the following items:
 
 - Constructors:
-    - A constructor which is visible from another class and initialize the **size** and **colour** attributes and
+    - A constructor which is visible from another class and initializes the **size** and **colour** attributes based on the input parameters and
       **vegetables** to an uninitialized array of **Vegetable** class of size of the **size** value.
 
 You must add the following items to complete the class:
