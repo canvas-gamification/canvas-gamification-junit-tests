@@ -56,15 +56,15 @@ public class MainTest {
     @Test
     public void chassisClassHasCorrectAttributes() {
         assertTrue(chassis.hasField(varMaterialType),
-                "Your " + chassisClass + " class is missing the " + varMaterialType + " attribute, or it is spelled incorrectly..");
+                "Your " + chassisClass + " class is missing the " + varMaterialType + " attribute, or it is spelled incorrectly.");
         assertTrue(chassis.hasField(varMaterialType, String.class),
-                "Your " + varMaterialType + " attribute does not have the correct return type.");
+                "Your " + varMaterialType + " attribute does not have the correct type.");
         assertTrue(chassis.hasModifier(varMaterialType, "private"),
                 "Your " + varMaterialType + " attribute does not have the correct visibility modifier.");
         assertTrue(chassis.hasField(varWheels),
-                "Your " + chassisClass + " class is missing the " + varWheels + " attribute, or it is spelled incorrectly..");
+                "Your " + chassisClass + " class is missing the " + varWheels + " attribute, or it is spelled incorrectly.");
         assertTrue(chassis.hasField(varWheels, Wheel[].class),
-                "Your " + varWheels + " attribute does not have the correct return type.");
+                "Your " + varWheels + " attribute does not have the correct type.");
         assertTrue(chassis.hasModifier(varWheels, "private"),
                 "Your " + varWheels + " attribute does not have the correct visibility modifier.");
     }
@@ -75,7 +75,7 @@ public class MainTest {
         assertTrue(wheel.hasConstructor(classArguments),
                 "Your " + wheelClass + " constructor does not have the correct parameters.");
         assertTrue(wheel.hasModifier(classArguments, "public"),
-                "Your " + wheelClass + " constructor does not have the correct visibility modifiers.");
+                "Your " + wheelClass + " constructor does not have the correct visibility modifier.");
     }
 
     private static Stream<Arguments> wheelInputProvider() {
@@ -98,7 +98,7 @@ public class MainTest {
         };
         Object wheelInstance = wheel.createInstance(arguments);
         _assertEquals((d >= 0) ? d : 0.0000, wheel.getFieldValue(wheelInstance, varDurability),
-                "Your " + wheelClass + " constructor does not correctly initialize the " + varDurability + " attribute.");
+                "Your " + wheelClass + " constructor does not correctly initialize the " + varDurability + " attribute when given a negative number.");
         _assertEquals(m, wheel.getFieldValue(wheelInstance, varManufacturer),
                 "Your " + wheelClass + " constructor does not correctly initialize the " + varManufacturer + " attribute.");
 
