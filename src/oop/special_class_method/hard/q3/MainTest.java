@@ -54,7 +54,7 @@ public class MainTest {
     }
 
     @Test
-    public void chairClassHasCorrectFields() {
+    public void chairClassHasCorrectAttributes() {
         assertTrue(testClass.hasField(doubleFieldName),
                 "Your " + className + " class is missing the " + doubleFieldName + " attribute, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(doubleFieldName, double.class),
