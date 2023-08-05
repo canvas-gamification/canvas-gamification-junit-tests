@@ -30,13 +30,8 @@ Your `Laundromat` class should have the following items:
       when there are 5 dirty **gymClothes** is shown:
 
       Cleaning item 1
-  
       Cleaning item 2
-  
       Cleaning item 3
-  
       Cleaning item 4
-  
       Cleaning item 5
-  
       Your laundry is done!
