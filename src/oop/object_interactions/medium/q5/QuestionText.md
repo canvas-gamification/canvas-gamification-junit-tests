@@ -29,7 +29,7 @@ The `Person` class currently has the following items:
 You must add the following items to the class:
 
 - Methods:
-    - A `receiveDonation` method that take another **Person** object called donor to do a transplant. It should check if
+    - A `receiveDonation` method that takes another **Person** object called donor to do a transplant. It should check if
       the **numEyes** in donor is non-zero. If donor has enough take 1 unit of **numEyes** from donor
       and give it to the **Person**, and then print `Transplant successful`.
     - A `toString` method that return the `String` of information in the format
