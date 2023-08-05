@@ -33,8 +33,8 @@ public class MainTest {
     @Test
     public void dishWasherClassHasCorrectAttributes() {
         String missingAttributeMessage =
-                "The attribute %s could not be found in your class. Please make sure you have added it and that it is spelled correctly.";
-        String wrongTypeMessage = "The attribute %s does not have the correct type.";
+                "The %s attribute could not be found in your class. Please make sure you have added it and that it is spelled correctly.";
+        String wrongTypeMessage = "The %s attribute does not have the correct type.";
         String incorrectModifierMessage = "Your %s attribute in the %s class does not have the correct visibility modifier.";
         assertTrue(classInstance.hasField(intAttributeName1), String.format(missingAttributeMessage, intAttributeName1));
         assertTrue(classInstance.hasField(intAttributeName1, int.class),
@@ -76,11 +76,11 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(arguments);
         String incorrectAttributeInstantiationMessage =
-                "Your " + testClassName + " constructor does not correctly initialize the object.";
+                "Your " + testClassName + " constructor does not correctly initialize the %s attribute.";
         _assertEquals(attribute1, classInstance.getFieldValue(instance, intAttributeName1),
-                incorrectAttributeInstantiationMessage);
+                String.format(incorrectAttributeInstantiationMessage, intAttributeName1));
         _assertEquals(attribute2, classInstance.getFieldValue(instance, intAttributeName2),
-                incorrectAttributeInstantiationMessage);
+                String.format(incorrectAttributeInstantiationMessage, intAttributeName2));
     }
 
     private static Stream<Arguments> methodInputProvider() {
@@ -101,8 +101,12 @@ public class MainTest {
                 {attribute2, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
+        assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class, int.class}),
+                "Your " + testClassName + " class is missing the method " + methodName + ". Check that is spelled correctly and has the correct parameters.");
+        assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class, int.class}, Void.TYPE),
+                "Your " + testClassName + " " + methodName + " method does not have the correct return type.");
         assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class, int.class}, Void.TYPE, new String[]{"public"}),
-                "Your " + testClassName + " class is missing the method " + methodName + " or it does not have the correct return type or visibility modifier.");
+                "Your " + testClassName + " " + methodName + " method does not have the correct return type visibility modifier.");
         classInstance.callMethod(
                 methodName, new Object[][]{{remove1, int.class}, {remove2, int.class}}, null, instance, new Clause[]{
                         new IntegerLiteral(remainder1),
@@ -110,7 +114,7 @@ public class MainTest {
                         new NewLine(),
                         new IntegerLiteral(remainder2),
                         new StringLiteral(" " + intAttributeName2 + " are still clean")
-                }, "Your " + methodName + " method does not print the correct messages."
+                }, "Your " + methodName + " method does not print the correct output."
         );
         _assertEquals(remainder1, classInstance.getFieldValue(instance, intAttributeName1),
                 "Your " + methodName + " method does not correctly modify the " + intAttributeName1 + " attribute.");
