@@ -152,7 +152,7 @@ public class MainTest {
             _assertEquals(busySeat, busy.getMaxSeats(),
                     "Your " + transferPassengersMethodName + " method does not correctly decrease the " + numPassengersAttributeName + " attribute of the donor.");
         }
-        assertNull(output, String.join(" ", "Your", transferPassengersMethodName, "should not return any output"));
+        assertNull(output, String.join(" ", "Your", transferPassengersMethodName, "method should not return any output."));
     }
 
     @ParameterizedTest
