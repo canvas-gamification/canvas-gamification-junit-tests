@@ -6,6 +6,7 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -13,9 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -61,14 +60,43 @@ public class MainTest {
         _assertEquals("", testClass.getFieldValue(classInstance, myStoryAttributeName),
                 "You have modified the provided constructor on the " + className + " class. Please revert it to the original state.");
 
-        assertTrue(testClass.hasMethod(getMyYearMethodName, null, int.class, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyYearMethodName));
-        assertTrue(testClass.hasMethod(getMyMonthMethodName, null, int.class, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyMonthMethodName));
-        assertTrue(testClass.hasMethod(getMyDayMethodName, null, int.class, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyDayMethodName));
-        assertTrue(testClass.hasMethod(getMyStoryMethodName, null, String.class, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyStoryMethodName));
+        Object[][] tests = new Object[][]{
+                {2002, 10, 23, "Story"},
+                {1994, 2, 1, "War"},
+                {2017, 7, 23, "Victoy"}
+        };
+        for(int i = 0; i < tests.length; i ++) {
+            Object[][] arguments = {
+                    {tests[i][0], int.class},
+                    {tests[i][1], int.class},
+                    {tests[i][2], int.class},
+                    {tests[i][3], String.class}
+            };
+            Object testInstance = testClass.createInstance(arguments);
+            assertTrue(testClass.hasMethod(getMyYearMethodName, null, int.class, new String[]{"public"}),
+                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyYearMethodName));
+            Object getMethodOutput = testClass.callMethod(getMyYearMethodName, testInstance);
+            _assertEquals(tests[i][0], getMethodOutput,
+                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyYearMethodName));
+
+            assertTrue(testClass.hasMethod(getMyMonthMethodName, null, int.class, new String[]{"public"}),
+                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyMonthMethodName));
+            getMethodOutput = testClass.callMethod(getMyMonthMethodName, testInstance);
+            _assertEquals(tests[i][1], getMethodOutput,
+                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyMonthMethodName));
+
+            assertTrue(testClass.hasMethod(getMyDayMethodName, null, int.class, new String[]{"public"}),
+                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyDayMethodName));
+            getMethodOutput = testClass.callMethod(getMyDayMethodName, testInstance);
+            _assertEquals(tests[i][2], getMethodOutput,
+                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyDayMethodName));
+
+            assertTrue(testClass.hasMethod(getMyStoryMethodName, null, String.class, new String[]{"public"}),
+                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyStoryMethodName));
+            getMethodOutput = testClass.callMethod(getMyStoryMethodName, testInstance);
+            _assertEquals(tests[i][3], getMethodOutput,
+                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyStoryMethodName));
+        }
 
     }
 
@@ -111,6 +139,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
+    @Tag("dependent2")
     public void correctMakeCopyMethod(int year, int month, int day, String story) throws Throwable {
         Object classInstance = testClass.createInstance();
         Object[][] methodArguments = {
@@ -135,6 +164,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
+    @Tag("dependent1")
     public void newspaperClassHasCorrectToStringMethod(int year, int month, int day, String story) throws Throwable {
         Object[][] arguments = {
                 {year, int.class},
@@ -152,6 +182,8 @@ public class MainTest {
     }
 
     @Test
+    @Tag("dependent1")
+    @Tag("dependent2")
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral("2021/12/5:The story is: The votes are in!"),
