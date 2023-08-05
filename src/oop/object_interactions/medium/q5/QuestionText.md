@@ -19,7 +19,7 @@ The `Person` class currently has the following items:
     - None of these attributes are accessible from other classes.
 
 - Constructors:
-    - A constructor that take a `String` and an `int` to initialize the **myName** and **numEyes** attributes.
+    - A constructor that takes a `String` and an `int` to initialize the **myName** and **numEyes** attributes.
     - It is accessible from other classes.
 
 - Methods:
