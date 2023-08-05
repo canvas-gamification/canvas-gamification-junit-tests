@@ -25,7 +25,7 @@ The `Airplane` class currently has the following items:
 - Constructors:
     - A constructor that takes one `int` and initialize the **maxSeats** attribute and initializes the **numPassengers**
       attribute to zero.
-    - A constructor that take two `int` parameters to initialize the **maxSeats** and **numPassengers** attributes.
+    - A constructor that takes two `int` parameters to initialize the **maxSeats** and **numPassengers** attributes.
     - Both are accessible from other classes.
 
 - Methods:
