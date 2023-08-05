@@ -29,7 +29,7 @@ The `Airplane` class currently has the following items:
     - Both are accessible from other classes.
 
 - Methods:
-    - Getter and Setter methods for **maxSeats** and **numPassengers** attributes
+    - Getter and Setter methods for the **maxSeats** and **numPassengers** attributes.
     - These methods are accessible from other classes.
 
 You must add the following items to the class:
