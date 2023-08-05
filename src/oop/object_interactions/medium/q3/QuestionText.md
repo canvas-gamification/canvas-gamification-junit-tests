@@ -24,7 +24,7 @@ The `Newspaper` class currently has the following items:
     - It is accessible from other classes.
 
 - Methods:
-    - Getter methods for **myStory**, **myYear**, **myMonth**, and **myDay** attributes that are accessible from other
+    - Getter methods for the **myStory**, **myYear**, **myMonth**, and **myDay** attributes that are accessible from other
       classes.
 
 You must add the following items to the class:
