@@ -6,6 +6,7 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -106,6 +107,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
+    @Tag("dependent2")
     public void correctTransfusionFromMethod(char type, double volume, char donType, double donVolume) throws Throwable {
         Object[][] arguments = {
                 {type, char.class},
@@ -149,6 +151,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
+    @Tag("dependent1")
     public void newspaperClassHasCorrectToStringMethod(char type, double volume) throws Throwable {
         Object[][] arguments = {
                 {type, char.class},
@@ -164,6 +167,8 @@ public class MainTest {
     }
 
     @Test
+    @Tag("dependent1")
+    @Tag("dependent2")
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral("Blood type incompatible"),
