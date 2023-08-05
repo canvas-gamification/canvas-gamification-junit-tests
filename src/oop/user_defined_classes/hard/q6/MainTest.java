@@ -75,11 +75,11 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(arguments);
         String incorrectAttributeInstantiationMessage =
-                "Your " + testClassName + " constructor does not correctly initialize the object.";
+                "Your " + testClassName + " constructor does not correctly initialize the %s attribute.";
         _assertEquals(attribute1, classInstance.getFieldValue(instance, intAttributeName1),
-                incorrectAttributeInstantiationMessage);
+                String.format(incorrectAttributeInstantiationMessage, intAttributeName1));
         _assertEquals(attribute2, classInstance.getFieldValue(instance, intAttributeName2),
-                incorrectAttributeInstantiationMessage);
+                String.format(incorrectAttributeInstantiationMessage, intAttributeName2));
     }
 
     private static Stream<Arguments> methodInputProvider() {
@@ -101,12 +101,15 @@ public class MainTest {
                 {attribute2, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
+        assertTrue(classInstance.hasMethod(methodName, null),
+                "Your " + testClassName + " class is missing the method " + methodName + ". Check that it is spelled correctly and has the correct parameters.");
+        assertTrue(classInstance.hasMethod(methodName, null, Void.TYPE),
+                "Your " + testClassName + " " + methodName + " method does not have the correct return type.");
         assertTrue(classInstance.hasMethod(methodName, null, Void.TYPE, new String[]{"public"}),
-                "Your " + testClassName + " class is missing the method " + methodName + " or it does not have the correct return type or visibility modifier.");
-        Object output = classInstance.callMethod(methodName, instance, new Clause[]{
+                "Your " + testClassName + " " + methodName + " method does not have the correct visibility modifier.");
+        classInstance.callMethod(methodName, instance, new Clause[]{
                 new StringLiteral("Fatigue level is " + stress)
         }, "Your " + methodName + " method does not produce the correct output.");
-        assertNull(output, "Your " + methodName + " method should not return anything.");
         assertEquals(0, (int) classInstance.getFieldValue(instance, intAttributeName2),
                 intAttributeName2 + " should be zero after " + methodName + " is called.");
     }
