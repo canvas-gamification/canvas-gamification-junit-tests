@@ -48,7 +48,7 @@ You must add the following items to the class:
 Your `TestBooking` class must have the following items:
 
 - Main Method:
-    - A `main` method which initializes three **Airplane** who respectively have 12 seats and 20 passengers, 6 seats and
+    - A `main` method which initializes three **Airplane** objects which respectively have 12 seats and 20 passengers, 6 seats and
       zero passengers, and 4 seats and zero passengers.
     - First move extra passengers from the first plane to second plane. Then move the rest from first to the third
       airplane.
