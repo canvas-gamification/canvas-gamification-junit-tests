@@ -29,8 +29,8 @@ public class MainTest {
     @Test
     public void phoneClassHasCorrectAttributes() {
         String missingAttributeMessage =
-                "The attribute %s could not be found in the %s class. Please make sure you have added it and that it is spelled correctly.";
-        String wrongTypeMessage = "The attribute %s does not have the correct type.";
+                "The %s attribute could not be found in the %s class. Please make sure you have added it and that it is spelled correctly.";
+        String wrongTypeMessage = "The %s attribute does not have the correct type.";
         String incorrectModifierMessage = "Your %s attribute in the %s class does not have the correct visibility modifier.";
         assertTrue(classInstance.hasField(doubleAttributeName1),
                 String.format(missingAttributeMessage, doubleAttributeName1, testClassName));
@@ -74,11 +74,11 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(arguments);
         String incorrectAttributeInstantiationMessage =
-                "Your " + testClassName + " constructor does not correctly initialize the object.";
+                "Your " + testClassName + " constructor does not correctly initialize the %s attribute.";
         _assertEquals(attribute1, classInstance.getFieldValue(instance, doubleAttributeName1),
-                incorrectAttributeInstantiationMessage);
+                String.format(incorrectAttributeInstantiationMessage, doubleAttributeName1));
         _assertEquals(attribute2, classInstance.getFieldValue(instance, doubleAttributeName2),
-                incorrectAttributeInstantiationMessage);
+                String.format(incorrectAttributeInstantiationMessage, doubleAttributeName2));
     }
 
     private static Stream<Arguments> methodInputProvider() {
@@ -103,7 +103,7 @@ public class MainTest {
         assertTrue(classInstance.hasMethod(methodName, null, double.class, new String[]{"public"}),
                 "Your " + testClassName + " class is missing the method " + methodName + " or it does not have the correct return type or visibility modifier.");
         Object methodOutput = classInstance.callMethod(methodName, instance, null);
-        _assertEquals(diag, methodOutput,
-                "Your " + methodName + " method does not produce the correct output.");
+        _assertEquals(diag, methodOutput, 0.000001,
+                "Your " + methodName + " method does not correctly calculate the diagonal of the screen.");
     }
 }
