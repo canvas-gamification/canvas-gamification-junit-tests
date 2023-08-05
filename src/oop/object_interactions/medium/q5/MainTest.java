@@ -6,6 +6,7 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -48,13 +49,13 @@ public class MainTest {
         assertTrue(testClass.hasModifier(classArguments, "public"),
                 "You have modified the provided constructor on the " + className + " class. Please revert it to the original state.");
         assertTrue(testClass.hasMethod(getMyNameMethodName, null, String.class, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyNameMethodName));
+                String.format("You have modified the provided %s method. Please revert it to the original state.", getMyNameMethodName));
         assertTrue(testClass.hasMethod(setMyNameMethodName, new Class<?>[]{String.class}, Void.TYPE, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", setMyNameMethodName));
+                String.format("You have modified the provided %s method. Please revert it to the original state.", setMyNameMethodName));
         assertTrue(testClass.hasMethod(getNumEyesMethodName, null, int.class, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", getNumEyesMethodName));
+                String.format("You have modified the provided %s method. Please revert it to the original state.", getNumEyesMethodName));
         assertTrue(testClass.hasMethod(setNumEyesMethodName, new Class<?>[]{int.class}, Void.TYPE, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", setNumEyesMethodName));
+                String.format("You have modified the provided %s method. Please revert it to the original state.", setNumEyesMethodName));
         Object[][] test = new Object[][]{
                 {"Sarah", 2, "John", 0},
                 {"Amir", 1, "Sam", 2},
@@ -103,15 +104,20 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
+    @Tag("dependent2")
     public void correctReceiveDonationMethod(String name, int eyes, String donName, int donEyes) throws Throwable {
         Object[][] arguments = {
                 {name, String.class},
                 {eyes, int.class}
         };
-        Person donor = new Person(donName, donEyes);
+        Object[][] donorArguments = {
+                {donName, String.class},
+                {donEyes, int.class}
+        };
         Object classInstance = testClass.createInstance(arguments);
+        Object donorInstance = testClass.createInstance(donorArguments);
         Object[][] methodArguments = {
-                {donor, Person.class}
+                {donorInstance, Person.class}
         };
         Object output = null;
         if (donEyes > 0) {
@@ -121,7 +127,7 @@ public class MainTest {
             });
             _assertEquals(eyes + 1, testClass.getFieldValue(classInstance, numEyesAttributeName),
                     "Your " + receiveDonationMethodName + " method does not correctly add the " + numEyesAttributeName + " attribute of the recipient.");
-            _assertEquals(donEyes - 1, donor.getNumEyes(),
+            _assertEquals(donEyes - 1, testClass.getFieldValue(donorInstance, numEyesAttributeName),
                     "Your " + receiveDonationMethodName + " method does not correctly decrease the " + numEyesAttributeName + " attribute of the donor.");
         }
         assertNull(output, String.join(" ", "Your", receiveDonationMethodName, "should not return any output"));
@@ -129,6 +135,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
+    @Tag("dependent1")
     public void personClassHasCorrectToStringMethod(String name, int eyes) throws Throwable {
         Object[][] arguments = {
                 {name, String.class},
@@ -144,6 +151,8 @@ public class MainTest {
     }
 
     @Test
+    @Tag("dependent1")
+    @Tag("dependent2")
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral("Tom has 2 eyes"),
