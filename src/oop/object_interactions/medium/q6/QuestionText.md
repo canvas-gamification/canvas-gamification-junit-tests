@@ -43,7 +43,7 @@ You must add the following items to the class:
       of `myName + " has " + numEyes + " eyes"`
     - All methods must be accessible from other classes.
 
-## TestTransfusion Class
+## TestBooking Class
 
 Your `TestBooking` class must have the following items:
 
