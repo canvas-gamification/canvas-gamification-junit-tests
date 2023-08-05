@@ -52,5 +52,5 @@ Your `TestBooking` class must have the following items:
       zero passengers, and 4 seats and zero passengers.
     - First move extra passengers from the first plane to second plane. Then move the rest from first to the third
       airplane.
-    - Then print the information of the three **Airplane** in order using **toString**.
+    - Then print the information of the three **Airplane** objects in order using **toString**.
     - Use this format: `"The first ride: " + first.toString()`.
