@@ -144,7 +144,7 @@ public class MainTest {
                     new Optional(new StringLiteral(" "))
             });
             _assertEquals(pass, testClass.getFieldValue(classInstance, numPassengersAttributeName),
-                    "Your " + transferPassengersMethodName + " method does not correctly add the " + numPassengersAttributeName + " attribute of the recipient.");
+                    "Your " + transferPassengersMethodName + " method does not correctly increase the " + numPassengersAttributeName + " attribute of the recipient.");
             _assertEquals(busyPass, busy.getNumPassengers(),
                     "Your " + transferPassengersMethodName + " method does not correctly decrease the " + numPassengersAttributeName + " attribute of the donor.");
             _assertEquals(seat, testClass.getFieldValue(classInstance, maxSeatsAttributeName),
