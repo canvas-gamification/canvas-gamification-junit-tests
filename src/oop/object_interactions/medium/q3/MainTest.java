@@ -146,7 +146,7 @@ public class MainTest {
         String[] methodModifiers = {"public"};
         String expected = year + "/" + month + "/" + day + ":The story is: " + story;
         String incorrectToStringMessage = String.join(" ",
-                "Your", className, " toString method does not return the correct String.");
+                "Your", className, "toString method does not return the correct String.");
         Object output = testClass.callMethod("toString", methodModifiers, classInstance);
         _assertEquals(expected, output, incorrectToStringMessage);
     }
