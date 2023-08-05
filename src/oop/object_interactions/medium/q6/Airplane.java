@@ -49,6 +49,6 @@ public class Airplane {
     }
 
     public String toString() {
-        return numPassengers + " out of  " + maxSeats + " seats are filled";
+        return numPassengers + " out of " + maxSeats + " seats are filled";
     }
 }
