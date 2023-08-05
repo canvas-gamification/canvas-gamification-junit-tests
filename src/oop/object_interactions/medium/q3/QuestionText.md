@@ -49,5 +49,5 @@ Your `TestNewspaper` class must have the following items:
 - Main Method:
     - A `main` method which initializes one **Newspaper** class with the date 2021/12/5 and the story of
       `The votes are in!` and print it using **toString** method.
-    - Then initialize a new **Newspaper** object without parameters, and print it, and use the `makeCopy` method to copy the previous
+    - Then initialize a new **Newspaper** object without parameters, print it, and use the `makeCopy` method to copy the previous
       object into the new one and finally print it again.
