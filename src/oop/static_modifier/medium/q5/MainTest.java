@@ -6,6 +6,7 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -31,11 +32,11 @@ public class MainTest {
         testClass = new ObjectTest(classString);
         String outputClassString = "oop.static_modifier.medium.q5." + testClassName;
         outputClass = new ObjectTest(outputClassString);
-        String modificationErrorMessage = "You have modified the provided portions of %s class. Please revert them to the original state.";
+        String modificationErrorMessage = "You have modified the provided portions of " + className + " class for %s attribute. Please revert them to the original state.";
         assertTrue(testClass.hasField(attributeName, String.class),
-                String.format(modificationErrorMessage, className));
+                String.format(modificationErrorMessage, attributeName));
         assertTrue(testClass.hasModifier(attributeName, "private"),
-                String.format(modificationErrorMessage, className));
+                String.format(modificationErrorMessage, attributeName));
         String[] test = new String[]{"Black", "Blue", "Red", "Brown"};
         for (int i = 0; i < test.length; i++) {
             Object[][] arguments = {
@@ -43,11 +44,12 @@ public class MainTest {
             };
             Object classInstance = testClass.createInstance(arguments);
             _assertEquals(test[i], testClass.getFieldValue(classInstance, attributeName),
-                    String.format(modificationErrorMessage, className));
+                    String.format(modificationErrorMessage, attributeName));
         }
     }
 
     @Test
+    @Tag("dependent1")
     public void correctTestClass() throws Throwable {
         Object classInstance = outputClass.createInstance();
         String[] methodModifiers = {"public"};
@@ -82,6 +84,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
+    @Tag("dependent1")
     public void correctToStringMethod(String colour) throws Throwable {
         Object[][] arguments = {
                 {colour, String.class}

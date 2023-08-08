@@ -22,7 +22,7 @@ Your `Hat` class already the following items:
 You need to add the following items:
 
 - Attributes:
-    - A `String` attribute called **companyLogo** that has its value shared by all **Hat** instances.
+    - A `String` attribute called **companyLogo** that has its value, initially `Nike`, shared by all **Hat** instances.
     - Note that all attributes in this class should be private
 
 - Methods:
