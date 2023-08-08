@@ -145,7 +145,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("updateStringInputProvider")
-    public void correctSetBountyMethod(int value1, String initialValue, String updatedValue) throws Throwable {
+    public void correctSetColourMethod(int value1, String initialValue, String updatedValue) throws Throwable {
         Object[][] instantiationArguments = {
                 {value1, int.class},
                 {initialValue, String.class}
