@@ -31,7 +31,7 @@ You need to add the following items.
 
 - Methods:
     - A `mixFun` method which returns nothing and should be visible from another class. It should check if there is
-      enough liquid left to make a reaction by finding the minimum amount need in the **guide** using **MIX_1** and
+      enough liquid left to make a reaction by finding the minimum amount need in the **guide** using the indexes **MIX_1** and
       **MIX_2**. If there is not enough liquid to make a reaction it should print
       `There's not enough ingredients to create mixture`. If there is enough it should print `Mixing …`  and then
       decrease the amount of **liquid1** and **liquid2** by the minimum amount
