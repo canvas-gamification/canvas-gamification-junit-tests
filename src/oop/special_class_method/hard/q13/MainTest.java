@@ -64,7 +64,7 @@ public class MainTest {
 
 
     @Test
-    public void alienClassHasRequiredConstructor() {
+    public void cupClassHasRequiredConstructor() {
         Class<?>[] classArguments = {String.class, double.class, String.class};
         assertTrue(testClass.hasConstructor(classArguments),
                 "Your " + className + " constructor does not have the correct parameters.");
