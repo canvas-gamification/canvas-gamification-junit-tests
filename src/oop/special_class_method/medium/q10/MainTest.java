@@ -202,13 +202,13 @@ public class MainTest {
         };
         testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
         _assertEquals(value1, testClass.callMethod(getAttributeMethodName1, testInstance),
-                "Your " + getAttributeMethodName1 + " method does not correctly update the value of " + setAttributeMethodName1 + " after using the " + getAttributeMethodName1 + " method.");
+                "Your " + getAttributeMethodName1 + " method does not correctly update the value of " + attributeName1 + " after using the " + setAttributeMethodName1 + " method.");
         setMethodArguments = new Object[][]{
                 {value2, String.class}
         };
         testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
         _assertEquals(value2, testClass.callMethod(getAttributeMethodName2, testInstance),
-                "Your " + getAttributeMethodName2 + " method does not correctly update the value of " + setAttributeMethodName2 + " after using the " + getAttributeMethodName2 + " method.");
+                "Your " + getAttributeMethodName2 + " method does not correctly update the value of " + attributeName2 + " after using the " + setAttributeMethodName2 + " method.");
         String expectedOutput = "The size of this shoe is " + value1 + " and its colour is " + value2;
         Object toStringOutput = testClass.callMethod("toString", testInstance);
         _assertEquals(expectedOutput, toStringOutput,
