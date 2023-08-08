@@ -74,7 +74,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void alienClassHasCorrectConstructor(String value1, double value2, String value3) throws Throwable {
+    public void cupClassHasCorrectConstructor(String value1, double value2, String value3) throws Throwable {
         Object[][] arguments = {
                 {value1, String.class},
                 {value2, double.class},
