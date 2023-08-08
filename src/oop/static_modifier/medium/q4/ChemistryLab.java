@@ -18,7 +18,7 @@ public class ChemistryLab {
             liquid2 = liquid2 - guide[MIX_2];
             System.out.println("Mixing Successful");
         } else {
-            System.out.println("There's not enough ingredients to create mixture");
+            System.out.println("There's not enough ingredients to create the mixture");
         }
     }
 

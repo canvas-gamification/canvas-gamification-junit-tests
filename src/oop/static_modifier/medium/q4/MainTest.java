@@ -26,7 +26,8 @@ public class MainTest {
     String secondIntName = "MIX_2";
     String arrayName = "guide";
     String methodName = "mixFun";
-    static double initialValue = 10.5;
+    static double initialValue1 = 10.5;
+    static double initialValue2 = 10.5;
     int typeValue1 = 0; // Must be less than 5
     int typeValue2 = 1; // Must be less than 5
 
@@ -34,48 +35,27 @@ public class MainTest {
     public void setup() throws Throwable {
         String circleString = "oop.static_modifier.medium.q4." + className;
         testClass = new ObjectTest(circleString);
-        String modificationErrorMessage = "You have modified the provided portions of %s class. Please revert them to the original state.";
-        assertTrue(testClass.hasField(firstDoubleName, double.class),
-                String.format(modificationErrorMessage, className));
-        assertTrue(testClass.hasField(secondDoubleName, double.class),
-                String.format(modificationErrorMessage, className));
-        assertTrue(testClass.hasField(firstIntName, int.class),
-                String.format(modificationErrorMessage, className));
-        assertTrue(testClass.hasField(secondIntName, int.class),
-                String.format(modificationErrorMessage, className));
-        assertTrue(testClass.hasField(arrayName, double[].class),
-                String.format(modificationErrorMessage, className));
-        assertTrue(testClass.hasModifier(firstDoubleName, "private"),
-                String.format(modificationErrorMessage, className));
-        assertTrue(testClass.hasModifier(firstDoubleName, "static"),
-                String.format(modificationErrorMessage, className));
-        assertTrue(testClass.hasModifier(secondDoubleName, "private"),
-                String.format(modificationErrorMessage, className));
-        assertTrue(testClass.hasModifier(secondDoubleName, "static"),
-                String.format(modificationErrorMessage, className));
-        assertTrue(testClass.hasModifier(firstIntName, "private"),
-                String.format(modificationErrorMessage, className));
-        assertTrue(testClass.hasModifier(firstIntName, "static"),
-                String.format(modificationErrorMessage, className));
-        assertTrue(testClass.hasModifier(firstIntName, "final"),
-                String.format(modificationErrorMessage, className));
-        assertTrue(testClass.hasModifier(secondIntName, "private"),
-                String.format(modificationErrorMessage, className));
-        assertTrue(testClass.hasModifier(secondIntName, "static"),
-                String.format(modificationErrorMessage, className));
-        assertTrue(testClass.hasModifier(secondIntName, "final"),
-                String.format(modificationErrorMessage, className));
-        assertTrue(testClass.hasModifier(arrayName, "private"),
-                String.format(modificationErrorMessage, className));
+        String modificationErrorMessage = "You have modified the provided portions of " + className + " class for the %s attribute. Please revert them to the original state.";
+        assertTrue(testClass.hasField(firstDoubleName, double.class, new String[]{"private", "static"}),
+                String.format(modificationErrorMessage,firstDoubleName));
+        assertTrue(testClass.hasField(secondDoubleName, double.class, new String[]{"private", "static"}),
+                String.format(modificationErrorMessage, secondDoubleName));
+        assertTrue(testClass.hasField(firstIntName, int.class, new String[]{"private", "final", "static"}),
+                String.format(modificationErrorMessage, firstIntName));
+        assertTrue(testClass.hasField(secondIntName, int.class, new String[]{"private", "final", "static"}),
+                String.format(modificationErrorMessage, secondIntName));
+        assertTrue(testClass.hasField(arrayName, double[].class, new String[]{"private"}),
+                String.format(modificationErrorMessage, arrayName));
+
         for (int i = 0; i < 10; i++) {
             double[] test = generateRandomArray(0.5, 20.0, ((int) (Math.random() * 20)));
             Object[][] arguments = {{test, double[].class}};
             Object classInstance = testClass.createInstance(arguments);
             _assertArrayEquals(test, testClass.getFieldValue(classInstance, arrayName),
                     String.format(modificationErrorMessage, className));
-            _assertEquals(initialValue, testClass.getFieldValue(null, firstDoubleName),
+            _assertEquals(initialValue1, testClass.getFieldValue(null, firstDoubleName),
                     String.format(modificationErrorMessage, className));
-            _assertEquals(initialValue, testClass.getFieldValue(null, secondDoubleName),
+            _assertEquals(initialValue2, testClass.getFieldValue(null, secondDoubleName),
                     String.format(modificationErrorMessage, className));
             _assertEquals(typeValue1, testClass.getFieldValue(null, firstIntName),
                     String.format(modificationErrorMessage, className));
@@ -87,9 +67,9 @@ public class MainTest {
 
     private static Stream<Arguments> inputProvider() {
         return Stream.of(
-                Arguments.of(new double[]{initialValue, initialValue, initialValue, initialValue, initialValue}),
-                Arguments.of(new double[]{initialValue + 1, initialValue + 1, initialValue + 1, initialValue + 1, initialValue + 1}),
-                Arguments.of(new double[]{initialValue - 1, initialValue - 1, initialValue - 1, initialValue - 1, initialValue - 1}),
+                Arguments.of(new double[]{initialValue1, initialValue2, initialValue1, initialValue2, initialValue1}),
+                Arguments.of(new double[]{initialValue1 + 1, initialValue2 + 1, initialValue1 + 1, initialValue2 + 1, initialValue1 + 1}),
+                Arguments.of(new double[]{initialValue1 - 1, initialValue2 - 1, initialValue1 - 1, initialValue2 - 1, initialValue1 - 1}),
                 Arguments.of(generateRandomArray(0.5, 20.0, 10)),
                 Arguments.of(generateRandomArray(0.5, 20.0, 10)),
                 Arguments.of(generateRandomArray(0.5, 20.0, 10))
@@ -109,9 +89,7 @@ public class MainTest {
         assertTrue(testClass.hasMethod(methodName, null, Void.TYPE, new String[]{"public"}),
                 "Your " + methodName + " method does not have the correct visibility modifier.");
         Object classInstance = testClass.createInstance(arguments);
-        double value1 = (double) testClass.getFieldValue(null, firstDoubleName);
-        double value2 = (double) testClass.getFieldValue(null, secondDoubleName);
-        if (guide[typeValue1] <= value1 && guide[typeValue2] <= value2) {
+        if (guide[typeValue1] <= initialValue1 && guide[typeValue2] <= initialValue2) {
             testClass.callMethod(methodName, classInstance, new Clause[]{
                     new StringLiteral("Mixing …"),
                     new Optional(new StringLiteral(" ")),
@@ -119,22 +97,22 @@ public class MainTest {
                     new StringLiteral("Mixing Successful"),
                     new Optional(new StringLiteral(" "))
             });
-            _assertEquals(value1 - guide[typeValue1], testClass.getFieldValue(null, firstDoubleName),
+            _assertEquals(initialValue1 - guide[typeValue1], testClass.getFieldValue(null, firstDoubleName),
                     "Your " + methodName + " method does not decrease the value of " + firstDoubleName + " correctly.");
-            _assertEquals(value2 - guide[typeValue2], testClass.getFieldValue(null, secondDoubleName),
+            _assertEquals(initialValue2 - guide[typeValue2], testClass.getFieldValue(null, secondDoubleName),
                     "Your " + methodName + " method does not decrease the value of " + secondDoubleName + " correctly.");
         } else {
             testClass.callMethod(methodName, classInstance, new Clause[]{
-                    new StringLiteral("There's not enough ingredients to create mixture"),
+                    new StringLiteral("There's not enough ingredients to create the mixture"),
                     new Optional(new StringLiteral(" ")),
             });
-            _assertEquals(value1, testClass.getFieldValue(null, firstDoubleName),
-                    "Your " + methodName + " method decrease the value of " + firstDoubleName + " when it should not.");
-            _assertEquals(value2, testClass.getFieldValue(null, secondDoubleName),
-                    "Your " + methodName + " method decrease the value of " + secondDoubleName + " when it should not.");
+            _assertEquals(initialValue1, testClass.getFieldValue(null, firstDoubleName),
+                    "Your " + methodName + " method decreases the value of " + firstDoubleName + " when it should not.");
+            _assertEquals(initialValue2, testClass.getFieldValue(null, secondDoubleName),
+                    "Your " + methodName + " method decreases the value of " + secondDoubleName + " when it should not.");
         }
-        testClass.setFieldValue(null, initialValue, firstDoubleName);
-        testClass.setFieldValue(null, initialValue, secondDoubleName);
+        testClass.setFieldValue(null, initialValue1, firstDoubleName);
+        testClass.setFieldValue(null, initialValue2, secondDoubleName);
     }
 
 
