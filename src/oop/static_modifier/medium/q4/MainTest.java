@@ -113,7 +113,7 @@ public class MainTest {
         double value2 = (double) testClass.getFieldValue(null, secondDoubleName);
         if (guide[typeValue1] <= value1 && guide[typeValue2] <= value2) {
             testClass.callMethod(methodName, classInstance, new Clause[]{
-                    new StringLiteral("Mixing … "),
+                    new StringLiteral("Mixing …"),
                     new Optional(new StringLiteral(" ")),
                     new NewLine(),
                     new StringLiteral("Mixing Successful"),
