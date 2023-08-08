@@ -126,7 +126,7 @@ public class MainTest {
         };
         testClass.callMethod(setAttributeMethodName, setMethodArguments, testInstance);
         _assertEquals(updatedValue, testClass.callMethod(getAttributeMethodName, testInstance),
-                "Your " + getAttributeMethodName + " method does not correctly update the value of " + setAttributeMethodName + " after using the " + getAttributeMethodName + " method.");
+                "Your " + getAttributeMethodName + " method does not correctly return the value of " + attributeName + " after using the " + setAttributeMethodName + " method.");
         String expectedOutput;
         if (updatedValue)
             expectedOutput = "I am full";
