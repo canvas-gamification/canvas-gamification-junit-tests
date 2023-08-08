@@ -15,8 +15,8 @@ Your `Water` class already has the following items:
     - These are not visible from other classes
 
 - Constructor:
-    - a `Water` constructor that is visible to other classes
-      initialize the **quality** and **volume** attributes to `Good` and 1000.0.
+    - a `Water` constructor that is visible to other classes initialize the **quality** and **volume** attributes to
+      `Good` and 1000.0.
 
 You need to add the following items:
 

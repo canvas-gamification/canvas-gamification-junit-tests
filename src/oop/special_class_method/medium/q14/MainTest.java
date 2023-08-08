@@ -24,17 +24,20 @@ public class MainTest {
         String classString = "oop.special_class_method.medium.q14." + className;
         this.testClass = new ObjectTest(classString);
         String modifiedClassMessage =
-                "You have modified the provided portions of class " + className + ". Please revert them to the original state.";
-        assertTrue(testClass.hasField(attributeName1, String.class), modifiedClassMessage);
-        assertTrue(testClass.hasModifier(attributeName1, "private"), modifiedClassMessage);
-        assertTrue(testClass.hasField(attributeName2, double.class), modifiedClassMessage);
-        assertTrue(testClass.hasModifier(attributeName2, "private"), modifiedClassMessage);
+                "You have modified the provided portions of class " + className + " for %s attribute. Please revert them to the original state.";
+        assertTrue(testClass.hasField(attributeName1, String.class, new String[]{"private"}),
+                String.format(modifiedClassMessage, attributeName1));
+        assertTrue(testClass.hasField(attributeName2, double.class, new String[]{"private"}),
+                String.format(modifiedClassMessage, attributeName2));
 
         Class<?>[] classes = {};
         Object testInstance = testClass.createInstance();
-        _assertEquals(initialValue1, testClass.getFieldValue(testInstance, attributeName1), modifiedClassMessage);
-        _assertEquals(initialValue2, testClass.getFieldValue(testInstance, attributeName2), modifiedClassMessage);
-        assertTrue(testClass.hasModifier(classes, "public"), modifiedClassMessage);
+        _assertEquals(initialValue1, testClass.getFieldValue(testInstance, attributeName1),
+                "You have modified the provided portions of class " + className + " constructor. Please revert them to the original state.");
+        _assertEquals(initialValue2, testClass.getFieldValue(testInstance, attributeName2),
+                "You have modified the provided portions of class " + className + " constructor. Please revert them to the original state.");
+        assertTrue(testClass.hasModifier(classes, "public"),
+                "You have modified the provided portions of class " + className + " constructor. Please revert them to the original state.");
 
     }
 
