@@ -11,15 +11,16 @@ Your `Bottle` class must have the following items:
 
 - Attributes:
     - A `boolean` called **isFull**
-    - These are not visible from other classes
+    - This is not visible from other classes
 
 - Constructor:
-    - a `Bottle` constructor that initialize the **isFull** attribute to false.
+    - A `Bottle` constructor that initialize the **isFull** attribute to false.
 
 - Methods:
-    - a `setIsFull` method which accepts a `boolean` and uses it to set the value of the **isFull** attribute
-    - a `getIsFull` method which returns the value stored in the **isFull** attribute
+    - A `setIsFull` method which accepts a `boolean` and uses it to set the value of the **isFull** attribute
+    - A `getIsFull` method which returns the value stored in the **isFull** attribute
     - These methods must be visible from other classes.
+    - A `toString` method which returns `I am full` if the **isFull** value is true and `I am empty` otherwise.
 
 ### Distractors
 
@@ -31,7 +32,7 @@ Your `Bottle` class must have the following items:
     }
     private Bottle
     private String toString( String str )
-    private boolean isFull;
+    public boolean isFull;
     isFull = full;
     String str = "";
     Bottle b1 = new Bottle( false );
