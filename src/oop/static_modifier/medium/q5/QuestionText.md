@@ -19,7 +19,7 @@ Your `Hat` class already the following items:
     - A constructor that accepts a `String` and initializes the **colour** attribute.
     - This constructor is accessible from other classes.
 
-You need to add the following items.
+You need to add the following items:
 
 - Attributes:
     - A `String` attributes called **companyLogo** that its value is shared by all **Hat** instances.
