@@ -3,6 +3,7 @@ package oop.static_modifier.medium.q6;
 import global.ObjectTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -16,35 +17,41 @@ public class MainTest {
     String methodName1 = "canadianize";
     String methodName2 = "extractVowels";
 
-    public String f1(String s) {
-        return s + ", eh?";
-    }
-
-    public String f2(String s) {
-        String str = "";
-        for (int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
-            if (ch != 'a' && ch != 'e' && ch != 'i' && ch != 'o' && ch != 'u')
-                str += ch;
-        }
-        return str;
-    }
-
     @BeforeEach
     public void setup() throws Throwable {
         String classString = "oop.static_modifier.medium.q6." + className;
         testClass = new ObjectTest(classString);
     }
 
-    private static Stream<String> inputProvider() {
+    private static Stream<Arguments> inputProvider1() {
         return Stream.of(
-                "Black", "Blue", "Red", "Brown", "Hello there", "It is hot", "How is the weather", "How's your day?"
+                Arguments.of("Black", "Black, eh?"),
+                Arguments.of("Blue", "Blue, eh?"),
+                Arguments.of("Red","Red, eh?"),
+                Arguments.of("Brown", "Brown, eh?"),
+                Arguments.of("Hello there", "Hello there, eh?"),
+                Arguments.of("It is hot", "It is hot, eh?"),
+                Arguments.of("How is the weather", "How is the weather, eh?"),
+                Arguments.of("How's your day?", "How's your day?, eh?")
+        );
+    }
+
+    private static Stream<Arguments> inputProvider2() {
+        return Stream.of(
+                Arguments.of("Black", "Blck"),
+                Arguments.of("Blue", "Bl"),
+                Arguments.of("Red","Rd"),
+                Arguments.of("Brown", "Brwn"),
+                Arguments.of("Hello there", "Hll thr"),
+                Arguments.of("It is hot", "It s ht"),
+                Arguments.of("How is the weather", "Hw s th wthr"),
+                Arguments.of("How's your day?", "Hw's yr dy?")
         );
     }
 
     @ParameterizedTest
-    @MethodSource("inputProvider")
-    public void correctCanadianizeMethod(String text) throws Throwable {
+    @MethodSource("inputProvider1")
+    public void correctCanadianizeMethod(String text, String ans) throws Throwable {
         Object classInstance = testClass.createInstance();
         String[] methodModifiers = {"public", "static"};
         assertTrue(testClass.hasMethod(methodName1, new Class<?>[]{String.class}),
@@ -58,12 +65,12 @@ public class MainTest {
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, methodName1, "method does not return the correct String.");
         Object output = testClass.callMethod(methodName1, new Object[][]{{text, String.class}}, methodModifiers, classInstance);
-        _assertEquals(f1(text), output, incorrectToStringMessage);
+        _assertEquals(ans, output, incorrectToStringMessage);
     }
 
     @ParameterizedTest
-    @MethodSource("inputProvider")
-    public void correctExtractVowelsMethod(String text) throws Throwable {
+    @MethodSource("inputProvider2")
+    public void correctExtractVowelsMethod(String text, String ans) throws Throwable {
         Object classInstance = testClass.createInstance();
         String[] methodModifiers = {"public", "static"};
         assertTrue(testClass.hasMethod(methodName2, new Class<?>[]{String.class}),
@@ -77,7 +84,7 @@ public class MainTest {
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, methodName2, "method does not return the correct String.");
         Object output = testClass.callMethod(methodName2, new Object[][]{{text, String.class}}, methodModifiers, classInstance);
-        _assertEquals(f2(text), output, incorrectToStringMessage);
+        _assertEquals(ans, output, incorrectToStringMessage);
     }
 
 }
