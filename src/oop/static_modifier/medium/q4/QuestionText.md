@@ -24,7 +24,7 @@ Your `ChemistryLab` class already the following items:
     - Note that all attributes in this class should be private
 
 - Constructors:
-    - A constructor that accepts an array of `double` as a parameter to initialize the **guide** attribute.
+    - A constructor that accepts an array of type `double` as a parameter to initialize the **guide** attribute.
     - This constructor is accessible from other classes.
 
 You need to add the following items.
