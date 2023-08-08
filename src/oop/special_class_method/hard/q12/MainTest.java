@@ -19,9 +19,9 @@ public class MainTest {
     private final String attributeName1 = "yearMade";
     private final String getAttributeMethodName1 = "getYearMade";
     private final String setAttributeMethodName1 = "setYearMade";
-    private final String attributeName2 = "texture";
-    private final String getAttributeMethodName2 = "getTexture";
-    private final String setAttributeMethodName2 = "setTexture";
+    private final String attributeName2 = "colour";
+    private final String getAttributeMethodName2 = "getColour";
+    private final String setAttributeMethodName2 = "setColour";
     private ObjectTest testClass;
 
     @BeforeEach
@@ -31,7 +31,7 @@ public class MainTest {
     }
 
     @Test
-    public void alienClassHasCorrectAttributes() {
+    public void laptopClassHasCorrectAttributes() {
         assertTrue(testClass.hasField(attributeName1),
                 "Your " + className + " class is missing the " + attributeName1 + " attributes, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(attributeName1, int.class),
@@ -80,7 +80,7 @@ public class MainTest {
     }
 
     @Test
-    public void alienClassHasRequiredConstructor() {
+    public void laptopClassHasRequiredConstructor() {
         Class<?>[] classArguments = {int.class, String.class};
         assertTrue(testClass.hasConstructor(classArguments),
                 "Your " + className + " constructor does not have the correct parameters.");
@@ -90,7 +90,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void alienClassHasCorrectConstructor(int value1, String value2) throws Throwable {
+    public void laptopClassHasCorrectConstructor(int value1, String value2) throws Throwable {
         Object[][] arguments = {
                 {value1, int.class},
                 {value2, String.class}
@@ -120,7 +120,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctGetTextureMethod(int value1, String value2) throws Throwable {
+    public void correctGetColourMethod(int value1, String value2) throws Throwable {
         Object[][] arguments = {
                 {value1, int.class},
                 {value2, String.class}
@@ -160,7 +160,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("updateStringInputProvider")
-    public void correctSetTextureMethod(int value1, String initialValue, String updatedValue) throws Throwable {
+    public void correctSetColourMethod(int value1, String initialValue, String updatedValue) throws Throwable {
         Object[][] instantiationArguments = {
                 {value1, int.class},
                 {initialValue, String.class}
@@ -202,12 +202,12 @@ public class MainTest {
         };
         testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
         _assertEquals(value1, testClass.callMethod(getAttributeMethodName1, testInstance),
-                "Your " + getAttributeMethodName1 + " method does not correctly update the value of " + setAttributeMethodName1 + " after using the " + getAttributeMethodName1 + " method.");
+                "Your " + getAttributeMethodName1 + " method does not correctly update the value of " + attributeName1 + " after using the " + setAttributeMethodName1 + " method.");
         setMethodArguments = new Object[][]{
                 {value2, String.class}
         };
         testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
         _assertEquals(value2, testClass.callMethod(getAttributeMethodName2, testInstance),
-                "Your " + getAttributeMethodName2 + " method does not correctly update the value of " + setAttributeMethodName2 + " after using the " + getAttributeMethodName2 + " method.");
+                "Your " + getAttributeMethodName2 + " method does not correctly update the value of " + attributeName2 + " after using the " + setAttributeMethodName2 + " method.");
     }
 }

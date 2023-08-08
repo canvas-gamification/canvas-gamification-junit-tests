@@ -2,27 +2,27 @@ package oop.special_class_method.hard.q12;
 
 public class Laptop {
     private int yearMade;
-    private String texture;
+    private String colour;
 
     public Laptop(int yearMade, String texture) {
         this.yearMade = yearMade;
-        this.texture = texture;
+        this.colour = texture;
     }
 
     public void setYearMade(int yearMade) {
         this.yearMade = yearMade;
     }
 
-    public void setTexture(String t) {
-        texture = t;
+    public void setColour(String t) {
+        colour = t;
     }
 
     public int getYearMade() {
         return yearMade;
     }
 
-    public String getTexture() {
-        return texture;
+    public String getColour() {
+        return colour;
     }
 }
 
