@@ -30,7 +30,7 @@ public class MainTest {
     @Test
     public void bottleClassHasCorrectAttributes() {
         assertTrue(testClass.hasField(attributeName),
-                "Your " + className + " class is missing the " + attributeName + " attributes, or it is spelled incorrectly.");
+                "Your " + className + " class is missing the " + attributeName + " attribute, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(attributeName, boolean.class),
                 "Your " + attributeName + " does not have the correct type.");
         assertTrue(testClass.hasModifier(attributeName, "private"),
