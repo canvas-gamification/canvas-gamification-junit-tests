@@ -28,6 +28,6 @@ You need to add the following items:
       the value of **currTemp**, y is the value of **size**, and z is the value of **colour**.
     - Two methods called `powerDecrease` and `powerIncrease` where the `powerDecrease` method decreases the value of **currTemp** by 10
       and the `powerIncrease` method increases the value of **currTemp** by 10.
-    - A `changePower` method which call the `powerDecrease` if the value of **currTemp** attribute is more than 100, and
+    - A `changePower` method which call the `powerDecrease` method if the value of the **currTemp** attribute is more than 100, and
       call the `powerIncrease` otherwise.
     - These methods must be visible from other classes.
