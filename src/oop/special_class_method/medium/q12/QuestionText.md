@@ -2,7 +2,7 @@
 
 ## Question Text
 
-Make a Java class called **Shirt** with a constructor that initializes the attributes. Furthermore, the attribute called
+Complete a Java class called **Shirt** with a constructor that initializes the attributes. Furthermore, the attribute called
 **size** cannot be modified from outside the class, but it can be accessed through an accessor method. The class has
 another attribute called **yearMade** that cannot be modified or accessed from outside the class.
 

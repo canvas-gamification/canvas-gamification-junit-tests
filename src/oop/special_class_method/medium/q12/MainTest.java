@@ -21,6 +21,7 @@ public class MainTest {
     private final String getAttributeMethodName1 = "getSize";
     private final String attributeName2 = "yearMade";
     private final String methodName = "displaySize";
+    private static final int yearPivot = 2000;
     private ObjectTest testClass;
 
     @BeforeEach
@@ -28,17 +29,19 @@ public class MainTest {
         String classString = "oop.special_class_method.medium.q12." + className;
         this.testClass = new ObjectTest(classString);
         String modifiedClassMessage =
-                "You have modified the provided portions of class " + className + ". Please revert them to the original state.";
-        assertTrue(testClass.hasField(attributeName1, int.class), modifiedClassMessage);
-        assertTrue(testClass.hasModifier(attributeName1, "private"), modifiedClassMessage);
-        assertTrue(testClass.hasField(attributeName2, int.class), modifiedClassMessage);
-        assertTrue(testClass.hasModifier(attributeName2, "private"), modifiedClassMessage);
+                "You have modified the provided portions of class " + className + " for the %s attribute. Please revert them to the original state.";
+        assertTrue(testClass.hasField(attributeName1, int.class, new String[]{"private"}),
+                String.format(modifiedClassMessage, attributeName1));
+        assertTrue(testClass.hasField(attributeName2, int.class, new String[]{"private"}),
+                String.format(modifiedClassMessage, attributeName1));
         Object[][] tests = new Object[][]{
-                {3, 2002},
-                {10, 1954},
-                {12, 2020},
-                {43, 2003},
-                {7, 1995}
+                {3, yearPivot + 2},
+                {3, yearPivot + 1},
+                {10, yearPivot -50},
+                {12, yearPivot + 20},
+                {43, yearPivot + 3},
+                {7, yearPivot - 5},
+                {7, yearPivot}
         };
         for (int i = 0; i < tests.length; i++) {
             int size = (int) tests[i][0];
@@ -58,11 +61,12 @@ public class MainTest {
 
     private static Stream<Arguments> inputProvider() {
         return Stream.of(
-                Arguments.of(3, 2012),
-                Arguments.of(10, 1994),
-                Arguments.of(12, 1974),
-                Arguments.of(43, 2023),
-                Arguments.of(7, 2000)
+                Arguments.of(3, yearPivot + 12),
+                Arguments.of(3, yearPivot + 1),
+                Arguments.of(10, yearPivot - 6),
+                Arguments.of(12, yearPivot - 26),
+                Arguments.of(43, yearPivot + 23),
+                Arguments.of(7, yearPivot)
         );
     }
 
