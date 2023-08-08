@@ -18,8 +18,10 @@ Your `Oven` class already has the following items:
 - Constructor:
     - An `Oven` constructor that is visible to other classes and accepts two `double` and a `String` and uses it to
       initialize the **currTemp**, **size**, and **colour** attributes.
+  
 - Methods:
-    - Getter methods for **size** and **colour** attributes, and getter and setter method for **currTemp** attribute.
+    - Getter methods for **size**, **colour**, and **currTemp** attributes.
+    - Setter method for **currTemp** attribute.
 
 You need to add the following items:
 

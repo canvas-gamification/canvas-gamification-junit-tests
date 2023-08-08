@@ -35,13 +35,13 @@ public class MainTest {
         String classString = "oop.special_class_method.medium.q11." + className;
         this.testClass = new ObjectTest(classString);
         String modifiedClassMessage =
-                "You have modified the provided portions of class " + className + ". Please revert them to the original state.";
-        assertTrue(testClass.hasField(attributeName0, double.class), modifiedClassMessage);
-        assertTrue(testClass.hasModifier(attributeName0, "private"), modifiedClassMessage);
-        assertTrue(testClass.hasField(attributeName1, double.class), modifiedClassMessage);
-        assertTrue(testClass.hasModifier(attributeName1, "private"), modifiedClassMessage);
-        assertTrue(testClass.hasField(attributeName2, String.class), modifiedClassMessage);
-        assertTrue(testClass.hasModifier(attributeName2, "private"), modifiedClassMessage);
+                "You have modified the provided portions of class " + className + " class in the %s attribute part. Please revert them to the original state.";
+        assertTrue(testClass.hasField(attributeName0, double.class, new String[]{"private"}),
+                String.format(modifiedClassMessage, attributeName0));
+        assertTrue(testClass.hasField(attributeName1, double.class, new String[]{"private"}),
+                String.format(modifiedClassMessage, attributeName1));
+        assertTrue(testClass.hasField(attributeName2, String.class, new String[]{"private"}),
+                String.format(modifiedClassMessage, attributeName2));
         Object[][] tests = new Object[][]{
                 {3.2, 3.4, "Red", 43243.3},
                 {432.3, 10.2, "Black", 432.2},
