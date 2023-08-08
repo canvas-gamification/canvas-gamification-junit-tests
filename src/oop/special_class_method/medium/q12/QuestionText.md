@@ -16,7 +16,7 @@ Your `Shirt` class already has the following items:
     - These are not visible from other classes
 
 - Constructor:
-    - a `Shirt` constructor that is visible to other classes and accepts two `int` and uses it to initialize
+    - a `Shirt` constructor that is visible to other classes and accepts two `int` values and uses them to initialize
       the **size** and **yearMade** attributes.
 
 You need to add the following items:
