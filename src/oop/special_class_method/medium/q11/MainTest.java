@@ -142,7 +142,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctPowerIncreaseeMethod(double value1, double value2, String value3) throws Throwable {
+    public void correctPowerIncreaseMethod(double value1, double value2, String value3) throws Throwable {
         Object[][] arguments = {
                 {value1, double.class},
                 {value2, double.class},
