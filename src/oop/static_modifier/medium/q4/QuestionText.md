@@ -27,7 +27,7 @@ Your `ChemistryLab` class already the following items:
     - A constructor that accepts an array of type `double` as a parameter to initialize the **guide** attribute.
     - This constructor is accessible from other classes.
 
-You need to add the following items.
+You need to add the following items:
 
 - Methods:
     - A `mixFun` method which returns nothing and should be visible from another class. It should check if there is
