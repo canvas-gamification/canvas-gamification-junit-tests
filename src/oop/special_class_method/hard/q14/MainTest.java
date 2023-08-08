@@ -28,7 +28,7 @@ public class MainTest {
     }
 
     @Test
-    public void alienClassHasCorrectAttributes() {
+    public void bottleClassHasCorrectAttributes() {
         assertTrue(testClass.hasField(attributeName),
                 "Your " + className + " class is missing the " + attributeName + " attributes, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(attributeName, boolean.class),
