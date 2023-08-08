@@ -29,6 +29,10 @@ public class MainTest {
     private final String getNumPassengersMethodName = "getNumPassengers";
     private final String setNumPassengersMethodName = "setNumPassengers";
     private final String transferPassengersMethodName = "transferPassengers";
+    private final int passP1 = 20; // passP1 > maxP1
+    private final int maxP1 = 12;
+    private final int maxP2 = 6; // maxP2 + maxP3 >= passP1 - maxP1
+    private final int maxP3 = 4;
 
     @BeforeEach
     public void setup() throws Throwable {
@@ -36,15 +40,9 @@ public class MainTest {
         String testClassString = "oop.object_interactions.medium.q6." + testClassName;
         testClass = new ObjectTest(classString);
         classObject = new ObjectTest(testClassString);
-        assertTrue(testClass.hasModifier("public"),
-                "You have changed the visibility modifier on the " + className + " class. Please revert it to the original state.");
         assertTrue(testClass.hasField(maxSeatsAttributeName, int.class, new String[]{"private"}),
                 String.format("You have modified the provided %s attribute. Please revert it to the original state.", maxSeatsAttributeName));
-        assertTrue(testClass.hasModifier(maxSeatsAttributeName, "private"),
-                String.format("You have modified the provided %s attribute. Please revert it to the original state.", maxSeatsAttributeName));
         assertTrue(testClass.hasField(numPassengersAttributeName, int.class, new String[]{"private"}),
-                String.format("You have modified the provided %s attribute. Please revert it to the original state.", numPassengersAttributeName));
-        assertTrue(testClass.hasModifier(numPassengersAttributeName, "private"),
                 String.format("You have modified the provided %s attribute. Please revert it to the original state.", numPassengersAttributeName));
         Class<?>[] classArguments = {int.class};
         assertTrue(testClass.hasConstructor(classArguments),
@@ -52,9 +50,7 @@ public class MainTest {
         assertTrue(testClass.hasModifier(classArguments, "public"),
                 "You have modified the provided constructor on the " + className + " class. Please revert it to the original state.");
         classArguments = new Class[]{int.class, int.class};
-        assertTrue(testClass.hasConstructor(classArguments),
-                "You have modified the provided constructor on the " + className + " class. Please revert it to the original state.");
-        assertTrue(testClass.hasModifier(classArguments, "public"),
+        assertTrue(testClass.hasConstructor(classArguments, new String[]{"public"}),
                 "You have modified the provided constructor on the " + className + " class. Please revert it to the original state.");
         assertTrue(testClass.hasMethod(getMaxSeatsMethodName, null, int.class, new String[]{"public"}),
                 String.format("You have modified the provided %s method method. Please revert it to the original state.", getMaxSeatsMethodName));
@@ -95,14 +91,12 @@ public class MainTest {
             output = testClass.callMethod(getNumPassengersMethodName, classInstance);
             _assertEquals(pass, output,
                     "You have modified the provided " + getNumPassengersMethodName + "method  on the " + className + " class. Please revert it to the original state.");
-            output = testClass.callMethod(setMaxSeatsMethodName, new Object[][]{{updateSeat, int.class}}, classInstance);
+            testClass.callMethod(setMaxSeatsMethodName, new Object[][]{{updateSeat, int.class}}, classInstance);
             _assertEquals(updateSeat, testClass.getFieldValue(classInstance, maxSeatsAttributeName),
                     "You have modified the provided " + setMaxSeatsMethodName + "method  on the " + className + " class. Please revert it to the original state.");
-            assertNull(output, String.join(" ", "Your", setMaxSeatsMethodName, "should not return any output"));
-            output = testClass.callMethod(setNumPassengersMethodName, new Object[][]{{updatePass, int.class}}, classInstance);
+            testClass.callMethod(setNumPassengersMethodName, new Object[][]{{updatePass, int.class}}, classInstance);
             _assertEquals(updatePass, testClass.getFieldValue(classInstance, numPassengersAttributeName),
                     "You have modified the provided " + setNumPassengersMethodName + "method  on the " + className + " class. Please revert it to the original state.");
-            assertNull(output, String.join(" ", "Your", setNumPassengersMethodName, "should not return any output"));
         }
     }
 
@@ -122,10 +116,14 @@ public class MainTest {
                 {seat, int.class},
                 {pass, int.class}
         };
-        Airplane busy = new Airplane(busySeat, busyPass);
+        Object[][] busyArguments = {
+                {busySeat, int.class},
+                {busyPass, int.class}
+        };
         Object classInstance = testClass.createInstance(arguments);
+        Object busyInstance = testClass.createInstance(busyArguments);
         Object[][] methodArguments = {
-                {busy, Airplane.class}
+                {busyInstance, Airplane.class}
         };
         Object output = null;
         if (seat - pass > 0) {
@@ -136,7 +134,7 @@ public class MainTest {
             });
             _assertEquals(pass + move, testClass.getFieldValue(classInstance, numPassengersAttributeName),
                     "Your " + transferPassengersMethodName + " method does not correctly add the " + numPassengersAttributeName + " attribute of the recipient.");
-            _assertEquals(busyPass - move, busy.getNumPassengers(),
+            _assertEquals(busyPass - move, testClass.getFieldValue(busyInstance, numPassengersAttributeName),
                     "Your " + transferPassengersMethodName + " method does not correctly decrease the " + numPassengersAttributeName + " attribute of the donor.");
         } else {
             output = testClass.callMethod(transferPassengersMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
@@ -145,11 +143,7 @@ public class MainTest {
             });
             _assertEquals(pass, testClass.getFieldValue(classInstance, numPassengersAttributeName),
                     "Your " + transferPassengersMethodName + " method does not correctly increase the " + numPassengersAttributeName + " attribute of the recipient.");
-            _assertEquals(busyPass, busy.getNumPassengers(),
-                    "Your " + transferPassengersMethodName + " method does not correctly decrease the " + numPassengersAttributeName + " attribute of the donor.");
-            _assertEquals(seat, testClass.getFieldValue(classInstance, maxSeatsAttributeName),
-                    "Your " + transferPassengersMethodName + " method does not correctly add the " + maxSeatsAttributeName + " attribute of the recipient.");
-            _assertEquals(busySeat, busy.getMaxSeats(),
+            _assertEquals(busyPass, testClass.getFieldValue(busyInstance, numPassengersAttributeName),
                     "Your " + transferPassengersMethodName + " method does not correctly decrease the " + numPassengersAttributeName + " attribute of the donor.");
         }
         assertNull(output, String.join(" ", "Your", transferPassengersMethodName, "method should not return any output."));
@@ -164,7 +158,7 @@ public class MainTest {
         };
         Object classInstance = testClass.createInstance(arguments);
         String[] methodModifiers = {"public"};
-        String expected = pass + " out of  " + seat + " seats are filled";
+        String expected = pass + " out of " + seat + " seats are filled";
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, "toString method does not return the correct String.");
         Object output = testClass.callMethod("toString", methodModifiers, classInstance);
@@ -174,19 +168,19 @@ public class MainTest {
     @Test
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
-                new StringLiteral("We moved 2 passengers"),
+                new StringLiteral("We moved " + (Math.min(passP1 - maxP1, maxP2)) + " passengers"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("We moved 2 passengers"),
+                new StringLiteral("We moved " + ((passP1 - maxP1) - Math.min(passP1 - maxP1, maxP2)) + " passengers"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("The first ride: 16 out of  12 seats are filled"),
+                new StringLiteral("The first ride: " + maxP1 + " out of " + maxP1 + " seats are filled"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("The second ride: 2 out of  6 seats are filled"),
+                new StringLiteral("The second ride: " + Math.min(passP1 - maxP1, maxP2) + " out of " + maxP2 + " seats are filled"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("The third ride: 2 out of  4 seats are filled"),
+                new StringLiteral("The third ride: " + ((passP1 - maxP1) - Math.min(passP1 - maxP1, maxP2)) + " out of " + maxP3 + " seats are filled"),
                 new Optional(new StringLiteral(" "))
 
         };

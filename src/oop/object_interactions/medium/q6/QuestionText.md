@@ -5,13 +5,7 @@
 ## Question Text
 
 Companies constantly overbook available seats which causes a lot of passenger frustration. Make a class called
-**Airplane** that has **maxSeats** and **numPassengers** as attributes whose values are initialized by either a
-constructor that is given the seating capacity or a constructor that is given input parameters for both attributes.
-This class has a method called **transferPassengers()** whose purpose is to transfer the overflow of passengers from a
-busy booking to a less busy booking. If the booking has enough empty seats, then it will accommodate all of the
-overflow.
-Otherwise, it just accommodates however many passengers it can until it is full. The resulting passengers that got moved
-will be displayed.
+**Airplane** that has **maxSeats** and **numPassengers** as attributes.
 
 ## Airplane Class
 
@@ -36,11 +30,11 @@ You must add the following items to the class:
 
 - Methods:
     - A `transferPassengers` method that take another **Airplane** called **busyPlane** and move some of the
-      passengers of **busyPlane** to this Airplane until this plane is full.
-    - If this plane is already full it should write `This plane is full too and cannot accommodate anymore passengers`
-    - If the plane is not full it should write `We moved n passengers` if n passengers are moved.
-    - A `toString` method that return the `String` of information in the format
-      of `myName + " has " + numEyes + " eyes"`
+      passengers of **busyPlane** to this Airplane until this plane is full. If this plane is already full it should
+      write `This plane is full too and cannot accommodate anymore passengers`. If the plane is not full it should write
+      `We moved n passengers` if n passengers are moved.
+    - A `toString` method that return the `String` of information in the format of `x out of y seats are filled`. Where
+      x is the value of **numPassengers** and y is the value of **numSeats**.
     - All methods must be accessible from other classes.
 
 ## TestBooking Class
@@ -48,9 +42,9 @@ You must add the following items to the class:
 Your `TestBooking` class must have the following items:
 
 - Main Method:
-    - A `main` method which initializes three **Airplane** objects which respectively have 12 seats and 20 passengers, 6 seats and
-      zero passengers, and 4 seats and zero passengers.
+    - A `main` method which initializes three **Airplane** objects which respectively have 12 seats and 20 passengers, 6
+      seats and 0 passengers, and 4 seats and 0 passengers.
     - First move extra passengers from the first plane to second plane. Then move the rest from first to the third
       airplane.
-    - Then print the information of the three **Airplane** objects in order using **toString**.
-    - Use this format: `"The first ride: " + first.toString()`.
+    - Second print the information of the three **Airplane** objects in order using **toString**. Use this format:
+      `"The first ride: " + first.toString()`.

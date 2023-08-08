@@ -23,10 +23,10 @@ public class Airplane {
                 busyPlane.setNumPassengers(busyPlane.getNumPassengers() - numToMove);
                 System.out.println("We moved " + numToMove + " passengers");
             } else {
-                int numCanMove = numToMove - emptySeats;
-                numPassengers += numCanMove;
-                busyPlane.setNumPassengers(busyPlane.getNumPassengers() - numCanMove);
-                System.out.println("We moved " + numCanMove + " passengers");
+
+                numPassengers += emptySeats;
+                busyPlane.setNumPassengers(busyPlane.getNumPassengers() - emptySeats);
+                System.out.println("We moved " + emptySeats + " passengers");
             }
 
         } else
