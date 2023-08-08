@@ -3,8 +3,7 @@
 ## Question Text
 
 Suppose you were hired by a departmental store to digitize their catalogue system, and one of the classes you are making
-for objects is a **Cup** class. This class has three attributes called **liquid**, **color** , and **volume** which
-cannot be modified, but can be accessed
+for objects is a **Cup** class. This class has three attributes called **liquid**, **color** , and **volume**.
 
 ### Cup Class:
 
@@ -29,7 +28,9 @@ Your `Cup` class must have the following items:
 
     - public void setColour(String a)
     - public void setVolume(double a)
-    - return this.year;
+    - public String colour;
+    - private String volume;
+    - public String liquid;
     - this.colour = a;
     - this.volume = a;
     - return this.liquid = a;
