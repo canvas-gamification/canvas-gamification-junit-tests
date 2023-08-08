@@ -78,7 +78,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctSetYearMadeMethod(boolean initialiValue, boolean updatedValue) throws Throwable {
+    public void correctSetIsFullMethod(boolean initialiValue, boolean updatedValue) throws Throwable {
         Object testInstance = testClass.createInstance();
         testClass.setFieldValue(testInstance, initialiValue, attributeName);
         Object[][] setMethodArguments = {
