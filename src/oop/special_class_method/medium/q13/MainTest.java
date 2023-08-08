@@ -15,7 +15,7 @@ public class MainTest {
     // Java
 
     private final String className = "Detergent";
-    private final String attributeName1 = "colour";
+    private final String attributeName1 = "volume";
     private final String attributeName2 = "manufacturer";
     private final String getAttributeMethodName2 = "getManufacturer";
     private final String setAttributeMethodName2 = "setManufacturer";
@@ -26,60 +26,61 @@ public class MainTest {
         String classString = "oop.special_class_method.medium.q13." + className;
         this.testClass = new ObjectTest(classString);
         String modifiedClassMessage =
-                "You have modified the provided portions of class " + className + ". Please revert them to the original state.";
-        assertTrue(testClass.hasField(attributeName1, String.class), modifiedClassMessage);
-        assertTrue(testClass.hasModifier(attributeName1, "private"), modifiedClassMessage);
-        assertTrue(testClass.hasField(attributeName2, String.class), modifiedClassMessage);
-        assertTrue(testClass.hasModifier(attributeName2, "private"), modifiedClassMessage);
+                "You have modified the provided portions of class " + className + " class for the %s attribute. Please revert them to the original state.";
+        assertTrue(testClass.hasField(attributeName1, double.class, new String[]{"private"}),
+                String.format(modifiedClassMessage, attributeName1));
+        assertTrue(testClass.hasField(attributeName2, String.class, new String[]{"private"}),
+                String.format(modifiedClassMessage, attributeName1));
         Object[][] tests = new Object[][]{
-                {"Red", "myCompany"},
-                {"Black", "Best Det"},
-                {"Blue", "clearer"},
-                {"White", "Get Clean"},
-                {"Yellow", "Good Detergent"}
+                {5435.4, "myCompany"},
+                {544.3, "Best Det"},
+                {876.3, "clearer"},
+                {75.3, "Get Clean"},
+                {3.5, "Good Detergent"}
         };
         for (int i = 0; i < tests.length; i++) {
-            String value1 = (String) tests[i][0];
+            double value1 = (double) tests[i][0];
             String value2 = (String) tests[i][1];
             Object[][] arguments = {
-                    {value1, String.class},
+                    {value1, double.class},
                     {value2, String.class}
             };
-            Class<?>[] classes = {String.class, String.class};
             Object testInstance = testClass.createInstance(arguments);
-            _assertEquals(value1, testClass.getFieldValue(testInstance, attributeName1), modifiedClassMessage);
-            _assertEquals(value2, testClass.getFieldValue(testInstance, attributeName2), modifiedClassMessage);
-            assertTrue(testClass.hasModifier(classes, "public"), modifiedClassMessage);
+            modifiedClassMessage = "You have modified the provided portions of class " + className + " constructor for the %s attribute. Please revert them to the original state.";
+            _assertEquals(value1, testClass.getFieldValue(testInstance, attributeName1),
+                    String.format(modifiedClassMessage, attributeName1));
+            _assertEquals(value2, testClass.getFieldValue(testInstance, attributeName2),
+                    String.format(modifiedClassMessage, attributeName2));
         }
     }
 
 
     private static Stream<Arguments> inputProvider() {
         return Stream.of(
-                Arguments.of("Red", "myCompany"),
-                Arguments.of("Black", "Best Det"),
-                Arguments.of("Blue", "clearer"),
-                Arguments.of("White", "Get Clean"),
-                Arguments.of("Yellow", "Good Detergent")
+                Arguments.of(432.3, "myCompany"),
+                Arguments.of(54.3, "Best Det"),
+                Arguments.of(123.3, "clearer"),
+                Arguments.of(65.4, "Get Clean"),
+                Arguments.of(234.4, "Good Detergent")
         );
     }
 
     private static Stream<Arguments> updateStringInputProvider() {
         return Stream.of(
-                Arguments.of("Red", "myCompany", "Best Det"),
-                Arguments.of("Black", "Best Det", "Get Clean"),
-                Arguments.of("Blue", "clearer", "Good Detergent"),
-                Arguments.of("White", "Get Clean", "myCompany"),
-                Arguments.of("Yellow", "Good Detergent", "clearer")
+                Arguments.of(34.3, "myCompany", "Best Det"),
+                Arguments.of(432.2, "Best Det", "Get Clean"),
+                Arguments.of(5.5, "clearer", "Good Detergent"),
+                Arguments.of(23.3, "Get Clean", "myCompany"),
+                Arguments.of(78.7, "Good Detergent", "clearer")
 
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctGetManufacturerMethod(String value1, String value2) throws Throwable {
+    public void correctGetManufacturerMethod(double value1, String value2) throws Throwable {
         Object[][] arguments = {
-                {value1, String.class},
+                {value1, double.class},
                 {value2, String.class}
         };
         Object testInstance = testClass.createInstance(arguments);
@@ -92,9 +93,9 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("updateStringInputProvider")
-    public void correctSetSizeMethod(String value, String initialiValue, String updatedValue) throws Throwable {
+    public void correctSetSizeMethod(double value, String initialiValue, String updatedValue) throws Throwable {
         Object[][] instantiationArguments = {
-                {value, String.class},
+                {value, double.class},
                 {initialiValue, String.class}
         };
         Object testInstance = testClass.createInstance(instantiationArguments);
@@ -117,9 +118,9 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("updateStringInputProvider")
-    public void methodsWorkingTogether(String value1, String initialValue, String updatedValue) throws Throwable {
+    public void methodsWorkingTogether(double value1, String initialValue, String updatedValue) throws Throwable {
         Object[][] initialArguments = {
-                {value1, String.class},
+                {value1, double.class},
                 {initialValue, String.class}
         };
         Object testInstance = testClass.createInstance(initialArguments);

@@ -1,11 +1,11 @@
 package oop.special_class_method.medium.q13;
 
 public class Detergent {
-    private String colour;
+    private double volume;
     private String manufacturer;
 
-    public Detergent(String c, String m) {
-        colour = c;
+    public Detergent(double c, String m) {
+        volume = c;
         manufacturer = m;
     }
 
