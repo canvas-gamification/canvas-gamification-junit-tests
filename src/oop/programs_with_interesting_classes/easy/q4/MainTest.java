@@ -171,4 +171,20 @@ public class MainTest {
         _assertEquals(updatedValue2, testClass.getFieldValue(classInstance, attributeName2), incorrectSetMethodMessage);
         assertNull(setMethodOutput, String.join(" ", "Your", setAttributeName2, "should not return any output"));
     }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void treeClassHasCorrectToStringMethod(String value1, double value2) throws Throwable {
+        Object[][] arguments = {
+                {value1, String.class},
+                {value2, double.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        String[] methodModifiers = {"public"};
+        String expected = "This is a " + value1 + " tree with " + value2 + " centimeters in diameter.";
+        String incorrectToStringMessage = String.join(" ",
+                "Your", className, "toString method does not return the correct String.");
+        Object output = testClass.callMethod("toString", methodModifiers, classInstance);
+        _assertEquals(expected, output, incorrectToStringMessage);
+    }
 }
