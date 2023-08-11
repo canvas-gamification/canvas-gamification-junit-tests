@@ -11,6 +11,7 @@ import static global.tools.CustomAssertions._assertEquals;
 
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -55,14 +56,14 @@ public class MainTest {
 
     private static Stream<Arguments> inputProvider() {
         return Stream.of(
-                Arguments.of("Oak", 21.54),
-                Arguments.of("Apple", 1.43),
-                Arguments.of("Orange", 0.5),
-                Arguments.of("White", 35.43),
-                Arguments.of("Brown", 36.23),
-                Arguments.of("Nut", 364.32),
-                Arguments.of("Pistachio", 36.24),
-                Arguments.of("Coconut", 232.432)
+                Arguments.of("Oak", 21.54, "Apple", 54.3),
+                Arguments.of("Apple", 1.43, "Pistachio", 324.4),
+                Arguments.of("Orange", 0.5, "White", 32.3),
+                Arguments.of("White", 35.43, "Brown", 75.4),
+                Arguments.of("Brown", 36.23, "Coconut", 34.1),
+                Arguments.of("Nut", 364.32, "Oak", 92.3),
+                Arguments.of("Pistachio", 36.24, "Orange", 83.8),
+                Arguments.of("Coconut", 232.432, "Nut", 3.2)
         );
     }
 
@@ -91,7 +92,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void gettingOlderProducesCorrectOutcome(String value1, double value2) throws Throwable {
+    public void treeClassHasCorrectGettingOlderMethod(String value1, double value2) throws Throwable {
         Object[][] constructorArgs = {
                 {value1, String.class},
                 {value2, double.class}
@@ -101,5 +102,73 @@ public class MainTest {
         testClass.callMethod(methodName, classInstance);
         _assertEquals(value2 + 4, testClass.getFieldValue(classInstance, attributeName2),
                 String.format(incorrectNumDays, methodName, className, attributeName2));
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void treeClassHasCorrectGetTypeMethod(String value1, double value2) throws Throwable {
+        Object[][] arguments = {
+                {value1, String.class},
+                {value2, double.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        String[] getMethodModifiers = {"public"};
+        String incorrectGetMethodMessage = String.join(" ",
+                "Your", getAttributeName1, "does not correctly get the value of the", attributeName1, "attribute.");
+        Object getMethodOutput = testClass.callMethod(getAttributeName1, getMethodModifiers, classInstance);
+        _assertEquals(value1, getMethodOutput, incorrectGetMethodMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void treeClassHasCorrectGetSizeMethod(String value1, double value2) throws Throwable {
+        Object[][] arguments = {
+                {value1, String.class},
+                {value2, double.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        String[] getMethodModifiers = {"public"};
+        String incorrectGetMethodMessage = String.join(" ",
+                "Your", getAttributeName2, "does not correctly get the value of the", attributeName2, "attribute.");
+        Object getMethodOutput = testClass.callMethod(getAttributeName2, getMethodModifiers, classInstance);
+        _assertEquals(value2, getMethodOutput, incorrectGetMethodMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void treeClassHasCorrectSetTypeMethod(String value1, double value2, String updatedValue1) throws Throwable {
+        Object[][] arguments = {
+                {value1, String.class},
+                {value2, double.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        Object[][] setSizeArguments = {
+                {updatedValue1, String.class}
+        };
+        String[] setMethodModifiers = {"public"};
+        String incorrectSetMethodMessage = String.join(" ",
+                "Your", setAttributeName1, "does not correctly set the value of the", attributeName1, "attribute.");
+        Object setMethodOutput = testClass.callMethod(setAttributeName1, setSizeArguments, setMethodModifiers, classInstance);
+        _assertEquals(updatedValue1, testClass.getFieldValue(classInstance, attributeName1), incorrectSetMethodMessage);
+        assertNull(setMethodOutput, String.join(" ", "Your", setAttributeName1, "should not return any output"));
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void treeClassHasCorrectSetSizeMethod(String value1, double value2, String updatedValue1, double updatedValue2) throws Throwable {
+        Object[][] arguments = {
+                {value1, String.class},
+                {value2, double.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        Object[][] setSizeArguments = {
+                {updatedValue2, double.class}
+        };
+        String[] setMethodModifiers = {"public"};
+        String incorrectSetMethodMessage = String.join(" ",
+                "Your", setAttributeName2, "does not correctly set the value of the", attributeName2, "attribute.");
+        Object setMethodOutput = testClass.callMethod(setAttributeName2, setSizeArguments, setMethodModifiers, classInstance);
+        _assertEquals(updatedValue2, testClass.getFieldValue(classInstance, attributeName2), incorrectSetMethodMessage);
+        assertNull(setMethodOutput, String.join(" ", "Your", setAttributeName2, "should not return any output"));
     }
 }
