@@ -10,7 +10,7 @@ that can be used by other classes.
 
 ### TextProcessing Class
 
-You need to add the following items.
+You need to add the following items:
 
 - Methods:
     - A `canadianize` method that takes an input `String` phrase, adds ", eh?" at the end of it, and returns the phrase as
