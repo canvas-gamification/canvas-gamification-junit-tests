@@ -5,6 +5,7 @@ import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -25,11 +26,14 @@ public class MainTest {
     private final String getDoubleAttributeName1 = "getHeight";
     private final String setBooleanAttributeName1 = "setIsRare";
     private final String setDoubleAttributeName1 = "setHeight";
+    private final String deforestationName = "deforestation";
     private final boolean testBooleanAttributeName1 = true;
     private final boolean testBooleanAttributeName2 = false;
     private final double testDoubleAttributeName1 = 50.5;
     private final double testDoubleAttributeName2 = 20.4;
     private final double testDoubleAttributeNameUpdate = 0.0;
+    private final int deforestatedNumber = 0;
+    private final double deforestatedDoubleNumber = 0.0;
     private ObjectTest classInstance;
     private ObjectTest testInstance;
 
@@ -104,6 +108,13 @@ public class MainTest {
         Object instance = classInstance.createInstance(arguments);
         String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
 
+        assertTrue(classInstance.hasMethod(getBooleanAttributeName1, new Class[]{}),
+                "Your " + testClassName + " class is missing the method " + getBooleanAttributeName1 + ".");
+        assertTrue(classInstance.hasMethod(getBooleanAttributeName1, new Class[]{}, boolean.class),
+                "Your " + testClassName + " class " + getBooleanAttributeName1 + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(getBooleanAttributeName1, new Class[]{}, boolean.class, new String[]{"public"}),
+                "Your " + testClassName + " class " + getBooleanAttributeName1 + " method does not have the correct visibility modifier.");
+
         Object output = classInstance.callMethod(getBooleanAttributeName1, new String[]{"public"}, instance);
         _assertEquals(b, output, String.format(incorrectGetMethods, getBooleanAttributeName1, booleanAttributeName1));
     }
@@ -117,6 +128,13 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(arguments);
         String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
+
+        assertTrue(classInstance.hasMethod(getDoubleAttributeName1, new Class[]{}),
+                "Your " + testClassName + " class is missing the method " + getDoubleAttributeName1 + ".");
+        assertTrue(classInstance.hasMethod(getDoubleAttributeName1, new Class[]{}, double.class),
+                "Your " + testClassName + " class " + getDoubleAttributeName1 + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(getDoubleAttributeName1, new Class[]{}, double.class, new String[]{"public"}),
+                "Your " + testClassName + " class " + getDoubleAttributeName1 + " method does not have the correct visibility modifier.");
 
         Object output = classInstance.callMethod(getDoubleAttributeName1, new String[]{"public"}, instance);
         _assertEquals(d, output, String.format(incorrectGetMethods, getDoubleAttributeName1, doubleAttributeName1));
@@ -139,14 +157,18 @@ public class MainTest {
                 {d, double.class}
         };
         Object instance = classInstance.createInstance(arguments);
+        assertTrue(classInstance.hasMethod(setBooleanAttributeName1, new Class[]{boolean.class}),
+                "Your " + testClassName + " class is missing the method " + setBooleanAttributeName1 + ".");
+        assertTrue(classInstance.hasMethod(setBooleanAttributeName1, new Class[]{boolean.class}, Void.TYPE),
+                "Your " + testClassName + " class " + setBooleanAttributeName1 + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(setBooleanAttributeName1, new Class[]{boolean.class}, Void.TYPE, new String[]{"public"}),
+                "Your " + testClassName + " class " + setBooleanAttributeName1 + " method does not have the correct visibility modifier.");
         classInstance.callMethod(setBooleanAttributeName1, new Object[][]{{newB, boolean.class}}, instance);
 
         String incorrectSetMethods = "Your %s method does not update the %s attribute to the passed parameter.";
 
         _assertEquals(newB, classInstance.getFieldValue(instance, booleanAttributeName1),
                 String.format(incorrectSetMethods, setBooleanAttributeName1, booleanAttributeName1));
-
-        assertTrue(classInstance.hasReturnType(setBooleanAttributeName1, new Class[]{boolean.class}, void.class));
     }
 
     @ParameterizedTest
@@ -157,14 +179,41 @@ public class MainTest {
                 {d, double.class}
         };
         Object instance = classInstance.createInstance(arguments);
+        assertTrue(classInstance.hasMethod(setDoubleAttributeName1, new Class[]{double.class}),
+                "Your " + testClassName + " class is missing the method " + setDoubleAttributeName1 + ".");
+        assertTrue(classInstance.hasMethod(setDoubleAttributeName1, new Class[]{double.class}, Void.TYPE),
+                "Your " + testClassName + " class " + setDoubleAttributeName1 + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(setDoubleAttributeName1, new Class[]{double.class}, Void.TYPE, new String[]{"public"}),
+                "Your " + testClassName + " class " + setDoubleAttributeName1 + " method does not have the correct visibility modifier.");
         classInstance.callMethod(setDoubleAttributeName1, new Object[][]{{newD, double.class}}, instance);
 
         String incorrectSetMethods = "Your %s method does not update the %s attribute to the passed parameter.";
 
         _assertEquals(newD, classInstance.getFieldValue(instance, doubleAttributeName1),
                 String.format(incorrectSetMethods, setDoubleAttributeName1, doubleAttributeName1));
+    }
 
-        assertTrue(classInstance.hasReturnType(setDoubleAttributeName1, new Class[]{double.class}, void.class));
+    @Tag("dependent1")
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void treeHasCorrectDeforestationMethod(boolean b, double d) throws Throwable {
+        Object[][] arguments = {
+                {b, boolean.class},
+                {d, double.class}
+        };
+        Object instance = classInstance.createInstance(arguments);
+        assertTrue(classInstance.hasMethod(deforestationName, new Class[]{}),
+                "Your " + testClassName + " class is missing the method " + deforestationName + ".");
+        assertTrue(classInstance.hasMethod(deforestationName, new Class[]{}, Void.TYPE),
+                "Your " + testClassName + " class " + deforestationName + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(deforestationName, new Class[]{}, Void.TYPE, new String[]{"public"}),
+                "Your " + testClassName + " class " + deforestationName + " method does not have the correct visibility modifier.");
+        classInstance.callMethod(deforestationName, instance);
+
+        String incorrectDeforestationMethod = "Your %s method does not update the %s attribute to " + deforestatedNumber + ".";
+
+        _assertEquals(deforestatedDoubleNumber, classInstance.getFieldValue(instance, doubleAttributeName1),
+                String.format(incorrectDeforestationMethod, deforestationName, doubleAttributeName1));
     }
 
     @ParameterizedTest
@@ -176,6 +225,8 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(arguments);
         String expectedOutput = "This tree’s rarity is " + b + ", and is " + d + "m tall";
+        assertTrue(classInstance.hasMethod("toString", new Class[]{}),
+                "Your " + testClassName + " class is missing the toString method.");
         Object output = classInstance.callMethod("toString", new String[]{"public"}, instance);
         String incorrectToString = String.format("Your toString method for the %s class does return the correct String.", objectClassName);
         _assertEquals(expectedOutput, output, incorrectToString);
@@ -207,6 +258,7 @@ public class MainTest {
                         setDoubleAttributeName1));
     }
 
+    @Tag("dependency1")
     @Test
     public void testFoliageMainMethodProducesCorrectOutput() throws Throwable {
         Object[][] arguments = {{new String[0], String[].class}};

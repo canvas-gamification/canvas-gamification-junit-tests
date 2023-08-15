@@ -28,7 +28,7 @@ Your `Tree` class must have the following items:
       passed value, and returns nothing
     - A method called `setHeight` that accepts a `double` as a parameter, updates the **height** attribute to the passed
       value, and returns nothing
-    - A method called `deforestation` that updates the **height** value to 0
+    - A method called `deforestation` that updates the **height** value to 0. It has no parameters and does not return anything.
     - A `toString` method which returns a `String` of the form `"This tree’s rarity is x, and is ym tall"` where x is
       the value of the **isRare** attribute, y is the value of the **height** attribute (m signifies meters)
 
