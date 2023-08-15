@@ -26,4 +26,4 @@ Your `Phone` class should have the following items:
 
 - Methods:
     - A method called `calcScreenSize` which another class can use to compute the diagonal of the screen using the 
-      Pythagorean Theorem.
+      Pythagorean Theorem. It should return the result as a `double`.

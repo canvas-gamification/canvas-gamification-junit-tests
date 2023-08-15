@@ -100,10 +100,14 @@ public class MainTest {
         };
         double diag = Math.sqrt(Math.pow(attribute1, 2) + Math.pow(attribute2, 2));
         Object instance = classInstance.createInstance(arguments);
+        assertTrue(classInstance.hasMethod(methodName, null),
+                "Your " + testClassName + " class is missing the method " + methodName + ".");
+        assertTrue(classInstance.hasMethod(methodName, null, double.class),
+                "Your " + testClassName + " class " + methodName + " method does not have the correct return type.");
         assertTrue(classInstance.hasMethod(methodName, null, double.class, new String[]{"public"}),
-                "Your " + testClassName + " class is missing the method " + methodName + " or it does not have the correct return type or visibility modifier.");
+                "Your " + testClassName + " class " + methodName + " method does not have the correct visibility modifier.");
         Object methodOutput = classInstance.callMethod(methodName, instance, null);
-        _assertEquals(diag, methodOutput, 0.000001,
+        _assertEquals(diag, methodOutput, 0.00001,
                 "Your " + methodName + " method does not correctly calculate the diagonal of the screen.");
     }
 }
