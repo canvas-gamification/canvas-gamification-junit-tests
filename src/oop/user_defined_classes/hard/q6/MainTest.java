@@ -109,7 +109,7 @@ public class MainTest {
                 "Your " + testClassName + " " + methodName + " method does not have the correct visibility modifier.");
         classInstance.callMethod(methodName, instance, new Clause[]{
                 new StringLiteral("Fatigue level is " + stress)
-        }, "Your " + methodName + " method does not produce the correct output.");
+        }, "Your " + methodName + " method does not print the correct fatigue level.");
         assertEquals(0, (int) classInstance.getFieldValue(instance, intAttributeName2),
                 intAttributeName2 + " should be zero after " + methodName + " is called.");
     }

@@ -25,6 +25,6 @@ Your `UniversityStudent` class should have the following items:
     - This constructor should be visible to other classes
 
 - Methods:
-    - A method called `workAllDay` which completes the workload, but also increases the fatigue level for every piece of 
-      work completed. The method should print "Fatigue level is **fatigueLevel**" once all work is completed. It should
-      not return anything. 
+    - A method called `workAllDay` which completes the workload by decrementing **workload** until it hits 0, but also 
+      increases the fatigue level for every piece of work completed. The method should print "Fatigue level is 
+      **fatigueLevel**" once all work is completed. It should not return anything. 
