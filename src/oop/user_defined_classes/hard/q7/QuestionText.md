@@ -28,3 +28,4 @@ Your `Course` class should have the following items:
     - A method called `determineDifficulty` which another class can give an integer representing the difficulty and 
       determines whether the course is considered difficult. If the given number is greater than or equal to 
       **difficulty** then print "**topic** is a difficult course" otherwise print "**topic** is not a difficult course".
+      This method does not return anything.
