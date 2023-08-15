@@ -272,6 +272,10 @@ public class MainTest {
         String expectedOutput = "This fish is " + colour + ", and is " + gender + ", and is " + age + " years old";
         assertTrue(classInstance.hasMethod("toString", new Class[]{}),
                 "Your " + testClassName + " class is missing the toString method.");
+        assertTrue(classInstance.hasMethod("toString", new Class[]{}, String.class),
+                "Your " + testClassName + " class toString method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod("toString", new Class[]{}, String.class, new String[]{"public"}),
+                "Your " + testClassName + " class toString method does not have the correct visibility modifier.");
         Object output = classInstance.callMethod("toString", new String[]{"public"}, instance);
         String incorrectToString = String.format("Your toString method for the %s class does return the correct String.", objectClassName);
         _assertEquals(expectedOutput, output, incorrectToString);
