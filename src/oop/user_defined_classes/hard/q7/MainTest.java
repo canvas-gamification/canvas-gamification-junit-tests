@@ -107,11 +107,15 @@ public class MainTest {
                 {attribute2, int.class}
         };
         Object instance = classInstance.createInstance(arguments);
+        assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class}),
+                "Your " + testClassName + " class is missing the method " + methodName + ".");
+        assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class}, Void.TYPE),
+                "Your " + testClassName + " class " + methodName + " method does not have the correct return type.");
         assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class}, Void.TYPE, new String[]{"public"}),
-                "Your " + testClassName + " class is missing the method " + methodName + " or it does not have the correct return type or visibility modifier.");
+                "Your " + testClassName + " class " + methodName + " method does not have the correct visibility modifier.");
         classInstance.callMethod(methodName, new Object[][]{{dif, int.class}}, null, instance, new Clause[]{
                 new StringLiteral(mssg),
                 new Optional(new StringLiteral(" "))
-        }, "Your " + methodName + " method does not produce the correct output.");
+        }, "Your " + methodName + " method does not correctly print whether the difficulty of a course.");
     }
 }
