@@ -47,6 +47,6 @@ Your `TestAquarium` class must have the following items:
     - The third object should have a **colour** of `Red`, a **gender** of `Female`, and an **age** of `3`
     - After initializing both objects, print the `toString` value of each object, starting with the first object
     - Next, using the `setAge` method, update the **age** attribute of all objects to be 10 higher
-    - Finally, print the `toString` of both objects again.
+    - Finally, print the `toString` of all the objects again.
     - Make sure that each of the six `toString` results are printed on their own line
     
