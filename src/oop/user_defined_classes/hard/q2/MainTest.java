@@ -106,7 +106,7 @@ public class MainTest {
         assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class, int.class}, Void.TYPE),
                 "Your " + testClassName + " " + methodName + " method does not have the correct return type.");
         assertTrue(classInstance.hasMethod(methodName, new Class[]{int.class, int.class}, Void.TYPE, new String[]{"public"}),
-                "Your " + testClassName + " " + methodName + " method does not have the correct return type visibility modifier.");
+                "Your " + testClassName + " " + methodName + " method does not have the correct visibility modifier.");
         classInstance.callMethod(
                 methodName, new Object[][]{{remove1, int.class}, {remove2, int.class}}, null, instance, new Clause[]{
                         new IntegerLiteral(remainder1),
