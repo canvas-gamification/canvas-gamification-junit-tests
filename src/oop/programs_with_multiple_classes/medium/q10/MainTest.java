@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -65,19 +64,19 @@ public class MainTest {
     }
 
     @Test
-    public void cupboardClassHasCorrectAttributes() {
-        assertTrue(cupboard.hasField(varSize, int.class),
-                "Your " + classCupboard + " class is missing the " + varSize + " attribute.");
-        assertTrue(cupboard.hasModifier(varSize, "private"),
-                "The " + varSize + " attribute in your " + classCupboard + " class does not have the correct visibility modifier.");
-        assertTrue(cupboard.hasField(varColour, String.class),
-                "Your " + classCupboard + " class is missing the " + varColour + " attribute.");
-        assertTrue(cupboard.hasModifier(varColour, "private"),
-                "The " + varColour + " attribute in your " + classCupboard + " class does not have the correct visibility modifier.");
-        assertTrue(cupboard.hasField(varVegtables, Vegetable[].class),
-                "Your " + classCupboard + " class is missing the " + varVegtables + " attribute.");
-        assertTrue(cupboard.hasModifier(varVegtables, "private"),
-                "The " + varVegtables + " attribute in your " + classCupboard + " class does not have the correct visibility modifier.");
+    public void discordHasRequiredAttributes() {
+        String missingAttributeMessage = "The %s class is missing the %s attribute. Make sure that the class contains the attribute and it is spelt correctly.";
+        String wrongTypeMessage = "The %s attribute in the %s class has the wrong type.";
+        String wrongModifierMessage = "The %s attribute in the %s class has the wrong visibility modifier.";
+        assertTrue(cupboard.hasField(varSize), String.format(missingAttributeMessage, classCupboard, varSize));
+        assertTrue(cupboard.hasField(varSize, int.class), String.format(wrongTypeMessage, varSize, classCupboard));
+        assertTrue(cupboard.hasModifier(varSize, "private"), String.format(wrongModifierMessage, varSize, classCupboard));
+        assertTrue(cupboard.hasField(varColour), String.format(missingAttributeMessage, classCupboard, varColour));
+        assertTrue(cupboard.hasField(varColour, String.class), String.format(wrongTypeMessage, varColour, classCupboard));
+        assertTrue(cupboard.hasModifier(varColour, "private"), String.format(wrongModifierMessage, varColour, classCupboard));
+        assertTrue(cupboard.hasField(varVegtables), String.format(missingAttributeMessage, classCupboard, varVegtables));
+        assertTrue(cupboard.hasField(varVegtables, Vegetable[].class), String.format(wrongTypeMessage, varVegtables, classCupboard));
+        assertTrue(cupboard.hasModifier(varVegtables, "private"), String.format(wrongModifierMessage, varVegtables, classCupboard));
     }
 
     @Test
@@ -115,6 +114,16 @@ public class MainTest {
                 "Your " + classVegtable + " constructor does not correctly initialize the " + varOrigin + " attribute.");
     }
 
+    @Test
+    public void vegetableEatingIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(vegetable.hasMethod(methodName, null), String.format(incorrectMethodDefinition, methodName, classVegtable));
+        assertTrue(vegetable.hasModifier(methodName, null, "public"), String.format(incorrectModifierMessage, methodName, classVegtable));
+        assertTrue(vegetable.hasReturnType(methodName, null, Void.TYPE), String.format(incorrectReturnType, methodName, classVegtable));
+    }
+
     @ParameterizedTest
     @MethodSource("vegetableInputProvider")
     public void correctVegetableEatingMethod(boolean isSpoiled, double weight, String countryOfOrigin) throws Throwable {
@@ -127,7 +136,6 @@ public class MainTest {
         Object output = vegetable.callMethod(methodName, vegetableInstance);
         _assertEquals(weight - 0.5, vegetable.getFieldValue(vegetableInstance, varWeight),
                 "Your " + classVegtable + " " + methodName + " method does not decrement the " + varWeight + " by 0.5.");
-        assertNull(output, "Your " + methodName + " method should not return anything.");
     }
 
 }
