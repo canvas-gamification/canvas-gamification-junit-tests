@@ -6,6 +6,7 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -109,6 +110,7 @@ public class MainTest {
                 String.format(incorrectAttributeValue, objectClassName, doubleAttributeName1));
     }
 
+    @Tag("dependent1")
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
     public void glassHasCorrectFixMethod(String condition, boolean broken, double weight) throws Throwable {
@@ -120,11 +122,19 @@ public class MainTest {
         Object instance = classInstance.createInstance(arguments);
         String incorrectFixMethod = "Your %s method does not set the %s attribute to false.";
 
+        assertTrue(classInstance.hasMethod(methodName2, new Class[]{}),
+                "Your " + testClassName + " class is missing the method " + methodName2 + ".");
+        assertTrue(classInstance.hasMethod(methodName2, new Class[]{}, Void.TYPE),
+                "Your " + testClassName + " class " + methodName2 + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(methodName2, new Class[]{}, Void.TYPE, new String[]{"public"}),
+                "Your " + testClassName + " class " + methodName2 + " method does not have the correct visibility modifier.");
+
         classInstance.callMethod(methodName2, new String[]{"public"}, instance);
         _assertEquals(false, classInstance.getFieldValue(instance, "isBroken"),
                 String.format(incorrectFixMethod, methodName2, booleanAttributeName1));
     }
 
+    @Tag("dependent1")
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
     public void glassHasCorrectBrokenMethod(String condition, boolean broken, double weight) throws Throwable {
@@ -136,11 +146,19 @@ public class MainTest {
         Object instance = classInstance.createInstance(arguments);
         String incorrectBrokenMethod = "Your %s method does not set the %s attribute to true.";
 
+        assertTrue(classInstance.hasMethod(methodName1, new Class[]{}),
+                "Your " + testClassName + " class is missing the method " + methodName1 + ".");
+        assertTrue(classInstance.hasMethod(methodName1, new Class[]{}, Void.TYPE),
+                "Your " + testClassName + " class " + methodName1 + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(methodName1, new Class[]{}, Void.TYPE, new String[]{"public"}),
+                "Your " + testClassName + " class " + methodName1 + " method does not have the correct visibility modifier.");
+
         classInstance.callMethod(methodName1, new String[]{"public"}, instance);
         _assertEquals(true, classInstance.getFieldValue(instance, "isBroken"),
                 String.format(incorrectBrokenMethod, methodName1, booleanAttributeName1));
     }
 
+    @Tag("dependent1")
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
     public void glassHasCorrectGetMethod(String condition, boolean broken, double weight) throws Throwable {
@@ -152,10 +170,18 @@ public class MainTest {
         Object instance = classInstance.createInstance(arguments);
         String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
 
+        assertTrue(classInstance.hasMethod(getMethodName, new Class[]{}),
+                "Your " + testClassName + " class is missing the method " + getMethodName + ".");
+        assertTrue(classInstance.hasMethod(getMethodName, new Class[]{}, boolean.class),
+                "Your " + testClassName + " class " + getMethodName + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(getMethodName, new Class[]{}, boolean.class, new String[]{"public"}),
+                "Your " + testClassName + " class " + getMethodName + " method does not have the correct visibility modifier.");
+
         Object output = classInstance.callMethod(getMethodName, new String[]{"public"}, instance);
         _assertEquals(broken, output, String.format(incorrectGetMethods, getMethodName, booleanAttributeName1));
     }
 
+    @Tag("dependent1")
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
     public void glassClassHasCorrectToStringMethod(String condition, boolean broken, double weight) throws Throwable {
@@ -165,6 +191,12 @@ public class MainTest {
                 {weight, double.class}
         };
         Object instance = classInstance.createInstance(arguments);
+        assertTrue(classInstance.hasMethod("toString", new Class[]{}),
+                "Your " + testClassName + " class is missing the toString method.");
+        assertTrue(classInstance.hasMethod("toString", new Class[]{}, String.class),
+                "Your " + testClassName + " class toString method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod("toString", new Class[]{}, String.class, new String[]{"public"}),
+                "Your " + testClassName + " class toString method does not have the correct visibility modifier.");
         String expectedOutput = "The item is " + condition + ", and its weight is " + weight + " and is it broken? " + broken;
         Object output = classInstance.callMethod("toString", new String[]{"public"}, instance);
         String incorrectToString = String.format("Your toString method for the %s class does return the correct String.", objectClassName);
@@ -192,6 +224,7 @@ public class MainTest {
         _assertEquals(expectedToStringOutput, output2, String.format(incorrectToString, methodName1));
     }
 
+    @Tag("dependency1")
     @Test
     public void testFragileMainMethodProducesCorrectOutput() throws Throwable {
         Object[][] arguments = {{new String[0], String[].class}};
