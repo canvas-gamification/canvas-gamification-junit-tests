@@ -260,6 +260,7 @@ public class MainTest {
         assertTrue(classInstance.hasReturnType(setIntAttributeName1, new Class[]{int.class}, void.class));
     }
 
+    @Tag("dependent1")
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
     public void fishClassHasCorrectToStringMethod(String colour, String gender, int age) throws Throwable {
