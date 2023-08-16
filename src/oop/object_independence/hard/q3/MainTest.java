@@ -32,8 +32,8 @@ public class MainTest {
     private final double testDoubleAttributeName1 = 50.5;
     private final double testDoubleAttributeName2 = 20.4;
     private final double testDoubleAttributeNameUpdate = 0.0;
-    private final int deforestatedNumber = 0;
-    private final double deforestatedDoubleNumber = 0.0;
+    private final int deforestedNumber = 0;
+    private final double deforestedDoubleNumber = 0.0;
     private ObjectTest classInstance;
     private ObjectTest testInstance;
 
@@ -210,9 +210,9 @@ public class MainTest {
                 "Your " + testClassName + " class " + deforestationName + " method does not have the correct visibility modifier.");
         classInstance.callMethod(deforestationName, instance);
 
-        String incorrectDeforestationMethod = "Your %s method does not update the %s attribute to " + deforestatedNumber + ".";
+        String incorrectDeforestationMethod = "Your %s method does not update the %s attribute to " + deforestedNumber + ".";
 
-        _assertEquals(deforestatedDoubleNumber, classInstance.getFieldValue(instance, doubleAttributeName1),
+        _assertEquals(deforestedDoubleNumber, classInstance.getFieldValue(instance, doubleAttributeName1),
                 String.format(incorrectDeforestationMethod, deforestationName, doubleAttributeName1));
     }
 
@@ -225,8 +225,12 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(arguments);
         String expectedOutput = "This tree’s rarity is " + b + ", and is " + d + "m tall";
-        assertTrue(classInstance.hasMethod("toString", new Class[]{}),
+        assertTrue(classInstance.hasMethod(deforestationName, new Class[]{}),
                 "Your " + testClassName + " class is missing the toString method.");
+        assertTrue(classInstance.hasMethod(deforestationName, new Class[]{}, String.class),
+                "Your " + testClassName + " class toString method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(deforestationName, new Class[]{}, String.class, new String[]{"public"}),
+                "Your " + testClassName + " class toString method does not have the correct visibility modifier.");
         Object output = classInstance.callMethod("toString", new String[]{"public"}, instance);
         String incorrectToString = String.format("Your toString method for the %s class does return the correct String.", objectClassName);
         _assertEquals(expectedOutput, output, incorrectToString);
@@ -248,14 +252,21 @@ public class MainTest {
         String expectedToStringOutput = "This tree’s rarity is " + newB + ", and is " + newD + "m tall";
         String incorrectSetGet =
                 "Your %s method does not return the correct value after updating the %s attribute using the %s method.";
-        String incorrectToString = "Your toString method does not return the correct String after updating the %s and %s attributes using the %s and %s methods.";
+        String incorrectToString = "Your toString method does not return the correct String after updating the %s after using the %s.";
         _assertEquals(newB, output1,
                 String.format(incorrectSetGet, getBooleanAttributeName1, booleanAttributeName1, setBooleanAttributeName1));
         _assertEquals(newD, output2,
                 String.format(incorrectSetGet, getDoubleAttributeName1, doubleAttributeName1, setDoubleAttributeName1));
         _assertEquals(expectedToStringOutput, toStringOutput,
-                String.format(incorrectToString, booleanAttributeName1, doubleAttributeName1, setBooleanAttributeName1,
-                        setDoubleAttributeName1));
+                String.format(incorrectToString, booleanAttributeName1 + " and " + doubleAttributeName1 + " attributes",
+                        setBooleanAttributeName1 + " and " + setDoubleAttributeName1 + " methods"));
+        classInstance.callMethod(deforestationName, instance);
+        _assertEquals(deforestedDoubleNumber, classInstance.getFieldValue(instance, doubleAttributeName1),
+                String.format(incorrectSetGet, getDoubleAttributeName1, doubleAttributeName1, deforestationName));
+        toStringOutput = classInstance.callMethod("toString", instance);
+        expectedToStringOutput = "This tree’s rarity is " + newB + ", and is " + deforestedDoubleNumber + "m tall";
+        _assertEquals(expectedToStringOutput, toStringOutput,
+                String.format(incorrectToString, doubleAttributeName1 + " attribute", deforestationName + " method"));
     }
 
     @Tag("dependency1")
