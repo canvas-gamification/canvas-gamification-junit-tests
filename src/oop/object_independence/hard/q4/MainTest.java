@@ -193,6 +193,7 @@ public class MainTest {
         assertTrue(classInstance.hasReturnType(setStringAttributeName2, new Class[]{String.class}, void.class));
     }
 
+    @Tag("dependent1")
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
     public void paintingClassHasCorrectToStringMethod(String name, String quality) throws Throwable {
