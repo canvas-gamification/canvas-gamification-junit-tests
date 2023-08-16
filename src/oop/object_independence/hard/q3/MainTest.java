@@ -216,6 +216,7 @@ public class MainTest {
                 String.format(incorrectDeforestationMethod, deforestationName, doubleAttributeName1));
     }
 
+    @Tag("dependent1")
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
     public void treeClassHasCorrectToStringMethod(boolean b, double d) throws Throwable {
