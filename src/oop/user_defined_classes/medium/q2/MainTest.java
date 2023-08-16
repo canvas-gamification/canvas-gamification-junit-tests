@@ -65,7 +65,7 @@ public class MainTest {
         assertTrue(classInstance.hasModifier(varPower, "private"),
                 "Your " + varPower + " attribute does not have the correct visibility modifier.");
         assertTrue(classInstance.hasField(varYear),
-                "Your " + className + " class is missing the " + varYear+ " attribute, or it is spelled incorrectly..");
+                "Your " + className + " class is missing the " + varYear+ " attribute, or it is spelled incorrectly.");
         assertTrue(classInstance.hasField(varYear, int.class),
                 "Your " + varYear + " attribute does not have the correct return type.");
         assertTrue(classInstance.hasModifier(varYear, "private"),
