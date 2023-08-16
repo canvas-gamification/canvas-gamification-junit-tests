@@ -83,6 +83,12 @@ public class MainTest {
                 {lName, String.class}
         };
         Object instance = classInstance.createInstance(constructorArguments);
+        assertTrue(classInstance.hasMethod(getStringAttribute1, new Class[]{}),
+                "Your " + objectClassName + " class is missing the method " + getStringAttribute1 + ".");
+        assertTrue(classInstance.hasMethod(getStringAttribute1, new Class[]{}, String.class),
+                "Your " + objectClassName + " class " + getStringAttribute1 + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(getStringAttribute1, new Class[]{}, String.class, new String[]{"public"}),
+                "Your " + objectClassName + " class " + getStringAttribute1 + " method does not have the correct visibility modifier.");
         String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
         assertTrue(classInstance.hasMethod(getStringAttribute1, null, String.class, new String[]{"public"}),
                 String.format("Your %s class is missing the %s method, or the %s method has the wrong return type.", objectClassName, getStringAttribute1, getStringAttribute1));
@@ -99,6 +105,12 @@ public class MainTest {
                 {lName, String.class}
         };
         Object instance = classInstance.createInstance(constructorArguments);
+        assertTrue(classInstance.hasMethod(getStringAttribute2, new Class[]{}),
+                "Your " + objectClassName + " class is missing the method " + getStringAttribute2 + ".");
+        assertTrue(classInstance.hasMethod(getStringAttribute2, new Class[]{}, String.class),
+                "Your " + objectClassName + " class " + getStringAttribute2 + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(getStringAttribute2, new Class[]{}, String.class, new String[]{"public"}),
+                "Your " + objectClassName + " class " + getStringAttribute2 + " method does not have the correct visibility modifier.");
         String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
         assertTrue(classInstance.hasMethod(getStringAttribute2, null, String.class, new String[]{"public"}),
                 String.format("Your %s class is missing the %s method, or the %s method has the wrong return type.", objectClassName, getStringAttribute2, getStringAttribute2));
@@ -125,9 +137,12 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(constructorArguments);
 
+        assertTrue(classInstance.hasMethod(setStringAttribute1, new Class[]{String.class}),
+                "Your " + objectClassName + " class is missing the method " + setStringAttribute1 + ".");
+        assertTrue(classInstance.hasMethod(setStringAttribute1, new Class[]{String.class}, Void.TYPE),
+                "Your " + objectClassName + " class " + setStringAttribute1 + " method does not have the correct return type.");
         assertTrue(classInstance.hasMethod(setStringAttribute1, new Class[]{String.class}, Void.TYPE, new String[]{"public"}),
-                String.format("Your %s class is missing the %s method, or the method name was spelt incorrectly.",
-                        objectClassName, setStringAttribute1));
+                "Your " + objectClassName + " class " + setStringAttribute1 + " method does not have the correct visibility modifier.");
         Object[][] setArguments = {{newFName, String.class}};
         classInstance.callMethod(setStringAttribute1, setArguments, instance);
         _assertEquals(newFName, classInstance.getFieldValue(instance, stringAttribute1),
@@ -144,9 +159,12 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(constructorArguments);
 
+        assertTrue(classInstance.hasMethod(setStringAttribute2, new Class[]{String.class}),
+                "Your " + objectClassName + " class is missing the method " + setStringAttribute2 + ".");
+        assertTrue(classInstance.hasMethod(setStringAttribute2, new Class[]{String.class}, Void.TYPE),
+                "Your " + objectClassName + " class " + setStringAttribute2 + " method does not have the correct return type.");
         assertTrue(classInstance.hasMethod(setStringAttribute2, new Class[]{String.class}, Void.TYPE, new String[]{"public"}),
-                String.format("Your %s class is missing the %s method, or the method name was spelt incorrectly.",
-                        objectClassName, setStringAttribute2));
+                "Your " + objectClassName + " class " + setStringAttribute2 + " method does not have the correct visibility modifier.");
         Object[][] setArguments = new Object[][]{{newLName, String.class}};
         classInstance.callMethod(setStringAttribute2, setArguments, instance);
         _assertEquals(newLName, classInstance.getFieldValue(instance, stringAttribute2),
@@ -161,6 +179,12 @@ public class MainTest {
                 {lName, String.class}
         };
         Object instance = classInstance.createInstance(constructorArguments);
+        assertTrue(classInstance.hasMethod("toString", new Class[]{}),
+                "Your " + objectClassName + " class is missing the toString method.");
+        assertTrue(classInstance.hasMethod("toString", new Class[]{}, String.class),
+                "Your " + objectClassName + " class toString method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod("toString", new Class[]{}, String.class, new String[]{"public"}),
+                "Your " + objectClassName + " class toString method does not have the correct visibility modifier.");
         Object output = classInstance.callMethod("toString", instance);
         String expected = String.format("My name is: %s %s.", fName, lName);
         _assertEquals(expected, output,
@@ -189,11 +213,12 @@ public class MainTest {
         };
         Object instance1 = classInstance.createInstance(person1Arguments);
         Object instance2 = classInstance.createInstance(person2Arguments);
+        assertTrue(classInstance.hasMethod(methodName1, new Class[]{classInstance.getObjectClass()}),
+                "Your " + objectClassName + " class is missing the method " + methodName1 + ".");
+        assertTrue(classInstance.hasMethod(methodName1, new Class[]{classInstance.getObjectClass()}, Void.TYPE),
+                "Your " + objectClassName + " class " + methodName1 + " method does not have the correct return type.");
         assertTrue(classInstance.hasMethod(methodName1, new Class[]{classInstance.getObjectClass()}, Void.TYPE, new String[]{"public"}),
-                String.format(
-                        "Your %s class is missing the %s method. Please check that the name is spelled correctly, the parameters and return type are correct, and it has the correct visibility modifier.",
-                        objectClassName, methodName1
-                ));
+                "Your " + objectClassName + " class " + methodName1 + " method does not have the correct visibility modifier.");
         Object[][] methodArguments = {{instance2, classInstance.getObjectClass()}};
         classInstance.callMethod(methodName1, methodArguments, instance1);
         _assertEquals(conjoined, classInstance.getFieldValue(instance1, stringAttribute2),

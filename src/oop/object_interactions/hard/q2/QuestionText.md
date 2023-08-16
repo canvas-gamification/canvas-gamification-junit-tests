@@ -25,10 +25,13 @@ Your `Partner` class must have the following items:
 - Methods
     - The following methods should be visible from another class
       - A `marryMe` method which takes a `Partner` object and changes the last names of both objects to a hyphenated 
-        version of their unmarried names. Where the format is `lastName-passedLastName`.
+        version of their unmarried names. Where the format is `lastName-passedLastName`. The method does not return
+        anything.
     - A `getFirstName` method which returns the **firstName** attribute of the partner
     - A `getLastName` method which returns the **lastName** attribute of the partner
-    - A `setFirstName` method which takes a `String` parameter and updates the **firstName** attribute to that value. 
-    - A `setLastName` method which takes a `String` parameter and updates the **lastName** attribute to that value. 
+    - A `setFirstName` method which takes a `String` parameter, updates the **firstName** attribute to that value, and 
+      does not return anything. 
+    - A `setLastName` method which takes a `String` parameter, updates the **lastName** attribute to that value, and 
+      does not return anything. 
     - A `toString` method which returns a `String` describing the `Partner` object. It should be of the format "My name
       is: x y." where x is the **firstName** attribute and y is the **lastName** attribute of the partner
