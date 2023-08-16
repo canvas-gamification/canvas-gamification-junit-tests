@@ -26,8 +26,8 @@ Your `Lasagna` class must have the following items:
     - A method called `getIsBad` that returns the value of the **isBad** attribute
     - A method called `getInGarbage` that returns the value of the **inGarbage** attribute
     - A method called `getHoursSinceMade` that returns the value of the **hoursSinceMade** attribute
-    - A method called `gettingOld` that updates the **isBad** attribute to `true`
-    - A method called `throwFood` that updates the **inGarbage** attribute to `true`
+    - A method called `gettingOld` that updates the **isBad** attribute to `true` and returns nothing
+    - A method called `throwFood` that updates the **inGarbage** attribute to `true` and returns nothing
     - A `toString` method which returns a `String` of the form `"The dish was made x hours ago. Is it bad? y. Has it 
       been thrown out? z."` where x is the value of the **hoursSinceMade** attribute, y is the value of the **isBad** 
       attribute, and z is the value of the **inGarbage** attribute.
