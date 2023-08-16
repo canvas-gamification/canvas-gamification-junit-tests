@@ -76,13 +76,26 @@ public class MainTest {
                 Arguments.of("Red", 300, 2003),
                 Arguments.of("Blue", 200, 2014),
                 Arguments.of("Black", 100, 1986),
-                Arguments.of("Yellow", 250, 2001)
+                Arguments.of("White", 250, 2001),
+                Arguments.of("Yellow", 0, 1),
+                Arguments.of("Purple", 0, 0),
+                Arguments.of("Green", 1, 1)
         );
+    }
+
+    @Test
+    public void improveIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(classInstance.hasMethod(methodName, null), String.format(incorrectMethodDefinition, methodName, className));
+        assertTrue(classInstance.hasModifier(methodName, null, "public"), String.format(incorrectModifierMessage, methodName, className));
+        assertTrue(classInstance.hasReturnType(methodName, null, Void.TYPE), String.format(incorrectReturnType, methodName, className));
     }
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
-    public void correctVegetableEatingMethod(String colour, int horsePower, int yearMade) throws Throwable {
+    public void correctImproveMethod(String colour, int horsePower, int yearMade) throws Throwable {
         Object[][] arguments = {
                 {colour, String.class},
                 {horsePower, int.class},
@@ -92,7 +105,6 @@ public class MainTest {
         Object output = classInstance.callMethod(methodName, instance);
         _assertEquals(horsePower * 2, classInstance.getFieldValue(instance, varPower),
                 "Your " + className + " improve method does not doubles the " + varPower + ".");
-        assertNull(output, "Your " + methodName + " method must not return anything.");
     }
 
 }
