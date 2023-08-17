@@ -21,9 +21,9 @@ Your `Laptop` class must have the following items:
 
 - Methods:
     - A `getIdentification` method which returns the **identification** attribute and should be visible from another class
-    - A `setIdentification` method which takes an `int` parameter and updates the **identification** attribute to that 
-      value. It should be visible from another class
-    - An `incrementer` method which increments the value of the initial by 5 and returns that value. It should be 
+    - A `setIdentification` method which takes an `int` parameter, updates the **identification** attribute to that 
+      value, and returns nothing. It should be visible from another class
+    - An `incrementer` method which increments the value of the initial by 5 and returns that value. It should not be 
       visible from another class
 
 # TestObject Class

@@ -5,10 +5,7 @@ import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.RepetitionInfo;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -73,16 +70,18 @@ public class MainTest {
         return Stream.of(0, 1, 3, 5, 10, 59, 61032);
     }
 
+    @Tag("dependent1")
     @ParameterizedTest
     @MethodSource("countInputProvider")
     public void laptopClassHasCorrectGetIdentificationMethod(int n) throws Throwable {
         Object instance = classInstance.createInstance();
         classInstance.setFieldValue(instance, n, intAttribute1);
-        String missingMethodMessage =
-                "Your %s class is missing the %s method. Make sure that the method name is spelt correctly, has the " +
-                        "correct parameters, returns the correct type, and has the correct visibility modifier.";
-        assertTrue(classInstance.hasMethod(getMethodName, null, int.class, new String[]{"public"}),
-                String.format(missingMethodMessage, objectName, getMethodName));
+        assertTrue(classInstance.hasMethod(getMethodName, new Class[]{}),
+                "Your " + objectName + " class is missing the method " + getMethodName + ".");
+        assertTrue(classInstance.hasMethod(getMethodName, new Class[]{}, int.class),
+                "Your " + objectName + " class " + getMethodName + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(getMethodName, new Class[]{}, int.class, new String[]{"public"}),
+                "Your " + objectName + " class " + getMethodName + " method does not have the correct visibility modifier.");
         _assertEquals(n, classInstance.callMethod(getMethodName, instance),
                 String.format("Your %s method does not return the correct value of the %s attribute.", getMethodName, intAttribute1));
     }
@@ -91,11 +90,12 @@ public class MainTest {
     @MethodSource("countInputProvider")
     public void laptopClassHasCorrectSetIdentificationMethod(int n) throws Throwable {
         Object instance = classInstance.createInstance();
-        String missingMethodMessage =
-                "Your %s class is missing the %s method. Make sure that the method name is spelt correctly, has the " +
-                        "correct parameters, returns the correct type, and has the correct visibility modifier.";
+        assertTrue(classInstance.hasMethod(setMethodName, new Class[]{int.class}),
+                "Your " + objectName + " class is missing the method " + setMethodName + ".");
+        assertTrue(classInstance.hasMethod(setMethodName, new Class[]{int.class}, Void.TYPE),
+                "Your " + objectName + " class " + setMethodName + " method does not have the correct return type.");
         assertTrue(classInstance.hasMethod(setMethodName, new Class[]{int.class}, Void.TYPE, new String[]{"public"}),
-                String.format(missingMethodMessage, objectName, getMethodName));
+                "Your " + objectName + " class " + setMethodName + " method does not have the correct visibility modifier.");
         classInstance.callMethod(setMethodName, new Object[][]{{n, int.class}}, instance);
         _assertEquals(n, classInstance.getFieldValue(instance, intAttribute1),
                 String.format("Your %s method does not return the correct value of the %s attribute.", setMethodName, intAttribute1));
@@ -106,6 +106,12 @@ public class MainTest {
     public void laptopClassHasCorrectIncrementerMethod(int n) throws Throwable {
         Object instance = classInstance.createInstance();
         classInstance.setFieldValue(null, n, intAttribute2);
+        assertTrue(classInstance.hasMethod(methodName, new Class[]{}),
+                "Your " + objectName + " class is missing the method " + methodName + ".");
+        assertTrue(classInstance.hasMethod(methodName, new Class[]{}, int.class),
+                "Your " + objectName + " class " + methodName + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(methodName, new Class[]{}, int.class, new String[]{"private"}),
+                "Your " + objectName + " class " + methodName + " method does not have the correct visibility modifier.");
         Object output = classInstance.callMethod(methodName, instance);
         _assertEquals(n + incrementAmount, classInstance.getFieldValue(null, intAttribute2),
                 String.format("Your %s method does not correctly increment the value of the %s attribute.", methodName, intAttribute2));
@@ -113,6 +119,7 @@ public class MainTest {
                 String.format("Your %s method does not return the correct value of the %s attribute.", methodName, intAttribute2));
     }
 
+    @Tag("dependency1")
     @Test
     public void testPlatformGameMainMethodProducesCorrectOutput() throws Throwable {
         classInstance.setFieldValue(null, initialStart, intAttribute2);
