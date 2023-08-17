@@ -4,6 +4,7 @@ import global.ObjectTest;
 import global.variables.Clause;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -89,8 +90,13 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(constructorArguments);
         String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
-        assertTrue(classInstance.hasMethod(getIntAttribute1, null, int.class, new String[]{"public"}),
-                String.format("Your %s class is missing the %s method, or the %s method has the wrong return type.", objectClassName, getIntAttribute1, getIntAttribute1));
+
+        assertTrue(classInstance.hasMethod(getIntAttribute1, new Class[]{}),
+                "Your " + objectClassName + " class is missing the method " + getIntAttribute1 + ".");
+        assertTrue(classInstance.hasMethod(getIntAttribute1, new Class[]{}, int.class),
+                "Your " + objectClassName + " class " + getIntAttribute1 + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(getIntAttribute1, new Class[]{}, int.class, new String[]{"public"}),
+                "Your " + objectClassName + " class " + getIntAttribute1 + " method does not have the correct visibility modifier.");
 
         Object output = classInstance.callMethod(getIntAttribute1, new String[]{"public"}, instance);
         _assertEquals(key, output, String.format(incorrectGetMethods, getIntAttribute1, stringAttribute1));
@@ -105,6 +111,7 @@ public class MainTest {
         );
     }
 
+    @Tag("dependent1")
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     public void correctCrossEncryptMethod(String data1, int key1, String data2, int key2, String mssg) throws Throwable {
@@ -118,16 +125,20 @@ public class MainTest {
         };
         Object instance1 = classInstance.createInstance(box1Arguments);
         Object instance2 = classInstance.createInstance(box2Arguments);
+
+        assertTrue(classInstance.hasMethod(methodName1, new Class[]{classInstance.getObjectClass()}),
+                "Your " + objectClassName + " class is missing the method " + methodName1 + ".");
+        assertTrue(classInstance.hasMethod(methodName1, new Class[]{classInstance.getObjectClass()}, String.class),
+                "Your " + objectClassName + " class " + methodName1 + " method does not have the correct return type.");
         assertTrue(classInstance.hasMethod(methodName1, new Class[]{classInstance.getObjectClass()}, String.class, new String[]{"public"}),
-                String.format(
-                        "Your %s class is missing the %s method. Please check that the name is spelled correctly, the parameters and return type are correct, and it has the correct visibility modifier.",
-                        objectClassName, methodName1
-                ));
+                "Your " + objectClassName + " class " + methodName1 + " method does not have the correct visibility modifier.");
+
         Object[][] methodArguments = {{instance2, classInstance.getObjectClass()}};
         Object output = classInstance.callMethod(methodName1, methodArguments, instance1);
         _assertEquals(mssg, output, "Your " + methodName1 + " method does not correctly encrypt the " + stringAttribute1);
     }
 
+    @Tag("dependency1")
     @Test
     public void testEncryptionMainMethodProducesCorrectOutput() throws Throwable {
         Object[][] arguments = {{new String[0], String[].class}};
