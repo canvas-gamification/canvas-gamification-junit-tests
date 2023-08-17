@@ -5,8 +5,7 @@
 ## Question Text
 
 You are considering working in a biotech company where researchers conduct experiments on cloning and mutating animals 
-and insects. Write an `Animal` class using the requirements below, and create a `clone` and `mutate` method that alters
-the **DNASequence** of the `Animal`.
+and insects. Write an `Animal` class that can alter the **DNASequence** of the `Animal` using the requirements below.
 
 ### Animal Class:
 
@@ -29,14 +28,15 @@ Your `Animal` class must have the following items:
     - A `toString` method which returns a `String` describing the `Animal` object. It should be of the format `"x has
       DNA y"` where x is the **name** attribute and y is the **DNASequence** attribute of the `Animal`
     - A `clone` method which accepts an `Animal` object as input and changes the **DNASequence** of the object the 
-      method is called upon to that of the input object's **DNASequence**
+      method is called upon to that of the input object's **DNASequence**. This method does not return anything
     - A `mutate` method which accepts an `Animal` object as input and change the **DNASequence** of the object the 
       method is called upon to a combination of the original sequence and the input object's sequence. Build the new DNA 
       sequence by interleaving the original sequence first with the input object's sequence following. For example, if 
       the original sequence is "ABCDE" and the input sequence is "VWXYZ", then the combined sequence becomes 
       "AVBWCXDYEZ". On the other hand, if the original sequence is a longer sequence such as "ABCDE" and the input 
       sequence is "XYZ", then the combined sequence becomes "AXBYCZDE". Finally, if the original sequence is a shorter 
-      sequence such as "ABC" and the input sequence is "VWXYZ", then the combined sequence becomes "AVBWCXYZ".
+      sequence such as "ABC" and the input sequence is "VWXYZ", then the combined sequence becomes "AVBWCXYZ". 
+      This method does not return anything
     
 # TestExperiment Class
 

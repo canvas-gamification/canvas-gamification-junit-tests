@@ -6,6 +6,7 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -102,8 +103,12 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(constructorArguments);
         String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
-        assertTrue(classInstance.hasMethod(getStringAttribute1, null, String.class, new String[]{"public"}),
-                String.format("Your %s class is missing the %s method, or the %s method has the wrong return type.", objectClassName, getStringAttribute1, getStringAttribute1));
+        assertTrue(classInstance.hasMethod(getStringAttribute1, new Class[]{}),
+                "Your " + objectClassName + " class is missing the method " + getStringAttribute1 + ".");
+        assertTrue(classInstance.hasMethod(getStringAttribute1, new Class[]{}, String.class),
+                "Your " + objectClassName + " class " + getStringAttribute1 + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(getStringAttribute1, new Class[]{}, String.class, new String[]{"public"}),
+                "Your " + objectClassName + " class " + getStringAttribute1 + " method does not have the correct visibility modifier.");
 
         Object output = classInstance.callMethod(getStringAttribute1, new String[]{"public"}, instance);
         _assertEquals(dna, output, String.format(incorrectGetMethods, getStringAttribute1, stringAttribute1));
@@ -118,13 +123,18 @@ public class MainTest {
         };
         Object instance = classInstance.createInstance(constructorArguments);
         String incorrectGetMethods = "Your %s method does not return the value of the %s attribute.";
-        assertTrue(classInstance.hasMethod(getStringAttribute2, null, String.class, new String[]{"public"}),
-                String.format("Your %s class is missing the %s method, or the %s method has the wrong return type.", objectClassName, getStringAttribute2, getStringAttribute2));
+        assertTrue(classInstance.hasMethod(getStringAttribute2, new Class[]{}),
+                "Your " + objectClassName + " class is missing the method " + getStringAttribute2 + ".");
+        assertTrue(classInstance.hasMethod(getStringAttribute2, new Class[]{}, String.class),
+                "Your " + objectClassName + " class " + getStringAttribute2 + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(getStringAttribute2, new Class[]{}, String.class, new String[]{"public"}),
+                "Your " + objectClassName + " class " + getStringAttribute2 + " method does not have the correct visibility modifier.");
 
         Object output = classInstance.callMethod(getStringAttribute2, new String[]{"public"}, instance);
         _assertEquals(name, output, String.format(incorrectGetMethods, getStringAttribute2, stringAttribute2));
     }
 
+    @Tag("dependent1")
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
     public void correctToStringMethod(String name, String dna) throws Throwable {
@@ -133,6 +143,12 @@ public class MainTest {
                 {name, String.class}
         };
         Object instance = classInstance.createInstance(constructorArguments);
+        assertTrue(classInstance.hasMethod("toString", new Class[]{}),
+                "Your " + objectClassName + " class is missing the toString method.");
+        assertTrue(classInstance.hasMethod("toString", new Class[]{}, String.class),
+                "Your " + objectClassName + " class toString method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod("toString", new Class[]{}, String.class, new String[]{"public"}),
+                "Your " + objectClassName + " class toString method does not have the correct visibility modifier.");
         Object output = classInstance.callMethod("toString", instance);
         String expected = String.format("%s has DNA %s", name, dna);
         _assertEquals(expected, output,
@@ -149,6 +165,7 @@ public class MainTest {
         );
     }
 
+    @Tag("dependent1")
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     public void correctCloneMethod(String name1, String dna1, String name2, String dna2, String dna3) throws Throwable {
@@ -162,17 +179,19 @@ public class MainTest {
         };
         Object instance1 = classInstance.createInstance(donor1Arguments);
         Object instance2 = classInstance.createInstance(donor2Arguments);
+        assertTrue(classInstance.hasMethod(methodName1, new Class[]{classInstance.getObjectClass()}),
+                "Your " + objectClassName + " class is missing the method " + methodName1 + ".");
+        assertTrue(classInstance.hasMethod(methodName1, new Class[]{classInstance.getObjectClass()}, Void.TYPE),
+                "Your " + objectClassName + " class " + methodName1 + " method does not have the correct return type.");
         assertTrue(classInstance.hasMethod(methodName1, new Class[]{classInstance.getObjectClass()}, Void.TYPE, new String[]{"public"}),
-                String.format(
-                        "Your %s class is missing the %s method. Please check that the name is spelled correctly, the parameters and return type are correct, and it has the correct visibility modifier.",
-                        objectClassName, methodName1
-                ));
+                "Your " + objectClassName + " class " + methodName1 + " method does not have the correct visibility modifier.");
         Object[][] methodArguments = {{instance2, classInstance.getObjectClass()}};
         classInstance.callMethod(methodName1, methodArguments, instance1);
         _assertEquals(dna2, classInstance.getFieldValue(instance1, stringAttribute1), "Your " + methodName1 +
                 " method does not correctly change the DNA sequence to that of the given " + objectClassName);
     }
 
+    @Tag("dependent1")
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     public void correctMutateMethod(String name1, String dna1, String name2, String dna2, String dna3) throws Throwable {
@@ -186,11 +205,12 @@ public class MainTest {
         };
         Object instance1 = classInstance.createInstance(animal1Arguments);
         Object instance2 = classInstance.createInstance(animal2Arguments);
+        assertTrue(classInstance.hasMethod(methodName2, new Class[]{classInstance.getObjectClass()}),
+                "Your " + objectClassName + " class is missing the method " + methodName2 + ".");
+        assertTrue(classInstance.hasMethod(methodName2, new Class[]{classInstance.getObjectClass()}, Void.TYPE),
+                "Your " + objectClassName + " class " + methodName2 + " method does not have the correct return type.");
         assertTrue(classInstance.hasMethod(methodName2, new Class[]{classInstance.getObjectClass()}, Void.TYPE, new String[]{"public"}),
-                String.format(
-                        "Your %s class is missing the %s method. Please check that the name is spelled correctly, the parameters and return type are correct, and it has the correct visibility modifier.",
-                        objectClassName, methodName1
-                ));
+                "Your " + objectClassName + " class " + methodName2 + " method does not have the correct visibility modifier.");
         Object[][] methodArguments = {{instance2, classInstance.getObjectClass()}};
         classInstance.callMethod(methodName2, methodArguments, instance1);
         _assertEquals(dna3, classInstance.getFieldValue(instance1, stringAttribute1), "Your " + methodName2 +
@@ -249,6 +269,7 @@ public class MainTest {
         _assertEquals(String.format(expectedToStringOutput, "mixture", dna3), toStringOutput, format);
     }
 
+    @Tag("dependency1")
     @Test
     public void testExperimentMainMethodProducesCorrectOutput() throws Throwable {
         Object[][] arguments = {{new String[0], String[].class}};
