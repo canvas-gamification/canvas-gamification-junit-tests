@@ -23,9 +23,9 @@ Your `Horse` class must have the following items:
 - Methods:
     - All methods should be visible from another class 
     - A `lengthenSound` method which finds the first vowel in the sound and inserts it an extra four times into the 
-      noise.
+      noise. This method does not return anything
     - A `shortenSound` method which finds a vowel sound that has been extended to five of the same letter and shrinks
-      it back down to one vowel.
+      it back down to one vowel. This method does not return anything
     - A `toString` method which returns a `String` of the form `"x calls out y"` where x is the value of the **name** 
       attribute and y is the value of the **noise** attribute
 

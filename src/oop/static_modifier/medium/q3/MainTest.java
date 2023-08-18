@@ -5,6 +5,7 @@ import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -61,7 +62,7 @@ public class MainTest {
     }
 
     @Test
-    public void horseClassHasCorrectConstructor() throws Throwable {
+    public void horseClassHasCorrectConstructor() {
         Class<?>[] arguments = {String.class};
         assertTrue(classInstance.hasConstructor(arguments),
                 String.format("Your %s class is missing a required constructor.", objectName));
@@ -82,6 +83,7 @@ public class MainTest {
                 String.format(incorrectAttributeValue, objectName, stringAttribute2));
     }
 
+    @Tag("dependent1")
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
     public void horseClassHasCorrectToStringMethod(String name) throws Throwable {
@@ -90,6 +92,12 @@ public class MainTest {
                 {name, String.class},
         };
         Object instance = classInstance.createInstance(arguments);
+        assertTrue(classInstance.hasMethod("toString", new Class[]{}),
+                "Your " + objectName + " class is missing the toString method.");
+        assertTrue(classInstance.hasMethod("toString", new Class[]{}, String.class),
+                "Your " + objectName + " class toString method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod("toString", new Class[]{}, String.class, new String[]{"public"}),
+                "Your " + objectName + " class toString method does not have the correct visibility modifier.");
         String expectedOutput = name + " calls out " + startNoise;
         Object output = classInstance.callMethod("toString", new String[]{"public"}, instance);
         String incorrectToString = String.format("Your toString method for the %s class does return the correct String.", objectName);
@@ -108,11 +116,18 @@ public class MainTest {
         );
     }
 
+    @Tag("dependent1")
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     public void horseClassHasCorrectLengthenSoundMethod(int one, int two, String noise, String vowel) throws Throwable {
         classInstance.setFieldValue(null, noise, stringAttribute1);
         StringBuilder series = new StringBuilder();
+        assertTrue(classInstance.hasMethod(methodName1, new Class[]{}),
+                "Your " + objectName + " class is missing the method " + methodName1 + ".");
+        assertTrue(classInstance.hasMethod(methodName1, new Class[]{}, Void.TYPE),
+                "Your " + objectName + " class " + methodName1 + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(methodName1, new Class[]{}, Void.TYPE, new String[]{"public"}),
+                "Your " + objectName + " class " + methodName1 + " method does not have the correct visibility modifier.");
 
         for (int x = 0; x < one; x++) {
             series.append(vowel.repeat(repetitionAmount));
@@ -124,10 +139,17 @@ public class MainTest {
                 String.format("Your %s method does not properly alter the %s attribute.", methodName1, stringAttribute1));
     }
 
+    @Tag("dependent1")
     @ParameterizedTest
     @MethodSource("methodInputProvider")
     public void horseClassHasCorrectShortenSoundMethod(int one, int two, String noise, String vowel) throws Throwable {
         StringBuilder series = new StringBuilder();
+        assertTrue(classInstance.hasMethod(methodName2, new Class[]{}),
+                "Your " + objectName + " class is missing the method " + methodName2 + ".");
+        assertTrue(classInstance.hasMethod(methodName2, new Class[]{}, Void.TYPE),
+                "Your " + objectName + " class " + methodName2 + " method does not have the correct return type.");
+        assertTrue(classInstance.hasMethod(methodName2, new Class[]{}, Void.TYPE, new String[]{"public"}),
+                "Your " + objectName + " class " + methodName2 + " method does not have the correct visibility modifier.");
         for (int x = 0; x < Math.random() * 50 + repetitionAmount; x++) {
             series.append(vowel);
         }
@@ -189,6 +211,7 @@ public class MainTest {
                 String.format(incorrectToString, stringAttribute1, methodName1, methodName2));
     }
 
+    @Tag("dependency1")
     @Test
     public void testAnimalMainMethodProducesCorrectOutput() throws Throwable {
         classInstance.setFieldValue(null, startNoise, stringAttribute1);
