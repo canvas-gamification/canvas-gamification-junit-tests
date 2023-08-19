@@ -1,10 +1,5 @@
 # oop-special_class_method-hard-q2
 
-## Question Text
-
-You are writing a Java program about objects that can be different sizes and different types. Write a Java class
-called **Glasses** that has an attributes called **size** of type `double` and `String` variable called **type**. 
-
 ### Glasses Class:
 
 Your `Glasses` class must have the following items:
@@ -25,6 +20,7 @@ Your `Glasses` class must have the following items:
     - a `setType` method which accepts a `String` value, updates the **type** attribute with it, and is accessible
       from other classes
     - a `getType` method which is accessible from other classes and returns the value of the **type** attribute
+    - Note that the return type for the setter methods must be void
     - a `toString` method which returns a String of the information about the `Glasses` class of the form
       `"These glasses have a size of x, and are type y"` where x is the value of the size attribute, y is the value of the type attribute.
 
