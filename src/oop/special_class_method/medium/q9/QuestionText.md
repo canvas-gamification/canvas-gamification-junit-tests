@@ -1,12 +1,5 @@
 # oop-special_class_method-medium-q9
 
-## Question Text
-
-Suppose you are an employee of a vehicle manufacturing company, and you want to impress your boss with your Java skills. 
-Make a Java class called **Car** with two attributes called **maker** and **topSpeed** that are initialized by 
-the constructor. The necessary methods must be set up so that these attributes can be accessed from outside 
-of the class but they cannot be modified.
-
 ### Car Class:
 
 Your `Car` class already has the following items:
