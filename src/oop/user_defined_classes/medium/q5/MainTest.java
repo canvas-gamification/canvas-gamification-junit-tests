@@ -67,7 +67,7 @@ public class MainTest {
         Object output = classInstance.callMethod(methodName, arguments, (new String[]{"public"}), instance);
         Object fee = classInstance.getFieldValue(instance, var);
         assertTrue(classInstance.hasMethod(methodName, new Class<?>[]{int.class}, double.class, new String[]{"public"}));
-        _assertEquals((double) fee * (num + 0.95), output,
+        _assertEquals((double) fee * (num + 0.95), output, 0.0001,
                 "Your " + className + " " + methodName + " does not correctly calculate the future " + var);
 
     }
