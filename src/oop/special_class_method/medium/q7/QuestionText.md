@@ -1,12 +1,5 @@
 # oop-special_class_method-medium-q7
 
-## Question Text
-
-Financial literacy has been recognized as an important life skill for young people. Make a Java class called 
-**PiggyBank** that has several attributes called  **numPennies** and **numNickels**. This class has the basic 
-constructor that initializes the attributes, accessors and mutators for each attribute, and a **toString()** method that 
-returns the total amount of money available as a String.
-
 ### PiggyBank Class:
 
 Your `PiggyBank` class already has the following items:
