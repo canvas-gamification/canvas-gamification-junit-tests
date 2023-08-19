@@ -85,7 +85,7 @@ public class MainTest {
         assertTrue(testClass.hasConstructor(classArguments),
                 "Your " + className + " constructor does not have the correct parameters.");
         assertTrue(testClass.hasModifier(classArguments, "public"),
-                "Your " + className + " constructor does not have the correct modifier.");
+                "Your " + className + " constructor does not have the correct visibility modifier.");
     }
 
     @ParameterizedTest
