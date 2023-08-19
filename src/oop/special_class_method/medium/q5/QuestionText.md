@@ -22,9 +22,11 @@ Your `Calculator` class already has the following items:
 You need to add the following items:
 
 - Methods:
-    - a `setSum` method which accepts a `double` and uses it to set the value of the **sum** attribute
+    - a `setSum` method, with void return type, which accepts a `double` and uses it to set the value of the **sum**
+      attribute
     - a `getSum` method which returns the value stored in the **sum** attribute
-    - a `setIsCorrect` method which accepts a `boolean` and uses it to set the value of the **isCorrect** attribute
+    - a `setIsCorrect` method, with void return type, which accepts a `boolean` and uses it to set the value of the
+      **isCorrect** attribute
     - a `getIsCorrect` method which returns the value stored in the **isCorrect** attribute
     - a `toString` method which returns the string `"The sum is  x and it is y"` where x is the value
       of **sum** and y is the value of **isCorrect**.
