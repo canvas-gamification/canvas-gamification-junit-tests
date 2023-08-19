@@ -16,7 +16,7 @@ Your `Glasses` class must have the following items:
 - Constructors:
     - A constructor which is accessible from other classes and accepts a `double` and a `String` value to initialize the
       **size** and **type** attributes.
-    - You should initialize the **size** attribute as 10 times of the `double` input.
+    - You should initialize the **size** attribute as 10 times the `double` input.
 
 - Methods:
     - a `setSize` method which accepts a `double` value, updates the **size** attribute with it, and is accessible from
