@@ -1,11 +1,5 @@
 # oop-special_class_method-medium-q6
 
-## Question Text
-
-Teaching children to stay away from sharp objects is an important lesson. Make a Java class called `Scissors` that has
-two attributes called **isSharp** and **outOfReach**. This class has a constructor that initializes the two attributes,
-accessor and mutator methods for each attribute.
-
 ### Scissors:
 
 Your `Scissors` class already has the following items:
@@ -25,5 +19,6 @@ You need to add the following items to the class:
     - a `getIsSharp` method which returns the value stored in the **isSharp** attribute
     - a `setOutOfReach` method that accepts a `boolean` and uses it to set the value of the **outOfReach** attribute
     - a `getOutOfReach` method which returns the value stored in the **outOfReach** attribute
+    - Note that the setter methods should have a void return type.
     - a `toString` method which returns the string `"isSharp is x and outOfReach is y"` where x is the isSharp attribute and y is the outOfReach attribute.
     - All of these methods must be accessible from another class.
