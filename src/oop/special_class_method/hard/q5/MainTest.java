@@ -54,7 +54,8 @@ public class MainTest {
                 new StringLiteral("The " + className + " instance " + intFieldName + " is " + outputLanes + ", its " + stringFieldName + " is " + outputTypeOfRoad + ", and its " + int2FieldName + " is " + outputMaxCapacity),
                 new Optional(new StringLiteral(".")),
                 new Optional(new StringLiteral(" "))
-        });
+        },
+                "Your " + testClassName + " class does not print the correct output.");
     }
 
     @Test
@@ -135,6 +136,16 @@ public class MainTest {
         );
     }
 
+    @Test
+    public void setLanesIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(setIntMethodName, new Class<?>[]{int.class}), String.format(incorrectMethodDefinition, setIntMethodName, className));
+        assertTrue(testClass.hasModifier(setIntMethodName, new Class<?>[]{int.class}, "public"), String.format(incorrectModifierMessage, setIntMethodName, className));
+        assertTrue(testClass.hasReturnType(setIntMethodName, new Class<?>[]{int.class}, Void.TYPE), String.format(incorrectReturnType, setIntMethodName, className));
+    }
+
     @ParameterizedTest
     @MethodSource("twoIntInputProvider")
     public void roadClassHasCorrectSetLanesMethod(int initialValue, int setValue) throws Throwable {
@@ -150,9 +161,25 @@ public class MainTest {
         String[] setMethodModifiers = {"public"};
         String incorrectSetMethodMessage = String.join(" ",
                 "Your", setIntMethodName, "method does not correctly set the value of the", intFieldName, "attribute.");
-        Object setMethodOutput = testClass.callMethod(setIntMethodName, setSizeArguments, setMethodModifiers, classInstance);
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(setIntMethodName, new Class<?>[]{int.class}), String.format(incorrectMethodDefinition, setIntMethodName, className));
+        assertTrue(testClass.hasModifier(setIntMethodName, new Class<?>[]{int.class}, "public"), String.format(incorrectModifierMessage, setIntMethodName, className));
+        assertTrue(testClass.hasReturnType(setIntMethodName, new Class<?>[]{int.class}, Void.TYPE), String.format(incorrectReturnType, setIntMethodName, className));
+
+        testClass.callMethod(setIntMethodName, setSizeArguments, setMethodModifiers, classInstance);
         _assertEquals(setValue, testClass.getFieldValue(classInstance, intFieldName), incorrectSetMethodMessage);
-        assertNull(setMethodOutput, String.join(" ", "Your", setIntMethodName, "method should not return any output"));
+    }
+
+    @Test
+    public void getLanesIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(getIntMethodName, null), String.format(incorrectMethodDefinition, getIntMethodName, className));
+        assertTrue(testClass.hasModifier(getIntMethodName, null, "public"), String.format(incorrectModifierMessage, getIntMethodName, className));
+        assertTrue(testClass.hasReturnType(getIntMethodName, null, int.class), String.format(incorrectReturnType, getIntMethodName, className));
     }
 
     @ParameterizedTest
@@ -167,6 +194,13 @@ public class MainTest {
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
                 "Your", getIntMethodName, "method does not correctly get the value of the", intFieldName, "attribute.");
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(getIntMethodName, null), String.format(incorrectMethodDefinition, getIntMethodName, className));
+        assertTrue(testClass.hasModifier(getIntMethodName, null, "public"), String.format(incorrectModifierMessage, getIntMethodName, className));
+        assertTrue(testClass.hasReturnType(getIntMethodName, null, int.class), String.format(incorrectReturnType, getIntMethodName, className));
+
         Object getMethodOutput = testClass.callMethod(getIntMethodName, getMethodModifiers, classInstance);
         _assertEquals(value1, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -178,6 +212,16 @@ public class MainTest {
                 Arguments.of("Blue", "Red"),
                 Arguments.of("Horizontal", "Vertical")
         );
+    }
+
+    @Test
+    public void setTypeOfRoadIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(setStringMethodName, new Class<?>[]{String.class}), String.format(incorrectMethodDefinition, setStringMethodName, className));
+        assertTrue(testClass.hasModifier(setStringMethodName, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, setStringMethodName, className));
+        assertTrue(testClass.hasReturnType(setStringMethodName, new Class<?>[]{String.class}, Void.TYPE), String.format(incorrectReturnType, setStringMethodName, className));
     }
 
     @ParameterizedTest
@@ -195,9 +239,25 @@ public class MainTest {
         String[] setMethodModifiers = {"public"};
         String incorrectSetMethodMessage = String.join(" ",
                 "Your", setStringMethodName, "method does not correctly set the value of the", stringFieldName, "attribute.");
-        Object setMethodOutput = testClass.callMethod(setStringMethodName, setMethodArguments, setMethodModifiers, classInstance);
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(setStringMethodName, new Class<?>[]{String.class}), String.format(incorrectMethodDefinition, setStringMethodName, className));
+        assertTrue(testClass.hasModifier(setStringMethodName, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, setStringMethodName, className));
+        assertTrue(testClass.hasReturnType(setStringMethodName, new Class<?>[]{String.class}, Void.TYPE), String.format(incorrectReturnType, setStringMethodName, className));
+
+        testClass.callMethod(setStringMethodName, setMethodArguments, setMethodModifiers, classInstance);
         _assertEquals(updatedValue, testClass.getFieldValue(classInstance, stringFieldName), incorrectSetMethodMessage);
-        assertNull(setMethodOutput, String.join(" ", "Your", setStringMethodName, "method should not return any output"));
+    }
+
+    @Test
+    public void getTypeOfRoadIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(getStringMethodName, null), String.format(incorrectMethodDefinition, getStringMethodName, className));
+        assertTrue(testClass.hasModifier(getStringMethodName, null, "public"), String.format(incorrectModifierMessage, getStringMethodName, className));
+        assertTrue(testClass.hasReturnType(getStringMethodName, null, String.class), String.format(incorrectReturnType, getStringMethodName, className));
     }
 
     @ParameterizedTest
@@ -212,8 +272,24 @@ public class MainTest {
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
                 "Your", getStringMethodName, "method does not correctly get the value of the", stringFieldName, "attribute.");
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(getStringMethodName, null), String.format(incorrectMethodDefinition, getStringMethodName, className));
+        assertTrue(testClass.hasModifier(getStringMethodName, null, "public"), String.format(incorrectModifierMessage, getStringMethodName, className));
+        assertTrue(testClass.hasReturnType(getStringMethodName, null, String.class), String.format(incorrectReturnType, getStringMethodName, className));
         Object getMethodOutput = testClass.callMethod(getStringMethodName, getMethodModifiers, classInstance);
         _assertEquals(value2, getMethodOutput, incorrectGetMethodMessage);
+    }
+
+    @Test
+    public void setMaxCapacityIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(setInt2MethodName, new Class<?>[]{int.class}), String.format(incorrectMethodDefinition, setInt2MethodName, className));
+        assertTrue(testClass.hasModifier(setInt2MethodName, new Class<?>[]{int.class}, "public"), String.format(incorrectModifierMessage, setInt2MethodName, className));
+        assertTrue(testClass.hasReturnType(setInt2MethodName, new Class<?>[]{int.class}, Void.TYPE), String.format(incorrectReturnType, setInt2MethodName, className));
     }
 
     @ParameterizedTest
@@ -231,9 +307,25 @@ public class MainTest {
         String[] setMethodModifiers = {"public"};
         String incorrectSetMethodMessage = String.join(" ",
                 "Your", setInt2MethodName, "method does not correctly set the value of the", int2FieldName, "attribute.");
-        Object setMethodOutput = testClass.callMethod(setInt2MethodName, setSizeArguments, setMethodModifiers, classInstance);
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(setInt2MethodName, new Class<?>[]{int.class}), String.format(incorrectMethodDefinition, setInt2MethodName, className));
+        assertTrue(testClass.hasModifier(setInt2MethodName, new Class<?>[]{int.class}, "public"), String.format(incorrectModifierMessage, setInt2MethodName, className));
+        assertTrue(testClass.hasReturnType(setInt2MethodName, new Class<?>[]{int.class}, Void.TYPE), String.format(incorrectReturnType, setInt2MethodName, className));
+
+        testClass.callMethod(setInt2MethodName, setSizeArguments, setMethodModifiers, classInstance);
         _assertEquals(setValue, testClass.getFieldValue(classInstance, int2FieldName), incorrectSetMethodMessage);
-        assertNull(setMethodOutput, String.join(" ", "Your", setInt2MethodName, "method should not return any output"));
+    }
+
+    @Test
+    public void getMaxCapacityIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(getInt2MethodName, null), String.format(incorrectMethodDefinition, getInt2MethodName, className));
+        assertTrue(testClass.hasModifier(getInt2MethodName, null, "public"), String.format(incorrectModifierMessage, getInt2MethodName, className));
+        assertTrue(testClass.hasReturnType(getInt2MethodName, null, int.class), String.format(incorrectReturnType, getInt2MethodName, className));
     }
 
     @ParameterizedTest
@@ -248,6 +340,13 @@ public class MainTest {
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
                 "Your", getInt2MethodName, "method does not correctly get the value of the", int2FieldName, "attribute.");
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(getInt2MethodName, null), String.format(incorrectMethodDefinition, getInt2MethodName, className));
+        assertTrue(testClass.hasModifier(getInt2MethodName, null, "public"), String.format(incorrectModifierMessage, getInt2MethodName, className));
+        assertTrue(testClass.hasReturnType(getInt2MethodName, null, int.class), String.format(incorrectReturnType, getInt2MethodName, className));
+
         Object getMethodOutput = testClass.callMethod(getInt2MethodName, getMethodModifiers, classInstance);
         _assertEquals(value3, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -265,6 +364,12 @@ public class MainTest {
         String expected = "The " + className + " instance " + intFieldName + " is " + value1 + ", its " + stringFieldName + " is " + value2 + ", and its " + int2FieldName + " is " + value3 + ".";
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, " toString method does not return the correct String.");
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod("toString", null), String.format(incorrectMethodDefinition, "toString", className));
+        assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className));
+        assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className));
         Object output = testClass.callMethod("toString", methodModifiers, classInstance);
         _assertEquals(expected, output, incorrectToStringMessage);
     }

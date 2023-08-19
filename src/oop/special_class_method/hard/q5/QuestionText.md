@@ -1,11 +1,5 @@
 # oop-special_class_method-hard-q5
 
-## Question Text
-
-You are writing a Java program that describes different types of roads and their attributes. Write a Java class called
-**Road** that has an `int` variable called **lanes**, a `String` variable called **typeOfRoad**, and an
-`int` variable called **maxCapacity**.
-
 ### Road Class:
 
 Your `Road` class must have the following items:
@@ -31,6 +25,7 @@ Your `Road` class must have the following items:
       accessible from other classes
     - a `getMaxCapacity` method which is accessible from other classes and returns the value of the **maxCapacity**
       attribute
+    - Note that all setter methods return type must be void
     - a `toString` method which returns a String of the information about the `Road` class of the form
       `"The Road instance lanes is " + lanes + ", its typeOfRoad is " + typeOfRoad + ", and its maxCapacity is " + maxCapacity + "."`
       .
