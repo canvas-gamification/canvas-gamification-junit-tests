@@ -1,12 +1,5 @@
 # oop-special_class_method-medium-q5
 
-## Question Text
-
-It's April fool's day and you want to change how the calculator works, so you can trick your Math teacher. Make a Java
-class called `Calculator` that has two attributes called **sum** and **isCorrect** whose values are initialized in the
-constructor. In particular, **sum** is set to the input parameter times 7. The class also has an accessor and mutator
-method for each attribute.
-
 ### Calculator:
 
 Your `Calculator` class already has the following items:
