@@ -35,7 +35,7 @@ public class MainTest {
     @Test
     void hasCorrectConstructor() throws Throwable {
         String incorrectCons = "Your " + className + " class does not have the correct constructor.";
-        String incorrectModi = "Your " + className + " class does not have the correct modifiers for constructor.";
+        String incorrectModi = "Your " + className + " constructor does not have the correct visibility modifier.";
         Class<?>[] classArguments = {};
         assertTrue(classInstance.hasConstructor(classArguments), incorrectCons);
         assertTrue(classInstance.hasModifier(classArguments, "public"), incorrectModi);
