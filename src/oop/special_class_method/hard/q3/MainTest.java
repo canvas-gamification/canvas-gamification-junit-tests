@@ -5,6 +5,7 @@ import global.variables.Clause;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -41,6 +42,8 @@ public class MainTest {
     }
 
     @Test
+    @Tag("dependent1")
+    @Tag("dependent2")
     public void correctTestClass() throws Throwable {
         Object classInstance = outputClass.createInstance();
         String[] methodModifiers = {"public"};
@@ -91,6 +94,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
+    @Tag("dependent1")
     public void chairClassHasCorrectConstructor(double value1, String value2) throws Throwable {
         Object[][] arguments = {
                 {value1, double.class},
@@ -263,6 +267,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
+    @Tag("dependent2")
     public void chairClassHasCorrectToStringMethod(double value, String b) throws Throwable {
         Object[][] arguments = {
                 {value, double.class},
