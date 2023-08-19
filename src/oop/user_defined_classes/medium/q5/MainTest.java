@@ -33,14 +33,19 @@ public class MainTest {
     }
 
     @Test
-    void hasCorrectConstructor() throws Throwable {
-        String incorrectCons = "Your " + className + " class does not have the correct constructor.";
-        String incorrectModi = "Your " + className + " constructor does not have the correct visibility modifier.";
-        Class<?>[] classArguments = {};
-        assertTrue(classInstance.hasConstructor(classArguments), incorrectCons);
-        assertTrue(classInstance.hasModifier(classArguments, "public"), incorrectModi);
+    public void horseHasRequiredConstructor() {
+        String missingConstructorMessage = "The %s class is missing a required constructor. Make sure that it is named correctly and has the correct parameters.";
+        String wrongAccessModifier = "The %s class constructor has the wrong visibility modifier. Make sure that it is visible from all other classes.";
+        Class<?>[] constructorArgs = new Class[]{};
+        assertTrue(classInstance.hasConstructor(constructorArgs), String.format(missingConstructorMessage, className));
+        assertTrue(classInstance.hasModifier(constructorArgs, "public"), String.format(wrongAccessModifier, className));
+    }
+
+    @Test
+    public void bankConstructorInitializesObjectCorrectly() throws Throwable {
         Object instance = classInstance.createInstance();
-        _assertEquals(initialFee, classInstance.getFieldValue(instance, var), incorrectCons);
+        _assertEquals(initialFee, classInstance.getFieldValue(instance, var), 0.000001,
+                "Your " + className + " constructor does not correctly initialize the " + var + " attribute.");
     }
 
     private static Stream<Arguments> methodInputProvider() {
