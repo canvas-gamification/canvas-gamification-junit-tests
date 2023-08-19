@@ -2,6 +2,7 @@ package oop.user_defined_classes.medium.q7;
 
 import global.ObjectTest;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -57,8 +58,20 @@ public class MainTest {
                 Arguments.of(120, 40, 0),
                 Arguments.of(60, 70, initialFee),
                 Arguments.of(30, 40, initialFee),
-                Arguments.of(100, 100, 0)
+                Arguments.of(100, 100, 0),
+                Arguments.of(30, 31, initialFee),
+                Arguments.of(100, 99, 0)
         );
+    }
+
+    @Test
+    public void issueTicketIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(classInstance.hasMethod(methodName, new Class<?>[]{int.class}), String.format(incorrectMethodDefinition, methodName, className));
+        assertTrue(classInstance.hasModifier(methodName, new Class<?>[]{int.class}, "public"), String.format(incorrectModifierMessage, methodName, className));
+        assertTrue(classInstance.hasReturnType(methodName, new Class<?>[]{int.class}, int.class), String.format(incorrectReturnType, methodName, className));
     }
 
     @ParameterizedTest
