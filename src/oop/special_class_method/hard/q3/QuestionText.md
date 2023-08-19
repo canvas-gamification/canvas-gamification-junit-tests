@@ -1,10 +1,5 @@
 # oop-special_class_method-hard-q3
 
-## Question Text
-
-You are writing a Java program that models household furniture and objects. Write a Java class called **Chair** that has
-a `double` variable called **size** and a `String` variable called **softness**.
-
 ### Chair Class:
 
 Your `Chair` class must have the following items:
@@ -24,6 +19,7 @@ Your `Chair` class must have the following items:
     - a `setSoftness` method which accepts a `String` value, updates the **softness** attribute with it, and is
       accessible from other classes
     - a `getSoftness` method which is accessible from other classes and returns the value of the **softness** attribute
+    - Note that the setter methods return type must be void.
     - a `toString` method which returns a String of the information about the `Chair` class of the form
       `"This Chair's size is x, and it's softness is y"` where x is the value of the size attribute, y is the value of
       the softness attribute.
