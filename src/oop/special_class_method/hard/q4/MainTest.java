@@ -64,7 +64,7 @@ public class MainTest {
     }
 
     @Test
-    public void detergentClassHasCorrectFields() {
+    public void detergentClassHasCorrectAttributes() {
         assertTrue(testClass.hasField(string2FieldName),
                 "The attribute " +  string2FieldName + " could not be found in your class. Please make sure you have added it, it is spelled correctly.");
         assertTrue(testClass.hasField(string2FieldName, String.class),
