@@ -2,6 +2,7 @@ package oop.special_class_method.medium.q2;
 
 import global.ObjectTest;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -111,6 +112,15 @@ public class MainTest {
                 Arguments.of(5.67, true),
                 Arguments.of(Math.PI, false)
         );
+    }
+
+    @Test
+    public void lampHasRequiredConstructor() {
+        String missingConstructorMessage = "The %s class is missing a required constructor. Make sure that it is named correctly and has the correct parameters.";
+        String wrongAccessModifier = "The %s class constructor has the wrong visibility modifier. Make sure that it is visible from all other classes.";
+        Class<?>[] constructorArgs = new Class[]{double.class, boolean.class};
+        assertTrue(testClass.hasConstructor(constructorArgs), String.format(missingConstructorMessage, className));
+        assertTrue(testClass.hasModifier(constructorArgs, "public"), String.format(wrongAccessModifier, className));
     }
 
     @ParameterizedTest
