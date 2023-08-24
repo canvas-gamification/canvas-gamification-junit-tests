@@ -4,9 +4,8 @@
 
 ## Question Text
 
-Some data should be encrypted, however to do so you need a key to base the encryption off of. Design a `CryptBox` class
-using the provided class components, and create a `crossEncrypt` method that takes another `CryptBox` object and 
-uses that object's key to encrypt the other object's data.
+Some data should be encrypted, however, to do so you need a key to base the encryption off of. Design a `CryptBox` class to encrypt data
+using the requirements below.
 
 ### CryptBox Class:
 
