@@ -5,8 +5,7 @@
 ## Question Text
 
 People can save lives by donating blood regularly. You have volunteered to build an app that manages blood donors. Write
-a `BloodDonor` class using the requirements below, and create a `canReceiveBloodFrom` method that checks if the 
-`BloodDonor` can receive blood from another `BloodDonor`.
+a `BloodDonor` class using the requirements below.
 
 ### BloodDonor Class:
 
