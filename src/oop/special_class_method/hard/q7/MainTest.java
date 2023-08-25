@@ -250,7 +250,7 @@ public class MainTest {
         };
         testClass.callMethod(setIntMethodName, setBooleanArguments, classInstance);
         _assertEquals(b, testClass.callMethod(getIntMethodName, classInstance),
-                "Your " + getIntMethodName + " method does not return the correct value calling the " + setIntMethodName + " method.");
+                "Your " + getIntMethodName + " method does not return the correct value after calling the " + setIntMethodName + " method.");
         String expectedToString = "I have " + value + " dollars in me after " + b + " days.";
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, "toString method does not return the correct String after updating the values of its attributes using its setter methods.");
