@@ -36,6 +36,7 @@ public class MainTest {
         testInstance = new ObjectTest(testPath);
     }
 
+    @Order(2)
     @Test
     public void laptopClassHasRequiredAttributes() {
         assertTrue(classInstance.hasField(intAttribute1),
@@ -54,11 +55,9 @@ public class MainTest {
                 String.format("Your %s attribute is missing the static modifier.", intAttribute2));
     }
 
+    @Order(1)
     @RepeatedTest(3)
     public void laptopClassHasCorrectConstructor(RepetitionInfo repetitionInfo) throws Throwable {
-        if (repetitionInfo.getCurrentRepetition() == 1) {
-            classInstance.setFieldValue(null, initialStart, intAttribute2);
-        }
         Object instance = classInstance.createInstance();
         _assertEquals(initialStart + (incrementAmount * repetitionInfo.getCurrentRepetition()), classInstance.getFieldValue(instance, intAttribute1),
                 String.format("Your %s constructor does not initialize the %s attribute to the correct value.", objectName, intAttribute1));
@@ -70,6 +69,7 @@ public class MainTest {
         return Stream.of(0, 1, 3, 5, 10, 59, 61032);
     }
 
+    @Order(3)
     @Tag("dependent1")
     @ParameterizedTest
     @MethodSource("countInputProvider")
@@ -86,6 +86,7 @@ public class MainTest {
                 String.format("Your %s method does not return the correct value of the %s attribute.", getMethodName, intAttribute1));
     }
 
+    @Order(4)
     @ParameterizedTest
     @MethodSource("countInputProvider")
     public void laptopClassHasCorrectSetIdentificationMethod(int n) throws Throwable {
@@ -101,6 +102,7 @@ public class MainTest {
                 String.format("Your %s method does not return the correct value of the %s attribute.", setMethodName, intAttribute1));
     }
 
+    @Order(5)
     @ParameterizedTest
     @MethodSource("countInputProvider")
     public void laptopClassHasCorrectIncrementerMethod(int n) throws Throwable {
@@ -119,6 +121,7 @@ public class MainTest {
                 String.format("Your %s method does not return the correct value of the %s attribute.", methodName, intAttribute2));
     }
 
+    @Order(6)
     @Tag("dependency1")
     @Test
     public void testPlatformGameMainMethodProducesCorrectOutput() throws Throwable {
