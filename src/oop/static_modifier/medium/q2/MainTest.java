@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MainTest {
     private ObjectTest classInstance;
     private ObjectTest testInstance;
