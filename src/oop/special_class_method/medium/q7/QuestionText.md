@@ -23,3 +23,4 @@ You need to add the following items:
     - a `toString` method which returns the string `"The total amount is $x"` where x is the sum of
   money that we have in dollors.
     - All of these methods are visible from other classes.
+    - All of the `set` methods must not return anything.
