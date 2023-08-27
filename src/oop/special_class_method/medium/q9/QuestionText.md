@@ -2,14 +2,14 @@
 
 ### Car Class:
 
-Your `Car` class already has the following items:
+Suppose you are an employee of a vehicle manufacturing company, and you want to impress your boss with your Java skills. You have started making a `Car` class that has the following items:
 
 - Attributes:
     - An `String` called **maker**
     - An `double` called **topSpeed**
     - These are not visible from other classes
 
-You need to add the following items:
+You need to add the following items to finish the class:
 
 - Constructor:
     - a `Car` constructor that is visible to other classes and accepts a `String` and a `double` and uses it to initialize the
