@@ -64,7 +64,7 @@ public class MainTest {
     }
 
     @Test
-    public void discordHasRequiredAttributes() {
+    public void cupboardHasRequiredAttributes() {
         String missingAttributeMessage = "The %s class is missing the %s attribute. Make sure that the class contains the attribute and it is spelt correctly.";
         String wrongTypeMessage = "The %s attribute in the %s class has the wrong type.";
         String wrongModifierMessage = "The %s attribute in the %s class has the wrong visibility modifier.";
