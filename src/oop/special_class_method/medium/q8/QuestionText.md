@@ -2,7 +2,7 @@
 
 ### Luffy Class:
 
-Your `Luffy` class already has the following items
+You want to make a battle game with characters that are modelled after the characters from the well-known anime called One Piece who ate the devil fruit to gain a special ability. Your `Luffy` class, which is one of these characters, already has the following items:
 
 - Attributes:
     - An `String` called **skill**
