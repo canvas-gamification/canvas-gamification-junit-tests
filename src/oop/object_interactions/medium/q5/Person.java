@@ -16,6 +16,9 @@ public class Person {
             numEyes++;
             System.out.println("Transplant successful");
         }
+        else{
+            System.out.println("Transplant cannot be done");
+        }
     }
 
     public String getMyName() {

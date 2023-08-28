@@ -77,20 +77,20 @@ public class MainTest {
             int updateEyes = (int) test[num][3];
             Object output = testClass.callMethod(getMyNameMethodName, classInstance);
             _assertEquals(name, output,
-                    "You have modified the provided " + getMyNameMethodName + "method  on the " + className + " class. Please revert it to the original state.");
+                    "You have modified the provided " + getMyNameMethodName + " method on the " + className + " class. Please revert it to the original state.");
             output = testClass.callMethod(getNumEyesMethodName, classInstance);
             _assertEquals(eyes, output,
-                    "You have modified the provided " + getNumEyesMethodName + "method  on the " + className + " class. Please revert it to the original state.");
+                    "You have modified the provided " + getNumEyesMethodName + " method on the " + className + " class. Please revert it to the original state.");
             output = testClass.callMethod(setMyNameMethodName, new Object[][]{{updateName, String.class}}, classInstance);
             _assertEquals(updateName, testClass.getFieldValue(classInstance, myNameAttributeName),
-                    "You have modified the provided " + setMyNameMethodName + "method  on the " + className + " class. Please revert it to the original state.");
+                    "You have modified the provided " + setMyNameMethodName + " method on the " + className + " class. Please revert it to the original state.");
             assertNull(output,
-                    "You have modified the provided " + setMyNameMethodName + "method  on the " + className + " class. Please revert it to the original state.");
+                    "You have modified the provided " + setMyNameMethodName + " method on the " + className + " class. Please revert it to the original state.");
             output = testClass.callMethod(setNumEyesMethodName, new Object[][]{{updateEyes, int.class}}, classInstance);
             _assertEquals(updateEyes, testClass.getFieldValue(classInstance, numEyesAttributeName),
-                    "You have modified the provided " + setNumEyesMethodName + "method  on the " + className + " class. Please revert it to the original state.");
+                    "You have modified the provided " + setNumEyesMethodName + " method on the " + className + " class. Please revert it to the original state.");
             assertNull(output,
-                    "You have modified the provided " + setNumEyesMethodName + "method  on the " + className + " class. Please revert it to the original state.");
+                    "You have modified the provided " + setNumEyesMethodName + " method on the " + className + " class. Please revert it to the original state.");
         }
     }
 
@@ -100,6 +100,16 @@ public class MainTest {
                 Arguments.of("Amir", 1, "Sam", 2),
                 Arguments.of("John", 0, "Jack", 0)
         );
+    }
+
+    @Test
+    public void recieveDonationIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(receiveDonationMethodName, new Class<?>[]{Person.class}), String.format(incorrectMethodDefinition, receiveDonationMethodName, className));
+        assertTrue(testClass.hasModifier(receiveDonationMethodName, new Class<?>[]{Person.class}, "public"), String.format(incorrectModifierMessage, receiveDonationMethodName, className));
+        assertTrue(testClass.hasReturnType(receiveDonationMethodName, new Class<?>[]{Person.class}, Void.TYPE), String.format(incorrectReturnType, receiveDonationMethodName, className));
     }
 
     @ParameterizedTest
@@ -116,12 +126,17 @@ public class MainTest {
         };
         Object classInstance = testClass.createInstance(arguments);
         Object donorInstance = testClass.createInstance(donorArguments);
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(receiveDonationMethodName, new Class<?>[]{Person.class}), String.format(incorrectMethodDefinition, receiveDonationMethodName, className));
+        assertTrue(testClass.hasModifier(receiveDonationMethodName, new Class<?>[]{Person.class}, "public"), String.format(incorrectModifierMessage, receiveDonationMethodName, className));
+        assertTrue(testClass.hasReturnType(receiveDonationMethodName, new Class<?>[]{Person.class}, Void.TYPE), String.format(incorrectReturnType, receiveDonationMethodName, className));
         Object[][] methodArguments = {
                 {donorInstance, Person.class}
         };
-        Object output = null;
         if (donEyes > 0) {
-            output = testClass.callMethod(receiveDonationMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
+            testClass.callMethod(receiveDonationMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
                     new StringLiteral("Transplant successful"),
                     new Optional(new StringLiteral(" "))
             });
@@ -130,7 +145,16 @@ public class MainTest {
             _assertEquals(donEyes - 1, testClass.getFieldValue(donorInstance, numEyesAttributeName),
                     "Your " + receiveDonationMethodName + " method does not correctly decrease the " + numEyesAttributeName + " attribute of the donor.");
         }
-        assertNull(output, String.join(" ", "Your", receiveDonationMethodName, "should not return any output"));
+        else {
+            testClass.callMethod(receiveDonationMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
+                    new StringLiteral("Transplant cannot be done"),
+                    new Optional(new StringLiteral(" "))
+            });
+            _assertEquals(eyes, testClass.getFieldValue(classInstance, numEyesAttributeName),
+                    "Your " + receiveDonationMethodName + " method does not correctly add the " + numEyesAttributeName + " attribute of the recipient.");
+            _assertEquals(donEyes, testClass.getFieldValue(donorInstance, numEyesAttributeName),
+                    "Your " + receiveDonationMethodName + " method does not correctly decrease the " + numEyesAttributeName + " attribute of the donor.");
+        }
     }
 
     @ParameterizedTest
@@ -142,6 +166,12 @@ public class MainTest {
                 {eyes, int.class}
         };
         Object classInstance = testClass.createInstance(arguments);
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod("toString", null), String.format(incorrectMethodDefinition, "toString", className));
+        assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className));
+        assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className));
         String[] methodModifiers = {"public"};
         String expected = name + " has " + eyes + " eyes";
         String incorrectToStringMessage = String.join(" ",
@@ -151,8 +181,8 @@ public class MainTest {
     }
 
     @Test
-    @Tag("dependent1")
-    @Tag("dependent2")
+    @Tag("dependency1")
+    @Tag("dependency2")
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral("Tom has 2 eyes"),
