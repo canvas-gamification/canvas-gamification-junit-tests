@@ -1,10 +1,5 @@
 # oop-special_class_method-hard-q9
 
-## Question Text
-
-Many people are fascinated by our planet's solar system. Make a Java class called **Earth** with two attributes; a
-`double` **landMass** and an `int` named **population**.
-
 ### Earth Class:
 
 Your `Earth` class must have the following items:
