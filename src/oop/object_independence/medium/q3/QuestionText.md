@@ -4,12 +4,6 @@
 
 - Question type: Java
 
-## Question Text
-
-You want to become a master chef so you make a mobile app to keep track of all your secret recipes. Make a class
-called **Cocktail** with one attribute called **ingredients** which represents a list of ingredients and are initialized
-in the constructor. The method also has setter, getter, and a **toString()** method.
-
 ### Cocktail Class
 
 Your `Cocktail` class must have the following items:

@@ -5,6 +5,7 @@ import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -29,6 +30,8 @@ public class MainTest {
     private final String[] outputNum2 = new String[]{"Apple Juice", "Almond Milk"};
 
     @Test
+    @Tag("dependency1")
+    @Tag("dependency2")
     public void correctTestClass() throws Throwable {
         Clause[] c = new Clause[outputNum1.length + outputNum2.length + 3];
         int t = 0;
@@ -76,6 +79,7 @@ public class MainTest {
     }
 
     @Test
+    @Tag("dependency1")
     public void cocktailClassHasRequiredConstructor() {
         Class<?>[] classArguments = {String[].class};
         assertTrue(testClass.hasConstructor(classArguments),
@@ -95,6 +99,16 @@ public class MainTest {
                 "Your " + className + " constructor does not correctly initialize the " + firstFieldName + " attribute.");
     }
 
+    @Test
+    public void getIngredientsIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(getFirstField, null), String.format(incorrectMethodDefinition, getFirstField, className));
+        assertTrue(testClass.hasModifier(getFirstField, null, "public"), String.format(incorrectModifierMessage, getFirstField, className));
+        assertTrue(testClass.hasReturnType(getFirstField, null, String[].class), String.format(incorrectReturnType, getFirstField, className));
+    }
+
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void cocktailClassHasCorrectGetIngredientsMethod(String[] value) throws Throwable {
@@ -105,6 +119,13 @@ public class MainTest {
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
                 "Your", getFirstField, "method does not correctly get the value of the", firstFieldName, "attribute.");
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(getFirstField, null), String.format(incorrectMethodDefinition, getFirstField, className));
+        assertTrue(testClass.hasModifier(getFirstField, null, "public"), String.format(incorrectModifierMessage, getFirstField, className));
+        assertTrue(testClass.hasReturnType(getFirstField, null, String[].class), String.format(incorrectReturnType, getFirstField, className));
+
         Object getMethodOutput = testClass.callMethod(getFirstField, getMethodModifiers, classInstance);
         _assertArrayEquals(value, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -115,6 +136,16 @@ public class MainTest {
                 Arguments.of(new String[]{"Gin", "Tonic"}, new String[]{"Ginger Beer", "Lime", "Vodka"}),
                 Arguments.of(new String[]{"Rum", "StrawBerry", "Syrup"}, new String[]{"Rum", "Coke"})
         );
+    }
+
+    @Test
+    public void setIngredientsIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(setFirstField, new Class<?>[]{String[].class}), String.format(incorrectMethodDefinition, setFirstField, className));
+        assertTrue(testClass.hasModifier(setFirstField, new Class<?>[]{String[].class}, "public"), String.format(incorrectModifierMessage, setFirstField, className));
+        assertTrue(testClass.hasReturnType(setFirstField, new Class<?>[]{String[].class}, Void.TYPE), String.format(incorrectReturnType, setFirstField, className));
     }
 
 
@@ -131,6 +162,12 @@ public class MainTest {
         String[] setMethodModifiers = {"public"};
         String incorrectSetMethodMessage = String.join(" ",
                 "Your", setFirstField, "method does not correctly set the value of the", firstFieldName, "attribute.");
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(setFirstField, new Class<?>[]{String[].class}), String.format(incorrectMethodDefinition, setFirstField, className));
+        assertTrue(testClass.hasModifier(setFirstField, new Class<?>[]{String[].class}, "public"), String.format(incorrectModifierMessage, setFirstField, className));
+        assertTrue(testClass.hasReturnType(setFirstField, new Class<?>[]{String[].class}, Void.TYPE), String.format(incorrectReturnType, setFirstField, className));
         Object setMethodOutput = testClass.callMethod(setFirstField, setArguments, setMethodModifiers, classInstance);
         _assertArrayEquals(update, testClass.getFieldValue(classInstance, firstFieldName), incorrectSetMethodMessage);
         assertNull(setMethodOutput, String.join(" ", "Your", setFirstField, "method should not return any output"));
@@ -138,11 +175,18 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
+    @Tag("dependency2")
     public void cocktailClassHasCorrectToStringMethod(String[] value) throws Throwable {
         Object[][] arguments = {
                 {value, String[].class}
         };
         Object classInstance = testClass.createInstance(arguments);
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod("toString", null), String.format(incorrectMethodDefinition, "toString", className));
+        assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className));
+        assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className));
         String[] methodModifiers = {"public"};
         String expected = "My ingredients are: ";
         for (int i = 0; i < value.length; i++)
