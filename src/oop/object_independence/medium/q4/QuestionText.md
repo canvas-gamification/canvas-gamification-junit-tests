@@ -4,13 +4,6 @@
 
 - Question type: Java
 
-## Question Text
-
-You are about to take a long road trip. So, you want to build a simple portable player to keep yourself entertained on
-the trip. Make a class called **PortableMusicPlayer** with attributes called **playlist** and **current** that are
-initialized in the constructor. The class has a method to play the item at the **current** index in the **playlist**, or
-play the next item, or play the previous item.
-
 ### PortableMusicPlayer Class
 
 Your `PortableMusicPlayer` class must have the following items:

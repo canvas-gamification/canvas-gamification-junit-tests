@@ -80,6 +80,16 @@ public class MainTest {
                 "Your " + className + " constructor does not correctly initialize the " + secondFieldName + " attribute.");
     }
 
+    @Test
+    public void playIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(firstMethod, null), String.format(incorrectMethodDefinition, firstMethod, className));
+        assertTrue(testClass.hasModifier(firstMethod, null, "public"), String.format(incorrectModifierMessage, firstMethod, className));
+        assertTrue(testClass.hasReturnType(firstMethod, null, Void.TYPE), String.format(incorrectReturnType, firstMethod, className));
+    }
+
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void portableMusicPlayerClassHasCorrectPlayMethod(String[] value) throws Throwable {
@@ -89,13 +99,29 @@ public class MainTest {
         Object classInstance = testClass.createInstance(arguments);
         String[] methodModifiers = {"public"};
         int current = (int) testClass.getFieldValue(classInstance, secondFieldName);
-        Object output = testClass.callMethod(firstMethod, methodModifiers, classInstance, new Clause[]{
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(firstMethod, null), String.format(incorrectMethodDefinition, firstMethod, className));
+        assertTrue(testClass.hasModifier(firstMethod, null, "public"), String.format(incorrectModifierMessage, firstMethod, className));
+        assertTrue(testClass.hasReturnType(firstMethod, null, Void.TYPE), String.format(incorrectReturnType, firstMethod, className));
+
+        testClass.callMethod(firstMethod, methodModifiers, classInstance, new Clause[]{
                         new StringLiteral("Now Playing : " + value[current])
                 },
                 String.join(" ", "Your", firstMethod, "method does not print the correct output."));
-        assertNull(output, String.join(" ", "Your", firstMethod, "method should not return any output"));
         _assertEquals(current, testClass.getFieldValue(classInstance, secondFieldName),
                 String.join(" ", "Your", firstMethod, "method should not alter the", secondFieldName, "attribute"));
+    }
+
+    @Test
+    public void playNextIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(secondMethod, null), String.format(incorrectMethodDefinition, secondMethod, className));
+        assertTrue(testClass.hasModifier(secondMethod, null, "public"), String.format(incorrectModifierMessage, secondMethod, className));
+        assertTrue(testClass.hasReturnType(secondMethod, null, Void.TYPE), String.format(incorrectReturnType, secondMethod, className));
     }
 
     @ParameterizedTest
@@ -107,13 +133,29 @@ public class MainTest {
         Object classInstance = testClass.createInstance(arguments);
         String[] methodModifiers = {"public"};
         int current = (int) testClass.getFieldValue(classInstance, secondFieldName);
-        Object output = testClass.callMethod(secondMethod, methodModifiers, classInstance, new Clause[]{
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(secondMethod, null), String.format(incorrectMethodDefinition, secondMethod, className));
+        assertTrue(testClass.hasModifier(secondMethod, null, "public"), String.format(incorrectModifierMessage, secondMethod, className));
+        assertTrue(testClass.hasReturnType(secondMethod, null, Void.TYPE), String.format(incorrectReturnType, secondMethod, className));
+
+        testClass.callMethod(secondMethod, methodModifiers, classInstance, new Clause[]{
                         new StringLiteral("Now Playing : " + value[(current + 1) % value.length])
                 },
                 String.join(" ", "Your", firstMethod, "method does not print the correct output."));
-        assertNull(output, String.join(" ", "Your", firstMethod, "method should not return any output"));
         _assertEquals((current + 1) % value.length, testClass.getFieldValue(classInstance, secondFieldName),
                 String.join(" ", "Your", firstMethod, "method does not increase the", secondFieldName, "attribute"));
+    }
+
+    @Test
+    public void playPrevIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(thirdMethod, null), String.format(incorrectMethodDefinition, testClass, className));
+        assertTrue(testClass.hasModifier(thirdMethod, null, "public"), String.format(incorrectModifierMessage, testClass, className));
+        assertTrue(testClass.hasReturnType(thirdMethod, null, Void.TYPE), String.format(incorrectReturnType, testClass, className));
     }
 
     @ParameterizedTest
@@ -125,11 +167,16 @@ public class MainTest {
         Object classInstance = testClass.createInstance(arguments);
         String[] methodModifiers = {"public"};
         int current = (int) testClass.getFieldValue(classInstance, secondFieldName);
-        Object output = testClass.callMethod(thirdMethod, methodModifiers, classInstance, new Clause[]{
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(thirdMethod, null), String.format(incorrectMethodDefinition, testClass, className));
+        assertTrue(testClass.hasModifier(thirdMethod, null, "public"), String.format(incorrectModifierMessage, testClass, className));
+        assertTrue(testClass.hasReturnType(thirdMethod, null, Void.TYPE), String.format(incorrectReturnType, testClass, className));
+        testClass.callMethod(thirdMethod, methodModifiers, classInstance, new Clause[]{
                         new StringLiteral("Now Playing : " + value[(current - 1 + value.length) % value.length])
                 },
                 String.join(" ", "Your", firstMethod, "method does not print the correct output."));
-        assertNull(output, String.join(" ", "Your", firstMethod, "method should not return any output"));
         _assertEquals((current - 1 + value.length) % value.length, testClass.getFieldValue(classInstance, secondFieldName),
                 String.join(" ", "Your", firstMethod, "method does not decrease the", secondFieldName, "attribute"));
     }
