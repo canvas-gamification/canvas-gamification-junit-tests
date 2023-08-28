@@ -1,10 +1,5 @@
 # oop-special_class_method-hard-q8
 
-## Question Text
-
-You are writing a Java program that details various round objects. Write a Java class called **Circle** that has a
-`double` variable called **radius** and another `String` variable called **colour**. 
-
 ### Circle Class:
 
 Your `Circle` class must have the following items:
