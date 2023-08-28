@@ -74,28 +74,28 @@ public class MainTest {
             };
             Object testInstance = testClass.createInstance(arguments);
             assertTrue(testClass.hasMethod(getMyYearMethodName, null, int.class, new String[]{"public"}),
-                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyYearMethodName));
+                    String.format("You have modified the provided %s method. Please revert it to the original state.", getMyYearMethodName));
             Object getMethodOutput = testClass.callMethod(getMyYearMethodName, testInstance);
             _assertEquals(tests[i][0], getMethodOutput,
-                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyYearMethodName));
+                    String.format("You have modified the provided %s method. Please revert it to the original state.", getMyYearMethodName));
 
             assertTrue(testClass.hasMethod(getMyMonthMethodName, null, int.class, new String[]{"public"}),
-                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyMonthMethodName));
+                    String.format("You have modified the provided %s method. Please revert it to the original state.", getMyMonthMethodName));
             getMethodOutput = testClass.callMethod(getMyMonthMethodName, testInstance);
             _assertEquals(tests[i][1], getMethodOutput,
-                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyMonthMethodName));
+                    String.format("You have modified the provided %s method. Please revert it to the original state.", getMyMonthMethodName));
 
             assertTrue(testClass.hasMethod(getMyDayMethodName, null, int.class, new String[]{"public"}),
-                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyDayMethodName));
+                    String.format("You have modified the provided %s method. Please revert it to the original state.", getMyDayMethodName));
             getMethodOutput = testClass.callMethod(getMyDayMethodName, testInstance);
             _assertEquals(tests[i][2], getMethodOutput,
-                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyDayMethodName));
+                    String.format("You have modified the provided %s method. Please revert it to the original state.", getMyDayMethodName));
 
             assertTrue(testClass.hasMethod(getMyStoryMethodName, null, String.class, new String[]{"public"}),
-                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyStoryMethodName));
+                    String.format("You have modified the provided %s method. Please revert it to the original state.", getMyStoryMethodName));
             getMethodOutput = testClass.callMethod(getMyStoryMethodName, testInstance);
             _assertEquals(tests[i][3], getMethodOutput,
-                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getMyStoryMethodName));
+                    String.format("You have modified the provided %s method. Please revert it to the original state.", getMyStoryMethodName));
         }
 
     }
@@ -137,9 +137,19 @@ public class MainTest {
                 "Your " + className + " constructor does not correctly initialize the " + myStoryAttributeName + " attribute.");
     }
 
+    @Test
+    public void setColourIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(makeCopyMethodName, new Class<?>[]{Newspaper.class}), String.format(incorrectMethodDefinition, makeCopyMethodName, className));
+        assertTrue(testClass.hasModifier(makeCopyMethodName, new Class<?>[]{Newspaper.class}, "public"), String.format(incorrectModifierMessage, makeCopyMethodName, className));
+        assertTrue(testClass.hasReturnType(makeCopyMethodName, new Class<?>[]{Newspaper.class}, Void.TYPE), String.format(incorrectReturnType, makeCopyMethodName, className));
+    }
+
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependent2")
+    @Tag("dependency2")
     public void correctMakeCopyMethod(int year, int month, int day, String story) throws Throwable {
         Object classInstance = testClass.createInstance();
         Object[][] methodArguments = {
@@ -164,7 +174,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependent1")
+    @Tag("dependency1")
     public void newspaperClassHasCorrectToStringMethod(int year, int month, int day, String story) throws Throwable {
         Object[][] arguments = {
                 {year, int.class},
@@ -173,6 +183,12 @@ public class MainTest {
                 {story, String.class}
         };
         Object classInstance = testClass.createInstance(arguments);
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod("toString", null), String.format(incorrectMethodDefinition, "toString", className));
+        assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className));
+        assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className));
         String[] methodModifiers = {"public"};
         String expected = year + "/" + month + "/" + day + ":The story is: " + story;
         String incorrectToStringMessage = String.join(" ",
@@ -182,8 +198,8 @@ public class MainTest {
     }
 
     @Test
-    @Tag("dependent1")
-    @Tag("dependent2")
+    @Tag("dependency1")
+    @Tag("dependency2")
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral("2021/12/5:The story is: The votes are in!"),

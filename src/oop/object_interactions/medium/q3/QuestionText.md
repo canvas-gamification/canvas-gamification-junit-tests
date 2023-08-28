@@ -2,11 +2,6 @@
 
 - Java question
 
-## Question Text
-
-You work at a printing company and your summer job is to make copies of original works. Make a **Newspaper** class that
-has attributes to store the year, month, and day of the print as well as the story.
-
 ## Newspaper Class
 
 The `Newspaper` class currently has the following items:
@@ -35,7 +30,7 @@ You must add the following items to the class:
     - It should be accessible from other classes.
 
 - Methods:
-    - A `makeCopy` method that take another **Newspaper** object and change the attribute of the class to the attributes
+    - A `makeCopy` method that take another **Newspaper** object and change the attribute of the object to the attributes
       of the input parameter **Newspaper** object.
     - A `toString` method which returns the information about the class in the following `String` structure:
       if the **myYear**, **myMonth**, **myDay**, and **myStory** attributes are in order 2023, 6,
