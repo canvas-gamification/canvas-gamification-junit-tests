@@ -16,7 +16,7 @@ Your `Award` class must have the following items:
     - A `String` attribute named **awardCategory** which is not accessible from other classes
 
 - Constructors:
-    - A constructor which is accessible from other classes and accepts two `String` parameter to initialize the
+    - A constructor which is accessible from other classes and accepts two `String` parameters to initialize the
       **awardRecipient** and **awardCategory** attributes in that order.
 
 - Methods:
