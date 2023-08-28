@@ -4,12 +4,6 @@
 
 - Question type: Java
 
-## Question Text
-
-Your friends are interested in betting on which team wins the Stanley Cup this year. Make a program called **Team**
-where you keep track of the teams in the league and the games they have won as attributes whose values are initialized
-in the constructor.
-
 ### Team Class
 
 Your `Team` class must have the following items:
