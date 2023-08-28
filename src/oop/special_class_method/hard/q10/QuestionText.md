@@ -1,12 +1,5 @@
 # oop-special_class_method-hard-q10
 
-## Question Text
-
-You've been chosen to make plans for an award show! Your first task is to model the awards being received, so create a
-java class called **Award** that has two `String` attributes **awardRecipient** and **awardCategory** that are
-initialized by the constructor. You will need to compose the necessary methods so that these attributes can be accessed
-and modified from outside the class.
-
 ### Award Class:
 
 Your `Award` class must have the following items:
