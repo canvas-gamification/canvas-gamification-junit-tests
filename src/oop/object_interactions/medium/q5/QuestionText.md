@@ -32,7 +32,7 @@ You must add the following items to the class:
     - A `receiveDonation` method that takes another **Person** object called donor to do a transplant. It should check
       if the **numEyes** in donor is non-zero. If donor has enough take 1 unit of **numEyes** from donor
       and give it to the **Person**, and then print `Transplant successful`.
-    - A `toString` method that return the `String` of information in the format
+    - A `toString` method that returns the `String` of information in the format
       of `x has y eyes"` where x is the value of **myName** and y is the value of **numEyes**.
 
 ## TestTransplant Class
