@@ -7,6 +7,7 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -77,12 +78,17 @@ public class MainTest {
                     "You have modified the provided constructor on the " + className + " class. Please revert it to the original state.");
             _assertArrayEquals(new String[friends.length], testClass.getFieldValue(classInstance, friendSecretsAttributeName),
                     "You have modified the provided constructor on the " + className + " class. Please revert it to the original state.");
+            assertTrue(testClass.hasMethod(getNameMethodName, null, String.class, new String[]{"public"}),
+                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getNameMethodName));
+            Object getMethodOutput = testClass.callMethod(getNameMethodName, new String[]{"public"}, classInstance);
+            _assertEquals(name, getMethodOutput,
+                    "You have modified the provided " + getNameMethodName + " method on the " + className + " class. Please revert it to the original state.");
+            assertTrue(testClass.hasMethod(getSecretMethodName, null, String.class, new String[]{"public"}),
+                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getSecretMethodName));
+            getMethodOutput = testClass.callMethod(getSecretMethodName, new String[]{"public"}, classInstance);
+            _assertEquals(secret, getMethodOutput,
+                    "You have modified the provided " + getSecretMethodName + " method on the " + className + " class. Please revert it to the original state.");
         }
-
-        assertTrue(testClass.hasMethod(getNameMethodName, null, String.class, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", getNameMethodName));
-        assertTrue(testClass.hasMethod(getSecretMethodName, null, String.class, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", getSecretMethodName));
 
     }
 
@@ -94,8 +100,19 @@ public class MainTest {
         );
     }
 
+    @Test
+    public void hearSecretIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(hearSecretMethodName, new Class<?>[]{String.class, String.class}), String.format(incorrectMethodDefinition, hearSecretMethodName, className));
+        assertTrue(testClass.hasModifier(hearSecretMethodName, new Class<?>[]{String.class, String.class}, "public"), String.format(incorrectModifierMessage, hearSecretMethodName, className));
+        assertTrue(testClass.hasReturnType(hearSecretMethodName, new Class<?>[]{String.class, String.class}, Void.TYPE), String.format(incorrectReturnType, hearSecretMethodName, className));
+    }
+
     @ParameterizedTest
     @MethodSource("hearSecretInputProvider")
+    @Tag("dependency2")
     public void correctHearSecretMethod(String name, String secret, String[] allFriends, String friend, String friendSecret) throws Throwable {
         Object[][] arguments = {
                 {name, String.class},
@@ -124,8 +141,19 @@ public class MainTest {
         assertNull(output, String.join(" ", "Your", hearSecretMethodName, "should not return any output"));
     }
 
+    @Test
+    public void writeInDiaryIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(writeInDiaryMethodName, null), String.format(incorrectMethodDefinition, writeInDiaryMethodName, className));
+        assertTrue(testClass.hasModifier(writeInDiaryMethodName, null, "public"), String.format(incorrectModifierMessage, writeInDiaryMethodName, className));
+        assertTrue(testClass.hasReturnType(writeInDiaryMethodName, null, Void.TYPE), String.format(incorrectReturnType, writeInDiaryMethodName, className));
+    }
+
     @ParameterizedTest
     @MethodSource("hearSecretInputProvider")
+    @Tag("dependency1")
     public void correctWriteInDiaryMethod(String name, String secret, String[] allFriends, String friend, String friendSecret) throws Throwable {
         Object[][] arguments = {
                 {name, String.class},
@@ -161,6 +189,8 @@ public class MainTest {
     }
 
     @Test
+    @Tag("dependency1")
+    @Tag("dependency2")
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral("I have the following secrets:"),
