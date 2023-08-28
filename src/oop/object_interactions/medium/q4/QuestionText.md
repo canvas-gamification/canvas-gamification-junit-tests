@@ -2,15 +2,6 @@
 
 - Java question
 
-## Question Text
-
-You are working as a vet assistant in an animal hospital, and sometimes you encounter an animal that requires a blood
-transfusion in order to save its life. Make a class called **Snail**
-with attributes **bloodType** and **volume** that are initialized by the constructor. This class has a method called
-**transfusionFrom()** that checks if the two animals have the same blood type and whether the donor has enough blood
-before starting the transfusion. If both conditions pass, then 1L of blood is transferred from the donor to the
-recipient.
-
 ## Snail Class
 
 The `Snail` class currently has the following items:
@@ -36,7 +27,7 @@ You must add the following items to the class:
     - A `transfusionFrom` method that take another **Snail** object to do a blood tansfer.
     - It should check if the blood types are a match and if not print `Blood type incompatible`. Note that in this scenario
   **Snail** blood types are not like humans, so you should check that the type match exactly.
-    - If the types are compatible it should say `Blood transfusion starting...`
+    - If the types are compatible it should say `Checking if donor has enough blood for a transfusion...`
     - Then it should make sure that the donor has more than 5 unit of blood if not
       it should print `Donor does not have enough blood for a transfusion`.
     - If donor has enough take 1 unit of blood from donor

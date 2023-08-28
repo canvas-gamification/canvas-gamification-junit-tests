@@ -50,13 +50,13 @@ public class MainTest {
         assertTrue(testClass.hasModifier(classArguments, "public"),
                 "You have modified the provided constructor on the " + className + " class. Please revert it to the original state.");
         assertTrue(testClass.hasMethod(getBloodTypeMethodName, null, char.class, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", getBloodTypeMethodName));
+                String.format("You have modified the provided %s method. Please revert it to the original state.", getBloodTypeMethodName));
         assertTrue(testClass.hasMethod(setBloodTypeMethodName, new Class<?>[]{char.class}, Void.TYPE, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", setBloodTypeMethodName));
+                String.format("You have modified the provided %s method. Please revert it to the original state.", setBloodTypeMethodName));
         assertTrue(testClass.hasMethod(getVolumeMethodName, null, double.class, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", getVolumeMethodName));
+                String.format("You have modified the provided %s method. Please revert it to the original state.", getVolumeMethodName));
         assertTrue(testClass.hasMethod(setVolumeMethodName, new Class<?>[]{double.class}, Void.TYPE, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", setVolumeMethodName));
+                String.format("You have modified the provided %s method. Please revert it to the original state.", setVolumeMethodName));
         Object[][] test = new Object[][]{
                 {'A', 10.3, 'B', 4.1},
                 {'B', 4.2, 'A', 2.3},
@@ -78,17 +78,17 @@ public class MainTest {
             double updateVolume = (double) test[num][3];
             Object output = testClass.callMethod(getBloodTypeMethodName, classInstance);
             _assertEquals(type, output,
-                    "You have modified the provided " + getBloodTypeMethodName + "method  on the " + className + " class. Please revert it to the original state.");
+                    "You have modified the provided " + getBloodTypeMethodName + " method on the " + className + " class. Please revert it to the original state.");
             output = testClass.callMethod(getVolumeMethodName, classInstance);
             _assertEquals(volume, output,
-                    "You have modified the provided " + getVolumeMethodName + "method  on the " + className + " class. Please revert it to the original state.");
+                    "You have modified the provided " + getVolumeMethodName + " method on the " + className + " class. Please revert it to the original state.");
             output = testClass.callMethod(setBloodTypeMethodName, new Object[][]{{updateType, char.class}}, classInstance);
             _assertEquals(updateType, testClass.getFieldValue(classInstance, bloodTypeAttributeName),
-                    "You have modified the provided " + setBloodTypeMethodName + "method  on the " + className + " class. Please revert it to the original state.");
+                    "You have modified the provided " + setBloodTypeMethodName + " method on the " + className + " class. Please revert it to the original state.");
             assertNull(output, String.join(" ", "Your", setBloodTypeMethodName, "should not return any output"));
             output = testClass.callMethod(setVolumeMethodName, new Object[][]{{updateVolume, double.class}}, classInstance);
             _assertEquals(updateVolume, testClass.getFieldValue(classInstance, volumeAttributeName),
-                    "You have modified the provided " + setVolumeMethodName + "method  on the " + className + " class. Please revert it to the original state.");
+                    "You have modified the provided " + setVolumeMethodName + " method on the " + className + " class. Please revert it to the original state.");
             assertNull(output, String.join(" ", "Your", setVolumeMethodName, "should not return any output"));
         }
     }
@@ -105,9 +105,19 @@ public class MainTest {
         );
     }
 
+    @Test
+    public void transfusionFromIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(transfusionFromMethodName, new Class<?>[]{Snail.class}), String.format(incorrectMethodDefinition, transfusionFromMethodName, className));
+        assertTrue(testClass.hasModifier(transfusionFromMethodName, new Class<?>[]{Snail.class}, "public"), String.format(incorrectModifierMessage, transfusionFromMethodName, className));
+        assertTrue(testClass.hasReturnType(transfusionFromMethodName, new Class<?>[]{Snail.class}, Void.TYPE), String.format(incorrectReturnType, transfusionFromMethodName, className));
+    }
+
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependent2")
+    @Tag("dependent1")
     public void correctTransfusionFromMethod(char type, double volume, char donType, double donVolume) throws Throwable {
         Object[][] arguments = {
                 {type, char.class},
@@ -115,6 +125,13 @@ public class MainTest {
         };
         Snail donor = new Snail(donType, donVolume);
         Object classInstance = testClass.createInstance(arguments);
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(transfusionFromMethodName, new Class<?>[]{Snail.class}), String.format(incorrectMethodDefinition, transfusionFromMethodName, className));
+        assertTrue(testClass.hasModifier(transfusionFromMethodName, new Class<?>[]{Snail.class}, "public"), String.format(incorrectModifierMessage, transfusionFromMethodName, className));
+        assertTrue(testClass.hasReturnType(transfusionFromMethodName, new Class<?>[]{Snail.class}, Void.TYPE), String.format(incorrectReturnType, transfusionFromMethodName, className));
+
         Object[][] methodArguments = {
                 {donor, Snail.class}
         };
@@ -126,7 +143,7 @@ public class MainTest {
             });
         } else if (donVolume <= minBlood) {
             output = testClass.callMethod(transfusionFromMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
-                    new StringLiteral("Blood transfusion starting..."),
+                    new StringLiteral("Checking if donor has enough blood for a transfusion..."),
                     new Optional(new StringLiteral(" ")),
                     new NewLine(),
                     new StringLiteral("Donor does not have enough blood for a transfusion"),
@@ -134,7 +151,7 @@ public class MainTest {
             });
         } else {
             output = testClass.callMethod(transfusionFromMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
-                    new StringLiteral("Blood transfusion starting..."),
+                    new StringLiteral("Checking if donor has enough blood for a transfusion..."),
                     new Optional(new StringLiteral(" ")),
                     new NewLine(),
                     new StringLiteral("Blood transfusion completed"),
@@ -151,13 +168,19 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependent1")
+    @Tag("dependent2")
     public void newspaperClassHasCorrectToStringMethod(char type, double volume) throws Throwable {
         Object[][] arguments = {
                 {type, char.class},
                 {volume, double.class}
         };
         Object classInstance = testClass.createInstance(arguments);
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod("toString", null), String.format(incorrectMethodDefinition, "toString", className));
+        assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className));
+        assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className));
         String[] methodModifiers = {"public"};
         String expected = "My blood type is " + type + " and I have " + volume + "L of blood left";
         String incorrectToStringMessage = String.join(" ",
@@ -167,14 +190,14 @@ public class MainTest {
     }
 
     @Test
-    @Tag("dependent1")
-    @Tag("dependent2")
+    @Tag("dependency1")
+    @Tag("dependency2")
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral("Blood type incompatible"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("Blood transfusion starting..."),
+                new StringLiteral("Checking if donor has enough blood for a transfusion..."),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("Blood transfusion completed"),

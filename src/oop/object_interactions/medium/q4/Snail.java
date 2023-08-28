@@ -11,7 +11,7 @@ public class Snail {
 
     public void transfusionFrom(Snail donor) {
         if (bloodType == donor.getBloodType()) {
-            System.out.println("Blood transfusion starting...");
+            System.out.println("Checking if donor has enough blood for a transfusion...");
             if (donor.getVolume() > 5) {
                 donor.setVolume(donor.getVolume() - 1);
                 volume += 1;
