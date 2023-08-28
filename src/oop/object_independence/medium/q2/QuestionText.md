@@ -19,7 +19,7 @@ Your `PhoneWaitList` class must have the following items:
     - This attribute should not be visible from another class
 
 - Constructors:
-    - A single constructor with a parameter `int` that initalzies the **numAhead** attribute
+    - A single constructor with a parameter `int` that initializes the **numAhead** attribute
     - This constructor should be visible from another class
 
 - Methods:
