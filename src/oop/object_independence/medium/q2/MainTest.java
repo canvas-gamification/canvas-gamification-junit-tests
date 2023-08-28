@@ -206,7 +206,7 @@ public class MainTest {
         };
         testClass.callMethod(setFirstField, setArguments, classInstance);
         _assertEquals(value, testClass.callMethod(getFirstField, classInstance),
-                "Your " + getFirstField + " method does not return the correct value calling the " + setFirstField + " method.");
+                "Your " + getFirstField + " method does not return the correct value after calling the " + setFirstField + " method.");
         String expectedToString = "There are " + value + " people ahead of you";
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, "toString method does not return the correct String after updating the value of its attribute using its setter method.");
