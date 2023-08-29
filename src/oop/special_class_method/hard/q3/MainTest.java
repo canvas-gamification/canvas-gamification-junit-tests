@@ -195,7 +195,7 @@ public class MainTest {
     }
 
     @Test
-    public void setSogtnessIsDefinedCorrectly() {
+    public void setSoftnessIsDefinedCorrectly() {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
