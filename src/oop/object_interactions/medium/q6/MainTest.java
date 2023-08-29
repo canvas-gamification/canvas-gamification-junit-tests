@@ -6,6 +6,7 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -53,13 +54,13 @@ public class MainTest {
         assertTrue(testClass.hasConstructor(classArguments, new String[]{"public"}),
                 "You have modified the provided constructor on the " + className + " class. Please revert it to the original state.");
         assertTrue(testClass.hasMethod(getMaxSeatsMethodName, null, int.class, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", getMaxSeatsMethodName));
+                String.format("You have modified the provided %s method. Please revert it to the original state.", getMaxSeatsMethodName));
         assertTrue(testClass.hasMethod(setMaxSeatsMethodName, new Class<?>[]{int.class}, Void.TYPE, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", setMaxSeatsMethodName));
+                String.format("You have modified the provided %s method. Please revert it to the original state.", setMaxSeatsMethodName));
         assertTrue(testClass.hasMethod(getNumPassengersMethodName, null, int.class, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", getNumPassengersMethodName));
+                String.format("You have modified the provided %s method. Please revert it to the original state.", getNumPassengersMethodName));
         assertTrue(testClass.hasMethod(setNumPassengersMethodName, new Class<?>[]{int.class}, Void.TYPE, new String[]{"public"}),
-                String.format("You have modified the provided %s method method. Please revert it to the original state.", setNumPassengersMethodName));
+                String.format("You have modified the provided %s method. Please revert it to the original state.", setNumPassengersMethodName));
         Object[][] test = new Object[][]{
                 {20, 10, 40, 35},
                 {10, 20, 15, 30},
@@ -87,16 +88,16 @@ public class MainTest {
             int updatePass = (int) test[num][3];
             Object output = testClass.callMethod(getMaxSeatsMethodName, classInstance);
             _assertEquals(seat, output,
-                    "You have modified the provided " + getMaxSeatsMethodName + "method  on the " + className + " class. Please revert it to the original state.");
+                    "You have modified the provided " + getMaxSeatsMethodName + " method on the " + className + " class. Please revert it to the original state.");
             output = testClass.callMethod(getNumPassengersMethodName, classInstance);
             _assertEquals(pass, output,
-                    "You have modified the provided " + getNumPassengersMethodName + "method  on the " + className + " class. Please revert it to the original state.");
+                    "You have modified the provided " + getNumPassengersMethodName + " method on the " + className + " class. Please revert it to the original state.");
             testClass.callMethod(setMaxSeatsMethodName, new Object[][]{{updateSeat, int.class}}, classInstance);
             _assertEquals(updateSeat, testClass.getFieldValue(classInstance, maxSeatsAttributeName),
-                    "You have modified the provided " + setMaxSeatsMethodName + "method  on the " + className + " class. Please revert it to the original state.");
+                    "You have modified the provided " + setMaxSeatsMethodName + " method on the " + className + " class. Please revert it to the original state.");
             testClass.callMethod(setNumPassengersMethodName, new Object[][]{{updatePass, int.class}}, classInstance);
             _assertEquals(updatePass, testClass.getFieldValue(classInstance, numPassengersAttributeName),
-                    "You have modified the provided " + setNumPassengersMethodName + "method  on the " + className + " class. Please revert it to the original state.");
+                    "You have modified the provided " + setNumPassengersMethodName + " method on the " + className + " class. Please revert it to the original state.");
         }
     }
 
@@ -109,8 +110,19 @@ public class MainTest {
         );
     }
 
+    @Test
+    public void transferPassengerIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(transferPassengersMethodName, new Class<?>[]{Airplane.class}), String.format(incorrectMethodDefinition, transferPassengersMethodName, className));
+        assertTrue(testClass.hasModifier(transferPassengersMethodName, new Class<?>[]{Airplane.class}, "public"), String.format(incorrectModifierMessage, transferPassengersMethodName, className));
+        assertTrue(testClass.hasReturnType(transferPassengersMethodName, new Class<?>[]{Airplane.class}, Void.TYPE), String.format(incorrectReturnType, transferPassengersMethodName, className));
+    }
+
     @ParameterizedTest
     @MethodSource("inputProvider")
+    @Tag("dependent1")
     public void correctTransferPassengersMethod(int seat, int pass, int busySeat, int busyPass) throws Throwable {
         Object[][] arguments = {
                 {seat, int.class},
@@ -122,35 +134,41 @@ public class MainTest {
         };
         Object classInstance = testClass.createInstance(arguments);
         Object busyInstance = testClass.createInstance(busyArguments);
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(transferPassengersMethodName, new Class<?>[]{Airplane.class}), String.format(incorrectMethodDefinition, transferPassengersMethodName, className));
+        assertTrue(testClass.hasModifier(transferPassengersMethodName, new Class<?>[]{Airplane.class}, "public"), String.format(incorrectModifierMessage, transferPassengersMethodName, className));
+        assertTrue(testClass.hasReturnType(transferPassengersMethodName, new Class<?>[]{Airplane.class}, Void.TYPE), String.format(incorrectReturnType, transferPassengersMethodName, className));
+
         Object[][] methodArguments = {
                 {busyInstance, Airplane.class}
         };
-        Object output = null;
         if (seat - pass > 0) {
             int move = Math.min(busyPass - busySeat, seat - pass);
-            output = testClass.callMethod(transferPassengersMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
+            testClass.callMethod(transferPassengersMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
                     new StringLiteral("We moved " + move + " passengers"),
                     new Optional(new StringLiteral(" "))
             });
             _assertEquals(pass + move, testClass.getFieldValue(classInstance, numPassengersAttributeName),
-                    "Your " + transferPassengersMethodName + " method does not correctly add the " + numPassengersAttributeName + " attribute of the recipient.");
+                    "Your " + transferPassengersMethodName + " method does not correctly add the " + numPassengersAttributeName + " attribute of the recipient plane.");
             _assertEquals(busyPass - move, testClass.getFieldValue(busyInstance, numPassengersAttributeName),
-                    "Your " + transferPassengersMethodName + " method does not correctly decrease the " + numPassengersAttributeName + " attribute of the donor.");
+                    "Your " + transferPassengersMethodName + " method does not correctly decrease the " + numPassengersAttributeName + " attribute of the busy plane.");
         } else {
-            output = testClass.callMethod(transferPassengersMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
+            testClass.callMethod(transferPassengersMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
                     new StringLiteral("This plane is full too and cannot accommodate anymore passengers"),
                     new Optional(new StringLiteral(" "))
             });
             _assertEquals(pass, testClass.getFieldValue(classInstance, numPassengersAttributeName),
-                    "Your " + transferPassengersMethodName + " method does not correctly increase the " + numPassengersAttributeName + " attribute of the recipient.");
+                    "Your " + transferPassengersMethodName + " method must not change the " + numPassengersAttributeName + " attribute of the recipient plane.");
             _assertEquals(busyPass, testClass.getFieldValue(busyInstance, numPassengersAttributeName),
-                    "Your " + transferPassengersMethodName + " method does not correctly decrease the " + numPassengersAttributeName + " attribute of the donor.");
+                    "Your " + transferPassengersMethodName + " method must not change the " + numPassengersAttributeName + " attribute of the busy plane.");
         }
-        assertNull(output, String.join(" ", "Your", transferPassengersMethodName, "method should not return any output."));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
+    @Tag("dependent1")
     public void airplaneClassHasCorrectToStringMethod(int seat, int pass) throws Throwable {
         Object[][] arguments = {
                 {seat, int.class},
@@ -166,6 +184,7 @@ public class MainTest {
     }
 
     @Test
+    @Tag("dependency1")
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral("We moved " + (Math.min(passP1 - maxP1, maxP2)) + " passengers"),

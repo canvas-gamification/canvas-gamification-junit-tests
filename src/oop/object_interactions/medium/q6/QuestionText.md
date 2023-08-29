@@ -2,11 +2,6 @@
 
 - Java question
 
-## Question Text
-
-Companies constantly overbook available seats which causes a lot of passenger frustration. Make a class called
-**Airplane** that has **maxSeats** and **numPassengers** as attributes.
-
 ## Airplane Class
 
 The `Airplane` class currently has the following items:
@@ -31,7 +26,7 @@ You must add the following items to the class:
 - Methods:
     - A `transferPassengers` method that takes another **Airplane** called **busyPlane** and moves
       passengers of **busyPlane** to this Airplane until this plane is full. If this plane is already full it should
-      write `This plane is full too and cannot accommodate anymore passengers`. If the plane is not full it should write
+      print `This plane is full too and cannot accommodate anymore passengers`. If the plane is not full it should write
       `We moved n passengers` if n passengers are moved.
     - A `toString` method that returns a `String` of information in the format of `x out of y seats are filled`. Where
       x is the value of **numPassengers** and y is the value of **numSeats**.
