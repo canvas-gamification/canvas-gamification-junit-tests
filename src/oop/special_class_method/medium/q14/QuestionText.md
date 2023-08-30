@@ -3,7 +3,7 @@
 ## Question Text
 
 As an employee of a material processing facility, you are tasked with modelling the facility's functionalities. Make a
-Java class called **Water** that has an attribute called **quality** and another attribute called **volume**.
+Java class called **Water**.
 
 ### Water Class:
 

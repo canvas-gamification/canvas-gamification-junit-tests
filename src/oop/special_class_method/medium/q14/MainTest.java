@@ -3,6 +3,7 @@ package oop.special_class_method.medium.q14;
 import global.ObjectTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -41,32 +42,55 @@ public class MainTest {
 
     }
 
+    @Test
+    public void getVolumeIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(getAttributeMethodName2, null), String.format(incorrectMethodDefinition, getAttributeMethodName2, className));
+        assertTrue(testClass.hasModifier(getAttributeMethodName2, null, "public"), String.format(incorrectModifierMessage, getAttributeMethodName2, className));
+        assertTrue(testClass.hasReturnType(getAttributeMethodName2, null, double.class), String.format(incorrectReturnType, getAttributeMethodName2, className));
+    }
+
     @RepeatedTest(10)
     public void correctGetVolumeMethod() throws Throwable {
         Object testInstance = testClass.createInstance();
         double value = Math.random() * 10000;
         testClass.setFieldValue(testInstance, value, attributeName2);
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(getAttributeMethodName2, null), String.format(incorrectMethodDefinition, getAttributeMethodName2, className));
+        assertTrue(testClass.hasModifier(getAttributeMethodName2, null, "public"), String.format(incorrectModifierMessage, getAttributeMethodName2, className));
+        assertTrue(testClass.hasReturnType(getAttributeMethodName2, null, double.class), String.format(incorrectReturnType, getAttributeMethodName2, className));
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName2, testInstance);
-        assertTrue(testClass.hasModifier(getAttributeMethodName2, null, "public"),
-                "Your " + getAttributeMethodName2 + " method does not have the correct visibility modifier.");
         _assertEquals(value, getMethodOutput,
                 "Your " + getAttributeMethodName2 + " method does not return the value of the " + attributeName2 + " attribute.");
     }
 
+    @Test
+    public void setVolumeIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(setAttributeMethodName2, new Class<?>[]{double.class}), String.format(incorrectMethodDefinition, setAttributeMethodName2, className));
+        assertTrue(testClass.hasModifier(setAttributeMethodName2, new Class<?>[]{double.class}, "public"), String.format(incorrectModifierMessage, setAttributeMethodName2, className));
+        assertTrue(testClass.hasReturnType(setAttributeMethodName2, new Class<?>[]{double.class}, Void.TYPE), String.format(incorrectReturnType, setAttributeMethodName2, className));
+    }
+
     @RepeatedTest(10)
-    public void correctSetSizeMethod() throws Throwable {
+    public void correctSetVolumeMethod() throws Throwable {
         Object testInstance = testClass.createInstance();
         double updatedValue = Math.random() * 10000;
         Object[][] setMethodArguments = {
                 {updatedValue, double.class}
         };
-        Class<?>[] methodModifierClasses = {
-                double.class
-        };
-        assertTrue(testClass.hasMethod(setAttributeMethodName2, methodModifierClasses, Void.TYPE),
-                "Your " + setAttributeMethodName2 + " method does not have the correct name, return type, or parameters.");
-        assertTrue(testClass.hasModifier(setAttributeMethodName2, methodModifierClasses, "public"),
-                "Your " + setAttributeMethodName2 + " method does not have the correct visibility modifier.");
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(setAttributeMethodName2, new Class<?>[]{double.class}), String.format(incorrectMethodDefinition, setAttributeMethodName2, className));
+        assertTrue(testClass.hasModifier(setAttributeMethodName2, new Class<?>[]{double.class}, "public"), String.format(incorrectModifierMessage, setAttributeMethodName2, className));
+        assertTrue(testClass.hasReturnType(setAttributeMethodName2, new Class<?>[]{double.class}, Void.TYPE), String.format(incorrectReturnType, setAttributeMethodName2, className));
         testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
         String incorrectSetterMessage =
                 "Your " + setAttributeMethodName2 + " method does not correctly update the value of " + attributeName2 + ".";
