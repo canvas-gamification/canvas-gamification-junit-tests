@@ -5,10 +5,7 @@
 ## Question Text
 
 You want to make a program for the chemistry labs in a school that are making an experiment with household liquids.
-Lots of different household items can make fun chemistry experiments. Make a Java program called **ChemistryLab** that
-has two liquids from household items and a guide that says how much of which type of liquid is needed to make a
-reaction. Note that all the labs in the school use the same source to get the liquid for their experiment, but they may
-have different guides for the experiment.
+Lots of different household items can make fun chemistry experiments. Make a Java program called **ChemistryLab**.
 
 ### ChemistryLab Class
 

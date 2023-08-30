@@ -6,6 +6,7 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -46,7 +47,7 @@ public class MainTest {
                 String.format(modificationErrorMessage, secondIntName));
         assertTrue(testClass.hasField(arrayName, double[].class, new String[]{"private"}),
                 String.format(modificationErrorMessage, arrayName));
-
+        modificationErrorMessage = "You have modified the provided portions of " + className + " class for the %s constructor. Please revert them to the original state.";
         for (int i = 0; i < 10; i++) {
             double[] test = generateRandomArray(0.5, 20.0, ((int) (Math.random() * 20)));
             Object[][] arguments = {{test, double[].class}};
@@ -74,6 +75,16 @@ public class MainTest {
                 Arguments.of(generateRandomArray(0.5, 20.0, 10)),
                 Arguments.of(generateRandomArray(0.5, 20.0, 10))
         );
+    }
+
+    @Test
+    public void mixFunIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(methodName, null), String.format(incorrectMethodDefinition, methodName, className));
+        assertTrue(testClass.hasModifier(methodName, null, "public"), String.format(incorrectModifierMessage, methodName, className));
+        assertTrue(testClass.hasReturnType(methodName, null, Void.TYPE), String.format(incorrectReturnType, methodName, className));
     }
 
     @ParameterizedTest
