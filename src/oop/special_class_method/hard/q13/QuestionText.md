@@ -3,7 +3,7 @@
 ## Question Text
 
 Suppose you were hired by a departmental store to digitize their catalogue system, and one of the classes you are making
-for objects is a **Cup** class. This class has three attributes called **liquid**, **color** , and **volume**.
+for objects is a **Cup** class.
 
 ### Cup Class:
 
