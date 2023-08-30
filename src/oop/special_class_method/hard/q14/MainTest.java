@@ -63,17 +63,40 @@ public class MainTest {
                 "Your " + className + " constructor does not initialize the " + attributeName + " attribute to the correct value.");
     }
 
+    @Test
+    public void getIsFullIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(getAttributeMethodName, null), String.format(incorrectMethodDefinition, getAttributeMethodName, className));
+        assertTrue(testClass.hasModifier(getAttributeMethodName, null, "public"), String.format(incorrectModifierMessage, getAttributeMethodName, className));
+        assertTrue(testClass.hasReturnType(getAttributeMethodName, null, boolean.class), String.format(incorrectReturnType, getAttributeMethodName, className));
+    }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void correctGetIsFullMethod(boolean value) throws Throwable {
         Object testInstance = testClass.createInstance();
         testClass.setFieldValue(testInstance, value, attributeName);
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(getAttributeMethodName, null), String.format(incorrectMethodDefinition, getAttributeMethodName, className));
+        assertTrue(testClass.hasModifier(getAttributeMethodName, null, "public"), String.format(incorrectModifierMessage, getAttributeMethodName, className));
+        assertTrue(testClass.hasReturnType(getAttributeMethodName, null, boolean.class), String.format(incorrectReturnType, getAttributeMethodName, className));
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName, testInstance);
-        assertTrue(testClass.hasModifier(getAttributeMethodName, null, "public"),
-                "Your " + getAttributeMethodName + " method does not have the correct visibility modifier.");
         _assertEquals(value, getMethodOutput,
                 "Your " + getAttributeMethodName + " method does not return the value of the " + attributeName + " attribute.");
+    }
+
+    @Test
+    public void setIsFullIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(setAttributeMethodName, new Class<?>[]{boolean.class}), String.format(incorrectMethodDefinition, setAttributeMethodName, className));
+        assertTrue(testClass.hasModifier(setAttributeMethodName, new Class<?>[]{boolean.class}, "public"), String.format(incorrectModifierMessage, setAttributeMethodName, className));
+        assertTrue(testClass.hasReturnType(setAttributeMethodName, new Class<?>[]{boolean.class}, Void.TYPE), String.format(incorrectReturnType, setAttributeMethodName, className));
     }
 
     @ParameterizedTest
@@ -84,14 +107,13 @@ public class MainTest {
         Object[][] setMethodArguments = {
                 {updatedValue, boolean.class}
         };
-        Class<?>[] methodModifierClasses = {
-                boolean.class
-        };
-        assertTrue(testClass.hasMethod(setAttributeMethodName, methodModifierClasses, Void.TYPE),
-                "Your " + setAttributeMethodName + " method does not have the correct name, return type, or parameters.");
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(setAttributeMethodName, new Class<?>[]{boolean.class}), String.format(incorrectMethodDefinition, setAttributeMethodName, className));
+        assertTrue(testClass.hasModifier(setAttributeMethodName, new Class<?>[]{boolean.class}, "public"), String.format(incorrectModifierMessage, setAttributeMethodName, className));
+        assertTrue(testClass.hasReturnType(setAttributeMethodName, new Class<?>[]{boolean.class}, Void.TYPE), String.format(incorrectReturnType, setAttributeMethodName, className));
         testClass.callMethod(setAttributeMethodName, setMethodArguments, testInstance);
-        assertTrue(testClass.hasModifier(setAttributeMethodName, methodModifierClasses, "public"),
-                "Your " + setAttributeMethodName + " method does not have the correct visibility modifier.");
         String incorrectSetterMessage =
                 "Your " + setAttributeMethodName + " method does not correctly update the value of " + attributeName + ".";
         _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName),
@@ -103,6 +125,12 @@ public class MainTest {
     public void correctToStringMethod(boolean value) throws Throwable {
         String incorrectToStringMessage = "Your toString method does not return the correct String.";
         Object testInstance = testClass.createInstance();
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod("toString", null), String.format(incorrectMethodDefinition, "toString", className));
+        assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className));
+        assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className));
         testClass.setFieldValue(testInstance, value, attributeName);
         String expectedOutput;
         if (value)

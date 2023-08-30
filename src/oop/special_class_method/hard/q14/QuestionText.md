@@ -3,7 +3,7 @@
 ## Question Text
 
 As part of a larger virtual reality program, you want to build more life-like objects. Make a Java class called 
-**Bottle** that has an attribute called **isFull** which is initialized to **false** in the constructor.
+**Bottle**.
 
 ### Bottle Class:
 
