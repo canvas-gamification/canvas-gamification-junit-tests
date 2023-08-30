@@ -90,6 +90,12 @@ public class MainTest {
                 {colour, String.class}
         };
         Object classInstance = testClass.createInstance(arguments);
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod("toString", null), String.format(incorrectMethodDefinition, "toString", className));
+        assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className));
+        assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className));
         String[] methodModifiers = {"public"};
         String expected = "This is a " + initialName + " that is " + colour + " in colour";
         String incorrectToStringMessage = String.join(" ",
