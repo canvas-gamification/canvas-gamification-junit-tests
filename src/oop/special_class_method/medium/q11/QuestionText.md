@@ -3,7 +3,7 @@
 ## Question Text
 
 Many appliances and electronic devices have an internal mechanism to moderate temperature. Make a Java class called
-**Oven** that has attributes **currTemp**, **size**, and **colour** that specify different properties of the **Oven**.
+**Oven**.
 
 ### Oven Class:
 
