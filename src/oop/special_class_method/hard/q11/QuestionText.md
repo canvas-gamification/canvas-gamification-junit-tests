@@ -2,8 +2,7 @@
 
 ## Question Text
 
-You are making a game that has many strange and scary looking characters. Write a Java class called **Alien** that has
-two attributes, an `int` called **numEyes** and a `String` called **colour**
+You are making a game that has many strange and scary looking characters. Write a Java class called **Alien**.
 
 ### Alien Class:
 
