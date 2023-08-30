@@ -3,7 +3,7 @@
 ## Question Text
 
 You are developing a wholesale application consisting of items that can be purchased in large quantities. Make a Java 
-class called **Detergent** that has two attributes called **manufacturer** and **volume**
+class called **Detergent**.
 
 ### Detergent Class:
 

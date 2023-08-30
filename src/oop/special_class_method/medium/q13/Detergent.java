@@ -4,8 +4,8 @@ public class Detergent {
     private double volume;
     private String manufacturer;
 
-    public Detergent(double c, String m) {
-        volume = c;
+    public Detergent(double v, String m) {
+        volume = v;
         manufacturer = m;
     }
 
