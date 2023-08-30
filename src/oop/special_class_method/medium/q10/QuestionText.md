@@ -3,8 +3,7 @@
 ## Question Text
 
 A store inventory system must keep track of all the items available for purchase so when  it is low in stock, the 
-manager can order more. Make a Java class called **Shoe** that has two attributes called **size** and **colour** that 
-are initialized by the constructor.
+manager can order more. Make a Java class called **Shoe**.
 
 ### Shoe Class:
 
