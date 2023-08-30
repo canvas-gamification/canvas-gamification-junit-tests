@@ -16,7 +16,7 @@ Your `Laptop` class must have the following items:
     - These are not visible from other classes
 
 - Constructor:
-    - a `Laptop` constructor that is visible to other classes and accepts an `int` and a `String` and uses it to initialize
+    - a `Laptop` constructor that is visible to other classes and accepts an `int` and a `String` and uses them to initialize
       the **yearMade** and **colour** attributes.
 
 - Methods:
