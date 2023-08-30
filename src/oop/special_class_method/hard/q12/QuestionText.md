@@ -3,8 +3,7 @@
 ## Question Text
 
 You are developing a program that teaches people about the physical traits of a variety of human-made objects. Write a 
-Java class called **Laptop** that has two attributes, an `int` called **yearMade** and a `String` called **texture** 
-that are initialized by the constructor
+Java class called **Laptop**.
 
 ### Laptop Class:
 
