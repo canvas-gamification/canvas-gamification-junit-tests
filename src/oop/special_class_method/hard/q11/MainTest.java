@@ -31,7 +31,7 @@ public class MainTest {
     @Test
     public void alienClassHasCorrectAttributes() {
         assertTrue(testClass.hasField(attributeName1),
-                "Your " + className + " class is missing the " + attributeName1 + " attribute, or it spelled incorrectly.");
+                "Your " + className + " class is missing the " + attributeName1 + " attribute, or it is spelled incorrectly.");
         assertTrue(testClass.hasField(attributeName1, int.class),
                 "Your " + attributeName1 + " does not have the correct type.");
         assertTrue(testClass.hasModifier(attributeName1, "private"),
