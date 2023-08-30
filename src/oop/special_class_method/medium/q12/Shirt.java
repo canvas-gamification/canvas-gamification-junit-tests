@@ -16,6 +16,8 @@ public class Shirt {
     public void displaySize() {
         if (this.yearMade > 2000)
             System.out.println("The size is " + getSize());
+        else
+            System.out.println("This shirt is no longer carried");
     }
 }
 
