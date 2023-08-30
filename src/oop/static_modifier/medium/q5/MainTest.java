@@ -49,7 +49,7 @@ public class MainTest {
     }
 
     @Test
-    @Tag("dependent1")
+    @Tag("dependency1")
     public void correctTestClass() throws Throwable {
         Object classInstance = outputClass.createInstance();
         String[] methodModifiers = {"public"};

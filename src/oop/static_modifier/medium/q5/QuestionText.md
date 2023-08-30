@@ -5,7 +5,7 @@
 ## Question Text
 
 As the manager of a local apparel store, you are tasked with modelling your store's selection. Make a Java program
-called **Hat** that has a static variable called **companyLogo** that is shared by all the objects of the class.
+called **Hat**.
 
 ### Hat Class
 
@@ -13,7 +13,7 @@ Your `Hat` class already the following items:
 
 - Attributes:
     - A `String` attributes called **colour**.
-    - Note that all attributes in this class are private
+    - Note that the attribute in this class is private
 
 - Constructors:
     - A constructor that accepts a `String` and initializes the **colour** attribute.
