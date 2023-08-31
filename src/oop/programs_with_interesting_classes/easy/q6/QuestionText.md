@@ -5,7 +5,7 @@
 ## Question Text
 
 University courses can get expensive because they often come with supply costs for things like textbooks and lab
-equipment. Make a class called `Course` with three attributes called **textBookFee**, **suppliesFee**, and **labFee**
+equipment. Make a class called `Course`.
 
 ### Course Class
 

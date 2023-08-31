@@ -75,6 +75,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
+    @Tag("dependent1")
     public void courseConstructorInitializesValuesCorrectly(double value1, double value2, double value3) throws Throwable {
         String wrongValueMessage = "The %s constructor did not initialize the %s attribute to the correct value based on the parameters passed to the constructor.";
         Object[][] constructorArgs = {
@@ -100,7 +101,8 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void discordClassHasCorrectDeleteMessageMethod(double value1, double value2, double value3) throws Throwable {
+    @Tag("dependent1")
+    public void discordClassHasCorrectCalcTotalCostMethod(double value1, double value2, double value3) throws Throwable {
         Object[][] constructorArgs = {
                 {value1, double.class},
                 {value2, double.class},
@@ -114,6 +116,7 @@ public class MainTest {
     }
 
     @Test
+    @Tag("dependency1")
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral("The total cost for this semester is: 737.71 dollars"),
