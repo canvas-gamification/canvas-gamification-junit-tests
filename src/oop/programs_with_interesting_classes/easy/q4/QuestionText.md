@@ -4,8 +4,7 @@
 
 ## Question Text
 
-Life is a beautiful thing, and as time passes, things grow. Write a Java class about plants called `Tree` that has two
-variables called **type** and **size**.
+Life is a beautiful thing, and as time passes, things grow. Write a Java class about plants called `Tree`.
 
 ### Tree Class
 
