@@ -5,7 +5,7 @@
 ## Question Text
 
 Social media and the Internet has enabled people to communicate with each other through great distances. Make a Java
-program that mimics a social media platform called `Discord` that has attributes **content** and **user**.
+program that mimics a social media platform called `Discord`.
 
 ### Discord Class
 
