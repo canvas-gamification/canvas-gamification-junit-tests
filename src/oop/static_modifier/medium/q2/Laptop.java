@@ -11,22 +11,23 @@ public void setIdentification()
 private static int incrementer( int a )
  */
 
-public class Laptop
-{
+public class Laptop {
     private int identification;
     private static int initial = 0;
-    public Laptop()
-    {
+
+    public Laptop() {
         identification = incrementer();
     }
-    private static int incrementer()
-    {
+
+    private static int incrementer() {
         initial = initial + 5;
         return initial;
     }
-    public void setIdentification( int a ) {
+
+    public void setIdentification(int a) {
         identification = a;
     }
+
     public int getIdentification() {
         return identification;
     }

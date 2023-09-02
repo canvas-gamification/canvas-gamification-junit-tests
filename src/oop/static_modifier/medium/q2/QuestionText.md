@@ -13,8 +13,7 @@ Your `Laptop` class must have the following items:
 
 - Attributes:
     - An `int` attribute called **identification** 
-    - A static `int` attribute called **initial** which is used to assign new **identification** numbers and starts
-      initialized to 0
+    - A static `int` attribute called **initial** which is used to assign new **identification** numbers and starts initialized to 0
     - Note that all attributes in this class should be private
 
 - Constructors:
