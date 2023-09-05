@@ -4,9 +4,7 @@ import global.ObjectTest;
 import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -16,6 +14,7 @@ import java.util.stream.Stream;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MainTest {
     private ObjectTest classInstance;
     private ObjectTest testInstance;
@@ -40,6 +39,7 @@ public class MainTest {
     }
 
     @Test
+    @Order(1)
     public void horseClassHasRequiredAttributes() {
         assertTrue(classInstance.hasField(stringAttribute1),
                 String.format("Your %s class is missing the %s attribute. Please make sure that is is spelt correctly.", objectName, stringAttribute1));
@@ -55,6 +55,9 @@ public class MainTest {
                 String.format("Your %s attribute is missing the static modifier.", stringAttribute1));
         assertTrue(classInstance.hasModifier(stringAttribute2, "private"),
                 String.format("Your %s attribute does not have the correct visibility modifier.", stringAttribute2));
+        String wrongStartingValue = "The %s attribute does not have the correct starting value.";
+        _assertEquals(startNoise, classInstance.getFieldValue(null, stringAttribute1),
+                String.format(wrongStartingValue, stringAttribute1));
     }
 
     private static Stream<String> constructorInputProvider() {
@@ -209,6 +212,31 @@ public class MainTest {
                 "Your toString method does not return the correct String after updating the %s attribute using the %s and %s methods.";
         _assertEquals(expectedToStringOutput, toStringOutput,
                 String.format(incorrectToString, stringAttribute1, methodName1, methodName2));
+    }
+
+    private static Stream<Arguments> noVowelInputProvider() {
+        return Stream.of(
+                Arguments.of("Ngh!", 4),
+                Arguments.of("nvwls", 10),
+                Arguments.of("bdfhjnptv", 1)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("noVowelInputProvider")
+    public void shortenAndLengthenSoundWorkWithInputThatHasNoVowels(String noise, int n) throws Throwable {
+        classInstance.setFieldValue(null, noise, stringAttribute1);
+        String invalidModification = "The %s method in your %s class modified the %s attribute when it had no vowels.";
+        for (int i = 0; i < n; i++) {
+            classInstance.callMethod(methodName1);
+            _assertEquals(noise, classInstance.getFieldValue(null, stringAttribute1),
+                    String.format(invalidModification, methodName1, objectName, stringAttribute1));
+        }
+        for (int i = 0; i < n; i++) {
+            classInstance.callMethod(methodName2);
+            _assertEquals(noise, classInstance.getFieldValue(null, stringAttribute1),
+                    String.format(invalidModification, methodName2, objectName, stringAttribute1));
+        }
     }
 
     @Tag("dependency1")
