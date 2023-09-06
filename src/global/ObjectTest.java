@@ -107,6 +107,15 @@ public class ObjectTest {
         return createInstance(null);
     }
 
+    public boolean hasField(String fieldName) {
+        try {
+            Field f = objectClass.getDeclaredField(fieldName);
+            return true;
+        } catch (NoSuchFieldException e) {
+            return false;
+        }
+    }
+
     public boolean hasField(String fieldName, Class<?> fieldClass) {
         try {
             Field f = objectClass.getDeclaredField(fieldName);
