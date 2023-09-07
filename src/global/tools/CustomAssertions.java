@@ -42,6 +42,23 @@ public class CustomAssertions {
             fail("Error with test definition: a custom assert was used with the wrong type.");
     }
 
+    public static void _assertArrayEquals(Object expected, Object actual, double delta, String userMessage) {
+        if (!(expected instanceof double[]))
+            fail("Error with test definition: a custom assert was used with the wrong type.");
+        _assertSameTypes(expected, actual);
+        if (expected.getClass().isArray()) {
+            int expectedLength = Array.getLength(expected);
+            int actualLength = Array.getLength(actual);
+            double[] expectedArray = new double[expectedLength];
+            double[] actualArray = new double[actualLength];
+            for (int i = 0; i < expectedLength; i++)
+                expectedArray[i] = (double) Array.get(expected, i);
+            for (int i = 0; i < actualLength; i++)
+                actualArray[i] = (double) Array.get(actual, i);
+            assertArrayEquals(expectedArray, actualArray, delta, userMessage);
+        }
+    }
+
     public static void _assertSameTypes(Object expected, Object actual) {
         String message = String.join(" ",
                 "Received",
