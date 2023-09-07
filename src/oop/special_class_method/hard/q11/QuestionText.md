@@ -2,7 +2,7 @@
 
 ## Question Text
 
-You are making a game that has many strange and scary looking characters. Write a Java class called **Alien**.
+You are making a game that has many strange and scary-looking characters. Write a Java class called **Alien** to model a creature in the game using the requirements below:
 
 ### Alien Class:
 
