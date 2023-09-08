@@ -4,13 +4,18 @@
 
 ## Question Text
 
-Given the dog class below, initialize a Dog with the following properties in the 
-main method below:
+Suppose you have defined a `Dog` class to model your pet, and now you want to test it to make sure that it works. Given 
+the dog class below, create a test class called `DogTest` with a main method and initialize a `Dog` object with the 
+following attributes:
 - Name: "Piper"
 - Age: 8
 - Weight: 12.5
 
-Then, call the `eat` method and the `bark` method on the created dog object.
+Then, call the `eat` method and the `bark` method on the created dog object. The result from doing this should be 
+the printing of the `String` "Bark!".
+
+Note: You do not need to place the dog class in your submission code, the website will handle this for you. It is just
+for you to reference.
 
 ### Dog Class:
 
