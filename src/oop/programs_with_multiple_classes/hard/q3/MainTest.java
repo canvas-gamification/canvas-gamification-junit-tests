@@ -130,4 +130,7 @@ public class MainTest {
         _assertEquals(sizeCapacity, bookcase.getFieldValue(bookcaseInstance, this.sizeCapacity),
                 "Your " + bookcaseLc + " constructor does not correctly initialize the " + this.sizeCapacity + " attribute.");
     }
+
+    // TODO: test Bookcase constructor
+    // TODO: test Book method
 }

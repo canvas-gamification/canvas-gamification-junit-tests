@@ -8,4 +8,8 @@ public class Book {
         this.count = count;
         this.type = type;
     }
+
+    public int incrementBookCount() {
+        return this.count += 1;
+    }
 }
