@@ -39,11 +39,14 @@ public class MainTest {
      * Person Tests
      **/
     @Test
-    public void personClassHasCorrectFields() {
-        String missingFieldMessage = "Your " + personLc + " class is missing a required field.";
-        String incorrectFieldModifierMessage = "A field in your " + personLc + " class has the wrong visibility modifier.";
-        assertTrue(person.hasField(height, double.class), missingFieldMessage);
-        assertTrue(person.hasModifier(height, "private"), incorrectFieldModifierMessage);
+    public void personClassHasCorrectAttributes() {
+        String missingAttributeMessage = "Your " + personLc + " class is missing the following required attribute: " + height + ".";
+        String incorrectAttributeTypeMessage = "The " + height + " attribute in your " + personLc + " class has the wrong type.";
+        String incorrectAttributeModifierMessage = "The " + height + " attribute in your " + personLc + " class has the wrong visibility modifier.";
+
+        assertTrue(person.hasField(height), missingAttributeMessage);
+        assertTrue(person.hasField(height, double.class), incorrectAttributeTypeMessage);
+        assertTrue(person.hasModifier(height, "private"), incorrectAttributeModifierMessage);
     }
 
     @Test
@@ -75,20 +78,25 @@ public class MainTest {
         };
         Object personInstance = person.createInstance(arguments);
         _assertEquals(height, person.getFieldValue(personInstance, this.height),
-                "Your " + personLc + " constructor does not correctly initialize the " + this.height + " field.");
+                "Your " + personLc + " constructor does not correctly initialize the " + this.height + " attribute.");
     }
 
     /**
      * Blanket Tests
      **/
     @Test
-    public void blanketClassHasCorrectFields() {
-        String missingFieldMessage = "Your " + blanketLc + " class is missing a required field.";
-        String incorrectFieldModifierMessage = "A field in your " + blanketLc + " class has the wrong visibility modifier.";
-        assertTrue(blanket.hasField(size, String.class), missingFieldMessage);
-        assertTrue(blanket.hasModifier(size, "private"), incorrectFieldModifierMessage);
-        assertTrue(blanket.hasField(threadCount, int.class), missingFieldMessage);
-        assertTrue(blanket.hasModifier(threadCount, "private"), incorrectFieldModifierMessage);
+    public void blanketClassHasCorrectAttributes() {
+        String missingAttributeMessage = "Your " + blanketLc + " class is missing the following required attribute: %s.";
+        String incorrectAttributeModifierMessage = "The %s attribute in your " + blanketLc + " class has the wrong visibility modifier.";
+        String incorrectAttributeTypeMessage = "The %s attribute in your " + blanketLc + " class has the wrong type.";
+
+        assertTrue(blanket.hasField(size), String.format(missingAttributeMessage, size));
+        assertTrue(blanket.hasField(size, String.class), String.format(incorrectAttributeTypeMessage, size));
+        assertTrue(blanket.hasModifier(size, "private"), String.format(incorrectAttributeModifierMessage, size));
+
+        assertTrue(blanket.hasField(threadCount), String.format(missingAttributeMessage, threadCount));
+        assertTrue(blanket.hasField(threadCount, int.class), String.format(incorrectAttributeTypeMessage, threadCount));
+        assertTrue(blanket.hasModifier(threadCount, "private"), String.format(incorrectAttributeModifierMessage, threadCount));
     }
 
     @Test
@@ -123,8 +131,8 @@ public class MainTest {
         };
         Object blanketInstance = blanket.createInstance(arguments);
         _assertEquals(size, blanket.getFieldValue(blanketInstance, this.size),
-                "Your " + blanketLc + " constructor does not correctly initialize the " + this.size + " field.");
+                "Your " + blanketLc + " constructor does not correctly initialize the " + this.size + " attribute.");
         _assertEquals(threadCount, blanket.getFieldValue(blanketInstance, this.threadCount),
-                "Your " + blanketLc + " constructor does not correctly initialize the " + this.threadCount + " field.");
+                "Your " + blanketLc + " constructor does not correctly initialize the " + this.threadCount + " attribute.");
     }
 }
