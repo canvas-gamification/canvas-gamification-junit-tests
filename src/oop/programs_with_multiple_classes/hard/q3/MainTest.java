@@ -1,11 +1,6 @@
 package oop.programs_with_multiple_classes.hard.q3;
 
-import global.BaseTest;
 import global.ObjectTest;
-import global.variables.Clause;
-import global.variables.clauses.IntegerLiteral;
-import global.variables.clauses.NewLine;
-import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -43,13 +38,18 @@ public class MainTest {
      * Book tests
      **/
     @Test
-    public void bookClassHasCorrectFields() {
-        String missingFieldMessage = "Your " + bookLc + " class is missing a required field.";
-        String incorrectFieldModifierMessage = "A field in your " + bookLc + " class has an incorrect modifier.";
-        assertTrue(book.hasField(count, int.class), missingFieldMessage);
-        assertTrue(book.hasField(type, String.class), missingFieldMessage);
-        assertTrue(book.hasModifier(count, "private"), incorrectFieldModifierMessage);
-        assertTrue(book.hasModifier(type, "private"), incorrectFieldModifierMessage);
+    public void bookClassHasCorrectAttributes() {
+        String missingAttributeMessage = "Your " + bookLc + " class is missing the following required attribute: %s.";
+        String incorrectAttributeTypeMessage = "The %s attribute in your " + bookLc + " class has the wrong type.";
+        String incorrectAttributeModifierMessage = "The %s attribute in your " + bookLc + " class has an incorrect modifier.";
+
+        assertTrue(book.hasField(count), missingAttributeMessage);
+        assertTrue(book.hasField(count, int.class), incorrectAttributeTypeMessage);
+        assertTrue(book.hasModifier(count, "private"), incorrectAttributeModifierMessage);
+
+        assertTrue(book.hasField(type), missingAttributeMessage);
+        assertTrue(book.hasField(type, String.class), incorrectAttributeTypeMessage);
+        assertTrue(book.hasModifier(type, "private"), incorrectAttributeModifierMessage);
     }
 
     @Test
@@ -83,20 +83,23 @@ public class MainTest {
         };
         Object bookInstance = book.createInstance(arguments);
         _assertEquals(count, book.getFieldValue(bookInstance, this.count),
-                "Your " + book + " constructor does not correctly initialize the " + this.count + " field.");
+                "Your " + book + " constructor does not correctly initialize the " + this.count + " attribute.");
         _assertEquals(type, book.getFieldValue(bookInstance, this.type),
-                "Your " + book + " constructor does not correctly initialize the " + this.type + " field.");
+                "Your " + book + " constructor does not correctly initialize the " + this.type + " attribute.");
     }
 
     /**
      * Bookcase tests
      **/
     @Test
-    public void bookcaseClassHasCorrectFields() {
-        String missingFieldMessage = "Your " + bookcaseLc + " class is missing a required field.";
-        String incorrectFieldModifierMessage = "A field in your " + bookcaseLc + " class has an incorrect modifier.";
-        assertTrue(bookcase.hasField(sizeCapacity, int.class), missingFieldMessage);
-        assertTrue(bookcase.hasModifier(sizeCapacity, "private"), incorrectFieldModifierMessage);
+    public void bookcaseClassHasCorrectAttributes() {
+        String missingAttributeMessage = "Your " + bookcaseLc + " class is missing the following required attribute: " + sizeCapacity + ".";
+        String incorrectAttributeTypeMessage = "The %s attribute in your " + bookLc + " class has the wrong type.";
+        String incorrectAttributeModifierMessage = "An attribute in your " + bookcaseLc + " class has an incorrect modifier.";
+
+        assertTrue(bookcase.hasField(sizeCapacity), missingAttributeMessage);
+        assertTrue(bookcase.hasField(sizeCapacity, int.class), incorrectAttributeTypeMessage);
+        assertTrue(bookcase.hasModifier(sizeCapacity, "private"), incorrectAttributeModifierMessage);
     }
 
     @Test
@@ -125,6 +128,6 @@ public class MainTest {
         };
         Object bookcaseInstance = bookcase.createInstance(arguments);
         _assertEquals(sizeCapacity, bookcase.getFieldValue(bookcaseInstance, this.sizeCapacity),
-                "Your " + bookcaseLc + " constructor does not correctly initialize the " + this.sizeCapacity + " field.");
+                "Your " + bookcaseLc + " constructor does not correctly initialize the " + this.sizeCapacity + " attribute.");
     }
 }
