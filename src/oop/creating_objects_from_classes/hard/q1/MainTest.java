@@ -73,6 +73,10 @@ class Dog {
     private String name;
     private int age;
     private double weight;
+    /*
+     * These values below are used to track the actions of the student in their test class. They track what values they
+     * initialize the dog object to, and if they have called the methods they are supposed to.
+     */
     private static Dog dog;
     private static boolean constructorCalled = false;
     private static String constructorName;
