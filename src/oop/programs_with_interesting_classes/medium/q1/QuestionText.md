@@ -54,7 +54,7 @@ Your `Collision` Class must have the following methods:
       time.
 
 - Collide method:
-    - A method called `collide` which is accessible from any class, is static, returns nothing, and accepts two `Car`
+    - A method called `collide` which is accessible from any class, is *static*, returns nothing, and accepts two `Car`
       objects as parameters.
     - The method should compare the **speed** attributes of both cars to check which one is going slower.
     - On the slower car, it should remove the last two strings from the **parts** array. To do this, create a new array
