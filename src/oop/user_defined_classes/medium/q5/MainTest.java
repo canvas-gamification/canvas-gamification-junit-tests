@@ -63,6 +63,12 @@ public class MainTest {
         Object[][] arguments = {
                 {num, int.class}
         };
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(classInstance.hasMethod(methodName, new Class<?>[]{int.class}), String.format(incorrectMethodDefinition, methodName, className));
+        assertTrue(classInstance.hasModifier(methodName, new Class<?>[]{int.class}, "public"), String.format(incorrectModifierMessage, methodName, className));
+        assertTrue(classInstance.hasReturnType(methodName, new Class<?>[]{int.class}, double.class), String.format(incorrectReturnType, methodName, className));
         Object instance = classInstance.createInstance();
         Object output = classInstance.callMethod(methodName, arguments, (new String[]{"public"}), instance);
         Object fee = classInstance.getFieldValue(instance, var);
