@@ -20,7 +20,7 @@ You are already given the following items:
 
 - Constructor:
     - a `Lamp` constructor that is visible to other classes, accepts a `double` and uses it to initialize the
-      **brightness** attribute and initializes the **isOn** attribute to true.
+      **brightness** attribute, and initializes the **isOn** attribute to true.
 
 You need to add the following items to the class:
 
