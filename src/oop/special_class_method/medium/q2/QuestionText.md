@@ -19,7 +19,7 @@ You are already given the following items:
     - a `boolean` called **isOn** that is not accessible from other classes.
 
 - Constructor:
-    - a `Lamp` constructor that is visible to other classes and accepts a `double` and uses it to initialize the
+    - a `Lamp` constructor that is visible to other classes, accepts a `double` and uses it to initialize the
       **brightness** attribute and initializes the **isOn** attribute to true.
 
 You need to add the following items to the class:
