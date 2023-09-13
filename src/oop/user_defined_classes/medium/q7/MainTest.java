@@ -83,10 +83,14 @@ public class MainTest {
         Object[][] arguments2 = {
                 {current, int.class}
         };
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(classInstance.hasMethod(methodName, new Class<?>[]{int.class}), String.format(incorrectMethodDefinition, methodName, className));
+        assertTrue(classInstance.hasModifier(methodName, new Class<?>[]{int.class}, "public"), String.format(incorrectModifierMessage, methodName, className));
+        assertTrue(classInstance.hasReturnType(methodName, new Class<?>[]{int.class}, int.class), String.format(incorrectReturnType, methodName, className));
         Object instance = classInstance.createInstance(arguments1);
         Object output = classInstance.callMethod(methodName, arguments2, (new String[]{"public"}), instance);
-        assertTrue(classInstance.hasMethod(methodName, new Class<?>[]{int.class}, int.class, new String[]{"public"}),
-                "Your " + methodName + " method does not have the currect visibility modifier, or signature.");
         _assertEquals(ans, output,
                 "Your " + className + " " + methodName + " does not correctly calculate the fine.");
 
