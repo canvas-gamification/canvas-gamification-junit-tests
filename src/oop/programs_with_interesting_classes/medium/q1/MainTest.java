@@ -7,6 +7,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertArrayEquals;
@@ -29,7 +31,8 @@ public class MainTest {
     private final String getSpeedMethodName = "getSpeed";
     private final String setSpeedMethodName = "setSpeed";
     private final String collideMethodName = "collide";
-    private final String[] expectedPartsArray = new String[]{"Wheels", "Chassis", "Steering", "BodyKit", "Windows", "Doors", "Seats"};
+    private final String[] expectedPartsArray =
+            new String[]{"Wheels", "Chassis", "Steering", "BodyKit", "Windows", "Doors", "Seats"};
 
     @BeforeEach
     public void setUp() {
@@ -238,42 +241,149 @@ public class MainTest {
                 String.format(incorrectUpdate, getSpeedMethodName, doubleAttributeName));
     }
 
-    private static Stream<String[]> setPartsInputProvider() {
+    private static Stream<Arguments> partsInputProvider() {
         return Stream.of(
-                new String[]{}, new String[]{"some", "other", "parts"}, new String[]{"Car"},
-                new String[]{"Wheels", "Chassis", "Steering", "BodyKit", "Windows", "Doors", "Seats"}
+                Arguments.of((Object) new String[]{}),
+                Arguments.of((Object) new String[]{"some", "other", "parts"}),
+                Arguments.of((Object) new String[]{"Car"}),
+                Arguments.of((Object) new String[]{"Wheels", "Chassis", "Steering", "BodyKit", "Windows", "Doors", "Seats"})
         );
     }
 
     @ParameterizedTest
-    @MethodSource("setPartsInputProvider")
-    public void correctSetPartsMethod(double[] parts) throws Throwable {
+    @MethodSource("partsInputProvider")
+    public void correctSetPartsMethod(String[] parts) throws Throwable {
         /* Check method definition */
         String incorrectDefinition = "Your %s class is missing the %s method. Make sure it is defined, spelt correctly, and has the correct parameters.";
         String incorrectModifier = "The %s method does not have the correct visibility modifier.";
         String incorrectReturnType = "The %s method does not have the correct return type.";
-        Class<?>[] methodClassParameters = new Class[]{double.class};
-        assertTrue(car.hasMethod(setSpeedMethodName, methodClassParameters),
-                String.format(incorrectDefinition, carClassName, setSpeedMethodName));
-        assertTrue(car.hasModifier(setSpeedMethodName, methodClassParameters, "public"),
-                String.format(incorrectModifier, setSpeedMethodName));
-        assertTrue(car.hasReturnType(setSpeedMethodName, methodClassParameters, Void.TYPE),
-                String.format(incorrectReturnType, setSpeedMethodName));
+        Class<?>[] methodClassParameters = new Class[]{String[].class};
+        assertTrue(car.hasMethod(setPartsMethodName, methodClassParameters),
+                String.format(incorrectDefinition, carClassName, setPartsMethodName));
+        assertTrue(car.hasModifier(setPartsMethodName, methodClassParameters, "public"),
+                String.format(incorrectModifier, setPartsMethodName));
+        assertTrue(car.hasReturnType(setPartsMethodName, methodClassParameters, Void.TYPE),
+                String.format(incorrectReturnType, setPartsMethodName));
 
         /* Create instance to call method on */
         Object[][] constructorArguments = {
                 {"Just another car", String.class},
-                {initialSpeed, double.class}
+                {51.34, double.class}
         };
         Object carInstance = car.createInstance(constructorArguments);
 
-        /* Call setName on car */
-        Object[][] methodArgs = {{updatedSpeed, double.class}};
-        car.callMethod(setSpeedMethodName, methodArgs, carInstance);
+        /* Call setParts on car */
+        Object[][] methodArgs = {{parts, String[].class}};
+        car.callMethod(setPartsMethodName, methodArgs, carInstance);
 
         /* Check result */
         String incorrectUpdate = "Your %s method does not correctly update the %s attribute.";
-        _assertEquals(updatedSpeed, car.getFieldValue(carInstance, doubleAttributeName), 0.001,
-                String.format(incorrectUpdate, setSpeedMethodName, doubleAttributeName));
+        _assertArrayEquals(parts, car.getFieldValue(carInstance, stringArrayAttributeName),
+                String.format(incorrectUpdate, setPartsMethodName, stringArrayAttributeName));
+    }
+
+    @ParameterizedTest
+    @MethodSource("partsInputProvider")
+    public void correctGetPartsMethod(String[] parts) throws Throwable {
+        /* Check method definition */
+        String incorrectDefinition = "Your %s class is missing the %s method. Make sure it is defined, spelt correctly, and has the correct parameters.";
+        String incorrectModifier = "The %s method does not have the correct visibility modifier.";
+        String incorrectReturnType = "The %s method does not have the correct return type.";
+        assertTrue(car.hasMethod(getPartsMethodName, null),
+                String.format(incorrectDefinition, carClassName, getPartsMethodName));
+        assertTrue(car.hasModifier(getPartsMethodName, null, "public"),
+                String.format(incorrectModifier, getPartsMethodName));
+        assertTrue(car.hasReturnType(getPartsMethodName, null, String[].class),
+                String.format(incorrectReturnType, getPartsMethodName));
+
+        /* Create instance to call method on */
+        Object[][] constructorArguments = {
+                {"Katie", String.class},
+                {34.2223, double.class}
+        };
+        Object carInstance = car.createInstance(constructorArguments);
+
+        /* Set parts field to passed value */
+        car.setFieldValue(carInstance, parts, stringArrayAttributeName);
+
+        /* Call getParts on car */
+        Object getNameOutput = car.callMethod(getPartsMethodName, carInstance);
+
+        /* Check result */
+        String incorrectUpdate = "Your %s method does not return the value of the %s attribute.";
+        _assertArrayEquals(parts, getNameOutput,
+                String.format(incorrectUpdate, getPartsMethodName, stringArrayAttributeName));
+    }
+
+    private static Stream<Arguments> toStringInputProvider() {
+        return Stream.of(
+                Arguments.of("Another Random Car", 0.51, new String[]{"Wheel", "Motor", "Das Auto"}),
+                Arguments.of("Volkswagen Golf", 345.12, new String[]{""}),
+                Arguments.of("Fiat 500", 0.01, new String[]{}),
+                Arguments.of("Dodge Grand Caravan", 187.66,
+                        new String[]{"Wheels", "Chassis", "Steering", "BodyKit", "Windows", "Doors", "Seats"})
+        );
+    }
+
+    private String expectedToString(String name, double speed, String[] parts) {
+        return String.format("Car{name='%s', speed=%.2f, parts=%s}", name, speed, Arrays.toString(parts));
+    }
+
+    @ParameterizedTest
+    @MethodSource("toStringInputProvider")
+    public void correctToStringMethod(String name, double speed, String[] parts) throws Throwable {
+        /* Check method definition */
+        String incorrectDefinition = "Your %s class is missing the %s method. Make sure it is defined, spelt correctly, and has the correct parameters.";
+        String incorrectModifier = "The %s method does not have the correct visibility modifier.";
+        String incorrectReturnType = "The %s method does not have the correct return type.";
+        assertTrue(car.hasMethod("toString", null),
+                String.format(incorrectDefinition, carClassName, "toString"));
+        assertTrue(car.hasModifier("toString", null, "public"),
+                String.format(incorrectModifier, "toString"));
+        assertTrue(car.hasReturnType("toString", null, String.class),
+                String.format(incorrectReturnType, "toString"));
+
+        /* Initialize object for toString test */
+        Object[][] constructorArguments = {
+                {"Kia Soul", String.class},
+                {11.43, double.class}
+        };
+        Object carInstance = car.createInstance(constructorArguments);
+
+        /* Set fields to values for test */
+        car.setFieldValue(carInstance, name, stringAttributeName);
+        car.setFieldValue(carInstance, speed, doubleAttributeName);
+        car.setFieldValue(carInstance, parts, stringArrayAttributeName);
+
+        /* Test output */
+        String expectedOutput = expectedToString(name, speed, parts);
+        Object actualOutput = car.callMethod("toString", carInstance);
+        _assertEquals(expectedOutput, actualOutput,
+                "The String output from your toString method is not correct. Please check the formatting of the String.");
+    }
+
+    private static Stream<Arguments> collideInputProvider() {
+        return Stream.of(
+
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("collideInputProvider")
+    public void collisionHasCorrectCollideMethod(String name1, double speed1, String[] parts1, String name2, double speed2, String[] parts2) {
+        /* Check method parameters */
+        String incorrectDefinition = "Your %s class is missing the %s method. Make sure it is defined, spelt correctly, and has the correct parameters.";
+        String incorrectModifier = "The %s method does not have the correct visibility modifier.";
+        String incorrectReturnType = "The %s method does not have the correct return type.";
+        String incorrectStatic = "The %s method must have the static modifier.";
+        Class<?>[] methodClassParameters = new Class[]{car.getObjectClass(), car.getObjectClass()};
+        assertTrue(car.hasMethod(collideMethodName, methodClassParameters),
+                String.format(incorrectDefinition, collisionClassName, collideMethodName));
+        assertTrue(car.hasModifier(collideMethodName, methodClassParameters, "public"),
+                String.format(incorrectModifier, collideMethodName));
+        assertTrue(car.hasReturnType(collideMethodName, methodClassParameters, Void.TYPE),
+                String.format(incorrectReturnType, collideMethodName));
+        assertTrue(car.hasModifier(collideMethodName, methodClassParameters, "static"),
+                String.format(incorrectStatic, collideMethodName));
     }
 }
