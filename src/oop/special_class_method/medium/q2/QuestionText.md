@@ -2,9 +2,8 @@
 
 ## Question Text
 
-You are about to start writing a program that involves luminous objects. Make a Java class called `Lamp` that has two
-attributes called **brightness** and **isOn**. The class also has two constructors, one with 2 parameters to initialize
-two attributes and one with 1 parameter that sets the second attribute to the default value.
+You are about to start writing a program that involves luminous objects. Make a Java class called `Lamp` with the 
+following description.
 
 ### Question Type:
 
@@ -36,4 +35,5 @@ You need to add the following items to the class:
     - a `toString` method which returns the string `"My brightness is x and isOn is y"`, where x is the
       **brightness** attribute and y is the **isOn** attribute.
     - All of these methods must be acessible from other classes.
+    - The setter method must not have any return value (It must be void).
   
