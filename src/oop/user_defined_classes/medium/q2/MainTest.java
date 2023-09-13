@@ -104,7 +104,7 @@ public class MainTest {
         Object instance = classInstance.createInstance(arguments);
         Object output = classInstance.callMethod(methodName, instance);
         _assertEquals(horsePower * 2, classInstance.getFieldValue(instance, varPower),
-                "Your " + className + " improve method does not doubles the " + varPower + ".");
+                "Your " + className + " improve method does not double the value of the " + varPower + "  attribute.");
     }
 
 }
