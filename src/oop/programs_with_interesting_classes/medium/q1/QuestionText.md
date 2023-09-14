@@ -60,3 +60,4 @@ Your `Collision` Class must have the following methods:
     - On the slower car, it should remove the last two strings from the **parts** array. To do this, create a new array
       where the length is two less than the old **parts** array, and copy in all the strings except the last two.
       Then, update the value of **parts** to this newly created array.
+    - If both cars are going the same speed, remove two parts from both.

@@ -33,6 +33,7 @@ public class MainTest {
     private final String collideMethodName = "collide";
     private final String[] expectedPartsArray =
             new String[]{"Wheels", "Chassis", "Steering", "BodyKit", "Windows", "Doors", "Seats"};
+    private final int collisionPartsDifference = 2;
 
     @BeforeEach
     public void setUp() {
@@ -273,7 +274,9 @@ public class MainTest {
         Object carInstance = car.createInstance(constructorArguments);
 
         /* Call setParts on car */
-        Object[][] methodArgs = {{parts, String[].class}};
+        String[] partsCopy = new String[parts.length];
+        System.arraycopy(parts, 0, partsCopy, 0, parts.length);
+        Object[][] methodArgs = {{partsCopy, String[].class}};
         car.callMethod(setPartsMethodName, methodArgs, carInstance);
 
         /* Check result */
@@ -304,7 +307,9 @@ public class MainTest {
         Object carInstance = car.createInstance(constructorArguments);
 
         /* Set parts field to passed value */
-        car.setFieldValue(carInstance, parts, stringArrayAttributeName);
+        String[] partsCopy = new String[parts.length];
+        System.arraycopy(parts, 0, partsCopy, 0, parts.length);
+        car.setFieldValue(carInstance, partsCopy, stringArrayAttributeName);
 
         /* Call getParts on car */
         Object getNameOutput = car.callMethod(getPartsMethodName, carInstance);
@@ -353,7 +358,9 @@ public class MainTest {
         /* Set fields to values for test */
         car.setFieldValue(carInstance, name, stringAttributeName);
         car.setFieldValue(carInstance, speed, doubleAttributeName);
-        car.setFieldValue(carInstance, parts, stringArrayAttributeName);
+        String[] partsCopy = new String[parts.length];
+        System.arraycopy(parts, 0, partsCopy, 0, parts.length);
+        car.setFieldValue(carInstance, partsCopy, stringArrayAttributeName);
 
         /* Test output */
         String expectedOutput = expectedToString(name, speed, parts);
@@ -364,26 +371,99 @@ public class MainTest {
 
     private static Stream<Arguments> collideInputProvider() {
         return Stream.of(
-
+                Arguments.of("Dodge Ram", 30.31, new String[]{"Chasis", "Body", "Headphones", "Windows"},
+                        "Fiat 500", 30.32, new String[]{"Go cart"}),
+                Arguments.of("Volkswagen Tiguan", 145.67, new String[]{"Teresa", "Cargo Bay", "Arduino Board", "Shotgun", "Yeti mug"},
+                        "MAC TRUCK", 145.68, new String[]{"Nuclear Codes", "Justin", "Trump", "TI-89"}),
+                Arguments.of("Ramonmobile", 404.304, new String[]{"MySQl Database", "Kevin's Cheat Codes"},
+                        "Popemobile", 404.304, new String[]{"Pope", "Hat", "Holy Water"})
         );
     }
 
     @ParameterizedTest
     @MethodSource("collideInputProvider")
-    public void collisionHasCorrectCollideMethod(String name1, double speed1, String[] parts1, String name2, double speed2, String[] parts2) {
+    public void collisionHasCorrectCollideMethod(String name1, double speed1, String[] parts1, String name2, double speed2, String[] parts2) throws Throwable {
         /* Check method parameters */
         String incorrectDefinition = "Your %s class is missing the %s method. Make sure it is defined, spelt correctly, and has the correct parameters.";
         String incorrectModifier = "The %s method does not have the correct visibility modifier.";
         String incorrectReturnType = "The %s method does not have the correct return type.";
         String incorrectStatic = "The %s method must have the static modifier.";
         Class<?>[] methodClassParameters = new Class[]{car.getObjectClass(), car.getObjectClass()};
-        assertTrue(car.hasMethod(collideMethodName, methodClassParameters),
+        assertTrue(collision.hasMethod(collideMethodName, methodClassParameters),
                 String.format(incorrectDefinition, collisionClassName, collideMethodName));
-        assertTrue(car.hasModifier(collideMethodName, methodClassParameters, "public"),
+        assertTrue(collision.hasModifier(collideMethodName, methodClassParameters, "public"),
                 String.format(incorrectModifier, collideMethodName));
-        assertTrue(car.hasReturnType(collideMethodName, methodClassParameters, Void.TYPE),
+        assertTrue(collision.hasReturnType(collideMethodName, methodClassParameters, Void.TYPE),
                 String.format(incorrectReturnType, collideMethodName));
-        assertTrue(car.hasModifier(collideMethodName, methodClassParameters, "static"),
+        assertTrue(collision.hasModifier(collideMethodName, methodClassParameters, "static"),
                 String.format(incorrectStatic, collideMethodName));
+
+        /* Initialize objects for toString test */
+        Object[][] constructorArguments = {
+                {"", String.class},
+                {0.00, double.class}
+        };
+        Object car1 = car.createInstance(constructorArguments);
+        Object car2 = car.createInstance(constructorArguments);
+
+        /* Make array copies */
+        String[] partsCopy1 = new String[parts1.length];
+        System.arraycopy(parts1, 0, partsCopy1, 0, parts1.length);
+        String[] partsCopy2 = new String[parts2.length];
+        System.arraycopy(parts2, 0, partsCopy2, 0, parts2.length);
+
+        /* Set fields to values for test */
+        car.setFieldValue(car1, name1, stringAttributeName);
+        car.setFieldValue(car1, speed1, doubleAttributeName);
+        car.setFieldValue(car1, partsCopy1, stringArrayAttributeName);
+        car.setFieldValue(car2, name2, stringAttributeName);
+        car.setFieldValue(car2, speed2, doubleAttributeName);
+        car.setFieldValue(car2, partsCopy2, stringArrayAttributeName);
+
+        /* Call collision */
+        Object[][] collisionInput = {{car1, car.getObjectClass()}, {car2, car.getObjectClass()}};
+        collision.callMethod(collideMethodName, collisionInput);
+
+        /* Test output */
+        if (speed1 == speed2) {
+            String incorrectArray = String.format(
+                    "Your %s method did not correctly modify the %s array when the %s of both %s objects were equal.",
+                    collideMethodName,
+                    stringArrayAttributeName,
+                    doubleAttributeName,
+                    carClassName
+            );
+            _assertArrayEquals(collisionArray(parts1), car.getFieldValue(car1, stringArrayAttributeName), incorrectArray);
+            _assertArrayEquals(collisionArray(parts2), car.getFieldValue(car2, stringArrayAttributeName), incorrectArray);
+        } else {
+            String slowerCar = String.format(
+                    "Your %s method did not correctly modify the %s array of the %s object that had a lower %s.",
+                    collideMethodName,
+                    stringArrayAttributeName,
+                    carClassName,
+                    doubleAttributeName
+            );
+            String fasterCar = String.format(
+                    "Your %s method should not modify the %s array of the %s object that had a higher %s.",
+                    collideMethodName,
+                    stringArrayAttributeName,
+                    carClassName,
+                    doubleAttributeName
+            );
+            if (speed1 > speed2) {
+                _assertArrayEquals(parts1, car.getFieldValue(car1, stringArrayAttributeName), fasterCar);
+                _assertArrayEquals(collisionArray(parts2), car.getFieldValue(car2, stringArrayAttributeName), slowerCar);
+            } else {
+                _assertArrayEquals(collisionArray(parts1), car.getFieldValue(car1, stringArrayAttributeName), slowerCar);
+                _assertArrayEquals(parts2, car.getFieldValue(car2, stringArrayAttributeName), fasterCar);
+            }
+        }
+    }
+
+    private String[] collisionArray(String[] array) {
+        int length = array.length - collisionPartsDifference;
+        String[] result = new String[length];
+        System.arraycopy(array, 0, result, 0, length);
+        return result;
     }
 }
