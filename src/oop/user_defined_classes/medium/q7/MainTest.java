@@ -76,7 +76,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("methodInputProvider")
-    public void highwayCorrectIssueTicketMethod(int speedLim, int current, int ans) throws Throwable {
+    public void highwayHasCorrectIssueTicketMethod(int speedLim, int current, int ans) throws Throwable {
         Object[][] arguments1 = {
                 {speedLim, int.class}
         };
