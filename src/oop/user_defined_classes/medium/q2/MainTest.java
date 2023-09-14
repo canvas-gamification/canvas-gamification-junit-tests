@@ -50,27 +50,29 @@ public class MainTest {
             _assertEquals(colour, classInstance.getFieldValue(instance, varColour), modifiedClassMessage);
         }
     }
+    
     @Test
     public void classHasRequiredFields() {
         assertTrue(classInstance.hasField(varColour),
                 "Your " + className + " class is missing the " + varColour + " attribute, or it is spelled incorrectly.");
         assertTrue(classInstance.hasField(varColour, String.class),
-                "Your " + varColour + " attribute does not have the correct return type.");
+                "Your " + varColour + " attribute does not have the correct type.");
         assertTrue(classInstance.hasModifier(varColour, "private"),
                 "Your " + varColour + " attribute does not have the correct visibility modifier.");
         assertTrue(classInstance.hasField(varPower),
                 "Your " + className + " class is missing the " + varPower + " attribute, or it is spelled incorrectly.");
         assertTrue(classInstance.hasField(varPower, int.class),
-                "Your " + varPower + " attribute does not have the correct return type.");
+                "Your " + varPower + " attribute does not have the correct type.");
         assertTrue(classInstance.hasModifier(varPower, "private"),
                 "Your " + varPower + " attribute does not have the correct visibility modifier.");
         assertTrue(classInstance.hasField(varYear),
                 "Your " + className + " class is missing the " + varYear+ " attribute, or it is spelled incorrectly.");
         assertTrue(classInstance.hasField(varYear, int.class),
-                "Your " + varYear + " attribute does not have the correct return type.");
+                "Your " + varYear + " attribute does not have the correct type.");
         assertTrue(classInstance.hasModifier(varYear, "private"),
                 "Your " + varYear + " attribute does not have the correct visibility modifier.");
     }
+    
     private static Stream<Arguments> methodInputProvider() {
         return Stream.of(
                 Arguments.of("Red", 300, 2003),
@@ -108,4 +110,3 @@ public class MainTest {
     }
 
 }
-
