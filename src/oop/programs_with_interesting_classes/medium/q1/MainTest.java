@@ -1,6 +1,9 @@
 package oop.programs_with_interesting_classes.medium.q1;
 
 import global.ObjectTest;
+import global.variables.Clause;
+import global.variables.clauses.NewLine;
+import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -374,9 +377,11 @@ public class MainTest {
                 Arguments.of("Dodge Ram", 30.31, new String[]{"Chasis", "Body", "Headphones", "Windows"},
                         "Fiat 500", 30.32, new String[]{"Go cart"}),
                 Arguments.of("Volkswagen Tiguan", 145.67, new String[]{"Teresa", "Cargo Bay", "Arduino Board", "Shotgun", "Yeti mug"},
-                        "MAC TRUCK", 145.68, new String[]{"Nuclear Codes", "Justin", "Trump", "TI-89"}),
+                        "MAC TRUCK", 145.66, new String[]{"Nuclear Codes", "Justin", "Trump", "TI-89"}),
                 Arguments.of("Ramonmobile", 404.304, new String[]{"MySQl Database", "Kevin's Cheat Codes"},
-                        "Popemobile", 404.304, new String[]{"Pope", "Hat", "Holy Water"})
+                        "Popemobile", 404.304, new String[]{"Pope", "Hat", "Holy Water"}),
+                Arguments.of("Just another veichle", 50.00, new String[]{"Cab", "Bed"},
+                        "Batmobile", 50.00, new String[]{"Bat", "Motor"})
         );
     }
 
@@ -465,5 +470,36 @@ public class MainTest {
         String[] result = new String[length];
         System.arraycopy(array, 0, result, 0, length);
         return result;
+    }
+
+    @Test
+    public void collisionHasCorrectMainMethod() throws Throwable {
+        /* Check method definition */
+        String incorrectDefinition = "Your %s class is missing the main method. Make sure it is defined, spelt correctly, and has the correct parameters.";
+        String incorrectModifier = "Your main method does not have the correct visibility modifier.";
+        String incorrectReturnType = "Your main method does not have the correct return type.";
+        String incorrectStatic = "Your main method must have the static modifier.";
+        Class<?>[] methodClassParameters = new Class[]{String[].class};
+        assertTrue(collision.hasMethod("main", methodClassParameters),
+                String.format(incorrectDefinition, collisionClassName));
+        assertTrue(collision.hasModifier("main", methodClassParameters, "public"),
+                incorrectModifier);
+        assertTrue(collision.hasReturnType("main", methodClassParameters, Void.TYPE),
+                incorrectReturnType);
+        assertTrue(collision.hasModifier("main", methodClassParameters, "static"),
+                incorrectStatic);
+
+        Clause[] output = {
+                new StringLiteral(Pattern.quote("Car{name='Volkswagen Golf', speed=60.0, parts=[Wheels, Chassis, Steering, BodyKit, Windows, Doors, Seats]}")),
+                new NewLine(),
+                new StringLiteral(Pattern.quote("Car{name='Mini Cooper', speed=65.5, parts=[Wheels, Chassis, Steering, BodyKit, Windows, Doors, Seats]}")),
+                new NewLine(),
+                new StringLiteral(Pattern.quote("Car{name='Volkswagen Golf', speed=60.0, parts=[Wheels, Chassis, Steering, BodyKit, Windows]}")),
+                new NewLine(),
+                new StringLiteral(Pattern.quote("Car{name='Mini Cooper', speed=65.5, parts=[Wheels, Chassis, Steering, BodyKit, Windows, Doors, Seats]}"))
+        };
+        String incorrectOutput = "Your main method in the %s class did not print the correct output. Make sure you print the toString outputs on different lines and call the %s method";
+        Object[][] mainArgs = {{new String[0], String[].class}};
+        collision.callMethod("main", mainArgs, output, String.format(incorrectOutput, collisionClassName, collideMethodName));
     }
 }
