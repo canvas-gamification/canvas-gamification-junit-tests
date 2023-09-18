@@ -55,10 +55,14 @@ public class MainTest {
         Object[][] arguments = {
                 {value, String.class}
         };
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(getAttributeMethodName, null), String.format(incorrectMethodDefinition,getAttributeMethodName, className));
+        assertTrue(testClass.hasModifier(getAttributeMethodName, null, "public"), String.format(incorrectModifierMessage, getAttributeMethodName, className));
+        assertTrue(testClass.hasReturnType(getAttributeMethodName, null, String.class), String.format(incorrectReturnType, getAttributeMethodName, className));
         Object testInstance = testClass.createInstance(arguments);
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName, testInstance);
-        assertTrue(testClass.hasModifier(getAttributeMethodName, null, "public"),
-                "Your " + getAttributeMethodName + " method does not have the correct visibility modifier.");
         _assertEquals(value, getMethodOutput,
                 "Your " + getAttributeMethodName + " method does not return the value of the " + attributeName + " attribute.");
     }
@@ -77,18 +81,17 @@ public class MainTest {
         Object[][] instantiationArguments = {
                 {initialValue, String.class}
         };
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(setAttributeMethodName, new Class<?>[]{String.class}), String.format(incorrectMethodDefinition,setAttributeMethodName, className));
+        assertTrue(testClass.hasModifier(setAttributeMethodName, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, setAttributeMethodName, className));
+        assertTrue(testClass.hasReturnType(setAttributeMethodName, new Class<?>[]{String.class}, Void.TYPE), String.format(incorrectReturnType, setAttributeMethodName, className));
         Object testInstance = testClass.createInstance(instantiationArguments);
         Object[][] setMethodArguments = {
                 {updatedValue, String.class}
         };
-        Class<?>[] methodModifierClasses = {
-                String.class
-        };
         testClass.callMethod(setAttributeMethodName, setMethodArguments, testInstance);
-        assertTrue((testClass.hasMethod(setAttributeMethodName, methodModifierClasses)),
-                "Your " + setAttributeMethodName + " does not have the correct parameters.");
-        assertTrue(testClass.hasModifier(setAttributeMethodName, methodModifierClasses, "public"),
-                "Your " + setAttributeMethodName + " method does not have the correct visibility modifier.");
         String incorrectSetterMessage =
                 "Your " + setAttributeMethodName + " method does not correctly update the value of " + attributeName + ".";
         _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName),
