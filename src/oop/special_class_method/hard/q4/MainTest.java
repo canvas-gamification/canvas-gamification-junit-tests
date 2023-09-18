@@ -151,9 +151,8 @@ public class MainTest {
         assertTrue(testClass.hasModifier(setString2MethodName, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, setString2MethodName, className));
         assertTrue(testClass.hasReturnType(setString2MethodName, new Class<?>[]{String.class}, Void.TYPE), String.format(incorrectReturnType, setString2MethodName, className));
 
-        Object setMethodOutput = testClass.callMethod(setString2MethodName, setSizeArguments, setMethodModifiers, classInstance);
+        testClass.callMethod(setString2MethodName, setSizeArguments, setMethodModifiers, classInstance);
         _assertEquals(setValue, testClass.getFieldValue(classInstance, string2FieldName), incorrectSetMethodMessage);
-        assertNull(setMethodOutput, String.join(" ", "Your", setString2MethodName, "method should not return any output"));
     }
 
     @Test
@@ -228,9 +227,8 @@ public class MainTest {
         assertTrue(testClass.hasModifier(setStringMethodName, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, setStringMethodName, className));
         assertTrue(testClass.hasReturnType(setStringMethodName, new Class<?>[]{String.class}, Void.TYPE), String.format(incorrectReturnType, setStringMethodName, className));
 
-        Object setMethodOutput = testClass.callMethod(setStringMethodName, setMethodArguments, setMethodModifiers, classInstance);
+        testClass.callMethod(setStringMethodName, setMethodArguments, setMethodModifiers, classInstance);
         _assertEquals(updatedValue, testClass.getFieldValue(classInstance, stringFieldName), incorrectSetMethodMessage);
-        assertNull(setMethodOutput, String.join(" ", "Your", setStringMethodName, "method should not return any output"));
     }
 
     private static Stream<String> stringInputProvider() {
