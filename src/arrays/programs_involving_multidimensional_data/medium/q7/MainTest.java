@@ -54,7 +54,9 @@ public class MainTest extends BaseRandomTest {
     }
 
     public static int[][] answerFor(int[][] arr) {
-        int[][] ans = arr.clone();
+        int[][] ans = new int[arr.length][arr[0].length];
+        for (int x = 0; x < arr.length; x++)
+            System.arraycopy(arr[x], 0, ans[x], 0, arr[x].length);
         for (int i = 0; i < ans.length; i++) {
             for (int j = 0; j < ans[i].length; j++) {
                 if (ans[i][j] % 2 == 0)
@@ -123,7 +125,7 @@ public class MainTest extends BaseRandomTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctAddorSubMethod(int[][] arr) throws Throwable {
+    public void correctAddOrSubMethod(int[][] arr) throws Throwable {
         int[][] ans = answerFor(arr);
         Clause[] testSentence = new Clause[ans.length * ans.length + ans.length];
         int t = 0;
@@ -135,7 +137,8 @@ public class MainTest extends BaseRandomTest {
         Object[][] arguments = {
                 {arr, int[][].class}
         };
-        MethodTest m = new MethodTest(MultiDivide.class, "addorSub", arguments, testSentence);
-        m.setIncorrectMethodStructureErrorMessage("Your addorSub method does not correctly manipulate the elements of the generated 2D array.");
+        MethodTest m = new MethodTest(MultiDivide.class, "addOrSub", arguments, testSentence);
+        m.setIncorrectMethodStructureErrorMessage("Your addOrSub method does not correctly manipulate the elements of the generated 2D array.");
+        m.callMethod();
     }
 }
