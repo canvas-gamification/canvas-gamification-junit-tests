@@ -42,8 +42,7 @@ public class MainTest {
     }
 
     @Test
-    @Tag("dependent1")
-    @Tag("dependent2")
+    @Tag("dependency1")
     public void correctTestClass() throws Throwable {
         Object classInstance = outputClass.createInstance();
         String[] methodModifiers = {"public"};
@@ -271,7 +270,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    @Tag("dependent2")
+    @Tag("dependent1")
     public void detergentClassHasCorrectToStringMethod(String value, String b) throws Throwable {
         Object[][] arguments = {
                 {value, String.class},
