@@ -49,11 +49,12 @@ public class MainTest {
         Object[][] arguments = {
                 {new String[0], String[].class}
         };
+        String incorrectMainMethodOutput = "Your " + testClassName + " does not print the correct output in its main method.";
         outputClass.callMethod("main", arguments, methodModifiers, classInstance, new Clause[]{
                 new StringLiteral("The " + className + " instance " + string2FieldName + " is " + outputName + " and its " + stringFieldName + " is " + outputStrength + "."),
                 new Optional(new StringLiteral(" ")),
                 new Optional(new NewLine())
-        });
+        }, incorrectMainMethodOutput);
     }
 
     @Test
