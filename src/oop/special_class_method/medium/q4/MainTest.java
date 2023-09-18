@@ -86,7 +86,7 @@ public class MainTest {
         };
         testClass.callMethod(setAttributeMethodName, setMethodArguments, testInstance);
         assertTrue((testClass.hasMethod(setAttributeMethodName, methodModifierClasses)),
-                "Your " + setAttributeMethodName + " does nor have the correct parameters.");
+                "Your " + setAttributeMethodName + " does not have the correct parameters.");
         assertTrue(testClass.hasModifier(setAttributeMethodName, methodModifierClasses, "public"),
                 "Your " + setAttributeMethodName + " method does not have the correct visibility modifier.");
         String incorrectSetterMessage =
