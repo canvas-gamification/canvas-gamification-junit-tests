@@ -61,3 +61,11 @@ Your `Collision` Class must have the following methods:
       where the length is two less than the old **parts** array, and copy in all the strings except the last two.
       Then, update the value of **parts** to this newly created array.
     - If both cars are going the same speed, remove two parts from both.
+
+- Copy Parts Method:
+    - A helper method called `copyParts` which is accessible from any class, is *static*, returns nothing, and accepts
+      two `String[]` as parameters.
+    - The method will take two arrays `newParts` and `oldParts`, and should copy the parts from the old array to the new
+      array
+    - This method is to copy the parts over in the collide method
+    - Hint: make sure to initialize the arrays in the collide method before calling this method
