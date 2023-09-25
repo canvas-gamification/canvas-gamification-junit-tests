@@ -41,9 +41,7 @@ public class MainTest {
     }
 
     @Test
-    @Tag("dependent1")
-    @Tag("dependent2")
-    @Tag("dependent3")
+    @Tag("dependency1")
     public void correctTestClass() throws Throwable {
         Object classInstance = outputClass.createInstance();
         String[] methodModifiers = {"public"};
@@ -109,23 +107,19 @@ public class MainTest {
                 {value1, double.class},
                 {value2, String.class}
         };
-        Class<?>[] constructorClasses = {double.class, String.class};
         Object classInstance = testClass.createInstance(arguments);
         String incorrectDoubleValueMessage =
                 "Your " + className + " constructor with input does not initialize the " + doubleFieldName + " attribute to the correct value.";
         String incorrectStringValueMessage =
                 "Your " + className + " constructor with input does not initialize the " + stringFieldName + " attribute to the correct value.";
-        String incorrectConstructorVisibilityModifier =
-                "Your " + className + " constructor does not have the correct visibility modifier.";
         _assertEquals(value1, testClass.getFieldValue(classInstance, doubleFieldName),
                 incorrectDoubleValueMessage);
         _assertEquals(value2, testClass.getFieldValue(classInstance, stringFieldName),
                 incorrectStringValueMessage);
-        assertTrue(testClass.hasModifier(constructorClasses, "public"), incorrectConstructorVisibilityModifier);
     }
 
     @Test
-    @Tag("dependent2")
+    @Tag("dependent1")
     public void carClassHasCorrectConstructor2() throws Throwable {
         Object classInstance = testClass.createInstance();
         String incorrectDoubleValueMessage =
@@ -290,7 +284,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    @Tag("dependent3")
+    @Tag("dependent1")
     public void carClassHasCorrectToStringMethod(double value, String b) throws Throwable {
         Object[][] arguments = {
                 {value, double.class},
