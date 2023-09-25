@@ -35,9 +35,18 @@ public class MainTest {
         assertTrue(testClass.hasModifier(attributeName1, "private"), modifiedClassMessage);
         assertTrue(testClass.hasField(attributeName2, boolean.class), modifiedClassMessage);
         assertTrue(testClass.hasModifier(attributeName2, "private"), modifiedClassMessage);
-        double[] tests = new double[]{0.0, 23.3233, 553233333.55655334324, -111111.333342, 3554 / 3.7};
+        Class<?>[] constructorArgs = new Class[]{double.class, boolean.class};
+        assertTrue(testClass.hasConstructor(constructorArgs), modifiedClassMessage);
+        assertTrue(testClass.hasModifier(constructorArgs, "public"), modifiedClassMessage);
+        Object[][] tests = new Object[][]{
+                {0.0, false},
+                {23.3233, true},
+                {553233333.55655334324, false},
+                {-111111.333342, false},
+                {3554 / 3.7, true}};
         for (int i = 0; i < tests.length; i++) {
-            double value = tests[i];
+            double value = (double) tests[i][0];
+            boolean on = (boolean) tests[i][1];
             Object[][] arguments = {
                     {value, double.class}
             };
@@ -46,6 +55,16 @@ public class MainTest {
             _assertEquals(value, testClass.getFieldValue(testInstance, attributeName1), modifiedClassMessage);
             _assertEquals(isOnValue, testClass.getFieldValue(testInstance, attributeName2), modifiedClassMessage);
             assertTrue(testClass.hasModifier(classes, "public"), modifiedClassMessage);
+
+            Object[][] arguments2 = {
+                    {value, double.class},
+                    {on, boolean.class}
+            };
+            Class<?>[] classes2 = {double.class, boolean.class};
+            Object testInstance2 = testClass.createInstance(arguments2);
+            _assertEquals(value, testClass.getFieldValue(testInstance2, attributeName1), modifiedClassMessage);
+            _assertEquals(on, testClass.getFieldValue(testInstance2, attributeName2), modifiedClassMessage);
+            assertTrue(testClass.hasModifier(classes2, "public"), modifiedClassMessage);
         }
     }
 
@@ -65,7 +84,7 @@ public class MainTest {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(getAttributeMethodName1, null), String.format(incorrectMethodDefinition,getAttributeMethodName1, className));
+        assertTrue(testClass.hasMethod(getAttributeMethodName1, null), String.format(incorrectMethodDefinition, getAttributeMethodName1, className));
         assertTrue(testClass.hasModifier(getAttributeMethodName1, null, "public"), String.format(incorrectModifierMessage, getAttributeMethodName1, className));
         assertTrue(testClass.hasReturnType(getAttributeMethodName1, null, double.class), String.format(incorrectReturnType, getAttributeMethodName1, className));
         Object testInstance = testClass.createInstance(arguments);
@@ -92,7 +111,7 @@ public class MainTest {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(setAttributeMethodName1, new Class<?>[]{double.class}), String.format(incorrectMethodDefinition,getAttributeMethodName1, className));
+        assertTrue(testClass.hasMethod(setAttributeMethodName1, new Class<?>[]{double.class}), String.format(incorrectMethodDefinition, getAttributeMethodName1, className));
         assertTrue(testClass.hasModifier(setAttributeMethodName1, new Class<?>[]{double.class}, "public"), String.format(incorrectModifierMessage, getAttributeMethodName1, className));
         assertTrue(testClass.hasReturnType(setAttributeMethodName1, new Class<?>[]{double.class}, Void.TYPE), String.format(incorrectReturnType, getAttributeMethodName1, className));
         Object testInstance = testClass.createInstance(instantiationArguments);
@@ -115,35 +134,6 @@ public class MainTest {
         );
     }
 
-    @Test
-    public void lampHasRequiredConstructor() {
-        String missingConstructorMessage = "The %s class is missing a required constructor. Make sure that it is named correctly and has the correct parameters.";
-        String wrongAccessModifier = "The %s class constructor has the wrong visibility modifier. Make sure that it is visible from all other classes.";
-        Class<?>[] constructorArgs = new Class[]{double.class, boolean.class};
-        assertTrue(testClass.hasConstructor(constructorArgs), String.format(missingConstructorMessage, className));
-        assertTrue(testClass.hasModifier(constructorArgs, "public"), String.format(wrongAccessModifier, className));
-    }
-
-    @ParameterizedTest
-    @MethodSource("booleanDoublesInputProvider")
-    public void correctLampConstructor(double value, boolean on) throws Throwable {
-        String incorrectValueMessage = "Your " + className + " constructor does not correctly initialize the " +
-                attributeName1 + " attribute.";
-        String incorrectValueMessage2 = "Your " + className + " constructor does not correctly initialize the " +
-                attributeName2 + " attribute.";
-        String incorrectVisibilityModifier =
-                "Your " + className + " constructor does not have the correct visibility modifier.";
-        Object[][] arguments = {
-                {value, double.class},
-                {on, boolean.class}
-        };
-        Class<?>[] classes = {double.class, boolean.class};
-        Object testInstance = testClass.createInstance(arguments);
-        _assertEquals(value, testClass.getFieldValue(testInstance, attributeName1), incorrectValueMessage);
-        _assertEquals(on, testClass.getFieldValue(testInstance, attributeName2), incorrectValueMessage2);
-        assertTrue(testClass.hasModifier(classes, "public"), incorrectVisibilityModifier);
-    }
-
     @ParameterizedTest
     @MethodSource("booleanDoublesInputProvider")
     public void correctGetIsOnMethod(double value, boolean on) throws Throwable {
@@ -154,7 +144,7 @@ public class MainTest {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(getAttributeMethodName2, null), String.format(incorrectMethodDefinition,getAttributeMethodName2, className));
+        assertTrue(testClass.hasMethod(getAttributeMethodName2, null), String.format(incorrectMethodDefinition, getAttributeMethodName2, className));
         assertTrue(testClass.hasModifier(getAttributeMethodName2, null, "public"), String.format(incorrectModifierMessage, getAttributeMethodName2, className));
         assertTrue(testClass.hasReturnType(getAttributeMethodName2, null, boolean.class), String.format(incorrectReturnType, getAttributeMethodName2, className));
         Object testInstance = testClass.createInstance(arguments);
@@ -180,7 +170,7 @@ public class MainTest {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(setAttributeMethodName2, new Class<?>[]{boolean.class}), String.format(incorrectMethodDefinition,getAttributeMethodName2, className));
+        assertTrue(testClass.hasMethod(setAttributeMethodName2, new Class<?>[]{boolean.class}), String.format(incorrectMethodDefinition, getAttributeMethodName2, className));
         assertTrue(testClass.hasModifier(setAttributeMethodName2, new Class<?>[]{boolean.class}, "public"), String.format(incorrectModifierMessage, getAttributeMethodName2, className));
         assertTrue(testClass.hasReturnType(setAttributeMethodName2, new Class<?>[]{boolean.class}, Void.TYPE), String.format(incorrectReturnType, getAttributeMethodName2, className));
         Object testInstance = testClass.createInstance(instantiationArguments);

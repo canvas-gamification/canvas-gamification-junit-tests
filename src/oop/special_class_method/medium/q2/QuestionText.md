@@ -20,12 +20,10 @@ You are already given the following items:
 - Constructor:
     - a `Lamp` constructor that is visible to other classes, accepts a `double` and uses it to initialize the
       **brightness** attribute, and initializes the **isOn** attribute to true.
+    - - a `Lamp` constructor that is visible to other classes and accepts a `double` and a `boolean` and uses it to
+        initialize the **brightness** and **isOn** attributes.
 
 You need to add the following items to the class:
-
-- Constructor:
-    - a `Lamp` constructor that is visible to other classes and accepts a `double` and a `boolean` and uses it to
-      initialize the **brightness** and **isOn** attributes.
 
 - Methods:
     - a `setBrightness` method which accepts a `double` and uses it to set the value of the **brightness** attribute
