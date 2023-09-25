@@ -31,7 +31,6 @@ public class MainTest {
 
     @Test
     @Tag("dependency1")
-    @Tag("dependency2")
     public void correctTestClass() throws Throwable {
         Clause[] c = new Clause[]{
                 new StringLiteral("There are " + outputNum1 + " people ahead of you"),
@@ -43,7 +42,7 @@ public class MainTest {
         Object[][] arguments = {
                 {new String[0], String[].class}
         };
-        String incorrectMethodOutputMessage = "Your main method in the " + outputClassName + " class does not print the correct output.";
+        String incorrectMethodOutputMessage = "Your main method in the " + outputClassName + " class does not print the correct output, make sure you initialize, modify, and print the object correctly using toString method.";
         outputClass.callMethod("main", arguments, c, incorrectMethodOutputMessage);
     }
 
@@ -86,7 +85,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependency1")
+    @Tag("dependent1")
     public void phoneWaitListClassHasCorrectConstructor(int value) throws Throwable {
         Object[][] arguments = {
                 {value, int.class}
@@ -171,7 +170,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependency2")
+    @Tag("dependent1")
     public void phoneWaitListClassHasCorrectToStringMethod(int value) throws Throwable {
         Object[][] arguments = {
                 {value, int.class}
