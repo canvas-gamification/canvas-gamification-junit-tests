@@ -1,5 +1,10 @@
 # oop-special_class_method-hard-q9
 
+### Question Text
+
+Many people are fascinated by our planet's solar system. Make a Java class called Earth that represents one of those
+planets and has the description below:
+
 ### Earth Class:
 
 Your `Earth` class must have the following items:
@@ -23,6 +28,7 @@ Your `Earth` class must have the following items:
     - a `toString` method which returns a String of the information about the `Earth` class of the form
       `"Here x people live on a ykg planet."` where x is the value of **population** attribute and
       y is the value of **landMass** attribute.
+    - Note that all of the setter methods must not return any value
 
 ### Distractors:
 
