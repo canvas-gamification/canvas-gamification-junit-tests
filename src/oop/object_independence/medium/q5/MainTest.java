@@ -92,7 +92,6 @@ public class MainTest {
                 {value1, String.class},
                 {value2, int.class}
         };
-        Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
                 "Your", getSecondField, "method does not correctly get the value of the", secondFieldName, "attribute.");
@@ -102,6 +101,7 @@ public class MainTest {
         assertTrue(testClass.hasMethod(getSecondField, null), String.format(incorrectMethodDefinition, getSecondField, className));
         assertTrue(testClass.hasModifier(getSecondField, null, "public"), String.format(incorrectModifierMessage, getSecondField, className));
         assertTrue(testClass.hasReturnType(getSecondField, null, int.class), String.format(incorrectReturnType, getSecondField, className));
+        Object classInstance = testClass.createInstance(arguments);
         Object getMethodOutput = testClass.callMethod(getSecondField, getMethodModifiers, classInstance);
         _assertEquals(value2, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -132,7 +132,6 @@ public class MainTest {
                 {"Name", String.class},
                 {value, int.class}
         };
-        Object classInstance = testClass.createInstance(arguments);
         Object[][] setArguments = {
                 {update, int.class}
         };
@@ -145,7 +144,7 @@ public class MainTest {
         assertTrue(testClass.hasMethod(setSecondField, new Class<?>[]{int.class}), String.format(incorrectMethodDefinition, setSecondField, className));
         assertTrue(testClass.hasModifier(setSecondField, new Class<?>[]{int.class}, "public"), String.format(incorrectModifierMessage, setSecondField, className));
         assertTrue(testClass.hasReturnType(setSecondField, new Class<?>[]{int.class}, Void.TYPE), String.format(incorrectReturnType, setSecondField, className));
-
+        Object classInstance = testClass.createInstance(arguments);
         testClass.callMethod(setSecondField, setArguments, setMethodModifiers, classInstance);
         _assertEquals(update, testClass.getFieldValue(classInstance, secondFieldName), incorrectSetMethodMessage);
     }
@@ -157,7 +156,6 @@ public class MainTest {
                 {value1, String.class},
                 {value2, int.class}
         };
-        Object classInstance = testClass.createInstance(arguments);
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
@@ -168,6 +166,7 @@ public class MainTest {
         String expected = "Team " + value1 + " has won " + value2 + " games";
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, "toString method does not return the correct String.");
+        Object classInstance = testClass.createInstance(arguments);
         Object output = testClass.callMethod("toString", methodModifiers, classInstance);
         _assertEquals(expected, output, incorrectToStringMessage);
     }

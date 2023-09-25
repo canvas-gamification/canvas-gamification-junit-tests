@@ -4,6 +4,11 @@
 
 - Question type: Java
 
+### Question Text
+
+Your friends are interested in betting on which team wins the Stanley Cup this year. Make a program called **Team** 
+where you keep track of the teams in the league and the games they have won as attribute.
+
 ### Team Class
 
 Your `Team` class must have the following items:
@@ -25,3 +30,4 @@ Your `Team` class must have the following items:
     - a `toString` method which returns a String of the information about the `Team` class of the form
       `"Team x has won y games"`, where x is the value of **name** and y is the value of **totalWins**,
       and is visible from other classes.
+    - Note that all setter methods must not return any value
