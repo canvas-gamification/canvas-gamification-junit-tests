@@ -4,6 +4,11 @@
 
 - Question type: Java
 
+### Question Text
+
+You are about to take a long road trip so you want to build a simple portable player to keep yourself entertained on the 
+trip. Make a class called **portableMusicPlayer** with the following description:
+
 ### PortableMusicPlayer Class
 
 Your `PortableMusicPlayer` class must have the following items:

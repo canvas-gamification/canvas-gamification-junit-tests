@@ -96,16 +96,15 @@ public class MainTest {
         Object[][] arguments = {
                 {value, String[].class}
         };
-        Object classInstance = testClass.createInstance(arguments);
-        String[] methodModifiers = {"public"};
-        int current = (int) testClass.getFieldValue(classInstance, secondFieldName);
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(firstMethod, null), String.format(incorrectMethodDefinition, firstMethod, className));
         assertTrue(testClass.hasModifier(firstMethod, null, "public"), String.format(incorrectModifierMessage, firstMethod, className));
         assertTrue(testClass.hasReturnType(firstMethod, null, Void.TYPE), String.format(incorrectReturnType, firstMethod, className));
-
+        Object classInstance = testClass.createInstance(arguments);
+        String[] methodModifiers = {"public"};
+        int current = (int) testClass.getFieldValue(classInstance, secondFieldName);
         testClass.callMethod(firstMethod, methodModifiers, classInstance, new Clause[]{
                         new StringLiteral("Now Playing : " + value[current])
                 },
@@ -130,16 +129,15 @@ public class MainTest {
         Object[][] arguments = {
                 {value, String[].class}
         };
-        Object classInstance = testClass.createInstance(arguments);
-        String[] methodModifiers = {"public"};
-        int current = (int) testClass.getFieldValue(classInstance, secondFieldName);
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(secondMethod, null), String.format(incorrectMethodDefinition, secondMethod, className));
         assertTrue(testClass.hasModifier(secondMethod, null, "public"), String.format(incorrectModifierMessage, secondMethod, className));
         assertTrue(testClass.hasReturnType(secondMethod, null, Void.TYPE), String.format(incorrectReturnType, secondMethod, className));
-
+        Object classInstance = testClass.createInstance(arguments);
+        String[] methodModifiers = {"public"};
+        int current = (int) testClass.getFieldValue(classInstance, secondFieldName);
         testClass.callMethod(secondMethod, methodModifiers, classInstance, new Clause[]{
                         new StringLiteral("Now Playing : " + value[(current + 1) % value.length])
                 },
@@ -164,15 +162,15 @@ public class MainTest {
         Object[][] arguments = {
                 {value, String[].class}
         };
-        Object classInstance = testClass.createInstance(arguments);
         String[] methodModifiers = {"public"};
-        int current = (int) testClass.getFieldValue(classInstance, secondFieldName);
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(thirdMethod, null), String.format(incorrectMethodDefinition, testClass, className));
         assertTrue(testClass.hasModifier(thirdMethod, null, "public"), String.format(incorrectModifierMessage, testClass, className));
         assertTrue(testClass.hasReturnType(thirdMethod, null, Void.TYPE), String.format(incorrectReturnType, testClass, className));
+        Object classInstance = testClass.createInstance(arguments);
+        int current = (int) testClass.getFieldValue(classInstance, secondFieldName);
         testClass.callMethod(thirdMethod, methodModifiers, classInstance, new Clause[]{
                         new StringLiteral("Now Playing : " + value[(current - 1 + value.length) % value.length])
                 },
