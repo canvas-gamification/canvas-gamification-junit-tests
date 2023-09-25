@@ -3,8 +3,7 @@
 ## Question Text
 
 You are about to write a program that can grow and breed different things, and you can control how they evolve. Make a 
-Java class called `Plant` that has a String attribute called **breed** which is initialized in the constructor. The class 
-also includes an accessor and a mutator for each attribute.
+Java class called `Plant` that represents something you grow with the following description.
 
 
 ### Plant
@@ -26,3 +25,4 @@ You need to add the following items:
     - a `getBreed` method which returns the value stored in the **breed** attribute
     - a `toString` method which return the string `"My breed is x"` where x is the value of **breed**
     - All of these methods should be visible from another class.
+    - All the setter methods must not return anything.
