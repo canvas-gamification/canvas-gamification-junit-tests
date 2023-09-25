@@ -1,5 +1,10 @@
 # oop-special_class_method-hard-q5
 
+### Question Text
+
+You are writing a Java program that describes different types of roads and their attributes. Write a Java class called
+Road the has the following description:
+
 ### Road Class:
 
 Your `Road` class must have the following items:
