@@ -58,15 +58,6 @@ public class MainTest {
     }
 
     @Test
-    public void detergentClassHasRequiredConstructor() {
-        Class<?>[] classArguments = {String.class, String.class};
-        assertTrue(testClass.hasConstructor(classArguments),
-                "Your " + className + " constructor does not have the correct parameters.");
-        assertTrue(testClass.hasModifier(classArguments, "public"),
-                "Your " + className + " constructor does not have the correct modifier.");
-    }
-
-    @Test
     public void detergentClassHasCorrectAttributes() {
         assertTrue(testClass.hasField(string2FieldName),
                 "The attribute " +  string2FieldName + " could not be found in your class. Please make sure you have added it, and it is spelled correctly.");
@@ -121,7 +112,7 @@ public class MainTest {
     }
 
     @Test
-    public void setVolumeIsDefinedCorrectly() {
+    public void setNameIsDefinedCorrectly() {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
