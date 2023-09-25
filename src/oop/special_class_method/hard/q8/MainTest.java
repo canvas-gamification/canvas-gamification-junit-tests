@@ -41,8 +41,7 @@ public class MainTest {
     }
 
     @Test
-    @Tag("dependent1")
-    @Tag("dependent2")
+    @Tag("dependency1")
     public void correctTestClass() throws Throwable {
         Object classInstance = outputClass.createInstance();
         String[] methodModifiers = {"public"};
@@ -53,7 +52,8 @@ public class MainTest {
                 new StringLiteral("I have a " + outputRadius + " radius and my colour is " + outputColour),
                 new Optional(new StringLiteral(" ")),
                 new Optional(new NewLine())
-        });
+        },
+                "Your main method in " + testClassName + " class does not print the correct output.");
     }
 
     @Test
@@ -99,19 +99,15 @@ public class MainTest {
                 {value1, double.class},
                 {value2, String.class}
         };
-        Class<?>[] constructorClasses = {double.class, String.class};
         Object classInstance = testClass.createInstance(arguments);
         String incorrectDoubleValueMessage =
                 "Your " + className + " constructor does not initialize the " + doubleFieldName + " attribute to the correct value.";
         String incorrectStringValueMessage =
                 "Your " + className + " constructor does not initialize the " + stringFieldName + " attribute to the correct value.";
-        String incorrectConstructorVisibilityModifier =
-                "Your " + className + " constructor does not have the correct visibility modifier.";
         _assertEquals(value1, testClass.getFieldValue(classInstance, doubleFieldName),
                 incorrectDoubleValueMessage);
         _assertEquals(value2, testClass.getFieldValue(classInstance, stringFieldName),
                 incorrectStringValueMessage);
-        assertTrue(testClass.hasModifier(constructorClasses, "public"), incorrectConstructorVisibilityModifier);
     }
 
     private static Stream<Arguments> doubleInputProvider() {

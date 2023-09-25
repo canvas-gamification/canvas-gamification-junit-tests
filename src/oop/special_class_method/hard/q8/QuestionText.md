@@ -1,5 +1,10 @@
 # oop-special_class_method-hard-q8
 
+## Question Text
+
+You are writing a Java program that details various round objects. Write a Java class called Circle with the following
+description:
+
 ### Circle Class:
 
 Your `Circle` class must have the following items:
@@ -22,8 +27,9 @@ Your `Circle` class must have the following items:
     - a `toString` method which returns a String of the information about the `Circle` class of the form
       `"I have a x radius and my colour is y"` where x is the value of **radius** attribute and y is the
       value of **colour** attribute
+    - The setter methods must not return any value
 
 ### Test Class:
 
-Your `Test` class will have a main method which initializes a `Circle` of **radius** 3.75 and **colour** "Red". Then,
-print the toString for this class.
+Your `TestClass` class will have a main method which initializes a `Circle` with value of 3.75 for the **radius** 
+attribute and the value of "Red" for the **colour** attribute. Then, print the toString for this class.
