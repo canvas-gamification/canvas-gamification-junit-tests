@@ -33,7 +33,7 @@ public class MainTest {
     }
 
     @Test
-    public void horseHasRequiredConstructor() {
+    public void bankHasRequiredConstructor() {
         String missingConstructorMessage = "The %s class is missing a required constructor. Make sure that it is named correctly and has the correct parameters.";
         String wrongAccessModifier = "The %s class constructor has the wrong visibility modifier. Make sure that it is visible from all other classes.";
         Class<?>[] constructorArgs = new Class[]{};
