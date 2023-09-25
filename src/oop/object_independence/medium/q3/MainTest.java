@@ -31,7 +31,6 @@ public class MainTest {
 
     @Test
     @Tag("dependency1")
-    @Tag("dependency2")
     public void correctTestClass() throws Throwable {
         Clause[] c = new Clause[outputNum1.length + outputNum2.length + 3];
         int t = 0;
@@ -74,12 +73,15 @@ public class MainTest {
                 Arguments.of((Object) new String[]{"Ginger Beer", "Lime", "Vodka"}),
                 Arguments.of((Object) new String[]{"Rum", "StrawBerry", "Syrup"}),
                 Arguments.of((Object) new String[]{"Rum", "Coke"}),
-                Arguments.of((Object) new String[]{"Gin", "Tonic"})
+                Arguments.of((Object) new String[]{"Gin", "Tonic"}),
+                Arguments.of((Object) new String[]{}),
+                Arguments.of((Object) new String[]{"Beer"}),
+                Arguments.of((Object) new String[]{"Pineapple Juice", "Coconut Milk", "Apple Juice", "Almond Milk","Rum", "StrawBerry", "Syrup"})
         );
     }
 
     @Test
-    @Tag("dependency1")
+    @Tag("dependent1")
     public void cocktailClassHasRequiredConstructor() {
         Class<?>[] classArguments = {String[].class};
         assertTrue(testClass.hasConstructor(classArguments),
@@ -115,7 +117,6 @@ public class MainTest {
         Object[][] arguments = {
                 {value, String[].class}
         };
-        Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
                 "Your", getFirstField, "method does not correctly get the value of the", firstFieldName, "attribute.");
@@ -125,7 +126,7 @@ public class MainTest {
         assertTrue(testClass.hasMethod(getFirstField, null), String.format(incorrectMethodDefinition, getFirstField, className));
         assertTrue(testClass.hasModifier(getFirstField, null, "public"), String.format(incorrectModifierMessage, getFirstField, className));
         assertTrue(testClass.hasReturnType(getFirstField, null, String[].class), String.format(incorrectReturnType, getFirstField, className));
-
+        Object classInstance = testClass.createInstance(arguments);
         Object getMethodOutput = testClass.callMethod(getFirstField, getMethodModifiers, classInstance);
         _assertArrayEquals(value, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -134,7 +135,9 @@ public class MainTest {
         return Stream.of(
                 Arguments.of(new String[]{"Pineapple Juice", "Coconut Milk"}, new String[]{"Apple Juice", "Almond Milk"}),
                 Arguments.of(new String[]{"Gin", "Tonic"}, new String[]{"Ginger Beer", "Lime", "Vodka"}),
-                Arguments.of(new String[]{"Rum", "StrawBerry", "Syrup"}, new String[]{"Rum", "Coke"})
+                Arguments.of(new String[]{"Rum", "StrawBerry", "Syrup"}, new String[]{"Rum", "Coke"}),
+                Arguments.of(new String[]{}, new String[]{"Rum"}),
+                Arguments.of(new String[]{"Rum", "StrawBerry", "Syrup", "Rum", "Coke", "Pineapple Juice", "Coconut Milk"}, new String[]{"Rum", "Coke"})
         );
     }
 
@@ -175,7 +178,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependency2")
+    @Tag("dependent1")
     public void cocktailClassHasCorrectToStringMethod(String[] value) throws Throwable {
         Object[][] arguments = {
                 {value, String[].class}

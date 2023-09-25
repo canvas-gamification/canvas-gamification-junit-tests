@@ -4,6 +4,11 @@
 
 - Question type: Java
 
+### Question Text
+
+Your goal is to become a master chef so you make a mobile app to keep track of all your secret recipes. Make a class
+called Cocktail with the following description:
+
 ### Cocktail Class
 
 Your `Cocktail` class must have the following items:
@@ -23,11 +28,13 @@ Your `Cocktail` class must have the following items:
     - a `toString` method which returns a String of the information about the `Cocktail` class of the form
       `My ingredients are: A B C D ...` ,where A, B, C, and D represent the strings in order in the **ingredients**
       attribute, and is visible from other classes.
+    - Note that all setter methods must not return any value
 
 ### TestRecipe Class
 
 Your `TestRecipe` class must have the following items:
 
 - Methods:
-    - A `main` method which initializes two **Cocktail** objects, one with **ingredients** Pineapple Juice and Coconut Milk
-      the other with Apple Juice and Almond Milk. Print them in order using **toString** method.
+    - A `main` method which initializes two **Cocktail** objects, one with **ingredients** Pineapple Juice and Coconut
+      Milk the other with Apple Juice then change the **ingredients** of the latter object to Apple Juice and Almond Milk.
+      Then, Print them in order using **toString** method.
