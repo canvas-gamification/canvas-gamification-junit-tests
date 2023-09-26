@@ -2,6 +2,11 @@
 
 - Java question
 
+## Question Text
+
+Many people keep secrets that they only share with a trusted friend. Make a class called **Person** that has a secret 
+and potentially knows about the secrets of his/her friends.
+
 ## Person Class
 
 The `Person` class currently has the following items:

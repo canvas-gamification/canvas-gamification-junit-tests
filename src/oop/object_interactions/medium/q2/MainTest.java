@@ -123,7 +123,6 @@ public class MainTest {
                 {secret, String.class},
                 {allFriends, String[].class}
         };
-        Object classInstance = testClass.createInstance(arguments);
         Object[][] methodArguments = {
                 {friend, String.class},
                 {friendSecret, String.class}
@@ -134,6 +133,7 @@ public class MainTest {
                 "Your " + hearSecretMethodName + " method does not have the correct return type.");
         assertTrue(testClass.hasMethod(hearSecretMethodName, new Class<?>[]{String.class, String.class}, Void.TYPE, new String[]{"public"}),
                 "Your " + hearSecretMethodName + " method does not have the correct modifier.");
+        Object classInstance = testClass.createInstance(arguments);
         Object output = testClass.callMethod(hearSecretMethodName, methodArguments, new String[]{"public"}, classInstance);
         String[] ans = new String[allFriends.length];
         for (int i = 0; i < allFriends.length; i++) {
