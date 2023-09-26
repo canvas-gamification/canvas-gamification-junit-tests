@@ -1,59 +1,138 @@
 package oop.creating_objects_from_classes.hard.q1;
 
 import global.ObjectTest;
+import global.variables.Clause;
+import global.variables.clauses.NewLine;
+import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.stream.Stream;
-
-import static global.tools.CustomAssertions._assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
     // Java
-
-    private final String pet = "Pet";
-    private final String animalType = "Dog";
-    private final String methodName = "makePet";
-    private final String animalStringFieldName = "name";
-    private ObjectTest petClass;
-    private ObjectTest animalClass;
+    private ObjectTest testDog;
+    private final String testDogName = "TestDog";
+    private final String noiseMethodName = "bark";
+    private final String consumeMethodName = "eat";
+    private final String objectName = "Dog";
+    private final String expectedDogName = "Piper";
+    private final int expectedDogAge = 8;
+    private final double expectedDogWeight = 12.5;
+    private final double dogEatIncrease = 2.5;
+    private final String name = "name";
+    private final String age = "age";
+    private final String weight = "weight";
 
     @BeforeEach
     public void setUp() {
-        String petClassString = "oop.creating_objects_from_classes.hard.q1." + pet;
-        String animalClassString = "oop.creating_objects_from_classes.hard.q1." + animalType;
-        petClass = new ObjectTest(petClassString);
-        animalClass = new ObjectTest(animalClassString);
+        String testDogString = "oop.creating_objects_from_classes.hard.q1." + testDogName;
+        testDog = new ObjectTest(testDogString);
     }
 
     @Test
-    public void petClassHasMakePetMethod() {
-        Class<?>[] classes = {String.class};
-        assertTrue(petClass.hasMethod(methodName, classes),
-                "Your " + pet + " class is missing the method" + methodName + ".");
-        assertTrue(petClass.hasReturnType(methodName, classes, Dog.class),
-                "Your " + methodName + " method does not return the correct type.");
-        assertTrue(petClass.hasModifier(methodName,  classes, "public"),
-                "Your " + methodName + " method does not have the correct visibility modifier.");
-    }
+    public void correctDogTestClass() throws Throwable {
+        String missingMain = "Your %s class is missing the %s method. Make sure it has been declared, it is spelt correctly, and has the correct parameters.";
+        String incorrectVisibility = "Your main method does not have the correct visibility modifier.";
+        String missingStatic = "Your main method is missing the static modifier.";
+        String wrongReturnType = "Your main method does not have the correct return type.";
+        Class<?>[] mainArgs = new Class[]{String[].class};
+        /* Check Method Definitions */
+        assertTrue(testDog.hasMethod("main", mainArgs), String.format(missingMain, testDogName, "main"));
+        assertTrue(testDog.hasModifier("main", mainArgs, "public"), incorrectVisibility);
+        assertTrue(testDog.hasModifier("main", mainArgs, "static"), missingStatic);
+        assertTrue(testDog.hasReturnType("main", mainArgs, Void.TYPE), wrongReturnType);
 
-    private static Stream<String> petNameInputProvider() {
-        return Stream.of("Carl", "John", "Joseph P Josephson", "Georgia", "Hailey");
-    }
-
-    @ParameterizedTest
-    @MethodSource("petNameInputProvider")
-    public void makePetClassReturnsCorrectValue(String name) throws Throwable {
-        Object petInstance = petClass.createInstance();
-        Object[][] arguments = {
-                {name, String.class}
+        String incorrectOutput = "Your main method in the %s class does not print the correct output. Make sure that you call the %s method.";
+        Clause[] clauses = new Clause[]{
+                new StringLiteral("Bark\\!"),
+                new Optional(new NewLine())
         };
-        Object makePetOutput = petClass.callMethod(methodName, arguments, petInstance);
-        assertTrue(makePetOutput instanceof Dog, "Your " + methodName + " method does not return the correct type.");
-        _assertEquals(name, animalClass.getFieldValue(makePetOutput, animalStringFieldName),
-                "Your " + methodName + " method does not return the correct output.");
+        Object[][] mainParameters = {{new String[0], String[].class}};
+        /* Call method and check printed output */
+        testDog.callMethod("main", mainParameters, clauses, String.format(incorrectOutput, testDogName, noiseMethodName));
+
+        /* Check that the constructor was called and with the correct values */
+        String noConstructorCall = "Your main method did not initialize a %s object.";
+        String incorrectValue = "Your main method did not initialize a %s with the correct %s value.";
+        assertTrue(Dog.getConstructorCalled(), String.format(noConstructorCall, objectName));
+        assertEquals(expectedDogName, Dog.getConstructorName(), String.format(incorrectValue, objectName, name));
+        assertEquals(expectedDogAge, Dog.getConstructorAge(), String.format(incorrectValue, objectName, age));
+        assertEquals(expectedDogWeight, Dog.getConstructorWeight(), 0.001, String.format(incorrectValue, objectName, weight));
+
+        /* Check that methods were called */
+        String methodNotCalled = "Your main method did not call the %s method.";
+        assertTrue(Dog.getBarkCalled(), String.format(methodNotCalled, noiseMethodName));
+        assertTrue(Dog.getEatCalled(), String.format(methodNotCalled, consumeMethodName));
+    }
+}
+
+class Dog {
+    private String name;
+    private int age;
+    private double weight;
+    /*
+     * These values below are used to track the actions of the student in their test class. They track what values they
+     * initialize the dog object to, and if they have called the methods they are supposed to.
+     */
+    private static Dog dog;
+    private static boolean constructorCalled = false;
+    private static String constructorName;
+    private static double constructorWeight;
+    private static int constructorAge;
+    private static boolean eatCalled = false;
+    private static boolean barkCalled = false;
+
+    public Dog(String n, int a, double w) {
+        constructorCalled = true;
+        if (dog == null) {
+            name = n;
+            age = a;
+            weight = w;
+            dog = this;
+            constructorAge = a;
+            constructorWeight = w;
+            constructorName = n;
+        }
+    }
+
+    public void eat() {
+        eatCalled = true;
+        weight += 2.5;
+    }
+
+    public void bark() {
+        barkCalled = true;
+        System.out.println("Bark!");
+    }
+
+    public static Dog getDog() {
+        return dog;
+    }
+
+    public static boolean getBarkCalled() {
+        return barkCalled;
+    }
+
+    public static boolean getEatCalled() {
+        return eatCalled;
+    }
+
+    public static boolean getConstructorCalled() {
+        return constructorCalled;
+    }
+
+    public static String getConstructorName() {
+        return constructorName;
+    }
+
+    public static int getConstructorAge() {
+        return constructorAge;
+    }
+
+    public static double getConstructorWeight() {
+        return constructorWeight;
     }
 }
