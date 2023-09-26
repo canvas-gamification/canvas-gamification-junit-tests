@@ -98,7 +98,10 @@ public class MainTest {
         return Stream.of(
                 Arguments.of("Sarah", 0, "John", 1),
                 Arguments.of("Amir", 1, "Sam", 2),
-                Arguments.of("John", 0, "Jack", 0)
+                Arguments.of("John", 0, "Jack", 0),
+                Arguments.of("Sarah", 2, "John", 1),
+                Arguments.of("Amir", 12, "Sam", 24),
+                Arguments.of("John", 30, "Jack", 10)
         );
     }
 
@@ -114,7 +117,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependent2")
+    @Tag("dependent1")
     public void correctReceiveDonationMethod(String name, int eyes, String donName, int donEyes) throws Throwable {
         Object[][] arguments = {
                 {name, String.class},
@@ -124,14 +127,14 @@ public class MainTest {
                 {donName, String.class},
                 {donEyes, int.class}
         };
-        Object classInstance = testClass.createInstance(arguments);
-        Object donorInstance = testClass.createInstance(donorArguments);
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(receiveDonationMethodName, new Class<?>[]{Person.class}), String.format(incorrectMethodDefinition, receiveDonationMethodName, className));
         assertTrue(testClass.hasModifier(receiveDonationMethodName, new Class<?>[]{Person.class}, "public"), String.format(incorrectModifierMessage, receiveDonationMethodName, className));
         assertTrue(testClass.hasReturnType(receiveDonationMethodName, new Class<?>[]{Person.class}, Void.TYPE), String.format(incorrectReturnType, receiveDonationMethodName, className));
+        Object classInstance = testClass.createInstance(arguments);
+        Object donorInstance = testClass.createInstance(donorArguments);
         Object[][] methodArguments = {
                 {donorInstance, Person.class}
         };
@@ -182,7 +185,6 @@ public class MainTest {
 
     @Test
     @Tag("dependency1")
-    @Tag("dependency2")
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral("Tom has 2 eyes"),

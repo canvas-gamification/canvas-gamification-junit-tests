@@ -2,6 +2,11 @@
 
 - Java question
 
+## Question Text
+
+You always need to keep track of transplants in a hospital. For that matter, make a **Person** class with the following
+descriptions to be able to keep track of eye transplants.
+
 ## Person Class
 
 The `Person` class currently has the following items:
@@ -22,10 +27,10 @@ The `Person` class currently has the following items:
 You must add the following items to the class:
 
 - Methods:
-    - A `receiveDonation` method that takes another **Person** object called donor to do a transplant. It should check
-      if the **numEyes** in donor is more than zero. If donor has enough take 1 unit of **numEyes** from donor
-      and give it to the **Person**, and then print `Transplant successful`. If not it should print
-      `Transplant cannot be done`
+    - A `receiveDonation` method that takes another **Person** object called donor to do a transplant and gives an eye
+      to the object calling the method.It should check if the **numEyes** in donor is more than zero. If donor has
+      enough take 1 unit of **numEyes** from donor and give it to the **Person**, and then print `Transplant successful`.
+      If not it should print `Transplant cannot be done`. This method must not return any value.
     - A `toString` method that returns the `String` of information in the format
       of `x has y eyes"` where x is the value of **myName** and y is the value of **numEyes**.
 
