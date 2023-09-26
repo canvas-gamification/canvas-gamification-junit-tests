@@ -138,7 +138,7 @@ public class MainTest {
     }
 
     @Test
-    public void setColourIsDefinedCorrectly() {
+    public void makeCopyIsDefinedCorrectly() {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
@@ -149,7 +149,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependency2")
+    @Tag("dependent1")
     public void correctMakeCopyMethod(int year, int month, int day, String story) throws Throwable {
         Object classInstance = testClass.createInstance();
         Object[][] methodArguments = {
@@ -174,7 +174,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependency1")
+    @Tag("dependent1")
     public void newspaperClassHasCorrectToStringMethod(int year, int month, int day, String story) throws Throwable {
         Object[][] arguments = {
                 {year, int.class},
@@ -199,7 +199,6 @@ public class MainTest {
 
     @Test
     @Tag("dependency1")
-    @Tag("dependency2")
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral("2021/12/5:The story is: The votes are in!"),
@@ -213,6 +212,7 @@ public class MainTest {
         };
         Object classInstance = classObject.createInstance();
         classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance,
-                clauses);
+                clauses,
+                "Your main method in the " + testClassName + " class does not print the correct output. Make sure you are initializing, modifying, and printing the values correctly.");
     }
 }

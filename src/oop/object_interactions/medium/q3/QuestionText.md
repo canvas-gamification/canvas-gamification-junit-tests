@@ -2,6 +2,11 @@
 
 - Java question
 
+## Question Text
+
+You work at a printing company and your summer job is to make copies of original works. Make a **Newspaper** class with
+the following description:
+
 ## Newspaper Class
 
 The `Newspaper` class currently has the following items:
@@ -19,7 +24,8 @@ The `Newspaper` class currently has the following items:
     - It is accessible from other classes.
 
 - Methods:
-    - Getter methods for the **myStory**, **myYear**, **myMonth**, and **myDay** attributes that are accessible from other
+    - Getter methods for the **myStory**, **myYear**, **myMonth**, and **myDay** attributes that are accessible from
+      other
       classes.
 
 You must add the following items to the class:
@@ -30,11 +36,11 @@ You must add the following items to the class:
     - It should be accessible from other classes.
 
 - Methods:
-    - A `makeCopy` method that take another **Newspaper** object and change the attribute of the object to the attributes
-      of the input parameter **Newspaper** object.
-    - A `toString` method which returns the information about the class in the following `String` structure:
-      if the **myYear**, **myMonth**, **myDay**, and **myStory** attributes are in order 2023, 6,
-      9, and `It's graduation day!`. Then the `String` should be `2023/6/9:The story is: It's graduation day!`.
+    - A `makeCopy` method that take another **Newspaper** object and change the attribute of the object that calls the
+      method to the attributes of the input parameter **Newspaper** object in input. This method must not return any
+      value.
+    - A `toString` method which returns the information about the class in the "Year/month/day:The story is" structure,
+      followed by the value of the **myStory**. For example: `2023/6/9:The story is: It's graduation day!`.
     - All methods must be accessible from other classes.
 
 ## TestNewspaper Class
@@ -44,5 +50,5 @@ Your `TestNewspaper` class must have the following items:
 - Main Method:
     - A `main` method which initializes one **Newspaper** class with the date 2021/12/5 and the story of
       `The votes are in!` and print it using **toString** method.
-    - Then initialize a new **Newspaper** object without parameters, print it, and use the `makeCopy` method to copy the previous
-      object into the new one and finally print it again.
+    - Then initialize a new **Newspaper** object without parameters, print it, and use the `makeCopy` method to copy the
+      previous object into the new one and finally print it again.
