@@ -51,7 +51,7 @@ public class MainTest {
     private static Stream<Arguments> methodInputProvider() {
         return Stream.of(
                 Arguments.of(0),
-                Arguments.of(2),
+                Arguments.of(1),
                 Arguments.of(7),
                 Arguments.of(12),
                 Arguments.of(24)
