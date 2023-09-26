@@ -96,11 +96,11 @@ public class MainTest {
     private static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of('A', 10.3, 'B', 4.9),
-                Arguments.of('A', 10.3, 'A', 7.2),
-                Arguments.of('A', 10.3, 'A', minBlood),
-                Arguments.of('A', 10.3, 'A', minBlood - 1),
-                Arguments.of('A', 10.3, 'A', minBlood + 1),
-                Arguments.of('B', 4.2, 'A', 2.5),
+                Arguments.of('A', 15.5, 'A', 7.2),
+                Arguments.of('A', 6.4, 'A', minBlood),
+                Arguments.of('A', 0, 'A', minBlood - 1),
+                Arguments.of('A', 0.5, 'A', minBlood + 1),
+                Arguments.of('B', 0, 'A', 2.5),
                 Arguments.of('O', 3.4, 'B', 5.7)
         );
     }
@@ -124,34 +124,32 @@ public class MainTest {
                 {volume, double.class}
         };
         Snail donor = new Snail(donType, donVolume);
-        Object classInstance = testClass.createInstance(arguments);
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(transfusionFromMethodName, new Class<?>[]{Snail.class}), String.format(incorrectMethodDefinition, transfusionFromMethodName, className));
         assertTrue(testClass.hasModifier(transfusionFromMethodName, new Class<?>[]{Snail.class}, "public"), String.format(incorrectModifierMessage, transfusionFromMethodName, className));
         assertTrue(testClass.hasReturnType(transfusionFromMethodName, new Class<?>[]{Snail.class}, Void.TYPE), String.format(incorrectReturnType, transfusionFromMethodName, className));
-
+        Object classInstance = testClass.createInstance(arguments);
         Object[][] methodArguments = {
                 {donor, Snail.class}
         };
-        Object output;
         if (type != donType) {
-            output = testClass.callMethod(transfusionFromMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
+            testClass.callMethod(transfusionFromMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
                     new StringLiteral("Blood type incompatible"),
                     new Optional(new StringLiteral(" "))
             });
         } else if (donVolume <= minBlood) {
-            output = testClass.callMethod(transfusionFromMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
-                    new StringLiteral("Checking if donor has enough blood for a transfusion..."),
+            testClass.callMethod(transfusionFromMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
+                    new StringLiteral("Checking if donor has enough blood for a transfusion\\.\\.\\."),
                     new Optional(new StringLiteral(" ")),
                     new NewLine(),
                     new StringLiteral("Donor does not have enough blood for a transfusion"),
                     new Optional(new StringLiteral(" "))
             });
         } else {
-            output = testClass.callMethod(transfusionFromMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
-                    new StringLiteral("Checking if donor has enough blood for a transfusion..."),
+            testClass.callMethod(transfusionFromMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
+                    new StringLiteral("Checking if donor has enough blood for a transfusion\\.\\.\\."),
                     new Optional(new StringLiteral(" ")),
                     new NewLine(),
                     new StringLiteral("Blood transfusion completed"),
@@ -163,24 +161,23 @@ public class MainTest {
                     "Your " + transfusionFromMethodName + " method does not correctly take blood from the donor.");
 
         }
-        assertNull(output, String.join(" ", "Your", transfusionFromMethodName, "should not return any output"));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependent2")
+    @Tag("dependent1")
     public void newspaperClassHasCorrectToStringMethod(char type, double volume) throws Throwable {
         Object[][] arguments = {
                 {type, char.class},
                 {volume, double.class}
         };
-        Object classInstance = testClass.createInstance(arguments);
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod("toString", null), String.format(incorrectMethodDefinition, "toString", className));
         assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className));
         assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className));
+        Object classInstance = testClass.createInstance(arguments);
         String[] methodModifiers = {"public"};
         String expected = "My blood type is " + type + " and I have " + volume + "L of blood left";
         String incorrectToStringMessage = String.join(" ",
@@ -191,13 +188,12 @@ public class MainTest {
 
     @Test
     @Tag("dependency1")
-    @Tag("dependency2")
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral("Blood type incompatible"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("Checking if donor has enough blood for a transfusion..."),
+                new StringLiteral("Checking if donor has enough blood for a transfusion\\.\\.\\."),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new StringLiteral("Blood transfusion completed"),
