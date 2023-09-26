@@ -27,12 +27,12 @@ You must add the following items to the class:
 
 - Methods:
     - A `hearSecret` method that takes two `String`. One is the name of a friend and the other is that friend's secret.
-      Your method should find the friend using the input name in the **friendNames** attribute and it should change the
-      value of **friendSecrets** at the same index as the friend is located to the value of the input for the secret.
-    - A `writeInDiary` method which prints `I have the following secrets:` and then prints each secret that the
-      **Person** knows on a separate line. Given a friend `Ginger` and a secret `she is scared of bears` it should write
-      the secret in the following format:
-      `Ginger told me she is scared of bears.`
+      Your method should find the friend using the names in the **friendNames** attribute and it should change the
+      value of **friendSecrets** at the same index as the friend is found in **friendNames**, if you do not find the
+      name you must not change anythim.
+    - A `writeInDiary` method which prints `I have the following secrets:` in first line and then prints each secret
+      that the **Person** knows on a separate line only if there is a secret. Given a friend `Ginger` and a secret
+      `she is scared of bears` it should write the secret in the following format: `Ginger told me she is scared of bears.`
 
 ## TestFriendship Class
 
@@ -40,6 +40,6 @@ Your `TestFriendship` class must have the following items:
 
 - Main Method:
     - A `main` method which initializes two **Person** objects, one with a **myName** value of `Ann` and **mySecret**
-      value of `she hates chocolates` and the other with values of `Cam` and `she is scared of heights`. Ann is friends
+      value of `she hates chocolates` and the other with values of `Cam` and `she has failed Math`. Ann is friends
       with Bob and Cam in that order and Cam is only friends with Ann.
     - Use the **hearSecret** method to tell Ann's secret to Cam and use writeInDiary for Cam to write it in console.

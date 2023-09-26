@@ -96,7 +96,11 @@ public class MainTest {
         return Stream.of(
                 Arguments.of("Sam", "Sam always cheat on exams", new String[]{"Bob", "Ali"}, "Bob", "Bob has a candy"),
                 Arguments.of("John", "John is in love with Alice", new String[]{"Alice", "Bob"}, "Alice", "Alice is in love with John"),
-                Arguments.of("Kim", "Kim has broken her leg", new String[]{"Ali", "John"}, "Ali", "Ali broke Kim's leg")
+                Arguments.of("Kim", "Kim has broken her leg", new String[]{"Ali", "John"}, "Ali", "Ali broke Kim's leg"),
+                Arguments.of("Sam", "Sam always cheat on exams", new String[]{"Bob", "Ali"}, "John", "Bob has a candy"),
+                Arguments.of("John", "John is in love with Alice", new String[]{"Alice", "Bob", "Sam", "Neil", "Jack", "Tom", "Sara"}, "John", "Alice is in love with John"),
+                Arguments.of("Kim", "Kim has broken her leg", new String[]{"Ali", "John", "Alice", "Bob", "Sam", "Neil", "Jack", "Tom", "Sara"}, "Ali", "Ali broke Kim's leg")
+
         );
     }
 
@@ -112,7 +116,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("hearSecretInputProvider")
-    @Tag("dependency2")
+    @Tag("dependent1")
     public void correctHearSecretMethod(String name, String secret, String[] allFriends, String friend, String friendSecret) throws Throwable {
         Object[][] arguments = {
                 {name, String.class},
@@ -128,7 +132,7 @@ public class MainTest {
                 "Your " + hearSecretMethodName + " method does not have the correct name or arguments.");
         assertTrue(testClass.hasMethod(hearSecretMethodName, new Class<?>[]{String.class, String.class}, Void.TYPE),
                 "Your " + hearSecretMethodName + " method does not have the correct return type.");
-        assertTrue(testClass.hasMethod(hearSecretMethodName, new Class<?>[]{String.class, String.class}, Void.TYPE, new String[] {"public"}),
+        assertTrue(testClass.hasMethod(hearSecretMethodName, new Class<?>[]{String.class, String.class}, Void.TYPE, new String[]{"public"}),
                 "Your " + hearSecretMethodName + " method does not have the correct modifier.");
         Object output = testClass.callMethod(hearSecretMethodName, methodArguments, new String[]{"public"}, classInstance);
         String[] ans = new String[allFriends.length];
@@ -153,44 +157,50 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("hearSecretInputProvider")
-    @Tag("dependency1")
+    @Tag("dependent1")
     public void correctWriteInDiaryMethod(String name, String secret, String[] allFriends, String friend, String friendSecret) throws Throwable {
         Object[][] arguments = {
                 {name, String.class},
                 {secret, String.class},
                 {allFriends, String[].class}
         };
+        assertTrue(testClass.hasMethod(writeInDiaryMethodName, null),
+                "Your " + writeInDiaryMethodName + " method does not have the correct name of arguments.");
+        assertTrue(testClass.hasMethod(writeInDiaryMethodName, null, Void.TYPE),
+                "Your " + writeInDiaryMethodName + " method does not have the correct return type.");
+        assertTrue(testClass.hasMethod(writeInDiaryMethodName, null, Void.TYPE, new String[]{"public"}),
+                "Your " + writeInDiaryMethodName + " method does not have the correct modifier.");
         Object classInstance = testClass.createInstance(arguments);
         Object[][] methodArguments = {
                 {friend, String.class},
                 {friendSecret, String.class}
         };
         testClass.callMethod(hearSecretMethodName, methodArguments, new String[]{"public"}, classInstance);
-        String[] ans = new String[allFriends.length];
+        boolean flg = false;
         for (int i = 0; i < allFriends.length; i++) {
             if (friend.equals(allFriends[i]))
-                ans[i] = friendSecret;
+                flg = true;
         }
-        assertTrue(testClass.hasMethod(writeInDiaryMethodName, null),
-                "Your " + writeInDiaryMethodName + " method does not have the correct name of arguments.");
-        assertTrue(testClass.hasMethod(writeInDiaryMethodName, null, Void.TYPE),
-                "Your " + writeInDiaryMethodName + " method does not have the correct return type.");
-        assertTrue(testClass.hasMethod(writeInDiaryMethodName, null, Void.TYPE, new String[] {"public"}),
-                "Your " + writeInDiaryMethodName + " method does not have the correct modifier.");
-        Object output = testClass.callMethod(writeInDiaryMethodName, null, new String[]{"public"}, classInstance, new Clause[]{
-                new StringLiteral("I have the following secrets:"),
-                new Optional(new StringLiteral(" ")),
-                new NewLine(),
-                new StringLiteral(friend + " told me " + friendSecret),
-                new Optional(new StringLiteral(".")),
-                new Optional(new StringLiteral(" "))
-        });
-        assertNull(output, String.join(" ", "Your", hearSecretMethodName, "method should not return any output."));
+        if (flg) {
+            testClass.callMethod(writeInDiaryMethodName, null, new String[]{"public"}, classInstance, new Clause[]{
+                    new StringLiteral("I have the following secrets:"),
+                    new Optional(new StringLiteral(" ")),
+                    new NewLine(),
+                    new StringLiteral(friend + " told me " + friendSecret),
+                    new Optional(new StringLiteral(".")),
+                    new Optional(new StringLiteral(" "))
+            });
+        } else {
+            testClass.callMethod(writeInDiaryMethodName, null, new String[]{"public"}, classInstance, new Clause[]{
+                    new StringLiteral("I have the following secrets:"),
+                    new Optional(new StringLiteral(" "))
+            });
+        }
+
     }
 
     @Test
     @Tag("dependency1")
-    @Tag("dependency2")
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral("I have the following secrets:"),
@@ -202,6 +212,7 @@ public class MainTest {
         };
         Object classInstance = classObject.createInstance();
         classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance,
-                clauses);
+                clauses,
+                "Your main method in " + testClassName + " class does not print the correct output, make sure the objects are initialized, modified, and printed correctly.");
     }
 }

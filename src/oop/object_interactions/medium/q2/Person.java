@@ -22,7 +22,7 @@ public class Person {
     }
 
     public void hearSecret(String friend, String secret) {
-        int friendIndex = -1;
+        int friendIndex = friendSecrets.length;
         for (int i = 0; i < friendNames.length; i++)
             if (friendNames[i].equals(friend)) {
                 friendIndex = i;
