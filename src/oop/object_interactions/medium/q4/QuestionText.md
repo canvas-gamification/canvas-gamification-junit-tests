@@ -27,7 +27,7 @@ You must add the following items to the class:
     - A `transfusionFrom` method that take another **Snail** object to do a blood tansfer.
     - It should check if the blood types are a match and if not print `Blood type incompatible`. Note that in this scenario
   **Snail** blood types are not like humans, so you should check that the type match exactly.
-    - If the types are compatible it should say `Checking if donor has enough blood for a transfusion...`
+    - If the types are compatible it should print `Checking if donor has enough blood for a transfusion...`
     - Then it should make sure that the donor has more than 5 unit of blood if not
       it should print `Donor does not have enough blood for a transfusion`.
     - If donor has enough take 1 unit of blood from donor
