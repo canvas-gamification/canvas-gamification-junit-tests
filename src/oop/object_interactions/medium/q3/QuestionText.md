@@ -25,7 +25,7 @@ The `Newspaper` class currently has the following items:
 You must add the following items to the class:
 
 - Constructors:
-    - A constructor that takes three `int` and one `String` in that order and initialized the **myYear**, **myMonth**,
+    - A constructor that takes three `int` and one `String` in that order and initializes the **myYear**, **myMonth**,
       **myDay**, and **myStory** attribute in that order.
     - It should be accessible from other classes.
 
