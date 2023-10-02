@@ -10,7 +10,7 @@ Your `Circus` class should have the following items:
 - Attributes:
     - An `int` called **numMembers**
 - Constructors:
-    - A `public Circus(int)` constructor which initializes the **numMembers** field with the passed integer
+    - A `public Circus(int)` constructor which initializes the **numMembers** attribute with the passed integer
 
 ## Member Class
 
@@ -19,6 +19,6 @@ Your `Member` class should have the following items:
 - Attributes:
     - A `String` called **title**
 - Constructors:
-    - A `public Member(String)` constructor which initializes the *title* field with the passed String
+    - A `public Member(String)` constructor which initializes the *title* attribute with the passed String
 
   ```
