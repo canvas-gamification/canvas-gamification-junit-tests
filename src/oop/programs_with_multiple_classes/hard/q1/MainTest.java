@@ -16,27 +16,38 @@ public class MainTest {
     private ObjectTest circus;
     private ObjectTest member;
 
+    private final String numMembers = "numMembers";
+    private final String title = "title";
+
+    private final String memberLc = "member";
+    private final String memberUc = "Member";
+    private final String circusLc = "circus";
+    private final String circusUc = "Circus";
+
     @BeforeEach
     public void Setup() {
-        String circusClassString = "oop.programs_with_multiple_classes.hard.q1.Circus";
-        String memberClassString = "oop.programs_with_multiple_classes.hard.q1.Member";
+        String circusClassString = "oop.programs_with_multiple_classes.hard.q1." + circusUc;
+        String memberClassString = "oop.programs_with_multiple_classes.hard.q1." + memberUc;
         circus = new ObjectTest(circusClassString);
         member = new ObjectTest(memberClassString);
     }
 
     @Test
-    public void memberClassHasCorrectFields() {
-        String missingFieldMessage = "Your member class is missing a required field.";
-        String incorrectFieldModifierMessage = "A field in your member class has an incorrect modifier.";
-        assertTrue(member.hasField("title", String.class), missingFieldMessage);
-        assertTrue(member.hasModifier("title", "private"), incorrectFieldModifierMessage);
+    public void memberClassHasCorrectAttribute() {
+        String missingAttributeMessage = "Your " + memberLc + " is missing the following required attribute: " + title + ".";
+        String incorrectAttributeModifierMessage = "The " + title + " attribute in your " + memberLc + "  has an incorrect modifier.";
+        String incorrectAttributeTypeMessage = "The " + title + " attribute in your " + memberLc + " class has the wrong type.";
+
+        assertTrue(member.hasField(title), missingAttributeMessage);
+        assertTrue(member.hasField(title, String.class), incorrectAttributeTypeMessage);
+        assertTrue(member.hasModifier(title, "private"), incorrectAttributeModifierMessage);
     }
 
     @Test
     public void memberClassHasCorrectConstructors() {
-        String missingConstructorMessage = "Your member class does not have a required constructor.";
+        String missingConstructorMessage = "Your " + memberLc + " class does not have a required constructor.";
         String incorrectConstructorModifierMessage =
-                "One of the constructors in your member class does not have the correct modifiers.";
+                "One of the constructors in your " + memberLc + " class does not have the correct modifiers.";
         Class<?>[] constructorClasses = new Class[]{
                 String.class
         };
@@ -60,23 +71,26 @@ public class MainTest {
                 {title, String.class}
         };
         Object memberInstance = member.createInstance(arguments);
-        _assertEquals(title, member.getFieldValue(memberInstance, "title"),
-                "Your member constructor does not correctly initialize the title field.");
+        _assertEquals(title, member.getFieldValue(memberInstance, this.title),
+                "Your member constructor does not correctly initialize the " + this.title + " attribute.");
     }
 
     @Test
-    public void circusClassHasCorrectFields() {
-        String missingFieldMessage = "Your circus class is missing a required field.";
-        String incorrectFieldModifierMessage = "A field in your circus class has an incorrect modifier.";
-        assertTrue(circus.hasField("numMembers", int.class), missingFieldMessage);
-        assertTrue(circus.hasModifier("numMembers", "private"), incorrectFieldModifierMessage);
+    public void circusClassHasCorrectAttributes() {
+        String missingAttributeMessage = "Your " + circusLc + " class is missing the following required attribute: " + numMembers + ".";
+        String incorrectAttributeModifierMessage = "The " + numMembers + " attribute in your " + circusLc + " class has an incorrect modifier.";
+        String incorrectAttributeTypeMessage = "The " + numMembers + " attribute in your " + circusLc + " class has the wrong type.";
+
+        assertTrue(circus.hasField(numMembers), missingAttributeMessage);
+        assertTrue(circus.hasField(numMembers, int.class), incorrectAttributeTypeMessage);
+        assertTrue(circus.hasModifier(numMembers, "private"), incorrectAttributeModifierMessage);
     }
 
     @Test
     public void circusClassHasCorrectConstructors() {
-        String missingConstructorMessage = "Your circus class does not have a required constructor.";
+        String missingConstructorMessage = "Your " + circusLc + " class does not have a required constructor.";
         String incorrectConstructorModifierMessage =
-                "One of the constructors in your circus class does not have the correct modifiers.";
+                "One of the constructors in your " + circusLc + "  class does not have the correct modifiers.";
         Class<?>[] constructorClasses = new Class[]{
                 int.class
         };
@@ -97,7 +111,7 @@ public class MainTest {
                 {numMembers, int.class}
         };
         Object circusInstance = circus.createInstance(arguments);
-        _assertEquals(numMembers, circus.getFieldValue(circusInstance, "numMembers"),
-                "Your circus constructor does not correctly initialize the numMembers field.");
+        _assertEquals(numMembers, circus.getFieldValue(circusInstance, this.numMembers),
+                "Your " + circusLc + " constructor does not correctly initialize the " + this.numMembers + " attribute.");
     }
 }
