@@ -109,7 +109,6 @@ public class MainTest {
                 {initialValue, double.class},
                 {0, int.class}
         };
-        Object classInstance = testClass.createInstance(arguments);
         Object[][] setSizeArguments = {
                 {setValue, double.class}
         };
@@ -122,6 +121,7 @@ public class MainTest {
         assertTrue(testClass.hasMethod(setDoubleMethodName, new Class<?>[]{double.class}), String.format(incorrectMethodDefinition, setDoubleMethodName, className));
         assertTrue(testClass.hasModifier(setDoubleMethodName, new Class<?>[]{double.class}, "public"), String.format(incorrectModifierMessage, setDoubleMethodName, className));
         assertTrue(testClass.hasReturnType(setDoubleMethodName, new Class<?>[]{double.class}, Void.TYPE), String.format(incorrectReturnType, setDoubleMethodName, className));
+        Object classInstance = testClass.createInstance(arguments);
         testClass.callMethod(setDoubleMethodName, setSizeArguments, setMethodModifiers, classInstance);
         _assertEquals(setValue, testClass.getFieldValue(classInstance, doubleFieldName), incorrectSetMethodMessage);
     }
@@ -143,7 +143,6 @@ public class MainTest {
                 {value1, double.class},
                 {value2, int.class}
         };
-        Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
                 "Your", getDoubleMethodName, "method does not correctly get the value of the", doubleFieldName, "attribute.");
@@ -153,7 +152,7 @@ public class MainTest {
         assertTrue(testClass.hasMethod(getDoubleMethodName, null), String.format(incorrectMethodDefinition, getDoubleMethodName, className));
         assertTrue(testClass.hasModifier(getDoubleMethodName, null, "public"), String.format(incorrectModifierMessage, getDoubleMethodName, className));
         assertTrue(testClass.hasReturnType(getDoubleMethodName, null, double.class), String.format(incorrectReturnType, getDoubleMethodName, className));
-
+        Object classInstance = testClass.createInstance(arguments);
         Object getMethodOutput = testClass.callMethod(getDoubleMethodName, getMethodModifiers, classInstance);
         _assertEquals(value1, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -184,7 +183,6 @@ public class MainTest {
                 {Math.random() * 1000, double.class},
                 {initialValue, int.class}
         };
-        Object classInstance = testClass.createInstance(arguments);
         Object[][] setMethodArguments = {
                 {updatedValue, int.class}
         };
@@ -197,7 +195,7 @@ public class MainTest {
         assertTrue(testClass.hasMethod(setIntMethodName, new Class<?>[]{int.class}), String.format(incorrectMethodDefinition, setIntMethodName, className));
         assertTrue(testClass.hasModifier(setIntMethodName, new Class<?>[]{int.class}, "public"), String.format(incorrectModifierMessage, setIntMethodName, className));
         assertTrue(testClass.hasReturnType(setIntMethodName, new Class<?>[]{int.class}, Void.TYPE), String.format(incorrectReturnType, setIntMethodName, className));
-
+        Object classInstance = testClass.createInstance(arguments);
         testClass.callMethod(setIntMethodName, setMethodArguments, setMethodModifiers, classInstance);
         _assertEquals(updatedValue, testClass.getFieldValue(classInstance, intFieldName), incorrectSetMethodMessage);
     }
@@ -219,7 +217,6 @@ public class MainTest {
                 {value1, double.class},
                 {value2, int.class}
         };
-        Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
                 "Your", getIntMethodName, "method does not correctly get the value of the", intFieldName, "attribute.");
@@ -229,6 +226,7 @@ public class MainTest {
         assertTrue(testClass.hasMethod(getIntMethodName, null), String.format(incorrectMethodDefinition, getIntMethodName, className));
         assertTrue(testClass.hasModifier(getIntMethodName, null, "public"), String.format(incorrectModifierMessage, getIntMethodName, className));
         assertTrue(testClass.hasReturnType(getIntMethodName, null, int.class), String.format(incorrectReturnType, getIntMethodName, className));
+        Object classInstance = testClass.createInstance(arguments);
         Object getMethodOutput = testClass.callMethod(getIntMethodName, getMethodModifiers, classInstance);
         _assertEquals(value2, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -240,7 +238,6 @@ public class MainTest {
                 {value, double.class},
                 {b, int.class}
         };
-        Object classInstance = testClass.createInstance(arguments);
         String[] methodModifiers = {"public"};
         String expected = "Here " + b + "people live on a " + value + "kg planet.";
         String incorrectToStringMessage = String.join(" ",
@@ -251,6 +248,7 @@ public class MainTest {
         assertTrue(testClass.hasMethod("toString", null), String.format(incorrectMethodDefinition, "toString", className));
         assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className));
         assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className));
+        Object classInstance = testClass.createInstance(arguments);
         Object output = testClass.callMethod("toString", methodModifiers, classInstance);
         _assertEquals(expected, output, incorrectToStringMessage);
     }
