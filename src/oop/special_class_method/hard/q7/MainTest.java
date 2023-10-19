@@ -74,6 +74,9 @@ public class MainTest {
     private static Stream<Arguments> constructorInputProvider() {
         return Stream.of(
                 Arguments.of(4535.4, 300),
+                Arguments.of(0, 340),
+                Arguments.of(123.2, 0),
+                Arguments.of(0, 0),
                 Arguments.of(234.4, 100),
                 Arguments.of(654.45, 365),
                 Arguments.of(43.3, 14)
@@ -82,27 +85,27 @@ public class MainTest {
     }
 
     @Test
-    public void piggyBankClassHasRequiredConstructor() {
+    public void piggyBankClassHasRequiredConstructorWithParameters() {
         Class<?>[] classArguments = {double.class, int.class};
         assertTrue(testClass.hasConstructor(classArguments),
-                "Your " + className + " constructor does not have the correct parameters.");
+                "Your " + className + " constructor with parameters does not have the correct parameters.");
         assertTrue(testClass.hasModifier(classArguments, "public"),
-                "Your " + className + " constructor does not have the correct modifier.");
+                "Your " + className + " constructor with parameters does not have the correct modifier.");
     }
 
     @Test
-    public void piggyBankClassHasRequiredConstructor2() {
+    public void piggyBankClassHasRequiredConstructorWithoutParameters() {
         Class<?>[] classArguments = {};
         assertTrue(testClass.hasConstructor(classArguments),
-                "Your " + className + " constructor does not have the correct parameters.");
+                "Your " + className + " parameterless constructor cannot be found.");
         assertTrue(testClass.hasModifier(classArguments, "public"),
-                "Your " + className + " constructor does not have the correct modifier.");
+                "Your " + className + "  parameterless constructor does not have the correct modifier.");
     }
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
     @Tag("dependent1")
-    public void piggyBankClassHasCorrectConstructor(double value1, int value2) throws Throwable {
+    public void piggyBankClassHasCorrectConstructorWithParameters(double value1, int value2) throws Throwable {
         Object[][] arguments = {
                 {value1, double.class},
                 {value2, int.class}
@@ -119,7 +122,7 @@ public class MainTest {
     }
 
     @Test
-    public void piggyBankClassHasCorrectConstructor2() throws Throwable {
+    public void piggyBankClassHasCorrectConstructorWithoutParameters() throws Throwable {
         Object classInstance = testClass.createInstance();
         String incorrectDoubleValueMessage =
                 "Your " + className + " constructor does not initialize the " + doubleFieldName + " attribute to the correct value.";
@@ -314,6 +317,33 @@ public class MainTest {
         };
         Object classInstance = testClass.createInstance(arguments);
         _assertEquals(initialValue, testClass.callMethod(getDoubleMethodName, classInstance),
+                "Your " + getDoubleMethodName + " method does not return the correct value.");
+        _assertEquals(0, testClass.callMethod(getIntMethodName, classInstance),
+                "Your " + getIntMethodName + " method does not return the correct value.");
+        Object[][] setDoubleArguments = {
+                {value, double.class}
+        };
+        testClass.callMethod(setDoubleMethodName, setDoubleArguments, classInstance);
+        _assertEquals(value, testClass.callMethod(getDoubleMethodName, classInstance),
+                "Your " + getDoubleMethodName + " method does not return the correct value after calling the " + setDoubleMethodName + " method.");
+        Object[][] setBooleanArguments = {
+                {b, int.class}
+        };
+        testClass.callMethod(setIntMethodName, setBooleanArguments, classInstance);
+        _assertEquals(b, testClass.callMethod(getIntMethodName, classInstance),
+                "Your " + getIntMethodName + " method does not return the correct value after calling the " + setIntMethodName + " method.");
+        String expectedToString = "I have " + value + " dollars in me after " + b + " days.";
+        String incorrectToStringMessage = String.join(" ",
+                "Your", className, "toString method does not return the correct String after updating the values of its attributes using its setter methods.");
+        Object output = testClass.callMethod("toString", classInstance);
+        _assertEquals(expectedToString, output, incorrectToStringMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void piggyBankClassMethodsWorkTogetherWithoutInitialParameters(double value, int b) throws Throwable {
+        Object classInstance = testClass.createInstance();
+        _assertEquals(0.0, testClass.callMethod(getDoubleMethodName, classInstance), 0.0001,
                 "Your " + getDoubleMethodName + " method does not return the correct value.");
         _assertEquals(0, testClass.callMethod(getIntMethodName, classInstance),
                 "Your " + getIntMethodName + " method does not return the correct value.");

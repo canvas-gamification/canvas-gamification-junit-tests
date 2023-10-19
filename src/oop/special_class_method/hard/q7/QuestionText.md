@@ -1,5 +1,10 @@
 # oop-special_class_method-hard-q7
 
+### Question Text:
+
+You are writing a Java program that mimics different financial institutions or personal banks. Write a Java class called
+`PiggyBank` that has the following description:
+
 ### PiggyBak Class:
 
 Your `PiggyBank` class must have the following items:
