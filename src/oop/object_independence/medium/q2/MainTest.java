@@ -18,7 +18,7 @@ import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest {
-    // Java
+    // Parsons
     private final String className = "PhoneWaitList";
     private final String outputClassName = "TestWaitList";
     private ObjectTest testClass;

@@ -2,12 +2,13 @@
 
 ## Question Info
 
-- Question type: Java
+- Question type: Parsons
 
 ### Question Text
 
 You've noticed that there are line ups everywhere so you decided to write a program that predicts how long you need to 
 wait in them. Make a program called PhoneWaitList with the following description to solve that problem.
+Also make a class called TestWaitList with the descriptions mentioned below to test the PhoneWaitList class.
 
 ### PhoneWaitList Class
 
