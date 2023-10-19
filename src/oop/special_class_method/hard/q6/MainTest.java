@@ -81,7 +81,7 @@ public class MainTest {
     }
 
     @Test
-    public void carClassHasRequiredConstructor2() {
+    public void carClassHasRequiredConstructorWithNoParameters() {
         Class<?>[] classArguments = {};
         assertTrue(testClass.hasConstructor(classArguments),
                 "Your " + className + " constructor without parameters does not have the correct parameters.");
