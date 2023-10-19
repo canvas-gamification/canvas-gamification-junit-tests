@@ -1,5 +1,11 @@
 # oop-special_class_method-hard-q4
 
+### Question Text:
+
+Chemistry tells us a lot about the properties of different liquids. Write a Java class called `Detergent` with the
+following description:
+
+
 ### Detergent Class:
 
 Your `Detergent` class must have the following items:
