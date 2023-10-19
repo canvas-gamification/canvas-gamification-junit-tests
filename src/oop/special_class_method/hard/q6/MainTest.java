@@ -72,7 +72,7 @@ public class MainTest {
     }
 
     @Test
-    public void carClassHasRequiredConstructor() {
+    public void carClassHasRequiredConstructorWithParameters() {
         Class<?>[] classArguments = {double.class, String.class};
         assertTrue(testClass.hasConstructor(classArguments),
                 "Your " + className + " constructor with parameters does not have the correct parameters.");
