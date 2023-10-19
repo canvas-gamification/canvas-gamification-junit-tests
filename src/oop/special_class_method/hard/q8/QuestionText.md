@@ -2,8 +2,8 @@
 
 ## Question Text
 
-You are writing a Java program that details various round objects. Write a Java class called Circle with the following
-description:
+You are writing a Java program that details various round objects. Write a Java class called Circle, and a class called
+TestClass to test Circle, with the following description:
 
 ### Circle Class:
 

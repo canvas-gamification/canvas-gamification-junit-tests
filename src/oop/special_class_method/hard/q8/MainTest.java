@@ -75,6 +75,7 @@ public class MainTest {
     private static Stream<Arguments> constructorInputProvider() {
         return Stream.of(
                 Arguments.of(4535.4, "Red"),
+                Arguments.of(0.0, "Orange"),
                 Arguments.of(234.4, "Black"),
                 Arguments.of(654.45, "Green"),
                 Arguments.of(43.3, "Yellow")
@@ -113,6 +114,7 @@ public class MainTest {
     private static Stream<Arguments> doubleInputProvider() {
         return Stream.of(
                 Arguments.of(4535.4, 432.2),
+                Arguments.of(4535.4, 0),
                 Arguments.of(234.4, 655.3),
                 Arguments.of(654.45, 453.3),
                 Arguments.of(43.3, 654.2)
@@ -152,7 +154,7 @@ public class MainTest {
         assertTrue(testClass.hasReturnType(setDoubleMethodName, new Class<?>[]{double.class}, Void.TYPE), String.format(incorrectReturnType, setDoubleMethodName, className));
 
         testClass.callMethod(setDoubleMethodName, setSizeArguments, setMethodModifiers, classInstance);
-        _assertEquals(setValue, testClass.getFieldValue(classInstance, doubleFieldName), incorrectSetMethodMessage);
+        _assertEquals(setValue, testClass.getFieldValue(classInstance, doubleFieldName), 0.0001, incorrectSetMethodMessage);
     }
 
     @Test
@@ -184,7 +186,7 @@ public class MainTest {
         assertTrue(testClass.hasReturnType(getDoubleMethodName, null, double.class), String.format(incorrectReturnType, getDoubleMethodName, className));
 
         Object getMethodOutput = testClass.callMethod(getDoubleMethodName, getMethodModifiers, classInstance);
-        _assertEquals(value1, getMethodOutput, incorrectGetMethodMessage);
+        _assertEquals(value1, getMethodOutput, 0.0001, incorrectGetMethodMessage);
     }
 
     private static Stream<Arguments> twoStringInputProvider() {
@@ -296,7 +298,7 @@ public class MainTest {
                 {"Sample String", String.class}
         };
         Object classInstance = testClass.createInstance(arguments);
-        _assertEquals(initialValue, testClass.callMethod(getDoubleMethodName, classInstance),
+        _assertEquals(initialValue, testClass.callMethod(getDoubleMethodName, classInstance), 0.0001,
                 "Your " + getDoubleMethodName + " method does not return the correct value.");
         _assertEquals("Sample String", testClass.callMethod(getStringMethodName, classInstance),
                 "Your " + getStringMethodName + " method does not return the correct value.");
@@ -304,7 +306,7 @@ public class MainTest {
                 {value, double.class}
         };
         testClass.callMethod(setDoubleMethodName, setDoubleArguments, classInstance);
-        _assertEquals(value, testClass.callMethod(getDoubleMethodName, classInstance),
+        _assertEquals(value, testClass.callMethod(getDoubleMethodName, classInstance), 0.0001,
                 "Your " + getDoubleMethodName + " method does not return the correct value after calling the " + setDoubleMethodName + " method.");
         Object[][] setArguments = {
                 {b, String.class}
