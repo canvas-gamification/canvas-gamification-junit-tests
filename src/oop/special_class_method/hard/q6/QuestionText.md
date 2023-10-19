@@ -1,5 +1,10 @@
 # oop-special_class_method-hard-q6
 
+### Question Text:
+
+You are writing a Java program that mimics different Vehicles and their attributes. Write a Java class called `Car` that
+has the following description:
+
 ### Car Class:
 
 Your `Car` class must have the following items:

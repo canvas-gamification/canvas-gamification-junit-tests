@@ -84,9 +84,9 @@ public class MainTest {
     public void carClassHasRequiredConstructorWithNoParameters() {
         Class<?>[] classArguments = {};
         assertTrue(testClass.hasConstructor(classArguments),
-                "Your " + className + " constructor without parameters does not have the correct parameters.");
+                "Your " + className + " parameterless constructor cannot be found.");
         assertTrue(testClass.hasModifier(classArguments, "public"),
-                "Your " + className + " constructor without parameters does not have the correct modifier.");
+                "Your " + className + " parameterless constructor does not have the correct modifier.");
     }
 
     private static Stream<Arguments> constructorInputProvider() {
@@ -102,7 +102,7 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
     @Tag("dependent1")
-    public void carClassHasCorrectConstructor(double value1, String value2) throws Throwable {
+    public void carClassHasCorrectConstructorWithParameters(double value1, String value2) throws Throwable {
         Object[][] arguments = {
                 {value1, double.class},
                 {value2, String.class}
@@ -120,7 +120,7 @@ public class MainTest {
 
     @Test
     @Tag("dependent1")
-    public void carClassHasCorrectConstructor2() throws Throwable {
+    public void carClassHasCorrectConstructorWithoutParameters() throws Throwable {
         Object classInstance = testClass.createInstance();
         String incorrectDoubleValueMessage =
                 "Your " + className + " constructor without input does not initialize the " + doubleFieldName + " attribute to the correct value.";
@@ -307,14 +307,14 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void carClassMethodsWorkTogether(double value, String b) throws Throwable {
+    public void carClassWithParametersMethodsWorkTogether(double value, String b) throws Throwable {
         double initialValue = Math.random() * 100;
         Object[][] arguments = {
                 {initialValue, double.class},
                 {"First String", String.class}
         };
         Object classInstance = testClass.createInstance(arguments);
-        _assertEquals(initialValue, testClass.callMethod(getDoubleMethodName, classInstance),
+        _assertEquals(initialValue, testClass.callMethod(getDoubleMethodName, classInstance), 0.0001,
                 "Your " + getDoubleMethodName + " method does not return the correct value.");
         _assertEquals("First String", testClass.callMethod(getStringMethodName, classInstance),
                 "Your " + getStringMethodName + " method does not return the correct value.");
@@ -322,7 +322,34 @@ public class MainTest {
                 {value, double.class}
         };
         testClass.callMethod(setDoubleMethodName, setDoubleArguments, classInstance);
-        _assertEquals(value, testClass.callMethod(getDoubleMethodName, classInstance),
+        _assertEquals(value, testClass.callMethod(getDoubleMethodName, classInstance), 0.0001,
+                "Your " + getDoubleMethodName + " method does not return the correct value after calling the " + setDoubleMethodName + " method.");
+        Object[][] setArguments = {
+                {b, String.class}
+        };
+        testClass.callMethod(setStringMethodName, setArguments, classInstance);
+        _assertEquals(b, testClass.callMethod(getStringMethodName, classInstance),
+                "Your " + getStringMethodName + " method does not return the correct value after calling the " + setStringMethodName + " method.");
+        String expectedToString = "This " + className + " has a " + doubleFieldName + " of " + value + " with the " + stringFieldName + " " + b + ".";
+        String incorrectToStringMessage = String.join(" ",
+                "Your", className, "toString method does not return the correct String after updating the values of its attributes using its setter methods.");
+        Object output = testClass.callMethod("toString", classInstance);
+        _assertEquals(expectedToString, output, incorrectToStringMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorInputProvider")
+    public void carClassWithoutParametersMethodsWorkTogether(double value, String b) throws Throwable {
+        Object classInstance = testClass.createInstance();
+        _assertEquals(180.0, testClass.callMethod(getDoubleMethodName, classInstance), 0.0001,
+                "Your " + getDoubleMethodName + " method does not return the correct value.");
+        assertNull(testClass.callMethod(getStringMethodName, classInstance),
+                "Your " + getStringMethodName + " method does not return the correct value.");
+        Object[][] setDoubleArguments = {
+                {value, double.class}
+        };
+        testClass.callMethod(setDoubleMethodName, setDoubleArguments, classInstance);
+        _assertEquals(value, testClass.callMethod(getDoubleMethodName, classInstance), 0.0001,
                 "Your " + getDoubleMethodName + " method does not return the correct value after calling the " + setDoubleMethodName + " method.");
         Object[][] setArguments = {
                 {b, String.class}
