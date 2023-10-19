@@ -42,7 +42,7 @@ public class MainTest {
         Object[][] arguments = {
                 {new String[0], String[].class}
         };
-        String incorrectMethodOutputMessage = "Your main method in the " + outputClassName + " class does not print the correct output, make sure you initialize, modify, and print the object correctly using toString method.";
+        String incorrectMethodOutputMessage = "Your main method in the " + outputClassName + " class does not print the correct output, make sure you initialize, modify, and print the object correctly using the toString method.";
         outputClass.callMethod("main", arguments, c, incorrectMethodOutputMessage);
     }
 
