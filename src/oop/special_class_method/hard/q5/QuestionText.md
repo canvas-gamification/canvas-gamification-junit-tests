@@ -2,8 +2,8 @@
 
 ### Question Text
 
-You are writing a Java program that describes different types of roads and their attributes. Write a Java class called
-Road the has the following description:
+You are writing a Java program, and a class to test it, that describes different types of roads and their attributes. 
+Write a Java class called Road and a class called TestClass the has the following description.
 
 ### Road Class:
 
