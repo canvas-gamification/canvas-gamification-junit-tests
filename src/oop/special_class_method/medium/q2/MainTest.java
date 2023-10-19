@@ -52,7 +52,7 @@ public class MainTest {
             };
             Class<?>[] classes = {double.class};
             Object testInstance = testClass.createInstance(arguments);
-            _assertEquals(value, testClass.getFieldValue(testInstance, attributeName1), modifiedClassMessage);
+            _assertEquals(value, testClass.getFieldValue(testInstance, attributeName1), 0.0001, modifiedClassMessage);
             _assertEquals(isOnValue, testClass.getFieldValue(testInstance, attributeName2), modifiedClassMessage);
             assertTrue(testClass.hasModifier(classes, "public"), modifiedClassMessage);
 
@@ -62,7 +62,7 @@ public class MainTest {
             };
             Class<?>[] classes2 = {double.class, boolean.class};
             Object testInstance2 = testClass.createInstance(arguments2);
-            _assertEquals(value, testClass.getFieldValue(testInstance2, attributeName1), modifiedClassMessage);
+            _assertEquals(value, testClass.getFieldValue(testInstance2, attributeName1), 0.0001, modifiedClassMessage);
             _assertEquals(on, testClass.getFieldValue(testInstance2, attributeName2), modifiedClassMessage);
             assertTrue(testClass.hasModifier(classes2, "public"), modifiedClassMessage);
         }
@@ -89,7 +89,7 @@ public class MainTest {
         assertTrue(testClass.hasReturnType(getAttributeMethodName1, null, double.class), String.format(incorrectReturnType, getAttributeMethodName1, className));
         Object testInstance = testClass.createInstance(arguments);
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName1, testInstance);
-        _assertEquals(value, getMethodOutput,
+        _assertEquals(value, getMethodOutput, 0.0001,
                 "Your " + getAttributeMethodName1 + " method does not return the value of the " + attributeName1 + " attribute.");
     }
 
@@ -121,7 +121,7 @@ public class MainTest {
         String incorrectSetterMessage =
                 "Your " + setAttributeMethodName1 + " method does not correctly update the value of " + attributeName1 + ".";
         testClass.callMethod(setAttributeMethodName1, setMethodArguments, testInstance);
-        _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName1),
+        _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName1), 0.0001,
                 incorrectSetterMessage);
     }
 
@@ -202,7 +202,7 @@ public class MainTest {
         Object testInstance = testClass.createInstance(arguments);
         String expectedOutput = "My brightness is " + value1 + " and isOn is " + value2;
         Object toStringOutput = testClass.callMethod("toString", testInstance);
-        _assertEquals(expectedOutput, toStringOutput, incorrectToStringMessage);
+        _assertEquals(expectedOutput, toStringOutput,  incorrectToStringMessage);
     }
 
     @ParameterizedTest
