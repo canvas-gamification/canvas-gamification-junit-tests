@@ -3,7 +3,7 @@
 ### Question Text
 
 Many people are fascinated by our planet's solar system. Make a Java class called Earth that represents one of those
-planets and has the description below:
+planets with the requirements below:
 
 ### Earth Class:
 
