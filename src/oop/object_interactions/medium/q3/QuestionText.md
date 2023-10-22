@@ -5,7 +5,7 @@
 ## Question Text
 
 You work at a printing company and your summer job is to make copies of original works. Make a **Newspaper** class with
-the following description:
+the following description and **TestNewspaper** for testing the **Newspaper** class.
 
 ## Newspaper Class
 

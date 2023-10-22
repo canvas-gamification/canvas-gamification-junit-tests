@@ -151,9 +151,16 @@ public class MainTest {
     @MethodSource("inputProvider")
     @Tag("dependent1")
     public void correctMakeCopyMethod(int year, int month, int day, String story) throws Throwable {
+        Object[][] arguments = {
+                {year, int.class},
+                {month, int.class},
+                {day, int.class},
+                {story, String.class}
+        };
         Object classInstance = testClass.createInstance();
+        Object classInstance2 = testClass.createInstance(arguments);
         Object[][] methodArguments = {
-                {new Newspaper(year, month, day, story), Newspaper.class}
+                {classInstance2, Newspaper.class}
         };
         assertTrue(testClass.hasMethod(makeCopyMethodName, new Class<?>[]{Newspaper.class}),
                 "Your " + className + " class does not have the " + makeCopyMethodName + " method or is misspelled");
