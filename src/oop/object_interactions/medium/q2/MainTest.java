@@ -171,16 +171,23 @@ public class MainTest {
         assertTrue(testClass.hasMethod(writeInDiaryMethodName, null, Void.TYPE, new String[]{"public"}),
                 "Your " + writeInDiaryMethodName + " method does not have the correct modifier.");
         Object classInstance = testClass.createInstance(arguments);
-        Object[][] methodArguments = {
-                {friend, String.class},
-                {friendSecret, String.class}
-        };
-        testClass.callMethod(hearSecretMethodName, methodArguments, new String[]{"public"}, classInstance);
+        String[] friendNames = (String[]) testClass.getFieldValue(classInstance, "friendNames");
+        String[] friendSecrets = (String[]) testClass.getFieldValue(classInstance, "friendSecrets");
+        int friendIndex = friendSecrets.length;
+        for (int i = 0; i < friendNames.length; i++)
+            if (friendNames[i].equals(friend)) {
+                friendIndex = i;
+                break;
+            }
+        if (friendIndex < friendNames.length)
+            friendSecrets[friendIndex] = friendSecret;
+
         boolean flg = false;
         for (int i = 0; i < allFriends.length; i++) {
             if (friend.equals(allFriends[i]))
                 flg = true;
         }
+        testClass.setFieldValue(classInstance, friendSecrets, "friendSecrets");
         if (flg) {
             testClass.callMethod(writeInDiaryMethodName, null, new String[]{"public"}, classInstance, new Clause[]{
                     new StringLiteral("I have the following secrets:"),

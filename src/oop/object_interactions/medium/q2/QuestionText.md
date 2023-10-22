@@ -6,6 +6,7 @@
 
 Many people keep secrets that they only share with a trusted friend. Make a class called **Person** that has a secret 
 and potentially knows about the secrets of his/her friends.
+Also make a TestFriendship class with the descriptions mentioned below to test the Person class.
 
 ## Person Class
 
