@@ -36,8 +36,8 @@ You must add the following items to the class:
     - It should be accessible from other classes.
 
 - Methods:
-    - A `makeCopy` method that take another **Newspaper** object and change the attribute of the object that calls the
-      method to the attributes of the input parameter **Newspaper** object in input. This method must not return any
+    - A `makeCopy` method that takes another **Newspaper** object and changes the attribute of the object that called the
+      method to the attributes of the input  **Newspaper** object. This method must not return any
       value.
     - A `toString` method which returns the information about the class in the "Year/month/day:The story is" structure,
       followed by the value of the **myStory**. For example: `2023/6/9:The story is: It's graduation day!`.
