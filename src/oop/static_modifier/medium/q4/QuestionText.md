@@ -32,3 +32,4 @@ You need to add the following items:
       **MIX_2**. If there is not enough liquid to make a reaction it should print
       `There's not enough ingredients to create the mixture`. If there is enough it should print `Mixing …`  and then
       decrease the amount of **liquid1** and **liquid2** by the minimum amount needed and then print `Mixing Successful`.
+    - Note that **MIX_1** and **MIX_2** respectively correspond to **liquid1** and **liquid2**

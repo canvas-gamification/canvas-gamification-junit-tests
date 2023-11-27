@@ -109,9 +109,9 @@ public class MainTest {
                     new Optional(new StringLiteral(" "))
             });
             _assertEquals(initialValue1 - guide[typeValue1], testClass.getFieldValue(null, firstDoubleName),
-                    "Your " + methodName + " method does not decrease the value of " + firstDoubleName + " correctly.");
+                    "Your " + methodName + " method does not decrease the value of " + firstDoubleName + " correctly when it mixes the liquids successfully.");
             _assertEquals(initialValue2 - guide[typeValue2], testClass.getFieldValue(null, secondDoubleName),
-                    "Your " + methodName + " method does not decrease the value of " + secondDoubleName + " correctly.");
+                    "Your " + methodName + " method does not decrease the value of " + secondDoubleName + " correctly when it mixes the liquids successfully.");
         } else {
             testClass.callMethod(methodName, classInstance, new Clause[]{
                     new StringLiteral("There's not enough ingredients to create the mixture"),
