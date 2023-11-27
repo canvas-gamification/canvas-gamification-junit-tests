@@ -133,16 +133,15 @@ public class MainTest {
                 "Your " + hearSecretMethodName + " method does not have the correct return type.");
         assertTrue(testClass.hasMethod(hearSecretMethodName, new Class<?>[]{String.class, String.class}, Void.TYPE, new String[]{"public"}),
                 "Your " + hearSecretMethodName + " method does not have the correct modifier.");
-        Object classInstance = testClass.createInstance(arguments);
-        Object output = testClass.callMethod(hearSecretMethodName, methodArguments, new String[]{"public"}, classInstance);
         String[] ans = new String[allFriends.length];
         for (int i = 0; i < allFriends.length; i++) {
             if (friend.equals(allFriends[i]))
                 ans[i] = friendSecret;
         }
+        Object classInstance = testClass.createInstance(arguments);
+        testClass.callMethod(hearSecretMethodName, methodArguments, new String[]{"public"}, classInstance);
         _assertArrayEquals(ans, testClass.getFieldValue(classInstance, friendSecretsAttributeName),
                 "Your " + hearSecretMethodName + " method does not change the " + friendSecretsAttributeName + " attribute correctly.");
-        assertNull(output, String.join(" ", "Your", hearSecretMethodName, "should not return any output"));
     }
 
     @Test
