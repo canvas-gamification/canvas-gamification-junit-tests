@@ -5,7 +5,7 @@
 ## Question Text
 
 Natural language processing is an area that analyzes text written or spoken by people with the ultimate goal of
-designing communicative computer programs. Make a Java program called **TextProcessing**
+designing communicative computer programs. Make a Java program called **TextProcessing** with the requirements below: 
 
 ### TextProcessing Class
 
