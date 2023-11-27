@@ -5,22 +5,23 @@ import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
 public class MainTest {
     ObjectTest testClass;
     ObjectTest outputClass;
     String className = "Hat";
-    String staticAttributeName = "companyLogo";
+    String staticAttributeName = "companyName";
     String attributeName = "colour";
     String initialName = "Nike";
     String initialColour = "Green";
@@ -50,6 +51,7 @@ public class MainTest {
 
     @Test
     @Tag("dependency1")
+    @Order(1)
     public void correctTestClass() throws Throwable {
         Object classInstance = outputClass.createInstance();
         String[] methodModifiers = {"public"};
@@ -64,6 +66,7 @@ public class MainTest {
     }
 
     @Test
+    @Order(2)
     public void hatClassHasCorrectAttributes() {
         String incorrectNameError = "Your %s class does not include the %s attribute.";
         String incorrectVisibilityError = "Your %s attribute does not have the correct visibility modifier.";
@@ -76,19 +79,24 @@ public class MainTest {
                 String.format(incorrectStaticError, staticAttributeName));
     }
 
-    private static Stream<String> inputProvider() {
+    private static Stream<Arguments> inputProvider() {
         return Stream.of(
-                "Black", "Blue", "Red", "Brown"
+                Arguments.of("Black", "Nike"),
+                Arguments.of("Blue", "Adidas"),
+                Arguments.of("Red", "Roots"),
+                Arguments.of("Brown", "Gap")
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
     @Tag("dependent1")
-    public void correctToStringMethod(String colour) throws Throwable {
+    @Order(3)
+    public void correctToStringMethod(String colour, String compName) throws Throwable {
         Object[][] arguments = {
                 {colour, String.class}
         };
+        testClass.setFieldValue(null, compName, staticAttributeName);
         Object classInstance = testClass.createInstance(arguments);
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
@@ -97,17 +105,10 @@ public class MainTest {
         assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className));
         assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className));
         String[] methodModifiers = {"public"};
-        String expected = "This is a " + initialName + " that is " + colour + " in colour";
+        String expected = "This is a " + compName + " that is " + colour + " in colour";
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, "toString method does not return the correct String.");
         Object output = testClass.callMethod("toString", methodModifiers, classInstance);
         _assertEquals(expected, output, incorrectToStringMessage);
-    }
-
-    @Test
-    public void correctCompanyNameValue(){
-        String incorrectValueError = "In your %s class, your %s static attribute is not initialized correctly.";
-        _assertEquals(initialName, testClass.getFieldValue(null, staticAttributeName),
-                String.format(incorrectValueError, className, staticAttributeName));
     }
 }
