@@ -99,7 +99,7 @@ public class MainTest {
         assertTrue(testClass.hasModifier(methodName2, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, methodName2, className));
         assertTrue(testClass.hasReturnType(methodName2, new Class<?>[]{String.class}, String.class), String.format(incorrectReturnType, methodName2, className));
         String incorrectToStringMessage = String.join(" ",
-                "Your", className, methodName2, "method does not return the correct String.");
+                "Your", className, methodName2, "method does not return the original String with the vowels extracted.");
         Object output = testClass.callMethod(methodName2, new Object[][]{{text, String.class}}, methodModifiers, classInstance);
         _assertEquals(ans, output, incorrectToStringMessage);
     }
