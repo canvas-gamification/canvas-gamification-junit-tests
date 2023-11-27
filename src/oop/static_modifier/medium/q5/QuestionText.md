@@ -5,7 +5,7 @@
 ## Question Text
 
 As the manager of a local apparel store, you are tasked with modelling your store's selection. Make a Java program
-called **Hat**.
+called **Hat**  to model the hats you have in the store using the requirements below:
 
 ### Hat Class
 
