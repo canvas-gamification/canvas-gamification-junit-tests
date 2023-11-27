@@ -41,6 +41,8 @@ public class MainTest {
         return Stream.of(
                 Arguments.of("Black", "Blck"),
                 Arguments.of("Blue", "Bl"),
+                Arguments.of("Hll thr", "Hll thr"),
+                Arguments.of("aeiou", ""),
                 Arguments.of("Red","Rd"),
                 Arguments.of("Brown", "Brwn"),
                 Arguments.of("Hello there", "Hll thr"),
@@ -54,9 +56,11 @@ public class MainTest {
     public void canadianizeIsDefinedCorrectly() {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectStaticMessage = "The %s method in the %s class is not static.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(methodName1, new Class<?>[]{String.class}), String.format(incorrectMethodDefinition, methodName1, className));
         assertTrue(testClass.hasModifier(methodName1, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, methodName1, className));
+        assertTrue(testClass.hasModifier(methodName1, new Class<?>[]{String.class}, "static"), String.format(incorrectStaticMessage, methodName1, className));
         assertTrue(testClass.hasReturnType(methodName1, new Class<?>[]{String.class}, String.class), String.format(incorrectReturnType, methodName1, className));
     }
 
@@ -67,9 +71,11 @@ public class MainTest {
         String[] methodModifiers = {"public", "static"};
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectStaticMessage = "The %s method in the %s class is not static.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(methodName1, new Class<?>[]{String.class}), String.format(incorrectMethodDefinition, methodName1, className));
         assertTrue(testClass.hasModifier(methodName1, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, methodName1, className));
+        assertTrue(testClass.hasModifier(methodName1, new Class<?>[]{String.class}, "static"), String.format(incorrectStaticMessage, methodName1, className));
         assertTrue(testClass.hasReturnType(methodName1, new Class<?>[]{String.class}, String.class), String.format(incorrectReturnType, methodName1, className));
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, methodName1, "method does not return the correct String.");
@@ -81,9 +87,11 @@ public class MainTest {
     public void extractVowelsIsDefinedCorrectly() {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectStaticMessage = "The %s method in the %s class is not static.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(methodName2, new Class<?>[]{String.class}), String.format(incorrectMethodDefinition, methodName2, className));
         assertTrue(testClass.hasModifier(methodName2, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, methodName2, className));
+        assertTrue(testClass.hasModifier(methodName1, new Class<?>[]{String.class}, "static"), String.format(incorrectStaticMessage, methodName1, className));
         assertTrue(testClass.hasReturnType(methodName2, new Class<?>[]{String.class}, String.class), String.format(incorrectReturnType, methodName2, className));
     }
 

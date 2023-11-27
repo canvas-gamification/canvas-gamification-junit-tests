@@ -15,3 +15,4 @@ You need to add the following items:
     - A `canadianize` method that takes an input `String` phrase, adds ", eh?" at the end of it, and returns the phrase as
       if it were spoken by a Canadian.
     - A `extractVowels`that takes an input `String` phrase and returns the same phrase but with the vowels removed.
+    - Note that these methods are accessible from any class.
