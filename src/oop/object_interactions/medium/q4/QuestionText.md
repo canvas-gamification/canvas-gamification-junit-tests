@@ -4,8 +4,9 @@
 
 ## Question Text
 
-You are working as a vet assistant in an animal hospital and sometimes you encounter an animal that requires a blood 
-transfusion in order to save its life.  Make a class called **Snail** for this project with the following description:
+You are working as a vet assistant in an animal hospital, and sometimes you encounter an animal that requires a blood 
+transfusion in order to save its life.  Make a class called **Snail** for this project, and a class called 
+**TestTransfusion** to test it, with the following description:
 
 ## Snail Class
 

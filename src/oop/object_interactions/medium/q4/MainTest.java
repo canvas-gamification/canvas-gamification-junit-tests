@@ -123,7 +123,11 @@ public class MainTest {
                 {type, char.class},
                 {volume, double.class}
         };
-        Snail donor = new Snail(donType, donVolume);
+        Object[][] donArguments = {
+                {donType, char.class},
+                {donVolume, double.class}
+        };
+        Object donor = testClass.createInstance(donArguments);
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
@@ -157,7 +161,7 @@ public class MainTest {
             });
             _assertEquals(volume + 1, testClass.getFieldValue(classInstance, volumeAttributeName),
                     "Your " + transfusionFromMethodName + " method does not correctly add blood to the recipient.");
-            _assertEquals(donVolume - 1, donor.getVolume(),
+            _assertEquals(donVolume - 1, testClass.getFieldValue(donor, volumeAttributeName),
                     "Your " + transfusionFromMethodName + " method does not correctly take blood from the donor.");
 
         }
