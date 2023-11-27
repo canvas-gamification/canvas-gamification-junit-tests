@@ -2,6 +2,11 @@
 
 - Java question
 
+## Question Text
+
+Companies constantly overbook available seats which causes a lot of passenger frustration. Make a class called 
+**Airplane** and another called **testBooking** with the following descriptions to help with that issue.
+
 ## Airplane Class
 
 The `Airplane` class currently has the following items:
