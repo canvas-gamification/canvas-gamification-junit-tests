@@ -72,7 +72,7 @@ public class MainTest {
         assertTrue(testClass.hasModifier(methodName1, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, methodName1, className));
         assertTrue(testClass.hasReturnType(methodName1, new Class<?>[]{String.class}, String.class), String.format(incorrectReturnType, methodName1, className));
         String incorrectToStringMessage = String.join(" ",
-                "Your", className, methodName1, "method does not return the correct String.");
+                "Your", className, methodName1, "method does not return the original String with the modified ending.");
         Object output = testClass.callMethod(methodName1, new Object[][]{{text, String.class}}, methodModifiers, classInstance);
         _assertEquals(ans, output, incorrectToStringMessage);
     }
