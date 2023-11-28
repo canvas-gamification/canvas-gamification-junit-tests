@@ -3,7 +3,7 @@
 ## Question Text
 
 You are developing a wholesale application consisting of items that can be purchased in large quantities. Make a Java 
-class called **Detergent**.
+class called **Detergent** to model such an instance using the requirements below:
 
 ### Detergent Class:
 
