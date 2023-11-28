@@ -2,7 +2,7 @@
 
 ## Question Text
 
-You are developing a wholesale application consisting of items that can be purchased in large quantities. Make a Java 
+You are developing a wholesale application consisting of items that can be purchased in large quantities. Make a Java
 class called **Detergent** to model such an instance using the requirements below:
 
 ### Detergent Class:
@@ -22,5 +22,6 @@ You need to add the following items:
 
 - Methods:
     - a `setManufacturer` method which accepts a `String` and uses it to set the value of the **manufacturer** attribute
+      and must return nothing.
     - a `getManufacturer` method which returns the value stored in the **manufacturer** attribute
     - These methods must be visible from other classes.
