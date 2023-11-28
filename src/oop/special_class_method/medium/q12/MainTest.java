@@ -66,6 +66,7 @@ public class MainTest {
         return Stream.of(
                 Arguments.of(3, yearPivot + 12),
                 Arguments.of(3, yearPivot + 1),
+                Arguments.of(3, yearPivot - 1),
                 Arguments.of(10, yearPivot - 6),
                 Arguments.of(12, yearPivot - 26),
                 Arguments.of(43, yearPivot + 23),
@@ -90,16 +91,14 @@ public class MainTest {
                 {value1, int.class},
                 {value2, int.class}
         };
-        Object testInstance = testClass.createInstance(arguments);
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(getAttributeMethodName1, null), String.format(incorrectMethodDefinition, getAttributeMethodName1, className));
         assertTrue(testClass.hasModifier(getAttributeMethodName1, null, "public"), String.format(incorrectModifierMessage, getAttributeMethodName1, className));
         assertTrue(testClass.hasReturnType(getAttributeMethodName1, null, int.class), String.format(incorrectReturnType, getAttributeMethodName1, className));
+        Object testInstance = testClass.createInstance(arguments);
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName1, testInstance);
-        assertTrue(testClass.hasModifier(getAttributeMethodName1, null, "public"),
-                "Your " + getAttributeMethodName1 + " method does not have the correct visibility modifier.");
         _assertEquals(value1, getMethodOutput,
                 "Your " + getAttributeMethodName1 + " method does not return the value of the " + attributeName1 + " attribute.");
     }
@@ -130,14 +129,14 @@ public class MainTest {
         assertTrue(testClass.hasModifier(methodName, null, "public"), String.format(incorrectModifierMessage, methodName, className));
         assertTrue(testClass.hasReturnType(methodName, null, Void.TYPE), String.format(incorrectReturnType, methodName, className));
 
-        if (value2 > 2000) {
+        if (value2 > yearPivot) {
             testClass.callMethod(methodName, testInstance, new Clause[]{
                     new StringLiteral("The size is " + value1)
-            });
+            }, "Your main method does not print the correct output");
         } else {
             testClass.callMethod(methodName, testInstance, new Clause[]{
                     new StringLiteral("This shirt is no longer carried")
-            });
+            }, "Your main method does not print the correct output");
         }
     }
 

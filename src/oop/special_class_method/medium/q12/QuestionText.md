@@ -1,5 +1,9 @@
 # oop-special_class_method-medium-q12
 
+### Question Text:
+
+Make a Java class called **Shirt** with the following description:
+
 ### Shirt Class:
 
 Your `Shirt` class already has the following items:
