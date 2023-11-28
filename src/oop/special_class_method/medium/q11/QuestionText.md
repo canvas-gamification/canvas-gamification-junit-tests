@@ -3,7 +3,7 @@
 ## Question Text
 
 Many appliances and electronic devices have an internal mechanism to moderate temperature. Make a Java class called
-**Oven**.
+**Oven** with the following descriptions:
 
 ### Oven Class:
 
@@ -32,4 +32,4 @@ You need to add the following items:
       and the `powerIncrease` method increases the value of **currTemp** by 10.
     - A `changePower` method which call the `powerDecrease` method if the value of the **currTemp** attribute is more than 100, and
       call the `powerIncrease` otherwise.
-    - These methods must be visible from other classes.
+    - These methods must be visible from other classes and must not return anything.

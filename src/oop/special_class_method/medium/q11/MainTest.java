@@ -26,8 +26,8 @@ public class MainTest {
     private final String methodName1 = "powerDecrease";
     private final String methodName2 = "powerIncrease";
     private final String methodName3 = "changePower";
-    private final int changeValue = 10;
-    private final int changeLimit = 100;
+    private final static int changeValue = 10;
+    private final static int changeLimit = 100;
 
     private ObjectTest testClass;
 
@@ -110,6 +110,9 @@ public class MainTest {
                 Arguments.of(3.2, 3.4, "Red"),
                 Arguments.of(432.3, 10.2, "Black"),
                 Arguments.of(1023.4, 11.0, "Blue"),
+                Arguments.of(changeLimit, 3.4, "Red"),
+                Arguments.of(changeLimit - 0.01, 10.2, "Black"),
+                Arguments.of(changeLimit + 0.01, 11.0, "Blue"),
                 Arguments.of(434.3, 43.4, "White"),
                 Arguments.of(43.34, 7, "Yellow"),
                 Arguments.of(100, 7, "Yellow")
@@ -231,6 +234,33 @@ public class MainTest {
         } else {
             _assertEquals(value1 + changeValue, testClass.getFieldValue(testInstance, attributeName0),
                     "Your " + methodName3 + " method does not change the value of " + attributeName0 + " correctly.");
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void methodsWorkTogether(double value1, double value2, String value3) throws Throwable {
+        Object[][] arguments = {
+                {value1, double.class},
+                {value2, double.class},
+                {value3, String.class}
+        };
+        Object testInstance = testClass.createInstance(arguments);
+        testClass.callMethod(methodName1, testInstance);
+        _assertEquals(value1 - changeValue, testClass.getFieldValue(testInstance, attributeName0),
+                "Your " + methodName1 + " method does not decrease the value of " + attributeName0 + " correctly.");
+        value1 -= changeValue;
+        testClass.callMethod(methodName2, testInstance);
+        _assertEquals(value1 + changeValue, testClass.getFieldValue(testInstance, attributeName0),
+                "Your " + methodName2 + " method does not increase the value of " + attributeName0 + " correctly after calling the " + methodName1 + " method");
+        value1 += changeValue;
+        testClass.callMethod(methodName3, testInstance);
+        if (value1 > changeLimit) {
+            _assertEquals(value1 - changeValue, testClass.getFieldValue(testInstance, attributeName0),
+                    "Your " + methodName3 + " method does not change the value of " + attributeName0 + " correctly after calling the " + methodName1 + " and " + methodName2 + " method.");
+        } else {
+            _assertEquals(value1 + changeValue, testClass.getFieldValue(testInstance, attributeName0),
+                    "Your " + methodName3 + " method does not change the value of " + attributeName0 + " correctly after calling the " + methodName1 + " and " + methodName2 + " method.");
         }
     }
 }
