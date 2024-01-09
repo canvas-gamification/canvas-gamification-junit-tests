@@ -1,71 +1,137 @@
 package oop.creating_objects_from_classes.hard.q2;
 
 import global.ObjectTest;
+import global.variables.Clause;
+import global.variables.clauses.NewLine;
+import global.variables.clauses.StringLiteral;
+import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.stream.Stream;
-
-import static global.tools.CustomAssertions._assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
     // Java
-
-    private final String summerFun = "SummerFun";
-    private final String waterToy = "WaterToy";
-    private final String methodName = "inflateToy";
-    private final String waterToyStringFieldName1 = "id";
-    private final String waterToyStringFieldName2 = "size";
-    private ObjectTest summerFunClass;
-    private ObjectTest waterToyClass;
+    private ObjectTest summerFunTest;
+    private final String testName = "SummerFun";
+    private final String inflateName = "Inflate";
+    private final String throwInPoolName = "throwInPool";
+    private final String objectName = "WaterToy";
+    private final String expectedToyColour = "yellow";
+    private final double expectedToySize = 5.2;
+    private final boolean expectedToyInflated = false;
+    private final String stringFieldName = "colour";
+    private final String doubleFieldName = "size";
+    private final String booleanFieldName = "inflated";
 
     @BeforeEach
     public void setUp() {
-        String summerFunClassString = "oop.creating_objects_from_classes.hard.q2." + summerFun;
-        String waterToyClassString = "oop.creating_objects_from_classes.hard.q2." + waterToy;
-        summerFunClass = new ObjectTest(summerFunClassString);
-        waterToyClass = new ObjectTest(waterToyClassString);
+        String testClassString = "oop.creating_objects_from_classes.hard.q2." + testName;
+        summerFunTest = new ObjectTest(testClassString);
     }
 
     @Test
-    public void summerFunClassHasInflateToyMethod() {
-        Class<?>[] classes = {int.class, double.class};
-        assertTrue(summerFunClass.hasMethod(methodName, classes),
-                "Your " + summerFun + " class is missing the method " + methodName + ".");
-        assertTrue(summerFunClass.hasReturnType(methodName, classes, WaterToy.class),
-                "Your " + methodName + " method does not return the correct type.");
-        assertTrue(summerFunClass.hasModifier(methodName, classes, "public"),
-                "Your " + methodName + " method does not have the correct visibility modifier.");
-    }
+    public void correctSummerFunClass() throws Throwable {
+        String missingMain = "Your %s class is missing the %s method. Make sure it has been declared, it is spelt correctly, and has the correct parameters.";
+        String incorrectVisibility = "Your main method does not have the correct visibility modifier.";
+        String missingStatic = "Your main method is missing the static modifier.";
+        String wrongReturnType = "Your main method does not have the correct return type.";
+        Class<?>[] mainArgs = new Class[]{String[].class};
+        /* Check Method Definitions */
+        assertTrue(summerFunTest.hasMethod("main", mainArgs), String.format(missingMain, testName, "main"));
+        assertTrue(summerFunTest.hasModifier("main", mainArgs, "public"), incorrectVisibility);
+        assertTrue(summerFunTest.hasModifier("main", mainArgs, "static"), missingStatic);
+        assertTrue(summerFunTest.hasReturnType("main", mainArgs, Void.TYPE), wrongReturnType);
 
-    private static Stream<Arguments> waterToyInputProvider() {
-        return Stream.of(
-                Arguments.of(1, 43.0),
-                Arguments.of(2, 66.5),
-                Arguments.of(2, 100010.0292),
-                Arguments.of(2, -9292.992),
-                Arguments.of(1, 92.99292)
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("waterToyInputProvider")
-    public void summerFunClassReturnsCorrectValue(int id, double size) throws Throwable {
-        Object summerFunInstance = summerFunClass.createInstance();
-        Object[][] arguments = {
-                {id, int.class},
-                {size, double.class}
+        String incorrectOutput = "Your main method in the %s class does not print the correct output. Make sure that you call the %s method.";
+        Clause[] clauses = new Clause[]{
+                new StringLiteral("Splash\\!"),
+                new Optional(new NewLine())
         };
-        Object inflateToyOutput = summerFunClass.callMethod(methodName, arguments, summerFunInstance);
-        assertTrue(inflateToyOutput instanceof WaterToy, "Your " + methodName + " method does not return the correct type.");
-        _assertEquals(id, waterToyClass.getFieldValue(inflateToyOutput, waterToyStringFieldName1),
-                "Your " + methodName + " method does not return the correct output.");
-        _assertEquals(size, waterToyClass.getFieldValue(inflateToyOutput, waterToyStringFieldName2),
-                "Your " + methodName + " method does not return the correct output.");
+        Object[][] mainParameters = {{new String[0], String[].class}};
+        /* Call method and check printed output */
+        summerFunTest.callMethod("main", mainParameters, clauses, String.format(incorrectOutput, testName, throwInPoolName));
+
+        /* Check that the constructor was called and with the correct values */
+        String noConstructorCall = "Your main method did not initialize a %s object.";
+        String incorrectValue = "Your main method did not initialize a %s with the correct %s value.";
+        assertTrue(WaterToy.isConstructorCalled(), String.format(noConstructorCall, objectName));
+        assertEquals(expectedToyColour, WaterToy.getConstructedColour(), String.format(incorrectValue, objectName, stringFieldName));
+        assertEquals(expectedToySize, WaterToy.getConstructedSize(), String.format(incorrectValue, objectName, doubleFieldName));
+        assertEquals(expectedToyInflated, WaterToy.isConstructedInflated(), String.format(incorrectValue, objectName, booleanFieldName));
+
+        /* Check that methods were called */
+        String methodNotCalled = "Your main method did not call the %s method.";
+        assertTrue(WaterToy.isThrowInPoolCalled(), String.format(methodNotCalled, throwInPoolName));
+        assertTrue(WaterToy.isInflateCalled(), String.format(methodNotCalled, inflateName));
     }
 
+}
+
+class WaterToy {
+    String colour;
+    double size;
+    boolean inflated;
+    /*
+     * These values below are used to track the actions of the student in their test class. They track what values they
+     * initialize the dog object to, and if they have called the methods they are supposed to.
+     */
+    private static WaterToy waterToy;
+    private static boolean constructorCalled = false;
+    private static String constructedColour;
+    private static double constructedSize;
+    private static boolean constructedInflated;
+    private static boolean inflateCalled = false;
+    private static boolean throwInPoolCalled = false;
+
+    public WaterToy(String c, double s, boolean i) {
+        constructorCalled = true;
+        if(waterToy == null) {
+            colour = c;
+            size = s;
+            inflated = i;
+            waterToy = this;
+            constructedColour = c;
+            constructedSize = s;
+            constructedInflated = i;
+        }
+    }
+
+    public void inflate(){
+        inflateCalled = true;
+        inflated = true;
+    }
+
+    public void throwInWater(){
+        throwInPoolCalled = true;
+        System.out.println("Splash!");
+    }
+
+    public static WaterToy getWaterToy() {
+        return waterToy;
+    }
+
+    public static boolean isConstructorCalled() {
+        return constructorCalled;
+    }
+
+    public static String getConstructedColour() {
+        return constructedColour;
+    }
+
+    public static double getConstructedSize() {
+        return constructedSize;
+    }
+
+    public static boolean isConstructedInflated() {
+        return constructedInflated;
+    }
+
+    public static boolean isInflateCalled() {
+        return inflateCalled;
+    }
+
+    public static boolean isThrowInPoolCalled() {
+        return throwInPoolCalled;
+    }
 }
