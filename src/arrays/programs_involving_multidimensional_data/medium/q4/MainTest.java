@@ -3,7 +3,6 @@ package arrays.programs_involving_multidimensional_data.medium.q4;
 import global.BaseRandomTest;
 import global.MethodTest;
 import global.tools.CustomAssertions;
-import global.tools.TestOption;
 import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
@@ -109,7 +108,7 @@ public class MainTest extends BaseRandomTest {
         int[][] t7 = genMul(50);
         int cnt2 = countMul(t7);
         return Stream.of(
-                Arguments.of(t1, 12, 13),
+                Arguments.of(t1, 10, 15),
                 Arguments.of(t2, 2, 2),
                 Arguments.of(t3, 4, 0),
                 Arguments.of(t4, 1, 0),
@@ -121,12 +120,11 @@ public class MainTest extends BaseRandomTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctCountMethod(int[][] arr, int even, int odd) {
-        ;
+    public void correctCountMethod(int[][] arr, int even, int odd) throws Throwable {
         Clause[] c = new Clause[]{
-                new StringLiteral("" + even),
+                new StringLiteral("Number of even numbers: " + even),
                 new NewLine(),
-                new StringLiteral("" + odd),
+                new StringLiteral("Number of odd numbers: " + odd),
                 new NewLine()
         };
         Object[][] arguments = {
@@ -134,5 +132,6 @@ public class MainTest extends BaseRandomTest {
         };
         MethodTest m = new MethodTest(OddorEven.class, "count", arguments, c);
         m.setIncorrectMethodStructureErrorMessage("Your count method does not correctly count the number of odd and even elements in the 2D array.");
+        m.callMethod();
     }
 }
