@@ -37,5 +37,5 @@ Your `Road` class must have the following items:
 
 ### Test Class:
 
-Your `Test` class will have a main method which initializes a `Road` of **lanes** 3, **typeOfRoad** "Highway",
+Your `Test` class will have a main method which initializes a `Road` of **lanes** 3,  and with **typeOfRoad** "Highway",
 and **maxCapacity** 100. Then, print the toString for this class.
