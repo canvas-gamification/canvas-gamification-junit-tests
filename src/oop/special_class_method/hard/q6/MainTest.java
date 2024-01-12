@@ -339,7 +339,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void carClassWithoutParametersMethodsWorkTogether(double value, String b) throws Throwable {
+    public void carClassMethodsWorkTogether2(double value, String b) throws Throwable {
         Object classInstance = testClass.createInstance();
         _assertEquals(180.0, testClass.callMethod(getDoubleMethodName, classInstance), 0.0001,
                 "Your " + getDoubleMethodName + " method does not return the correct value.");
