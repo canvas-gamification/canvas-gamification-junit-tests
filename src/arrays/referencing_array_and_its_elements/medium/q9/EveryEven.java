@@ -22,9 +22,9 @@ public class EveryEven {
             System.out.print(arr[i] + " ");
         System.out.println();
         int len = arr.length;
-        int[] arr2 = new int[len / 2];
+        int[] arr2 = new int[(len + 1)/ 2];
         int arr2index = 0;
-        for (int i = 0; i < len - 1; i += 2) {
+        for (int i = 0; i < len; i += 2) {
             arr2[arr2index] = arr[i];
             arr2index++;
         }
