@@ -1,9 +1,10 @@
 package oop.creating_objects_from_classes.hard.q4;
 
 public class BankAccount {
-    public Savings startInvestment() {
-        // double initial = Math.random() * 200;
-        double initial = 200;
-        return new Savings(initial, 0);
+    public static void main(String[] args) {
+        Savings s = new Savings(500.32);
+        System.out.println("Balance: " + s.getTotal());
+        s.receiveBonus();
+        System.out.println("Balance: " + s.getTotal());
     }
 }

@@ -4,12 +4,41 @@ investment account types:
 Savings, Checkings, Tfsa, Gic, Rrsp, Resp, Rrif, GrowthInvestment, Shares, Stocks, PropertyInvestment, CashInvestment,
 FixedRateInvestment, HighRiskInvestment, BrokerageAccount, TermInvestment, MutualFund
 
-vary initial deposit: integer from 100 to 1000
-vary bonus amount: integer from 0 to 100
+## Java questions
 
 ## Question Text
 
-Suppose you have defined a `Savings` class, and now you want to define a `BankAccount` class. In the `BankAccount`
-class, you need to define a method called `startInvestment` that takes no input and returns a **Savings** object with
-a random double value between 0 and 200 for the `initial` and 0 for the `bonus`. Use the constructor in the
-provided `Savings` class to do this.
+Suppose you have defined a `Savings` class to model your investment account, and now you want to test it to make sure 
+that it works. Given the savings class below, create a test class called `BankAccount` with a main method and 
+initialize a `Savings` object with the following attribute:
+- Initial: 500.32
+
+Then, call the `getTotal` method and print the balance of the created Savings object on its own line. The result from 
+doing this should be the printing of the `String` "Balance: x" where x is the value of the total.
+
+Then, call the `recieveBonus` method and repeat the print statement to view the new balance.
+
+Note: You do not need to place the savings class in your submission code, the website will handle this for you. It is 
+just for you to reference.
+
+### Dog Class:
+
+```java
+public class Savings {
+    double initial;
+    double bonus;
+
+    public Savings(double initial) {
+        this.initial = initial;
+        bonus = Math.random() * 200;
+    }
+
+    public double getTotal() {
+        return initial + bonus;
+    }
+
+    public double receiveBonus() {
+        return bonus += Math.random() * 200;
+    }
+}
+```
