@@ -1,10 +1,18 @@
 package oop.creating_objects_from_classes.hard.q5;
 
 public class SportsRoom {
-    public Basketball[] makeBalls(double[] sizes) {
-        Basketball[] balls = new Basketball[sizes.length];
-        for (int i = 0; i < sizes.length; i++)
-            balls[i] = new Basketball(sizes[i]);
-        return balls;
+    public static void main(String[] args) {
+        Basketball[] balls = {
+                new Basketball(25.5, "good"),
+                new Basketball(27.5, "poor"),
+                new Basketball(25.5, "great"),
+                new Basketball(29.5, "good"),
+                new Basketball(28.5, "poor"),
+                new Basketball(27.5, "poor"),
+                new Basketball(25.5, "great"),
+                new Basketball(29.5, "good"),
+                new Basketball(28.5, "good"),
+                new Basketball(28.5, "poor")
+        };
     }
 }
