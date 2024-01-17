@@ -14,7 +14,7 @@ The third should be initialized with the attributes:
 -Nickname: Sherry
 The last should be initialized using the `produceSeed` method with:
 -Nickname: Delilah 
-and type the copy of the second tomato which it comes from. 
+and type will be the same as the tomato it came from. 
 
 Note: You do not need to place the tomato class in your submission code, the website will handle this for you. It is just
 for you to reference.
