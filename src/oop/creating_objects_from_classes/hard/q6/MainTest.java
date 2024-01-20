@@ -31,7 +31,7 @@ public class MainTest {
     }
 
     @Test
-    public void correctDogTestClass() throws Throwable {
+    public void correctMartiniTestClass() throws Throwable {
         String missingMain = "Your %s class is missing the %s method. Make sure it has been declared, it is spelt correctly, and has the correct parameters.";
         String incorrectVisibility = "Your main method does not have the correct visibility modifier.";
         String missingStatic = "Your main method is missing the static modifier.";
