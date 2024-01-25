@@ -45,7 +45,8 @@ public class MainTest {
 
         String incorrectOutput = "Your main method in the %s class does not print the correct output. Make sure that you call the %s method.";
         Clause[] clauses = new Clause[]{
-                new StringLiteral("I detect vodka|lemon juice|syrup|triple sec"),
+                new StringLiteral("I detect "),
+                new StringLiteral("vodka|lemon juice|syrup|triple sec"),
                 new Optional(new NewLine())
         };
         Object[][] mainParameters = {{new String[0], String[].class}};
