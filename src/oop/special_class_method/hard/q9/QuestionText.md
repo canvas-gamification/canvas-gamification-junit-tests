@@ -2,8 +2,7 @@
 
 ### Question Text
 
-Many people are fascinated by our planet's solar system. Make a Java class called Earth that represents one of those
-planets with the requirements below:
+Many people are fascinated by our planet's Solar System. Make a Java class called Earth that models one of the planets in our Solar System with the requirements below:
 
 ### Earth Class:
 
