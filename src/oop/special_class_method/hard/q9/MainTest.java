@@ -50,6 +50,7 @@ public class MainTest {
                 Arguments.of(4535.4, 300),
                 Arguments.of(234.4, 100),
                 Arguments.of(654.45, 365),
+                Arguments.of(0.0, 0),
                 Arguments.of(43.3, 14)
 
         );
@@ -87,6 +88,8 @@ public class MainTest {
                 Arguments.of(4535.4, 432.2),
                 Arguments.of(234.4, 655.3),
                 Arguments.of(654.45, 453.3),
+                Arguments.of(0.0, 655.3),
+                Arguments.of(654.45, 0.0),
                 Arguments.of(43.3, 654.2)
 
         );
@@ -162,6 +165,8 @@ public class MainTest {
                 Arguments.of(10, 15),
                 Arguments.of(30, 10),
                 Arguments.of(100, 120),
+                Arguments.of(30, 0),
+                Arguments.of(0, 120),
                 Arguments.of(1, 2)
         );
     }
