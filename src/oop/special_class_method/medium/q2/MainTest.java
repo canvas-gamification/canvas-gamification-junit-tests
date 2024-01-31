@@ -207,7 +207,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("booleanDoublesInputProvider")
-    public void lampMethodsWorkCorrectlyWorkTogether(double firstValue, boolean secondValue) throws Throwable {
+    public void lampGettersAndSettersWorkTogether(double firstValue, boolean secondValue) throws Throwable {
         Object[][] instantiationArguments = {
                 {1.234, double.class},
                 {false, boolean.class}
