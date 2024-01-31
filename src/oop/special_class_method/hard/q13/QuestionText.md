@@ -20,10 +20,11 @@ Your `Cup` class must have the following items:
       uses it to initialize the **colour**, **volume**, and **liquid** attributes.
 
 - Methods:
-    - a `setLiquid` method which accepts a `String` and uses it to set the value of the **liquid** attribute
+    - a `setLiquid` method which accepts a `String` and uses it to set the value of the **liquid** attribute. It must ]
+      not return anything.
     - a `getVolume` method which returns the value stored in the **volume** attribute
     - These methods must be visible from other classes.
-  
+
 ### Distractors
 
     - public void setColour(String a)

@@ -107,13 +107,13 @@ public class MainTest {
                 {value2, double.class},
                 {value3, String.class}
         };
-        Object testInstance = testClass.createInstance(arguments);
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(getAttributeMethodName2, null), String.format(incorrectMethodDefinition, getAttributeMethodName2, className));
         assertTrue(testClass.hasModifier(getAttributeMethodName2, null, "public"), String.format(incorrectModifierMessage, getAttributeMethodName2, className));
         assertTrue(testClass.hasReturnType(getAttributeMethodName2, null, double.class), String.format(incorrectReturnType, getAttributeMethodName2, className));
+        Object testInstance = testClass.createInstance(arguments);
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName2, testInstance);
         _assertEquals(value2, getMethodOutput,
                 "Your " + getAttributeMethodName2 + " method does not return the value of the " + attributeName2 + " attribute.");
@@ -137,7 +137,6 @@ public class MainTest {
                 {value2, double.class},
                 {initialiValue, String.class}
         };
-        Object testInstance = testClass.createInstance(arguments);
         Object[][] setMethodArguments = {
                 {updatedValue, String.class}
         };
@@ -147,6 +146,7 @@ public class MainTest {
         assertTrue(testClass.hasMethod(setAttributeMethodName3, new Class<?>[]{String.class}), String.format(incorrectMethodDefinition, setAttributeMethodName3, className));
         assertTrue(testClass.hasModifier(setAttributeMethodName3, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, setAttributeMethodName3, className));
         assertTrue(testClass.hasReturnType(setAttributeMethodName3, new Class<?>[]{String.class}, Void.TYPE), String.format(incorrectReturnType, setAttributeMethodName3, className));
+        Object testInstance = testClass.createInstance(arguments);
         testClass.callMethod(setAttributeMethodName3, setMethodArguments, testInstance);
         String incorrectSetterMessage =
                 "Your " + setAttributeMethodName3 + " method does not correctly update the value of " + attributeName3 + ".";
