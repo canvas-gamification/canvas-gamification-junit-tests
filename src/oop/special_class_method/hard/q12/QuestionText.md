@@ -24,3 +24,4 @@ Your `Laptop` class must have the following items:
     - a `setColour` method which accepts a `String` and uses it to set the value of the **colour** attribute
     - a `getColour` method which returns the value stored in the **colour** attribute
     - These methods must be visible from other classes.
+    - Note that the setter methods must not return anything
