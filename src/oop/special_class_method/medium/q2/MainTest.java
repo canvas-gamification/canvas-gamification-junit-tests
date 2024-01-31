@@ -111,9 +111,9 @@ public class MainTest {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(setAttributeMethodName1, new Class<?>[]{double.class}), String.format(incorrectMethodDefinition, getAttributeMethodName1, className));
-        assertTrue(testClass.hasModifier(setAttributeMethodName1, new Class<?>[]{double.class}, "public"), String.format(incorrectModifierMessage, getAttributeMethodName1, className));
-        assertTrue(testClass.hasReturnType(setAttributeMethodName1, new Class<?>[]{double.class}, Void.TYPE), String.format(incorrectReturnType, getAttributeMethodName1, className));
+        assertTrue(testClass.hasMethod(setAttributeMethodName1, new Class<?>[]{double.class}), String.format(incorrectMethodDefinition, setAttributeMethodName1, className));
+        assertTrue(testClass.hasModifier(setAttributeMethodName1, new Class<?>[]{double.class}, "public"), String.format(incorrectModifierMessage, setAttributeMethodName1, className));
+        assertTrue(testClass.hasReturnType(setAttributeMethodName1, new Class<?>[]{double.class}, Void.TYPE), String.format(incorrectReturnType, setAttributeMethodName1, className));
         Object testInstance = testClass.createInstance(instantiationArguments);
         Object[][] setMethodArguments = {
                 {updatedValue, double.class}
@@ -170,9 +170,9 @@ public class MainTest {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(setAttributeMethodName2, new Class<?>[]{boolean.class}), String.format(incorrectMethodDefinition, getAttributeMethodName2, className));
-        assertTrue(testClass.hasModifier(setAttributeMethodName2, new Class<?>[]{boolean.class}, "public"), String.format(incorrectModifierMessage, getAttributeMethodName2, className));
-        assertTrue(testClass.hasReturnType(setAttributeMethodName2, new Class<?>[]{boolean.class}, Void.TYPE), String.format(incorrectReturnType, getAttributeMethodName2, className));
+        assertTrue(testClass.hasMethod(setAttributeMethodName2, new Class<?>[]{boolean.class}), String.format(incorrectMethodDefinition, setAttributeMethodName2, className));
+        assertTrue(testClass.hasModifier(setAttributeMethodName2, new Class<?>[]{boolean.class}, "public"), String.format(incorrectModifierMessage, setAttributeMethodName2, className));
+        assertTrue(testClass.hasReturnType(setAttributeMethodName2, new Class<?>[]{boolean.class}, Void.TYPE), String.format(incorrectReturnType, setAttributeMethodName2, className));
         Object testInstance = testClass.createInstance(instantiationArguments);
         Object[][] setMethodArguments = {
                 {updatedValue, boolean.class}
