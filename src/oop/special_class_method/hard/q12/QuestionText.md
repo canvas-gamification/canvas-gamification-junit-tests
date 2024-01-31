@@ -3,7 +3,7 @@
 ## Question Text
 
 You are developing a program that teaches people about the physical traits of a variety of human-made objects. Write a 
-Java class called **Laptop**.
+Java class called **Laptop** to model an object using the requirements below:
 
 ### Laptop Class:
 
