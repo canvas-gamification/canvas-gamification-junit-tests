@@ -67,6 +67,6 @@ public class MainTest extends BaseTest {
         MethodTest m = new MethodTest(DivSeries.class, "divisionCalc", arguments);
         Object output = m.callMethod();
         _assertEquals(ans, output,
-                "Your divisionCalc method does not return the correct sum of the series.");
+                "Your divisionCalc method does not return the correct sum of the series based on the input n.");
     }
 }
