@@ -26,6 +26,7 @@ public class MainTest extends BaseTest {
         return new Clause[]{
                 new StringLiteral("Enter a number for the upper bound of the series: "),
                 new NewLine(),
+                new StringLiteral("The sum of the series is "),
                 new PlaceHolder(),
         };
     }
@@ -53,7 +54,6 @@ public class MainTest extends BaseTest {
     public void correctSeriesOutput(int n, int expectedSum) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print the correct sum of the series.";
         runWithInput(n + "", new Clause[][]{{
-                new StringLiteral("The sum of the series is "),
                 new IntegerLiteral(expectedSum),
         }});
     }
