@@ -1,9 +1,9 @@
 package methods.modular_programs.medium.q4;
 
 /**
- * *[J] Write a program with a method called feverCheck that will ask the user
- * for their temperature and print out "You have a fever" when the temperature
- * exceeds 100 oF and "You don't have a fever" otherwise.
+ * *[J] Write a program with a method called feverCheck. The feverCheck method should get a double called temp and if
+ * temp is more or equal than 100 it should print "You have a fever", otherwise it should print "You don't have a fever.".
+ * The main method should get a double temp in input with the following format and call the feverCheck method.
  * 
  * Sample Output:
  *  Enter your current temperature ( in fahrenheit ): 
