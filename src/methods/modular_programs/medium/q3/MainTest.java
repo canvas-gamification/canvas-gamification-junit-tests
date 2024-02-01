@@ -16,6 +16,8 @@ import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
 
+import static global.tools.CustomAssertions._assertEquals;
+
 public class MainTest extends BaseTest {
     // Parsons
     public Clause[] testSentence() {
@@ -56,13 +58,11 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputUpperBoundProvider")
     public void correctSumCalcMethod(int n, int ans) throws Throwable {
-        Clause[] methodSentence = new Clause[]{
-                new StringLiteral("The sum of the series is: " + ans)
-        };
         Object[][] arguments = {
                 {n, int.class}
         };
-        MethodTest m = new MethodTest(AlternateIt.class, "sumCalc", arguments, methodSentence);
-        m.callMethod();
+        MethodTest m = new MethodTest(AlternateIt.class, "sumCalc", arguments);
+        Object output = m.callMethod();
+        _assertEquals(ans, output, "your sumCalc method does not return the correct sum of the series.");
     }
 }
