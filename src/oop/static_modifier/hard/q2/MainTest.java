@@ -19,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
+    // Java
+
     private final String className = "Lightbulb";
     private final String staticAttributeName = "voltage";
     private final String attributeName = "type";
@@ -77,6 +79,11 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void lightbulbConstructorInitializesValuesCorrectly(String value1) throws Throwable {
+        String missingConstructorMessage = "The %s class is missing a required constructor. Make sure that it is named correctly and has the correct parameters.";
+        String wrongAccessModifier = "The %s class constructor has the wrong visibility modifier. Make sure that it is visible from all other classes.";
+        Class<?>[] constructorArgsDef = new Class[]{String.class};
+        assertTrue(testClass.hasConstructor(constructorArgsDef), String.format(missingConstructorMessage, className));
+        assertTrue(testClass.hasModifier(constructorArgsDef, "public"), String.format(wrongAccessModifier, className));
         String wrongValueMessage = "The %s constructor did not initialize the %s attribute to the correct value based on the parameters passed to the constructor.";
         Object[][] constructorArgs = {
                 {value1, String.class}
@@ -88,14 +95,6 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void lightbulbClassHasCorrectSetVoltageMethod(String value1, int value2) throws Throwable {
-        Object[][] arguments = {
-                {value1, String.class}
-        };
-        Object classInstance = testClass.createInstance(arguments);
-        Object[][] setSizeArguments = {
-                {value2, int.class}
-        };
-        String[] setMethodModifiers = {"public"};
         String missingMethodMessage = "The %s class is missing the %s method. Make sure that the class contains the method and it is spelt correctly with the correct arguments as parameters.";
         String wrongTypeMessage = "The %s method in the %s class has the wrong return type.";
         String wrongModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
@@ -107,6 +106,14 @@ public class MainTest {
                 String.format(wrongTypeMessage, setAttributeName, className));
         assertTrue(testClass.hasMethod(setAttributeName, new Class<?>[]{int.class}, Void.TYPE, new String[]{"public"}),
                 String.format(wrongModifierMessage, setAttributeName, className));
+        Object[][] arguments = {
+                {value1, String.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        Object[][] setSizeArguments = {
+                {value2, int.class}
+        };
+        String[] setMethodModifiers = {"public"};
         testClass.callMethod(setAttributeName, setSizeArguments, setMethodModifiers, classInstance);
         _assertEquals(value2, testClass.getFieldValue(null, staticAttributeName), incorrectSetMethodMessage);
     }
@@ -115,6 +122,15 @@ public class MainTest {
     @MethodSource("inputProvider")
     @Tag("dependent1")
     public void discordClassHasCorrectToStringMethod(String value1, int value2) throws Throwable {
+        String missingMethodMessage = "The %s class is missing the %s method. Make sure that the class contains the method and it is spelt correctly with the correct arguments as parameters.";
+        String wrongTypeMessage = "The %s method in the %s class has the wrong return type.";
+        String wrongModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        assertTrue(testClass.hasMethod("toString", null),
+                String.format(missingMethodMessage, className, "toString"));
+        assertTrue(testClass.hasMethod("toString", null, String.class),
+                String.format(wrongTypeMessage, "toString", className));
+        assertTrue(testClass.hasMethod("toString", null, String.class, new String[]{"public"}),
+                String.format(wrongModifierMessage, "toString", className));
         Object[][] arguments = {
                 {value1, String.class}
         };
@@ -130,7 +146,7 @@ public class MainTest {
 
     @Test
     @Tag("dependent1")
-    public void correctMainMethod() throws Throwable {
+    public void correctTestClass() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral("This lightbulb is a LED light with 150 voltage."),
                 new NewLine(),
@@ -141,6 +157,6 @@ public class MainTest {
         };
         Object classInstance = classObject.createInstance();
         classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance,
-                clauses);
+                clauses, "Your " + testClassName + " class main method does not print the correct output.");
     }
 }
