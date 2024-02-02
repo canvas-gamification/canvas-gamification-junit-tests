@@ -27,6 +27,11 @@ The `Discord` class has the following requirements:
     - A `deleteMessage` method which changes the **content** attribute to an empty string.
     - A `toString` method that returns `x From: y` where x is the value of the **content** attribute and y is the value
       of the **user** attribute.
+    - A `getContent` method which returns the value of **content** attribute.
+    - A `getUser` method which returns the value of **user** attribute.
+    - A `setContent` method, which does not return anything, and changes the value of **content** attribute to its input.
+    - A `setUser` method, which does not return anything, and changes the value of **user** attribute to its input
+  
 
 ### TestSocialMedia class
 

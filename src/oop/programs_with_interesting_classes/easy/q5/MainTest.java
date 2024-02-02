@@ -19,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
+    // Parsons
+
     private final String className = "Discord";
     private final String attributeName1 = "content";
     private final String attributeName2 = "user";
@@ -89,19 +91,15 @@ public class MainTest {
         _assertEquals(value2, testClass.getFieldValue(checkupInstance, attributeName2), String.format(wrongValueMessage, className, attributeName2));
     }
 
-    @Test
-    public void deleteMessageIsDefinedCorrectly() {
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void discordClassHasCorrectDeleteMessageMethod(String value1, String value2) throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(methodName, null), String.format(incorrectMethodDefinition, methodName, className));
         assertTrue(testClass.hasModifier(methodName, null, "public"), String.format(incorrectModifierMessage, methodName, className));
         assertTrue(testClass.hasReturnType(methodName, null, Void.TYPE), String.format(incorrectReturnType, methodName, className));
-    }
-
-    @ParameterizedTest
-    @MethodSource("inputProvider")
-    public void discordClassHasCorrectDeleteMessageMethod(String value1, String value2) throws Throwable {
         Object[][] constructorArgs = {
                 {value1, String.class},
                 {value2, String.class}
@@ -113,30 +111,20 @@ public class MainTest {
                 String.format(incorrectNumDays, methodName, className, attributeName1));
     }
 
-    @Test
-    public void getContentIsDefinedCorrectly() {
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void discordClassHasCorrectGetContentMethod(String value1, String value2) throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(getAttributeName1, null), String.format(incorrectMethodDefinition, getAttributeName1, className));
         assertTrue(testClass.hasModifier(getAttributeName1, null, "public"), String.format(incorrectModifierMessage, getAttributeName1, className));
         assertTrue(testClass.hasReturnType(getAttributeName1, null, String.class), String.format(incorrectReturnType, getAttributeName1, className));
-    }
-
-    @ParameterizedTest
-    @MethodSource("inputProvider")
-    public void discordClassHasCorrectGetContentMethod(String value1, String value2) throws Throwable {
         Object[][] arguments = {
                 {value1, String.class},
                 {value2, String.class}
         };
         Object classInstance = testClass.createInstance(arguments);
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(getAttributeName1, null), String.format(incorrectMethodDefinition, getAttributeName1, className));
-        assertTrue(testClass.hasModifier(getAttributeName1, null, "public"), String.format(incorrectModifierMessage, getAttributeName1, className));
-        assertTrue(testClass.hasReturnType(getAttributeName1, null, String.class), String.format(incorrectReturnType, getAttributeName1, className));
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
                 "Your", getAttributeName1, "does not correctly get the value of the", attributeName1, "attribute.");
@@ -144,30 +132,20 @@ public class MainTest {
         _assertEquals(value1, getMethodOutput, incorrectGetMethodMessage);
     }
 
-    @Test
-    public void getUserIsDefinedCorrectly() {
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void discordClassHasCorrectGetUserMethod(String value1, String value2) throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(getAttributeName2, null), String.format(incorrectMethodDefinition, getAttributeName2, className));
         assertTrue(testClass.hasModifier(getAttributeName2, null, "public"), String.format(incorrectModifierMessage, getAttributeName2, className));
         assertTrue(testClass.hasReturnType(getAttributeName2, null, String.class), String.format(incorrectReturnType, getAttributeName2, className));
-    }
-
-    @ParameterizedTest
-    @MethodSource("inputProvider")
-    public void discordClassHasCorrectGetUserMethod(String value1, String value2) throws Throwable {
         Object[][] arguments = {
                 {value1, String.class},
                 {value2, String.class}
         };
         Object classInstance = testClass.createInstance(arguments);
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(getAttributeName2, null), String.format(incorrectMethodDefinition, getAttributeName2, className));
-        assertTrue(testClass.hasModifier(getAttributeName2, null, "public"), String.format(incorrectModifierMessage, getAttributeName2, className));
-        assertTrue(testClass.hasReturnType(getAttributeName2, null, String.class), String.format(incorrectReturnType, getAttributeName2, className));
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
                 "Your", getAttributeName2, "does not correctly get the value of the", attributeName2, "attribute.");
@@ -175,30 +153,20 @@ public class MainTest {
         _assertEquals(value2, getMethodOutput, incorrectGetMethodMessage);
     }
 
-    @Test
-    public void setContentIsDefinedCorrectly() {
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void discordClassHasCorrectSetContentMethod(String value1, String value2, String updatedValue1) throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(setAttributeName1, new Class<?>[]{String.class}), String.format(incorrectMethodDefinition, setAttributeName1, className));
         assertTrue(testClass.hasModifier(setAttributeName1, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, setAttributeName1, className));
         assertTrue(testClass.hasReturnType(setAttributeName1, new Class<?>[]{String.class}, Void.TYPE), String.format(incorrectReturnType, setAttributeName1, className));
-    }
-
-    @ParameterizedTest
-    @MethodSource("inputProvider")
-    public void discordClassHasCorrectSetContentMethod(String value1, String value2, String updatedValue1) throws Throwable {
         Object[][] arguments = {
                 {value1, String.class},
                 {value2, String.class}
         };
         Object classInstance = testClass.createInstance(arguments);
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(setAttributeName1, new Class<?>[]{String.class}), String.format(incorrectMethodDefinition, setAttributeName1, className));
-        assertTrue(testClass.hasModifier(setAttributeName1, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, setAttributeName1, className));
-        assertTrue(testClass.hasReturnType(setAttributeName1, new Class<?>[]{String.class}, Void.TYPE), String.format(incorrectReturnType, setAttributeName1, className));
         Object[][] setSizeArguments = {
                 {updatedValue1, String.class}
         };
@@ -209,30 +177,20 @@ public class MainTest {
         _assertEquals(updatedValue1, testClass.getFieldValue(classInstance, attributeName1), incorrectSetMethodMessage);
     }
 
-    @Test
-    public void setUserIsDefinedCorrectly() {
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void discordClassHasCorrectSetUserMethod(String value1, String value2, String updatedValue1, String updatedValue2) throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(setAttributeName2, new Class<?>[]{String.class}), String.format(incorrectMethodDefinition, setAttributeName2, className));
         assertTrue(testClass.hasModifier(setAttributeName2, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, setAttributeName2, className));
         assertTrue(testClass.hasReturnType(setAttributeName2, new Class<?>[]{String.class}, Void.TYPE), String.format(incorrectReturnType, setAttributeName2, className));
-    }
-
-    @ParameterizedTest
-    @MethodSource("inputProvider")
-    public void discordClassHasCorrectSetUserMethod(String value1, String value2, String updatedValue1, String updatedValue2) throws Throwable {
         Object[][] arguments = {
                 {value1, String.class},
                 {value2, String.class}
         };
         Object classInstance = testClass.createInstance(arguments);
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(setAttributeName2, new Class<?>[]{String.class}), String.format(incorrectMethodDefinition, setAttributeName2, className));
-        assertTrue(testClass.hasModifier(setAttributeName2, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, setAttributeName2, className));
-        assertTrue(testClass.hasReturnType(setAttributeName2, new Class<?>[]{String.class}, Void.TYPE), String.format(incorrectReturnType, setAttributeName2, className));
         Object[][] setSizeArguments = {
                 {updatedValue2, String.class}
         };
@@ -247,17 +205,17 @@ public class MainTest {
     @MethodSource("inputProvider")
     @Tag("dependent1")
     public void discordClassHasCorrectToStringMethod(String value1, String value2) throws Throwable {
-        Object[][] arguments = {
-                {value1, String.class},
-                {value2, String.class}
-        };
-        Object classInstance = testClass.createInstance(arguments);
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod("toString", null), String.format(incorrectMethodDefinition, "toString", className));
         assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className));
         assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className));
+        Object[][] arguments = {
+                {value1, String.class},
+                {value2, String.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
         String[] methodModifiers = {"public"};
         String expected = value1 + " From: " + value2;
         String incorrectToStringMessage = String.join(" ",
@@ -276,6 +234,6 @@ public class MainTest {
         };
         Object classInstance = classObject.createInstance();
         classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance,
-                clauses);
+                clauses, "Your TestSocialMedia class does not print the correct output.");
     }
 }
