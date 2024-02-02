@@ -4,7 +4,7 @@
 
 ## Question Text
 
-Life is a beautiful thing, and as time passes, things grow. Write a Java class about plants called `Tree`.
+Life is a beautiful thing, and as time passes, things grow. Write a Java class about plants called `Tree` to model a plant with the requirements below:
 
 ### Tree Class
 
