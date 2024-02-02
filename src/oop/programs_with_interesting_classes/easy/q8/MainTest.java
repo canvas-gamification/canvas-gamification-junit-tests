@@ -19,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
+    // Parsons
+
     private final String className = "Activity";
     private final String attributeName1 = "name";
     private final String attributeName2 = "consumptionRate";
@@ -94,19 +96,15 @@ public class MainTest {
         _assertEquals(value3, testClass.getFieldValue(checkupInstance, attributeName3), String.format(wrongValueMessage, className, attributeName3));
     }
 
-    @Test
-    public void usageCalculatorIsDefinedCorrectly() {
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void activityClassHasCorrectUsageCalculatorMethod(String value1, double value2, int value3) throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(methodName, null), String.format(incorrectMethodDefinition, methodName, className));
         assertTrue(testClass.hasModifier(methodName, null, "public"), String.format(incorrectModifierMessage, methodName, className));
         assertTrue(testClass.hasReturnType(methodName, null, double.class), String.format(incorrectReturnType, methodName, className));
-    }
-
-    @ParameterizedTest
-    @MethodSource("inputProvider")
-    public void activityClassHasCorrectUsageCalculatorMethod(String value1, double value2, int value3) throws Throwable {
         Object[][] constructorArgs = {
                 {value1, String.class},
                 {value2, double.class},
@@ -122,6 +120,12 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void activityClassHasCorrectGetNameMethod(String value1, double value2, int value3) throws Throwable {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(getAttributeName1, null), String.format(incorrectMethodDefinition, getAttributeName1, className));
+        assertTrue(testClass.hasModifier(getAttributeName1, null, "public"), String.format(incorrectModifierMessage, getAttributeName1, className));
+        assertTrue(testClass.hasReturnType(getAttributeName1, null, String.class), String.format(incorrectReturnType, getAttributeName1, className));
         Object[][] arguments = {
                 {value1, String.class},
                 {value2, double.class},
@@ -145,6 +149,6 @@ public class MainTest {
         };
         Object classInstance = classObject.createInstance();
         classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance,
-                clauses);
+                clauses, "Your " + testClassName + " class main method does not print the correct output.");
     }
 }
