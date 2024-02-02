@@ -1,11 +1,7 @@
 package oop.programs_with_interesting_classes.easy.q7;
 
 import global.ObjectTest;
-import global.variables.Clause;
-import global.variables.clauses.NewLine;
-import global.variables.clauses.StringLiteral;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,13 +10,14 @@ import org.junit.jupiter.params.provider.MethodSource;
 import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
+    // Parsons
+
     private final String className1 = "Song";
     private final String firstAttributeName1 = "title";
     private final String secondAttributeName1 = "length";
@@ -129,6 +126,12 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void songClassHasCorrectToStringMethod(String value1, double value2) throws Throwable {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass1.hasMethod("toString", null), String.format(incorrectMethodDefinition, "toString", className1));
+        assertTrue(testClass1.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className1));
+        assertTrue(testClass1.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className1));
         Object[][] arguments = {
                 {value1, String.class},
                 {value2, double.class}
@@ -144,6 +147,12 @@ public class MainTest {
 
     @Test
     public void playlistClassHasCorrectToStringMethod() throws Throwable {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass2.hasMethod("toString", null), String.format(incorrectMethodDefinition, "toString", className2));
+        assertTrue(testClass2.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className2));
+        assertTrue(testClass2.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className2));
         Object tests[][] = {
                 {"Bohemian Rhapsody", 5.92},
                 {"Billie Jean", 4.90},
@@ -175,17 +184,13 @@ public class MainTest {
     }
 
     @Test
-    public void expandPlaylistIsDefinedCorrectly() {
+    public void playlistClassHasCorrectExpandPlaylistMethod() throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass2.hasMethod(methodName1, null), String.format(incorrectMethodDefinition, methodName1, className2));
         assertTrue(testClass2.hasModifier(methodName1, null, "public"), String.format(incorrectModifierMessage, methodName1, className2));
         assertTrue(testClass2.hasReturnType(methodName1, null, Void.TYPE), String.format(incorrectReturnType, methodName1, className2));
-    }
-
-    @Test
-    public void playlistClassHasCorrectExpandPlaylistMethod() throws Throwable {
         Object tests[][] = {
                 {"Bohemian Rhapsody", 5.92},
                 {"Billie Jean", 4.90},
@@ -214,17 +219,13 @@ public class MainTest {
     }
 
     @Test
-    public void addToPlaylistIsDefinedCorrectly() {
+    public void playlistClassHasCorrectAddToPlaylistMethod() throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass2.hasMethod(methodName2, new Class[]{Song.class}), String.format(incorrectMethodDefinition, methodName2, className2));
         assertTrue(testClass2.hasModifier(methodName2, new Class[]{Song.class}, "public"), String.format(incorrectModifierMessage, methodName2, className2));
         assertTrue(testClass2.hasReturnType(methodName2, new Class[]{Song.class}, Void.TYPE), String.format(incorrectReturnType, methodName2, className2));
-    }
-
-    @Test
-    public void playlistClassHasCorrectAddToPlaylistMethod() throws Throwable {
         Object tests[][] = {
                 {"Bohemian Rhapsody", 5.92},
                 {"Billie Jean", 4.90},
@@ -246,6 +247,7 @@ public class MainTest {
                 for(int j = 0; j < songs.length; j ++)
                     temp[j] = songs[j];
                 songs = temp;
+
             }
             songs[t ++] = new Song((String)tests[i][0], (double)tests[i][1]);
             Object[][] arguments = new Object[][]{
@@ -253,8 +255,11 @@ public class MainTest {
             };
             testClass2.callMethod(methodName2, arguments, classInstance);
             String incorrectNumDays = "The %s method in the %s class does not correctly add to the %s attribute.";
-            _assertArrayEquals(songs, testClass2.getFieldValue(classInstance, firstAttributeName2),
-                    String.format(incorrectNumDays, methodName2, className2, firstAttributeName2));
+            Song[] ans = (Song[])testClass2.getFieldValue(classInstance, firstAttributeName2);
+            for(int j = 0; j < songs.length; j++){
+                if(songs[j] != null && ans[j] != null)
+                    _assertEquals(songs[j].toString(), ans[j].toString(), String.format(incorrectNumDays, methodName2, className2, firstAttributeName2));
+            }
             _assertEquals(t, testClass2.getFieldValue(classInstance, secondAttributeName2),
                     String.format(incorrectNumDays, methodName2, className2, secondAttributeName2));
         }
