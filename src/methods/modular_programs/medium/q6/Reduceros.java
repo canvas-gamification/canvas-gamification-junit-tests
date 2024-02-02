@@ -1,9 +1,15 @@
 package methods.modular_programs.medium.q6;
 
 /**
- * [J] Write a program with a method called addUp to display a "single-digit
+ * [J] Write a program with a method called addUp that get an integer and returns a "single-digit
  * reduction" of a number taken from the user by adding up its digits until a
  * single-digit number is obtained. Eg. 567 becomes 5 + 6 + 7 = 18 = 1 + 8 => 9)
+ * In you main method you should get an integer as input and use the method and print the result in the following format:
+ *
+ * Sample Output;
+ * Enter a number:
+ * 567
+ * 567's single number reduction is 9
  */
 import java.util.Scanner;
 
