@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.stream.Stream;
 
 public class MainTest {
+    // Parsons
+
     private final String className = "Course";
     private final String attributeName1 = "textBookFee";
     private final String attributeName2 = "suppliesFee";
@@ -89,20 +91,16 @@ public class MainTest {
         _assertEquals(value3, testClass.getFieldValue(checkupInstance, attributeName3), String.format(wrongValueMessage, className, attributeName3));
     }
 
-    @Test
-    public void calcTotalCostIsDefinedCorrectly() {
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    @Tag("dependent1")
+    public void discordClassHasCorrectCalcTotalCostMethod(double value1, double value2, double value3) throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(methodName, null), String.format(incorrectMethodDefinition, methodName, className));
         assertTrue(testClass.hasModifier(methodName, null, "public"), String.format(incorrectModifierMessage, methodName, className));
         assertTrue(testClass.hasReturnType(methodName, null, double.class), String.format(incorrectReturnType, methodName, className));
-    }
-
-    @ParameterizedTest
-    @MethodSource("inputProvider")
-    @Tag("dependent1")
-    public void discordClassHasCorrectCalcTotalCostMethod(double value1, double value2, double value3) throws Throwable {
         Object[][] constructorArgs = {
                 {value1, double.class},
                 {value2, double.class},
