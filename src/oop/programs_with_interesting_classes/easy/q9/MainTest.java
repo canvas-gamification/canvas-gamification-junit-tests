@@ -16,6 +16,8 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
+    // Parsons
+
     private final String className = "Activity";
     private final String attributeName1 = "type";
     private final String attributeName2 = "dailyEmissionRate";
@@ -67,8 +69,7 @@ public class MainTest {
                 Arguments.of("Basketball", 0.08 * 40),
                 Arguments.of("Gardening", 0.04 * 90),
                 Arguments.of("Hiking", 0.06 * 180),
-                Arguments.of("Meditation", 0.02 * 20)
-        );
+                Arguments.of("Meditation", 0.02 * 20));
     }
 
 
@@ -76,10 +77,7 @@ public class MainTest {
     @MethodSource("inputProvider")
     public void activityConstructorInitializesValuesCorrectly(String value1, double value2) throws Throwable {
         String wrongValueMessage = "The %s constructor did not initialize the %s attribute to the correct value based on the parameters passed to the constructor.";
-        Object[][] constructorArgs = {
-                {value1, String.class},
-                {value2, double.class}
-        };
+        Object[][] constructorArgs = {{value1, String.class}, {value2, double.class}};
         Object checkupInstance = testClass.createInstance(constructorArgs);
         _assertEquals(value1, testClass.getFieldValue(checkupInstance, attributeName1), String.format(wrongValueMessage, className, attributeName1));
         _assertEquals(value2, testClass.getFieldValue(checkupInstance, attributeName2), String.format(wrongValueMessage, className, attributeName2));
@@ -88,14 +86,16 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void activityClassHasCorrectGetTypeMethod(String value1, double value2) throws Throwable {
-        Object[][] arguments = {
-                {value1, String.class},
-                {value2, double.class}
-        };
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(getAttributeName1, null), String.format(incorrectMethodDefinition, getAttributeName1, className));
+        assertTrue(testClass.hasModifier(getAttributeName1, null, "public"), String.format(incorrectModifierMessage, getAttributeName1, className));
+        assertTrue(testClass.hasReturnType(getAttributeName1, null, String.class), String.format(incorrectReturnType, getAttributeName1, className));
+        Object[][] arguments = {{value1, String.class}, {value2, double.class}};
         Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
-        String incorrectGetMethodMessage = String.join(" ",
-                "Your", getAttributeName1, "does not correctly get the value of the", attributeName1, "attribute.");
+        String incorrectGetMethodMessage = String.join(" ", "Your", getAttributeName1, "does not correctly get the value of the", attributeName1, "attribute.");
         Object getMethodOutput = testClass.callMethod(getAttributeName1, getMethodModifiers, classInstance);
         _assertEquals(value1, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -103,25 +103,24 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void activityClassHasCorrectGetDailyEmissionRateMethod(String value1, double value2) throws Throwable {
-        Object[][] arguments = {
-                {value1, String.class},
-                {value2, double.class}
-        };
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(getAttributeName2, null), String.format(incorrectMethodDefinition, getAttributeName2, className));
+        assertTrue(testClass.hasModifier(getAttributeName2, null, "public"), String.format(incorrectModifierMessage, getAttributeName2, className));
+        assertTrue(testClass.hasReturnType(getAttributeName2, null, double.class), String.format(incorrectReturnType, getAttributeName2, className));
+        Object[][] arguments = {{value1, String.class}, {value2, double.class}};
         Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
-        String incorrectGetMethodMessage = String.join(" ",
-                "Your", getAttributeName2, "does not correctly get the value of the", attributeName2, "attribute.");
+        String incorrectGetMethodMessage = String.join(" ", "Your", getAttributeName2, "does not correctly get the value of the", attributeName2, "attribute.");
         Object getMethodOutput = testClass.callMethod(getAttributeName2, getMethodModifiers, classInstance);
         _assertEquals(value2, getMethodOutput, incorrectGetMethodMessage);
     }
 
     @Test
     public void correctMainMethod() throws Throwable {
-        Clause[] clauses = {
-                new StringLiteral("The activity that generates the most greenhouse gases is Car")
-        };
+        Clause[] clauses = {new StringLiteral("The activity that generates the most greenhouse gases is Car")};
         Object classInstance = classObject.createInstance();
-        classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance,
-                clauses);
+        classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance, clauses, "Your " + className + " class main method does not print the correct output.");
     }
 }
