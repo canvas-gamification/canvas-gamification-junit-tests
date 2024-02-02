@@ -21,8 +21,10 @@ The `Tree` class has the following requirements:
     - Note that this constructor should be visible from all other classes.
 
 - Methods:
-    - A accessor and mutator methods for the **type** attribute called `getType` and `setType`.
-    - A accessor and mutator methods for the **size** attribute called `getSize` and `setSize`.
     - A `gettingOlder` method which addes 4 to the **size** attribute.
     - A `toString` method that returns `This is a x tree with y centimeters in diameter.` where x is the value of the
       **type** attribute and y is the value of the **size** attribute.
+    - A `getType` method which returns the value of **type** attribute.
+    - A `getSize` method which returns the value of **size** attribute.
+    - A `setType` method, which returns nothing, and gets a String and changes the value of **type** to input value.
+    - A `setSize` method, which returns nothing, and gets a double and changes the value of **size** to input value.
