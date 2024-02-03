@@ -134,7 +134,7 @@ public class MainTest {
     @Tag("dependent2")
     @Tag("dependent3")
     @Order(7)
-    public void correctMainMethod() throws Throwable {
+    public void correctTestClass() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral("There are 80 more to give away after the Corner Jack award."),
                 new Optional(new StringLiteral(" ")),
