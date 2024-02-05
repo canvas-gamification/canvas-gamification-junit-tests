@@ -18,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MainTest {
+    // Java
+
     private final String className = "Bed";
     private final String staticAttributeName = "woodBeams";
     private final String attributeName = "numBeams";
@@ -113,6 +115,12 @@ public class MainTest {
     @Tag("dependent1")
     @Order(6)
     public void bedClassHasCorrectMakeFurnitureMethod(int value1, int value2) throws Throwable {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(methodName, null), String.format(incorrectMethodDefinition, methodName, className));
+        assertTrue(testClass.hasModifier(methodName, null, "public"), String.format(incorrectModifierMessage, methodName, className));
+        assertTrue(testClass.hasReturnType(methodName, null, boolean.class), String.format(incorrectReturnType, methodName, className));
         Object[][] constructorArgs = {
                 {value1, int.class}
         };
