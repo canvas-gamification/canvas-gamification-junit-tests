@@ -18,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MainTest {
+    // Java
+
     private final String className = "Carpet";
     private final String staticAttributeName = "materialAreaAvailable";
     private final String attributeName = "houseArea";
@@ -63,7 +65,7 @@ public class MainTest {
 
     @Test
     @Order(3)
-    @Tag("dependent2")
+    @Tag("dependency1")
     public void staticVariableIsInitializedCorrectly() {
         _assertEquals(initialBeams, testClass.getFieldValue(null, staticAttributeName),
                 "Your " + staticAttributeName + " static attribute is not initialized correctly.");
@@ -86,7 +88,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependent3")
+    @Tag("dependency1")
     @Order(4)
     public void carpetConstructorInitializesValuesCorrectly(double value1) throws Throwable {
         String wrongValueMessage = "The %s constructor did not initialize the %s attribute to the correct value based on the parameters passed to the constructor.";
@@ -110,9 +112,15 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependent1")
+    @Tag("dependency1")
     @Order(6)
     public void carpetClassHasCorrectCanCompleteFlooringMethod(double value1, double value2) throws Throwable {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(methodName, null), String.format(incorrectMethodDefinition, methodName, className));
+        assertTrue(testClass.hasModifier(methodName, null, "public"), String.format(incorrectModifierMessage, methodName, className));
+        assertTrue(testClass.hasReturnType(methodName, null, boolean.class), String.format(incorrectReturnType, methodName, className));
         Object[][] constructorArgs = {
                 {value1, double.class}
         };
@@ -135,8 +143,6 @@ public class MainTest {
 
     @Test
     @Tag("dependent1")
-    @Tag("dependent2")
-    @Tag("dependent3")
     @Order(7)
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
