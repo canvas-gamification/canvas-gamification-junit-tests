@@ -19,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MainTest {
+    // Java
+
     private final String className = "Farm";
     private final String staticAttributeName = "foodDonation";
     private final String attributeName1 = "amountPerAnimal";
@@ -69,7 +71,7 @@ public class MainTest {
 
     @Test
     @Order(3)
-    @Tag("dependent2")
+    @Tag("dependency1")
     public void staticVariableIsInitializedCorrectly() {
         _assertEquals(initialBeams, testClass.getFieldValue(null, staticAttributeName),
                 "Your " + staticAttributeName + " static attribute is not initialized correctly.");
@@ -92,7 +94,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependent3")
+    @Tag("dependency1")
     @Order(4)
     public void farmConstructorInitializesValuesCorrectly(double value1, int value2) throws Throwable {
         String wrongValueMessage = "The %s constructor did not initialize the %s attribute to the correct value based on the parameters passed to the constructor.";
@@ -118,9 +120,15 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependent1")
+    @Tag("dependency1")
     @Order(6)
     public void farmClassHasCorrectReceiveDonationMethod(double value1, int value2, double value3) throws Throwable {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(methodName2, null), String.format(incorrectMethodDefinition, methodName2, className));
+        assertTrue(testClass.hasModifier(methodName2, null, "public"), String.format(incorrectModifierMessage, methodName2, className));
+        assertTrue(testClass.hasReturnType(methodName2, null, Void.TYPE), String.format(incorrectReturnType, methodName2, className));
         Object[][] constructorArgs = {
                 {value1, double.class},
                 {value2, int.class}
@@ -163,7 +171,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependent1")
+    @Tag("dependency1")
     @Order(8)
     public void farmClassHasCorrectFoodNeededMethod(double value1, int value2) throws Throwable {
         Object[][] constructorArgs = {
@@ -178,8 +186,6 @@ public class MainTest {
 
     @Test
     @Tag("dependent1")
-    @Tag("dependent2")
-    @Tag("dependent3")
     @Order(9)
     public void correctMainMethod() throws Throwable {
         double temp = initialBeams;
@@ -211,6 +217,7 @@ public class MainTest {
         clauses[7] = new Optional(new StringLiteral(" "));
         Object classInstance = classObject.createInstance();
         classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance,
-                clauses);
+                clauses,
+                "Your " + testClassName + " class main method does not print the correct output.");
     }
 }
