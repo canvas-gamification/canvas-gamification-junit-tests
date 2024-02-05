@@ -65,7 +65,7 @@ public class MainTest {
 
     @Test
     @Order(3)
-    @Tag("dependent2")
+    @Tag("dependency1")
     public void bedIsInitializedCorrectly() {
         _assertEquals(initialBeams, testClass.getFieldValue(null, staticAttributeName),
                 "Your " + staticAttributeName + " static attribute is not initialized correctly.");
@@ -88,7 +88,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependent3")
+    @Tag("dependency1")
     @Order(4)
     public void bedConstructorInitializesValuesCorrectly(int value1) throws Throwable {
         String wrongValueMessage = "The %s constructor did not initialize the %s attribute to the correct value based on the parameters passed to the constructor.";
@@ -112,7 +112,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependent1")
+    @Tag("dependency1")
     @Order(6)
     public void bedClassHasCorrectMakeFurnitureMethod(int value1, int value2) throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
@@ -143,8 +143,6 @@ public class MainTest {
 
     @Test
     @Tag("dependent1")
-    @Tag("dependent2")
-    @Tag("dependent3")
     @Order(7)
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
