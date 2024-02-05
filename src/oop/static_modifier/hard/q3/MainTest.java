@@ -20,6 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MainTest {
+    // Java
+
     private final String className = "CandyStore";
     private final String staticAttributeName = "gummies";
     private final String attributeName = "name";
@@ -65,7 +67,7 @@ public class MainTest {
 
     @Test
     @Order(3)
-    @Tag("dependent2")
+    @Tag("dependency1")
     public void gummiesIsInitializedCorrectly() {
         _assertEquals(initialGummies, testClass.getFieldValue(null, staticAttributeName),
                 "Your " + staticAttributeName + " static attribute is not initialized correctly.");
@@ -88,9 +90,14 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependent3")
+    @Tag("dependency1")
     @Order(4)
-    public void lightbulbConstructorInitializesValuesCorrectly(String value1) throws Throwable {
+    public void candyStoreConstructorInitializesValuesCorrectly(String value1) throws Throwable {
+        String missingConstructorMessage = "The %s class is missing a required constructor. Make sure that it is named correctly and has the correct parameters.";
+        String wrongAccessModifier = "The %s class constructor has the wrong visibility modifier. Make sure that it is visible from all other classes.";
+        Class<?>[] constructorArgs2 = new Class[]{String.class};
+        assertTrue(testClass.hasConstructor(constructorArgs2), String.format(missingConstructorMessage, className));
+        assertTrue(testClass.hasModifier(constructorArgs2, "public"), String.format(wrongAccessModifier, className));
         String wrongValueMessage = "The %s constructor did not initialize the %s attribute to the correct value based on the parameters passed to the constructor.";
         Object[][] constructorArgs = {
                 {value1, String.class}
@@ -112,9 +119,15 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    @Tag("dependent1")
+    @Tag("dependency1")
     @Order(6)
     public void candyStoreClassHasCorrectAwardMethod(String value1, int value2) throws Throwable {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(methodName, new Class<?>[]{int.class}), String.format(incorrectMethodDefinition, methodName, className));
+        assertTrue(testClass.hasModifier(methodName, new Class<?>[]{int.class}, "public"), String.format(incorrectModifierMessage, methodName, className));
+        assertTrue(testClass.hasReturnType(methodName, new Class<?>[]{int.class}, Void.TYPE), String.format(incorrectReturnType, methodName, className));
         Object[][] constructorArgs = {
                 {value1, String.class}
         };
@@ -126,13 +139,13 @@ public class MainTest {
                 {value2, int.class}
         };
         testClass.callMethod(methodName, arguments, classInstance, testSentence);
+        _assertEquals(initialGummies - value2, testClass.getFieldValue(null, staticAttributeName),
+                "Your " + methodName + " method does not correctly change the value of " + staticAttributeName);
         testClass.setFieldValue(null, initialGummies, staticAttributeName);
     }
 
     @Test
     @Tag("dependent1")
-    @Tag("dependent2")
-    @Tag("dependent3")
     @Order(7)
     public void correctTestClass() throws Throwable {
         Clause[] clauses = {
@@ -147,6 +160,7 @@ public class MainTest {
         };
         Object classInstance = classObject.createInstance();
         classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance,
-                clauses);
+                clauses,
+                "Your " + testClassName + " class main method does not print the correct output.");
     }
 }

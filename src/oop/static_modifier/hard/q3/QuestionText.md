@@ -18,9 +18,10 @@ Your `CandyStore` class must have the following requirements:
 
 - Methods:
     - Note that all methods in this class should be visible from another class
-    - A `award` method which takes an `int` value as input and decrease that value from the **gummies** attribute. Then
-      it should print the number of remaining gummies in format of "There are x more to give away after the y award",
-      where x is the value of the **gummies** attribute after the subtraction and y is the value of **name**.
+    - A `award` method which takes an `int` value as input and if there are more **gummies** available than the input
+      value it should decrease that value from the **gummies** attribute. Then it should print the number of remaining
+      gummies in format of "There are x more to give away after the y award", where x is the value of the **gummies**
+      attribute after the subtraction and y is the value of **name**.
 
 ## Test Class
 
