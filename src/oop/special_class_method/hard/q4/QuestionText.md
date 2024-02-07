@@ -3,8 +3,7 @@
 ### Question Text:
 
 Chemistry tells us a lot about the properties of different liquids. Write a Java class called `Detergent` with the
-following description. Also, write a **TestClass** with the mentioned description to test your class.
-
+following description. Then, write a **TestClass** to use your `Detergent` class.
 
 ### Detergent Class:
 
