@@ -3,7 +3,7 @@
 ### Question Text:
 
 You are writing a Java program that mimics different financial institutions or personal banks. Write a Java class called
-`PiggyBank` that has the following description:
+`PiggyBank` based on the following description:
 
 ### PiggyBak Class:
 
