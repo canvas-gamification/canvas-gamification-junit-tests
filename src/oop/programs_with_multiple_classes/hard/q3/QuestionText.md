@@ -11,18 +11,22 @@ Your `Book` class should have the following items:
     - An `int` called **count**
     - A `String` called **type**
 - Constructors:
-    - A constructor which accepts a String to initialize the **count** attribute and an int to initialize the
+    - A constructor which accepts an `int` to initialize the **count** attribute and a `String` to initialize the
       **type** attribute and is accessible from other classes
 - Methods:
-    - An `incrementBookCount` method that adds one to the **count**. This method should return the incremented count.
+    - An `incrementBookCount` method that increments the value of **count** by 1. This method should then return the 
+      incremented count.
 
 ## Bookcase Class
 
 Your `Bookcase` class should have the following items:
 
 - Attributes:
-    - A `int` called **sizeCapacity**
+    - An `int` called **sizeCapacity**
 - Constructors:
     - A constructor which accepts an int to initialize the **sizeCapacity** attribute and is accessible from other classes.
-      This constructor should ensure that the **sizeCapacity** attribute is not set to a negative number. If it is, print "Error!
-      Size capacity cannot be negative." instead of setting it to the passed parameter.
+      This constructor should ensure that the **sizeCapacity** attribute is not set to a negative number by calling the 
+      `validate` method. If `validate` returns false, instead set **sizeCapacity** to 0.
+- Methods:
+    - A `validate` method that accepts an `int` and checks if it is negative. If it is, print "Error! Size capacity 
+      cannot be negative." and return false. Otherwise, return true.
