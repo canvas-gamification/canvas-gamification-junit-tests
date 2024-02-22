@@ -133,6 +133,7 @@ public class MainTest {
 
     private static Stream<Arguments> set1InputProvider() {
         return Stream.of(
+                Arguments.of(new String[]{"Pineapple Juice", "Coconut Milk"}, new String[]{}),
                 Arguments.of(new String[]{"Pineapple Juice", "Coconut Milk"}, new String[]{"Apple Juice", "Almond Milk"}),
                 Arguments.of(new String[]{"Gin", "Tonic"}, new String[]{"Ginger Beer", "Lime", "Vodka"}),
                 Arguments.of(new String[]{"Rum", "StrawBerry", "Syrup"}, new String[]{"Rum", "Coke"}),
@@ -158,7 +159,6 @@ public class MainTest {
         Object[][] arguments = {
                 {value, String[].class}
         };
-        Object classInstance = testClass.createInstance(arguments);
         Object[][] setArguments = {
                 {update, String[].class}
         };
@@ -171,6 +171,7 @@ public class MainTest {
         assertTrue(testClass.hasMethod(setFirstField, new Class<?>[]{String[].class}), String.format(incorrectMethodDefinition, setFirstField, className));
         assertTrue(testClass.hasModifier(setFirstField, new Class<?>[]{String[].class}, "public"), String.format(incorrectModifierMessage, setFirstField, className));
         assertTrue(testClass.hasReturnType(setFirstField, new Class<?>[]{String[].class}, Void.TYPE), String.format(incorrectReturnType, setFirstField, className));
+        Object classInstance = testClass.createInstance(arguments);
         Object setMethodOutput = testClass.callMethod(setFirstField, setArguments, setMethodModifiers, classInstance);
         _assertArrayEquals(update, testClass.getFieldValue(classInstance, firstFieldName), incorrectSetMethodMessage);
         assertNull(setMethodOutput, String.join(" ", "Your", setFirstField, "method should not return any output"));
@@ -183,7 +184,6 @@ public class MainTest {
         Object[][] arguments = {
                 {value, String[].class}
         };
-        Object classInstance = testClass.createInstance(arguments);
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
@@ -196,6 +196,7 @@ public class MainTest {
             expected += value[i] + " ";
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, "toString method does not return the correct String.");
+        Object classInstance = testClass.createInstance(arguments);
         Object output = testClass.callMethod("toString", methodModifiers, classInstance);
         _assertEquals(expected, output, incorrectToStringMessage);
     }
