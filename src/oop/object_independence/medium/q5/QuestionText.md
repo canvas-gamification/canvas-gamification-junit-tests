@@ -26,8 +26,7 @@ Your `Team` class must have the following items:
 - Methods:
     - a `getTotalWins` method which is accessible from other classes and returns the **totalWins** attribute
     - a `setTotalWins` method which accepts an `int` value, updates the **totalWins** attribute with it,
-      and is accessible from other classes
+      and is accessible from other classes. This method must not return any value.
     - a `toString` method which returns a String of the information about the `Team` class of the form
       `"Team x has won y games"`, where x is the value of **name** and y is the value of **totalWins**,
       and is visible from other classes.
-    - Note that all setter methods must not return any value

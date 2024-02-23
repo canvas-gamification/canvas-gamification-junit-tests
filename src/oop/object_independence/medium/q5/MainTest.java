@@ -108,6 +108,9 @@ public class MainTest {
 
     private static Stream<Arguments> set1InputProvider() {
         return Stream.of(
+                Arguments.of(0, 6),
+                Arguments.of(10, 0),
+                Arguments.of(7, 7),
                 Arguments.of(5, 6),
                 Arguments.of(10, 20),
                 Arguments.of(7, 5)
