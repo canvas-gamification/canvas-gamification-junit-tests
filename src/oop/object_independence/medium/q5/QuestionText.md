@@ -7,7 +7,7 @@
 ### Question Text
 
 Your friends are interested in betting on which team wins the Stanley Cup this year. Make a program called **Team** 
-where you keep track of the teams in the league and the games they have won as attribute.
+where you keep track of the teams in the league and the games they have won as attribute using the description below.
 
 ### Team Class
 
