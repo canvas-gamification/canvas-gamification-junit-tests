@@ -54,6 +54,30 @@ public class MainTest {
                 Arguments.of((Object) new String[]{"Ginger Beer", "Lime", "Vodka"}),
                 Arguments.of((Object) new String[]{"Rum", "StrawBerry", "Syrup"}),
                 Arguments.of((Object) new String[]{"Pink Floyd", "Metallica"}),
+                Arguments.of((Object) new String[]{"Bohemian Rhapsody",
+                        "Stairway to Heaven",
+                        "Imagine",
+                        "Hotel California",
+                        "Like a Rolling Stone",
+                        "Hey Jude",
+                        "Smells Like Teen Spirit",
+                        "Billie Jean",
+                        "Imagine",
+                        "What's Going On",
+                        "Johnny B. Goode",
+                        "Good Vibrations",
+                        "My Generation",
+                        "Let It Be",
+                        "Born to Run",
+                        "Layla",
+                        "I Want to Hold Your Hand",
+                        "Purple Haze",
+                        "Whole Lotta Love",
+                        "Imagine",
+                        "Every Breath You Take",
+                        "London Calling",
+                        "Yesterday",
+                        "I Heard It Through the Grapevine"}),
                 Arguments.of((Object) new String[]{"Pop", "Rap"})
         );
     }
@@ -104,13 +128,15 @@ public class MainTest {
         assertTrue(testClass.hasReturnType(firstMethod, null, Void.TYPE), String.format(incorrectReturnType, firstMethod, className));
         Object classInstance = testClass.createInstance(arguments);
         String[] methodModifiers = {"public"};
-        int current = (int) testClass.getFieldValue(classInstance, secondFieldName);
-        testClass.callMethod(firstMethod, methodModifiers, classInstance, new Clause[]{
-                        new StringLiteral("Now Playing : " + value[current])
-                },
-                String.join(" ", "Your", firstMethod, "method does not print the correct output."));
-        _assertEquals(current, testClass.getFieldValue(classInstance, secondFieldName),
-                String.join(" ", "Your", firstMethod, "method should not alter the", secondFieldName, "attribute"));
+        for(int i = 0; i < value.length; i ++) {
+            testClass.setFieldValue(classInstance, i, secondFieldName);
+            testClass.callMethod(firstMethod, methodModifiers, classInstance, new Clause[]{
+                            new StringLiteral("Now Playing : " + value[i])
+                    },
+                    String.join(" ", "Your", firstMethod, "method does not print the correct output."));
+            _assertEquals(i, testClass.getFieldValue(classInstance, secondFieldName),
+                    String.join(" ", "Your", firstMethod, "method should not alter the", secondFieldName, "attribute"));
+        }
     }
 
     @Test
@@ -137,13 +163,15 @@ public class MainTest {
         assertTrue(testClass.hasReturnType(secondMethod, null, Void.TYPE), String.format(incorrectReturnType, secondMethod, className));
         Object classInstance = testClass.createInstance(arguments);
         String[] methodModifiers = {"public"};
-        int current = (int) testClass.getFieldValue(classInstance, secondFieldName);
-        testClass.callMethod(secondMethod, methodModifiers, classInstance, new Clause[]{
-                        new StringLiteral("Now Playing : " + value[(current + 1) % value.length])
-                },
-                String.join(" ", "Your", firstMethod, "method does not print the correct output."));
-        _assertEquals((current + 1) % value.length, testClass.getFieldValue(classInstance, secondFieldName),
-                String.join(" ", "Your", firstMethod, "method does not increase the", secondFieldName, "attribute"));
+        for(int i = 0; i < value.length; i ++) {
+            int current = (int) testClass.getFieldValue(classInstance, secondFieldName);
+            testClass.callMethod(secondMethod, methodModifiers, classInstance, new Clause[]{
+                            new StringLiteral("Now Playing : " + value[(current + 1) % value.length])
+                    },
+                    String.join(" ", "Your", firstMethod, "method does not print the correct output."));
+            _assertEquals((current + 1) % value.length, testClass.getFieldValue(classInstance, secondFieldName),
+                    String.join(" ", "Your", firstMethod, "method does not increase the", secondFieldName, "attribute"));
+        }
     }
 
     @Test
@@ -170,13 +198,15 @@ public class MainTest {
         assertTrue(testClass.hasModifier(thirdMethod, null, "public"), String.format(incorrectModifierMessage, testClass, className));
         assertTrue(testClass.hasReturnType(thirdMethod, null, Void.TYPE), String.format(incorrectReturnType, testClass, className));
         Object classInstance = testClass.createInstance(arguments);
-        int current = (int) testClass.getFieldValue(classInstance, secondFieldName);
-        testClass.callMethod(thirdMethod, methodModifiers, classInstance, new Clause[]{
-                        new StringLiteral("Now Playing : " + value[(current - 1 + value.length) % value.length])
-                },
-                String.join(" ", "Your", firstMethod, "method does not print the correct output."));
-        _assertEquals((current - 1 + value.length) % value.length, testClass.getFieldValue(classInstance, secondFieldName),
-                String.join(" ", "Your", firstMethod, "method does not decrease the", secondFieldName, "attribute"));
+        for(int i = 0; i < value.length; i ++) {
+            int current = (int) testClass.getFieldValue(classInstance, secondFieldName);
+            testClass.callMethod(thirdMethod, methodModifiers, classInstance, new Clause[]{
+                            new StringLiteral("Now Playing : " + value[(current - 1 + value.length) % value.length])
+                    },
+                    String.join(" ", "Your", firstMethod, "method does not print the correct output."));
+            _assertEquals((current - 1 + value.length) % value.length, testClass.getFieldValue(classInstance, secondFieldName),
+                    String.join(" ", "Your", firstMethod, "method does not decrease the", secondFieldName, "attribute"));
+        }
     }
 
     @ParameterizedTest

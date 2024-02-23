@@ -14,7 +14,7 @@ trip. Make a class called **portableMusicPlayer** with the following description
 Your `PortableMusicPlayer` class must have the following items:
 
 - Attributes:
-    - An array of `String` called **playlist**
+    - A non-empty array of `String` called **playlist**
     - An `int` called **current**
     - Note that neither of these attributes should be visible from another class
 
