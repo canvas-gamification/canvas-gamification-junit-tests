@@ -6,7 +6,13 @@ public class Bookcase {
 
     public Bookcase(int sizeCapacity, Book[] books) {
         this.sizeCapacity = sizeCapacity;
-        this.books = books;
+        if(sizeCapacity >= books.length) {
+            this.books = books;
+        }
+        else {
+            this.books = new Book[sizeCapacity];
+            System.arraycopy(books, 0, this.books, 0, sizeCapacity);
+        }
     }
 
     public String determineReplaced() {
