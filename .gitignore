@@ -1,7 +1,7 @@
 # JetBrains IDEA
 /.idea/
 *.iml
-/out
+out/
 bin/
 reports/
 .DS_Store
