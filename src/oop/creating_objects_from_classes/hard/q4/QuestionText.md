@@ -16,12 +16,12 @@ initialize a `Savings` object with the following attribute:
 Then, call the `getTotal` method and print the balance of the created Savings object on its own line. The result from 
 doing this should be the printing of the `String` "Balance: x" where x is the value of the total.
 
-Then, call the `recieveBonus` method and repeat the print statement to view the new balance.
+Then, call the `recieveBonus` method and print the above String again with the updated balance.
 
 Note: You do not need to place the savings class in your submission code, the website will handle this for you. It is 
 just for you to reference.
 
-### Dog Class:
+### Savings Class:
 
 ```java
 public class Savings {

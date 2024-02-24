@@ -1,15 +1,11 @@
 package oop.creating_objects_from_classes.hard.q4;
 
-import global.BaseTest;
-import global.MethodTest;
 import global.ObjectTest;
 import global.variables.Clause;
 import global.variables.clauses.*;
 import global.variables.wrappers.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,10 +19,9 @@ public class MainTest {
     private final String method2Name = "receiveBonus";
     private ObjectTest testClass;
     private final double initial = 500.32;
-    private final double bonusMin = 0;
-    private final double bonusMax = 200; //non-inclusive
     private final String field1 = "initial";
-    private final String field2 = "bonus";
+    public static double firstBonus = Math.random()*200;
+    public static double secondBonus = Math.random()*200;
 
     @BeforeEach
     public void setUp() {
@@ -35,7 +30,7 @@ public class MainTest {
     }
 
     @Test
-    public void correctDogTestClass() throws Throwable {
+    public void correctBankAccountClass() throws Throwable {
         String missingMain = "Your %s class is missing the %s method. Make sure it has been declared, it is spelt correctly, and has the correct parameters.";
         String incorrectVisibility = "Your main method does not have the correct visibility modifier.";
         String missingStatic = "Your main method is missing the static modifier.";
@@ -47,19 +42,16 @@ public class MainTest {
         assertTrue(testClass.hasModifier("main", mainArgs, "static"), missingStatic);
         assertTrue(testClass.hasReturnType("main", mainArgs, Void.TYPE), wrongReturnType);
 
-        String incorrectOutput = "Your main method in the %s class does not print the correct output. Make sure that you are printing the balance.";
+        String incorrectOutput = "Your main method in the %s class does not print the correct output. Make sure that you are printing the balance and calling all required methods.";
         Clause[] clauses = new Clause[]{
                 new StringLiteral("Balance: "),
-                new DoubleLiteral("num1"),
+                new DoubleLiteral(initial + firstBonus, initial + firstBonus + 0.00001),
                 new NewLine(),
                 new StringLiteral("Balance: "),
-                new DoubleLiteral("num2"),
+                new DoubleLiteral(initial + firstBonus + secondBonus, initial + firstBonus + secondBonus + 0.00001),
                 new Optional(new NewLine())
         };
         Object[][] mainParameters = {{new String[0], String[].class}};
-
-        ArrayList<Double> firstRandomValues = new ArrayList<>();
-        ArrayList<Double> secondRandomValues = new ArrayList<>();
 
         testClass.callMethod("main", mainParameters, clauses, String.format(incorrectOutput, testSavingsName));
 
@@ -74,19 +66,13 @@ public class MainTest {
         assertTrue(Savings.isGetTotalCalled(), String.format(methodNotCalled, method1Name, ""));
         assertTrue(Savings.isGetTotalCalledTwice(), String.format(methodNotCalled, method1Name, " a second time"));
         assertTrue(Savings.isRecieveBonusCalled(), String.format(methodNotCalled, method2Name, ""));
+    }
 
-        /* Call method and check randomness */
-        for (int x = 0; x < 1500; x++) {
-            MethodTest m = new MethodTest(BankAccount.class, "main", mainParameters, clauses);
-            m.callMethod();
-            double first = Double.parseDouble(m.getMethodItemByName("num1"));
-            firstRandomValues.add(first - initial);
-            secondRandomValues.add(Double.parseDouble(m.getMethodItemByName("num2")) - first);
+    public static double getRandomishBonus(){
+        if (!Savings.isRecieveBonusCalled()){
+            return firstBonus;
         }
-
-        RandomDouble randomDouble = new RandomDouble(bonusMin, bonusMax);
-        assertTrue(randomDouble.validateRandom(firstRandomValues), "Your first balance is not being correctly generated. Please ensure you are setting the correct initial value.");
-        assertTrue(randomDouble.validateRandom(secondRandomValues), "Your second balance is not being correctly generated. Please ensure you have called the " + method2Name + " method.");
+        return secondBonus;
     }
 }
 

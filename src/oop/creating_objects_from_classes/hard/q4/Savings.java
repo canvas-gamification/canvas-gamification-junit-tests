@@ -1,11 +1,13 @@
 package oop.creating_objects_from_classes.hard.q4;
 
+import com.sun.tools.javac.Main;
+
 public class Savings {
     double initial;
     double bonus;
     /*
      * These values below are used to track the actions of the student in their test class. They track what values they
-     * initialize the dog object to, and if they have called the methods they are supposed to.
+     * initialize the savings object to, and if they have called the methods they are supposed to.
      */
     private static Savings savings;
     private static boolean constructorCalled = false;
@@ -17,7 +19,7 @@ public class Savings {
     public Savings(double initial) {
         constructorCalled = true;
         this.initial = initial;
-        bonus = Math.random()*200;
+        bonus = MainTest.getRandomishBonus();
         if(savings == null){
             constructorInitial = initial;
             savings = this;
@@ -34,7 +36,7 @@ public class Savings {
 
     public double receiveBonus(){
         recieveBonusCalled = true;
-        return bonus += Math.random()*200;
+        return bonus += MainTest.getRandomishBonus();
     }
 
     public static Savings getSavings() {
