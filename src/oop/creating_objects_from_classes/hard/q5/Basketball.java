@@ -6,7 +6,7 @@ public class Basketball {
     String condition;
     /*
      * These values below are used to track the actions of the student in their test class. They track what values they
-     * initialize the dog object to, and if they have called the methods they are supposed to.
+     * initialize the basketball object to, and if they have called the methods they are supposed to.
      */
     private static Basketball ball;
     private static boolean constructorCalled = false;
