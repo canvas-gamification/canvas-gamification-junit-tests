@@ -8,14 +8,14 @@ BloodyMary, WhiskeySour, ShirleyTemple, GinAndTonic)
 
 ## Question Text
 
-Suppose you have defined a `Martini` class to model your pet, and now you want to test it to make sure that it works. 
+Suppose you have defined a `Martini` class to model your drink, and now you want to test it to make sure that it works. 
 Given the martini class below, create a test class called `OrderDrink` with a main method and initialize a `Martini` 
 object with the following attributes:
 - ingredients: "vodka", "lemon juice", "syrup", "triple sec"
 - percentAlcohol: 15
 
 Then, call the `mix` method and the `detectFlavour` method on the created martini object. The result from doing this 
-should be the printing of the `String` "I detect " followed by a randomly chosen String from the ingredients array.
+should be the printing of the `String` "I detect " followed by a randomly chosen ingredient from the ingredients array.
 
 Note: You do not need to place the martini class in your submission code, the website will handle this for you. It is 
 just for you to reference.
