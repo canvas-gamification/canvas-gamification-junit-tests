@@ -1,10 +1,42 @@
 # oop-creating_objects_from_classes-hard-q1
 
-Note: for this question give the student the entire Dog file, and nothing from the Pet file (not even the class header).
-You can just leave a comment saying something like // code your Pet class heere
+## Java questions
 
 ## Question Text
 
-Suppose you have defined a `Dog` class, and now you want to define a `Pet` class. In the `Pet` class, you need to define
-a method called `makePet` that takes a String as input for a name and returns a **Dog** object. Use the constructor in
-the provided `Dog` class to do this.
+Suppose you have defined a `Dog` class to model your pet, and now you want to test it to make sure that it works. Given 
+the dog class below, create a test class called `DogTest` with a main method and initialize a `Dog` object with the 
+following attributes:
+- Name: "Piper"
+- Age: 8
+- Weight: 12.5
+
+Then, call the `eat` method and the `bark` method on the created dog object. The result from doing this should be 
+the printing of the `String` "Bark!".
+
+Note: You do not need to place the dog class in your submission code, the website will handle this for you. It is just
+for you to reference.
+
+### Dog Class:
+
+```java
+public class Dog {
+    private String name;
+    private int age;
+    private double weight;
+
+    public Dog(String n, int a, double w) {
+        name = n;
+        age = a;
+        weight = w;
+    }
+
+    public void eat() {
+        weight += 2.5;
+    }
+
+    public void bark() {
+        System.out.println("Bark!");
+    }
+}
+```
