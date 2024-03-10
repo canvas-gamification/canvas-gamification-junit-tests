@@ -153,7 +153,11 @@ public class MainTest {
     @Test
     public void bookcaseClassHasCorrectConstructors() {
         try {
-            Book b = new Book(5, "fiction");
+            Object[][] arguments = new Object[][]{
+                    {5, int.class},
+                    {"fiction", String.class}
+            };
+            Object bookInstance = book.createInstance(arguments);
         } catch (Error e) {
             fail("Your program does not contain the " + bookClass + " class.");
         }
@@ -190,7 +194,11 @@ public class MainTest {
         _assertEquals(result, bookcase.getFieldValue(bookcaseInstance, this.sizeCapacity),
                 "Your " + bookcaseClass + " constructor does not correctly initialize the " + this.sizeCapacity + " attribute.");
         try {
-            Book b = new Book(5, "fiction");
+            Object[][] arguments = new Object[][]{
+                    {5, int.class},
+                    {"fiction", String.class}
+            };
+            Object bookInstance = book.createInstance(arguments);
         } catch (Error e) {
             fail("Your program does not contain the " + bookClass + " class.");
         }
@@ -243,7 +251,11 @@ public class MainTest {
     @MethodSource("addBooksInputProvider")
     public void bookcaseCorrectAddBookMethod(int sizeCapacity, int[] bookPlacement) throws Throwable {
         try {
-            Book b = new Book(5, "fiction");
+            Object[][] arguments = new Object[][]{
+                    {5, int.class},
+                    {"fiction", String.class}
+            };
+            Object bookInstance = book.createInstance(arguments);
         } catch (Error e) {
             fail("Your program does not contain the " + bookClass + " class.");
         }
@@ -303,7 +315,11 @@ public class MainTest {
     @MethodSource("removeBooksInputProvider")
     public void bookcaseCorrectRemoveBookMethod(int sizeCapacity, int[] bookPlacement, int index) throws Throwable {
         try {
-            Book b = new Book(5, "fiction");
+            Object[][] arguments = new Object[][]{
+                    {5, int.class},
+                    {"fiction", String.class}
+            };
+            Object bookInstance = book.createInstance(arguments);
         } catch (Error e) {
             fail("Your program does not contain the " + bookClass + " class.");
         }
