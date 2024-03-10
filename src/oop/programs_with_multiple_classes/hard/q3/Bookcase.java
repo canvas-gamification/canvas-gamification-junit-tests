@@ -13,35 +13,33 @@ public class Bookcase {
         shelf = new Book[this.sizeCapacity];
     }
 
-    public boolean validate(int sizeCapacity){
-        if (sizeCapacity >= 0){
+    public boolean validate(int sizeCapacity) {
+        if (sizeCapacity >= 0) {
             return true;
-        }
-        else {
+        } else {
             System.out.println("Error! Size capacity cannot be negative.");
             return false;
         }
     }
 
-    public void addBook(Book b){
+    public void addBook(Book b) {
         boolean placed = false;
-        for(int x = 0; x < sizeCapacity; x ++){
-            if(shelf[x] == null){
+        for (int x = 0; x < sizeCapacity; x++) {
+            if (shelf[x] == null) {
                 shelf[x] = b;
                 placed = true;
                 break;
             }
         }
-        if(!placed){
+        if (!placed) {
             System.out.println("The Bookshelf is full.");
         }
     }
 
-    public void removeBook(int i){
-        if(shelf[i] != null){
+    public void removeBook(int i) {
+        if (shelf[i] != null) {
             shelf[i] = null;
-        }
-        else {
+        } else {
             System.out.println("There is nothing here.");
         }
     }

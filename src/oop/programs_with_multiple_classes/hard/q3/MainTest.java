@@ -141,8 +141,7 @@ public class MainTest {
 
         try {
             Book b = new Book(5, "fiction");
-        }
-        catch (Error e){
+        } catch (Error e) {
             fail("Your program does not contain the " + bookClass + " class.");
         }
 
@@ -155,16 +154,14 @@ public class MainTest {
     public void bookcaseClassHasCorrectConstructors() {
         try {
             Book b = new Book(5, "fiction");
-        }
-        catch (Error e){
+        } catch (Error e) {
             fail("Your program does not contain the " + bookClass + " class.");
         }
         String missingConstructorMessage = "Your " + bookcaseClass + " class does not have a required constructor.";
         String incorrectConstructorModifierMessage =
                 "One of the constructors in your " + bookcaseClass + " class does not have the correct modifiers.";
         Class<?>[] constructorClasses = new Class[]{
-                int.class,
-                Book[].class
+                int.class
         };
         assertTrue(bookcase.hasConstructor(constructorClasses), missingConstructorMessage);
         assertTrue(bookcase.hasModifier(constructorClasses, "public"), incorrectConstructorModifierMessage);
@@ -194,8 +191,7 @@ public class MainTest {
                 "Your " + bookcaseClass + " constructor does not correctly initialize the " + this.sizeCapacity + " attribute.");
         try {
             Book b = new Book(5, "fiction");
-        }
-        catch (Error e){
+        } catch (Error e) {
             fail("Your program does not contain the " + bookClass + " class.");
         }
         Book[] b = new Book[result];
@@ -223,16 +219,15 @@ public class MainTest {
                     new StringLiteral(errorMessage),
                     new Optional(new StringLiteral(" "))
             }, "Your " + bookcaseClass + " class " + bookcaseMethodName + " method does not correctly print the error message and return a value.");
-            assertFalse((boolean)b);
-        }
-        else {
+            assertFalse((boolean) b);
+        } else {
             Object b = bookcase.callMethod(bookcaseMethodName, arguments, new String[]{"public"}, bookcaseInstance, new Clause[]{},
                     "Your " + bookcaseClass + " class " + bookcaseMethodName + " method does not correctly print the error message and return a value.");
-            assertTrue((boolean)b);
+            assertTrue((boolean) b);
         }
     }
 
-    private static Stream<Arguments> addBooksInputProvider(){
+    private static Stream<Arguments> addBooksInputProvider() {
         return Stream.of(
                 Arguments.of(5, new int[]{0, 0, 0, 0, 0}),
                 Arguments.of(3, new int[]{0, 1, 0, 0, 0}),
@@ -249,8 +244,7 @@ public class MainTest {
     public void bookcaseCorrectAddBookMethod(int sizeCapacity, int[] bookPlacement) throws Throwable {
         try {
             Book b = new Book(5, "fiction");
-        }
-        catch (Error e){
+        } catch (Error e) {
             fail("Your program does not contain the " + bookClass + " class.");
         }
 
@@ -265,13 +259,12 @@ public class MainTest {
         Book[] startingConfig = new Book[sizeCapacity];
         Book[] endingConfig = new Book[sizeCapacity];
         boolean firstZero = true;
-        for(int x = 0; x < sizeCapacity; x++){
-            if(bookPlacement[x] == 1){
+        for (int x = 0; x < sizeCapacity; x++) {
+            if (bookPlacement[x] == 1) {
                 Book b = new Book(1, "");
                 startingConfig[x] = b;
                 endingConfig[x] = b;
-            }
-            else if (firstZero){
+            } else if (firstZero) {
                 endingConfig[x] = insert;
                 firstZero = false;
             }
@@ -283,20 +276,19 @@ public class MainTest {
         Object bookcaseInstance = bookcase.createInstance(arguments);
         bookcase.setFieldValue(bookcaseInstance, startingConfig, shelf);
 
-        if(firstZero) {
+        if (firstZero) {
             bookcase.callMethod(bookcaseMethodName2, new Object[][]{{insert, Book.class}}, new String[]{"public"}, bookcaseInstance, new Clause[]{
                     new StringLiteral(addBookError),
                     new Optional(new StringLiteral(" "))
             }, "Your " + bookcaseMethodName2 + " method does not produce the correct error message when the " + bookcaseClass + " is full.");
-        }
-        else {
+        } else {
             bookcase.callMethod(bookcaseMethodName2, new Object[][]{{insert, Book.class}}, new String[]{"public"}, bookcaseInstance);
         }
 
         _assertArrayEquals(endingConfig, startingConfig, "Your " + bookcaseMethodName2 + " does not correctly handle inserting a new " + bookClass + ".");
     }
 
-    private static Stream<Arguments> removeBooksInputProvider(){
+    private static Stream<Arguments> removeBooksInputProvider() {
         return Stream.of(
                 Arguments.of(4, new int[]{1, 1, 0, 0}, 0),
                 Arguments.of(5, new int[]{1, 1, 0, 1, 0}, 3),
@@ -312,8 +304,7 @@ public class MainTest {
     public void bookcaseCorrectRemoveBookMethod(int sizeCapacity, int[] bookPlacement, int index) throws Throwable {
         try {
             Book b = new Book(5, "fiction");
-        }
-        catch (Error e){
+        } catch (Error e) {
             fail("Your program does not contain the " + bookClass + " class.");
         }
 
@@ -326,13 +317,13 @@ public class MainTest {
 
         Book[] startingConfig = new Book[sizeCapacity];
         Book[] endingConfig = new Book[sizeCapacity];
-        for(int x = 0; x < sizeCapacity; x++){
-            if(bookPlacement[x] == 1){
+        for (int x = 0; x < sizeCapacity; x++) {
+            if (bookPlacement[x] == 1) {
                 Book b = new Book(1, "");
                 startingConfig[x] = b;
                 endingConfig[x] = b;
             }
-            if (x == index){
+            if (x == index) {
                 endingConfig[x] = null;
             }
         }
@@ -343,13 +334,12 @@ public class MainTest {
         Object bookcaseInstance = bookcase.createInstance(arguments);
         bookcase.setFieldValue(bookcaseInstance, startingConfig, shelf);
 
-        if(startingConfig[index] == null) {
+        if (startingConfig[index] == null) {
             bookcase.callMethod(bookcaseMethodName3, new Object[][]{{index, int.class}}, new String[]{"public"}, bookcaseInstance, new Clause[]{
                     new StringLiteral(removeBookError),
                     new Optional(new StringLiteral(" "))
             }, "Your " + bookcaseMethodName3 + " method does not produce the correct error message when the " + bookcaseClass + " index is already empty.");
-        }
-        else {
+        } else {
             bookcase.callMethod(bookcaseMethodName3, new Object[][]{{index, int.class}}, new String[]{"public"}, bookcaseInstance);
         }
 
