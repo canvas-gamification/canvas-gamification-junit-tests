@@ -32,7 +32,7 @@ The `Person` class currently has the following items:
 You must add the following items to the class:
 
 - Methods:
-    - A `hearSecret` method that takes two `String`. One is the name of a friend and the other is that friend's secret.
+    - A `hearSecret` method that has two `String` parameters. The first one is the name of a friend and the second is the friend's secret.
       Your method should find the friend using the names in the **friendNames** attribute and it should change the
       value of **friendSecrets** at the same index as the friend is found in **friendNames**, if you do not find the
       name you must not change anythim.
