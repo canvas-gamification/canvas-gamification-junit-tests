@@ -33,7 +33,7 @@ You must add the following items to the class:
 
 - Methods:
     - A `hearSecret` method that has two `String` parameters. The first one is the name of a friend and the second is the friend's secret.
-      Your method should find the friend using the names in the **friendNames** attribute and it should change the
+      Your method should try to find the friend using the names in the **friendNames** attribute and it should change the
       value of **friendSecrets** at the same index as the friend is found in **friendNames**, if you do not find the
       name you must not change anythim.
     - A `writeInDiary` method which prints `I have the following secrets:` in first line and then prints each secret
