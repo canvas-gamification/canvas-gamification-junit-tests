@@ -79,7 +79,7 @@ public class MainTest {
             _assertArrayEquals(new String[friends.length], testClass.getFieldValue(classInstance, friendSecretsAttributeName),
                     "You have modified the provided constructor on the " + className + " class. Please revert it to the original state.");
             assertTrue(testClass.hasMethod(getNameMethodName, null, String.class, new String[]{"public"}),
-                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getNameMethodName));
+                    String.format("You have modified the provided %s method. Please revert it to the original state.", getNameMethodName));
             Object getMethodOutput = testClass.callMethod(getNameMethodName, new String[]{"public"}, classInstance);
             _assertEquals(name, getMethodOutput,
                     "You have modified the provided " + getNameMethodName + " method on the " + className + " class. Please revert it to the original state.");
