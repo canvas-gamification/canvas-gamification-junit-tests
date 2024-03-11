@@ -84,7 +84,7 @@ public class MainTest {
             _assertEquals(name, getMethodOutput,
                     "You have modified the provided " + getNameMethodName + " method on the " + className + " class. Please revert it to the original state.");
             assertTrue(testClass.hasMethod(getSecretMethodName, null, String.class, new String[]{"public"}),
-                    String.format("You have modified the provided %s method method. Please revert it to the original state.", getSecretMethodName));
+                    String.format("You have modified the provided %s method. Please revert it to the original state.", getSecretMethodName));
             getMethodOutput = testClass.callMethod(getSecretMethodName, new String[]{"public"}, classInstance);
             _assertEquals(secret, getMethodOutput,
                     "You have modified the provided " + getSecretMethodName + " method on the " + className + " class. Please revert it to the original state.");
