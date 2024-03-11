@@ -30,6 +30,8 @@ public class MainTest {
     private final String determineTime = "determineTime";
     private final String determineReplaced = "determineReplaced";
     private final int replacedUnit = 5;
+    private final String replaceResponse1 = "Time to buy a new book!";
+    private final String replaceResponse2 = "You have enough new books!";
 
 
     @BeforeEach
@@ -104,7 +106,7 @@ public class MainTest {
                 "Your " + bookClass + " class is missing the method" + determineTime + ".");
         assertTrue(book.hasReturnType(determineTime, new Class[]{}, int.class),
                 "Your " + determineTime + " method does not return the correct type.");
-        assertTrue(book.hasModifier(determineTime, new Class[]{},"public"),
+        assertTrue(book.hasModifier(determineTime, new Class[]{}, "public"),
                 "Your " + determineTime + " method does not have the correct visibility modifier.");
         Object determineTimeOutput = book.callMethod(determineTime, bookInstance);
         int determineTimeExpected = Year.now().getValue() - year;
@@ -126,10 +128,20 @@ public class MainTest {
     }
 
     @Test
-    public void bookcaseClassHasCorrectConstructors() {
+    public void bookcaseClassHasCorrectConstructors() throws Throwable {
         String missingConstructorMessage = "Your " + bookcaseClass + " class does not have a required constructor.";
         String incorrectConstructorModifierMessage =
                 "One of the constructors in your " + bookcaseClass + " class does not have the correct visibility modifier.";
+        try {
+            Object[][] arguments = new Object[][]{
+                    {5, int.class},
+                    {"fiction", String.class}
+            };
+            Object bookInstance = book.createInstance(arguments);
+        } catch (Error e) {
+            fail(bookClass + " object could not be created to be passed to " + bookcaseClass + ". Ensure your " +
+                    bookClass + " class's constructor exists and has the correct parameters.");
+        }
         Class<?>[] constructorClasses = new Class[]{
                 int.class,
                 Book[].class
@@ -159,20 +171,26 @@ public class MainTest {
     @MethodSource("bookcaseInputProvider")
     public void bookcaseConstructorInitializesValuesCorrectly(int sizeCapacity, int[] year, String[] type) throws Throwable {
         Object[][] arguments = null;
+
         try {
-            Book[] books = new Book[year.length];
-            for(int x = 0; x < books.length; x++){
-                books[x] = new Book(year[x], type[x]);
-            }
-            arguments = new Object[][] {
-                    {sizeCapacity, int.class},
-                    {books, Book[].class}
+            arguments = new Object[][]{
+                    {5, int.class},
+                    {"fiction", String.class}
             };
-        }
-        catch (Error e){
+            book.createInstance(arguments);
+        } catch (Error e) {
             fail(bookClass + " object could not be created to be passed to " + bookcaseClass + ". Ensure your " +
                     bookClass + " class's constructor exists and has the correct parameters.");
         }
+
+        Book[] books = new Book[year.length];
+        for (int x = 0; x < books.length; x++) {
+            books[x] = new Book(year[x], type[x]);
+        }
+        arguments = new Object[][]{
+                {sizeCapacity, int.class},
+                {books, Book[].class}
+        };
 
         Object bookcaseInstance = bookcase.createInstance(arguments);
         _assertEquals(sizeCapacity, bookcase.getFieldValue(bookcaseInstance, this.sizeCapacity),
@@ -186,26 +204,34 @@ public class MainTest {
     public void bookcaseConstructorInitializesIncorrectValuesCorrectly(int sizeCapacity, int[] year, String[] type) throws Throwable {
         Object[][] arguments = null;
         try {
-            Book[] books = new Book[year.length];
-            for(int x = 0; x < books.length; x++){
-                books[x] = new Book(year[x], type[x]);
-            }
-            arguments = new Object[][] {
-                    {sizeCapacity, int.class},
-                    {books, Book[].class}
+            arguments = new Object[][]{
+                    {5, int.class},
+                    {"fiction", String.class}
             };
-        }
-        catch (Error e){
+            book.createInstance(arguments);
+        } catch (Error e) {
             fail(bookClass + " object could not be created to be passed to " + bookcaseClass + ". Ensure your " +
                     bookClass + " class's constructor exists and has the correct parameters.");
         }
+
+        Book[] books = new Book[year.length];
+        Book[] booksHold = new Book[year.length];
+        for (int x = 0; x < books.length; x++) {
+            Book b = new Book(year[x], type[x]);
+            books[x] = b;
+            booksHold[x] = b;
+        }
+        arguments = new Object[][]{
+                {sizeCapacity, int.class},
+                {books, Book[].class}
+        };
+
         Object bookcaseInstance = bookcase.createInstance(arguments);
 
-        Book[] books = (Book[]) arguments[1][0];
         Book[] actualBooks = (Book[]) bookcase.getFieldValue(bookcaseInstance, this.books);
         boolean shortenedCorrectly = actualBooks.length <= sizeCapacity;
-        for(int x = 0; x < sizeCapacity; x ++){
-            if (!books[x].equals(actualBooks[x])) {
+        for (int x = 0; x < sizeCapacity; x++) {
+            if (!booksHold[x].equals(actualBooks[x])) {
                 shortenedCorrectly = false;
                 break;
             }
@@ -222,21 +248,23 @@ public class MainTest {
     public void correctDetermineReplacedMethod(int sizeCapacity, int[] year, String[] type) throws Throwable {
         Object[][] arguments = null;
         try {
-            Book[] books = new Book[year.length];
-            for(int x = 0; x < books.length; x++){
-                books[x] = new Book(year[x], type[x]);
-            }
-            arguments = new Object[][] {
-                    {sizeCapacity, int.class},
-                    {books, Book[].class}
+            arguments = new Object[][]{
+                    {5, int.class},
+                    {"fiction", String.class}
             };
-        }
-        catch (Error e){
+            book.createInstance(arguments);
+        } catch (Error e) {
             fail(bookClass + " object could not be created to be passed to " + bookcaseClass + ". Ensure your " +
                     bookClass + " class's constructor exists and has the correct parameters.");
         }
-
-        Book[] books = (Book[]) arguments[1][0];
+        Book[] books = new Book[year.length];
+        for (int x = 0; x < books.length; x++) {
+            books[x] = new Book(year[x], type[x]);
+        }
+        arguments = new Object[][]{
+                {sizeCapacity, int.class},
+                {books, Book[].class}
+        };
 
         Object bookcaseInstance = bookcase.createInstance(arguments);
         assertTrue(bookcase.hasMethod(determineReplaced, new Class[]{}),
@@ -250,8 +278,8 @@ public class MainTest {
         String determineReplacedExpected = Arrays.stream(books)
                 .filter(book -> book.determineTime() > replacedUnit)
                 .findFirst()
-                .map(book -> "Time to buy a new book!")
-                .orElse("You have enough new books!");
+                .map(book -> replaceResponse1)
+                .orElse(replaceResponse2);
         String incorrectDetermineReplacedExpected = "Your " + bookClass + " " + determineReplaced + " method does not return the correct message.";
         _assertEquals(determineReplacedExpected, determineReplacedOutput, incorrectDetermineReplacedExpected);
     }
