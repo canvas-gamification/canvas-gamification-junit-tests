@@ -37,8 +37,7 @@ You must add the following items to the class:
       value of **friendSecrets** at the same index as the friend is found in **friendNames**, if you do not find the
       name you must not change anythim.
     - A `writeInDiary` method which prints `I have the following secrets:` in first line and then prints each secret
-      that the **Person** knows on a separate line only if there is a secret. Given a friend `Ginger` and a secret
-      `she is scared of bears` it should write the secret in the following format: `Ginger told me she is scared of bears.`
+      that the **Person** knows on a separate line. For each secret they know, you must print the name of the friend and what you were told the secret is, with the format "<**Friend**> told me <**secret**>.". For example, given a friend `Ginger` and a secret `she is scared of bears` it should print the secret in the following format: `Ginger told me she is scared of bears.`
 
 ## TestFriendship Class
 
