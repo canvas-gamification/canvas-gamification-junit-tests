@@ -45,7 +45,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputAbove100Provider")
     public void correctsOutputAbove100(double temp) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message when temperature is above 100 oF";
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct message when the temperature is above 100 degrees.";
         runWithInput(temp + "", new Clause[]{
                 new StringLiteral("You have a fever.")
         });
