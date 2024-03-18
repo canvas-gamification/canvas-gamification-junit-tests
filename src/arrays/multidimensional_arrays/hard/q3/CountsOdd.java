@@ -3,7 +3,7 @@ package arrays.multidimensional_arrays.hard.q3;
 /*
 Write a Java program that randomly initialize a 3 by 3 multidimensional array, with integers between 1 and 100
 (inclusive of both ends) and prints it. Then gets two integers a and b from input and count the number of odd numbers
-a[i][j] in the array where 0 <= i < a and 0 <= j < b.
+a[i][j] in the array where 0 <= i < a and 0 <= j < b. Print the resulting count to the console.
 
 Sample output:
     Generated array:
