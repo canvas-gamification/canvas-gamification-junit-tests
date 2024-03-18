@@ -16,7 +16,7 @@ Your `Shoe` class already has the following items:
 
 - Constructor:
     - a `Shoe` constructor that is visible to other classes and accepts an `int` and a `String` and uses it to
-      initialize the **size** and **colour** attributes.
+      initialize the **size** and **colour** attributes respectively.
 
 You need to add the following items:
 
