@@ -28,7 +28,7 @@ You must add the following items to the class:
 
 - Methods:
     - A `receiveDonation` method that takes another **Person** object called donor to do a transplant and gives an eye
-      to the object calling the method.It should check if the **numEyes** in donor is more than zero. If donor has
+      to the object calling the method. It should check if the **numEyes** in the donor is more than zero. If the donor has
       enough take 1 unit of **numEyes** from donor and give it to the **Person**, and then print `Transplant successful`.
       If not it should print `Transplant cannot be done`. This method must not return any value.
     - A `toString` method that returns the `String` of information in the format
