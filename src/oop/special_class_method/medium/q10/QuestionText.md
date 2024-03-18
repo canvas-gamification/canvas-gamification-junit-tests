@@ -26,7 +26,7 @@ You need to add the following items:
     - a `getSize` method which returns the value stored in the **size** attribute
     - a `setColour` method which accepts a `String` and uses it to set the value of the **colour** attribute. It should
       not return anything.
-    - a `getColour` method which returns the value stored in the **colour** attribute
+    - a `getColour` method which returns the value stored in the **colour** attribute.
     - a `toString` method which returns the string `The size of this shoe is x and its colour is y` where x is
       the value of **size** and y is the value of **colour**.
     - These methods must be visible from other classes.
