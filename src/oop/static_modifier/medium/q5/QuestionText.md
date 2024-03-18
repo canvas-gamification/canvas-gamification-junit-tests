@@ -12,7 +12,7 @@ called **Hat**  to model the hats you have in the store using the requirements b
 Your `Hat` class already the following items:
 
 - Attributes:
-    - A `String` attributes called **colour** that cannot be accessed in other classes
+    - A `String` attribute called **colour** that cannot be accessed in other classes
 
 - Constructors:
     - A constructor that accepts a `String` and initializes the **colour** attribute.
