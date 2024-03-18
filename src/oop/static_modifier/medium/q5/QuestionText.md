@@ -32,4 +32,4 @@ You need to add the following items:
 ### Test Class:
 
 Your `Test` class will have a main method which initializes a `Hat` of **colour** value of `"Green"`. Then,
-print the toString for this class.
+print the object on its own line using the toString method.
