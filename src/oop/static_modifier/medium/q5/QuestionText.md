@@ -25,9 +25,9 @@ You need to add the following items:
     - Note that all attributes in this class should be private
 
 - Methods:
-    - a `toString` method which returns a String of the information about the `Hat` class of the form
-      `This is a x Hat that is y in colour` where x is the value of **companyName** attribute and y is the
-      value of **colour** attribute
+    - a `toString` method which returns a String of the information about the `Hat` class in the form
+      `This is a x Hat that is y in colour` where x is the value of the **companyName** attribute and y is the
+      value of the **colour** attribute
 
 ### Test Class:
 
