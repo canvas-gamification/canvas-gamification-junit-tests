@@ -5,7 +5,7 @@
 ## Question Text
 
 You always need to keep track of transplants in a hospital. For that matter, make a **Person** class with the following
-descriptions to be able to keep track of eye transplants.
+descriptions to be able to keep track of eye transplants and methods to give the eyes to another **Person** object.
 
 ## Person Class
 

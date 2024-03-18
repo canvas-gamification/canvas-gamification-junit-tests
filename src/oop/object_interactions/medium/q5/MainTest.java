@@ -30,6 +30,7 @@ public class MainTest {
     private final String getNumEyesMethodName = "getNumEyes";
     private final String setNumEyesMethodName = "setNumEyes";
     private final String receiveDonationMethodName = "receiveDonation";
+    private final int minEyes = 0;
 
     @BeforeEach
     public void setup() throws Throwable {
@@ -138,7 +139,7 @@ public class MainTest {
         Object[][] methodArguments = {
                 {donorInstance, Person.class}
         };
-        if (donEyes > 0) {
+        if (donEyes > minEyes) {
             testClass.callMethod(receiveDonationMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
                     new StringLiteral("Transplant successful"),
                     new Optional(new StringLiteral(" "))
