@@ -105,7 +105,9 @@ public class MainTest {
         return Stream.of(
                 Arguments.of(20, 10, 40, 35),
                 Arguments.of(10, 20, 15, 30),
-                Arguments.of(150, 200, 100, 50),
+                Arguments.of(45, 12, 45, 50),
+                Arguments.of(10, 20, 15, 30),
+                Arguments.of(10, 20, 15, 17),
                 Arguments.of(20, 20, 10, 20)
         );
     }
