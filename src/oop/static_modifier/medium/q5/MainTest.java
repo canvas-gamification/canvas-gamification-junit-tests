@@ -18,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
 public class MainTest {
+    // Java
+
     ObjectTest testClass;
     ObjectTest outputClass;
     String className = "Hat";
@@ -26,6 +28,7 @@ public class MainTest {
     String initialName = "Nike";
     String initialColour = "Green";
     String testClassName = "Test";
+    String toStringFormat = "This is a %s that is %s in colour";
 
     @BeforeEach
     public void setup() throws Throwable {
@@ -51,7 +54,7 @@ public class MainTest {
 
     @Test
     @Tag("dependency1")
-    @Order(1)
+    @Order(2)
     public void correctTestClass() throws Throwable {
         Object classInstance = outputClass.createInstance();
         String[] methodModifiers = {"public"};
@@ -62,11 +65,11 @@ public class MainTest {
                 new StringLiteral("This is a " + initialName + " that is " + initialColour + " in colour"),
                 new Optional(new StringLiteral(" ")),
                 new Optional(new NewLine())
-        });
+        }, "Your " + testClassName + " class does not print the correct output.");
     }
 
     @Test
-    @Order(2)
+    @Order(1)
     public void hatClassHasCorrectAttributes() {
         String incorrectNameError = "Your %s class does not include the %s attribute.";
         String incorrectVisibilityError = "Your %s attribute does not have the correct visibility modifier.";
@@ -82,6 +85,8 @@ public class MainTest {
     private static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of("Black", "Nike"),
+                Arguments.of("", " "),
+                Arguments.of("", ""),
                 Arguments.of("Blue", "Adidas"),
                 Arguments.of("Red", "Roots"),
                 Arguments.of("Brown", "Gap")
@@ -105,7 +110,7 @@ public class MainTest {
         assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className));
         assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className));
         String[] methodModifiers = {"public"};
-        String expected = "This is a " + compName + " that is " + colour + " in colour";
+        String expected = String.format(toStringFormat, compName, colour);
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, "toString method does not return the correct String.");
         Object output = testClass.callMethod("toString", methodModifiers, classInstance);
