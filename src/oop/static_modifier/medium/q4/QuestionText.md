@@ -14,10 +14,8 @@ Your `ChemistryLab` class already the following items:
 - Attributes:
     - Two static `double` attributes called **liquid1** and **liquid2**, with initial value of 10.5 each, which store
       the amount of these two liquids.
-    - Two static `int` attributes called **MIX_1** and **MIX_2**, with initial values of 0 and 1, that cannot be changed
-      later (using the final modifier). These are the numbers representing **liquid1** and **liquid2** attributes in the guide array.
-    - An array of type `double` that will be different for each chemistry lab due to the different temperatures and
-      air pressure.
+    - An array of type `double` called guide. Due to environmental factors like air pressure, this array will be different for each chemistry lab. It stores the amount of each liquid needed to conduct a reaction in that lab.
+    - Two **static** **final** `int` attributes called **MIX_1** and **MIX_2**, with initial values of 0 and 1, that cannot be changed. These corespond to the values in guide of how much of **liquid1** and **liquid2** is needed for a reaction.
     - Note that all attributes in this class should be private
 
 - Constructors:
