@@ -27,8 +27,8 @@ public class MainTest {
     String secondIntName = "MIX_2";
     String arrayName = "guide";
     String methodName = "mixFun";
-    static double initialValue1 = 10.5;
-    static double initialValue2 = 10.5;
+    static double liquidInitialValue1 = 10.5;
+    static double liquidInitialValue2 = 10.5;
     int typeValue1 = 0; // Must be less than 5
     int typeValue2 = 1; // Must be less than 5
 
@@ -54,9 +54,9 @@ public class MainTest {
             Object classInstance = testClass.createInstance(arguments);
             _assertArrayEquals(test, testClass.getFieldValue(classInstance, arrayName),
                     String.format(modificationErrorMessage, className));
-            _assertEquals(initialValue1, testClass.getFieldValue(null, firstDoubleName),
+            _assertEquals(liquidInitialValue1, testClass.getFieldValue(null, firstDoubleName),
                     String.format(modificationErrorMessage, className));
-            _assertEquals(initialValue2, testClass.getFieldValue(null, secondDoubleName),
+            _assertEquals(liquidInitialValue2, testClass.getFieldValue(null, secondDoubleName),
                     String.format(modificationErrorMessage, className));
             _assertEquals(typeValue1, testClass.getFieldValue(null, firstIntName),
                     String.format(modificationErrorMessage, className));
@@ -68,23 +68,13 @@ public class MainTest {
 
     private static Stream<Arguments> inputProvider() {
         return Stream.of(
-                Arguments.of(new double[]{initialValue1, initialValue2, initialValue1, initialValue2, initialValue1}),
-                Arguments.of(new double[]{initialValue1 + 1, initialValue2 + 1, initialValue1 + 1, initialValue2 + 1, initialValue1 + 1}),
-                Arguments.of(new double[]{initialValue1 - 1, initialValue2 - 1, initialValue1 - 1, initialValue2 - 1, initialValue1 - 1}),
-                Arguments.of(generateRandomArray(0.5, 20.0, 10)),
-                Arguments.of(generateRandomArray(0.5, 20.0, 10)),
+                Arguments.of(new double[]{liquidInitialValue1, liquidInitialValue2, liquidInitialValue1, liquidInitialValue2, liquidInitialValue1}),
+                Arguments.of(new double[]{liquidInitialValue1 + 0.001, liquidInitialValue2 + 0.001, liquidInitialValue1 + 0.001, liquidInitialValue2 + 0.001, liquidInitialValue1 + 0.001}),
+                Arguments.of(new double[]{liquidInitialValue1 - 0.001, liquidInitialValue2 - 0.001, liquidInitialValue1 - 0.001, liquidInitialValue2 - 0.001, liquidInitialValue1 - 0.001}),
+                Arguments.of(new double[]{liquidInitialValue1 + 0.001, liquidInitialValue2 - 0.001, liquidInitialValue1 + 0.001, liquidInitialValue2 - 0.001, liquidInitialValue1 + 0.001}),
+                Arguments.of(new double[]{liquidInitialValue1 - 0.001, liquidInitialValue2 + 0.001, liquidInitialValue1 - 0.001, liquidInitialValue2 + 0.001, liquidInitialValue1 - 0.001}),
                 Arguments.of(generateRandomArray(0.5, 20.0, 10))
         );
-    }
-
-    @Test
-    public void mixFunIsDefinedCorrectly() {
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(methodName, null), String.format(incorrectMethodDefinition, methodName, className));
-        assertTrue(testClass.hasModifier(methodName, null, "public"), String.format(incorrectModifierMessage, methodName, className));
-        assertTrue(testClass.hasReturnType(methodName, null, Void.TYPE), String.format(incorrectReturnType, methodName, className));
     }
 
     @ParameterizedTest
@@ -100,7 +90,7 @@ public class MainTest {
         assertTrue(testClass.hasMethod(methodName, null, Void.TYPE, new String[]{"public"}),
                 "Your " + methodName + " method does not have the correct visibility modifier.");
         Object classInstance = testClass.createInstance(arguments);
-        if (guide[typeValue1] <= initialValue1 && guide[typeValue2] <= initialValue2) {
+        if (guide[typeValue1] <= liquidInitialValue1 && guide[typeValue2] <= liquidInitialValue2) {
             testClass.callMethod(methodName, classInstance, new Clause[]{
                     new StringLiteral("Mixing …"),
                     new Optional(new StringLiteral(" ")),
@@ -108,22 +98,22 @@ public class MainTest {
                     new StringLiteral("Mixing Successful"),
                     new Optional(new StringLiteral(" "))
             });
-            _assertEquals(initialValue1 - guide[typeValue1], testClass.getFieldValue(null, firstDoubleName),
+            _assertEquals(liquidInitialValue1 - guide[typeValue1], testClass.getFieldValue(null, firstDoubleName), 0.001,
                     "Your " + methodName + " method does not decrease the value of " + firstDoubleName + " correctly when it mixes the liquids successfully.");
-            _assertEquals(initialValue2 - guide[typeValue2], testClass.getFieldValue(null, secondDoubleName),
+            _assertEquals(liquidInitialValue2 - guide[typeValue2], testClass.getFieldValue(null, secondDoubleName), 0.001,
                     "Your " + methodName + " method does not decrease the value of " + secondDoubleName + " correctly when it mixes the liquids successfully.");
         } else {
             testClass.callMethod(methodName, classInstance, new Clause[]{
                     new StringLiteral("There's not enough ingredients to create the mixture"),
                     new Optional(new StringLiteral(" ")),
             });
-            _assertEquals(initialValue1, testClass.getFieldValue(null, firstDoubleName),
+            _assertEquals(liquidInitialValue1, testClass.getFieldValue(null, firstDoubleName), 0.001,
                     "Your " + methodName + " method decreases the value of " + firstDoubleName + " when it should not.");
-            _assertEquals(initialValue2, testClass.getFieldValue(null, secondDoubleName),
+            _assertEquals(liquidInitialValue2, testClass.getFieldValue(null, secondDoubleName), 0.001,
                     "Your " + methodName + " method decreases the value of " + secondDoubleName + " when it should not.");
         }
-        testClass.setFieldValue(null, initialValue1, firstDoubleName);
-        testClass.setFieldValue(null, initialValue2, secondDoubleName);
+        testClass.setFieldValue(null, liquidInitialValue1, firstDoubleName);
+        testClass.setFieldValue(null, liquidInitialValue2, secondDoubleName);
     }
 
 
