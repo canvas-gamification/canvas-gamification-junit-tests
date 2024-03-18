@@ -1,9 +1,13 @@
 # oop-special_class_method-medium-q10
 
+## Question Type
+
+Java
+
 ## Question Text
 
-A store inventory system must keep track of all the items available for purchase so when it is low in stock, the
-manager can order more. Make a Java class called **Shoe**.
+Each store should have an inventory system to alert store managers when an item is low in stock so they can order 
+replacements. Using the requirements below, write a Java class called **Shoe** to keep track of the store's shoe stock.
 
 ### Shoe Class:
 

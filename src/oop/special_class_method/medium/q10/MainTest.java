@@ -22,6 +22,7 @@ public class MainTest {
     private final String attributeName2 = "colour";
     private final String getAttributeMethodName2 = "getColour";
     private final String setAttributeMethodName2 = "setColour";
+    private final String toStringFormat = "The size of this shoe is %s and its colour is %s";
     private ObjectTest testClass;
 
     @BeforeEach
@@ -39,7 +40,8 @@ public class MainTest {
                 {10, "Black"},
                 {12, "Blue"},
                 {43, "White"},
-                {7, "Yellow"}
+                {7, "Yellow"},
+                {0, "White"}
         };
         modifiedClassMessage =
                 "You have modified the provided %s constructor. Please revert it to the original state.";
@@ -75,6 +77,7 @@ public class MainTest {
     private static Stream<Arguments> updateIntegerInputProvider() {
         return Stream.of(
                 Arguments.of(3, "Red", 5),
+                Arguments.of(3, "Red", 0),
                 Arguments.of(10, "Black", 12),
                 Arguments.of(12, "Blue", 10),
                 Arguments.of(43, "White", 37),
@@ -92,16 +95,6 @@ public class MainTest {
                 Arguments.of(7, "Yellow", "Orange")
 
         );
-    }
-
-    @Test
-    public void getSizeIsDefinedCorrectly() {
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(getAttributeMethodName1, null), String.format(incorrectMethodDefinition, getAttributeMethodName1, className));
-        assertTrue(testClass.hasModifier(getAttributeMethodName1, null, "public"), String.format(incorrectModifierMessage, getAttributeMethodName1, className));
-        assertTrue(testClass.hasReturnType(getAttributeMethodName1, null, int.class), String.format(incorrectReturnType, getAttributeMethodName1, className));
     }
 
     @ParameterizedTest
@@ -123,16 +116,6 @@ public class MainTest {
                 "Your " + getAttributeMethodName1 + " method does not return the correct value of the " + attributeName1 + " attribute.");
     }
 
-    @Test
-    public void getColourIsDefinedCorrectly() {
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(getAttributeMethodName2, null), String.format(incorrectMethodDefinition, getAttributeMethodName2, className));
-        assertTrue(testClass.hasModifier(getAttributeMethodName2, null, "public"), String.format(incorrectModifierMessage, getAttributeMethodName2, className));
-        assertTrue(testClass.hasReturnType(getAttributeMethodName2, null, String.class), String.format(incorrectReturnType, getAttributeMethodName2, className));
-    }
-
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void correctGetColourMethod(int value1, String value2) throws Throwable {
@@ -150,16 +133,6 @@ public class MainTest {
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName2, testInstance);
         _assertEquals(value2, getMethodOutput,
                 "Your " + getAttributeMethodName2 + " method does not return the correct value of the " + attributeName2 + " attribute.");
-    }
-
-    @Test
-    public void setSizeIsDefinedCorrectly() {
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(setAttributeMethodName1, new Class<?>[]{int.class}), String.format(incorrectMethodDefinition, setAttributeMethodName1, className));
-        assertTrue(testClass.hasModifier(setAttributeMethodName1, new Class<?>[]{int.class}, "public"), String.format(incorrectModifierMessage, setAttributeMethodName1, className));
-        assertTrue(testClass.hasReturnType(setAttributeMethodName1, new Class<?>[]{int.class}, Void.TYPE), String.format(incorrectReturnType, setAttributeMethodName1, className));
     }
 
     @ParameterizedTest
@@ -184,16 +157,6 @@ public class MainTest {
                 "Your " + setAttributeMethodName1 + " method does not correctly update the value of " + attributeName1 + ".";
         _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName1),
                 incorrectSetterMessage);
-    }
-
-    @Test
-    public void setColourIsDefinedCorrectly() {
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(setAttributeMethodName2, new Class<?>[]{String.class}), String.format(incorrectMethodDefinition, setAttributeMethodName2, className));
-        assertTrue(testClass.hasModifier(setAttributeMethodName2, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, setAttributeMethodName2, className));
-        assertTrue(testClass.hasReturnType(setAttributeMethodName2, new Class<?>[]{String.class}, Void.TYPE), String.format(incorrectReturnType, setAttributeMethodName2, className));
     }
 
     @ParameterizedTest
@@ -236,7 +199,7 @@ public class MainTest {
         assertTrue(testClass.hasMethod("toString", null), String.format(incorrectMethodDefinition, "toString", className));
         assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className));
         assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className));
-        String expectedOutput = "The size of this shoe is " + value1 + " and its colour is " + value2;
+        String expectedOutput = String.format(toStringFormat, value1, value2);
         Object toStringOutput = testClass.callMethod("toString", testInstance);
         _assertEquals(expectedOutput, toStringOutput, incorrectToStringMessage);
     }
