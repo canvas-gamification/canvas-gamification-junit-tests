@@ -9,7 +9,7 @@ called **Hat**  to model the hats you have in the store using the requirements b
 
 ### Hat Class
 
-Your `Hat` class already the following items:
+Your `Hat` class already has the following items:
 
 - Attributes:
     - A `String` attribute called **colour** that cannot be accessed in other classes
