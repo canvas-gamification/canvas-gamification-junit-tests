@@ -2,7 +2,7 @@ package arrays.multidimensional_arrays.hard.q3;
 
 /*
 Write a Java program that randomly initialize a 3 by 3 multidimensional array, with integers between 1 and 100
-(inclusive of both ends) and prints it. Then gets two integers a and b and count the number of odd number for all
+(inclusive of both ends) and prints it. Then gets two integers a and b and count the number of odd numbers for all
 the integers in the array whose indices are i and j so that 0 <= i < a and 0 <= j < b.
 
 Sample output:
