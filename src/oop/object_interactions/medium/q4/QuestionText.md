@@ -48,5 +48,5 @@ Your `TestTransfusion` class must have the following items:
       blood type A, B, and B, and blood volume of 10.5, 8, and 0.5.
     - Cindy should try to get blood from first Sarah and then Jones.
     - Then it should print the information of Sarah, Jones, and Cindy in that order using **toString()** method.
-    - An example of the output would be `"Sarah: " + sarah.toString()`.
+    - An example of the output would be `Sarah: My blood type is A and I have 2.5L of blood left`.
     - Each output must be on a separate line.

@@ -151,6 +151,10 @@ public class MainTest {
                     new StringLiteral("Donor does not have enough blood for a transfusion"),
                     new Optional(new StringLiteral(" "))
             });
+            _assertEquals(volume, testClass.getFieldValue(classInstance, volumeAttributeName),
+                    "Your " + transfusionFromMethodName + " method does not correctly add blood to the recipient.");
+            _assertEquals(donVolume, testClass.getFieldValue(donor, volumeAttributeName),
+                    "Your " + transfusionFromMethodName + " method does not correctly take blood from the donor.");
         } else {
             testClass.callMethod(transfusionFromMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
                     new StringLiteral("Checking if donor has enough blood for a transfusion\\.\\.\\."),
