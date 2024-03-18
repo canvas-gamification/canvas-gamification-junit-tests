@@ -30,7 +30,7 @@ You must add the following items to the class:
 
 - Methods:
     - A `transferPassengers` method that takes another **Airplane** called **busyPlane** and moves
-      passengers of **busyPlane** to this Airplane until this plane is full. If this plane is already full it should
+      passengers of **busyPlane** to this Airplane until it is full. If this plane is already full it should
       print `This plane is full too and cannot accommodate anymore passengers`. If the plane is not full it should write
       `We moved n passengers`  where n is the number of passengers moved.
     - A `toString` method that returns a `String` of information in the format of `x out of y seats are filled`. Where
