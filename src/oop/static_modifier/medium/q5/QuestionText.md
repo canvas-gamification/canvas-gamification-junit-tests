@@ -31,5 +31,5 @@ You need to add the following items:
 
 ### Test Class:
 
-Your `Test` class will have a main method which initializes a `Hat` of **colour** value of `"Green"`. Then,
+Your `Test` class should have a main method which initializes a `Hat` object of **colour** value of `"Green"`. Then,
 print the object on its own line using the toString method.
