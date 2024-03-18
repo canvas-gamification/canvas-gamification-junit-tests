@@ -103,6 +103,7 @@ public class MainTest {
     private static Stream<Arguments> inputProvider() {
         return Stream.of(
                 Arguments.of(2020, 5, 17, "It's a new day!"),
+                Arguments.of(0, 0, 0, ""),
                 Arguments.of(2017, 4, 3, "A new brand of car is out!"),
                 Arguments.of(2023, 4, 5, "The classes are cancelled!")
         );
@@ -170,13 +171,13 @@ public class MainTest {
                 "Your " + makeCopyMethodName + " method does not have the correct visibility modifier.");
         testClass.callMethod(makeCopyMethodName, methodArguments, new String[]{"public"}, classInstance);
         _assertEquals(year, testClass.getFieldValue(classInstance, myYearAttributeName),
-                "Your " + makeCopyMethodName + " method does not make a copy of the " + myYearAttributeName + " attribute correctly.");
+                "Your " + makeCopyMethodName + " method does not correctly copy the " + myYearAttributeName + " attribute of the " + className + ".");
         _assertEquals(month, testClass.getFieldValue(classInstance, myMonthAttributeName),
-                "Your " + makeCopyMethodName + " method does not make a copy of the " + myMonthAttributeName + " attribute correctly.");
+                "Your " + makeCopyMethodName + " method does not correctly copy the " + myMonthAttributeName + " attribute of the " + className + ".");
         _assertEquals(day, testClass.getFieldValue(classInstance, myDayAttributeName),
-                "Your " + makeCopyMethodName + " method does not make a copy of the " + myDayAttributeName + " attribute correctly.");
+                "Your " + makeCopyMethodName + " method does not correctly copy the " + myDayAttributeName + " attribute of the " + className + ".");
         _assertEquals(story, testClass.getFieldValue(classInstance, myStoryAttributeName),
-                "Your " + makeCopyMethodName + " method does not make a copy of the " + myStoryAttributeName + " attribute correctly.");
+                "Your " + makeCopyMethodName + " method does not correctly copy the " + myStoryAttributeName + " attribute of the " + className + ".");
     }
 
     @ParameterizedTest
