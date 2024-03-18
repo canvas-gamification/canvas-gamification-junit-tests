@@ -36,7 +36,7 @@ You must add the following items to the class:
     - If the types are compatible it should print `Checking if donor has enough blood for a transfusion...`
     - Then it should make sure that the donor has more than 5 unit of blood if not
       it should print `Donor does not have enough blood for a transfusion`.
-    - If donor has enough take 1 unit of blood from donor
+    - If the donor has enough take 1 unit of blood from the donor
       and give it to the snail, and then print `Blood transfusion completed`.
 
 ## TestTransfusion Class
