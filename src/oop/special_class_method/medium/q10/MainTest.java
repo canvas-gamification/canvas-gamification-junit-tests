@@ -120,7 +120,7 @@ public class MainTest {
         Object testInstance = testClass.createInstance(arguments);
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName1, testInstance);
         _assertEquals(value1, getMethodOutput,
-                "Your " + getAttributeMethodName1 + " method does not return the value of the " + attributeName1 + " attribute.");
+                "Your " + getAttributeMethodName1 + " method does not return the correct value of the " + attributeName1 + " attribute.");
     }
 
     @Test
