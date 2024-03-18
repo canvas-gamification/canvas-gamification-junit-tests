@@ -5,8 +5,8 @@
 ## Question Text
 
 You are working as a vet assistant in an animal hospital, and sometimes you encounter an animal that requires a blood 
-transfusion in order to save its life.  Make a class called **Snail** for this project, and a class called 
-**TestTransfusion** to test it, with the following description:
+transfusion to save its life.  Using the following description, make a class called **Snail** 
+to model this situation, and a class called **TestTransfusion** to test your **Snail** class.
 
 ## Snail Class
 
@@ -36,7 +36,7 @@ You must add the following items to the class:
     - If the types are compatible it should print `Checking if donor has enough blood for a transfusion...`
     - Then it should make sure that the donor has more than 5 unit of blood if not
       it should print `Donor does not have enough blood for a transfusion`.
-    - If donor has enough take 1 unit of blood from donor
+    - If the donor has enough take 1 unit of blood from the donor
       and give it to the snail, and then print `Blood transfusion completed`.
 
 ## TestTransfusion Class
