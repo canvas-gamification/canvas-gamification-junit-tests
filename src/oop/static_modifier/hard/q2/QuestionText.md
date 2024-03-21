@@ -24,7 +24,7 @@ Your `Lightbulb` class must have the following requirements:
 - Methods:
     - Note that all methods in this class should be visible from another class
     - A mutator called `setVoltage` that gets an `int` value and change the voltage of all instances to the input value.
-      It must not return anythin.
+      It must not return anything.
     - A `toString` method which returns the `String` "This lightbulb is a x light with y voltage.", where x is the value
       of the **type** attribute of the `Lightbulb` object and y is the value of the **voltage** attribute.
 
