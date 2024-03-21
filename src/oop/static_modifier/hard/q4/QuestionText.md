@@ -7,7 +7,7 @@
 Your `Bed` class must have the following requirements:
 
 - Attributes:
-    - A _static_ `int` called **woodBeams**. This represents the total number of wood beans available for making `Bed`
+    - A _static_ `int` called **woodBeams**. This represents the total number of wood beams available for making `Bed`
       objects, and should be set initially to 100 without having to call the constructor. Note that it should be visible
       from other classes.
     - An `int` called **numBeams** which is the wood required to make the `Bed` Object. Note that it should not be
