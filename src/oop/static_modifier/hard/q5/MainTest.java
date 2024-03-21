@@ -91,7 +91,7 @@ public class MainTest {
     @Tag("dependency1")
     @Order(4)
     public void carpetConstructorInitializesValuesCorrectly(double value1) throws Throwable {
-        String wrongValueMessage = "The %s constructor did not initialize the %s attribute to the correct value based on the parameters passed to the constructor.";
+        String wrongValueMessage = "The %s constructor did not initialize the %s attribute to the correct value based on the parameter passed to the constructor.";
         Object[][] constructorArgs = {
                 {value1, double.class}
         };
