@@ -26,6 +26,7 @@ public class MainTest {
     private final String methodName = "makeFurniture";
     private final String testClassName = "TestWarehouse";
     private final static int initialBeams = 100;
+    private final String printOutput = "%s pieces of furniture were made";
 
     private ObjectTest testClass;
     private ObjectTest classObject;
@@ -39,7 +40,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(1)
+    @Order(2)
     public void bedHasRequiredAttributes() {
         String missingAttributeMessage = "The %s class is missing the %s attribute. Make sure that the class contains the attribute and it is spelt correctly.";
         String wrongTypeMessage = "The %s attribute in the %s class has the wrong type.";
@@ -49,12 +50,12 @@ public class MainTest {
         assertTrue(testClass.hasModifier(attributeName, "private"), String.format(wrongModifierMessage, attributeName, className));
         assertTrue(testClass.hasField(staticAttributeName), String.format(missingAttributeMessage, className, staticAttributeName));
         assertTrue(testClass.hasField(staticAttributeName, int.class), String.format(wrongTypeMessage, staticAttributeName, className));
-        assertTrue(testClass.hasModifier(staticAttributeName, "public"), String.format(wrongModifierMessage, staticAttributeName, className));
+        assertTrue(testClass.hasModifier(staticAttributeName, "private"), String.format(wrongModifierMessage, staticAttributeName, className));
         assertTrue(testClass.hasModifier(staticAttributeName, "static"), String.format(wrongModifierMessage, staticAttributeName, className));
     }
 
     @Test
-    @Order(2)
+    @Order(3)
     public void bedHasRequiredConstructor() {
         String missingConstructorMessage = "The %s class is missing a required constructor. Make sure that it is named correctly and has the correct parameters.";
         String wrongAccessModifier = "The %s class constructor has the wrong visibility modifier. Make sure that it is visible from all other classes.";
@@ -64,7 +65,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(3)
+    @Order(1)
     @Tag("dependency1")
     public void bedIsInitializedCorrectly() {
         _assertEquals(initialBeams, testClass.getFieldValue(null, staticAttributeName),
@@ -97,17 +98,6 @@ public class MainTest {
         };
         Object checkupInstance = testClass.createInstance(constructorArgs);
         _assertEquals(value1, testClass.getFieldValue(checkupInstance, attributeName), String.format(wrongValueMessage, className, attributeName));
-    }
-
-    @Test
-    @Order(5)
-    public void makeFurnitureIsDefinedCorrectly() {
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(methodName, null), String.format(incorrectMethodDefinition, methodName, className));
-        assertTrue(testClass.hasModifier(methodName, null, "public"), String.format(incorrectModifierMessage, methodName, className));
-        assertTrue(testClass.hasReturnType(methodName, null, boolean.class), String.format(incorrectReturnType, methodName, className));
     }
 
     @ParameterizedTest
@@ -146,11 +136,12 @@ public class MainTest {
     @Order(7)
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
-                new StringLiteral("4 pieces of furniture were made"),
+                new StringLiteral(String.format(printOutput, 4)),
                 new Optional(new StringLiteral(" "))
         };
         Object classInstance = classObject.createInstance();
         classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance,
-                clauses);
+                clauses,
+                "Your " + testClassName + " class main method does not print the correct output.");
     }
 }

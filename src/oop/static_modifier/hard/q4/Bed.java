@@ -1,7 +1,7 @@
 package oop.static_modifier.hard.q4;
 
 public class Bed {
-    public static int woodBeams = 100;
+    private static int woodBeams = 100;
     private int numBeams;
 
     public Bed(int nb) {
