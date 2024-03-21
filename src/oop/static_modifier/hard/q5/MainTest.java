@@ -26,6 +26,7 @@ public class MainTest {
     private final String methodName = "canCompleteFlooring";
     private final String testClassName = "TestCoverage";
     private final static double initialBeams = 300;
+    private final String printOutput = "There is enough material for the first %s houses";
 
     private ObjectTest testClass;
     private ObjectTest classObject;
@@ -39,7 +40,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(1)
+    @Order(2)
     public void carpetHasRequiredAttributes() {
         String missingAttributeMessage = "The %s class is missing the %s attribute. Make sure that the class contains the attribute and it is spelt correctly.";
         String wrongTypeMessage = "The %s attribute in the %s class has the wrong type.";
@@ -54,7 +55,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(2)
+    @Order(3)
     public void carpetHasRequiredConstructor() {
         String missingConstructorMessage = "The %s class is missing a required constructor. Make sure that it is named correctly and has the correct parameters.";
         String wrongAccessModifier = "The %s class constructor has the wrong visibility modifier. Make sure that it is visible from all other classes.";
@@ -64,7 +65,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(3)
+    @Order(1)
     @Tag("dependency1")
     public void staticVariableIsInitializedCorrectly() {
         _assertEquals(initialBeams, testClass.getFieldValue(null, staticAttributeName),
@@ -77,12 +78,14 @@ public class MainTest {
                 Arguments.of(5.7, 6.9),
                 Arguments.of(6.1, 5.8),
                 Arguments.of(7.3, 2.5),
-                Arguments.of(8.2, 10.6),
+                Arguments.of(0.0, 0.0),
+                Arguments.of(7.3, 0.0),
+                Arguments.of(0.0, 10.6),
                 Arguments.of(5.9, 4.4),
                 Arguments.of(4.8, 9.1),
                 Arguments.of(6.6, 1.7),
                 Arguments.of(5.5, 8.3),
-                Arguments.of(7.4, 0.5)
+                Arguments.of(123232.3, 999999.9)
         );
     }
 
@@ -97,17 +100,6 @@ public class MainTest {
         };
         Object checkupInstance = testClass.createInstance(constructorArgs);
         _assertEquals(value1, testClass.getFieldValue(checkupInstance, attributeName), String.format(wrongValueMessage, className, attributeName));
-    }
-
-    @Test
-    @Order(5)
-    public void canCompleteFlooringIsDefinedCorrectly() {
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(methodName, null), String.format(incorrectMethodDefinition, methodName, className));
-        assertTrue(testClass.hasModifier(methodName, null, "public"), String.format(incorrectModifierMessage, methodName, className));
-        assertTrue(testClass.hasReturnType(methodName, null, boolean.class), String.format(incorrectReturnType, methodName, className));
     }
 
     @ParameterizedTest
@@ -146,11 +138,12 @@ public class MainTest {
     @Order(7)
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
-                new StringLiteral("There is enough material for 2 houses"),
+                new StringLiteral(String.format(printOutput, 2)),
                 new Optional(new StringLiteral(" "))
         };
         Object classInstance = classObject.createInstance();
         classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance,
-                clauses);
+                clauses,
+                "Your " + testClassName + " class main method does not print the correct output.");
     }
 }

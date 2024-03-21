@@ -11,6 +11,6 @@ public class TestCoverage {
             else
                 break;
         }
-        System.out.println("There is enough material for " + count + " houses");
+        System.out.println("There is enough material for the first " + count + " houses");
     }
 }

@@ -2,6 +2,12 @@
 
 - Question Type: Java question
 
+## Question Text
+
+Carpet squares are easy to order but the colour of different batches can be slightly different and so cannot be used for 
+the same carpet. Write a Java class called `Carpet` to keep track of the carpet squares of the most recent order using the 
+requirements below. Then write a class called `TestCoverage` to test `Carpet`.
+
 ## Carpet Class
 
 Your `Carpet` class must have the following requirements:
