@@ -7,8 +7,8 @@
 Your `Carpet` class must have the following requirements:
 
 - Attributes:
-    - A _static_ `double` called **materialAreaAvailable**. This represents the total number of wood beans available for
-      making `Bed` objects, and should be set initially to 300 without having to call the constructor. Note that it
+    - A _static_ `double` called **materialAreaAvailable**. This represents the total number of carpet squares available for
+      making `Carpet` objects, and should be set initially to 300 without having to call the constructor. Note that it
       should not be visible from other classes.
     - A `double` called **houseArea** which is the the area of the house needed to be floored. Note that it should not
       be visible from other classes.
