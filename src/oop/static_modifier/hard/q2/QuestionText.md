@@ -12,7 +12,7 @@ A factory typically has employees who control machines that build the same items
 Your `Lightbulb` class must have the following requirements:
 
 - Attributes:
-    - Note that all attributes should not be visible from another class
+    - None of the attributes should be visible from another class
     - A _static_ `int` called **voltage**. This represents the voltage of the all `Lightbulb` objects,
       and should be set initially to 100 without having to call the constructor.
     - A `String` called **type**
