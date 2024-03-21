@@ -121,7 +121,7 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     @Tag("dependent1")
-    public void discordClassHasCorrectToStringMethod(String value1, int value2) throws Throwable {
+    public void lightbulbClassHasCorrectToStringMethod(String value1, int value2) throws Throwable {
         String missingMethodMessage = "The %s class is missing the %s method. Make sure that the class contains the method and it is spelt correctly with the correct arguments as parameters.";
         String wrongTypeMessage = "The %s method in the %s class has the wrong return type.";
         String wrongModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
