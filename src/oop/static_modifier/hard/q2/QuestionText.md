@@ -13,7 +13,7 @@ Your `Lightbulb` class must have the following requirements:
 
 - Attributes:
     - None of the attributes should be visible from another class
-    - A _static_ `int` called **voltage**. This represents the voltage of the all `Lightbulb` objects,
+    - A _static_ `int` called **voltage**. This represents the voltage of all `Lightbulb` objects,
       and should be set initially to 100 without having to call the constructor.
     - A `String` called **type**
 
