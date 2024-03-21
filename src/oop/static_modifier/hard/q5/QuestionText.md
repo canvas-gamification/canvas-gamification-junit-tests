@@ -31,4 +31,4 @@ Your `TestCoverage` class must have the following items:
     - A `main` method which initializes 5 `Carpet` objects with **houseArea** of each of them being in order: 126, 133,
       81, 100, 90.25, 156.25 then go through in order to floor them using `canCompleteFlooring` method. Finally, print
       how many of the houses can be floored in this format:
-      "There is enough material for x houses" where x is the number of floorings made.
+      "There is enough material for the first x houses" where x is the number of floorings made.
