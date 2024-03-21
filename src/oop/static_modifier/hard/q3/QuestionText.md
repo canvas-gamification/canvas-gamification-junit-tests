@@ -28,6 +28,6 @@ Your `CandyStore` class must have the following requirements:
 Your `Test` class must have the following items:
 
 - Main method:
-    - A `main` method which initializes three `CandyStore` objects with names: Corner Jack, Best Deals in Kelowna, and
-      The Apple Mall. Then use the **award** method to give away 20 gummies from the first store, 10 gummies from the
-      second and finally 15 gummies from the third in that order.
+    - A `main` method that initializes three `CandyStore` objects with names: "Corner Jack", "Best Deals in Kelowna", and
+      "The Apple Mall". Then use the **award** method to give away 20 gummies from the first store, 10 gummies from the
+      second and finally 15 gummies from the third.
