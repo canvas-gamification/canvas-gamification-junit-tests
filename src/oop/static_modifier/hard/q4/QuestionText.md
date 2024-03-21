@@ -28,5 +28,5 @@ Your `TestWarehouse` class must have the following items:
 
 - Main method:
     - A `main` method which initializes an array of 5 `Bed` objects with **numBeams** of each of them being 24, then go
-      through them and try to make them using `makeFurniture` method. Finally, print the number of beds made in format
+      through them and attempt to make one of each object using `makeFurniture` method. Finally, print the number of beds made in format
       of: "x pieces of furniture were made" where x is the number of furniture made.
