@@ -2,6 +2,14 @@
 
 - Question Type: Java question
 
+## Question Text
+
+The candy stores in Kelowna have banded together to give away a new flavour of gummy. Write a Java class called
+`CandyStore` to keep track of a store's gummy supply using the requirements below. Then, write a class called Test to test
+`CandyStore` using the next set of requirements below.
+
+
+
 ## CandyStore Class
 
 Your `CandyStore` class must have the following requirements:

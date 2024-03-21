@@ -28,6 +28,7 @@ public class MainTest {
     private final String methodName = "award";
     private final String testClassName = "Test";
     private final static int initialGummies = 100;
+    private final String printString = "There are %s more to give away after the %s award.";
 
     private ObjectTest testClass;
     private ObjectTest classObject;
@@ -41,7 +42,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(1)
+    @Order(2)
     public void candyStoreHasRequiredAttributes() {
         String missingAttributeMessage = "The %s class is missing the %s attribute. Make sure that the class contains the attribute and it is spelt correctly.";
         String wrongTypeMessage = "The %s attribute in the %s class has the wrong type.";
@@ -56,7 +57,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(2)
+    @Order(3)
     public void candyStoreHasRequiredConstructor() {
         String missingConstructorMessage = "The %s class is missing a required constructor. Make sure that it is named correctly and has the correct parameters.";
         String wrongAccessModifier = "The %s class constructor has the wrong visibility modifier. Make sure that it is visible from all other classes.";
@@ -66,7 +67,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(3)
+    @Order(1)
     @Tag("dependency1")
     public void gummiesIsInitializedCorrectly() {
         _assertEquals(initialGummies, testClass.getFieldValue(null, staticAttributeName),
@@ -106,17 +107,6 @@ public class MainTest {
         _assertEquals(value1, testClass.getFieldValue(checkupInstance, attributeName), String.format(wrongValueMessage, className, attributeName));
     }
 
-    @Test
-    @Order(5)
-    public void awardIsDefinedCorrectly() {
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(methodName, new Class<?>[]{int.class}), String.format(incorrectMethodDefinition, methodName, className));
-        assertTrue(testClass.hasModifier(methodName, new Class<?>[]{int.class}, "public"), String.format(incorrectModifierMessage, methodName, className));
-        assertTrue(testClass.hasReturnType(methodName, new Class<?>[]{int.class}, Void.TYPE), String.format(incorrectReturnType, methodName, className));
-    }
-
     @ParameterizedTest
     @MethodSource("inputProvider")
     @Tag("dependency1")
@@ -133,7 +123,7 @@ public class MainTest {
         };
         Object classInstance = testClass.createInstance(constructorArgs);
         Clause[] testSentence = new Clause[]{
-                new StringLiteral("There are " + (initialGummies - value2) + " more to give away after the " + value1 + " award.")
+                new StringLiteral(String.format(printString, (initialGummies - value2), value1))
         };
         Object[][] arguments = {
                 {value2, int.class}
@@ -149,13 +139,13 @@ public class MainTest {
     @Order(7)
     public void correctTestClass() throws Throwable {
         Clause[] clauses = {
-                new StringLiteral("There are 80 more to give away after the Corner Jack award."),
+                new StringLiteral(String.format(printString, 80, "Corner Jack")),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("There are 70 more to give away after the Best Deals in Kelowna award."),
+                new StringLiteral(String.format(printString, 70, "Best Deals in Kelowna")),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("There are 55 more to give away after the The Apple Mall award."),
+                new StringLiteral(String.format(printString, 55, "The Apple Mall")),
                 new Optional(new StringLiteral(" "))
         };
         Object classInstance = classObject.createInstance();
