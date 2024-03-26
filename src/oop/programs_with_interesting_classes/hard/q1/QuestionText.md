@@ -17,7 +17,8 @@ class in this question. More details below.
 ### Constructor
 
 - The constructor must be visible from another class.
-- This constructor must accept an array of strings to use as the words in the crossword puzzle.
+- This constructor must accept an array of strings to use as the words in the crossword puzzle. Assume the words are
+  spelled with only uppercase English letters.
 - Using the input array, the constructor should find the longest word and use the length to initialize the *
   *grid** array. For example, if the longest word is "Computer" with eight letters, the **grid** array would be
   initialized to a 8x8 square array. You can assume that the number is words in the String array will be less than or
@@ -31,7 +32,7 @@ class in this question. More details below.
   array `["VOLLEYBALL", "BASKETBALL", "SOCCER", "SWIMMING", "SKIING"]`, the **grid** would be initialized to:
 
   | Grid | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
-            |-------|---|---|---|---|---|---|---|---|---|---|
+                  |-------|---|---|---|---|---|---|---|---|---|---|
   | Row 0 | V | O | L | L | E | Y | B | A | L | L |
   | Row 1 | B | A | S | K | E | T | B | A | L | L |
   | Row 2 | S | O | C | C | E | R | * | * | * | * |
@@ -51,11 +52,13 @@ class in this question. More details below.
 - A method that returns nothing and is not accessible to other classes called `insertHorizontally`.
 - This method must accept a **word** of type `string` and **index** of type `int` as parameters.
 - The method places the **word** in the row of the **grid** array matching the input **index**.
+- Assume all the letters in the **word** are uppercase.
 
 #### Random Fill
 
 - A method that returns nothing and is not accessible from other classes called `randomFill`
 - This method initializes all indices of the **grid** attribute which do not already have a letter to a random letter.
+- Assume that all letters are uppercase English letters.
 
 #### To String
 

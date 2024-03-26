@@ -36,12 +36,12 @@ public class MainTest {
     }
 
     private static Stream<Arguments> constructorInputProvider() {
-        return Stream.of(Arguments.of("George", 15.234), Arguments.of("Mazda zooooom", 3412.23), Arguments.of("Fiat 500", 0.00));
+        return Stream.of(Arguments.of(new String[]{"AWD", "AWD"}, new char[][]{{'A', 'W', 'D'}, {'A', 'W', 'D'}}));
     }
 
     @ParameterizedTest
     @MethodSource("constructorInputProvider")
-    public void wordSearchClassHasRequiredConstructor(String[] words, char[][] expectedGrid) throws Throwable {
+    public void wordSearchClassHasRequiredConstructor(String[] words, int expectedGridLength) throws Throwable {
         /* Check Constructor Definition */
         String missingConstructor = "Your %s class is missing a required constructor. Make sure it has the correct parameters in the specified order.";
         String incorrectModifier = "The constructor in your %s class does not have the correct visibility modifier.";
@@ -54,8 +54,27 @@ public class MainTest {
         String incorrectArray = "Your %s constructor does not initialize the %s array to the correct value. Make sure each item is spelt correctly and it is in the order as listed in the question text.";
         Object[][] constructorArguments = {{words, String[][].class}};
         Object wordSearchInstance = wordSearch.createInstance(constructorArguments);
-        wordSearch.getFieldValue(wordSearchInstance, arrayAttributeName);
+
+        /* Check if the size of the grid is correct */
         assertTrue(wordSearch.hasField(arrayAttributeName, char[][].class), String.format(incorrectTypeMessage, arrayAttributeName));
-        assertEquals();
+        char[][] grid = (char[][]) wordSearch.getFieldValue(wordSearchInstance, arrayAttributeName);
+        assertEquals(expectedGridLength, grid.length, String.format("Your %s array does not have the correct number of rows", arrayAttributeName));
+        for (int i = 0; i < expectedGridLength; i++)
+            assertEquals(expectedGridLength, grid[i].length, String.format("Your %s array does not have the correct number of columns in each row.", arrayAttributeName));
+
+        /* Check that each word was inserted correctly */
+        String incorrectWordInsertionMessage = String.format("Your %s constructor does not correctly insert the input String array into the %s.", wordSearchClassName, arrayAttributeName);
+        for (int i = 0; i < words.length; i++) {
+            String gridWord = new String(grid[i]).substring(0, words[i].length());
+            assertEquals(words[i], gridWord, incorrectWordInsertionMessage);
+        }
+
+        /* Check that all remaining characters are uppercase letters */
+        for(int i = 0; i < expectedGridLength; i++) {
+            for (int j = words[i].length(); j < expectedGridLength; j++) {
+                char c = grid[i][j];
+                assertTrue(Character.isAlphabetic(c) && Character.isUpperCase(c));
+            }
+        }
     }
 }
