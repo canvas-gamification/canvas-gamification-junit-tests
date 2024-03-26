@@ -22,12 +22,21 @@ public class MainTest {
     // Java
 
     private final String className = "Farm";
-    private final String staticAttributeName = "foodDonation";
+    private final String staticAttributeName = "foodInSilo";
     private final String attributeName1 = "amountPerAnimal";
     private final String attributeName2 = "numAnimals";
     private final String methodName1 = "foodNeeded";
-    private final String methodName2 = "receiveDonation";
-    private final String testClassName = "TestDonation";
+    private final String methodName2 = "feedAnimals";
+    private final String testClassName = "TestFeeding";
+    private final String printOutput1 = "Animals fed and happy";
+    private final String printOutput2 = "We need to buy more food";
+    private final double amount1 = 0.5;
+    private final int num1 = 10;
+    private final double amount2 = 0.2;
+    private final int num2 = 20;
+    private final double amount3 = 1.0;
+    private final int num3 = 50;
+
     private final static double initialBeams = 50;
 
     private ObjectTest testClass;
@@ -42,7 +51,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(1)
+    @Order(2)
     public void farmHasRequiredAttributes() {
         String missingAttributeMessage = "The %s class is missing the %s attribute. Make sure that the class contains the attribute and it is spelt correctly.";
         String wrongTypeMessage = "The %s attribute in the %s class has the wrong type.";
@@ -60,7 +69,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(2)
+    @Order(3)
     public void farmHasRequiredConstructor() {
         String missingConstructorMessage = "The %s class is missing a required constructor. Make sure that it is named correctly and has the correct parameters.";
         String wrongAccessModifier = "The %s class constructor has the wrong visibility modifier. Make sure that it is visible from all other classes.";
@@ -70,7 +79,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(3)
+    @Order(1)
     @Tag("dependency1")
     public void staticVariableIsInitializedCorrectly() {
         _assertEquals(initialBeams, testClass.getFieldValue(null, staticAttributeName),
@@ -107,17 +116,6 @@ public class MainTest {
         _assertEquals(value2, testClass.getFieldValue(checkupInstance, attributeName2), String.format(wrongValueMessage, className, attributeName2));
     }
 
-    @Test
-    @Order(5)
-    public void receiveDonationIsDefinedCorrectly() {
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(methodName2, null), String.format(incorrectMethodDefinition, methodName2, className));
-        assertTrue(testClass.hasModifier(methodName2, null, "public"), String.format(incorrectModifierMessage, methodName2, className));
-        assertTrue(testClass.hasReturnType(methodName2, null, Void.TYPE), String.format(incorrectReturnType, methodName2, className));
-    }
-
     @ParameterizedTest
     @MethodSource("inputProvider")
     @Tag("dependency1")
@@ -138,16 +136,17 @@ public class MainTest {
         Clause[] testSentence;
         if (value1 * value2 <= value3) {
             testSentence = new Clause[]{
-                    new StringLiteral("Thank you for your donation."),
+                    new StringLiteral(printOutput1),
                     new Optional(new StringLiteral(" "))
             };
         } else {
             testSentence = new Clause[]{
-                    new StringLiteral("Thank you, but there is not enough for everyone here."),
+                    new StringLiteral(printOutput2),
                     new Optional(new StringLiteral(" "))
             };
         }
-        testClass.callMethod(methodName2, classInstance, testSentence);
+        testClass.callMethod(methodName2, classInstance, testSentence,
+                "Your " + methodName2 + " method does not print the correct output.");
         if (value1 * value2 <= value3) {
             _assertEquals(value3 - value1 * value2, testClass.getFieldValue(null, staticAttributeName),
                     "Your " + methodName2 + " method does not correctly change the value of " + staticAttributeName + " attribute.");
@@ -158,22 +157,17 @@ public class MainTest {
         testClass.setFieldValue(null, initialBeams, staticAttributeName);
     }
 
-    @Test
-    @Order(7)
-    public void foodNeededIsDefinedCorrectly() {
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    @Tag("dependency1")
+    @Order(8)
+    public void farmClassHasCorrectFoodNeededMethod(double value1, int value2) throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(methodName1, null), String.format(incorrectMethodDefinition, methodName1, className));
         assertTrue(testClass.hasModifier(methodName1, null, "public"), String.format(incorrectModifierMessage, methodName1, className));
         assertTrue(testClass.hasReturnType(methodName1, null, double.class), String.format(incorrectReturnType, methodName1, className));
-    }
-
-    @ParameterizedTest
-    @MethodSource("inputProvider")
-    @Tag("dependency1")
-    @Order(8)
-    public void farmClassHasCorrectFoodNeededMethod(double value1, int value2) throws Throwable {
         Object[][] constructorArgs = {
                 {value1, double.class},
                 {value2, int.class}
@@ -190,34 +184,34 @@ public class MainTest {
     public void correctMainMethod() throws Throwable {
         double temp = initialBeams;
         Clause[] clauses = new Clause[8];
-        if (temp >= 0.5 * 10) {
-            temp -= 0.5 * 10;
-            clauses[0] = new StringLiteral("Thank you for your donation.");
+        if (temp >= amount1 * num1) {
+            temp -= amount1 * num1;
+            clauses[0] = new StringLiteral(printOutput1);
         } else {
-            clauses[0] = new StringLiteral("Thank you, but there is not enough for everyone here.");
+            clauses[0] = new StringLiteral(printOutput2);
         }
         clauses[1] = new Optional(new StringLiteral(" "));
         clauses[2] = new NewLine();
 
-        if (temp >= 0.2 * 20) {
-            temp -= 0.2 * 20;
-            clauses[3] = new StringLiteral("Thank you for your donation.");
+        if (temp >= amount2 * num2) {
+            temp -= amount2 * num2;
+            clauses[3] = new StringLiteral(printOutput1);
         } else {
-            clauses[3] = new StringLiteral("Thank you, but there is not enough for everyone here.");
+            clauses[3] = new StringLiteral(printOutput2);
         }
         clauses[4] = new Optional(new StringLiteral(" "));
         clauses[5] = new NewLine();
 
-        if (temp >= 1 * 50) {
-            temp -= 1 * 50;
-            clauses[6] = new StringLiteral("Thank you for your donation.");
+        if (temp >= amount3 * num3) {
+            temp -= amount3 * num3;
+            clauses[6] = new StringLiteral(printOutput1);
         } else {
-            clauses[6] = new StringLiteral("Thank you, but there is not enough for everyone here.");
+            clauses[6] = new StringLiteral(printOutput2);
         }
         clauses[7] = new Optional(new StringLiteral(" "));
         Object classInstance = classObject.createInstance();
         classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance,
                 clauses,
-                "Your " + testClassName + " class main method does not print the correct output.");
+                "Your " + testClassName + " class main method does not print the correct output");
     }
 }

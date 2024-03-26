@@ -1,7 +1,7 @@
 package oop.static_modifier.hard.q6;
 
 public class Farm {
-    private static double foodDonation = 50;
+    private static double foodInSilo = 50;
     private double amountPerAnimal;
     private int numAnimals;
 
@@ -14,12 +14,12 @@ public class Farm {
         return numAnimals * amountPerAnimal;
     }
 
-    public void receiveDonation() {
-        if (foodDonation >= foodNeeded()) {
-            foodDonation -= foodNeeded();
-            System.out.println("Thank you for your donation.");
+    public void feedAnimals() {
+        if (foodInSilo >= foodNeeded()) {
+            foodInSilo -= foodNeeded();
+            System.out.println("Animals fed and happy");
         } else {
-            System.out.println("Thank you, but there is not enough for everyone here.");
+            System.out.println("We need to buy more food");
         }
     }
 }
