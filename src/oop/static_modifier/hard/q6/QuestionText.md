@@ -27,9 +27,9 @@ Your `Farm` class must have the following requirements:
       amount available in the **foodInSilo** variable, and subtract it from available food. If there is not enough
       food it should print "We need to buy more food." and subtract nothing.
 
-## TestDonation Class
+## TestFeeding Class
 
-Your `TestDontion` class must have the following items:
+Your `TestFeeding` class must have the following items:
 
 - Main method:
     - A `main` method which initializes 3 `Farm` objects with the following **amountPerAnimal** amounts in order:
