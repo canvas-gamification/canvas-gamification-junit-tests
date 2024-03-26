@@ -7,8 +7,8 @@
 Your `Farm` class must have the following requirements:
 
 - Attributes:
-    - A _static_ `double` called **foodDonation**. This represents the total number of food available for
-      donation to `Farm` objects, and should be set initially to 50 without having to call the constructor. Note that
+    - A _static_ `double` called **foodInSilo**. This represents the total number of food available in the silo for 
+    `Farm` objects, and should be set initially to 50 without having to call the constructor. Note that
       it should not be visible from other classes.
     - A `double` called **amountPerAnimal** which is the amount of the food needed for each animal. Note that it should
       not be visible from other classes.
