@@ -23,9 +23,9 @@ Your `Farm` class must have the following requirements:
     - Note that all methods in this class should be visible from another class
     - A `foodNeeded` method which returns a `double` equal to the value of **amountPerAnimal** times **numAnimals**
       which represents the total amount of food needed by the `Farm` object.
-    - A `receiveDonation` method which prints "Thank you for your donation." if the total food needed is less than the
-      amount available for donation, **foodDonation** value and subtract it from available food, and prints "Thank you,
-      but there is not enough for everyone here." otherwise.
+    - A `feedAnimals` method which prints "Animals fed and happy." if the total food needed is less than the
+      amount available in the **foodInSilo** variable, and subtract it from available food. If there is not enough
+      food it should print "We need to buy more food." and subtract nothing.
 
 ## TestDonation Class
 
