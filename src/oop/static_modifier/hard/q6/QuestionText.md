@@ -34,6 +34,6 @@ Your `TestFeeding` class must have the following items:
 - Main method:
     - A `main` method which initializes 3 `Farm` objects with the following **amountPerAnimal** amounts in order:
       0.5, 0.2, 1 and following **numAnimals** numbers in order: 10, 20, 50. Then in a loop from first to third farm
-      it should try to donate food by printing "Try to donate here... " and using **recieveDonation** method until there
+      it should try to donate food by printing "Try to feed animals here... " and using **recieveDonation** method until there
       can not be any food donated. Then it should print "There is no more food left today.". All prints are in separate lines.
   
