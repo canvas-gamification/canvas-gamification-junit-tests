@@ -158,9 +158,7 @@ public class MainTest {
         }
     }
 
-    @RepeatedTest(4)
-    public void wordSearchRandomFillInsertsRandomLetters() throws Throwable {
-        RandomChar randomChar = new RandomChar('A', 'Z', true);
+    public void randomFillAsserts() {
         String incorrectDefinition = "Your %s class is missing the %s method. Make sure it is defined, spelt correctly, and has the correct parameters.";
         String incorrectModifier = "The %s method does not have the correct visibility modifier.";
         String incorrectReturnType = "The %s method does not have the correct return type.";
@@ -171,9 +169,15 @@ public class MainTest {
         assertTrue(wordSearch.hasReturnType(fillMethodName, null, Void.TYPE),
                 String.format(incorrectReturnType, fillMethodName));
 
+    }
+
+    @RepeatedTest(4)
+    public void wordSearchRandomFillInsertsRandomLetters() throws Throwable {
+        randomFillAsserts();
         Object[][] constructorArguments = {{new String[]{"ONE"}, String[].class}};
         Object wordSearchInstance = wordSearch.createInstance(constructorArguments);
 
+        RandomChar randomChar = new RandomChar('A', 'Z', true);
         ArrayList<Character> randomChars = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             char[][] startingArray = new char[20][20];
@@ -194,37 +198,26 @@ public class MainTest {
         assertTrue(isRandom, String.format(randomValuesMessage, fillMethodName, arrayAttributeName));
     }
 
-    // TODO: Add test for random letter insertion
-    private static Stream<Arguments> randomInsertionInputProvider() {
+    private static Stream<char[][]> randomInsertionInputProvider() {
         char b = (char) 0;
-        char[][] x = new char[][]{
+        char[][] case1 = new char[][]{
                 {'A', b, 'B', 'Z', 'J'},
                 {b, 'Y', 'P', 'Q', 'D'},
                 {'T', 'F', 'V', b, b},
                 {'N', 'M', b, 'W', 'X'},
                 {'F', 'J', 'S', b, 'R'}
         };
-        return Stream.of(
-                Arguments.of("VOLLEYBALL", 0, 10, true),
-                Arguments.of("COMPUTER", 8, 8, false),
-                Arguments.of("COMPUTER", 7, 8, true),
-                Arguments.of("LEAST", 1, 4, false),
-                Arguments.of("TEST", 2, 5, true),
-                Arguments.of("A", 8, 20, true)
-        );
+        char[][] case2 = new char[12][12];
+        for (int i = 0; i < 12; i++) {
+            Arrays.fill(case2[i], b);
+        }
+        return Stream.of(case1, case2);
     }
 
     @ParameterizedTest
     @MethodSource("randomInsertionInputProvider")
     public void wordSearchRandomFillOnlyReplacesCorrectCharacters() throws Throwable {
-        char b = (char) 0;
-        char[][] x = new char[][]{
-                {'A', b, 'B', 'Z', 'J'},
-                {b, 'Y', 'P', 'Q', 'D'},
-                {'T', 'F', 'V', b, b},
-                {'N', 'M', b, 'W', 'X'},
-                {'F', 'J', 'S', b, 'R'}
-        };
+        randomFillAsserts();
     }
 
     // TODO: Add test for toString
