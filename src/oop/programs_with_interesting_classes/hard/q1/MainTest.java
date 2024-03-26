@@ -3,12 +3,17 @@ package oop.programs_with_interesting_classes.hard.q1;
 import global.ObjectTest;
 import global.variables.clauses.RandomChar;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
@@ -153,7 +158,7 @@ public class MainTest {
         }
     }
 
-    @Test
+    @RepeatedTest(4)
     public void wordSearchRandomFillInsertsRandomLetters() throws Throwable {
         RandomChar randomChar = new RandomChar('A', 'Z', true);
         String incorrectDefinition = "Your %s class is missing the %s method. Make sure it is defined, spelt correctly, and has the correct parameters.";
@@ -169,11 +174,36 @@ public class MainTest {
         Object[][] constructorArguments = {{new String[]{"ONE"}, String[].class}};
         Object wordSearchInstance = wordSearch.createInstance(constructorArguments);
 
-//        randomChar.validateRandom()
+        ArrayList<Character> randomChars = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            char[][] startingArray = new char[20][20];
+            wordSearch.setFieldValue(wordSearchInstance, startingArray, arrayAttributeName);
+            wordSearch.callMethod(fillMethodName, wordSearchInstance);
+            char[][] grid = (char[][]) wordSearch.getFieldValue(wordSearchInstance, arrayAttributeName);
+            List<Character> charList = Arrays.stream(grid)
+                    // Convert each char[] to a Character stream
+                    .flatMapToInt(row -> new String(row).chars())
+                    // Convert int stream (char) to a stream of Character
+                    .mapToObj(j -> (char) j)
+                    // Collect the elements into a list
+                    .collect(Collectors.toList());
+            randomChars.addAll(charList);
+        }
+        boolean isRandom = randomChar.validateRandom(randomChars);
+        String randomValuesMessage = "Your %s method does not fill the spaces in the %s array with random uppercase letters.";
+        assertTrue(isRandom, String.format(randomValuesMessage, fillMethodName, arrayAttributeName));
     }
 
     // TODO: Add test for random letter insertion
     private static Stream<Arguments> randomInsertionInputProvider() {
+        char b = (char) 0;
+        char[][] x = new char[][]{
+                {'A', b, 'B', 'Z', 'J'},
+                {b, 'Y', 'P', 'Q', 'D'},
+                {'T', 'F', 'V', b, b},
+                {'N', 'M', b, 'W', 'X'},
+                {'F', 'J', 'S', b, 'R'}
+        };
         return Stream.of(
                 Arguments.of("VOLLEYBALL", 0, 10, true),
                 Arguments.of("COMPUTER", 8, 8, false),
@@ -184,6 +214,18 @@ public class MainTest {
         );
     }
 
+    @ParameterizedTest
+    @MethodSource("randomInsertionInputProvider")
+    public void wordSearchRandomFillOnlyReplacesCorrectCharacters() throws Throwable {
+        char b = (char) 0;
+        char[][] x = new char[][]{
+                {'A', b, 'B', 'Z', 'J'},
+                {b, 'Y', 'P', 'Q', 'D'},
+                {'T', 'F', 'V', b, b},
+                {'N', 'M', b, 'W', 'X'},
+                {'F', 'J', 'S', b, 'R'}
+        };
+    }
 
     // TODO: Add test for toString
 }
