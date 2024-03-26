@@ -19,10 +19,9 @@ class in this question. More details below.
 - The constructor must be visible from another class.
 - This constructor must accept an array of strings to use as the words in the crossword puzzle.
 - Using the input array, the constructor should find the longest word and use the length to initialize the *
-  *grid**
-  array. For example, if the longest word is "Computer" with eight letters, the **grid** array would be
-  initialized
-  to a 8x8 square array.
+  *grid** array. For example, if the longest word is "Computer" with eight letters, the **grid** array would be
+  initialized to a 8x8 square array. You can assume that the number is words in the String array will be less than or
+  equal to the grid size (if your grid size should be eight, there will be at most eight words in the array).
 - Then, sequentially insert the words into the **grid** array horizontally, with the word at index 0 going
   horizontally into the row at index zero, the word at index 1 going into the row at index 1, and so on. Use
   the `insertHorizontally` method described below to do this.
@@ -32,7 +31,7 @@ class in this question. More details below.
   array `["VOLLEYBALL", "BASKETBALL", "SOCCER", "SWIMMING", "SKIING"]`, the **grid** would be initialized to:
 
   | Grid | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
-        |-------|---|---|---|---|---|---|---|---|---|---|
+            |-------|---|---|---|---|---|---|---|---|---|---|
   | Row 0 | V | O | L | L | E | Y | B | A | L | L |
   | Row 1 | B | A | S | K | E | T | B | A | L | L |
   | Row 2 | S | O | C | C | E | R | * | * | * | * |
@@ -62,7 +61,7 @@ class in this question. More details below.
 
 - A `toString` method which prints out the values in the **grid** array. Each row of the array should be printed on a
   separate line and the characters in a row should have spaces in between them (a space at the end of the row is
-  optional). 
+  optional).
 - ```
   Sample output:
   C A T
