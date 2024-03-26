@@ -17,9 +17,12 @@ public class WordSearch {
         randomFill();
     }
 
-    private void insertHorizontally(String word, int row) {
+    public boolean insertHorizontally(String word, int row) {
+        if (grid.length < row || word.length() > grid[row].length)
+            return false;
         for (int i = 0; i < word.length(); i++)
             grid[row][i] = word.charAt(i);
+        return true;
     }
 
     private void randomFill() {

@@ -23,6 +23,7 @@ class in this question. More details below.
   *grid** array. For example, if the longest word is "Computer" with eight letters, the **grid** array would be
   initialized to a 8x8 square array. You can assume that the number is words in the String array will be less than or
   equal to the grid size (if your grid size should be eight, there will be at most eight words in the array).
+- If the array is empty, then initialize the **grid** with size zero.
 - Then, sequentially insert the words into the **grid** array horizontally, with the word at index 0 going
   horizontally into the row at index zero, the word at index 1 going into the row at index 1, and so on. Use
   the `insertHorizontally` method described below to do this.
@@ -32,7 +33,7 @@ class in this question. More details below.
   array `["VOLLEYBALL", "BASKETBALL", "SOCCER", "SWIMMING", "SKIING"]`, the **grid** would be initialized to:
 
   | Grid | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
-                  |-------|---|---|---|---|---|---|---|---|---|---|
+                        |-------|---|---|---|---|---|---|---|---|---|---|
   | Row 0 | V | O | L | L | E | Y | B | A | L | L |
   | Row 1 | B | A | S | K | E | T | B | A | L | L |
   | Row 2 | S | O | C | C | E | R | * | * | * | * |
@@ -49,9 +50,13 @@ class in this question. More details below.
 
 #### Insert Horizontally
 
-- A method that returns nothing and is not accessible to other classes called `insertHorizontally`.
+- A method that returns a boolean and is accessible to other classes called `insertHorizontally`.
 - This method must accept a **word** of type `string` and **index** of type `int` as parameters.
 - The method places the **word** in the row of the **grid** array matching the input **index**.
+- Before placing the **word**, the method should check to see if the **word** is longer than the **row** it is being
+  inserted into. It should also check that the **index** passed is not out of bounds for the **grid**. If either of
+  these conditions are not satisfied, the **grid** should not be modified and the method returns `false`.
+- If the insertion can be completed, after inserting thr word the method must return `true`.
 - Assume all the letters in the **word** are uppercase.
 
 #### Random Fill
