@@ -1,6 +1,7 @@
 package oop.programs_with_interesting_classes.hard.q1;
 
 import global.ObjectTest;
+import global.variables.clauses.RandomChar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,6 +20,7 @@ public class MainTest {
     private final String arrayAttributeName = "grid";
     private final String incorrectTypeMessage = "Your %s attribute does not have the correct type.";
     private final String insertMethodName = "insertHorizontally";
+    private final String fillMethodName = "randomFill";
 
     @BeforeEach
     public void setUp() {
@@ -88,23 +90,20 @@ public class MainTest {
         }
     }
 
-    // TODO: Add test cases for insert method
     private static Stream<Arguments> insertInputProvider() {
         return Stream.of(
-                Arguments.of(
-                        new String[]{"VOLLEYBALL", "BASKETBALL", "SOCCER", "SWIMMING", "SKIING"},
-                        10
-                ),
-                Arguments.of(
-                        new String[]{},
-                        0
-                )
+                Arguments.of("VOLLEYBALL", 0, 10, true),
+                Arguments.of("COMPUTER", 8, 8, false),
+                Arguments.of("COMPUTER", 7, 8, true),
+                Arguments.of("LEAST", 1, 4, false),
+                Arguments.of("TEST", 2, 5, true),
+                Arguments.of("A", 8, 20, true)
         );
     }
 
     @ParameterizedTest
     @MethodSource("insertInputProvider")
-    public void wordSearchHasCorrectInsertHorizontallyMethod(String wordToInsert, int rowToInsert, int gridSize) throws Throwable {
+    public void wordSearchHasCorrectInsertHorizontallyMethod(String wordToInsert, int rowToInsert, int gridSize, boolean shouldSucceed) throws Throwable {
         /* Check that the method exists and is declared correctly */
         String incorrectDefinition = "Your %s class is missing the %s method. Make sure it is defined, spelt correctly, and has the correct parameters.";
         String incorrectModifier = "The %s method does not have the correct visibility modifier.";
@@ -135,18 +134,18 @@ public class MainTest {
 
         /* Check if word is inserted correctly or false returned if the word is too long */
         Object[][] insertInput = {{wordToInsert, String.class}, {rowToInsert, int.class}};
-        Object result = wordSearch.callMethod(insertMethodName, insertInput);
+        Object result = wordSearch.callMethod(insertMethodName, insertInput, wordSearchInstance);
         String gridMessage;
-        if (rowToInsert > gridSize || wordToInsert.length() > gridSize) {
-            String invalidInsertInput = "Your %s method does not correctly detect invalid input.";
-            _assertEquals(false, result, String.format(invalidInsertInput, insertMethodName));
-            gridMessage = "Your %s method should not modify the %s when the method input is invalid.";
-        } else {
+        if (shouldSucceed) {
             String invalidInsertInput = "Your %s method returned false when the insert should have been successful.";
             _assertEquals(true, result, String.format(invalidInsertInput, insertMethodName));
             gridMessage = "Your %s method does not correctly insert the input string into the %s. Make sure it is inserted into the correct location and no other values are modified.";
-            String insertResult = wordToInsert + "A".repeat(wordToInsert.length() - gridSize);
+            String insertResult = wordToInsert + "A".repeat(gridSize - wordToInsert.length());
             expectedGrid[rowToInsert] = insertResult.toCharArray();
+        } else {
+            String invalidInsertInput = "Your %s method does not correctly detect invalid input.";
+            _assertEquals(false, result, String.format(invalidInsertInput, insertMethodName));
+            gridMessage = "Your %s method should not modify the %s when the method input is invalid.";
         }
         char[][] grid = (char[][]) wordSearch.getFieldValue(wordSearchInstance, arrayAttributeName);
         for (int i = 0; i < gridSize; i++) {
@@ -154,7 +153,37 @@ public class MainTest {
         }
     }
 
+    @Test
+    public void wordSearchRandomFillInsertsRandomLetters() throws Throwable {
+        RandomChar randomChar = new RandomChar('A', 'Z', true);
+        String incorrectDefinition = "Your %s class is missing the %s method. Make sure it is defined, spelt correctly, and has the correct parameters.";
+        String incorrectModifier = "The %s method does not have the correct visibility modifier.";
+        String incorrectReturnType = "The %s method does not have the correct return type.";
+        assertTrue(wordSearch.hasMethod(fillMethodName, null),
+                String.format(incorrectDefinition, wordSearchClassName, fillMethodName));
+        assertTrue(wordSearch.hasModifier(fillMethodName, null, "private"),
+                String.format(incorrectModifier, fillMethodName));
+        assertTrue(wordSearch.hasReturnType(fillMethodName, null, Void.TYPE),
+                String.format(incorrectReturnType, fillMethodName));
+
+        Object[][] constructorArguments = {{new String[]{"ONE"}, String[].class}};
+        Object wordSearchInstance = wordSearch.createInstance(constructorArguments);
+
+//        randomChar.validateRandom()
+    }
+
     // TODO: Add test for random letter insertion
+    private static Stream<Arguments> randomInsertionInputProvider() {
+        return Stream.of(
+                Arguments.of("VOLLEYBALL", 0, 10, true),
+                Arguments.of("COMPUTER", 8, 8, false),
+                Arguments.of("COMPUTER", 7, 8, true),
+                Arguments.of("LEAST", 1, 4, false),
+                Arguments.of("TEST", 2, 5, true),
+                Arguments.of("A", 8, 20, true)
+        );
+    }
+
 
     // TODO: Add test for toString
 }

@@ -18,7 +18,7 @@ public class WordSearch {
     }
 
     public boolean insertHorizontally(String word, int row) {
-        if (grid.length < row || word.length() > grid[row].length)
+        if (grid.length <= row || word.length() > grid[row].length)
             return false;
         for (int i = 0; i < word.length(); i++)
             grid[row][i] = word.charAt(i);
