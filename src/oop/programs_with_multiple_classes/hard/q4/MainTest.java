@@ -16,7 +16,6 @@ import java.util.stream.Stream;
 import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class MainTest {
     // Java
@@ -120,7 +119,7 @@ public class MainTest {
      * Bookcase tests
      **/
     @Test
-    public void bookcaseClassHasCorrectAttributes() throws Throwable {
+    public void bookcaseClassHasCorrectAttributes() {
         String missingFieldMessage = "The %s class is missing the %s attribute. Make sure that the class contains the attribute and that it is spelled correctly.";
         String incorrectFieldTypeMessage = "The %s class's %s attribute does not have the correct type.";
         String incorrectFieldModifierMessage = "The %s class's %s attribute does not have the correct visibility modifier.";
@@ -128,39 +127,20 @@ public class MainTest {
         assertTrue(bookcase.hasField(sizeCapacity, int.class), String.format(incorrectFieldTypeMessage, bookcaseClass, sizeCapacity));
         assertTrue(bookcase.hasModifier(sizeCapacity, "private"), String.format(incorrectFieldModifierMessage, bookcaseClass, sizeCapacity));
 
-        try {
-            Object[][] arguments = new Object[][]{
-                    {0, int.class},
-                    {"type", String.class}
-            };
-            book.createInstance(arguments);
-        } catch (Error e) {
-            fail("Your program does not contain the " + bookClass + " class.");
-        }
-
         assertTrue(bookcase.hasField(books), String.format(missingFieldMessage, bookcaseClass, books));
-        assertTrue(bookcase.hasField(books, Book[].class), String.format(incorrectFieldTypeMessage, bookcaseClass, books));
+        assertTrue(bookcase.hasField(books, book.getObjectArrayClass()), String.format(incorrectFieldTypeMessage, bookcaseClass, books));
         assertTrue(bookcase.hasModifier(books, "private"), String.format(incorrectFieldModifierMessage, bookcaseClass, books));
     }
 
     @Test
-    public void bookcaseClassHasCorrectConstructors() throws Throwable {
+    public void bookcaseClassHasCorrectConstructors() {
         String missingConstructorMessage = "Your " + bookcaseClass + " class does not have a required constructor.";
         String incorrectConstructorModifierMessage =
                 "Your " + bookcaseClass + " class constructor does not have the correct visibility modifier.";
-        try {
-            Object[][] arguments = new Object[][]{
-                    {0, int.class},
-                    {"type", String.class}
-            };
-            book.createInstance(arguments);
-        } catch (Error e) {
-            fail("Your program does not contain the " + bookClass + " class.");
-        }
 
         Class<?>[] constructorClasses = new Class[]{
                 int.class,
-                Book[].class
+                book.getObjectArrayClass()
         };
         assertTrue(bookcase.hasConstructor(constructorClasses), missingConstructorMessage);
         assertTrue(bookcase.hasModifier(constructorClasses, "public"), incorrectConstructorModifierMessage);
@@ -178,24 +158,13 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("bookcaseInputProvider")
     public void bookcaseConstructorInitializesValuesCorrectly(int sizeCapacity, int year, String type) throws Throwable {
-
-        try {
-            Object[][] arguments = new Object[][]{
-                    {year, int.class},
-                    {type, String.class}
-            };
-            book.createInstance(arguments);
-        } catch (Error e) {
-            fail(bookClass + " object could not be created to be passed to " + bookcaseClass + ". Ensure your " +
-                    bookClass + " class's constructor exists and has the correct parameters.");
-        }
-
-        Book[] booksHold = new Book[]{new Book(year, type), new Book(year, type), new Book(year, type)};
+        Object[] booksHold = (Object[]) book.createArray(3, new Object[][]{{year, int.class}, {type, String.class}});
 
         Object[][] arguments = new Object[][]{
                 {sizeCapacity, int.class},
-                {booksHold, Book[].class}
+                {booksHold, book.getObjectArrayClass()}
         };
+
         Object bookcaseInstance = bookcase.createInstance(arguments);
         _assertEquals(sizeCapacity, bookcase.getFieldValue(bookcaseInstance, this.sizeCapacity),
                 "Your " + bookcaseClass + " constructor does not correctly initialize the " + this.sizeCapacity + " attribute.");
@@ -217,44 +186,32 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("setBooksInputProvider")
     public void correctSetBooksMethod(int size, int[] bookPlacement) throws Throwable {
-        try {
-            Object[][] arguments = new Object[][]{
-                    {6, int.class},
-                    {"type", String.class}
-            };
-            book.createInstance(arguments);
-        } catch (Error e) {
-            fail(bookClass + " object could not be created to be passed to " + bookcaseClass + ". Ensure your " +
-                    bookClass + " class's constructor exists and has the correct parameters.");
-        }
-
-        Book[] booksHold = new Book[size];
-        for (int x = 0; x < size; x++) {
-            booksHold[x] = new Book(0, "type");
-        }
+        Object[] booksHold = (Object[]) book.createArray(size, new Object[][]{{0, int.class}, {"type", String.class}});
 
         Object[][] arguments = new Object[][]{
                 {size, int.class},
-                {booksHold, Book[].class}
+                {booksHold, book.getObjectArrayClass()}
         };
         Object bookcaseInstance = bookcase.createInstance(arguments);
 
-        Book[] givenBooks = new Book[size];
-        Book[] endingBooks = new Book[size];
+        Object[] givenBooks = (Object[]) book.createArray(size);
+        Object[] endingBooks = (Object[]) book.createArray(size);
         for (int x = 0; x < size; x++) {
-            Book b = new Book(5, "test");
-            givenBooks[x] = b;
-            endingBooks[x] = b;
+            if (bookPlacement[x] == 1) {
+                Object b = book.createInstance(new Object[][]{{5, int.class}, {"test", String.class}});
+                givenBooks[x] = b;
+                endingBooks[x] = b;
+            }
         }
 
-        assertTrue(bookcase.hasMethod(setBooks, new Class[]{Book[].class}),
+        assertTrue(bookcase.hasMethod(setBooks, new Class[]{book.getObjectArrayClass()}),
                 String.format("Your %s class is missing the method %s.", bookcaseClass, setBooks));
-        assertTrue(bookcase.hasMethod(setBooks, new Class[]{Book[].class}, void.class),
+        assertTrue(bookcase.hasMethod(setBooks, new Class[]{book.getObjectArrayClass()}, void.class),
                 String.format("Your %s class %s method does not have the correct return type.", bookcaseClass, setBooks));
-        assertTrue(bookcase.hasMethod(setBooks, new Class[]{Book[].class}, void.class, new String[]{"public"}),
+        assertTrue(bookcase.hasMethod(setBooks, new Class[]{book.getObjectArrayClass()}, void.class, new String[]{"public"}),
                 String.format("Your %s class %s method does not have the correct visibility modifier.", bookcaseClass, setBooks));
 
-        bookcase.callMethod(setBooks, new Object[][]{{givenBooks, Book[].class}}, new String[]{"public"}, bookcaseInstance);
+        bookcase.callMethod(setBooks, new Object[][]{{givenBooks, book.getObjectArrayClass()}}, new String[]{"public"}, bookcaseInstance);
 
         _assertArrayEquals(endingBooks, bookcase.getFieldValue(bookcaseInstance, books),
                 "Your " + setBooks + " method does not correctly set the " + books + " attribute.");
@@ -273,22 +230,11 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("sellBookInputProvider")
     public void correctSellBookMethod(int size, int year, boolean tooOldToSell, int[] bookPlacement, int index) throws Throwable {
-        try {
-            Object[][] arguments = new Object[][]{
-                    {6, int.class},
-                    {"type", String.class}
-            };
-            book.createInstance(arguments);
-        } catch (Error e) {
-            fail(bookClass + " object could not be created to be passed to " + bookcaseClass + ". Ensure your " +
-                    bookClass + " class's constructor exists and has the correct parameters.");
-        }
-
-        Book[] booksGiven = new Book[size];
-        Book[] result = new Book[size];
+        Object[] booksGiven = (Object[]) book.createArray(size);
+        Object[] result = (Object[]) book.createArray(size);
         for (int x = 0; x < size; x++) {
             if (bookPlacement[x] == 1) {
-                Book b = new Book(year, "type");
+                Object b = book.createInstance(new Object[][]{{year, int.class}, {"type", String.class}});
                 booksGiven[x] = b;
                 result[x] = b;
                 if (x == index & !tooOldToSell) {
@@ -299,7 +245,7 @@ public class MainTest {
 
         Object[][] arguments = new Object[][]{
                 {size, int.class},
-                {booksGiven, Book[].class}
+                {booksGiven, book.getObjectArrayClass()}
         };
         Object bookcaseInstance = bookcase.createInstance(arguments);
 
