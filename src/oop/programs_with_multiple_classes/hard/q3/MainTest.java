@@ -124,13 +124,20 @@ public class MainTest {
                 String.format(incorrectIncrementBookCount, bookMethodName, this.count));
         assertEquals(count + incrementAmount, book.getFieldValue(bookInstance, "count"),
                 String.format(incorrectIncrementBookCount, bookMethodName, this.count));
+
+        //Checking if it works with multiple method calls
+        output = book.callMethod(bookMethodName, new String[]{"public"}, bookInstance);
+        assertEquals(count + incrementAmount + 1, output,
+                String.format(incorrectIncrementBookCount, bookMethodName, this.count));
+        assertEquals(count + incrementAmount + 1, book.getFieldValue(bookInstance, "count"),
+                String.format(incorrectIncrementBookCount, bookMethodName, this.count));
     }
 
     /**
      * Bookcase tests
      **/
     @Test
-    public void bookcaseClassHasCorrectAttributes() {
+    public void bookcaseClassHasCorrectAttributes() throws Throwable {
         String missingAttributeMessage = "Your " + bookcaseClass + " class is missing the %s attribute.";
         String incorrectAttributeTypeMessage = "The %s attribute in your " + bookClass + " class has the wrong type.";
         String incorrectAttributeModifierMessage = "The %s attribute in your " + bookcaseClass + " class has an incorrect modifier.";
@@ -139,28 +146,13 @@ public class MainTest {
         assertTrue(bookcase.hasField(sizeCapacity, int.class), String.format(incorrectAttributeTypeMessage, sizeCapacity));
         assertTrue(bookcase.hasModifier(sizeCapacity, "private"), String.format(incorrectAttributeModifierMessage, sizeCapacity));
 
-        try {
-            Book b = new Book(5, "fiction");
-        } catch (Error e) {
-            fail("Your program does not contain the " + bookClass + " class.");
-        }
-
         assertTrue(bookcase.hasField(shelf), String.format(missingAttributeMessage, shelf));
-        assertTrue(bookcase.hasField(shelf, Book[].class), String.format(incorrectAttributeTypeMessage, shelf));
+        assertTrue(bookcase.hasField(shelf, book.getObjectArrayClass()), String.format(incorrectAttributeTypeMessage, shelf));
         assertTrue(bookcase.hasModifier(shelf, "private"), String.format(incorrectAttributeModifierMessage, shelf));
     }
 
     @Test
-    public void bookcaseClassHasCorrectConstructors() {
-        try {
-            Object[][] arguments = new Object[][]{
-                    {5, int.class},
-                    {"fiction", String.class}
-            };
-            Object bookInstance = book.createInstance(arguments);
-        } catch (Error e) {
-            fail("Your program does not contain the " + bookClass + " class.");
-        }
+    public void bookcaseClassHasCorrectConstructors() throws Throwable {
         String missingConstructorMessage = "Your " + bookcaseClass + " class does not have a required constructor.";
         String incorrectConstructorModifierMessage =
                 "One of the constructors in your " + bookcaseClass + " class does not have the correct modifiers.";
@@ -177,6 +169,7 @@ public class MainTest {
                 Arguments.of(5, 5),
                 Arguments.of(11111, 11111),
                 Arguments.of(2, 2),
+                Arguments.of(1, 1),
                 Arguments.of(0, 0),
                 Arguments.of(-3, 0),
                 Arguments.of(-1, 0),
@@ -193,23 +186,14 @@ public class MainTest {
         Object bookcaseInstance = bookcase.createInstance(arguments);
         _assertEquals(result, bookcase.getFieldValue(bookcaseInstance, this.sizeCapacity),
                 "Your " + bookcaseClass + " constructor does not correctly initialize the " + this.sizeCapacity + " attribute.");
-        try {
-            Object[][] arguments = new Object[][]{
-                    {5, int.class},
-                    {"fiction", String.class}
-            };
-            Object bookInstance = book.createInstance(arguments);
-        } catch (Error e) {
-            fail("Your program does not contain the " + bookClass + " class.");
-        }
-        Book[] b = new Book[result];
-        _assertArrayEquals(b, bookcase.getFieldValue(bookcaseInstance, shelf),
+
+        _assertArrayEquals(book.createArray(result), bookcase.getFieldValue(bookcaseInstance, shelf),
                 "Your " + bookcaseClass + " constructor does not correctly initialize the " + shelf + " attribute.");
     }
 
     @ParameterizedTest
     @MethodSource("bookcaseInputProvider")
-    public void bookcaseCorrectCheckValidityMethod(int sizeCapacity, int result) throws Throwable {
+    public void bookcaseCorrectValidateMethod(int sizeCapacity, int result) throws Throwable {
         Object[][] arguments = new Object[][]{
                 {sizeCapacity, int.class}
         };
@@ -250,30 +234,21 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("addBooksInputProvider")
     public void bookcaseCorrectAddBookMethod(int sizeCapacity, int[] bookPlacement) throws Throwable {
-        try {
-            Object[][] arguments = new Object[][]{
-                    {5, int.class},
-                    {"fiction", String.class}
-            };
-            Object bookInstance = book.createInstance(arguments);
-        } catch (Error e) {
-            fail("Your program does not contain the " + bookClass + " class.");
-        }
-
-        assertTrue(bookcase.hasMethod(bookcaseMethodName2, new Class[]{Book.class}),
+        assertTrue(bookcase.hasMethod(bookcaseMethodName2, new Class[]{book.getObjectClass()}),
                 String.format("Your %s class is missing the method %s.", bookcaseClass, bookcaseMethodName2));
-        assertTrue(bookcase.hasMethod(bookcaseMethodName2, new Class[]{Book.class}, void.class),
+        assertTrue(bookcase.hasMethod(bookcaseMethodName2, new Class[]{book.getObjectClass()}, void.class),
                 String.format("Your %s class %s method does not have the correct return type.", bookcaseClass, bookcaseMethodName2));
-        assertTrue(bookcase.hasMethod(bookcaseMethodName2, new Class[]{Book.class}, void.class, new String[]{"public"}),
+        assertTrue(bookcase.hasMethod(bookcaseMethodName2, new Class[]{book.getObjectClass()}, void.class, new String[]{"public"}),
                 String.format("Your %s class %s method does not have the correct visibility modifier.", bookcaseClass, bookcaseMethodName2));
 
-        Book insert = new Book(1, "");
-        Book[] startingConfig = new Book[sizeCapacity];
-        Book[] endingConfig = new Book[sizeCapacity];
+        Object[] startingConfig = (Object[]) book.createArray(sizeCapacity);
+        Object[] endingConfig = (Object[]) book.createArray(sizeCapacity);
+        Object insert = book.createInstance(new Object[][]{{5, int.class}, {"fiction", String.class}});
+
         boolean firstZero = true;
         for (int x = 0; x < sizeCapacity; x++) {
             if (bookPlacement[x] == 1) {
-                Book b = new Book(1, "");
+                Object b = book.createInstance(new Object[][]{{1, int.class}, {"", String.class}});
                 startingConfig[x] = b;
                 endingConfig[x] = b;
             } else if (firstZero) {
@@ -289,12 +264,12 @@ public class MainTest {
         bookcase.setFieldValue(bookcaseInstance, startingConfig, shelf);
 
         if (firstZero) {
-            bookcase.callMethod(bookcaseMethodName2, new Object[][]{{insert, Book.class}}, new String[]{"public"}, bookcaseInstance, new Clause[]{
+            bookcase.callMethod(bookcaseMethodName2, new Object[][]{{insert, book.getObjectClass()}}, new String[]{"public"}, bookcaseInstance, new Clause[]{
                     new StringLiteral(addBookError),
                     new Optional(new StringLiteral(" "))
             }, "Your " + bookcaseMethodName2 + " method does not produce the correct error message when the " + bookcaseClass + " is full.");
         } else {
-            bookcase.callMethod(bookcaseMethodName2, new Object[][]{{insert, Book.class}}, new String[]{"public"}, bookcaseInstance);
+            bookcase.callMethod(bookcaseMethodName2, new Object[][]{{insert, book.getObjectClass()}}, new String[]{"public"}, bookcaseInstance);
         }
 
         _assertArrayEquals(endingConfig, startingConfig, "Your " + bookcaseMethodName2 + " does not correctly handle inserting a new " + bookClass + ".");
@@ -314,16 +289,6 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("removeBooksInputProvider")
     public void bookcaseCorrectRemoveBookMethod(int sizeCapacity, int[] bookPlacement, int index) throws Throwable {
-        try {
-            Object[][] arguments = new Object[][]{
-                    {5, int.class},
-                    {"fiction", String.class}
-            };
-            Object bookInstance = book.createInstance(arguments);
-        } catch (Error e) {
-            fail("Your program does not contain the " + bookClass + " class.");
-        }
-
         assertTrue(bookcase.hasMethod(bookcaseMethodName3, new Class[]{int.class}),
                 String.format("Your %s class is missing the method %s.", bookcaseClass, bookcaseMethodName3));
         assertTrue(bookcase.hasMethod(bookcaseMethodName3, new Class[]{int.class}, void.class),
@@ -331,11 +296,11 @@ public class MainTest {
         assertTrue(bookcase.hasMethod(bookcaseMethodName3, new Class[]{int.class}, void.class, new String[]{"public"}),
                 String.format("Your %s class %s method does not have the correct visibility modifier.", bookcaseClass, bookcaseMethodName3));
 
-        Book[] startingConfig = new Book[sizeCapacity];
-        Book[] endingConfig = new Book[sizeCapacity];
+        Object[] startingConfig = (Object[]) book.createArray(sizeCapacity);
+        Object[] endingConfig = (Object[]) book.createArray(sizeCapacity);
         for (int x = 0; x < sizeCapacity; x++) {
             if (bookPlacement[x] == 1) {
-                Book b = new Book(1, "");
+                Object b = book.createInstance(new Object[][]{{1, int.class}, {"", String.class}});
                 startingConfig[x] = b;
                 endingConfig[x] = b;
             }
