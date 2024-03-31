@@ -8,12 +8,10 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.time.Year;
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class MainTest {
     // Java
@@ -125,26 +123,21 @@ public class MainTest {
         assertTrue(bookcase.hasField(sizeCapacity), String.format(missingFieldMessage, bookcaseClass, sizeCapacity));
         assertTrue(bookcase.hasField(sizeCapacity, int.class), String.format(incorrectFieldTypeMessage, bookcaseClass, sizeCapacity));
         assertTrue(bookcase.hasModifier(sizeCapacity, "private"), String.format(incorrectFieldModifierMessage, bookcaseClass, sizeCapacity));
+
+        assertTrue(bookcase.hasField(books), String.format(missingFieldMessage, bookcaseClass, books));
+        assertTrue(bookcase.hasField(books, book.getObjectArrayClass()), String.format(incorrectFieldTypeMessage, bookcaseClass, books));
+        assertTrue(bookcase.hasModifier(books, "private"), String.format(incorrectFieldModifierMessage, bookcaseClass, books));
     }
 
     @Test
-    public void bookcaseClassHasCorrectConstructors() throws Throwable {
+    public void bookcaseClassHasCorrectConstructors() {
         String missingConstructorMessage = "Your " + bookcaseClass + " class does not have a required constructor.";
         String incorrectConstructorModifierMessage =
                 "One of the constructors in your " + bookcaseClass + " class does not have the correct visibility modifier.";
-        try {
-            Object[][] arguments = new Object[][]{
-                    {5, int.class},
-                    {"fiction", String.class}
-            };
-            Object bookInstance = book.createInstance(arguments);
-        } catch (Error e) {
-            fail(bookClass + " object could not be created to be passed to " + bookcaseClass + ". Ensure your " +
-                    bookClass + " class's constructor exists and has the correct parameters.");
-        }
+
         Class<?>[] constructorClasses = new Class[]{
                 int.class,
-                Book[].class
+                book.getObjectArrayClass()
         };
         assertTrue(bookcase.hasConstructor(constructorClasses), missingConstructorMessage);
         assertTrue(bookcase.hasModifier(constructorClasses, "public"), incorrectConstructorModifierMessage);
@@ -170,26 +163,13 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("bookcaseInputProvider")
     public void bookcaseConstructorInitializesValuesCorrectly(int sizeCapacity, int[] year, String[] type) throws Throwable {
-        Object[][] arguments = null;
-
-        try {
-            arguments = new Object[][]{
-                    {5, int.class},
-                    {"fiction", String.class}
-            };
-            book.createInstance(arguments);
-        } catch (Error e) {
-            fail(bookClass + " object could not be created to be passed to " + bookcaseClass + ". Ensure your " +
-                    bookClass + " class's constructor exists and has the correct parameters.");
-        }
-
-        Book[] books = new Book[year.length];
+        Object[] books = (Object[]) book.createArray(year.length);
         for (int x = 0; x < books.length; x++) {
-            books[x] = new Book(year[x], type[x]);
+            books[x] = book.createInstance(new Object[][]{{year[x], int.class}, {type[x], String.class}});
         }
-        arguments = new Object[][]{
+        Object[][] arguments = new Object[][]{
                 {sizeCapacity, int.class},
-                {books, Book[].class}
+                {books, book.getObjectArrayClass()}
         };
 
         Object bookcaseInstance = bookcase.createInstance(arguments);
@@ -202,33 +182,21 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("bookcaseLongInputProvider")
     public void bookcaseConstructorInitializesIncorrectValuesCorrectly(int sizeCapacity, int[] year, String[] type) throws Throwable {
-        Object[][] arguments = null;
-        try {
-            arguments = new Object[][]{
-                    {5, int.class},
-                    {"fiction", String.class}
-            };
-            book.createInstance(arguments);
-        } catch (Error e) {
-            fail(bookClass + " object could not be created to be passed to " + bookcaseClass + ". Ensure your " +
-                    bookClass + " class's constructor exists and has the correct parameters.");
-        }
-
-        Book[] books = new Book[year.length];
-        Book[] booksHold = new Book[year.length];
+        Object[] books = (Object[]) book.createArray(year.length);
+        Object[] booksHold = (Object[]) book.createArray(year.length);
         for (int x = 0; x < books.length; x++) {
-            Book b = new Book(year[x], type[x]);
+            Object b = book.createInstance(new Object[][]{{year[x], int.class}, {type[x], String.class}});
             books[x] = b;
             booksHold[x] = b;
         }
-        arguments = new Object[][]{
+        Object[][] arguments = new Object[][]{
                 {sizeCapacity, int.class},
-                {books, Book[].class}
+                {books, book.getObjectArrayClass()}
         };
 
         Object bookcaseInstance = bookcase.createInstance(arguments);
 
-        Book[] actualBooks = (Book[]) bookcase.getFieldValue(bookcaseInstance, this.books);
+        Object[] actualBooks = (Object[]) bookcase.getFieldValue(bookcaseInstance, this.books);
         boolean shortenedCorrectly = actualBooks.length <= sizeCapacity;
         for (int x = 0; x < sizeCapacity; x++) {
             if (!booksHold[x].equals(actualBooks[x])) {
@@ -246,24 +214,13 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("bookcaseInputProvider")
     public void correctDetermineReplacedMethod(int sizeCapacity, int[] year, String[] type) throws Throwable {
-        Object[][] arguments = null;
-        try {
-            arguments = new Object[][]{
-                    {5, int.class},
-                    {"fiction", String.class}
-            };
-            book.createInstance(arguments);
-        } catch (Error e) {
-            fail(bookClass + " object could not be created to be passed to " + bookcaseClass + ". Ensure your " +
-                    bookClass + " class's constructor exists and has the correct parameters.");
-        }
-        Book[] books = new Book[year.length];
+        Object[] books = (Object[]) book.createArray(year.length);
         for (int x = 0; x < books.length; x++) {
-            books[x] = new Book(year[x], type[x]);
+            books[x] = book.createInstance(new Object[][]{{year[x], int.class}, {type[x], String.class}});
         }
-        arguments = new Object[][]{
+        Object[][] arguments = new Object[][]{
                 {sizeCapacity, int.class},
-                {books, Book[].class}
+                {books, book.getObjectArrayClass()}
         };
 
         Object bookcaseInstance = bookcase.createInstance(arguments);
@@ -275,12 +232,14 @@ public class MainTest {
                 "Your " + determineReplaced + " method does not have the correct visibility modifier.");
         Object determineReplacedOutput = bookcase.callMethod(determineReplaced, bookcaseInstance);
 
-        String determineReplacedExpected = Arrays.stream(books)
-                .filter(book -> book.determineTime() > replacedUnit)
-                .findFirst()
-                .map(book -> replaceResponse1)
-                .orElse(replaceResponse2);
+        String determineReplacedExpected = replaceResponse2;
+        for(int x = 0; x < books.length; x++){
+            if(Year.now().getValue() - year[x] > replacedUnit){
+                determineReplacedExpected = replaceResponse1;
+            }
+        }
         String incorrectDetermineReplacedExpected = "Your " + bookClass + " " + determineReplaced + " method does not return the correct message.";
+
         _assertEquals(determineReplacedExpected, determineReplacedOutput, incorrectDetermineReplacedExpected);
     }
 
