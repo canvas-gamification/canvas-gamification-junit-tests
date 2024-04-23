@@ -11,7 +11,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -42,7 +41,6 @@ public class MainTest {
         assertTrue(wordSearch.hasModifier(arrayAttributeName, "private"), String.format(incorrectModifier, arrayAttributeName));
     }
 
-    // TODO: Add more test cases to constructor
     private static Stream<Arguments> constructorInputProvider() {
         return Stream.of(
                 Arguments.of(
@@ -52,6 +50,13 @@ public class MainTest {
                 Arguments.of(
                         new String[]{},
                         0
+                ),
+                Arguments.of(
+                        new String[]{"TESTING", "IF", "SUPERLUOUSLY"},
+                        12
+                ),
+                Arguments.of(
+                        new String[]{"CAT", "BATS", "RAT", "AT"}
                 )
         );
     }
@@ -168,7 +173,6 @@ public class MainTest {
                 String.format(incorrectModifier, fillMethodName));
         assertTrue(wordSearch.hasReturnType(fillMethodName, null, Void.TYPE),
                 String.format(incorrectReturnType, fillMethodName));
-
     }
 
     @RepeatedTest(4)
@@ -199,25 +203,46 @@ public class MainTest {
     }
 
     private static Stream<char[][]> randomInsertionInputProvider() {
-        char b = (char) 0;
+        char base = (char) 0;
         char[][] case1 = new char[][]{
-                {'A', b, 'B', 'Z', 'J'},
-                {b, 'Y', 'P', 'Q', 'D'},
-                {'T', 'F', 'V', b, b},
-                {'N', 'M', b, 'W', 'X'},
-                {'F', 'J', 'S', b, 'R'}
+                {'C', base, 'B', 'G', 'J'},
+                {base, 'Y', 'P', 'Q', 'D'},
+                {'T', 'F', 'V', base, base},
+                {'N', 'M', base, 'W', 'X'},
+                {'F', 'J', 'S', base, 'R'}
         };
         char[][] case2 = new char[12][12];
         for (int i = 0; i < 12; i++) {
-            Arrays.fill(case2[i], b);
+            Arrays.fill(case2[i], base);
         }
-        return Stream.of(case1, case2);
+        char edge1 = 'A' - 1;
+        char edge2 = 'Z' + 1;
+        char first = 'A';
+        char last = 'Z';
+        char[][] case3 = new char[][]{
+                {edge1, edge1, first},
+                {edge2, last, edge2},
+                {edge2, edge1, first}
+        };
+        return Stream.of(case1, case2, case3);
     }
 
     @ParameterizedTest
     @MethodSource("randomInsertionInputProvider")
-    public void wordSearchRandomFillOnlyReplacesCorrectCharacters() throws Throwable {
-        randomFillAsserts();
+    public void wordSearchRandomFillOnlyReplacesCorrectCharacters(char[][] input) throws Throwable {
+        /* Create instance of word search */
+        Object[][] constructorArguments = {{new String[]{"ONE"}, String[].class}};
+        Object wordSearchInstance = wordSearch.createInstance(constructorArguments);
+
+        /* Copy the input array */
+        char[][] expectedOutput = new char[input.length][input.length];
+        for (int i = 0; i < expectedOutput.length; i++) {
+            expectedOutput[i] = Arrays.copyOf(input[i], input[i].length);
+        }
+
+        /* Set the wordSearchInstance to have the input grid */
+        wordSearch.setFieldValue(wordSearchInstance, input, arrayAttributeName);
+        wordSearch.callMethod(fillMethodName, wordSearchInstance);
     }
 
     // TODO: Add test for toString
