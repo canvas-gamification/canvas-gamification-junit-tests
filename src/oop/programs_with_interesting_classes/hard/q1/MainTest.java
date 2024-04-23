@@ -1,6 +1,7 @@
 package oop.programs_with_interesting_classes.hard.q1;
 
 import global.ObjectTest;
+import global.tools.Logger;
 import global.variables.clauses.RandomChar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
@@ -56,7 +57,8 @@ public class MainTest {
                         12
                 ),
                 Arguments.of(
-                        new String[]{"CAT", "BATS", "RAT", "AT"}
+                        new String[]{"CAT", "BATS", "RAT", "AT"},
+                        4
                 )
         );
     }
@@ -243,7 +245,75 @@ public class MainTest {
         /* Set the wordSearchInstance to have the input grid */
         wordSearch.setFieldValue(wordSearchInstance, input, arrayAttributeName);
         wordSearch.callMethod(fillMethodName, wordSearchInstance);
+        char[][] outputGrid = (char[][]) wordSearch.getFieldValue(wordSearchInstance, arrayAttributeName);
+
+        /* Check that only chars that should be changed were updated */
+        String incorrectReplacementMessage = String.format("Your %s method replaced a character that it should not have.", insertMethodName);
+        String didNotReplaceMessage = String.format("Your %s method did not replace a character that it should have.", insertMethodName);
+        for (int i = 0; i < expectedOutput.length; i++) {
+            for (int j = 0; j < expectedOutput[i].length; j++) {
+                if (Character.isUpperCase(expectedOutput[i][j]))
+                    _assertEquals(expectedOutput[i][j], outputGrid[i][j], incorrectReplacementMessage);
+                else
+                    assertTrue(Character.isUpperCase(outputGrid[i][j]), didNotReplaceMessage);
+            }
+        }
     }
 
-    // TODO: Add test for toString
+    private static Stream<char[][]> toStringInputProvider() {
+        char[][] case1 = {
+                {'A', 'B', 'C'},
+                {'D', 'E', 'F'},
+                {'G', 'H', 'I'}
+        };
+        char[][] case2 = {
+                {'B'}
+        };
+        char[][] case3 = {
+                {'H', 'E', 'L', 'L', 'O'},
+                {'R', 'E', 'D', 'Z', 'L'},
+                {'G', 'N', 'O', 'M', 'E'},
+                {'P', 'O', 'O', 'B', 'R'},
+                {'M', 'Y', 'I', 'U', 'T'},
+        };
+        return Stream.of(case1, case2, case3);
+    }
+
+    @ParameterizedTest
+    @MethodSource("toStringInputProvider")
+    public void wordSearchHasCorrectToStringMethod(char[][] input) throws Throwable {
+        String incorrectDefinition = "Your %s class is missing the %s method. Make sure it is defined, spelt correctly, and has the correct parameters.";
+        String incorrectModifier = "The %s method does not have the correct visibility modifier.";
+        String incorrectReturnType = "The %s method does not have the correct return type.";
+        String methodNameToString = "toString";
+        assertTrue(wordSearch.hasMethod(methodNameToString, null),
+                String.format(incorrectDefinition, wordSearchClassName, methodNameToString));
+        assertTrue(wordSearch.hasModifier(methodNameToString, null, "public"),
+                String.format(incorrectModifier, methodNameToString));
+        assertTrue(wordSearch.hasReturnType(methodNameToString, null, String.class),
+                String.format(incorrectReturnType, methodNameToString));
+
+        Object[][] constructorArguments = {{new String[]{"ONE"}, String[].class}};
+        Object wordSearchInstance = wordSearch.createInstance(constructorArguments);
+
+        char[][] inputForToString = new char[input.length][input.length];
+        for (int i = 0; i < input.length; i++) {
+            inputForToString[i] = Arrays.copyOf(input[i], input[i].length);
+        }
+        wordSearch.setFieldValue(wordSearchInstance, inputForToString, arrayAttributeName);
+        String result = (String) wordSearch.callMethod("toString", wordSearchInstance);
+        String[] gridLines = result.split("\n");
+        assertEquals(input.length, gridLines.length, String.format("Your toString method does not place each row of the %s array on it's own line.", arrayAttributeName));
+        String incorrectLineMessage = "One of the lines of %s array was not correctly converted to a String.";
+        for (int i = 0; i < input.length; i++) {
+            String trimmedOutput = gridLines[i].trim();
+            StringBuilder sb = new StringBuilder();
+            for (char item : input[i]) {
+                sb.append(item);
+                sb.append(" ");
+            }
+            String expectedResult = sb.toString().trim();
+            assertEquals(expectedResult, trimmedOutput, String.format(incorrectLineMessage, arrayAttributeName));
+        }
+    }
 }
