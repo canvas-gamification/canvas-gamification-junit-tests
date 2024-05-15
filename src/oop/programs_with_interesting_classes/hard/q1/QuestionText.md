@@ -56,7 +56,7 @@ class in this question. More details below.
 - Before placing the **word**, the method should check to see if the **word** is longer than the **row** it is being
   inserted into. It should also check that the **index** passed is not out of bounds for the **grid**. If either of
   these conditions are not satisfied, the **grid** should not be modified and the method returns `false`.
-- If the insertion can be completed, after inserting thr word the method must return `true`.
+- If the insertion can be completed, after inserting the word the method must return `true`.
 - Assume all the letters in the **word** are uppercase.
 
 #### Random Fill
