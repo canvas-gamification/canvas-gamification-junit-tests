@@ -1,12 +1,12 @@
 package arrays.programs_involving_multidimensional_data.hard.q4;
 
 /*
-In the game of Tic-Tac-Toe is played on a board of size 3 by 3 between two players. Each player has a shape that can be
-used (either a circle 'O' or a cross 'X'), and the player has to get three of the same shapes in a row, column, or a
-diagonal to win. Write a Java program that uses a 2D character array to represent the board and randomly assigns one of
-the shapes to each square. For that, write a method called generateTicTac that
-takes an integer and returns a multidimensional char array which represent the generated random board.
-Next, the program prints out the shapes on the game board in the main method.
+The game of Tic-Tac-Toe is traditionally played on a board of size 3 by 3 between two players. Each player has a shape
+they place on the board (either a circle 'O' or a cross 'X'), and the player has to get three of the same shapes in a
+row, column, or a diagonal to win. Write a Java program that uses a 2D character array to represent the board and
+randomly assigns one of the shapes to each square. Write a method called generateTicTac to generate this random board.
+The method should take an integer n and return an n by n multidimensional array of random 'O' or 'X' characters. The
+program should print out the shapes of a 3 by 3 game board in the main method.
 
 Sample Output:
     The generated board is:
