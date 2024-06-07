@@ -2,7 +2,6 @@ package oop.object_interactions.medium.q2;
 
 import global.ObjectTest;
 import global.variables.Clause;
-import global.variables.clauses.DoubleLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
 import global.variables.wrappers.Optional;
@@ -13,12 +12,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Random;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertArrayEquals;
 import static global.tools.CustomAssertions._assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -94,12 +91,12 @@ public class MainTest {
 
     private static Stream<Arguments> hearSecretInputProvider() {
         return Stream.of(
-                Arguments.of("Sam", "Sam always cheat on exams", new String[]{"Bob", "Ali"}, "Bob", "Bob has a candy"),
-                Arguments.of("John", "John is in love with Alice", new String[]{"Alice", "Bob"}, "Alice", "Alice is in love with John"),
-                Arguments.of("Kim", "Kim has broken her leg", new String[]{"Ali", "John"}, "Ali", "Ali broke Kim's leg"),
-                Arguments.of("Sam", "Sam always cheat on exams", new String[]{"Bob", "Ali"}, "John", "Bob has a candy"),
-                Arguments.of("John", "John is in love with Alice", new String[]{"Alice", "Bob", "Sam", "Neil", "Jack", "Tom", "Sara"}, "John", "Alice is in love with John"),
-                Arguments.of("Kim", "Kim has broken her leg", new String[]{"Ali", "John", "Alice", "Bob", "Sam", "Neil", "Jack", "Tom", "Sara"}, "Ali", "Ali broke Kim's leg")
+                Arguments.of("Sam", "Sam always cheat on exams", new String[]{"Bob", "Ali"}, new String[]{"Bob"}, new String[]{"Bob has a candy"}),
+                Arguments.of("John", "John is in love with Alice", new String[]{"Alice", "Bob"}, new String[]{"Alice", "Bob"}, new String[]{"Alice is in love with John", "Bob sleeps in class"}),
+                Arguments.of("Kim", "Kim has broken her leg", new String[]{"Ali", "John"}, new String[]{"John"}, new String[]{"John broke Kim's leg"}),
+                Arguments.of("Sam", "Sam always cheat on exams", new String[]{"Bob", "Ali"}, new String[]{"John"}, new String[]{"Bob has a candy"}),
+                Arguments.of("John", "John is in love with Alice", new String[]{"Alice", "Bob", "Sam", "Tom", "Sara", "Jack", "Neil"}, new String[]{"Sam", "Tom", "Sara", "Jack", "Neil"}, new String[]{"Alice is in love with John", "Tom is Tom", "terrified of spiders", "designs bridges", "has no self-confidence"}),
+                Arguments.of("Kim", "Kim has broken her leg", new String[]{"Ali", "John", "Alice", "Bob", "Sam", "Neil", "Jack", "Tom", "Sara"}, new String[]{"Ali"}, new String[]{"Ali broke Kim's leg"})
 
         );
     }
@@ -117,15 +114,15 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("hearSecretInputProvider")
     @Tag("dependent1")
-    public void correctHearSecretMethod(String name, String secret, String[] allFriends, String friend, String friendSecret) throws Throwable {
+    public void correctHearSecretMethod(String name, String secret, String[] allFriends, String[] friend, String[] friendSecret) throws Throwable {
         Object[][] arguments = {
                 {name, String.class},
                 {secret, String.class},
                 {allFriends, String[].class}
         };
         Object[][] methodArguments = {
-                {friend, String.class},
-                {friendSecret, String.class}
+                {friend[0], String.class},
+                {friendSecret[0], String.class}
         };
         assertTrue(testClass.hasMethod(hearSecretMethodName, new Class<?>[]{String.class, String.class}),
                 "Your " + hearSecretMethodName + " method does not have the correct name or arguments.");
@@ -135,8 +132,8 @@ public class MainTest {
                 "Your " + hearSecretMethodName + " method does not have the correct modifier.");
         String[] ans = new String[allFriends.length];
         for (int i = 0; i < allFriends.length; i++) {
-            if (friend.equals(allFriends[i]))
-                ans[i] = friendSecret;
+            if (friend[0].equals(allFriends[i]))
+                ans[i] = friendSecret[0];
         }
         Object classInstance = testClass.createInstance(arguments);
         testClass.callMethod(hearSecretMethodName, methodArguments, new String[]{"public"}, classInstance);
@@ -157,7 +154,7 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("hearSecretInputProvider")
     @Tag("dependent1")
-    public void correctWriteInDiaryMethod(String name, String secret, String[] allFriends, String friend, String friendSecret) throws Throwable {
+    public void correctWriteInDiaryMethod(String name, String secret, String[] allFriends, String[] friend, String[] friendSecret) throws Throwable {
         Object[][] arguments = {
                 {name, String.class},
                 {secret, String.class},
@@ -169,40 +166,118 @@ public class MainTest {
                 "Your " + writeInDiaryMethodName + " method does not have the correct return type.");
         assertTrue(testClass.hasMethod(writeInDiaryMethodName, null, Void.TYPE, new String[]{"public"}),
                 "Your " + writeInDiaryMethodName + " method does not have the correct modifier.");
+
         Object classInstance = testClass.createInstance(arguments);
         String[] friendNames = (String[]) testClass.getFieldValue(classInstance, "friendNames");
         String[] friendSecrets = (String[]) testClass.getFieldValue(classInstance, "friendSecrets");
-        int friendIndex = friendSecrets.length;
-        for (int i = 0; i < friendNames.length; i++)
-            if (friendNames[i].equals(friend)) {
-                friendIndex = i;
-                break;
-            }
-        if (friendIndex < friendNames.length)
-            friendSecrets[friendIndex] = friendSecret;
+        for (int j = 0; j < friend.length; j++) {
+            for (int i = 0; i < friendNames.length; i++)
+                if (friendNames[i].equals(friend[j])) {
+                    friendSecrets[i] = friendSecret[j];
+                    break;
+                }
+        }
 
         boolean flg = false;
-        for (int i = 0; i < allFriends.length; i++) {
-            if (friend.equals(allFriends[i]))
-                flg = true;
+        for (String s : friend) {
+            for (String allFriend : allFriends) {
+                if (s.equals(allFriend)) {
+                    flg = true;
+                    break;
+                }
+            }
         }
+
         testClass.setFieldValue(classInstance, friendSecrets, "friendSecrets");
         if (flg) {
-            testClass.callMethod(writeInDiaryMethodName, null, new String[]{"public"}, classInstance, new Clause[]{
-                    new StringLiteral("I have the following secrets:"),
-                    new Optional(new StringLiteral(" ")),
-                    new NewLine(),
-                    new StringLiteral(friend + " told me " + friendSecret),
-                    new Optional(new StringLiteral(".")),
-                    new Optional(new StringLiteral(" "))
-            });
+            Clause[] c = new Clause[3 + (friendSecret.length) * 4];
+            c[0] = new StringLiteral("I have the following secrets:");
+            c[1] = new Optional(new StringLiteral(" "));
+            c[2] = new NewLine();
+            for (int x = 0; x < friendSecret.length; x++) {
+                c[4 * x + 3] = new StringLiteral(friend[x] + " told me " + friendSecret[x]);
+                c[4 * x + 4] = new Optional(new StringLiteral("."));
+                c[4 * x + 5] = new Optional(new StringLiteral(" "));
+                c[4 * x + 6] = new NewLine();
+            }
+            testClass.callMethod(writeInDiaryMethodName, null, new String[]{"public"}, classInstance, c, String.format("Your %s method does not print the correct output.", writeInDiaryMethodName));
         } else {
             testClass.callMethod(writeInDiaryMethodName, null, new String[]{"public"}, classInstance, new Clause[]{
                     new StringLiteral("I have the following secrets:"),
                     new Optional(new StringLiteral(" "))
-            });
+            }, String.format("Your %s method does not print the correct output.", writeInDiaryMethodName));
         }
 
+    }
+
+    @ParameterizedTest
+    @MethodSource("hearSecretInputProvider")
+    public void personMethodsWorkCorrectlyTogether(String name, String secret, String[] allFriends, String[] friend, String[] friendSecret) throws Throwable {
+        assertTrue(testClass.hasMethod(hearSecretMethodName, new Class<?>[]{String.class, String.class}),
+                "Your " + hearSecretMethodName + " method does not have the correct name or arguments.");
+        assertTrue(testClass.hasMethod(hearSecretMethodName, new Class<?>[]{String.class, String.class}, Void.TYPE),
+                "Your " + hearSecretMethodName + " method does not have the correct return type.");
+        assertTrue(testClass.hasMethod(hearSecretMethodName, new Class<?>[]{String.class, String.class}, Void.TYPE, new String[]{"public"}),
+                "Your " + hearSecretMethodName + " method does not have the correct modifier.");
+
+        assertTrue(testClass.hasMethod(writeInDiaryMethodName, null),
+                "Your " + writeInDiaryMethodName + " method does not have the correct name of arguments.");
+        assertTrue(testClass.hasMethod(writeInDiaryMethodName, null, Void.TYPE),
+                "Your " + writeInDiaryMethodName + " method does not have the correct return type.");
+        assertTrue(testClass.hasMethod(writeInDiaryMethodName, null, Void.TYPE, new String[]{"public"}),
+                "Your " + writeInDiaryMethodName + " method does not have the correct modifier.");
+
+        Object[][] arguments = {
+                {name, String.class},
+                {secret, String.class},
+                {allFriends, String[].class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        String[] ans = new String[allFriends.length];
+
+        for (int x = 0; x < friendSecret.length; x++) {
+            Object[][] methodArguments = {
+                    {friend[x], String.class},
+                    {friendSecret[x], String.class}
+            };
+
+            for (int i = 0; i < allFriends.length; i++) {
+                if (friend[x].equals(allFriends[i]))
+                    ans[i] = friendSecret[x];
+            }
+            testClass.callMethod(hearSecretMethodName, methodArguments, new String[]{"public"}, classInstance);
+            _assertArrayEquals(ans, testClass.getFieldValue(classInstance, friendSecretsAttributeName),
+                    "Your " + hearSecretMethodName + " method does not change the " + friendSecretsAttributeName + " attribute correctly.");
+        }
+
+        boolean flg = false;
+        for (String s : friend) {
+            for (String allFriend : allFriends) {
+                if (s.equals(allFriend)) {
+                    flg = true;
+                    break;
+                }
+            }
+        }
+
+        if (flg) {
+            Clause[] c = new Clause[3 + (friendSecret.length) * 4];
+            c[0] = new StringLiteral("I have the following secrets:");
+            c[1] = new Optional(new StringLiteral(" "));
+            c[2] = new NewLine();
+            for (int x = 0; x < friendSecret.length; x++) {
+                c[4 * x + 3] = new StringLiteral(friend[x] + " told me " + friendSecret[x]);
+                c[4 * x + 4] = new Optional(new StringLiteral("."));
+                c[4 * x + 5] = new Optional(new StringLiteral(" "));
+                c[4 * x + 6] = new NewLine();
+            }
+            testClass.callMethod(writeInDiaryMethodName, null, new String[]{"public"}, classInstance, c, String.format("Your %s method does not print the correct output after calling the %s method.", writeInDiaryMethodName, hearSecretMethodName));
+        } else {
+            testClass.callMethod(writeInDiaryMethodName, null, new String[]{"public"}, classInstance, new Clause[]{
+                    new StringLiteral("I have the following secrets:"),
+                    new Optional(new StringLiteral(" "))
+            }, String.format("Your %s method does not print the correct output after calling the %s method.", writeInDiaryMethodName, hearSecretMethodName));
+        }
     }
 
     @Test
