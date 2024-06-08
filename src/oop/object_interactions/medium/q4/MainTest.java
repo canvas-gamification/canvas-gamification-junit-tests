@@ -38,6 +38,7 @@ public class MainTest {
         String testClassString = "oop.object_interactions.medium.q4." + testClassName;
         testClass = new ObjectTest(classString);
         classObject = new ObjectTest(testClassString);
+
         assertTrue(testClass.hasModifier("public"),
                 "You have changed the visibility modifier on the " + className + " class. Please revert it to the original state.");
         assertTrue(testClass.hasField(bloodTypeAttributeName, char.class, new String[]{"private"}),
@@ -57,6 +58,7 @@ public class MainTest {
                 String.format("You have modified the provided %s method. Please revert it to the original state.", getVolumeMethodName));
         assertTrue(testClass.hasMethod(setVolumeMethodName, new Class<?>[]{double.class}, Void.TYPE, new String[]{"public"}),
                 String.format("You have modified the provided %s method. Please revert it to the original state.", setVolumeMethodName));
+
         Object[][] test = new Object[][]{
                 {'A', 10.3, 'B', 4.1},
                 {'B', 4.2, 'A', 2.3},
@@ -100,6 +102,7 @@ public class MainTest {
                 Arguments.of('A', 6.4, 'A', minBlood),
                 Arguments.of('A', 0, 'A', minBlood - 1),
                 Arguments.of('A', 0.5, 'A', minBlood + 1),
+                Arguments.of('A', 0.5, 'B', minBlood + 1),
                 Arguments.of('B', 0, 'A', 2.5),
                 Arguments.of('O', 3.4, 'B', 5.7)
         );
@@ -143,6 +146,10 @@ public class MainTest {
                     new StringLiteral("Blood type incompatible"),
                     new Optional(new StringLiteral(" "))
             });
+            _assertEquals(volume, testClass.getFieldValue(classInstance, volumeAttributeName),
+                    "Your " + transfusionFromMethodName + " method does not correctly maintain the blood level of the recipient.");
+            _assertEquals(donVolume, testClass.getFieldValue(donor, volumeAttributeName),
+                    "Your " + transfusionFromMethodName + " method does not correctly maintain the blood level of the donor.");
         } else if (donVolume <= minBlood) {
             testClass.callMethod(transfusionFromMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
                     new StringLiteral("Checking if donor has enough blood for a transfusion\\.\\.\\."),
@@ -152,9 +159,9 @@ public class MainTest {
                     new Optional(new StringLiteral(" "))
             });
             _assertEquals(volume, testClass.getFieldValue(classInstance, volumeAttributeName),
-                    "Your " + transfusionFromMethodName + " method does not correctly add blood to the recipient.");
+                    "Your " + transfusionFromMethodName + " method does not correctly maintain the blood level of the recipient.");
             _assertEquals(donVolume, testClass.getFieldValue(donor, volumeAttributeName),
-                    "Your " + transfusionFromMethodName + " method does not correctly take blood from the donor.");
+                    "Your " + transfusionFromMethodName + " does not correctly maintain the blood level of the donor.");
         } else {
             testClass.callMethod(transfusionFromMethodName, methodArguments, new String[]{"public"}, classInstance, new Clause[]{
                     new StringLiteral("Checking if donor has enough blood for a transfusion\\.\\.\\."),
@@ -174,7 +181,7 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     @Tag("dependent1")
-    public void newspaperClassHasCorrectToStringMethod(char type, double volume) throws Throwable {
+    public void snailClassHasCorrectToStringMethod(char type, double volume) throws Throwable {
         Object[][] arguments = {
                 {type, char.class},
                 {volume, double.class}
@@ -189,7 +196,7 @@ public class MainTest {
         String[] methodModifiers = {"public"};
         String expected = "My blood type is " + type + " and I have " + volume + "L of blood left";
         String incorrectToStringMessage = String.join(" ",
-                "Your", className, " toString method does not return the correct String.");
+                "Your", className, "toString method does not return the correct String.");
         Object output = testClass.callMethod("toString", methodModifiers, classInstance);
         _assertEquals(expected, output, incorrectToStringMessage);
     }

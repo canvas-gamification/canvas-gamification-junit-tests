@@ -5,8 +5,8 @@
 ## Question Text
 
 You are working as a vet assistant in an animal hospital, and sometimes you encounter an animal that requires a blood 
-transfusion to save its life.  Using the following description, make a class called **Snail** 
-to model this situation, and a class called **TestTransfusion** to test your **Snail** class.
+transfusion to save its life. Using the following description, modify a class called **Snail** to model this situation, 
+and write a class called **TestTransfusion** to test your **Snail** class.
 
 ## Snail Class
 
@@ -30,14 +30,12 @@ You must add the following items to the class:
 - Methods:
     - A `toString` method that prints the object information in the format
       `My blood type is x and I have yL of blood left` where x is the **bloodType** value and y is the **volume** value.
-    - A `transfusionFrom` method that take another **Snail** object to do a blood tansfer.
-    - It should check if the blood types are a match and if not print `Blood type incompatible`. Note that in this scenario
-  **Snail** blood types are not like humans, so you should check that the type match exactly.
-    - If the types are compatible it should print `Checking if donor has enough blood for a transfusion...`
-    - Then it should make sure that the donor has more than 5 unit of blood if not
-      it should print `Donor does not have enough blood for a transfusion`.
-    - If the donor has enough take 1 unit of blood from the donor
-      and give it to the snail, and then print `Blood transfusion completed`.
+    - A `transfusionFrom` method that takes another **Snail** object to do a blood transfer. It should check if the blood
+      types are a match and if not print `Blood type incompatible`. Note that in this scenario **Snail** blood types 
+      are not like humans, so you should check that the type match exactly. If the types are compatible it should print 
+      `Checking if donor has enough blood for a transfusion...` Then it should make sure that the donor has more than 
+      5 unit of blood, if not it should print `Donor does not have enough blood for a transfusion`. If the donor has 
+      enough take 1 unit of blood from the donor and give it to the snail, and then print `Blood transfusion completed`.
 
 ## TestTransfusion Class
 
