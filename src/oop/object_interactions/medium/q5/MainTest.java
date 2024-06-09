@@ -31,6 +31,7 @@ public class MainTest {
     private final String setNumEyesMethodName = "setNumEyes";
     private final String receiveDonationMethodName = "receiveDonation";
     private final int minEyes = 0;
+    private final int eyesToTake = 1;
 
     @BeforeEach
     public void setup() throws Throwable {
@@ -107,7 +108,7 @@ public class MainTest {
     }
 
     @Test
-    public void recieveDonationIsDefinedCorrectly() {
+    public void receiveDonationIsDefinedCorrectly() {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
@@ -144,9 +145,9 @@ public class MainTest {
                     new StringLiteral("Transplant successful"),
                     new Optional(new StringLiteral(" "))
             });
-            _assertEquals(eyes + 1, testClass.getFieldValue(classInstance, numEyesAttributeName),
+            _assertEquals(eyes + eyesToTake, testClass.getFieldValue(classInstance, numEyesAttributeName),
                     "Your " + receiveDonationMethodName + " method does not correctly add the " + numEyesAttributeName + " attribute of the recipient.");
-            _assertEquals(donEyes - 1, testClass.getFieldValue(donorInstance, numEyesAttributeName),
+            _assertEquals(donEyes - eyesToTake, testClass.getFieldValue(donorInstance, numEyesAttributeName),
                     "Your " + receiveDonationMethodName + " method does not correctly decrease the " + numEyesAttributeName + " attribute of the donor.");
         }
         else {
@@ -155,9 +156,9 @@ public class MainTest {
                     new Optional(new StringLiteral(" "))
             });
             _assertEquals(eyes, testClass.getFieldValue(classInstance, numEyesAttributeName),
-                    "Your " + receiveDonationMethodName + " method does not correctly add the " + numEyesAttributeName + " attribute of the recipient.");
+                    "Your " + receiveDonationMethodName + " method does not correctly maintain the value of the " + numEyesAttributeName + " attribute of the recipient.");
             _assertEquals(donEyes, testClass.getFieldValue(donorInstance, numEyesAttributeName),
-                    "Your " + receiveDonationMethodName + " method does not correctly decrease the " + numEyesAttributeName + " attribute of the donor.");
+                    "Your " + receiveDonationMethodName + " method does not correctly maintain the value of the " + numEyesAttributeName + " attribute of the donor.");
         }
     }
 
