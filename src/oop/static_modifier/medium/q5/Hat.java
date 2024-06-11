@@ -9,6 +9,6 @@ public class Hat {
     }
 
     public String toString() {
-        return "This is a " + companyName + " that is " + colour + " in colour";
+        return "This is a " + companyName + " Hat that is " + colour + " in colour";
     }
 }

@@ -14,7 +14,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static global.tools.CustomAssertions._assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
 public class MainTest {
@@ -28,7 +30,7 @@ public class MainTest {
     String initialName = "Nike";
     String initialColour = "Green";
     String testClassName = "Test";
-    String toStringFormat = "This is a %s that is %s in colour";
+    String toStringFormat = "This is a %s Hat that is %s in colour";
 
     @BeforeEach
     public void setup() throws Throwable {
@@ -62,7 +64,7 @@ public class MainTest {
                 {new String[0], String[].class}
         };
         outputClass.callMethod("main", arguments, methodModifiers, classInstance, new Clause[]{
-                new StringLiteral("This is a " + initialName + " that is " + initialColour + " in colour"),
+                new StringLiteral("This is a " + initialName + " Hat that is " + initialColour + " in colour"),
                 new Optional(new StringLiteral(" ")),
                 new Optional(new NewLine())
         }, "Your " + testClassName + " class does not print the correct output.");
@@ -80,6 +82,8 @@ public class MainTest {
                 String.format(incorrectVisibilityError, staticAttributeName));
         assertTrue(testClass.hasModifier(staticAttributeName, "static"),
                 String.format(incorrectStaticError, staticAttributeName));
+
+        assertEquals(initialName, testClass.getFieldValue(null, staticAttributeName));
     }
 
     private static Stream<Arguments> inputProvider() {
