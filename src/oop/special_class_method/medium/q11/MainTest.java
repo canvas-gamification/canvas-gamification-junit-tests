@@ -26,6 +26,7 @@ public class MainTest {
     private final String methodName1 = "powerDecrease";
     private final String methodName2 = "powerIncrease";
     private final String methodName3 = "changePower";
+    private final String toString = "The %s Oven with size of %s has the temperature of %s";
     private final static int changeValue = 10;
     private final static int changeLimit = 100;
 
@@ -36,7 +37,7 @@ public class MainTest {
         String classString = "oop.special_class_method.medium.q11." + className;
         this.testClass = new ObjectTest(classString);
         String modifiedClassMessage =
-                "You have modified the provided portions of class " + className + " class in the %s attribute part. Please revert them to the original state.";
+                "You have modified the provided %s attribute from the " + className + " class. Please revert it to its original state.";
         assertTrue(testClass.hasField(attributeName0, double.class, new String[]{"private"}),
                 String.format(modifiedClassMessage, attributeName0));
         assertTrue(testClass.hasField(attributeName1, double.class, new String[]{"private"}),
@@ -62,28 +63,28 @@ public class MainTest {
             };
             Class<?>[] classes = {double.class, double.class, String.class};
             Object testInstance = testClass.createInstance(arguments);
-            modifiedClassMessage = "You have modified the provided portions of class " + className + " class in the constructor initializing %s attribute part. Please revert them to the original state.";
+            modifiedClassMessage = "You have modified the provided constructor for the " + className + " class. Please revert the initialization of the %s attribute to its original state.";
             _assertEquals(temp, testClass.getFieldValue(testInstance, attributeName0), modifiedClassMessage);
             _assertEquals(size, testClass.getFieldValue(testInstance, attributeName1), modifiedClassMessage);
             _assertEquals(colour, testClass.getFieldValue(testInstance, attributeName2), modifiedClassMessage);
             assertTrue(testClass.hasModifier(classes, "public"), modifiedClassMessage);
 
-            Object getMethodOutput = testClass.callMethod(getAttributeMethodName0, testInstance);
-            modifiedClassMessage = "You have modified the provided portions of class %s method. Please revert them to the original state.";
             assertTrue(testClass.hasModifier(getAttributeMethodName0, null, "public"),
-                    String.format(modifiedClassMessage, getAttributeMethodName0));
+                   String.format(modifiedClassMessage, getAttributeMethodName0));
+            Object getMethodOutput = testClass.callMethod(getAttributeMethodName0, testInstance);
+            modifiedClassMessage = "You have modified the provided portions of the %s method. Please revert it to its original state.";
             _assertEquals(temp, getMethodOutput,
                     String.format(modifiedClassMessage, getAttributeMethodName0));
 
-            getMethodOutput = testClass.callMethod(getAttributeMethodName1, testInstance);
             assertTrue(testClass.hasModifier(getAttributeMethodName1, null, "public"),
-                    String.format(modifiedClassMessage, getAttributeMethodName1));
+                   String.format(modifiedClassMessage, getAttributeMethodName1));
+            getMethodOutput = testClass.callMethod(getAttributeMethodName1, testInstance);
             _assertEquals(size, getMethodOutput,
                     String.format(modifiedClassMessage, getAttributeMethodName1));
 
-            getMethodOutput = testClass.callMethod(getAttributeMethodName2, testInstance);
             assertTrue(testClass.hasModifier(getAttributeMethodName2, null, "public"),
-                    String.format(modifiedClassMessage, getAttributeMethodName2));
+                   String.format(modifiedClassMessage, getAttributeMethodName2));
+            getMethodOutput = testClass.callMethod(getAttributeMethodName2, testInstance);
             _assertEquals(colour, getMethodOutput,
                     String.format(modifiedClassMessage, getAttributeMethodName2));
 
@@ -115,7 +116,9 @@ public class MainTest {
                 Arguments.of(changeLimit + 0.01, 11.0, "Blue"),
                 Arguments.of(434.3, 43.4, "White"),
                 Arguments.of(43.34, 7, "Yellow"),
-                Arguments.of(100, 7, "Yellow")
+                Arguments.of(100, 7, "Yellow"),
+                Arguments.of(-changeValue, 5.5, "Red"),
+                Arguments.of(-changeLimit, 9.3, "Purple")
         );
     }
 
@@ -136,7 +139,7 @@ public class MainTest {
         assertTrue(testClass.hasMethod("toString", null), String.format(incorrectMethodDefinition, "toString", className));
         assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className));
         assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className));
-        String expectedOutput = "The " + value3 + " Oven with size of " + value2 + " has the tempeture of " + value1;
+        String expectedOutput = String.format(toString, value3, value2, value1);
         Object toStringOutput = testClass.callMethod("toString", testInstance);
         _assertEquals(expectedOutput, toStringOutput, incorrectToStringMessage);
     }
@@ -169,7 +172,7 @@ public class MainTest {
 
         testClass.callMethod(methodName1, testInstance);
         _assertEquals(value1 - changeValue, testClass.getFieldValue(testInstance, attributeName0),
-                "Your " + methodName1 + " method does not decrease the value of " + attributeName0 + " correctly.");
+                "Your " + methodName1 + " method does not correctly decrease the value of the " + attributeName0 + " attribute.");
     }
 
     @Test
@@ -199,7 +202,7 @@ public class MainTest {
         assertTrue(testClass.hasReturnType(methodName2, null, Void.TYPE), String.format(incorrectReturnType, methodName2, className));
         testClass.callMethod(methodName2, testInstance);
         _assertEquals(value1 + changeValue, testClass.getFieldValue(testInstance, attributeName0),
-                "Your " + methodName2 + " method does not increase the value of " + attributeName0 + " correctly.");
+                "Your " + methodName2 + " method does not correctly increase the value of " + attributeName0 + " attribute.");
     }
 
     @Test
@@ -212,8 +215,23 @@ public class MainTest {
         assertTrue(testClass.hasReturnType(methodName3, null, Void.TYPE), String.format(incorrectReturnType, methodName3, className));
     }
 
+    private static Stream<Arguments> changePowerInputProvider() {
+        return Stream.of(
+                Arguments.of(changeLimit - 0.01, 10.2, "Black"),
+                Arguments.of(changeLimit + 0.01, 11.0, "Blue"),
+                Arguments.of(434.3, 43.4, "White"),
+                Arguments.of(43.34, 7, "Yellow"),
+                Arguments.of(100, 7, "Yellow"),
+                Arguments.of(changeLimit - changeValue, 5.5, "red"),
+                Arguments.of(0, 5.5, "red"),
+                Arguments.of(changeLimit * 2, 5.5, "red"),
+                Arguments.of(-changeValue, 5.5, "Red"),
+                Arguments.of(-changeLimit, 9.3, "Purple")
+        );
+    }
+
     @ParameterizedTest
-    @MethodSource("inputProvider")
+    @MethodSource("changePowerInputProvider")
     public void correctChangePowerMethod(double value1, double value2, String value3) throws Throwable {
         Object[][] arguments = {
                 {value1, double.class},
@@ -227,13 +245,18 @@ public class MainTest {
         assertTrue(testClass.hasMethod(methodName3, null), String.format(incorrectMethodDefinition, methodName3, className));
         assertTrue(testClass.hasModifier(methodName3, null, "public"), String.format(incorrectModifierMessage, methodName3, className));
         assertTrue(testClass.hasReturnType(methodName3, null, Void.TYPE), String.format(incorrectReturnType, methodName3, className));
-        testClass.callMethod(methodName3, testInstance);
-        if (value1 > changeLimit) {
-            _assertEquals(value1 - changeValue, testClass.getFieldValue(testInstance, attributeName0),
-                    "Your " + methodName3 + " method does not change the value of " + attributeName0 + " correctly.");
-        } else {
-            _assertEquals(value1 + changeValue, testClass.getFieldValue(testInstance, attributeName0),
-                    "Your " + methodName3 + " method does not change the value of " + attributeName0 + " correctly.");
+
+        for(int x = 0; x < 4; x++) {
+            testClass.callMethod(methodName3, testInstance);
+            if (value1 > changeLimit) {
+                value1 -= changeValue;
+                _assertEquals(value1, testClass.getFieldValue(testInstance, attributeName0),
+                        "Your " + methodName3 + " method does not correctly decrease the value of " + attributeName0 + " attribute.");
+            } else {
+                value1 += changeValue;
+                _assertEquals(value1, testClass.getFieldValue(testInstance, attributeName0),
+                        "Your " + methodName3 + " method does not correctly increase the value of " + attributeName0 + " attribute.");
+            }
         }
     }
 
@@ -256,11 +279,17 @@ public class MainTest {
         value1 += changeValue;
         testClass.callMethod(methodName3, testInstance);
         if (value1 > changeLimit) {
-            _assertEquals(value1 - changeValue, testClass.getFieldValue(testInstance, attributeName0),
-                    "Your " + methodName3 + " method does not change the value of " + attributeName0 + " correctly after calling the " + methodName1 + " and " + methodName2 + " method.");
+            value1 -= changeValue;
+            _assertEquals(value1, testClass.getFieldValue(testInstance, attributeName0),
+                    "Your " + methodName3 + " method does not correctly decrease the value of the " + attributeName0 + " attribute after calling the " + methodName1 + " and " + methodName2 + " method.");
         } else {
-            _assertEquals(value1 + changeValue, testClass.getFieldValue(testInstance, attributeName0),
-                    "Your " + methodName3 + " method does not change the value of " + attributeName0 + " correctly after calling the " + methodName1 + " and " + methodName2 + " method.");
+            value1 += changeValue;
+            _assertEquals(value1, testClass.getFieldValue(testInstance, attributeName0),
+                    "Your " + methodName3 + " method does not correctly increase the value of the " + attributeName0 + " attribute after calling the " + methodName1 + " and " + methodName2 + " method.");
         }
+        String incorrectToStringMessage = "Your toString method does not return the correct String after calling the  " + methodName1 + ",  " + methodName2 + " and " + methodName3 + " method.";
+        String expectedOutput = String.format(toString, value3, value2, value1);
+        Object toStringOutput = testClass.callMethod("toString", testInstance);
+        _assertEquals(expectedOutput, toStringOutput, incorrectToStringMessage);
     }
 }
