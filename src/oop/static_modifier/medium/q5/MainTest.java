@@ -76,6 +76,7 @@ public class MainTest {
         String incorrectNameError = "Your %s class does not include the %s attribute.";
         String incorrectVisibilityError = "Your %s attribute does not have the correct visibility modifier.";
         String incorrectStaticError = "Your %s attribute does not have the static modifier.";
+        String incorrectStaticInitialization = "Your %s attribute does not have the correct value";
         assertTrue(testClass.hasField(staticAttributeName, String.class),
                 String.format(incorrectNameError, className, staticAttributeName));
         assertTrue(testClass.hasModifier(staticAttributeName, "private"),
@@ -83,7 +84,8 @@ public class MainTest {
         assertTrue(testClass.hasModifier(staticAttributeName, "static"),
                 String.format(incorrectStaticError, staticAttributeName));
 
-        assertEquals(initialName, testClass.getFieldValue(null, staticAttributeName));
+        assertEquals(initialName, testClass.getFieldValue(null, staticAttributeName),
+                String.format(incorrectStaticInitialization, staticAttributeName));
     }
 
     private static Stream<Arguments> inputProvider() {
