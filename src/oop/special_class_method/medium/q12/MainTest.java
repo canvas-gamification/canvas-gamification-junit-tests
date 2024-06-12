@@ -30,7 +30,7 @@ public class MainTest {
         String classString = "oop.special_class_method.medium.q12." + className;
         this.testClass = new ObjectTest(classString);
         String modifiedClassMessage =
-                "You have modified the provided portions of class " + className + " for the %s attribute. Please revert them to the original state.";
+                "You have modified the provided %s attribute in the " + className + " class. Please revert it to its original state.";
         assertTrue(testClass.hasField(attributeName1, int.class, new String[]{"private"}),
                 String.format(modifiedClassMessage, attributeName1));
         assertTrue(testClass.hasField(attributeName2, int.class, new String[]{"private"}),
@@ -42,10 +42,11 @@ public class MainTest {
                 {12, yearPivot + 20},
                 {43, yearPivot + 3},
                 {7, yearPivot - 5},
-                {7, yearPivot}
+                {7, yearPivot},
+                {0, 0}
         };
         modifiedClassMessage =
-                "You have modified the provided portions of class " + className + " for the constructor. Please revert them to the original state.";
+                "You have modified the provided constructor in the " + className + " class. Please revert it to its original state.";
         for (int i = 0; i < tests.length; i++) {
             int size = (int) tests[i][0];
             int yearMade = (int) tests[i][1];
@@ -54,10 +55,10 @@ public class MainTest {
                     {yearMade, int.class}
             };
             Class<?>[] classes = {int.class, int.class};
+            assertTrue(testClass.hasModifier(classes, "public"), modifiedClassMessage);
             Object testInstance = testClass.createInstance(arguments);
             _assertEquals(size, testClass.getFieldValue(testInstance, attributeName1), modifiedClassMessage);
             _assertEquals(yearMade, testClass.getFieldValue(testInstance, attributeName2), modifiedClassMessage);
-            assertTrue(testClass.hasModifier(classes, "public"), modifiedClassMessage);
         }
     }
 
@@ -70,7 +71,8 @@ public class MainTest {
                 Arguments.of(10, yearPivot - 6),
                 Arguments.of(12, yearPivot - 26),
                 Arguments.of(43, yearPivot + 23),
-                Arguments.of(7, yearPivot)
+                Arguments.of(7, yearPivot),
+                Arguments.of(0, 0)
         );
     }
 
@@ -86,10 +88,10 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    public void correctGetSizeMethod(int value1, int value2) throws Throwable {
+    public void correctGetSizeMethod(int value1) throws Throwable {
         Object[][] arguments = {
                 {value1, int.class},
-                {value2, int.class}
+                {2000, int.class}
         };
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
@@ -118,7 +120,7 @@ public class MainTest {
     @MethodSource("inputProvider")
     public void correctDisplaySizeMethod(int value1, int value2) throws Throwable {
         Object[][] arguments = {
-                {value1, int.class},
+                {3, int.class},
                 {value2, int.class}
         };
         Object testInstance = testClass.createInstance(arguments);
@@ -131,12 +133,12 @@ public class MainTest {
 
         if (value2 > yearPivot) {
             testClass.callMethod(methodName, testInstance, new Clause[]{
-                    new StringLiteral("The size is " + value1)
-            }, "Your main method does not print the correct output");
+                    new StringLiteral("The size is 3")
+            }, "Your " + methodName + " method does not print the correct output.");
         } else {
             testClass.callMethod(methodName, testInstance, new Clause[]{
                     new StringLiteral("This shirt is no longer carried")
-            }, "Your main method does not print the correct output");
+            }, "Your " + methodName + " method does not print the correct output.");
         }
     }
 
