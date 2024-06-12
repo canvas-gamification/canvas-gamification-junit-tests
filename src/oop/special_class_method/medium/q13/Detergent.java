@@ -16,4 +16,8 @@ public class Detergent {
     public void setManufacturer(String a) {
         manufacturer = a;
     }
+
+    public void upgradeSize() {
+        volume *= 2;
+    }
 }
