@@ -16,5 +16,10 @@ public class Water {
     public void setVolume(double a) {
         this.volume = a;
     }
+
+    public void filter() {
+        volume -= 0.001;
+        quality = "Filtered";
+    }
 }
 
