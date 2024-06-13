@@ -24,5 +24,9 @@ public class Laptop {
     public String getColour() {
         return colour;
     }
+
+    public void addSticker(String s) {
+        colour += " and " + s;
+    }
 }
 

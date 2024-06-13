@@ -22,6 +22,7 @@ public class MainTest {
     private final String attributeName2 = "colour";
     private final String getAttributeMethodName2 = "getColour";
     private final String setAttributeMethodName2 = "setColour";
+    private final String specialMethodName = "addSticker";
     private ObjectTest testClass;
 
     @BeforeEach
@@ -53,7 +54,8 @@ public class MainTest {
                 Arguments.of(1989, "Black"),
                 Arguments.of(2020, "Blue"),
                 Arguments.of(2017, "White"),
-                Arguments.of(2010, "Yellow")
+                Arguments.of(2010, "Yellow"),
+                Arguments.of(0, "")
         );
     }
 
@@ -63,7 +65,8 @@ public class MainTest {
                 Arguments.of(2022, "Black", 1987),
                 Arguments.of(2019, "Blue", 2001),
                 Arguments.of(2013, "White", 2007),
-                Arguments.of(1999, "Yellow", 2006)
+                Arguments.of(1999, "Yellow", 2006),
+                Arguments.of(2027, "Green", 0)
 
         );
     }
@@ -74,7 +77,8 @@ public class MainTest {
                 Arguments.of(10, "Black", "Green"),
                 Arguments.of(12, "Blue", "Red"),
                 Arguments.of(43, "White", "Gray"),
-                Arguments.of(7, "Yellow", "Orange")
+                Arguments.of(7, "Yellow", "Orange"),
+                Arguments.of(14, "lilac", "")
 
         );
     }
@@ -173,9 +177,9 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("updateIntegerInputProvider")
-    public void correctSetYearMadeMethod(int initialiValue, String value2, int updatedValue) throws Throwable {
+    public void correctSetYearMadeMethod(int initialValue, String value2, int updatedValue) throws Throwable {
         Object[][] instantiationArguments = {
-                {initialiValue, int.class},
+                {initialValue, int.class},
                 {value2, String.class}
         };
         Object[][] setMethodArguments = {
@@ -229,6 +233,40 @@ public class MainTest {
                 incorrectSetterMessage);
     }
 
+    @Test
+    public void addStickerIsDefinedCorrectly() {
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(specialMethodName, new Class<?>[]{String.class}), String.format(incorrectMethodDefinition, specialMethodName, className));
+        assertTrue(testClass.hasModifier(specialMethodName, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, specialMethodName, className));
+        assertTrue(testClass.hasReturnType(specialMethodName, new Class<?>[]{String.class}, Void.TYPE), String.format(incorrectReturnType, specialMethodName, className));
+    }
+
+    @ParameterizedTest
+    @MethodSource("updateStringInputProvider")
+    public void correctAddStickerMethod(int value1, String value2, String addedValue) throws Throwable {
+        Object[][] instantiationArguments = {
+                {value1, int.class},
+                {value2, String.class}
+        };
+        Object[][] methodArguments = {
+                {addedValue, String.class}
+        };
+        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod(specialMethodName, new Class<?>[]{String.class}), String.format(incorrectMethodDefinition, specialMethodName, className));
+        assertTrue(testClass.hasModifier(specialMethodName, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, specialMethodName, className));
+        assertTrue(testClass.hasReturnType(specialMethodName, new Class<?>[]{String.class}, Void.TYPE), String.format(incorrectReturnType, specialMethodName, className));
+        Object testInstance = testClass.createInstance(instantiationArguments);
+        testClass.callMethod(specialMethodName, methodArguments, testInstance);
+        String incorrectSetterMessage =
+                "Your " + specialMethodName + " method does not correctly update the value of " + attributeName2 + ".";
+        _assertEquals(value2 + " and " + addedValue, testClass.getFieldValue(testInstance, attributeName2),
+                incorrectSetterMessage);
+    }
+
     @ParameterizedTest
     @MethodSource("inputProvider")
     public void methodsWorkingTogether(int value1, String value2) throws Throwable {
@@ -253,5 +291,14 @@ public class MainTest {
         testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
         _assertEquals(value2, testClass.callMethod(getAttributeMethodName2, testInstance),
                 "Your " + getAttributeMethodName2 + " method does not correctly update the value of " + attributeName2 + " after using the " + setAttributeMethodName2 + " method.");
+
+        Object[][] methodArguments = {
+                {"purple", String.class}
+        };
+        testClass.callMethod(specialMethodName, methodArguments, testInstance);
+        String incorrectSetterMessage =
+                "Your " + specialMethodName + " method does not correctly update the value of " + attributeName2 + " after using the other methods.";
+        _assertEquals(value2 + " and purple", testClass.getFieldValue(testInstance, attributeName2),
+                incorrectSetterMessage);
     }
 }
