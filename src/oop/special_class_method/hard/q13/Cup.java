@@ -18,5 +18,9 @@ public class Cup {
     public void setLiquid(String a) {
         this.liquid = a;
     }
+
+    public String toString() {
+        return "The " + colour + " Cup has " + volume + "ml of " + liquid;
+    }
 }
 
