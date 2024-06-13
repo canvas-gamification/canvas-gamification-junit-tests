@@ -25,8 +25,8 @@ public class Laptop {
         return colour;
     }
 
-    public void addSticker(String s) {
-        colour += " and " + s;
+    public String toString() {
+        return "The " + colour + " Cup was made in " + yearMade;
     }
 }
 

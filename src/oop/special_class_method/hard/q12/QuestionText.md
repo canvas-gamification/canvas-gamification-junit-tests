@@ -27,7 +27,6 @@ Your `Laptop` class must have the following items:
     - a `setColour` method which accepts a `String` and uses it to set the value of the **colour** attribute and should
       not return anything.
     - a `getColour` method which returns the value stored in the **colour** attribute
-    - a `addSticker` method which accepts a `String` and uses it to change the value of **colour**. The new colour should
-      be in the format "x and y" where x is the original colour and y is the passed `String`. It should not return
-      anything.
+    - a `toString`  method which returns a `String` of the format "The x Cup was made in y" where x is **colour**, y is
+      **yearMade**.
     - These methods must be visible from other classes.
