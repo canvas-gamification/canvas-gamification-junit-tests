@@ -17,9 +17,8 @@ public class Water {
         this.volume = a;
     }
 
-    public void filter() {
-        volume -= 0.001;
-        quality = "Filtered";
+    public String toString() {
+        return "The quality of the water is " + quality + " and the volume is " + volume;
     }
 }
 

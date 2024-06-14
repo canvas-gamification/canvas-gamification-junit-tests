@@ -25,5 +25,6 @@ You need to add the following items:
 - Methods:
     - a `setVolume` method which accepts a `double` and uses it to set the value of the **volume** attribute.
     - a `getVolume` method which returns the value stored in the **volume** attribute.
-    - a `filter` method which subtracts 0.001 from the **volume** and changes the quality to `Filtered`.
+    - a `toString` method which returns a `String` of the format "The quality of the water is x and the volume is y" 
+      where x is the value of **quality** and y is the value of **volume**.
     - These methods must be visible from other classes.

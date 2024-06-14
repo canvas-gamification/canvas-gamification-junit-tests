@@ -16,11 +16,9 @@ public class MainTest {
     private final String attributeName2 = "volume";
     private final String getAttributeMethodName2 = "getVolume";
     private final String setAttributeMethodName2 = "setVolume";
-    private final String specialMethodName = "filter";
+    private final String expectedString = "The quality of the water is %s and the volume is %s";
     private final String initialValue1 = "Good";
     private final double initialValue2 = 1000.0;
-    private final String changedValue = "Filtered";
-    private final double subtraction = 0.001;
     private ObjectTest testClass;
 
     @BeforeEach
@@ -42,7 +40,6 @@ public class MainTest {
                 "You have modified the provided portions of the " + className + " class constructor. Please revert it to its original state.");
         assertTrue(testClass.hasModifier(classes, "public"),
                 "You have modified the provided portions of the " + className + " class constructor. Please revert it to its original state.");
-
     }
 
     @Test
@@ -101,32 +98,20 @@ public class MainTest {
                 incorrectSetterMessage);
     }
 
-    @Test
-    public void filterIsDefinedCorrectly() {
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(specialMethodName, null), String.format(incorrectMethodDefinition, specialMethodName, className));
-        assertTrue(testClass.hasModifier(specialMethodName, null, "public"), String.format(incorrectModifierMessage, specialMethodName, className));
-        assertTrue(testClass.hasReturnType(specialMethodName, null, Void.TYPE), String.format(incorrectReturnType, specialMethodName, className));
-    }
-
     @RepeatedTest(10)
-    public void correctFilterMethod() throws Throwable {
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(specialMethodName, null), String.format(incorrectMethodDefinition, specialMethodName, className));
-        assertTrue(testClass.hasModifier(specialMethodName, null, "public"), String.format(incorrectModifierMessage, specialMethodName, className));
-        assertTrue(testClass.hasReturnType(specialMethodName, null, Void.TYPE), String.format(incorrectReturnType, specialMethodName, className));
+    public void correctToStringMethod() throws Throwable {
+        String incorrectMethodDefinition = "The toString method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The toString method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The toString method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod("toString", null), String.format(incorrectMethodDefinition, className));
+        assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, className));
+        assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, className));
         Object testInstance = testClass.createInstance();
-        testClass.callMethod(specialMethodName, testInstance);
-        String incorrectFilterMessage =
-                "Your " + specialMethodName + " method does not correctly update the value of %s.";
-        _assertEquals(changedValue, testClass.getFieldValue(testInstance, attributeName1),
-                String.format(incorrectFilterMessage, attributeName1));
-        _assertEquals(initialValue2 - subtraction, testClass.getFieldValue(testInstance, attributeName2),
-                String.format(incorrectFilterMessage, attributeName2));
+        String output = (String) testClass.callMethod("toString", testInstance);
+        String incorrectToStringMessage =
+                "Your " + className + " toString method does not return the correct String.";
+        _assertEquals(String.format(expectedString, initialValue1, initialValue2), output,
+                String.format(incorrectToStringMessage, attributeName1));
     }
 
     @RepeatedTest(10)
@@ -139,12 +124,10 @@ public class MainTest {
         testClass.callMethod(setAttributeMethodName2, setMethodArguments, testInstance);
         _assertEquals(value, testClass.callMethod(getAttributeMethodName2, testInstance),
                 "Your " + getAttributeMethodName2 + " method does not correctly update the value of " + setAttributeMethodName2 + " after using the " + getAttributeMethodName2 + " method.");
-        testClass.callMethod(specialMethodName, testInstance);
-        String incorrectFilterMessage =
-                "Your " + specialMethodName + " method does not correctly update the value of %s.";
-        _assertEquals(changedValue, testClass.getFieldValue(testInstance, attributeName1),
-                String.format(incorrectFilterMessage, attributeName1));
-        _assertEquals(value - subtraction, testClass.getFieldValue(testInstance, attributeName2),
-                String.format(incorrectFilterMessage, attributeName2));
+        String output = (String) testClass.callMethod("toString", testInstance);
+        String incorrectToStringMessage =
+                "Your " + className + " toString method does not return the correct String after calling the " + setAttributeMethodName2 + " method.";
+        _assertEquals(String.format(expectedString, initialValue1, value), output,
+                String.format(incorrectToStringMessage, attributeName1));
     }
 }
