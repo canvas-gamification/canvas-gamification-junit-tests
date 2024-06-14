@@ -20,6 +20,7 @@ public class MainTest {
     private final String getAttributeMethodName1 = "getNumEyes";
     private final String attributeName2 = "colour";
     private final String getAttributeMethodName2 = "getColour";
+    private final String toString = "The %s Alien has %s eyes";
     private ObjectTest testClass;
 
     @BeforeEach
@@ -135,5 +136,24 @@ public class MainTest {
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName2, testInstance);
         _assertEquals(value2, getMethodOutput,
                 "Your " + getAttributeMethodName2 + " method does not return the value of the " + attributeName2 + " attribute.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void correctToStringMethod(int value1, String value2) throws Throwable {
+        String incorrectMethodDefinition = "The toString method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The toString method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The toString method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod("toString", null), String.format(incorrectMethodDefinition, className));
+        assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, className));
+        assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, className));
+        Object[][] arguments = {
+                {value1, int.class},
+                {value2, String.class}
+        };
+        Object testInstance = testClass.createInstance(arguments);
+        Object methodOutput = testClass.callMethod("toString", testInstance);
+        _assertEquals(String.format(toString, value2, value1), methodOutput,
+                "Your " + className + " toString method does not return the correct String.");
     }
 }
