@@ -11,7 +11,6 @@ import static global.tools.CustomAssertions._assertEquals;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -24,6 +23,8 @@ public class MainTest {
     private final String setAttributeName1 = "setType";
     private final String getAttributeName2 = "getSize";
     private final String setAttributeName2 = "setSize";
+    private final String expectedString = "This is a %s tree with %s centimeters in diameter.";
+    private final int attributeIncrease = 4;
 
     private ObjectTest testClass;
 
@@ -97,7 +98,7 @@ public class MainTest {
         Object classInstance = testClass.createInstance(constructorArgs);
         String incorrectNumDays = "The %s method in the %s class does not correctly change the %s attribute.";
         testClass.callMethod(methodName, classInstance);
-        _assertEquals(value2 + 4, testClass.getFieldValue(classInstance, attributeName2),
+        _assertEquals(value2 + attributeIncrease, testClass.getFieldValue(classInstance, attributeName2),
                 String.format(incorrectNumDays, methodName, className, attributeName2));
     }
 
@@ -119,7 +120,7 @@ public class MainTest {
         Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
-                "Your", getAttributeName1, "does not correctly get the value of the", attributeName1, "attribute.");
+                "Your", getAttributeName1, "method does not correctly get the value of the", attributeName1, "attribute.");
         Object getMethodOutput = testClass.callMethod(getAttributeName1, getMethodModifiers, classInstance);
         _assertEquals(value1, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -140,7 +141,7 @@ public class MainTest {
         Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
-                "Your", getAttributeName2, "does not correctly get the value of the", attributeName2, "attribute.");
+                "Your", getAttributeName2, "method does not correctly get the value of the", attributeName2, "attribute.");
         Object getMethodOutput = testClass.callMethod(getAttributeName2, getMethodModifiers, classInstance);
         _assertEquals(value2, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -164,8 +165,8 @@ public class MainTest {
         };
         String[] setMethodModifiers = {"public"};
         String incorrectSetMethodMessage = String.join(" ",
-                "Your", setAttributeName1, "does not correctly set the value of the", attributeName1, "attribute.");
-        Object setMethodOutput = testClass.callMethod(setAttributeName1, setSizeArguments, setMethodModifiers, classInstance);
+                "Your", setAttributeName1, "method does not correctly set the value of the", attributeName1, "attribute.");
+        testClass.callMethod(setAttributeName1, setSizeArguments, setMethodModifiers, classInstance);
         _assertEquals(updatedValue1, testClass.getFieldValue(classInstance, attributeName1), incorrectSetMethodMessage);
     }
 
@@ -188,7 +189,7 @@ public class MainTest {
         };
         String[] setMethodModifiers = {"public"};
         String incorrectSetMethodMessage = String.join(" ",
-                "Your", setAttributeName2, "does not correctly set the value of the", attributeName2, "attribute.");
+                "Your", setAttributeName2, "method does not correctly set the value of the", attributeName2, "attribute.");
         testClass.callMethod(setAttributeName2, setSizeArguments, setMethodModifiers, classInstance);
         _assertEquals(updatedValue2, testClass.getFieldValue(classInstance, attributeName2), incorrectSetMethodMessage);
     }
@@ -208,9 +209,61 @@ public class MainTest {
         };
         Object classInstance = testClass.createInstance(arguments);
         String[] methodModifiers = {"public"};
-        String expected = "This is a " + value1 + " tree with " + value2 + " centimeters in diameter.";
+        String expected = String.format(expectedString, value1, value2);
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, "toString method does not return the correct String.");
+        Object output = testClass.callMethod("toString", methodModifiers, classInstance);
+        _assertEquals(expected, output, incorrectToStringMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void methodsWorkingTogether(String value1, double value2, String updatedValue1, double updatedValue2) throws Throwable {
+        Object[][] arguments = {
+                {value1, String.class},
+                {value2, double.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+
+        Object[][] setSizeArguments = {
+                {updatedValue1, String.class}
+        };
+        String[] setMethodModifiers = {"public"};
+        String incorrectSetMethodMessage = String.join(" ",
+                "Your", setAttributeName1, "method does not correctly set the value of the", attributeName1, "attribute.");
+        testClass.callMethod(setAttributeName1, setSizeArguments, setMethodModifiers, classInstance);
+        _assertEquals(updatedValue1, testClass.getFieldValue(classInstance, attributeName1), incorrectSetMethodMessage);
+
+        setSizeArguments = new Object[][]{
+                {updatedValue2, double.class}
+        };
+        setMethodModifiers = new String[]{"public"};
+        incorrectSetMethodMessage = String.join(" ",
+                "Your", setAttributeName2, "method does not correctly set the value of the", attributeName2, "attribute.");
+        testClass.callMethod(setAttributeName2, setSizeArguments, setMethodModifiers, classInstance);
+        _assertEquals(updatedValue2, testClass.getFieldValue(classInstance, attributeName2), incorrectSetMethodMessage);
+
+        String[] getMethodModifiers = {"public"};
+        String incorrectGetMethodMessage = String.join(" ",
+                "Your", getAttributeName1, "method does not correctly get the value of the", attributeName1, "attribute after calling the set methods.");
+        Object getMethodOutput = testClass.callMethod(getAttributeName1, getMethodModifiers, classInstance);
+        _assertEquals(updatedValue1, getMethodOutput, incorrectGetMethodMessage);
+
+        getMethodModifiers = new String[]{"public"};
+        incorrectGetMethodMessage = String.join(" ",
+                "Your", getAttributeName2, "method does not correctly get the value of the", attributeName2, "attribute after calling the set methods.");
+        getMethodOutput = testClass.callMethod(getAttributeName2, getMethodModifiers, classInstance);
+        _assertEquals(updatedValue2, getMethodOutput, incorrectGetMethodMessage);
+
+        String incorrectNumDays = "The %s method in the %s class does not correctly change the %s attribute.";
+        testClass.callMethod(methodName, classInstance);
+        _assertEquals(updatedValue2 + attributeIncrease, testClass.getFieldValue(classInstance, attributeName2),
+                String.format(incorrectNumDays, methodName, className, attributeName2));
+
+        String[] methodModifiers = {"public"};
+        String expected = String.format(expectedString, updatedValue1, updatedValue2 + attributeIncrease);
+        String incorrectToStringMessage = String.join(" ",
+                "Your", className, "toString method does not return the correct String after calling the set, get, and", methodName, "methods.");
         Object output = testClass.callMethod("toString", methodModifiers, classInstance);
         _assertEquals(expected, output, incorrectToStringMessage);
     }
