@@ -2,6 +2,7 @@ package oop.special_class_method.hard.q14;
 
 import global.ObjectTest;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -16,9 +17,11 @@ public class MainTest {
     // Parsons with Distractors
 
     private final String className = "Bottle";
-    private final String attributeName = "isFull";
+    private final String attributeName1 = "isFull";
     private final String getAttributeMethodName = "getIsFull";
     private final String setAttributeMethodName = "setIsFull";
+    private final String emptyString = "I am empty";
+    private final String fullString = "I am full";
     private ObjectTest testClass;
 
     @BeforeEach
@@ -29,12 +32,12 @@ public class MainTest {
 
     @Test
     public void bottleClassHasCorrectAttributes() {
-        assertTrue(testClass.hasField(attributeName),
-                "Your " + className + " class is missing the " + attributeName + " attribute, or it is spelled incorrectly.");
-        assertTrue(testClass.hasField(attributeName, boolean.class),
-                "Your " + attributeName + " does not have the correct type.");
-        assertTrue(testClass.hasModifier(attributeName, "private"),
-                "Your " + attributeName + " does not have the correct visibility modifier.");
+        assertTrue(testClass.hasField(attributeName1),
+                "Your " + className + " class is missing the " + attributeName1 + " attribute, or it is spelled incorrectly.");
+        assertTrue(testClass.hasField(attributeName1, boolean.class),
+                "Your " + attributeName1 + " does not have the correct type.");
+        assertTrue(testClass.hasModifier(attributeName1, "private"),
+                "Your " + attributeName1 + " does not have the correct visibility modifier.");
     }
 
 
@@ -56,11 +59,11 @@ public class MainTest {
                 "Your " + className + " constructor does not have the correct visibility modifiers.");
     }
 
-    @Test
+    @RepeatedTest(5)
     public void bottleClassHasCorrectConstructor() throws Throwable {
         Object classInstance = testClass.createInstance();
-        _assertEquals(false, testClass.getFieldValue(classInstance, attributeName),
-                "Your " + className + " constructor does not initialize the " + attributeName + " attribute to the correct value.");
+        _assertEquals(false, testClass.getFieldValue(classInstance, attributeName1),
+                "Your " + className + " constructor does not initialize the " + attributeName1 + " attribute to the correct value.");
     }
 
     @Test
@@ -83,10 +86,10 @@ public class MainTest {
         assertTrue(testClass.hasModifier(getAttributeMethodName, null, "public"), String.format(incorrectModifierMessage, getAttributeMethodName, className));
         assertTrue(testClass.hasReturnType(getAttributeMethodName, null, boolean.class), String.format(incorrectReturnType, getAttributeMethodName, className));
         Object testInstance = testClass.createInstance();
-        testClass.setFieldValue(testInstance, value, attributeName);
+        testClass.setFieldValue(testInstance, value, attributeName1);
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName, testInstance);
         _assertEquals(value, getMethodOutput,
-                "Your " + getAttributeMethodName + " method does not return the value of the " + attributeName + " attribute.");
+                "Your " + getAttributeMethodName + " method does not return the value of the " + attributeName1 + " attribute.");
     }
 
     @Test
@@ -109,14 +112,14 @@ public class MainTest {
         assertTrue(testClass.hasModifier(setAttributeMethodName, new Class<?>[]{boolean.class}, "public"), String.format(incorrectModifierMessage, setAttributeMethodName, className));
         assertTrue(testClass.hasReturnType(setAttributeMethodName, new Class<?>[]{boolean.class}, Void.TYPE), String.format(incorrectReturnType, setAttributeMethodName, className));
         Object testInstance = testClass.createInstance();
-        testClass.setFieldValue(testInstance, initialiValue, attributeName);
+        testClass.setFieldValue(testInstance, initialiValue, attributeName1);
         Object[][] setMethodArguments = {
                 {updatedValue, boolean.class}
         };
         testClass.callMethod(setAttributeMethodName, setMethodArguments, testInstance);
         String incorrectSetterMessage =
-                "Your " + setAttributeMethodName + " method does not correctly update the value of " + attributeName + ".";
-        _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName),
+                "Your " + setAttributeMethodName + " method does not correctly update the value of " + attributeName1 + ".";
+        _assertEquals(updatedValue, testClass.getFieldValue(testInstance, attributeName1),
                 incorrectSetterMessage);
     }
 
@@ -131,12 +134,12 @@ public class MainTest {
         assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, "toString", className));
         assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, "toString", className));
         Object testInstance = testClass.createInstance();
-        testClass.setFieldValue(testInstance, value, attributeName);
+        testClass.setFieldValue(testInstance, value, attributeName1);
         String expectedOutput;
         if (value)
-            expectedOutput = "I am full";
+            expectedOutput = fullString;
         else
-            expectedOutput = "I am empty";
+            expectedOutput = emptyString;
         Object toStringOutput = testClass.callMethod("toString", testInstance);
         _assertEquals(expectedOutput, toStringOutput, incorrectToStringMessage);
     }
@@ -145,23 +148,23 @@ public class MainTest {
     @MethodSource("inputProvider")
     public void methodsWorkingTogether(boolean initialValue, boolean updatedValue) throws Throwable {
         Object testInstance = testClass.createInstance();
-        testClass.setFieldValue(testInstance, initialValue, attributeName);
+        testClass.setFieldValue(testInstance, initialValue, attributeName1);
         Object getMethodOutput = testClass.callMethod(getAttributeMethodName, testInstance);
         _assertEquals(initialValue, getMethodOutput,
-                "Your " + getAttributeMethodName + " method does not return the value of the " + attributeName + " attribute.");
+                "Your " + getAttributeMethodName + " method does not return the value of the " + attributeName1 + " attribute.");
         Object[][] setMethodArguments = {
                 {updatedValue, boolean.class}
         };
         testClass.callMethod(setAttributeMethodName, setMethodArguments, testInstance);
         _assertEquals(updatedValue, testClass.callMethod(getAttributeMethodName, testInstance),
-                "Your " + getAttributeMethodName + " method does not correctly return the value of " + attributeName + " after using the " + setAttributeMethodName + " method.");
+                "Your " + getAttributeMethodName + " method does not correctly return the value of " + attributeName1 + " after using the " + setAttributeMethodName + " method.");
         String expectedOutput;
         if (updatedValue)
-            expectedOutput = "I am full";
+            expectedOutput = fullString;
         else
-            expectedOutput = "I am empty";
+            expectedOutput = emptyString;
         Object toStringOutput = testClass.callMethod("toString", testInstance);
         _assertEquals(expectedOutput, toStringOutput,
-                "Your toString method does not work properly after using " + getAttributeMethodName + " method and " + setAttributeMethodName + " method.");
+                "Your toString method does not work properly after using the " + getAttributeMethodName + " method and " + setAttributeMethodName + " method.");
     }
 }
