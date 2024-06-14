@@ -22,7 +22,7 @@ public class MainTest {
     private final String attributeName2 = "colour";
     private final String getAttributeMethodName2 = "getColour";
     private final String setAttributeMethodName2 = "setColour";
-    private final String specialMethodName = "addSticker";
+    private final String toString = "The %s Cup was made in %s";
     private ObjectTest testClass;
 
     @BeforeEach
@@ -233,38 +233,23 @@ public class MainTest {
                 incorrectSetterMessage);
     }
 
-    @Test
-    public void addStickerIsDefinedCorrectly() {
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(specialMethodName, new Class<?>[]{String.class}), String.format(incorrectMethodDefinition, specialMethodName, className));
-        assertTrue(testClass.hasModifier(specialMethodName, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, specialMethodName, className));
-        assertTrue(testClass.hasReturnType(specialMethodName, new Class<?>[]{String.class}, Void.TYPE), String.format(incorrectReturnType, specialMethodName, className));
-    }
-
     @ParameterizedTest
-    @MethodSource("updateStringInputProvider")
-    public void correctAddStickerMethod(int value1, String value2, String addedValue) throws Throwable {
+    @MethodSource("inputProvider")
+    public void correctToStringMethod(int value1, String value2) throws Throwable {
         Object[][] instantiationArguments = {
                 {value1, int.class},
                 {value2, String.class}
         };
-        Object[][] methodArguments = {
-                {addedValue, String.class}
-        };
-        String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
-        String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
-        String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
-        assertTrue(testClass.hasMethod(specialMethodName, new Class<?>[]{String.class}), String.format(incorrectMethodDefinition, specialMethodName, className));
-        assertTrue(testClass.hasModifier(specialMethodName, new Class<?>[]{String.class}, "public"), String.format(incorrectModifierMessage, specialMethodName, className));
-        assertTrue(testClass.hasReturnType(specialMethodName, new Class<?>[]{String.class}, Void.TYPE), String.format(incorrectReturnType, specialMethodName, className));
+        String incorrectMethodDefinition = "The toString method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
+        String incorrectModifierMessage = "The toString method in the %s class has the wrong visibility modifier.";
+        String incorrectReturnType = "The toString method in the %s class has the incorrect return type.";
+        assertTrue(testClass.hasMethod("toString", null), String.format(incorrectMethodDefinition, className));
+        assertTrue(testClass.hasModifier("toString", null, "public"), String.format(incorrectModifierMessage, className));
+        assertTrue(testClass.hasReturnType("toString", null, String.class), String.format(incorrectReturnType, className));
         Object testInstance = testClass.createInstance(instantiationArguments);
-        testClass.callMethod(specialMethodName, methodArguments, testInstance);
-        String incorrectSetterMessage =
-                "Your " + specialMethodName + " method does not correctly update the value of " + attributeName2 + ".";
-        _assertEquals(value2 + " and " + addedValue, testClass.getFieldValue(testInstance, attributeName2),
-                incorrectSetterMessage);
+        String output = (String) testClass.callMethod("toString", testInstance);
+        _assertEquals(String.format(toString, value2, value1), output,
+                String.join(" ","Your", className, "toString method does not return the correct String."));
     }
 
     @ParameterizedTest
@@ -292,13 +277,10 @@ public class MainTest {
         _assertEquals(value2, testClass.callMethod(getAttributeMethodName2, testInstance),
                 "Your " + getAttributeMethodName2 + " method does not correctly update the value of " + attributeName2 + " after using the " + setAttributeMethodName2 + " method.");
 
-        Object[][] methodArguments = {
-                {"purple", String.class}
-        };
-        testClass.callMethod(specialMethodName, methodArguments, testInstance);
+        String output = (String) testClass.callMethod("toString", testInstance);
         String incorrectSetterMessage =
-                "Your " + specialMethodName + " method does not correctly update the value of " + attributeName2 + " after using the other methods.";
-        _assertEquals(value2 + " and purple", testClass.getFieldValue(testInstance, attributeName2),
+                "Your toString method does not return the correct String after using the other methods.";
+        _assertEquals(String.format(toString, value2, value1), output,
                 incorrectSetterMessage);
     }
 }
