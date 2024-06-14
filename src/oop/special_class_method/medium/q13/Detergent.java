@@ -17,7 +17,7 @@ public class Detergent {
         manufacturer = a;
     }
 
-    public void upgradeSize() {
-        volume *= 2;
+    public String toString() {
+        return volume + "ml of " + manufacturer + " Detergent";
     }
 }

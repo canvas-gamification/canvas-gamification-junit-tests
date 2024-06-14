@@ -24,5 +24,6 @@ You need to add the following items:
     - a `setManufacturer` method which accepts a `String` and uses it to set the value of the **manufacturer** attribute
       and must return nothing.
     - a `getManufacturer` method which returns the value stored in the **manufacturer** attribute.
-    - an `upgradeSize` method which multiplies the **volume** attribute by 2 and returns nothing.
+    - a `toString` method which returns a `String` of the format "xml of y Detergent" where x is **volume** and y is
+      **manufacturer**.
     - These methods must be visible from other classes.
