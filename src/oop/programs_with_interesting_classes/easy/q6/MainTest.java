@@ -20,11 +20,12 @@ public class MainTest {
     // Parsons
 
     private final String className = "Course";
-    private final String attributeName1 = "textBookFee";
+    private final String attributeName1 = "textbookFee";
     private final String attributeName2 = "suppliesFee";
     private final String attributeName3 = "labFee";
     private final String methodName = "calcTotalCost";
     private final String testClassName = "SemesterCost";
+    private final String mainOutput = "The total cost for this semester is: 737.71 dollars";
 
     private ObjectTest testClass;
     private ObjectTest classObject;
@@ -94,7 +95,7 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     @Tag("dependent1")
-    public void discordClassHasCorrectCalcTotalCostMethod(double value1, double value2, double value3) throws Throwable {
+    public void courseClassHasCorrectCalcTotalCostMethod(double value1, double value2, double value3) throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
@@ -117,11 +118,11 @@ public class MainTest {
     @Tag("dependency1")
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
-                new StringLiteral("The total cost for this semester is: 737.71 dollars"),
+                new StringLiteral(mainOutput),
                 new NewLine()
         };
         Object classInstance = classObject.createInstance();
         classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance,
-                clauses);
+                clauses, "Your main method does not print the correct output.");
     }
 }
