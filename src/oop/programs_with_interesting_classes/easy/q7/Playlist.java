@@ -9,10 +9,10 @@ public class Playlist {
         numItems = 0;
     }
 
-    public void addToPlaylist(Song oneItem) {
+    public void addToPlaylist(Song newSong) {
         if (numItems == songs.length)
             expandPlaylist();
-        songs[numItems] = oneItem;
+        songs[numItems] = newSong;
         numItems++;
     }
 
