@@ -15,7 +15,6 @@ import static global.tools.CustomAssertions._assertEquals;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest {
@@ -28,6 +27,8 @@ public class MainTest {
     private final String methodName = "usageCalculator";
     private final String getAttributeName1 = "getName";
     private final String testClassName = "TestWaterUsage";
+    private final double sum = 315.0;
+    private final String activity = "Watering Plants";
 
     private ObjectTest testClass;
     private ObjectTest classObject;
@@ -134,7 +135,7 @@ public class MainTest {
         Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
         String incorrectGetMethodMessage = String.join(" ",
-                "Your", getAttributeName1, "does not correctly get the value of the", attributeName1, "attribute.");
+                "Your", getAttributeName1, "method does not correctly get the value of the", attributeName1, "attribute.");
         Object getMethodOutput = testClass.callMethod(getAttributeName1, getMethodModifiers, classInstance);
         _assertEquals(value1, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -143,9 +144,9 @@ public class MainTest {
     @Tag("dependent1")
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
-                new StringLiteral("The total water usage is 315.0"),
+                new StringLiteral("The total water usage is " + sum),
                 new NewLine(),
-                new StringLiteral("The activity that uses the most water is Watering Plants")
+                new StringLiteral("The activity that uses the most water is " + activity)
         };
         Object classInstance = classObject.createInstance();
         classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance,

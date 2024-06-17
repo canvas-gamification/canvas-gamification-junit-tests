@@ -10,14 +10,15 @@ public class TestWaterUsage {
         dailyUsage += a2.usageCalculator();
         dailyUsage += a3.usageCalculator();
         System.out.println("The total water usage is " + dailyUsage);
-        double highestAmount = 0;
-        String worstActivity = "";
-        if (a1.usageCalculator() > highestAmount)
-            worstActivity = a1.getName();
-        if (a2.usageCalculator() > highestAmount)
+        double highestAmount = a1.usageCalculator();
+        String worstActivity = a1.getName();
+        if (a2.usageCalculator() > highestAmount) {
+            highestAmount = a2.usageCalculator();
             worstActivity = a2.getName();
-        if (a3.usageCalculator() > highestAmount)
+        }
+        if (a3.usageCalculator() > highestAmount) {
             worstActivity = a3.getName();
+        }
         System.out.println("The activity that uses the most water is " + worstActivity);
     }
 }
