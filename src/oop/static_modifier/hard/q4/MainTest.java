@@ -14,6 +14,7 @@ import static global.tools.CustomAssertions._assertEquals;
 
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -136,8 +137,12 @@ public class MainTest {
                 new Optional(new StringLiteral(" "))
         };
         Object classInstance = classObject.createInstance();
+        assertEquals(initialBeams, testClass.getFieldValue(null, staticAttributeName),
+                "Your " + className + " class does not initially have the correct value for the " + staticAttributeName + " attribute.");
         classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance,
                 clauses,
                 "Your " + testClassName + " class main method does not print the correct output.");
+        assertEquals(4, testClass.getFieldValue(null, staticAttributeName),
+                "Your main method does not correctly alter the value of the " + staticAttributeName + " attribute.");
     }
 }
