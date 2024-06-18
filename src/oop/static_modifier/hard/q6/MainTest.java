@@ -37,7 +37,7 @@ public class MainTest {
     private final double amount3 = 1.0;
     private final int num3 = 50;
 
-    private final static double initialBeams = 50;
+    private final static double initialFeed = 50;
 
     private ObjectTest testClass;
     private ObjectTest classObject;
@@ -51,7 +51,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(2)
+    @Order(1)
     public void farmHasRequiredAttributes() {
         String missingAttributeMessage = "The %s class is missing the %s attribute. Make sure that the class contains the attribute and it is spelt correctly.";
         String wrongTypeMessage = "The %s attribute in the %s class has the wrong type.";
@@ -66,24 +66,18 @@ public class MainTest {
         assertTrue(testClass.hasField(attributeName2), String.format(missingAttributeMessage, className, attributeName2));
         assertTrue(testClass.hasField(attributeName2, int.class), String.format(wrongTypeMessage, attributeName2, className));
         assertTrue(testClass.hasModifier(attributeName2, "private"), String.format(wrongModifierMessage, attributeName2, className));
+        _assertEquals(initialFeed, testClass.getFieldValue(null, staticAttributeName),
+                "Your " + staticAttributeName + " static attribute is not initialized correctly.");
     }
 
     @Test
-    @Order(3)
+    @Order(2)
     public void farmHasRequiredConstructor() {
         String missingConstructorMessage = "The %s class is missing a required constructor. Make sure that it is named correctly and has the correct parameters.";
         String wrongAccessModifier = "The %s class constructor has the wrong visibility modifier. Make sure that it is visible from all other classes.";
         Class<?>[] constructorArgs = new Class[]{double.class, int.class};
         assertTrue(testClass.hasConstructor(constructorArgs), String.format(missingConstructorMessage, className));
         assertTrue(testClass.hasModifier(constructorArgs, "public"), String.format(wrongAccessModifier, className));
-    }
-
-    @Test
-    @Order(1)
-    @Tag("dependency1")
-    public void staticVariableIsInitializedCorrectly() {
-        _assertEquals(initialBeams, testClass.getFieldValue(null, staticAttributeName),
-                "Your " + staticAttributeName + " static attribute is not initialized correctly.");
     }
 
     private static Stream<Arguments> inputProvider() {
@@ -104,7 +98,7 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     @Tag("dependency1")
-    @Order(4)
+    @Order(3)
     public void farmConstructorInitializesValuesCorrectly(double value1, int value2) throws Throwable {
         String wrongValueMessage = "The %s constructor did not initialize the %s attribute to the correct value based on the parameters passed to the constructor.";
         Object[][] constructorArgs = {
@@ -114,19 +108,21 @@ public class MainTest {
         Object checkupInstance = testClass.createInstance(constructorArgs);
         _assertEquals(value1, testClass.getFieldValue(checkupInstance, attributeName1), String.format(wrongValueMessage, className, attributeName1));
         _assertEquals(value2, testClass.getFieldValue(checkupInstance, attributeName2), String.format(wrongValueMessage, className, attributeName2));
+        _assertEquals(initialFeed, testClass.getFieldValue(null, staticAttributeName),
+                "Your " + className + " constructor should not alter the value of the " + staticAttributeName + " attribute.");
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
     @Tag("dependency1")
-    @Order(6)
-    public void farmClassHasCorrectReceiveDonationMethod(double value1, int value2, double value3) throws Throwable {
+    @Order(5)
+    public void farmClassHasCorrectFeedAnimalsMethod(double value1, int value2, double value3) throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectReturnType = "The %s method in the %s class has the incorrect return type.";
         assertTrue(testClass.hasMethod(methodName2, null), String.format(incorrectMethodDefinition, methodName2, className));
         assertTrue(testClass.hasModifier(methodName2, null, "public"), String.format(incorrectModifierMessage, methodName2, className));
-        assertTrue(testClass.hasReturnType(methodName2, null, Void.TYPE), String.format(incorrectReturnType, methodName2, className));
+        assertTrue(testClass.hasReturnType(methodName2, null, boolean.class), String.format(incorrectReturnType, methodName2, className));
         Object[][] constructorArgs = {
                 {value1, double.class},
                 {value2, int.class}
@@ -145,22 +141,24 @@ public class MainTest {
                     new Optional(new StringLiteral(" "))
             };
         }
-        testClass.callMethod(methodName2, classInstance, testSentence,
+        Object output = testClass.callMethod(methodName2, classInstance, testSentence,
                 "Your " + methodName2 + " method does not print the correct output.");
         if (value1 * value2 <= value3) {
             _assertEquals(value3 - value1 * value2, testClass.getFieldValue(null, staticAttributeName),
                     "Your " + methodName2 + " method does not correctly change the value of " + staticAttributeName + " attribute.");
+            _assertEquals(true, output, "Your " + methodName2 + " method does not return the correct value.");
         } else {
             _assertEquals(value3, testClass.getFieldValue(null, staticAttributeName),
                     "Your " + methodName2 + " method changes the value of " + staticAttributeName + " attribute when it should not.");
+            _assertEquals(false, output, "Your " + methodName2 + " method does not return the correct value.");
         }
-        testClass.setFieldValue(null, initialBeams, staticAttributeName);
+        testClass.setFieldValue(null, initialFeed, staticAttributeName);
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
     @Tag("dependency1")
-    @Order(8)
+    @Order(7)
     public void farmClassHasCorrectFoodNeededMethod(double value1, int value2) throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
@@ -180,38 +178,46 @@ public class MainTest {
 
     @Test
     @Tag("dependent1")
-    @Order(9)
+    @Order(8)
     public void correctMainMethod() throws Throwable {
-        double temp = initialBeams;
-        Clause[] clauses = new Clause[8];
-        if (temp >= amount1 * num1) {
-            temp -= amount1 * num1;
-            clauses[0] = new StringLiteral(printOutput1);
-        } else {
-            clauses[0] = new StringLiteral(printOutput2);
-        }
-        clauses[1] = new Optional(new StringLiteral(" "));
-        clauses[2] = new NewLine();
+        double temp = initialFeed;
+        Clause[] holdClause = new Clause[20];
+        int count = 0;
+        double[] amounts = {amount1*num1, amount2*num2, amount3*num3};
 
-        if (temp >= amount2 * num2) {
-            temp -= amount2 * num2;
-            clauses[3] = new StringLiteral(printOutput1);
-        } else {
-            clauses[3] = new StringLiteral(printOutput2);
+        for(int x = 0; x < 3; x++){
+            holdClause[count++] = new StringLiteral("Try to feed animals here\\.\\.\\.");
+            holdClause[count++] = new Optional(new StringLiteral(" "));
+            holdClause[count++] = new NewLine();
+            if(temp >= amounts[x]){
+                temp -= amounts[x];
+                holdClause[count++] = new StringLiteral(printOutput1);
+                holdClause[count++] = new Optional(new StringLiteral(" "));
+                holdClause[count++] = new NewLine();
+            }
+            else {
+                holdClause[count++] = new StringLiteral(printOutput2);
+                holdClause[count++] = new Optional(new StringLiteral(" "));
+                holdClause[count++] = new NewLine();
+                break;
+            }
         }
-        clauses[4] = new Optional(new StringLiteral(" "));
-        clauses[5] = new NewLine();
+        holdClause[count++] = new StringLiteral("There is no more food left today\\.");
+        holdClause[count] = new Optional(new StringLiteral(" "));
 
-        if (temp >= amount3 * num3) {
-            temp -= amount3 * num3;
-            clauses[6] = new StringLiteral(printOutput1);
-        } else {
-            clauses[6] = new StringLiteral(printOutput2);
+        if (count + 1 != holdClause.length){
+            Clause[] clause = new Clause[count + 1];
+            System.arraycopy(holdClause, 0, clause, 0, count + 1);
+            holdClause = clause;
         }
-        clauses[7] = new Optional(new StringLiteral(" "));
+
+        _assertEquals(initialFeed, testClass.getFieldValue(null, staticAttributeName),
+                "Your " + className + " class does not have the correct initial value for the " + staticAttributeName + " attribute.");
         Object classInstance = classObject.createInstance();
         classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance,
-                clauses,
+                holdClause,
                 "Your " + testClassName + " class main method does not print the correct output");
+        _assertEquals(temp, testClass.getFieldValue(null, staticAttributeName),
+                "Your main method does not correctly alter the value of the " + staticAttributeName + " attribute.");
     }
 }

@@ -14,12 +14,14 @@ public class Farm {
         return numAnimals * amountPerAnimal;
     }
 
-    public void feedAnimals() {
+    public boolean feedAnimals() {
         if (foodInSilo >= foodNeeded()) {
             foodInSilo -= foodNeeded();
             System.out.println("Animals fed and happy");
+            return true;
         } else {
             System.out.println("We need to buy more food");
+            return false;
         }
     }
 }
