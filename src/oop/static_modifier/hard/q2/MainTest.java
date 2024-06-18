@@ -14,7 +14,7 @@ import static global.tools.CustomAssertions._assertEquals;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
@@ -26,6 +26,7 @@ public class MainTest {
     private final String attributeName = "type";
     private final String setAttributeName = "setVoltage";
     private final String testClassName = "Test";
+    private final String expectedString = "This lightbulb is a %s light with %s voltage.";
     private final int initialStaticVariable = 100;
 
     private ObjectTest testClass;
@@ -53,6 +54,7 @@ public class MainTest {
         assertTrue(testClass.hasField(staticAttributeName, int.class), String.format(wrongTypeMessage, staticAttributeName, className));
         assertTrue(testClass.hasModifier(staticAttributeName, "private"), String.format(wrongModifierMessage, staticAttributeName, className));
         assertTrue(testClass.hasModifier(staticAttributeName, "static"), String.format(wrongStaticModifierMessage, staticAttributeName, className));
+        assertEquals(initialStaticVariable, testClass.getFieldValue(null, staticAttributeName), "The " + staticAttributeName + " attribute is not set to the correct initial value.");
     }
 
     @Test
@@ -99,31 +101,15 @@ public class MainTest {
         _assertEquals(initialStaticVariable, testClass.getFieldValue(checkupInstance, staticAttributeName), String.format(wrongValueMessage, className, setAttributeName));
     }
 
-    private static Stream<Arguments> setInputProvider() {
-        return Stream.of(
-                Arguments.of(100),
-                Arguments.of(200),
-                Arguments.of(110),
-                Arguments.of(20),
-                Arguments.of(130),
-                Arguments.of(40),
-                Arguments.of(20),
-                Arguments.of(0),
-                Arguments.of(300),
-                Arguments.of(70),
-                Arguments.of(40)
-        );
-    }
-
     @ParameterizedTest
-    @MethodSource("setInputProvider")
+    @MethodSource("inputProvider")
     @Order(4)
-    public void lightbulbClassHasCorrectSetVoltageMethod(int value2) throws Throwable {
+    public void lightbulbClassHasCorrectSetVoltageMethod(String value1, int value2) throws Throwable {
         String missingMethodMessage = "The %s class is missing the %s method. Make sure that the class contains the method and it is spelt correctly with the correct arguments as parameters.";
         String wrongTypeMessage = "The %s method in the %s class has the wrong return type.";
         String wrongModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
         String incorrectSetMethodMessage = String.join(" ",
-                "Your", setAttributeName, "does not correctly set the value of the", staticAttributeName, "attribute.");
+                "Your", setAttributeName, "method does not correctly set the value of the", staticAttributeName, "attribute.");
         assertTrue(testClass.hasMethod(setAttributeName, new Class<?>[]{int.class}),
                 String.format(missingMethodMessage, className, setAttributeName));
         assertTrue(testClass.hasMethod(setAttributeName, new Class<?>[]{int.class}, Void.TYPE),
@@ -162,11 +148,39 @@ public class MainTest {
         Object classInstance = testClass.createInstance(arguments);
         testClass.setFieldValue(null, value2, staticAttributeName);
         String[] methodModifiers = {"public"};
-        String expected = "This lightbulb is a " + value1 + " light with " + value2 + " voltage.";
         String incorrectToStringMessage = String.join(" ",
                 "Your", className, "toString method does not return the correct String.");
         Object output = testClass.callMethod("toString", methodModifiers, classInstance);
-        _assertEquals(expected, output, incorrectToStringMessage);
+        _assertEquals(String.format(expectedString, value1, value2), output, incorrectToStringMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    public void methodsWorkTogether(String value1, int value2) throws Throwable {
+        String missingMethodMessage = "The %s class is missing the %s method. Make sure that the class contains the method and it is spelt correctly with the correct arguments as parameters.";
+        String wrongTypeMessage = "The %s method in the %s class has the wrong return type.";
+        String wrongModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
+        assertTrue(testClass.hasMethod(setAttributeName, new Class<?>[]{int.class}),
+                String.format(missingMethodMessage, className, setAttributeName));
+        assertTrue(testClass.hasMethod(setAttributeName, new Class<?>[]{int.class}, Void.TYPE),
+                String.format(wrongTypeMessage, setAttributeName, className));
+        assertTrue(testClass.hasMethod(setAttributeName, new Class<?>[]{int.class}, Void.TYPE, new String[]{"public"}),
+                String.format(wrongModifierMessage, setAttributeName, className));
+        Object[][] arguments = {
+                {value1, String.class}
+        };
+        Object classInstance = testClass.createInstance(arguments);
+        Object[][] setSizeArguments = {
+                {value2, int.class}
+        };
+        String[] setMethodModifiers = {"public"};
+        testClass.callMethod(setAttributeName, setSizeArguments, setMethodModifiers, classInstance);
+
+        String[] methodModifiers = {"public"};
+        String incorrectToStringMessage = String.join(" ",
+                "Your", className, "toString method does not return the correct String after calling the", setAttributeName, "method.");
+        Object output = testClass.callMethod("toString", methodModifiers, classInstance);
+        _assertEquals(String.format(expectedString, value1, value2), output, incorrectToStringMessage);
     }
 
     @Test
