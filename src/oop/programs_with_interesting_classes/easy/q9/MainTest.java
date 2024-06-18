@@ -24,6 +24,7 @@ public class MainTest {
     private final String getAttributeName1 = "getType";
     private final String getAttributeName2 = "getDailyEmissionRate";
     private final String testClassName = "TestCarbonFootprint";
+    private final String activity = "Car";
 
     private ObjectTest testClass;
     private ObjectTest classObject;
@@ -95,7 +96,7 @@ public class MainTest {
         Object[][] arguments = {{value1, String.class}, {value2, double.class}};
         Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
-        String incorrectGetMethodMessage = String.join(" ", "Your", getAttributeName1, "does not correctly get the value of the", attributeName1, "attribute.");
+        String incorrectGetMethodMessage = String.join(" ", "Your", getAttributeName1, "method does not correctly get the value of the", attributeName1, "attribute.");
         Object getMethodOutput = testClass.callMethod(getAttributeName1, getMethodModifiers, classInstance);
         _assertEquals(value1, getMethodOutput, incorrectGetMethodMessage);
     }
@@ -112,15 +113,16 @@ public class MainTest {
         Object[][] arguments = {{value1, String.class}, {value2, double.class}};
         Object classInstance = testClass.createInstance(arguments);
         String[] getMethodModifiers = {"public"};
-        String incorrectGetMethodMessage = String.join(" ", "Your", getAttributeName2, "does not correctly get the value of the", attributeName2, "attribute.");
+        String incorrectGetMethodMessage = String.join(" ", "Your", getAttributeName2, "method does not correctly get the value of the", attributeName2, "attribute.");
         Object getMethodOutput = testClass.callMethod(getAttributeName2, getMethodModifiers, classInstance);
         _assertEquals(value2, getMethodOutput, incorrectGetMethodMessage);
     }
 
     @Test
     public void correctMainMethod() throws Throwable {
-        Clause[] clauses = {new StringLiteral("The activity that generates the most greenhouse gases is Car")};
+        Clause[] clauses = {new StringLiteral("The activity that generates the most greenhouse gases is " + activity)};
         Object classInstance = classObject.createInstance();
-        classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance, clauses, "Your " + className + " class main method does not print the correct output.");
+        classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance, clauses,
+                "Your " + className + " class main method does not print the correct output.");
     }
 }
