@@ -15,7 +15,6 @@ import static global.tools.CustomAssertions._assertEquals;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -42,7 +41,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(2)
+    @Order(1)
     public void candyStoreHasRequiredAttributes() {
         String missingAttributeMessage = "The %s class is missing the %s attribute. Make sure that the class contains the attribute and it is spelt correctly.";
         String wrongTypeMessage = "The %s attribute in the %s class has the wrong type.";
@@ -54,24 +53,18 @@ public class MainTest {
         assertTrue(testClass.hasField(staticAttributeName, int.class), String.format(wrongTypeMessage, staticAttributeName, className));
         assertTrue(testClass.hasModifier(staticAttributeName, "private"), String.format(wrongModifierMessage, staticAttributeName, className));
         assertTrue(testClass.hasModifier(staticAttributeName, "static"), String.format(wrongModifierMessage, staticAttributeName, className));
+        _assertEquals(initialGummies, testClass.getFieldValue(null, staticAttributeName),
+                "Your " + staticAttributeName + " static attribute is not initialized correctly.");
     }
 
     @Test
-    @Order(3)
+    @Order(2)
     public void candyStoreHasRequiredConstructor() {
         String missingConstructorMessage = "The %s class is missing a required constructor. Make sure that it is named correctly and has the correct parameters.";
         String wrongAccessModifier = "The %s class constructor has the wrong visibility modifier. Make sure that it is visible from all other classes.";
         Class<?>[] constructorArgs = new Class[]{String.class};
         assertTrue(testClass.hasConstructor(constructorArgs), String.format(missingConstructorMessage, className));
         assertTrue(testClass.hasModifier(constructorArgs, "public"), String.format(wrongAccessModifier, className));
-    }
-
-    @Test
-    @Order(1)
-    @Tag("dependency1")
-    public void gummiesIsInitializedCorrectly() {
-        _assertEquals(initialGummies, testClass.getFieldValue(null, staticAttributeName),
-                "Your " + staticAttributeName + " static attribute is not initialized correctly.");
     }
 
     private static Stream<Arguments> inputProvider() {
@@ -85,14 +78,16 @@ public class MainTest {
                 Arguments.of("Lollipop Lane", initialGummies / 4),
                 Arguments.of("Jellybean Junction", initialGummies - 15),
                 Arguments.of("Confectionery Corner", initialGummies / 5),
-                Arguments.of("Dulce Drive", initialGummies - 90)
+                Arguments.of("Dulce Drive", initialGummies - 90),
+                Arguments.of("97", initialGummies + 15),
+                Arguments.of("Sweet Treats", initialGummies)
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
     @Tag("dependency1")
-    @Order(4)
+    @Order(3)
     public void candyStoreConstructorInitializesValuesCorrectly(String value1) throws Throwable {
         String missingConstructorMessage = "The %s class is missing a required constructor. Make sure that it is named correctly and has the correct parameters.";
         String wrongAccessModifier = "The %s class constructor has the wrong visibility modifier. Make sure that it is visible from all other classes.";
@@ -105,12 +100,14 @@ public class MainTest {
         };
         Object checkupInstance = testClass.createInstance(constructorArgs);
         _assertEquals(value1, testClass.getFieldValue(checkupInstance, attributeName), String.format(wrongValueMessage, className, attributeName));
+        _assertEquals(initialGummies, testClass.getFieldValue(null, staticAttributeName),
+                "Your constructor should not change the " + staticAttributeName + " static attribute.");
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
     @Tag("dependency1")
-    @Order(6)
+    @Order(5)
     public void candyStoreClassHasCorrectAwardMethod(String value1, int value2) throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
@@ -122,21 +119,24 @@ public class MainTest {
                 {value1, String.class}
         };
         Object classInstance = testClass.createInstance(constructorArgs);
+        int expected = initialGummies - value2;
+        if(initialGummies - value2 < 0)
+            expected = initialGummies;
         Clause[] testSentence = new Clause[]{
-                new StringLiteral(String.format(printString, (initialGummies - value2), value1))
+                new StringLiteral(String.format(printString, expected, value1))
         };
         Object[][] arguments = {
                 {value2, int.class}
         };
         testClass.callMethod(methodName, arguments, classInstance, testSentence);
-        _assertEquals(initialGummies - value2, testClass.getFieldValue(null, staticAttributeName),
+        _assertEquals(expected, testClass.getFieldValue(null, staticAttributeName),
                 "Your " + methodName + " method does not correctly change the value of " + staticAttributeName);
         testClass.setFieldValue(null, initialGummies, staticAttributeName);
     }
 
     @Test
     @Tag("dependent1")
-    @Order(7)
+    @Order(6)
     public void correctTestClass() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral(String.format(printString, 80, "Corner Jack")),
