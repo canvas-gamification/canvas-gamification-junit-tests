@@ -98,7 +98,8 @@ public class MainTest {
         };
         Object checkupInstance = testClass.createInstance(constructorArgs);
         _assertEquals(value1, testClass.getFieldValue(checkupInstance, attributeName), String.format(wrongValueMessage, className, attributeName));
-        _assertEquals(initialStaticVariable, testClass.getFieldValue(checkupInstance, staticAttributeName), String.format(wrongValueMessage, className, setAttributeName));
+        _assertEquals(initialStaticVariable, testClass.getFieldValue(checkupInstance, staticAttributeName),
+                "Your constructor should not change the " + staticAttributeName + " static attribute.");
     }
 
     @ParameterizedTest
