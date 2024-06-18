@@ -40,7 +40,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(2)
+    @Order(1)
     public void bedHasRequiredAttributes() {
         String missingAttributeMessage = "The %s class is missing the %s attribute. Make sure that the class contains the attribute and it is spelt correctly.";
         String wrongTypeMessage = "The %s attribute in the %s class has the wrong type.";
@@ -52,24 +52,18 @@ public class MainTest {
         assertTrue(testClass.hasField(staticAttributeName, int.class), String.format(wrongTypeMessage, staticAttributeName, className));
         assertTrue(testClass.hasModifier(staticAttributeName, "private"), String.format(wrongModifierMessage, staticAttributeName, className));
         assertTrue(testClass.hasModifier(staticAttributeName, "static"), String.format(wrongModifierMessage, staticAttributeName, className));
+        _assertEquals(initialBeams, testClass.getFieldValue(null, staticAttributeName),
+                "Your " + staticAttributeName + " static attribute is not initialized correctly.");
     }
 
     @Test
-    @Order(3)
+    @Order(2)
     public void bedHasRequiredConstructor() {
         String missingConstructorMessage = "The %s class is missing a required constructor. Make sure that it is named correctly and has the correct parameters.";
         String wrongAccessModifier = "The %s class constructor has the wrong visibility modifier. Make sure that it is visible from all other classes.";
         Class<?>[] constructorArgs = new Class[]{int.class};
         assertTrue(testClass.hasConstructor(constructorArgs), String.format(missingConstructorMessage, className));
         assertTrue(testClass.hasModifier(constructorArgs, "public"), String.format(wrongAccessModifier, className));
-    }
-
-    @Test
-    @Order(1)
-    @Tag("dependency1")
-    public void bedIsInitializedCorrectly() {
-        _assertEquals(initialBeams, testClass.getFieldValue(null, staticAttributeName),
-                "Your " + staticAttributeName + " static attribute is not initialized correctly.");
     }
 
     private static Stream<Arguments> inputProvider() {
@@ -90,7 +84,7 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     @Tag("dependency1")
-    @Order(4)
+    @Order(3)
     public void bedConstructorInitializesValuesCorrectly(int value1) throws Throwable {
         String wrongValueMessage = "The %s constructor did not initialize the %s attribute to the correct value based on the parameters passed to the constructor.";
         Object[][] constructorArgs = {
@@ -98,12 +92,14 @@ public class MainTest {
         };
         Object checkupInstance = testClass.createInstance(constructorArgs);
         _assertEquals(value1, testClass.getFieldValue(checkupInstance, attributeName), String.format(wrongValueMessage, className, attributeName));
+        _assertEquals(initialBeams, testClass.getFieldValue(null, staticAttributeName),
+                "Your constructor should not change the " + staticAttributeName + " static attribute.");
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
     @Tag("dependency1")
-    @Order(6)
+    @Order(5)
     public void bedClassHasCorrectMakeFurnitureMethod(int value1, int value2) throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
@@ -133,7 +129,7 @@ public class MainTest {
 
     @Test
     @Tag("dependent1")
-    @Order(7)
+    @Order(6)
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
                 new StringLiteral(String.format(printOutput, 4)),

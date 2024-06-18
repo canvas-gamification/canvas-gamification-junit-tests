@@ -14,19 +14,19 @@ Your `Bed` class must have the following requirements:
 
 - Attributes:
     - A _static_ `int` called **woodBeams**. This represents the total number of wood beams available for making `Bed`
-      objects, and should be set initially to 100 without having to call the constructor. Note that it should not be
-      visible from other classes.
-    - An `int` called **numBeams** which is the amount of wood required to make the `Bed` Object. Note that it should not be
-      visible from other classes.
+      objects, and should be set initially to 100 without having to call the constructor.
+    - An `int` called **numBeams** which is the amount of wood required to make the `Bed` Object.
+    - Note that neither of these attributes should be visible from other classes.
 
 - Constructors:
-    - A constructor that is accessible from other methods, and accepts an `int` as a parameter to set the **numBeams**
+    - A constructor that is accessible from other classes, and accepts an `int` as a parameter to set the **numBeams**
       attribute of the object.
 
 - Methods:
     - Note that all methods in this class should be visible from another class
-    - A `makeFurniture` method which return false if the **numBeams** value is more than **woodBeams**, meaning that the
-      `Bed` object cannot be made, or subtract the **numBeams** value from the **woodBeams** and return true.
+    - A `makeFurniture` method which returns false if the **numBeams** value is more than **woodBeams**, meaning that the
+      `Bed` object cannot be made, or subtracts the **numBeams** value from the **woodBeams** and returns true. This 
+      should be visible from other classes.
 
 ## TestWarehouse Class
 
