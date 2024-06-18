@@ -14,6 +14,7 @@ import static global.tools.CustomAssertions._assertEquals;
 
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -26,7 +27,7 @@ public class MainTest {
     private final String methodName = "canCompleteFlooring";
     private final String testClassName = "TestCoverage";
     private final static double initialBeams = 300;
-    private final String printOutput = "There is enough material for the first %s houses";
+    private final String printOutput = "There is enough material for the first 2 houses";
 
     private ObjectTest testClass;
     private ObjectTest classObject;
@@ -40,7 +41,7 @@ public class MainTest {
     }
 
     @Test
-    @Order(2)
+    @Order(1)
     public void carpetHasRequiredAttributes() {
         String missingAttributeMessage = "The %s class is missing the %s attribute. Make sure that the class contains the attribute and it is spelt correctly.";
         String wrongTypeMessage = "The %s attribute in the %s class has the wrong type.";
@@ -52,24 +53,18 @@ public class MainTest {
         assertTrue(testClass.hasField(staticAttributeName, double.class), String.format(wrongTypeMessage, staticAttributeName, className));
         assertTrue(testClass.hasModifier(staticAttributeName, "private"), String.format(wrongModifierMessage, staticAttributeName, className));
         assertTrue(testClass.hasModifier(staticAttributeName, "static"), String.format(wrongModifierMessage, staticAttributeName, className));
+        _assertEquals(initialBeams, testClass.getFieldValue(null, staticAttributeName),
+                "Your " + staticAttributeName + " static attribute is not initialized correctly.");
     }
 
     @Test
-    @Order(3)
+    @Order(2)
     public void carpetHasRequiredConstructor() {
         String missingConstructorMessage = "The %s class is missing a required constructor. Make sure that it is named correctly and has the correct parameters.";
         String wrongAccessModifier = "The %s class constructor has the wrong visibility modifier. Make sure that it is visible from all other classes.";
         Class<?>[] constructorArgs = new Class[]{double.class};
         assertTrue(testClass.hasConstructor(constructorArgs), String.format(missingConstructorMessage, className));
         assertTrue(testClass.hasModifier(constructorArgs, "public"), String.format(wrongAccessModifier, className));
-    }
-
-    @Test
-    @Order(1)
-    @Tag("dependency1")
-    public void staticVariableIsInitializedCorrectly() {
-        _assertEquals(initialBeams, testClass.getFieldValue(null, staticAttributeName),
-                "Your " + staticAttributeName + " static attribute is not initialized correctly.");
     }
 
     private static Stream<Arguments> inputProvider() {
@@ -92,7 +87,7 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     @Tag("dependency1")
-    @Order(4)
+    @Order(3)
     public void carpetConstructorInitializesValuesCorrectly(double value1) throws Throwable {
         String wrongValueMessage = "The %s constructor did not initialize the %s attribute to the correct value based on the parameter passed to the constructor.";
         Object[][] constructorArgs = {
@@ -105,7 +100,7 @@ public class MainTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     @Tag("dependency1")
-    @Order(6)
+    @Order(5)
     public void carpetClassHasCorrectCanCompleteFlooringMethod(double value1, double value2) throws Throwable {
         String incorrectMethodDefinition = "The %s method in the %s class is not defined correctly. Make sure it is declared, spelt correctly, and has the correct parameters.";
         String incorrectModifierMessage = "The %s method in the %s class has the wrong visibility modifier.";
@@ -135,15 +130,19 @@ public class MainTest {
 
     @Test
     @Tag("dependent1")
-    @Order(7)
+    @Order(6)
     public void correctMainMethod() throws Throwable {
         Clause[] clauses = {
-                new StringLiteral(String.format(printOutput, 2)),
+                new StringLiteral(printOutput),
                 new Optional(new StringLiteral(" "))
         };
         Object classInstance = classObject.createInstance();
+        assertEquals(initialBeams, testClass.getFieldValue(null, staticAttributeName),
+                "Your " + className + " class does not initially have the correct value for " + staticAttributeName + ".");
         classObject.callMethod("main", new Object[][]{{new String[0], String[].class}}, new String[]{"public"}, classInstance,
                 clauses,
                 "Your " + testClassName + " class main method does not print the correct output.");
+        assertEquals(41.0, testClass.getFieldValue(null, staticAttributeName),
+                "Your main method does not correctly alter the value of the " + staticAttributeName + " attribute.");
     }
 }
