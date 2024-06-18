@@ -20,4 +20,6 @@ Your `Alien` class must have the following items:
 - Methods:
     - a `getNumEyes` method which returns the value stored in the **numEyes** attribute
     - a `getColour` method which returns the value stored in the **colour** attribute
+    - a `toString` method which returns a `String` in the format of "The x Alien has y eyes" where x is the value of 
+      **colour** and y is the value of **numEyes**
     - These methods must be visible from other classes.
