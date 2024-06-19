@@ -215,5 +215,3 @@ public class MainTest {
     }
 
 }
-
-//need to test that the calculate method actually uses the static variables
