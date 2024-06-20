@@ -16,4 +16,8 @@ public class Alien {
     public String getColour() {
         return colour;
     }
+
+    public String toString() {
+        return "The " + colour + " Alien has " + numEyes + " eyes";
+    }
 }
