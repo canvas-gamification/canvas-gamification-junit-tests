@@ -1,7 +1,5 @@
 package oop.creating_objects_from_classes.hard.q4;
 
-import com.sun.tools.javac.Main;
-
 public class Savings {
     double initial;
     double bonus;
