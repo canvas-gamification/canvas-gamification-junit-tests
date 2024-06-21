@@ -15,7 +15,7 @@ public class Bookcase {
         }
     }
 
-    public String determineReplaced() {
+    public String determineReplacement() {
         for (Book book : books) {
             if (book.determineTime() > 5)
                 return "Time to buy a new book!";

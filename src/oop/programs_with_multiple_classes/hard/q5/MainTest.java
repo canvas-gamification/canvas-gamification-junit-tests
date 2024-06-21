@@ -26,7 +26,7 @@ public class MainTest {
     private final String sizeCapacity = "sizeCapacity";
     private final String books = "books";
     private final String determineTime = "determineTime";
-    private final String determineReplaced = "determineReplaced";
+    private final String determineReplaced = "determineReplacement";
     private final int replacedUnit = 5;
     private final String replaceResponse1 = "Time to buy a new book!";
     private final String replaceResponse2 = "You have enough new books!";
@@ -57,10 +57,10 @@ public class MainTest {
     }
 
     @Test
-    public void bookClassHasCorrectConstructors() {
+    public void bookClassHasCorrectConstructor() {
         String missingConstructorMessage = "Your " + bookClass + " class does not have a required constructor.";
         String incorrectConstructorModifierMessage =
-                "One of the constructors in your " + bookClass + " class does not have the correct visibility modifier.";
+                "The " + bookClass + " class constructor does not have the correct visibility modifier.";
         Class<?>[] constructorClasses = new Class[]{
                 int.class,
                 String.class
@@ -130,10 +130,10 @@ public class MainTest {
     }
 
     @Test
-    public void bookcaseClassHasCorrectConstructors() {
+    public void bookcaseClassHasCorrectConstructor() {
         String missingConstructorMessage = "Your " + bookcaseClass + " class does not have a required constructor.";
         String incorrectConstructorModifierMessage =
-                "One of the constructors in your " + bookcaseClass + " class does not have the correct visibility modifier.";
+                "The " + bookcaseClass + " class constructor does not have the correct visibility modifier.";
 
         Class<?>[] constructorClasses = new Class[]{
                 int.class,
@@ -213,7 +213,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("bookcaseInputProvider")
-    public void correctDetermineReplacedMethod(int sizeCapacity, int[] year, String[] type) throws Throwable {
+    public void correctBookcaseDetermineReplacementMethod(int sizeCapacity, int[] year, String[] type) throws Throwable {
         Object[] books = (Object[]) book.createArray(year.length);
         for (int x = 0; x < books.length; x++) {
             books[x] = book.createInstance(new Object[][]{{year[x], int.class}, {type[x], String.class}});
