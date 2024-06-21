@@ -1,18 +1,19 @@
 package oop.static_modifier.medium.q6;
 
 public class TextProcessing {
-    public static String canadianize(String input) {
-        return input + ", eh?";
+    private static String indicator = ", eh";
+    private String text;
+
+    public TextProcessing(String t) {
+        text = t;
     }
 
-    public static String extractVowels(String input) {
-        String str = "";
-        for (int i = 0; i < input.length(); i++) {
-            char ch = input.charAt(i);
-            if (ch != 'a' && ch != 'e' && ch != 'i' && ch != 'o' && ch != 'u')
-                str += ch;
-        }
-        return str;
+    public String localize() {
+        return text + indicator;
+    }
+
+    public String extractLocalizations() {
+        return text.replaceAll(indicator, "");
     }
 }
 
