@@ -65,10 +65,10 @@ public class MainTest {
     }
 
     @Test
-    public void bookClassHasCorrectConstructors() {
+    public void bookClassHasCorrectConstructor() {
         String missingConstructorMessage = "Your " + bookClass + " class does not have a required constructor.";
         String incorrectConstructorModifierMessage =
-                "One of the constructors in your " + bookClass + " class does not have the correct modifiers.";
+                "The constructor in your " + bookClass + " class does not have the correct modifiers.";
         Class<?>[] constructorClasses = new Class[]{
                 int.class,
                 String.class
@@ -137,7 +137,7 @@ public class MainTest {
      * Bookcase tests
      **/
     @Test
-    public void bookcaseClassHasCorrectAttributes() throws Throwable {
+    public void bookcaseClassHasCorrectAttributes() {
         String missingAttributeMessage = "Your " + bookcaseClass + " class is missing the %s attribute.";
         String incorrectAttributeTypeMessage = "The %s attribute in your " + bookClass + " class has the wrong type.";
         String incorrectAttributeModifierMessage = "The %s attribute in your " + bookcaseClass + " class has an incorrect modifier.";
@@ -152,10 +152,10 @@ public class MainTest {
     }
 
     @Test
-    public void bookcaseClassHasCorrectConstructors() throws Throwable {
+    public void bookcaseClassHasCorrectConstructor() {
         String missingConstructorMessage = "Your " + bookcaseClass + " class does not have a required constructor.";
         String incorrectConstructorModifierMessage =
-                "One of the constructors in your " + bookcaseClass + " class does not have the correct modifiers.";
+                "The constructor in your " + bookcaseClass + " class does not have the correct modifiers.";
         Class<?>[] constructorClasses = new Class[]{
                 int.class
         };
@@ -193,7 +193,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("bookcaseInputProvider")
-    public void bookcaseCorrectValidateMethod(int sizeCapacity, int result) throws Throwable {
+    public void correctBookcaseValidateMethod(int sizeCapacity, int result) throws Throwable {
         Object[][] arguments = new Object[][]{
                 {sizeCapacity, int.class}
         };
@@ -233,7 +233,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("addBooksInputProvider")
-    public void bookcaseCorrectAddBookMethod(int sizeCapacity, int[] bookPlacement) throws Throwable {
+    public void correctBookcaseAddBookMethod(int sizeCapacity, int[] bookPlacement) throws Throwable {
         assertTrue(bookcase.hasMethod(bookcaseMethodName2, new Class[]{book.getObjectClass()}),
                 String.format("Your %s class is missing the method %s.", bookcaseClass, bookcaseMethodName2));
         assertTrue(bookcase.hasMethod(bookcaseMethodName2, new Class[]{book.getObjectClass()}, void.class),
@@ -288,7 +288,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("removeBooksInputProvider")
-    public void bookcaseCorrectRemoveBookMethod(int sizeCapacity, int[] bookPlacement, int index) throws Throwable {
+    public void correctBookcaseRemoveBookMethod(int sizeCapacity, int[] bookPlacement, int index) throws Throwable {
         assertTrue(bookcase.hasMethod(bookcaseMethodName3, new Class[]{int.class}),
                 String.format("Your %s class is missing the method %s.", bookcaseClass, bookcaseMethodName3));
         assertTrue(bookcase.hasMethod(bookcaseMethodName3, new Class[]{int.class}, void.class),
