@@ -15,11 +15,9 @@ Your `Book` class should have the following items:
       attribute (in this order)
         - This constructor should be accessible from other classes
 - Methods:
-    - A method called `howManyYears`
-        - It should take no input and return an `int`
-        - It should calculate the amount of years since the **year** when a book was purchased using the 
-          current year
-        - This method should be accessible from other classes
+    - A method called `howManyYears` that takes no input and returns an `int`. It should calculate the amount of years 
+      since the **year** when a book was purchased using the current year. This method should be accessible from other 
+      classes.
 
 ## Bookcase Class
 
@@ -35,6 +33,6 @@ Your `Bookcase` class should have the following items:
 - Methods:
     - A method called `setBooks` which receives an array of `Book` as a parameter and sets the value of **books** to
       the array. This method should be accessible from other classes.
-    - A method called `sellBook` which receives and `int` representing the index of the book to be sold. If the book
-      has been purchased twenty years ago or longer, print "No, this book is precious to me." Otherwise, set the value
+    - A method called `sellBook` which receives an `int` representing the index of the book to be sold. If the book
+      was purchased twenty years ago or longer, print "No, this book is precious to me." Otherwise, set the value
       of the index to null.

@@ -110,7 +110,7 @@ public class MainTest {
         assertTrue(book.hasModifier(howManyYears, new Class[]{}, "public"),
                 "Your " + howManyYears + " method does not have the correct visibility modifier.");
         Object howManyYearsOutput = book.callMethod(howManyYears, bookInstance);
-        int howManyYearsExpected = Year.now().getValue() - year;
+        int howManyYearsExpected = getCurrYear() - year;
         String incorrectHowManyYearsExpected = "Your " + bookClass + " class's " + howManyYears + " method does not return the correct age of the " + bookClass + ".";
         _assertEquals(howManyYearsExpected, howManyYearsOutput, incorrectHowManyYearsExpected);
     }
@@ -185,7 +185,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("setBooksInputProvider")
-    public void correctSetBooksMethod(int size, int[] bookPlacement) throws Throwable {
+    public void correctBookcaseSetBooksMethod(int size, int[] bookPlacement) throws Throwable {
         Object[] booksHold = (Object[]) book.createArray(size, new Object[][]{{0, int.class}, {"type", String.class}});
 
         Object[][] arguments = new Object[][]{
@@ -229,7 +229,7 @@ public class MainTest {
 
     @ParameterizedTest
     @MethodSource("sellBookInputProvider")
-    public void correctSellBookMethod(int size, int year, boolean tooOldToSell, int[] bookPlacement, int index) throws Throwable {
+    public void correctBookcaseSellBookMethod(int size, int year, boolean tooOldToSell, int[] bookPlacement, int index) throws Throwable {
         Object[] booksGiven = (Object[]) book.createArray(size);
         Object[] result = (Object[]) book.createArray(size);
         for (int x = 0; x < size; x++) {
