@@ -25,21 +25,19 @@ public class MainTest extends BaseTest {
 
     public static int sum(int[][] nums) {
         int sum = 0;
-        for (int i = 0; i < nums.length; i++)
-            for (int j = 0; j < nums[i].length; j++)
-                sum += nums[i][j];
+        for (int[] num : nums)
+            for (int i : num) sum += i;
         return sum;
     }
 
     public static double avg(int[][] nums) {
         double count = 0;
         int sum = 0;
-        for (int i = 0; i < nums.length; i++)
-            for (int j = 0; j < nums[i].length; j++) {
-                sum += nums[i][j];
+        for (int[] num : nums)
+            for (int j = 0; j < num.length; j++) {
+                sum += num[j];
                 count++;
             }
-        double avg = sum / count;
-        return avg;
+        return sum / count;
     }
 }
