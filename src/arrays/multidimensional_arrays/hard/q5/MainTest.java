@@ -34,8 +34,8 @@ public class MainTest extends BaseTest {
         double count = 0;
         int sum = 0;
         for (int[] num : nums)
-            for (int j = 0; j < num.length; j++) {
-                sum += num[j];
+            for (int i : num) {
+                sum += i;
                 count++;
             }
         return sum / count;
