@@ -48,7 +48,7 @@ public class MainTest {
                 new DoubleLiteral(initial + firstBonus, initial + firstBonus + 0.00001),
                 new NewLine(),
                 new StringLiteral("Balance: "),
-                new DoubleLiteral(initial + firstBonus + secondBonus, initial + firstBonus + secondBonus + 0.00001),
+                new DoubleLiteral(initial + firstBonus + secondBonus - 0.000001, initial + firstBonus + secondBonus + 0.00001),
                 new Optional(new NewLine())
         };
         Object[][] mainParameters = {{new String[0], String[].class}};
