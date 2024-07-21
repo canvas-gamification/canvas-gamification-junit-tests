@@ -159,7 +159,7 @@ public class MainTest {
 
         int count = 1;
 
-        for(int x = 0; x < 5; x++){
+        for (int x = 0; x < 5; x++) {
             /* call eatPowerUp method */
             mario.callMethod(eatPowerUpMethodName, marioInstance);
             count += 5;
@@ -207,18 +207,17 @@ public class MainTest {
 
         /* Check result */
         String incorrectUpdate = "Your %s method does not correctly update the %s attribute.";
-        if(!powerUp){
+        if (!powerUp) {
             _assertEquals(0, mario.getFieldValue(marioInstance, intAttributeName),
                     String.format(incorrectUpdate, takeDamageMethodName, intAttributeName));
-            assertTrue((Boolean)mario.getFieldValue(marioInstance, booleanAttributeName2),
+            assertTrue((Boolean) mario.getFieldValue(marioInstance, booleanAttributeName2),
                     String.format(incorrectUpdate, takeDamageMethodName, booleanAttributeName2));
-        }
-        else {
+        } else {
             _assertEquals(jump - 5, mario.getFieldValue(marioInstance, intAttributeName),
                     String.format(incorrectUpdate, takeDamageMethodName, intAttributeName));
-            assertFalse((Boolean)mario.getFieldValue(marioInstance, booleanAttributeName1),
+            assertFalse((Boolean) mario.getFieldValue(marioInstance, booleanAttributeName1),
                     String.format(incorrectUpdate, takeDamageMethodName, booleanAttributeName1));
-            assertFalse((Boolean)mario.getFieldValue(marioInstance, booleanAttributeName2),
+            assertFalse((Boolean) mario.getFieldValue(marioInstance, booleanAttributeName2),
                     String.format(incorrectUpdate, takeDamageMethodName, booleanAttributeName2));
         }
     }
@@ -256,10 +255,9 @@ public class MainTest {
 
         /* Test output */
         String expectedOutput;
-        if(dead){
+        if (dead) {
             expectedOutput = String.format(expectedString, jump, powerUp, "dead");
-        }
-        else {
+        } else {
             expectedOutput = String.format(expectedString, jump, powerUp, "still alive");
         }
         Object actualOutput = mario.callMethod("toString", marioInstance);
