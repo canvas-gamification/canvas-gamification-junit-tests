@@ -38,4 +38,16 @@ Your `Horse` class must have the following requirements:
       race at the **gateSpeed** value and each minute increase their speed by an amount equal to the **acceleration**
       value up to the value of **topSpeed**. Given that races can be photo finish, the method should remove the time
       a `Horse` overran the finish line from its total time.
-      
+
+### RaceTrack Class
+
+Your `RaceTrack` Class must have the following methods:
+
+- Main method:
+    - A `main` method to run the class from.
+    - It must initialize two `Horse` objects. One should be named `"Betsy"`, have a gate speed of `38.2`, an acceleration
+      of `5.1` and a top speed of `55.0`. The other must be named `"Gerald"`, have a gate speed of `34.7`, an
+      acceleration of `4.3` and a top speed of `63.0`.
+    - Then, announce the start of the race.
+    - Finally, call and print the `completionTime` method on both `Horse` objects and compare their time to determine the 
+      winner then print the result of the race.
