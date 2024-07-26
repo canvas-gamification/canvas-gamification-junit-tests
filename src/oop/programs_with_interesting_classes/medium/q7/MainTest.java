@@ -278,23 +278,21 @@ public class MainTest {
 
         Object[] holdArray = (Object[]) vendingMachine.getFieldValue(vmInstance, hotSoupArrayAttributeName);
 
-        if(msg.length > 1){
+        if (msg.length > 1) {
             assertEquals(size - 1, vendingMachine.getFieldValue(vmInstance, intAttributeName), "Your " + buyItemMethodName + " method does not correctly reduce the " + intAttributeName + " attribute.");
             assertNull(holdArray[size - 1], "Your " + buyItemMethodName + " method does not remove the " + hotSoupClassName + " that has been purchased from the " + hotSoupArrayAttributeName + " attribute.");
-        }
-        else {
+        } else {
             assertEquals(size, vendingMachine.getFieldValue(vmInstance, intAttributeName), "Your " + buyItemMethodName + " method incorrectly reduces the " + intAttributeName + " attribute.");
-            if(size != 0)
+            if (size != 0)
                 assertNotNull(holdArray[size - 1], "Your " + buyItemMethodName + " method incorrectly removes a " + hotSoupClassName + " from the " + hotSoupArrayAttributeName + " attribute.");
         }
     }
 
     private static String getChange(double money) {
         String msg;
-        if(money - defaultPrice < 0){
+        if (money - defaultPrice < 0) {
             msg = "Not enough money. Returning payment...\n";
-        }
-        else {
+        } else {
             msg = "Your change is: \n";
             int amount = (int) (Math.round((money - defaultPrice) * 100));
             if (amount / 25 != 0) {
