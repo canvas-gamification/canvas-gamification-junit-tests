@@ -34,7 +34,7 @@ public class MainTest {
     private final String buyItemMethodName = "buyItem";
     private final String getChangeMethodName = "getChange";
     private final String defaultFlavour = "Chicken Noodle";
-    private static final double defaultPrice = 2.5;
+    private final double defaultPrice = 2.5;
     private final int defaultCapacity = 50;
     private final String expectedString = "%s soup for $%s";
 
@@ -288,7 +288,46 @@ public class MainTest {
         }
     }
 
-    private static String getChange(double money) {
+    private static Stream<Arguments> getChangeInputProvider() {
+        return Stream.of(
+                Arguments.of(0, ""),
+                Arguments.of(1, "Pennies: 1\n"),
+                Arguments.of(26, "Quarters: 1\nPennies: 1\n"),
+                Arguments.of(89, "Quarters: 3\nDimes: 1\nPennies: 4\n"),
+                Arguments.of(15, "Dimes: 1\nNickels: 1\n"),
+                Arguments.of(5, "Nickels: 1\n"),
+                Arguments.of(10, "Dimes: 1\n")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("getChangeInputProvider")
+    public void correctGetChangeMethod(int amount, String msg) throws Throwable {
+        /* Check method parameters */
+        String incorrectDefinition = "Your %s class is missing the %s method. Make sure it is defined, spelt correctly, and has the correct parameters.";
+        String incorrectModifier = "The %s method does not have the correct visibility modifier.";
+        String incorrectReturnType = "The %s method does not have the correct return type.";
+        Class<?>[] methodClassParameters = new Class[]{int.class};
+        assertTrue(vendingMachine.hasMethod(getChangeMethodName, methodClassParameters),
+                String.format(incorrectDefinition, vendingMachineClassName, getChangeMethodName));
+        assertTrue(vendingMachine.hasModifier(getChangeMethodName, methodClassParameters, "public"),
+                String.format(incorrectModifier, getChangeMethodName));
+        assertTrue(vendingMachine.hasReturnType(getChangeMethodName, methodClassParameters, String.class),
+                String.format(incorrectReturnType, getChangeMethodName));
+
+        /* Initialize object */
+        Object vmInstance = vendingMachine.createInstance();
+
+        /* Call getChange */
+        Object[][] getChangeInput = {{amount, int.class}};
+        Object output = vendingMachine.callMethod(getChangeMethodName, getChangeInput, vmInstance);
+
+        /* Test output */
+        _assertEquals(msg, output,
+                "Your " + getChangeMethodName + " method does not return the correct String.");
+    }
+
+    private String getChange(double money) {
         String msg;
         if (money - defaultPrice < 0) {
             msg = "Not enough money. Returning payment...\n";
