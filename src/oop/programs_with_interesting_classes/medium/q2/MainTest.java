@@ -7,7 +7,6 @@ import global.variables.Clause;
 import global.variables.clauses.IntegerLiteral;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.StringLiteral;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -55,20 +54,13 @@ public class MainTest extends BaseTest {
     public void runMain() {
         TestMap.main(new String[0]);
     }
-//
-//    @BeforeEach
-//    public void setUp() {
-//        String packageString = "oop.programs_with_interesting_classes.medium.q2.";
-//        map = new ObjectTest(packageString + mapClassName);
-//        testMap = new ObjectTest(packageString + testMapClassName);
-//    }
 
     /* Test if the map class has the required attributes */
     @Test
     public void mapClassHasRequiredAttribute() {
         String packageString = "oop.programs_with_interesting_classes.medium.q2.";
         map = new ObjectTest(packageString + mapClassName);
-        testMap = new ObjectTest(packageString + testMapClassName);
+
         String missingAttribute = "Your %s class is missing the %s attribute. Make sure the class contains the attribute and it is spelt correctly.";
         String incorrectType = "Your %s attribute does not have the correct type.";
         String incorrectModifier = "Your %s attribute does not have the correct visibility modifier.";
@@ -95,7 +87,7 @@ public class MainTest extends BaseTest {
         /* Check method definition */
         String packageString = "oop.programs_with_interesting_classes.medium.q2.";
         map = new ObjectTest(packageString + mapClassName);
-        testMap = new ObjectTest(packageString + testMapClassName);
+
         String incorrectDefinition = "Your %s class is missing the %s method. Make sure it is defined, spelt correctly, and has the correct parameters.";
         String incorrectModifier = "The %s method does not have the correct visibility modifier.";
         String incorrectStaticModifier = "The %s method does not have the static modifier.";
@@ -136,8 +128,8 @@ public class MainTest extends BaseTest {
     public void correctConvertStringToIndexMethod(String input, int expectedOutput) throws Throwable {
         /* Check method definition */
         String packageString = "oop.programs_with_interesting_classes.medium.q2.";
-        map = new ObjectTest(packageString + mapClassName);
         testMap = new ObjectTest(packageString + testMapClassName);
+
         String incorrectDefinition = "Your %s class is missing the %s method. Make sure it is defined, spelt correctly, and has the correct parameters.";
         String incorrectModifier = "The %s method does not have the correct visibility modifier.";
         String incorrectStaticModifier = "The %s method does not have the static modifier.";
@@ -165,8 +157,8 @@ public class MainTest extends BaseTest {
     public void collisionHasCorrectMainMethod() {
         /* Check method definition */
         String packageString = "oop.programs_with_interesting_classes.medium.q2.";
-        map = new ObjectTest(packageString + mapClassName);
         testMap = new ObjectTest(packageString + testMapClassName);
+
         String incorrectDefinition = "Your %s class is missing the main method. Make sure it is defined, spelt correctly, and has the correct parameters.";
         String incorrectModifier = "Your main method does not have the correct visibility modifier.";
         String incorrectReturnType = "Your main method does not have the correct return type.";
