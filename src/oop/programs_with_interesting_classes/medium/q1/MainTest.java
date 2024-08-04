@@ -34,6 +34,7 @@ public class MainTest {
     private final String getSpeedMethodName = "getSpeed";
     private final String setSpeedMethodName = "setSpeed";
     private final String collideMethodName = "collide";
+    private final String copyPartsMethodName = "copyParts";
     private final String[] expectedPartsArray =
             new String[]{"Wheels", "Chassis", "Steering", "BodyKit", "Windows", "Doors", "Seats"};
     private final int collisionPartsDifference = 2;
@@ -470,6 +471,44 @@ public class MainTest {
         String[] result = new String[length];
         System.arraycopy(array, 0, result, 0, length);
         return result;
+    }
+
+    private static Stream<Arguments> copyPartsInputProvider() {
+        return Stream.of(
+                Arguments.of(new String[]{"", "", "", ""}, new String[]{"Go cart", "Headphones", "Windows", "outlet"},
+                        new String[]{"Go cart", "Headphones", "Windows", "outlet"}),
+                Arguments.of(new String[]{""}, new String[]{"Nuclear Codes", "Justin", "Trump", "TI-89", "Cargo Bay", "Arduino Board", "Shotgun", "Yeti mug"},
+                        new String[]{"Nuclear Codes"}),
+                Arguments.of(new String[]{"", ""}, new String[]{"Pope", "Hat", "Holy Water"}, new String[]{"Pope", "Hat"}),
+                Arguments.of(new String[]{}, new String[]{"Bat", "Motor"}, new String[]{})
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("copyPartsInputProvider")
+    public void collisionHasCorrectCopyPartsMethod(String[] partsNew, String[] partsOld, String[] partsAns) throws Throwable {
+        /* Check method parameters */
+        String incorrectDefinition = "Your %s class is missing the %s method. Make sure it is defined, spelt correctly, and has the correct parameters.";
+        String incorrectModifier = "The %s method does not have the correct visibility modifier.";
+        String incorrectReturnType = "The %s method does not have the correct return type.";
+        String incorrectStatic = "The %s method must have the static modifier.";
+        Class<?>[] methodClassParameters = new Class[]{String[].class, String[].class};
+        assertTrue(collision.hasMethod(copyPartsMethodName, methodClassParameters),
+                String.format(incorrectDefinition, collisionClassName, copyPartsMethodName));
+        assertTrue(collision.hasModifier(copyPartsMethodName, methodClassParameters, "public"),
+                String.format(incorrectModifier, copyPartsMethodName));
+        assertTrue(collision.hasReturnType(copyPartsMethodName, methodClassParameters, Void.TYPE),
+                String.format(incorrectReturnType, copyPartsMethodName));
+        assertTrue(collision.hasModifier(copyPartsMethodName, methodClassParameters, "static"),
+                String.format(incorrectStatic, copyPartsMethodName));
+
+        /* Call copyParts */
+        Object[][] copyPartsInput = {{partsNew, String[].class}, {partsOld, String[].class}};
+        collision.callMethod(copyPartsMethodName, copyPartsInput);
+
+        /* Test output */
+        _assertArrayEquals(partsAns, partsNew,
+                "Your " + copyPartsMethodName + " method does not correctly copy the elements of the old array into the space of the new array");
     }
 
     @Test
