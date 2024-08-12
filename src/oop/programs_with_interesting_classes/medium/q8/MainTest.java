@@ -427,7 +427,7 @@ public class MainTest {
                 Arguments.of(2, new Object[][][]{{{"Cheese", String.class}, {15, int.class}}, {{"Beef", String.class}, {5, int.class}}}, 1),
                 Arguments.of(5, new Object[][][]{{{"Leek", String.class}, {3749, int.class}}, {{"Pho", String.class}, {3, int.class}},
                         {{"Clementine", String.class}, {37, int.class}}, {{"Hollandaise", String.class}, {1, int.class}},
-                        {{"Perch", String.class}, {1389247, int.class}}}, 3)
+                        {{"Perch", String.class}, {89247, int.class}}}, 3)
         );
     }
 

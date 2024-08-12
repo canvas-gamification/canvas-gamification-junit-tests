@@ -29,8 +29,10 @@ public class Fridge {
         int min = 999999;
         Food oldestItem = null;
         for (int i = 0; i < items.length; i++)
-            if (items[i].getDaysToExpiration() < min)
+            if (items[i].getDaysToExpiration() < min) {
                 oldestItem = items[i];
+                min = items[i].getDaysToExpiration();
+            }
         return oldestItem;
     }
 }
