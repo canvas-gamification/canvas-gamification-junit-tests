@@ -239,7 +239,7 @@ public class MainTest {
         assertTrue(leaderBoard.hasModifier(constructorParameters, "public"), String.format(incorrectModifier, leaderBoardClassName));
 
         /* Create instance */
-        Object[][] constructorArguments=
+        Object[][] constructorArguments =
                 fillArray ? new Object[][]{{player.createArray(valid ? arrayLength : arrayLength + 20, argument), player.getObjectArrayClass()}} :
                         length == 0 ? new Object[][]{{player.createArray(0), player.getObjectArrayClass()}} :
                                 new Object[][]{{player.createArray(length, arguments), player.getObjectArrayClass()}};
@@ -251,21 +251,19 @@ public class MainTest {
         assertEquals(arrayLength, holdArray.length, "Your " + leaderBoardClassName + " class constructor does not initialize the " + playerAttributeName + " array to the correct length.");
 
         int firstNullIndex = fillArray ? -1 : length;
-        if(firstNullIndex != -1){
-            for(int x = firstNullIndex; x < arrayLength; x++){
+        if (firstNullIndex != -1) {
+            for (int x = firstNullIndex; x < arrayLength; x++) {
                 assertNull(holdArray[x], "Your " + leaderBoardClassName + " class constructor does not retain all the null values after the passed " + playerClassName + " array has been processed in the constructor.");
             }
             Object[] shorterArray = new Object[length];
             System.arraycopy(holdArray, 0, shorterArray, 0, length);
             assertArrayEquals((Object[]) constructorArguments[0][0], shorterArray, "Your " + leaderBoardClassName + " class constructor does not correctly transfer the given " + playerClassName + " objects into the " + playerAttributeName + " array.");
             assertEquals(length, leaderBoard.getFieldValue(leaderBoardInstance, intAttributeName2), "Your " + leaderBoardClassName + " class constructor does not correctly update the " + intAttributeName2 + " value.");
-        }
-        else {
-            if(valid) {
+        } else {
+            if (valid) {
                 assertArrayEquals((Object[]) constructorArguments[0][0], holdArray, "Your " + leaderBoardClassName + " class constructor does not correctly transfer the given " + playerClassName + " objects into the " + playerAttributeName + " array.");
                 assertEquals(arrayLength, leaderBoard.getFieldValue(leaderBoardInstance, intAttributeName2), "Your " + leaderBoardClassName + " class constructor does not correctly update the " + intAttributeName2 + " value.");
-            }
-            else {
+            } else {
                 assertArrayEquals(new Object[arrayLength], holdArray, "Your " + leaderBoardClassName + " class constructor does not correctly handle invalid input.");
                 assertEquals(0, leaderBoard.getFieldValue(leaderBoardInstance, intAttributeName2), "Your " + leaderBoardClassName + " class constructor does not correctly initialize the " + intAttributeName2 + " value.");
             }
@@ -277,7 +275,7 @@ public class MainTest {
                 Arguments.of(new Object[][][]{{{}}}, new Object[][]{{"Sabrina", String.class}}, 0),
                 Arguments.of(new Object[][][]{{{"Raine", String.class}}}, new Object[][]{{"Wong", String.class}}, 1),
                 Arguments.of(new Object[][][]{{{"Gupta", String.class}}, {{"Kal", String.class}}}, new Object[][]{{"Goemon", String.class}}, 2),
-                Arguments.of(new Object[][][]{{{"Sill", String.class}}}, new Object[][]{{"Mumford", String.class}}, arrayLength-2),
+                Arguments.of(new Object[][][]{{{"Sill", String.class}}}, new Object[][]{{"Mumford", String.class}}, arrayLength - 2),
                 Arguments.of(new Object[][][]{{{"Kitty", String.class}}}, new Object[][]{{"Bridget", String.class}}, arrayLength - 1),
                 Arguments.of(new Object[][][]{{{"Holly", String.class}}}, new Object[][]{{"Sung", String.class}}, arrayLength),
                 Arguments.of(new Object[][][]{{{"Yusuf", String.class}}}, new Object[][]{{"Harry", String.class}}, 40)
@@ -321,18 +319,18 @@ public class MainTest {
             String errorMessage = "Your %s method does not correctly add the input %s object into the %s array. Make sure it is inserted into the correct location and no other values are modified.";
             assertEquals(playerInstance, studentArray[length],
                     String.format(errorMessage, addPlayerMethodName, playerClassName, playerAttributeName));
-            for(int x = 0; x < length; x++){
+            for (int x = 0; x < length; x++) {
                 assertEquals(holdArray[x], studentArray[x],
                         String.format(errorMessage, addPlayerMethodName, playerClassName, playerAttributeName));
             }
-            for(int x = length + 1; x < arrayLength; x++){
+            for (int x = length + 1; x < arrayLength; x++) {
                 assertNull(studentArray[x], String.format(errorMessage, addPlayerMethodName, playerClassName, playerAttributeName));
             }
         } else {
             String invalidInsertInput = "Your %s method does not correctly detect invalid input.";
             _assertEquals(false, result, String.format(invalidInsertInput, addPlayerMethodName));
             String errorMessage = "Your %s method should not modify the %s array when the method input is invalid.";
-            for(int x = 0; x < length; x++){
+            for (int x = 0; x < length; x++) {
                 assertEquals(holdArray[x], studentArray[x],
                         String.format(errorMessage, addPlayerMethodName, playerAttributeName));
             }
@@ -348,11 +346,11 @@ public class MainTest {
                 Arguments.of(new Object[][][]{{{"Latee", String.class}}, {{"L", String.class}}, {{"Fading", String.class}}}, new int[]{27, 0, 21},
                         "Winner: Latee with 27 points\nRunner-up: Fading with 21 points\n"),
                 Arguments.of(new Object[][][]{{{"Carol", String.class}}, {{"Count Rekt", String.class}}, {{"DK", String.class}},
-                        {{"sonny", String.class}}, {{"Guy Fieriiii", String.class}}, {{"V", String.class}}, {{"Beat Drop", String.class}},
-                        {{"Hello :)", String.class}}, {{"Lala", String.class}}, {{"Tem", String.class}}, {{"Doodoo", String.class}},
-                        {{"Meow", String.class}}, {{"Riviere", String.class}}, {{"Pluie", String.class}}, {{"Friends Destroyer", String.class}},
-                        {{"Dada sucks", String.class}}, {{"DragonFly", String.class}}, {{"Dragon without the fly", String.class}},
-                        {{"Hiccups", String.class}}, {{"Blue", String.class}}},
+                                {{"sonny", String.class}}, {{"Guy Fieriiii", String.class}}, {{"V", String.class}}, {{"Beat Drop", String.class}},
+                                {{"Hello :)", String.class}}, {{"Lala", String.class}}, {{"Tem", String.class}}, {{"Doodoo", String.class}},
+                                {{"Meow", String.class}}, {{"Riviere", String.class}}, {{"Pluie", String.class}}, {{"Friends Destroyer", String.class}},
+                                {{"Dada sucks", String.class}}, {{"DragonFly", String.class}}, {{"Dragon without the fly", String.class}},
+                                {{"Hiccups", String.class}}, {{"Blue", String.class}}},
                         new int[]{1, 2, 3, 4, 5, 6, 7, 4217, 75, 52, 693, 68, 1, 6, 573, 692, 1234, 8, 29022, 89},
                         "Winner: Hiccups with 29022 points\nRunner-up: Hello :) with 4217 points\n")
         );
@@ -376,7 +374,7 @@ public class MainTest {
 
         /* Set attributes */
         Object[] holdArray = (Object[]) player.createArray(points.length, arguments);
-        for(int x = 0; x < points.length; x++){
+        for (int x = 0; x < points.length; x++) {
             player.callMethod(setScoreMethodName, new Object[][]{{points[x], int.class}}, holdArray[x]);
         }
         Object[] studentArray = (Object[]) leaderBoard.getFieldValue(leaderBoardInstance, playerAttributeName);
