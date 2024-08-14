@@ -63,9 +63,10 @@ classes in this question. More details below.
 - This method iterates through the **players** array and finds the two `Player` objects with the highest **score**s.
 - It must then return a `String` of this information on two separate lines. 
 ```
-Sample output using a print() on the returned String:
+Sample output if printed:
 Winner: Sandra with 27 points
 Runner-up: Margaux with 25 points
 ```
 - Where there are not enough objects in **players** to fill both the winner and runner-up, the 
 empty positions should fill the name with `"empty"` and points with `-1`.
+- Note: the line break after the runner-up should be included in the `String`
