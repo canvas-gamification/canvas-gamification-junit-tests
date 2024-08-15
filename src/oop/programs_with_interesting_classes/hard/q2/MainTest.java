@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest {
     private ObjectTest player;
+    // Java
     private ObjectTest leaderBoard;
     private final String playerClassName = "Player";
     private final String leaderBoardClassName = "LeaderBoard";
