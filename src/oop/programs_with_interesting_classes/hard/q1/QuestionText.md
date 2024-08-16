@@ -19,8 +19,8 @@ class in this question. More details below.
 - The constructor must be visible from another class.
 - This constructor must accept an array of strings to use as the words in the crossword puzzle. Assume the words are
   spelled with only uppercase English letters.
-- Using the input array, the constructor should find the longest word and use the length to initialize the *
-  *grid** array. For example, if the longest word is "Computer" with eight letters, the **grid** array would be
+- Using the input array, the constructor should find the longest word and use the length to initialize the **grid** 
+  array. For example, if the longest word is "Computer" with eight letters, the **grid** array would be
   initialized to a 8x8 square array. You can assume that the number is words in the String array will be less than or
   equal to the grid size (if your grid size should be eight, there will be at most eight words in the array).
 - If the array is empty, then initialize the **grid** with size zero.
