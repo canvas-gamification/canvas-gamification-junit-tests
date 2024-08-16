@@ -121,7 +121,7 @@ public class MainTest {
     }
 
     private static Stream<Integer> getIntInputProvider() {
-        return Stream.of(0, 1 ,2 ,13, 4356);
+        return Stream.of(0, 1, 2, 13, 4356);
     }
 
     @ParameterizedTest
@@ -264,16 +264,16 @@ public class MainTest {
                 Arguments.of(5, new Object[][][]{{{"Isabelle", String.class}, {17, int.class}, {24, int.class}}, {{"Ahbi", String.class}, {45, int.class}, {12, int.class}}},
                         2, new Object[][]{{"Red3", String.class}, {3, int.class}, {1, int.class}}, true),
                 Arguments.of(15, new Object[][][]{{{"Dorthy", String.class}, {2, int.class}, {2, int.class}}, {{"Farren", String.class}, {4, int.class}, {2, int.class}},
-                        {{"Willow 123", String.class}, {7, int.class}, {13, int.class}}, {{"Darth", String.class}, {1, int.class}, {0, int.class}},
-                        {{"Jason", String.class}, {4, int.class}, {153, int.class}}, {{"Karly", String.class}, {23, int.class}, {78, int.class}},
-                        {{"Selene", String.class}, {3, int.class}, {14, int.class}}, {{"Percy", String.class}, {39, int.class}, {1, int.class}},
-                        {{"Cari", String.class}, {832, int.class}, {47, int.class}}, {{"Nico", String.class}, {9, int.class}, {11, int.class}}},
+                                {{"Willow 123", String.class}, {7, int.class}, {13, int.class}}, {{"Darth", String.class}, {1, int.class}, {0, int.class}},
+                                {{"Jason", String.class}, {4, int.class}, {153, int.class}}, {{"Karly", String.class}, {23, int.class}, {78, int.class}},
+                                {{"Selene", String.class}, {3, int.class}, {14, int.class}}, {{"Percy", String.class}, {39, int.class}, {1, int.class}},
+                                {{"Cari", String.class}, {832, int.class}, {47, int.class}}, {{"Nico", String.class}, {9, int.class}, {11, int.class}}},
                         10, new Object[][]{{"El", String.class}, {0, int.class}, {0, int.class}}, true),
                 Arguments.of(10, new Object[][][]{{{"Dorthy", String.class}, {2, int.class}, {2, int.class}}, {{"Farren", String.class}, {4, int.class}, {2, int.class}},
-                        {{"Willow 123", String.class}, {7, int.class}, {13, int.class}}, {{"Darth", String.class}, {1, int.class}, {0, int.class}},
-                        {{"Jason", String.class}, {4, int.class}, {153, int.class}}, {{"Karly", String.class}, {23, int.class}, {78, int.class}},
-                        {{"Selene", String.class}, {3, int.class}, {14, int.class}}, {{"Percy", String.class}, {39, int.class}, {1, int.class}},
-                        {{"Cari", String.class}, {832, int.class}, {47, int.class}}, {{"Nico", String.class}, {9, int.class}, {11, int.class}}},
+                                {{"Willow 123", String.class}, {7, int.class}, {13, int.class}}, {{"Darth", String.class}, {1, int.class}, {0, int.class}},
+                                {{"Jason", String.class}, {4, int.class}, {153, int.class}}, {{"Karly", String.class}, {23, int.class}, {78, int.class}},
+                                {{"Selene", String.class}, {3, int.class}, {14, int.class}}, {{"Percy", String.class}, {39, int.class}, {1, int.class}},
+                                {{"Cari", String.class}, {832, int.class}, {47, int.class}}, {{"Nico", String.class}, {9, int.class}, {11, int.class}}},
                         10, new Object[][]{{"Cassie", String.class}, {3, int.class}, {13, int.class}}, false)
         );
     }
@@ -299,11 +299,10 @@ public class MainTest {
         Object[] studentArray = (Object[]) team.getFieldValue(teamInstance, personAttributeName);
         Object[] holdArray;
         /* Set attributes */
-        if(arguments[0][0].length != 0){
+        if (arguments[0][0].length != 0) {
             holdArray = (Object[]) person.createArray(index, arguments);
             System.arraycopy(holdArray, 0, studentArray, 0, index);
-        }
-        else {
+        } else {
             holdArray = (Object[]) person.createArray(index);
             System.arraycopy(holdArray, 0, studentArray, 0, index);
         }
@@ -311,24 +310,23 @@ public class MainTest {
 
         Object personInstance = person.createInstance(personArgument);
         boolean output = (boolean) team.callMethod(addMemberMethodName, new Object[][]{{personInstance, person.getObjectClass()}}, teamInstance);
-        if(valid){
+        if (valid) {
             assertTrue(output, "Your " + addMemberMethodName + " method returned false on a valid operation.");
             assertEquals(studentArray[index], personInstance, "Your " + addMemberMethodName + " method does not correctly insert the " + personClassName + ".");
             String errorMsg = "Your " + addMemberMethodName + " method modifies the rest of the " + personAttributeName + " array.";
-            for(int x = 0; x < index; x++){
+            for (int x = 0; x < index; x++) {
                 assertEquals(holdArray[x], studentArray[x], errorMsg);
             }
-            for(int x = index + 1; x < size; x++){
+            for (int x = index + 1; x < size; x++) {
                 assertNull(studentArray[x], errorMsg);
             }
-        }
-        else {
+        } else {
             assertFalse(output, "Your " + addMemberMethodName + " method does not correctly identify invalid operations.");
             String errorMsg = "Your " + addMemberMethodName + " method modifies the " + personAttributeName + " array after invalid input.";
-            for(int x = 0; x < index; x++){
+            for (int x = 0; x < index; x++) {
                 assertEquals(holdArray[x], studentArray[x], errorMsg);
             }
-            for(int x = index; x < size; x++){
+            for (int x = index; x < size; x++) {
                 assertNull(studentArray[x], errorMsg);
             }
         }
@@ -370,7 +368,7 @@ public class MainTest {
     private static Stream<Arguments> getAverageSkillsInputProvider() {
         return Stream.of(Arguments.of(
                         10, new Object[][][]{{{"namer", String.class}, {4, int.class}, {5, int.class}}, {{"Kris", String.class}, {0, int.class}, {1, int.class}},
-                        {{"Carrie", String.class}, {5, int.class}, {5, int.class}}}, "Team's average skill level is:\n\t Programming:   3.0\n\t Communication: 3.6666666666666665\n",
+                                {{"Carrie", String.class}, {5, int.class}, {5, int.class}}}, "Team's average skill level is:\n\t Programming:   3.0\n\t Communication: 3.6666666666666665\n",
                         3
                 ),
                 Arguments.of(
@@ -413,10 +411,9 @@ public class MainTest {
 
         Object[] studentArray = (Object[]) team.getFieldValue(teamInstance, personAttributeName);
         Object[] holdArray;
-        if(length == 0){
+        if (length == 0) {
             holdArray = (Object[]) person.createArray(0);
-        }
-        else {
+        } else {
             holdArray = (Object[]) person.createArray(length, arguments);
         }
         System.arraycopy(holdArray, 0, studentArray, 0, length);
@@ -434,8 +431,8 @@ public class MainTest {
                 Arguments.of(10, new Object[][][]{{{"Lucas", String.class}, {8, int.class}, {0, int.class}},
                         {{"Murrey", String.class}, {4, int.class}, {748, int.class}}}, 2, " Lucas: 8, 0\n Murrey: 4, 748\n "),
                 Arguments.of(5, new Object[][][]{{{"Bob", String.class}, {7, int.class}, {1, int.class}},
-                        {{"Billy", String.class}, {2, int.class}, {78, int.class}}, {{"Kneil", String.class}, {3, int.class}, {19, int.class}},
-                        {{"Flat Sharp", String.class}, {45, int.class}, {3718, int.class}}, {{"V", String.class}, {1, int.class}, {9, int.class}}},
+                                {{"Billy", String.class}, {2, int.class}, {78, int.class}}, {{"Kneil", String.class}, {3, int.class}, {19, int.class}},
+                                {{"Flat Sharp", String.class}, {45, int.class}, {3718, int.class}}, {{"V", String.class}, {1, int.class}, {9, int.class}}},
                         5, " Bob: 7, 1\n Billy: 2, 78\n Kneil: 3, 19\n Flat Sharp: 45, 3718\n V: 1, 9\n ")
         );
     }
