@@ -175,40 +175,40 @@ public class MainTest {
 
         String msg = "Address: " + street + "\nNumber of rooms: " + rooms + "\nMonthly rent: " + money + "\n";
         String result = (String) ad.callMethod("toString", adInstance);
-       assertEquals(msg, result, "Your " + adClassName + " class toString method does not return the correct String. Check that the formatting follows the question text.");
+        assertEquals(msg, result, "Your " + adClassName + " class toString method does not return the correct String. Check that the formatting follows the question text.");
     }
 
     private static Stream<Arguments> printAdListInputProvider() {
         return Stream.of(
                 Arguments.of(3, new Object[][][]{{{"12 James st", String.class}, {60, int.class}, {474.37, double.class}},
-                        {{"Ken Ave.", String.class}, {4, int.class}, {13.3, double.class}}, {{"139-1 Central street", String.class}, {0, int.class}, {1.1, double.class}}},
+                                {{"Ken Ave.", String.class}, {4, int.class}, {13.3, double.class}}, {{"139-1 Central street", String.class}, {0, int.class}, {1.1, double.class}}},
                         new Clause[]{new StringLiteral("Ad 1:"), new Optional(new StringLiteral(" ")), new NewLine(), new StringLiteral("Address: 12 James st"),
-                        new NewLine(), new StringLiteral("Number of rooms: 60"), new NewLine(), new StringLiteral("Monthly rent: 474.37"),
-                        new NewLine(), new NewLine(), new StringLiteral("Ad 2:"), new Optional(new StringLiteral(" ")), new NewLine(), new StringLiteral("Address: Ken Ave."),
+                                new NewLine(), new StringLiteral("Number of rooms: 60"), new NewLine(), new StringLiteral("Monthly rent: 474.37"),
+                                new NewLine(), new NewLine(), new StringLiteral("Ad 2:"), new Optional(new StringLiteral(" ")), new NewLine(), new StringLiteral("Address: Ken Ave."),
                                 new NewLine(), new StringLiteral("Number of rooms: 4"), new NewLine(), new StringLiteral("Monthly rent: 13.3"),
                                 new NewLine(), new NewLine(), new StringLiteral("Ad 3:"), new Optional(new StringLiteral(" ")), new NewLine(), new StringLiteral("Address: 139-1 Central street"),
                                 new NewLine(), new StringLiteral("Number of rooms: 0"), new NewLine(), new StringLiteral("Monthly rent: 1.1"),
                                 new NewLine(), new NewLine()}),
                 Arguments.of(1, new Object[][][]{{{"1 street", String.class}, {45, int.class}, {12.4, double.class}}},
                         new Clause[]{new StringLiteral("Ad 1:"), new Optional(new StringLiteral(" ")), new NewLine(), new StringLiteral("Address: 1 street"),
-                        new NewLine(), new StringLiteral("Number of rooms: 45"), new NewLine(), new StringLiteral("Monthly rent: 12.4"),
-                        new NewLine(), new NewLine()}),
+                                new NewLine(), new StringLiteral("Number of rooms: 45"), new NewLine(), new StringLiteral("Monthly rent: 12.4"),
+                                new NewLine(), new NewLine()}),
                 Arguments.of(5, new Object[][][]{{{"66 Pes Street", String.class}, {9, int.class}, {123.4567, double.class}},
-                        {{"", String.class}, {0, int.class}, {0.0, double.class}}, {{"Hope Lane", String.class}, {5, int.class}, {3.3, double.class}},
-                        {{"Richmond Road", String.class}, {6, int.class}, {5.29, double.class}}, {{"Kinsty boulevard", String.class}, {4, int.class}, {4.4, double.class}}},
+                                {{"", String.class}, {0, int.class}, {0.0, double.class}}, {{"Hope Lane", String.class}, {5, int.class}, {3.3, double.class}},
+                                {{"Richmond Road", String.class}, {6, int.class}, {5.29, double.class}}, {{"Kinsty boulevard", String.class}, {4, int.class}, {4.4, double.class}}},
                         new Clause[]{new StringLiteral("Ad 1:"), new Optional(new StringLiteral(" ")), new NewLine(),
-                        new StringLiteral("Address: 66 Pes Street"), new NewLine(), new StringLiteral("Number of rooms: 9"),
-                        new NewLine(), new StringLiteral("Monthly rent: 123.4567"), new NewLine(), new NewLine(),
-                        new StringLiteral("Ad 2:"), new Optional(new StringLiteral(" ")), new NewLine(),
-                        new StringLiteral("Address: "), new NewLine(), new StringLiteral("Number of rooms: 0"),
-                        new NewLine(), new StringLiteral("Monthly rent: 0.0"), new NewLine(), new NewLine(), new StringLiteral("Ad 3:"), new Optional(new StringLiteral(" ")), new NewLine(),
-                        new StringLiteral("Address: Hope Lane"), new NewLine(), new StringLiteral("Number of rooms: 5"),
-                        new NewLine(), new StringLiteral("Monthly rent: 3.3"), new NewLine(), new NewLine(),
-                        new StringLiteral("Ad 4:"), new NewLine(), new Optional(new StringLiteral(" ")), new StringLiteral("Address: Richmond Road"),
-                        new NewLine(), new StringLiteral("Number of rooms: 6"), new NewLine(), new StringLiteral("Monthly rent: 5.29"),
-                        new NewLine(), new NewLine(), new StringLiteral("Ad 5:"), new Optional(new StringLiteral(" ")),
-                        new NewLine(), new StringLiteral("Address: Kinsty boulevard"), new NewLine(), new StringLiteral("Number of rooms: 4"),
-                        new NewLine(), new StringLiteral("Monthly rent: 4.4"), new NewLine(), new NewLine()})
+                                new StringLiteral("Address: 66 Pes Street"), new NewLine(), new StringLiteral("Number of rooms: 9"),
+                                new NewLine(), new StringLiteral("Monthly rent: 123.4567"), new NewLine(), new NewLine(),
+                                new StringLiteral("Ad 2:"), new Optional(new StringLiteral(" ")), new NewLine(),
+                                new StringLiteral("Address: "), new NewLine(), new StringLiteral("Number of rooms: 0"),
+                                new NewLine(), new StringLiteral("Monthly rent: 0.0"), new NewLine(), new NewLine(), new StringLiteral("Ad 3:"), new Optional(new StringLiteral(" ")), new NewLine(),
+                                new StringLiteral("Address: Hope Lane"), new NewLine(), new StringLiteral("Number of rooms: 5"),
+                                new NewLine(), new StringLiteral("Monthly rent: 3.3"), new NewLine(), new NewLine(),
+                                new StringLiteral("Ad 4:"), new NewLine(), new Optional(new StringLiteral(" ")), new StringLiteral("Address: Richmond Road"),
+                                new NewLine(), new StringLiteral("Number of rooms: 6"), new NewLine(), new StringLiteral("Monthly rent: 5.29"),
+                                new NewLine(), new NewLine(), new StringLiteral("Ad 5:"), new Optional(new StringLiteral(" ")),
+                                new NewLine(), new StringLiteral("Address: Kinsty boulevard"), new NewLine(), new StringLiteral("Number of rooms: 4"),
+                                new NewLine(), new StringLiteral("Monthly rent: 4.4"), new NewLine(), new NewLine()})
         );
     }
 
@@ -242,12 +242,12 @@ public class MainTest {
                 Arguments.of(1, new Object[][][]{{{"123 Lane", String.class}, {3, int.class}, {1946.99, double.class}}},
                         3, 1, new int[]{0}),
                 Arguments.of(5, new Object[][][]{{{"123 Roade", String.class}, {1, int.class}, {893.11, double.class}},
-                        {{"67 drysdale", String.class}, {2, int.class}, {14.12, double.class}}, {{"12 Academy Way", String.class}, {2, int.class}, {1234.32, double.class}},
-                        {{"37 dshauid", String.class}, {12, int.class}, {3728948.33, double.class}}, {{"Just fine", String.class}, {2, int.class}, {4782.23, double.class}}},
+                                {{"67 drysdale", String.class}, {2, int.class}, {14.12, double.class}}, {{"12 Academy Way", String.class}, {2, int.class}, {1234.32, double.class}},
+                                {{"37 dshauid", String.class}, {12, int.class}, {3728948.33, double.class}}, {{"Just fine", String.class}, {2, int.class}, {4782.23, double.class}}},
                         2, 3, new int[]{1, 2, 4}),
                 Arguments.of(5, new Object[][][]{{{"streetname", String.class}, {1, int.class}, {4783.32, double.class}},
-                        {{"Crane street", String.class}, {1, int.class}, {12.12, double.class}}, {{"Vulture street", String.class}, {1, int.class}, {12.12, double.class}},
-                        {{"Waverly Place", String.class}, {1, int.class}, {5.3, double.class}}, {{"Old Court House", String.class}, {1, int.class}, {56.5, double.class}}},
+                                {{"Crane street", String.class}, {1, int.class}, {12.12, double.class}}, {{"Vulture street", String.class}, {1, int.class}, {12.12, double.class}},
+                                {{"Waverly Place", String.class}, {1, int.class}, {5.3, double.class}}, {{"Old Court House", String.class}, {1, int.class}, {56.5, double.class}}},
                         1, 5, new int[]{0, 1, 2, 3, 4})
         );
     }
@@ -271,7 +271,7 @@ public class MainTest {
 
         Object[] holdArray = (Object[]) ad.createArray(size, arguments);
         Object[] answerArray = new Object[newSize];
-        for(int x = 0; x < newSize; x++){
+        for (int x = 0; x < newSize; x++) {
             answerArray[x] = holdArray[indexes[x]];
         }
 
@@ -320,7 +320,7 @@ public class MainTest {
 
         Object[] holdArray = (Object[]) ad.createArray(size, arguments);
         Object[] answerArray = new Object[newSize];
-        for(int x = 0; x < newSize; x++){
+        for (int x = 0; x < newSize; x++) {
             answerArray[x] = holdArray[indexes[x]];
         }
 
