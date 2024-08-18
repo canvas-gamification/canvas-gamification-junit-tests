@@ -71,7 +71,7 @@ Ad 2:
 
 - A method that is **static** and accessible to other classes called `filteredByRooms`.
 - This method must accept an `int` and an `Ad[]` as parameters in that order and return a newly created `Ad[]`.
-- This method should search the given array for the `Ad` object where the **numberOfRooms** attribute matches the passed
+- This method should search the given `Ad` array for objects where the **numberOfRooms** attribute matches the passed
   integer. It should then add them to a new array and return that new array.
 - Note: the returned array should have no empty indexes.
 
@@ -79,6 +79,6 @@ Ad 2:
 
 - A method that is **static** and accessible to other classes called `filteredByMaxRent`.
 - This method must accept a `double` and an `Ad[]` as parameters in that order and return a newly created `Ad[]`.
-- This method should search the given array for `Ad` object where the **monthlyRent** attribute is less than or equal
+- This method should search the given `Ad` array for objects where the **monthlyRent** attribute is less than or equal
   to the passed double. It should then add them to a new array and return that new array.
 - Note: the returned array should have no empty indexes.
