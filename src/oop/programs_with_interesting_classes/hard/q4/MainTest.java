@@ -31,6 +31,8 @@ public class MainTest {
     private final String filteredByRoomsMethodName = "filteredByRooms";
     private final String filteredByMaxRentMethodName = "filteredByMaxRent";
 
+// Java question
+
     @BeforeEach
     public void setUp() {
         String packageString = "oop.programs_with_interesting_classes.hard.q4.";
