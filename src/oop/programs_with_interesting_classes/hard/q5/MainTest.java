@@ -205,9 +205,9 @@ public class MainTest {
                 Arguments.of(new String[]{null, null}, "communication", 0, new String[]{"communication", null}),
                 Arguments.of(new String[]{"resilience", "patience"}, "creativity", 2, new String[]{"resilience", "patience", "creativity", null}),
                 Arguments.of(new String[]{"Sketching", "text editors", "orator", null}, "empathy", 3, new String[]{"Sketching",
-                "text editors", "orator", "empathy"}),
+                        "text editors", "orator", "empathy"}),
                 Arguments.of(new String[]{"degree", "literary analysis", "instruction", "communication", "grace", "patience of a saint",
-                "proposal writing", "commitmment", "willing to crunch"}, "does not need to sleep", 9, new String[]{"degree",
+                        "proposal writing", "commitmment", "willing to crunch"}, "does not need to sleep", 9, new String[]{"degree",
                         "literary analysis", "instruction", "communication", "grace", "patience of a saint", "proposal writing",
                         "commitmment", "willing to crunch", "does not need to sleep", null, null, null, null, null, null, null, null})
         );
@@ -285,9 +285,9 @@ public class MainTest {
         return Stream.of(
                 Arguments.of(1, new Object[][][]{{{"Platformer", String.class}, {100, int.class}}}, new String[][]{{"Fast reflexes", "Jumping height", null}}, new int[]{2},
                         new Clause[]{new StringLiteral("Job Ad 1:"), new Optional(new StringLiteral(" ")), new NewLine(),
-                        new StringLiteral("Title:  Platformer"), new NewLine(), new StringLiteral("Salary: 100"), new NewLine(),
-                        new StringLiteral("Skills: Fast reflexes, Jumping height"),
-                        new NewLine()}),
+                                new StringLiteral("Title:  Platformer"), new NewLine(), new StringLiteral("Salary: 100"), new NewLine(),
+                                new StringLiteral("Skills: Fast reflexes, Jumping height"),
+                                new NewLine()}),
                 Arguments.of(3, new Object[][][]{{{"Forensic Scientist", String.class}, {0, int.class}}, {{"", String.class}, {23780, int.class}},
                         {{"Sleep therapist", String.class}, {10050, int.class}}}, new String[][]{{"eye for Detail", "no squeemishness", "medicine"},
                         {null, null}, {"soft voice", null}}, new int[]{3, 0, 1}, new Clause[]{new StringLiteral("Job Ad 1:"), new Optional(new StringLiteral(" ")),
@@ -299,21 +299,21 @@ public class MainTest {
                         new NewLine(), new StringLiteral("Title:  Sleep therapist"), new NewLine(), new StringLiteral("Salary: 10050"), new NewLine(),
                         new StringLiteral("Skills: soft voice"), new NewLine(), new NewLine()}),
                 Arguments.of(5, new Object[][][]{{{"Musician", String.class}, {10, int.class}}, {{"Teacher", String.class}, {60000, int.class}},
-                        {{"Photographer", String.class}, {55555, int.class}}, {{"Opera Singer", String.class}, {150150, int.class}},
-                        {{"Line worker", String.class}, {7000, int.class}}}, new String[][]{{"guitar", "charisma"}, {"patience", "instruction", "communication", null},
-                        {"composition", null}, {"vocal training", "professionalism", "musicality", "confidence", "preparation"}, {null, null}},
+                                {{"Photographer", String.class}, {55555, int.class}}, {{"Opera Singer", String.class}, {150150, int.class}},
+                                {{"Line worker", String.class}, {7000, int.class}}}, new String[][]{{"guitar", "charisma"}, {"patience", "instruction", "communication", null},
+                                {"composition", null}, {"vocal training", "professionalism", "musicality", "confidence", "preparation"}, {null, null}},
                         new int[]{2, 3, 1, 5, 0}, new Clause[]{new StringLiteral("Job Ad 1:"), new Optional(new StringLiteral(" ")), new NewLine(),
-                        new StringLiteral("Title:  Musician"), new NewLine(), new StringLiteral("Salary: 10"), new NewLine(),
-                        new StringLiteral("Skills: guitar, charisma"), new NewLine(), new NewLine(), new StringLiteral("Job Ad 2:"),
-                        new Optional(new StringLiteral(" ")), new NewLine(), new StringLiteral("Title:  Teacher"),
-                        new NewLine(), new StringLiteral("Salary: 60000"), new NewLine(), new StringLiteral("Skills: patience, instruction, communication"),
-                        new NewLine(), new NewLine(), new StringLiteral("Job Ad 3:"), new Optional(new StringLiteral(" ")), new NewLine(),
-                        new StringLiteral("Title:  Photographer"), new NewLine(), new StringLiteral("Salary: 55555"), new NewLine(),
-                        new StringLiteral("Skills: composition"), new NewLine(), new NewLine(), new StringLiteral("Job Ad 4:"), new Optional(new StringLiteral(" ")),
-                        new NewLine(), new StringLiteral("Title:  Opera Singer"), new NewLine(), new StringLiteral("Salary: 150150"), new NewLine(),
-                        new StringLiteral("Skills: vocal training, professionalism, musicality, confidence, preparation"), new NewLine(), new NewLine(),
-                        new StringLiteral("Job Ad 5:"), new Optional(new StringLiteral(" ")), new NewLine(), new StringLiteral("Title:  Line worker"),
-                        new NewLine(), new StringLiteral("Salary: 7000"), new NewLine(), new StringLiteral("Skills: "), new NewLine(), new NewLine()})
+                                new StringLiteral("Title:  Musician"), new NewLine(), new StringLiteral("Salary: 10"), new NewLine(),
+                                new StringLiteral("Skills: guitar, charisma"), new NewLine(), new NewLine(), new StringLiteral("Job Ad 2:"),
+                                new Optional(new StringLiteral(" ")), new NewLine(), new StringLiteral("Title:  Teacher"),
+                                new NewLine(), new StringLiteral("Salary: 60000"), new NewLine(), new StringLiteral("Skills: patience, instruction, communication"),
+                                new NewLine(), new NewLine(), new StringLiteral("Job Ad 3:"), new Optional(new StringLiteral(" ")), new NewLine(),
+                                new StringLiteral("Title:  Photographer"), new NewLine(), new StringLiteral("Salary: 55555"), new NewLine(),
+                                new StringLiteral("Skills: composition"), new NewLine(), new NewLine(), new StringLiteral("Job Ad 4:"), new Optional(new StringLiteral(" ")),
+                                new NewLine(), new StringLiteral("Title:  Opera Singer"), new NewLine(), new StringLiteral("Salary: 150150"), new NewLine(),
+                                new StringLiteral("Skills: vocal training, professionalism, musicality, confidence, preparation"), new NewLine(), new NewLine(),
+                                new StringLiteral("Job Ad 5:"), new Optional(new StringLiteral(" ")), new NewLine(), new StringLiteral("Title:  Line worker"),
+                                new NewLine(), new StringLiteral("Salary: 7000"), new NewLine(), new StringLiteral("Skills: "), new NewLine(), new NewLine()})
         );
     }
 
@@ -335,7 +335,7 @@ public class MainTest {
                 String.format(incorrectReturnType, displaySearchResultsMethodName));
 
         Object[] holdArray = (Object[]) jobAd.createArray(size, arguments);
-        for(int x = 0; x < size; x++){
+        for (int x = 0; x < size; x++) {
             jobAd.setFieldValue(holdArray[x], skills[x], stringArrayAttributeName);
             jobAd.setFieldValue(holdArray[x], numSkills[x], intAttributeName2);
         }
@@ -380,7 +380,7 @@ public class MainTest {
 
         Object[] holdArray = (Object[]) jobAd.createArray(size, arguments);
         Object[] ansArray = (Object[]) jobAd.createArray(indexes.length);
-        for(int x = 0; x < indexes.length; x++){
+        for (int x = 0; x < indexes.length; x++) {
             ansArray[x] = holdArray[indexes[x]];
         }
 
@@ -429,12 +429,12 @@ public class MainTest {
                 String.format(incorrectReturnType, whichJobsRequireMethodName));
 
         Object[] holdArray = (Object[]) jobAd.createArray(size, arguments);
-        for(int x = 0; x < size; x++){
+        for (int x = 0; x < size; x++) {
             jobAd.setFieldValue(holdArray[x], skills[x], stringArrayAttributeName);
             jobAd.setFieldValue(holdArray[x], skillNum[x], intAttributeName2);
         }
         Object[] ansArray = (Object[]) jobAd.createArray(indexes.length);
-        for(int x = 0; x < indexes.length; x++){
+        for (int x = 0; x < indexes.length; x++) {
             ansArray[x] = holdArray[indexes[x]];
         }
 
