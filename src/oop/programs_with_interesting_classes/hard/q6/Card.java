@@ -19,13 +19,13 @@ public class Card {
     public String toString()
     {
         String str = "";
-        if( rank == 1 )
+        if (rank == 1)
             str += "A";
-        else if( rank > 1 && rank <= 10 )
+        else if (rank > 1 && rank <= 10)
             str += rank;
-        else if( rank == 11 )
+        else if (rank == 11)
             str += "J";
-        else if( rank == 12 )
+        else if (rank == 12)
             str += "Q";
         else
             str += "K";

@@ -39,7 +39,7 @@ public class MainTest {
     private final String dealMethodName = "deal";
     private static final int suits = 4;
     private static final int ranks = 13;
-    private static final int maxCards = suits*ranks;
+    private static final int maxCards = suits * ranks;
 
     private final String incorrectTypeMessage = "Your %s attribute does not have the correct type.";
 
@@ -88,8 +88,8 @@ public class MainTest {
         Object cardInstance = card.createInstance(constructorArguments);
 
         String msg = "Your %s class constructor does not correctly initialize the %s value.";
-       assertEquals(rank, card.getFieldValue(cardInstance, intAttributeName1), String.format(msg, cardClassName, intAttributeName1));
-       assertEquals(suit, card.getFieldValue(cardInstance, stringAttributeName), String.format(msg, cardClassName, stringAttributeName));
+        assertEquals(rank, card.getFieldValue(cardInstance, intAttributeName1), String.format(msg, cardClassName, intAttributeName1));
+        assertEquals(suit, card.getFieldValue(cardInstance, stringAttributeName), String.format(msg, cardClassName, stringAttributeName));
     }
 
     private static Stream<Integer> getRankInputProvider() {
@@ -295,29 +295,28 @@ public class MainTest {
 
         /* Create instance to call method on */
         Object deckInstance = deckOfCards.createInstance();
-        deckOfCards.setFieldValue(deckInstance, suit+1, finalIntAttributeName2);
+        deckOfCards.setFieldValue(deckInstance, suit + 1, finalIntAttributeName2);
 
         /* Call setSuits on card */
         Object[][] methodArguments = new Object[][]{{suit, int.class}};
-        if(suit <= 4) {
+        if (suit <= 4) {
             deckOfCards.callMethod(setSuitsMethodName, methodArguments, deckInstance);
             assertEquals(suit, deckOfCards.getFieldValue(deckInstance, finalIntAttributeName2),
                     "Your " + setSuitsMethodName + " method does not correctly change the value of the " + finalIntAttributeName2 + " attribute.");
-            assertEquals(suit*ranks, deckOfCards.getFieldValue(deckInstance, finalIntAttributeName3),
+            assertEquals(suit * ranks, deckOfCards.getFieldValue(deckInstance, finalIntAttributeName3),
                     "Your " + setSuitsMethodName + " method does not correctly update the value of the " + finalIntAttributeName3 + " attribute.");
-            assertArrayEquals((Object[]) card.createArray(suit*ranks), (Object[]) deckOfCards.getFieldValue(deckInstance, cardArrayAttributeName),
+            assertArrayEquals((Object[]) card.createArray(suit * ranks), (Object[]) deckOfCards.getFieldValue(deckInstance, cardArrayAttributeName),
                     "Your " + setSuitsMethodName + " method does not correctly reinitialize the " + cardArrayAttributeName + " attribute.");
-        }
-        else {
+        } else {
             Object[] holdArray = ((Object[]) deckOfCards.getFieldValue(deckInstance, cardArrayAttributeName)).clone();
-            deckOfCards.setFieldValue(deckInstance, (suit+1)*ranks, finalIntAttributeName3);
+            deckOfCards.setFieldValue(deckInstance, (suit + 1) * ranks, finalIntAttributeName3);
             deckOfCards.callMethod(setSuitsMethodName, methodArguments, new String[]{"public"}, deckInstance, new Clause[]{new StringLiteral("Invalid value")},
                     "Your " + setSuitsMethodName + " method does not recognize invalid input and print the required response.");
-            assertEquals(suit+1, deckOfCards.getFieldValue(deckInstance, finalIntAttributeName2),
+            assertEquals(suit + 1, deckOfCards.getFieldValue(deckInstance, finalIntAttributeName2),
                     "Your " + setSuitsMethodName + " method does not correctly maintain the value of the " + finalIntAttributeName2 + " attribute after invalid input.");
-            assertEquals((suit+1)*ranks, deckOfCards.getFieldValue(deckInstance, finalIntAttributeName3),
+            assertEquals((suit + 1) * ranks, deckOfCards.getFieldValue(deckInstance, finalIntAttributeName3),
                     "Your " + setSuitsMethodName + " method does not correctly maintain the value of the " + finalIntAttributeName3 + " attribute.");
-            assertArrayEquals(holdArray, (Object[])deckOfCards.getFieldValue(deckInstance, cardArrayAttributeName),
+            assertArrayEquals(holdArray, (Object[]) deckOfCards.getFieldValue(deckInstance, cardArrayAttributeName),
                     "Your " + setSuitsMethodName + " method does not correctly maintain the " + cardArrayAttributeName + " attribute.");
         }
     }
@@ -339,29 +338,28 @@ public class MainTest {
 
         /* Create instance to call method on */
         Object deckInstance = deckOfCards.createInstance();
-        deckOfCards.setFieldValue(deckInstance, rank+1, finalIntAttributeName1);
+        deckOfCards.setFieldValue(deckInstance, rank + 1, finalIntAttributeName1);
 
         /* Call setSuits on card */
         Object[][] methodArguments = new Object[][]{{rank, int.class}};
-        if(rank <= 13) {
+        if (rank <= 13) {
             deckOfCards.callMethod(setRanksMethodName, methodArguments, deckInstance);
             assertEquals(rank, deckOfCards.getFieldValue(deckInstance, finalIntAttributeName1),
                     "Your " + setRanksMethodName + " method does not correctly change the value of the " + finalIntAttributeName1 + " attribute.");
-            assertEquals(rank*suits, deckOfCards.getFieldValue(deckInstance, finalIntAttributeName3),
+            assertEquals(rank * suits, deckOfCards.getFieldValue(deckInstance, finalIntAttributeName3),
                     "Your " + setSuitsMethodName + " method does not correctly update the value of the " + finalIntAttributeName3 + " attribute.");
-            assertArrayEquals((Object[]) card.createArray(suits*rank), (Object[]) deckOfCards.getFieldValue(deckInstance, cardArrayAttributeName),
+            assertArrayEquals((Object[]) card.createArray(suits * rank), (Object[]) deckOfCards.getFieldValue(deckInstance, cardArrayAttributeName),
                     "Your " + setSuitsMethodName + " method does not correctly reinitialize the " + cardArrayAttributeName + " attribute.");
-        }
-        else {
+        } else {
             Object[] holdArray = ((Object[]) deckOfCards.getFieldValue(deckInstance, cardArrayAttributeName)).clone();
-            deckOfCards.setFieldValue(deckInstance, (rank+1)*suits, finalIntAttributeName3);
+            deckOfCards.setFieldValue(deckInstance, (rank + 1) * suits, finalIntAttributeName3);
             deckOfCards.callMethod(setRanksMethodName, methodArguments, new String[]{"public"}, deckInstance, new Clause[]{new StringLiteral("Invalid value")},
                     "Your " + setRanksMethodName + " method does not recognize invalid input and print the required response.");
-            assertEquals(rank+1, deckOfCards.getFieldValue(deckInstance, finalIntAttributeName1),
+            assertEquals(rank + 1, deckOfCards.getFieldValue(deckInstance, finalIntAttributeName1),
                     "Your " + setRanksMethodName + " method does not correctly maintain the value of the " + finalIntAttributeName1 + " attribute after invalid input.");
-            assertEquals((rank+1)*suits, deckOfCards.getFieldValue(deckInstance, finalIntAttributeName3),
+            assertEquals((rank + 1) * suits, deckOfCards.getFieldValue(deckInstance, finalIntAttributeName3),
                     "Your " + setSuitsMethodName + " method does not correctly maintain the value of the " + finalIntAttributeName3 + " attribute.");
-            assertArrayEquals(holdArray, (Object[])deckOfCards.getFieldValue(deckInstance, cardArrayAttributeName),
+            assertArrayEquals(holdArray, (Object[]) deckOfCards.getFieldValue(deckInstance, cardArrayAttributeName),
                     "Your " + setSuitsMethodName + " method does not correctly maintain the " + cardArrayAttributeName + " attribute.");
         }
     }
@@ -369,9 +367,9 @@ public class MainTest {
     private static Stream<Arguments> shuffleInputProvider() {
         return Stream.of(
                 Arguments.of(ranks, suits, maxCards),
-                Arguments.of(ranks-1, suits, (ranks-1)*suits),
-                Arguments.of(ranks-3, suits-2, (ranks-3)*(suits-2)),
-                Arguments.of(5, suits-1, 5*(suits-1))
+                Arguments.of(ranks - 1, suits, (ranks - 1) * suits),
+                Arguments.of(ranks - 3, suits - 2, (ranks - 3) * (suits - 2)),
+                Arguments.of(5, suits - 1, 5 * (suits - 1))
         );
     }
 
@@ -402,42 +400,38 @@ public class MainTest {
         ArrayList<Integer> randomSuitsValues = new ArrayList<>();
 
         // Check for uniqueness property
-        for (int x = 0; x < 3; x++){
+        for (int x = 0; x < 3; x++) {
             deckOfCards.callMethod(shuffleCardsMethodName, deckInstance);
             int[] unique = new int[maxCards];
             Object[] holdCards = (Object[]) deckOfCards.getFieldValue(deckInstance, cardArrayAttributeName);
-            for (Object holdCard: holdCards) {
+            for (Object holdCard : holdCards) {
                 String holdSuit = (String) card.getFieldValue(holdCard, stringAttributeName);
                 int rank = (int) card.getFieldValue(holdCard, intAttributeName1);
-                if(rank < 0 || rank > ranks)
+                if (rank < 0 || rank > ranks)
                     fail("Your " + shuffleCardsMethodName + " method does not generate " + cardClassName + "s with valid " + intAttributeName1 + " values (1-" + ranks + ").");
-               randomRanksValues.add(rank);
+                randomRanksValues.add(rank);
                 int increment = -1;
-                if(holdSuit.equals("Spades")) {
+                if (holdSuit.equals("Spades")) {
                     increment = 0;
                     randomSuitsValues.add(1);
-                }
-                else if (holdSuit.equals("Hearts")) {
+                } else if (holdSuit.equals("Hearts")) {
                     increment = ranks;
                     randomSuitsValues.add(2);
-                }
-                else if(holdSuit.equals("Clubs")) {
-                    if(suits <= 2)
+                } else if (holdSuit.equals("Clubs")) {
+                    if (suits <= 2)
                         fail("Your " + shuffleCardsMethodName + " method does not generate " + cardClassName + "s with valid " + stringAttributeName + " values (Spades and Hearts).");
                     increment = ranks * 2;
                     randomSuitsValues.add(3);
-                }
-                else if (holdSuit.equals("Diamonds")) {
-                    if(suits <= 3){
+                } else if (holdSuit.equals("Diamonds")) {
+                    if (suits <= 3) {
                         fail("Your " + shuffleCardsMethodName + " method does not generate " + cardClassName + "s with valid " + stringAttributeName + " values (Spades, Hearts, and Clubs).");
                     }
                     increment = ranks * 3;
                     randomSuitsValues.add(4);
-                }
-                else
+                } else
                     fail("Your " + shuffleCardsMethodName + " method does not generate " + cardClassName + "s with valid " + stringAttributeName + " values.");
                 int index = (rank - 1) + increment;
-                if(unique[index] == 0)
+                if (unique[index] == 0)
                     unique[index]++;
                 else
                     fail("Your " + shuffleCardsMethodName + " generated duplicates of a " + cardClassName + ".");
@@ -445,17 +439,17 @@ public class MainTest {
         }
 
         // collect remaining values necessary for the randomization check
-        for(int x = 0; x < repetitions; x++){
+        for (int x = 0; x < repetitions; x++) {
             deckOfCards.callMethod(shuffleCardsMethodName, deckInstance);
             Object[] holdCards = (Object[]) deckOfCards.getFieldValue(deckInstance, cardArrayAttributeName);
-            for (Object holdCard: holdCards) {
+            for (Object holdCard : holdCards) {
                 String holdSuit = (String) card.getFieldValue(holdCard, stringAttributeName);
                 randomRanksValues.add((int) card.getFieldValue(holdCard, intAttributeName1));
-                if(holdSuit.equals("Spades"))
+                if (holdSuit.equals("Spades"))
                     randomSuitsValues.add(1);
                 else if (holdSuit.equals("Hearts"))
                     randomSuitsValues.add(2);
-                else if(holdSuit.equals("Clubs"))
+                else if (holdSuit.equals("Clubs"))
                     randomSuitsValues.add(3);
                 else if (holdSuit.equals("Diamonds"))
                     randomSuitsValues.add(4);
@@ -493,7 +487,7 @@ public class MainTest {
         /* Call method */
         String output = (String) deckOfCards.callMethod(mapSuitToStringMethodName, new Object[][]{{input, int.class}}, deckInstance);
 
-       assertEquals(ans, output, "Your " + mapSuitToStringMethodName + " method does not return the correct output for a given input.");
+        assertEquals(ans, output, "Your " + mapSuitToStringMethodName + " method does not return the correct output for a given input.");
     }
 
     @Test
@@ -512,8 +506,8 @@ public class MainTest {
         Object deckInstance = deckOfCards.createInstance();
 
         Object[] holdDeck = (Object[]) card.createArray(maxCards);
-        for(int x = 0; x < suits; x++){
-            for(int y = 0; y < ranks; y++){
+        for (int x = 0; x < suits; x++) {
+            for (int y = 0; y < ranks; y++) {
                 String suit = x == 0 ? "Spades" : x == 1 ? "Clubs" : x == 2 ? "Hearts" : "Diamonds";
                 Object[][] arguments = new Object[][]{{y + 1, int.class}, {suit, String.class}};
                 holdDeck[y + (x * ranks)] = card.createInstance(arguments);
@@ -524,13 +518,12 @@ public class MainTest {
         deckOfCards.setFieldValue(deckInstance, 0, intAttributeName2);
 
         int position = 0;
-        for(int x = 0; x < maxCards + 2; x++){
-            if (position < maxCards){
+        for (int x = 0; x < maxCards + 2; x++) {
+            if (position < maxCards) {
                 Object output = deckOfCards.callMethod(dealMethodName, deckInstance);
                 assertEquals(deckClone[x], output,
                         "Your " + dealMethodName + " method does not return the " + cardClassName + " located at the " + intAttributeName2 + " index.");
-            }
-            else {
+            } else {
                 Object output = deckOfCards.callMethod(dealMethodName, deckInstance, new Clause[]{new StringLiteral("There are no more cards left in the deck.")},
                         "Your " + dealMethodName + " method does not print the correct statement after the end of the " + cardArrayAttributeName + " is reached.");
                 assertNull(output, "Your " + dealMethodName + " method does not return null after the end of the " + cardArrayAttributeName + " is reached.");
@@ -542,7 +535,7 @@ public class MainTest {
     private static Stream<Arguments> deckToStringInputProvider() {
         Object[][][] deck1 = new Object[maxCards][2][2];
         StringBuilder msg1 = new StringBuilder();
-        for(int x = 0; x < maxCards; x++){
+        for (int x = 0; x < maxCards; x++) {
             deck1[x] = new Object[][]{{5, int.class}, {"Spades", String.class}};
             msg1.append("5 of Spades\n");
         }
@@ -550,17 +543,17 @@ public class MainTest {
         Object[][][] deck2 = new Object[maxCards][2][2];
         StringBuilder msg2 = new StringBuilder();
         int count = 0;
-        for(int x = 0; x < suits; x++){
-            for(int y = 0; y < ranks; y++){
+        for (int x = 0; x < suits; x++) {
+            for (int y = 0; y < ranks; y++) {
                 String suit = x == 0 ? "Spades" : x == 1 ? "Clubs" : x == 2 ? "Hearts" : "Diamonds";
                 deck2[count++] = new Object[][]{{y + 1, int.class}, {suit, String.class}};
-                if( y+1 == 1 )
+                if (y + 1 == 1)
                     msg2.append("A");
-                else if(y+1 <= 10 )
+                else if (y + 1 <= 10)
                     msg2.append(y + 1);
-                else if( y+1 == 11 )
+                else if (y + 1 == 11)
                     msg2.append("J");
-                else if( y+1 == 12 )
+                else if (y + 1 == 12)
                     msg2.append("Q");
                 else
                     msg2.append("K");
@@ -590,11 +583,11 @@ public class MainTest {
                                 {{8, int.class}, {"Diamonds", String.class}}, {{1, int.class}, {"Diamonds", String.class}}, {{12, int.class}, {"Diamonds", String.class}},
                                 {{6, int.class}, {"Clubs", String.class}}, {{6, int.class}, {"Diamonds", String.class}}},
                         "K of Spades\nK of Hearts\n5 of Spades\n9 of Spades\nK of Clubs\n5 of Hearts\n4 of Spades\n2 of Spades\nK of Diamonds\n3 of Spades\n" +
-                        "Q of Spades\n9 of Hearts\n10 of Spades\n2 of Hearts\n9 of Clubs\n5 of Clubs\nQ of Hearts\n4 of Hearts\n7 of Spades\n2 of Clubs\n" +
-                        "8 of Spades\nJ of Spades\n7 of Hearts\n4 of Clubs\n5 of Diamonds\nJ of Hearts\n2 of Diamonds\nJ of Clubs\n10 of Hearts\nJ of Diamonds\n" +
-                        "10 of Clubs\n10 of Diamonds\nQ of Clubs\n7 of Clubs\n3 of Hearts\n3 of Clubs\n4 of Diamonds\n7 of Diamonds\n3 of Diamonds\n8 of Hearts\n" +
-                        "A of Spades\nA of Hearts\nA of Clubs\n6 of Spades\n9 of Diamonds\n8 of Clubs\n6 of Hearts\n8 of Diamonds\nA of Diamonds\nQ of Diamonds\n" +
-                        "6 of Clubs\n6 of Diamonds\n") //randomized
+                                "Q of Spades\n9 of Hearts\n10 of Spades\n2 of Hearts\n9 of Clubs\n5 of Clubs\nQ of Hearts\n4 of Hearts\n7 of Spades\n2 of Clubs\n" +
+                                "8 of Spades\nJ of Spades\n7 of Hearts\n4 of Clubs\n5 of Diamonds\nJ of Hearts\n2 of Diamonds\nJ of Clubs\n10 of Hearts\nJ of Diamonds\n" +
+                                "10 of Clubs\n10 of Diamonds\nQ of Clubs\n7 of Clubs\n3 of Hearts\n3 of Clubs\n4 of Diamonds\n7 of Diamonds\n3 of Diamonds\n8 of Hearts\n" +
+                                "A of Spades\nA of Hearts\nA of Clubs\n6 of Spades\n9 of Diamonds\n8 of Clubs\n6 of Hearts\n8 of Diamonds\nA of Diamonds\nQ of Diamonds\n" +
+                                "6 of Clubs\n6 of Diamonds\n") //randomized
         );
     }
 
