@@ -355,15 +355,15 @@ public class MainTest {
         String name = (String) animal.getFieldValue(output, stringAttributeName1);
         String sound = (String) animal.getFieldValue(output, stringAttributeName2);
         boolean exists = false;
-        for (Object[][] argumentSet: arguments) {
-            if(argumentSet[0][0].equals(name) && argumentSet[1][0].equals(sound)){
+        for (Object[][] argumentSet : arguments) {
+            if (argumentSet[0][0].equals(name) && argumentSet[1][0].equals(sound)) {
                 exists = true;
                 break;
             }
         }
         assertTrue(exists, "Your " + getRandomAnimalMethodName + " method does not return an " + animalClassName + " from within the " + animalArrayAttributeName + " attribute.");
 
-        if(size > 1){ //only check for randomness if the array is greater than size 1
+        if (size > 1) { //only check for randomness if the array is greater than size 1
             ArrayList<Integer> randomValues = new ArrayList<>();
             // collect remaining values necessary for the randomization check
             for (int x = 0; x < 1000; x++) {
@@ -371,8 +371,8 @@ public class MainTest {
                 name = (String) animal.getFieldValue(output, stringAttributeName1);
                 sound = (String) animal.getFieldValue(output, stringAttributeName2);
                 int count = 0;
-                for (Object[][] argumentSet: arguments) {
-                    if(argumentSet[0][0].equals(name) && argumentSet[1][0].equals(sound)){
+                for (Object[][] argumentSet : arguments) {
+                    if (argumentSet[0][0].equals(name) && argumentSet[1][0].equals(sound)) {
                         randomValues.add(count);
                         break;
                     }
@@ -394,10 +394,10 @@ public class MainTest {
                 Arguments.of("Canada", new Object[][][]{{{"meese", String.class}, {"grunt", String.class}}, {{"beaver", String.class}, {"chitter", String.class}}}, 2,
                         "Canada has: [meese makes the noise grunt, beaver makes the noise chitter]"),
                 Arguments.of("planet", new Object[][][]{{{"fox", String.class}, {"ringdingding", String.class}}, {{"sheep", String.class}, {"bahhh", String.class}},
-                        {{"mouse", String.class}, {"squeak", String.class}}, {{"deer", String.class}, {"snuffle", String.class}},
-                        {{"Bear", String.class}, {"growl", String.class}}, {{"rabbit", String.class}, {"snuffle", String.class}},
-                        {{"Bird", String.class}, {"chirp", String.class}}, {{"bee", String.class}, {"buzz", String.class}},
-                        {{"Lion", String.class}, {"rawr", String.class}}, {{"skunk", String.class}, {"hiss", String.class}}}, 10,
+                                {{"mouse", String.class}, {"squeak", String.class}}, {{"deer", String.class}, {"snuffle", String.class}},
+                                {{"Bear", String.class}, {"growl", String.class}}, {{"rabbit", String.class}, {"snuffle", String.class}},
+                                {{"Bird", String.class}, {"chirp", String.class}}, {{"bee", String.class}, {"buzz", String.class}},
+                                {{"Lion", String.class}, {"rawr", String.class}}, {{"skunk", String.class}, {"hiss", String.class}}}, 10,
                         "planet has: [fox makes the noise ringdingding, sheep makes the noise bahhh, mouse makes the noise squeak, deer makes the noise snuffle, Bear makes the noise growl," +
                                 " rabbit makes the noise snuffle, Bird makes the noise chirp, bee makes the noise buzz, Lion makes the noise rawr, skunk makes the noise hiss]")
         );
