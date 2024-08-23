@@ -140,7 +140,7 @@ public class MainTest {
 
     private static Stream<Integer> numInputProvider() {
         return Stream.of(
-               0, 1, 3, 554, 42452
+                0, 1, 3, 554, 42452
         );
     }
 
@@ -288,11 +288,11 @@ public class MainTest {
                         {{"name", String.class}, {3, int.class}, {7, int.class}, {1, int.class}, {4, int.class}},
                         {{"name", String.class}, {1, int.class}, {2, int.class}, {3, int.class}, {4, int.class}}}, 51),
                 Arguments.of(6, new Object[][][]{{{"name", String.class}, {6, int.class}, {0, int.class}, {3, int.class}, {1, int.class}},
-                        {{"name", String.class}, {7, int.class}, {7, int.class}, {7, int.class}, {7, int.class}},
-                        {{"name", String.class}, {4, int.class}, {9, int.class}, {1, int.class}, {1, int.class}},
-                        {{"name", String.class}, {2, int.class}, {1, int.class}, {4, int.class}, {3, int.class}},
-                        {{"name", String.class}, {6, int.class}, {2, int.class}, {2, int.class}, {2, int.class}},
-                        {{"name", String.class}, {3, int.class}, {2, int.class}, {3, int.class}, {2, int.class}}},
+                                {{"name", String.class}, {7, int.class}, {7, int.class}, {7, int.class}, {7, int.class}},
+                                {{"name", String.class}, {4, int.class}, {9, int.class}, {1, int.class}, {1, int.class}},
+                                {{"name", String.class}, {2, int.class}, {1, int.class}, {4, int.class}, {3, int.class}},
+                                {{"name", String.class}, {6, int.class}, {2, int.class}, {2, int.class}, {2, int.class}},
+                                {{"name", String.class}, {3, int.class}, {2, int.class}, {3, int.class}, {2, int.class}}},
                         187)
         );
     }
@@ -322,11 +322,11 @@ public class MainTest {
     private static Stream<Arguments> displaySpareTimeInputProvider() {
         return Stream.of(
                 Arguments.of(0, 168 - (7 * sleep)),
-                Arguments.of(1, 167 - (7*sleep)),
-                Arguments.of(56, 112 - (7*sleep)),
-                Arguments.of(112, 56 - (7*sleep)),
-                Arguments.of(168 - (7*sleep), 0),
-                Arguments.of(30, 138 - (7*sleep))
+                Arguments.of(1, 167 - (7 * sleep)),
+                Arguments.of(56, 112 - (7 * sleep)),
+                Arguments.of(112, 56 - (7 * sleep)),
+                Arguments.of(168 - (7 * sleep), 0),
+                Arguments.of(30, 138 - (7 * sleep))
         );
     }
 
@@ -348,7 +348,7 @@ public class MainTest {
 
         Object[][] methodArguments = {{input, int.class}};
         testSemester.callMethod(displaySpareTimeMethodName, methodArguments, new Clause[]{
-                new StringLiteral("This week you will have " + ans + " hours of spare time."), new NewLine()},
+                        new StringLiteral("This week you will have " + ans + " hours of spare time."), new NewLine()},
                 "Your " + testSemesterClassName + " " + displaySpareTimeMethodName + " method does not print the correct output. Ensure the message follows the formatting provided in the question text.");
     }
 
