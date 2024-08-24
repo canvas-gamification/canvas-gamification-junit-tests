@@ -4,11 +4,6 @@
 
 # Question Text
 
-Word search puzzles are used in many classrooms to help children build their vocabulary. You are given the test class
-below called `BuildVocab` that creates an object of the class called `WordSearch` with a list of 5 words
-about sports. The program then displays that newly created puzzle. Your task is to complete the `WordSearch`
-class in this question. More details below.
-
 Searching for a place to live is an arduous and demanding process for most people. Below is a test class called 
 `CraigsList` that defines an array of 5 rental advertisements (`Ad` objects) each with a street address, the number 
 of rooms, and the cost of the monthly rental fee. The class also has a few methods that can be used to find listings 
