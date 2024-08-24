@@ -189,7 +189,7 @@ public class MainTest {
                 Arguments.of(5, 1, new Object[][][]{{{"Steven", String.class}, {"February 1989", String.class}}},
                         new Object[][]{{"Kitty", String.class}, {"March 2012", String.class}}), //one element in
                 Arguments.of(5, 4, new Object[][][]{{{"Paige", String.class}, {"01/01/01", String.class}}, {{"Sky", String.class}, {"February 31", String.class}},
-                        {{"Jet", String.class}, {"2nd", String.class}}, {{"Bill Nie", String.class}, {"science hour is every hour", String.class}}},
+                                {{"Jet", String.class}, {"2nd", String.class}}, {{"Bill Nie", String.class}, {"science hour is every hour", String.class}}},
                         new Object[][]{{"Laura", String.class}, {"August 23, 2024", String.class}}), //one element from full
                 Arguments.of(5, 5, new Object[][][]{{{"Sylvia Plath", String.class}, {"12", String.class}}, {{"Shane", String.class}, {"Winter 21", String.class}},
                         {{"Guy", String.class}, {"April", String.class}}, {{"Captain", String.class}, {"2012", String.class}},
@@ -216,7 +216,7 @@ public class MainTest {
         Object bookInstance = book.createInstance(constructorArguments);
 
         Object[] holdSmallArray = (Object[]) (actualSize == 0 ? borrower.createArray(size) : borrower.createArray(actualSize, arguments));
-        Object[] properArray = (Object[]) (size==actualSize ? borrower.createArray(size* 2) : borrower.createArray(size));
+        Object[] properArray = (Object[]) (size == actualSize ? borrower.createArray(size * 2) : borrower.createArray(size));
         System.arraycopy(holdSmallArray, 0, properArray, 0, actualSize);
         Object[] result = (Object[]) borrower.createArray(properArray.length);
         System.arraycopy(holdSmallArray, 0, result, 0, actualSize);
@@ -239,10 +239,10 @@ public class MainTest {
                 Arguments.of("", 5, 1, new Object[][][]{{{"Steven", String.class}, {"February 1989", String.class}}}, "Title: \nSteven signed on February 1989\n"),
                 Arguments.of("The Fly Swatter", 5, 4, new Object[][][]{{{"Paige", String.class}, {"01/01/01", String.class}}, {{"Sky", String.class}, {"February 31", String.class}},
                                 {{"Jet", String.class}, {"2nd", String.class}}, {{"Bill Nie", String.class}, {"science hour is every hour", String.class}}},
-                            "Title: The Fly Swatter\nPaige signed on 01/01/01\nSky signed on February 31\nJet signed on 2nd\nBill Nie signed on science hour is every hour\n"),
+                        "Title: The Fly Swatter\nPaige signed on 01/01/01\nSky signed on February 31\nJet signed on 2nd\nBill Nie signed on science hour is every hour\n"),
                 Arguments.of("Mirror", 5, 5, new Object[][][]{{{"Sylvia Plath", String.class}, {"12", String.class}}, {{"Shane", String.class}, {"Winter 21", String.class}},
-                        {{"Guy", String.class}, {"April", String.class}}, {{"Captain", String.class}, {"2012", String.class}},
-                        {{"Theo Crane", String.class}, {"2067", String.class}}},
+                                {{"Guy", String.class}, {"April", String.class}}, {{"Captain", String.class}, {"2012", String.class}},
+                                {{"Theo Crane", String.class}, {"2067", String.class}}},
                         "Title: Mirror\nSylvia Plath signed on 12\nShane signed on Winter 21\nGuy signed on April\nCaptain signed on 2012\nTheo Crane signed on 2067\n")
         );
     }
