@@ -22,7 +22,7 @@ public class MainTest {
     private final String stringAttributeName1 = "name";
     private final String booleanArrayAttributeName = "availability";
     private final String intAttributeName1 = "NUM_DAYS";
-    private final String intAttributeName2= "NUM_SLOTS";
+    private final String intAttributeName2 = "NUM_SLOTS";
     private final String stringAttributeName2 = "week";
     private final String intArrayAttributeName = "timetable";
     private final String getAvailabilityMethodName = "getAvailability";
@@ -78,7 +78,7 @@ public class MainTest {
         assertEquals(NUM_DAYS, grid.length, String.format("Your %s array does not have the correct number of rows", booleanArrayAttributeName));
         for (int i = 0; i < NUM_DAYS; i++) {
             assertEquals(NUM_SLOTS, grid[i].length, String.format("Your %s array does not have the correct number of columns in each row.", booleanArrayAttributeName));
-            for(int j = 0; j < NUM_SLOTS; j++){
+            for (int j = 0; j < NUM_SLOTS; j++) {
                 assertFalse(grid[i][j], "Your " + booleanArrayAttributeName + " array incorrectly contains a true value after initialization.");
             }
         }
@@ -158,24 +158,23 @@ public class MainTest {
         employee.callMethod(addTimeMethodName, insertInput, employeeInstance);
         boolean[][] grid = (boolean[][]) employee.getFieldValue(employeeInstance, booleanArrayAttributeName);
 
-            for (int i = 0; i < NUM_DAYS; i++) {
-                assertEquals(NUM_SLOTS, grid[i].length, String.format("Your %s array does not have the correct number of columns in each row.", booleanArrayAttributeName));
-                for(int j = 0; j < NUM_SLOTS; j++){
-                    if(i == idx1 && j == idx2)
-                        assertTrue(grid[i][j], "Your " + addTimeMethodName + " method does not correctly alter the values of the " + booleanArrayAttributeName + " array.");
-                    else if (i == 1 && j == 1){
-                        assertTrue(grid[i][j], "Your " + addTimeMethodName + " method does not correctly alter the values of the " + booleanArrayAttributeName + " array.");
-                    }
-                    else
-                        assertFalse(grid[i][j], "Your " + booleanArrayAttributeName + " array incorrectly contains a true value after initialization.");
-                }
+        for (int i = 0; i < NUM_DAYS; i++) {
+            assertEquals(NUM_SLOTS, grid[i].length, String.format("Your %s array does not have the correct number of columns in each row.", booleanArrayAttributeName));
+            for (int j = 0; j < NUM_SLOTS; j++) {
+                if (i == idx1 && j == idx2)
+                    assertTrue(grid[i][j], "Your " + addTimeMethodName + " method does not correctly alter the values of the " + booleanArrayAttributeName + " array.");
+                else if (i == 1 && j == 1) {
+                    assertTrue(grid[i][j], "Your " + addTimeMethodName + " method does not correctly alter the values of the " + booleanArrayAttributeName + " array.");
+                } else
+                    assertFalse(grid[i][j], "Your " + booleanArrayAttributeName + " array incorrectly contains a true value after initialization.");
             }
+        }
     }
 
     private static Stream<Arguments> employeeToStringInputProvider() {
         return Stream.of(
                 Arguments.of("Clarissa Reese", new boolean[][]{{false, false, false, false}, {false, false, false, false},
-                        {false, false, false, false}, {false, false, false, false}, {false, false, false, false}},
+                                {false, false, false, false}, {false, false, false, false}, {false, false, false, false}},
                         "Availability for Clarissa Reese:\nMon: \nTue: \nWed: \nThu: \nFri: \n"),
                 Arguments.of("Kate", new boolean[][]{{true, true, true, true}, {true, true, true, true}, {true, true, true, true},
                         {true, true, true, true}, {true, true, true, true}}, "Availability for Kate:\n" +
@@ -237,16 +236,16 @@ public class MainTest {
                 Arguments.of("2nd of June", 0, new boolean[][][]{{{}}}, new int[][]{{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0},
                         {0, 0, 0, 0}, {0, 0, 0, 0}}),//no people
                 Arguments.of("Next week", 1, new boolean[][][]{{{true, true, false, false}, {true, false, true, false},
-                        {false, false, false, false}, {false, false, true, true}, {false, false, true, false}}},
+                                {false, false, false, false}, {false, false, true, true}, {false, false, true, false}}},
                         new int[][]{{1, 1, 0, 0}, {1, 0, 1, 0}, {0, 0, 0, 0}, {0, 0, 1, 1}, {0, 0, 1, 0}}), //one person
                 Arguments.of("08-14", 5, new boolean[][][]{{{false, false, false, false}, {false, false, false, false},
-                        {false, false, false, false}, {false, false, false, false}, {false, false, false, false}},
-                        {{true, false, false, false}, {false, true, true, true}, {true, true, true, true}, {false,
-                        true, true, false}, {false, false, false, true}}, {{true, true, true, true}, {true, true, true, true},
-                        {true, true, true, true}, {true, true, true, false}, {true, true, true, true}}, {{true, false,
-                        false, false}, {false, true, false, true}, {true, false, false, true}, {true, true, true, false},
-                        {true, true, false, false}}, {{false, false, false, false}, {false, false, false, false},
-                        {true, true, true, true}, {true, true, true, false}, {true, true, true, true}}},
+                                {false, false, false, false}, {false, false, false, false}, {false, false, false, false}},
+                                {{true, false, false, false}, {false, true, true, true}, {true, true, true, true}, {false,
+                                        true, true, false}, {false, false, false, true}}, {{true, true, true, true}, {true, true, true, true},
+                                {true, true, true, true}, {true, true, true, false}, {true, true, true, true}}, {{true, false,
+                                false, false}, {false, true, false, true}, {true, false, false, true}, {true, true, true, false},
+                                {true, true, false, false}}, {{false, false, false, false}, {false, false, false, false},
+                                {true, true, true, true}, {true, true, true, false}, {true, true, true, true}}},
                         new int[][]{{3, 1, 1, 1}, {1, 3, 2, 3}, {4, 3, 3, 4}, {3, 4, 4, 0}, {3, 3, 2, 3}}) // multiple people
         );
     }
@@ -263,7 +262,7 @@ public class MainTest {
 
         /* Check constructor functionality */
         Object[] holdEmployees = (Object[]) employee.createArray(length, new Object[][]{{"name", String.class}});
-        for(int x = 0; x < length; x++){
+        for (int x = 0; x < length; x++) {
             employee.setFieldValue(holdEmployees[x], in[x], booleanArrayAttributeName);
         }
         Object[][] constructorArguments = {{week, String.class}, {holdEmployees, employee.getObjectArrayClass()}};
@@ -274,7 +273,7 @@ public class MainTest {
         assertEquals(NUM_DAYS, grid.length, String.format("Your %s array does not have the correct number of rows", intArrayAttributeName));
         for (int i = 0; i < NUM_DAYS; i++) {
             assertEquals(NUM_SLOTS, grid[i].length, String.format("Your %s array does not have the correct number of columns in each row.", intArrayAttributeName));
-            for(int j = 0; j < NUM_SLOTS; j++){
+            for (int j = 0; j < NUM_SLOTS; j++) {
                 assertEquals(res[i][j], grid[i][j], "Your " + workScheduleClassName + " constructor does not properly process the " + employeeClassName + " array and compile the results into the " + intArrayAttributeName + " array.");
             }
         }
@@ -303,7 +302,7 @@ public class MainTest {
         Object workScheduleInstance = workSchedule.createInstance(constructorArguments);
 
         Object[] holdEmployees = (Object[]) employee.createArray(length, new Object[][]{{"name", String.class}});
-        for(int x = 0; x < length; x++){
+        for (int x = 0; x < length; x++) {
             employee.setFieldValue(holdEmployees[x], in[x], booleanArrayAttributeName);
         }
         workSchedule.callMethod(howManyAvailableMethodName, new Object[][]{{holdEmployees, employee.getObjectArrayClass()}}, workScheduleInstance);
@@ -313,7 +312,7 @@ public class MainTest {
         assertEquals(NUM_DAYS, grid.length, String.format("Your %s array does not have the correct number of rows", intArrayAttributeName));
         for (int i = 0; i < NUM_DAYS; i++) {
             assertEquals(NUM_SLOTS, grid[i].length, String.format("Your %s array does not have the correct number of columns in each row.", intArrayAttributeName));
-            for(int j = 0; j < NUM_SLOTS; j++){
+            for (int j = 0; j < NUM_SLOTS; j++) {
                 assertEquals(res[i][j], grid[i][j], "Your " + howManyAvailableMethodName + " method does not properly process the " + employeeClassName + " array and compile the results into the " + intArrayAttributeName + " array.");
             }
         }
