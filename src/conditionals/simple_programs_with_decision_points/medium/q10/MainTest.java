@@ -20,7 +20,7 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "25";
         return new Clause[]{
-                new StringLiteral("What is your age?"),
+                new StringLiteral("What is your age\\?"),
                 new NewLine(),
                 new PlaceHolder()
         };
@@ -31,17 +31,17 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of(25, "Congrats, you can vote!."),
-        Arguments.of(15, "You are not allowed to vote yet"),
-        Arguments.of(19, "Congrats, you can vote!.")
+        return Stream.of(Arguments.of("25", "Congrats, you can vote!"),
+        Arguments.of("15", "You are not allowed to vote yet"),
+        Arguments.of("19", "Congrats, you can vote!")
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(String ageInput, String expectedOutput) throws InvalidClauseException {
-        runWithInput(ageInput + System.lineSeparator(), new Clause[]{
-                new StringLiteral(expectedOutput)
+    void testWithInput(String newInput, String expectedOutput) throws InvalidClauseException {
+        runWithInput(newInput, new Clause[]{
+            new StringLiteral(expectedOutput)
         });
     }
 

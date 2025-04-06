@@ -12,12 +12,11 @@ and check whether they are of legal age to {vote} in a country, which happens to
 public class VirtualBouncer {
     public static void main( String [] args ) {
         Scanner input = new Scanner(System.in);
-        System.out.println("What is your age? ");
-        int age = input.nextInt();
-        
-        switch (age >= 19 ? 1 : 0) {
+        System.out.println("What is your age?");
+        int age = input.nextInt();       
+        switch ((age >= 19) ? 1 : 0) {
            case 1:
-              System.out.println("Congrats, you can vote!.");
+              System.out.println("Congrats, you can vote!");
               break;
            default:
               System.out.println("You are not allowed to vote yet");
