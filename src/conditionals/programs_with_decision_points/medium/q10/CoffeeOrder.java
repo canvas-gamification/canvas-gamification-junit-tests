@@ -13,7 +13,7 @@ public class CoffeeOrder {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        System.out.println("Enter a size (1-5): "); 
+        System.out.print("Enter a size from 1 to 5: "); 
 
         int size = scanner.nextInt();
 
