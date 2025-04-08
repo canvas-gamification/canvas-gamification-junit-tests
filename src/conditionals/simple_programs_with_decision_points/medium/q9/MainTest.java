@@ -17,6 +17,8 @@ import java.util.stream.Stream;
 public class MainTest extends BaseTest {
     // Parsons
 
+    // add threshold
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "6000";
@@ -39,6 +41,7 @@ public class MainTest extends BaseTest {
         );
     }
 
+    // use String.valueOf() to convert integer to string after runWithInput()
     @ParameterizedTest
     @MethodSource("inputProvider")
     void testWithInput(String investment, String expectedOutput) throws InvalidClauseException {
