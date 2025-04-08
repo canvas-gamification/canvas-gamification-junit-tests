@@ -17,11 +17,10 @@ import java.util.stream.Stream;
 public class MainTest extends BaseTest {
     // Parsons
 
-    // add threshold
-
+    static double threshold = 5000;
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "6000";
+        TestOption.defaultInput = String.valueOf(threshold + 1000);
         return new Clause[]{
                 new StringLiteral("Enter  your investment in \\$ "),
                 new NewLine(),
@@ -34,18 +33,19 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of("6000", "Investment : \\$12000\\.0"),
-        Arguments.of("4500", "Investment : \\$4500\\.0"),
-        Arguments.of("5000", "Investment : \\$5000\\.0"),
-        Arguments.of("7500.50", "Investment : \\$15001\\.0")
+        return Stream.of(Arguments.of(threshold + 1000, "Investment : \\$" + (2 * (threshold + 1000))),
+        Arguments.of(threshold - 500, "Investment : \\$" + (threshold - 500)),
+        Arguments.of(threshold, "Investment : \\$" + threshold),
+        Arguments.of(threshold + 2500.5, "Investment : \\$" + (2 * (threshold + 2500.5)))
         );
     }
 
     // use String.valueOf() to convert integer to string after runWithInput()
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(String investment, String expectedOutput) throws InvalidClauseException {
-        runWithInput(investment, new Clause[]{
+    void testWithInput(double investment, String expectedOutput) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct output for the entered investment.";
+        runWithInput(String.valueOf(investment), new Clause[]{
             new StringLiteral(expectedOutput)
         });
     }
