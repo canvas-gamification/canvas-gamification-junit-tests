@@ -37,7 +37,7 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("inputProvider")
     void testWithInput(String charString, String sizeOutput) throws InvalidClauseException {
-        //add test option structure error message
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct size for the entered character.";
         runWithInput(charString, new Clause[]{
                 new StringLiteral(sizeOutput)
         });
