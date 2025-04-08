@@ -13,7 +13,7 @@ package conditionals.programs_with_decision_points.medium.q11;
  public class WeatherConditions {
      public static void main(String[] args) {
          Scanner scanner = new Scanner(System.in);
-         System.out.print("Enter a weather condition (1-5): ");
+         System.out.println("Enter a weather condition (1-5): ");
          int condition = scanner.nextInt();
  
          switch (condition) {

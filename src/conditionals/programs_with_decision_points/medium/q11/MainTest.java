@@ -7,7 +7,6 @@ import global.variables.Clause;
 import global.variables.clauses.NewLine;
 import global.variables.clauses.PlaceHolder;
 import global.variables.clauses.StringLiteral;
-import global.variables.wrappers.Optional;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,11 +19,10 @@ public class MainTest extends BaseTest {
     public Clause[] testSentence() {
         // when you need to provide Scanner input
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "03/05";
+        TestOption.defaultInput = "1";
 
         return new Clause[]{
-                new StringLiteral("Enter a weather condition (1-5): "),
-                new Optional(new StringLiteral(" ")),
+                new StringLiteral("Enter a weather condition \\(1-5\\): "),
                 new NewLine(),
                 new PlaceHolder()
         };
@@ -32,12 +30,12 @@ public class MainTest extends BaseTest {
 
     static Stream<Arguments> InputProvider() {
         return Stream.of(
-                Arguments.of(1, "rainy"),
-                Arguments.of(2, "cloudy"),
-                Arguments.of(3, "sunny"),
-                Arguments.of(4, "stormy"),
-                Arguments.of(5, "snowy"),
-                Arguments.of(6, "Invalid. Please enter a number between 1 and 5.")
+                Arguments.of("1", "sunny"),
+                Arguments.of("2", "cloudy"),
+                Arguments.of("3", "rainy"),
+                Arguments.of("4", "stormy"),
+                Arguments.of("5", "snowy"),
+                Arguments.of("6", "Invalid. Please enter a number between 1 and 5.")
         );
     }
 
@@ -47,10 +45,10 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("InputProvider")
-    void printsCorrectAstrologicalSign(int day, int month, String sign) throws InvalidClauseException {
-        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct star sign for the entered date.";
-        runWithInput(day + "/" + month, new Clause[]{
-                new StringLiteral(sign)
+    void printsCorrectWeather(String num, String weather) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct weather for the entered date.";
+        runWithInput(num, new Clause[]{
+                new StringLiteral(weather)
         });
     }
 }
