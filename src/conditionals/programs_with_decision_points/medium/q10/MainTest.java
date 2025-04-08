@@ -1,4 +1,4 @@
-package conditionals.programs_with_decision_points.medium.q10
+package conditionals.programs_with_decision_points.medium.q10;
 import global.BaseTest;
 import global.exceptions.InvalidClauseException;
 import global.tools.TestOption;
@@ -17,9 +17,9 @@ public class MainTest extends BaseTest {
 
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "1";
+        TestOption.defaultInput = "s";
         return new Clause[]{
-                new StringLiteral("Enter a size from 1 to 5: "),
+                new StringLiteral("Enter a character: "),
                 new NewLine(),
                 new PlaceHolder()
         };
@@ -30,14 +30,15 @@ public class MainTest extends BaseTest {
     }
 
     static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of("1", "small"), Arguments.of("2", "tall"), Arguments.of("3", "grande"),
-                Arguments.of("4", "venti"), Arguments.of("5", "trenta"), Arguments.of("6", "Invalid. Please enter a number between 1 and 5."));
+        return Stream.of(Arguments.of("s", "small"), Arguments.of("t", "tall"), Arguments.of("g", "grande"),
+                Arguments.of("v", "venti"), Arguments.of("r", "trenta"), Arguments.of("6", "Invalid. Please enter a valid character."));
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(String num, String sizeOutput) throws InvalidClauseException {
-        runWithInput(num, new Clause[]{
+    void testWithInput(String charString, String sizeOutput) throws InvalidClauseException {
+        //add test option structure error message
+        runWithInput(charString, new Clause[]{
                 new StringLiteral(sizeOutput)
         });
     }
