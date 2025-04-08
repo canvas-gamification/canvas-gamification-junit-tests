@@ -7,6 +7,14 @@ import java.util.Scanner;
 Rearrange the following Java code snippets in the correct order to run a program to ask the user for their age 
 and check whether they are of legal age to {vote} in a country, which happens to be {19}. 
 
+Sample Output:
+    What is your age?
+    25
+    Congrats, you can vote!
+
+    What is your age?
+    13
+    You are not allowed to vote yet
  */
 
 public class VirtualBouncer {

@@ -16,6 +16,8 @@ import java.util.stream.Stream;
 public class MainTest extends BaseTest {
     // Parsons
 
+    // private variable int threshold, 
+
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "25";
@@ -30,6 +32,7 @@ public class MainTest extends BaseTest {
         VirtualBouncer.main(new String[0]);
     }
 
+    // modify the argument to be threshold +1 and -1
     static Stream<Arguments> inputProvider() {
         return Stream.of(Arguments.of("25", "Congrats, you can vote!"),
         Arguments.of("15", "You are not allowed to vote yet"),
