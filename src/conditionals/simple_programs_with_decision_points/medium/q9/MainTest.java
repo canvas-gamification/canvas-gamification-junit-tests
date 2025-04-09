@@ -22,7 +22,7 @@ public class MainTest extends BaseTest {
         TestOption.isInputTest = true;
         TestOption.defaultInput = String.valueOf(threshold + 1000);
         return new Clause[]{
-                new StringLiteral("Enter  your investment in \\$ "),
+                new StringLiteral("Enter your investment in \\$ "),
                 new NewLine(),
                 new PlaceHolder()
             };
