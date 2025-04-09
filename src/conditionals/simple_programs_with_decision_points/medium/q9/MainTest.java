@@ -40,7 +40,6 @@ public class MainTest extends BaseTest {
         );
     }
 
-    // use String.valueOf() to convert integer to string after runWithInput()
     @ParameterizedTest
     @MethodSource("inputProvider")
     void testWithInput(double investment, String expectedOutput) throws InvalidClauseException {

@@ -20,7 +20,7 @@ public class DoubleIt {
 
     public static void main( String [] args ) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter  your investment in $ ");
+        System.out.println("Enter your investment in $ ");
         double number = input.nextDouble();
         
         switch (number > 5000 ? 1 : 0) {
