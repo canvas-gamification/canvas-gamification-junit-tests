@@ -16,11 +16,10 @@ import java.util.stream.Stream;
 public class MainTest extends BaseTest {
     // Parsons
 
-    // private variable int threshold, 
-
+    static int threshold = 19;
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
-        TestOption.defaultInput = "25";
+        TestOption.defaultInput = String.valueOf(threshold + 6);
         return new Clause[]{
                 new StringLiteral("What is your age\\?"),
                 new NewLine(),
@@ -32,18 +31,18 @@ public class MainTest extends BaseTest {
         VirtualBouncer.main(new String[0]);
     }
 
-    // modify the argument to be threshold +1 and -1
     static Stream<Arguments> inputProvider() {
-        return Stream.of(Arguments.of("25", "Congrats, you can vote!"),
-        Arguments.of("15", "You are not allowed to vote yet"),
-        Arguments.of("19", "Congrats, you can vote!")
+        return Stream.of(Arguments.of(threshold + 6, "Congrats, you can vote!"),
+        Arguments.of(threshold - 4, "You are not allowed to vote yet"),
+        Arguments.of(threshold, "Congrats, you can vote!")
         );
     }
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void testWithInput(String newInput, String expectedOutput) throws InvalidClauseException {
-        runWithInput(newInput, new Clause[]{
+    void testWithInput(int newInput, String expectedOutput) throws InvalidClauseException {
+        TestOption.incorrectStructureErrorMessage = "Your program does not print the correct output for the entered age.";
+        runWithInput(String.valueOf(newInput), new Clause[]{
             new StringLiteral(expectedOutput)
         });
     }
