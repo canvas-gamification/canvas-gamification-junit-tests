@@ -6,24 +6,39 @@ import java.util.Scanner;
  an item based on two input Strings, color and taste. The outer switch should handle color, and the inner 
  switch should handle taste within certain cases. The output should be a single string indicating the item.
 
+ Sample output:
+ Chili
  */
 
 
 public class FruitIdentifier {
+   public static void main(String[] args) {
+       String color = "Red";
+       String taste = "Spicy";
 
-    public static void main( String [] args ) {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter  your investment in $ ");
-        double number = input.nextDouble();
-        
-        switch (number > 5000 ? 1 : 0) {
-           case 1: 
-              number *= 2; 
-              break;
-        }
-        
-        System.out.println("Investment : $" + number);
-     }
-  
-    
+       switch (color) {
+           case "Red":
+               switch (taste) {
+                   case "Sweet":
+                       System.out.print("Apple");
+                       break;
+                   case "Spicy":
+                       System.out.print("Chili");
+                       break;
+                   default:
+                       System.out.print("Not found");
+                       break;
+               }
+               break;
+           case "Yellow":
+               switch (taste) {
+                   case "Sweet":
+                       System.out.print("Banana");
+                       break;
+                   default:
+                       break;
+               }
+               break;
+       }
+   }
 }
