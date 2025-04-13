@@ -1,8 +1,9 @@
 package conditionals.nested_statements.q12;
 
 public class ScoreAnalyzer {
+    // Parsons
     public static void main(String[] args) {
-        int score = 87; // You can change this value to test other scores
+        int score = 87;
 
         switch (score % 2) {
             case 0:
