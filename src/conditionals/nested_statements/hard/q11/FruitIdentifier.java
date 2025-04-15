@@ -25,7 +25,6 @@ public class FruitIdentifier {
         String color = scanner.nextLine();
         System.out.println("Enter taste: ");
         String taste = scanner.nextLine();
-        scanner.close();
 
         switch (color) {
             case "Red":
