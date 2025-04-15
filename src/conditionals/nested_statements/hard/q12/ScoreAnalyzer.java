@@ -1,5 +1,5 @@
 package conditionals.nested_statements.hard.q12;
-
+import java.util.Scanner;
 /*
  * Rearrange the following Java code snippets in the correct order to correctly implement a nested switch
  * statement that determines a grade category based on a score.
@@ -7,8 +7,9 @@ package conditionals.nested_statements.hard.q12;
 
 public class ScoreAnalyzer {
     public static void main(String[] args) {
-        int score = 87;
-
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter score: ");
+        int score = scanner.nextInt();
         switch (score % 2) {
             case 0:
                 System.out.println("Even Score");
@@ -54,5 +55,6 @@ public class ScoreAnalyzer {
                 }
                 break;
         }
+        scanner.close();
     }
 }
