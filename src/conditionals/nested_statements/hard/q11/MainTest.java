@@ -1,4 +1,4 @@
-package conditionals.nested_statements.q11;
+package conditionals.nested_statements.hard.q11;
 
 import global.BaseTest;
 import global.variables.Clause;
