@@ -3,24 +3,22 @@ package conditionals.simple_programs_with_decision_points.hard.q9;
 import java.util.Scanner;
 
 /*
- Suppose there is a Java program that takes <tt>grade</tt> as integer input from the user and prints the letter correspondingly 
- using the if-else statement below. Translate the following statement into a switch statement block, and use the sentence 
- “Enter the numerical grade: “ to ask for input.
+ Write a Java program that prompts the user to enter a numerical grade and outputs the corresponding letter grade.
+ 
+ Your program must use a switch statement to determine the letter based on the input grade.
 
-<code>
-        if (grade >= 90) {
-            System.out.println("A");
-        } else if (grade >= 80) {
-            System.out.println("B");
-        } else if (grade >= 70) {
-            System.out.println("C");
-        } else if (grade >= 60) {
-            System.out.println("D");
-        } else {
-            System.out.println("F");
-        }
-</code>
+ Use the sentence:
+     "Enter the numerical grade: "
+ as your prompt to the user.
 
+ Grading scale:
+ - 90 and above: A
+ - 80–89: B
+ - 70–79: C
+ - 60–69: D
+ - Below 60: F
+
+ Your program should handle all possible valid integer inputs accordingly.
  */
 
 
