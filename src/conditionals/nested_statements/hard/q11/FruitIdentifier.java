@@ -1,4 +1,4 @@
-package conditionals.nested_statements.q11;
+package conditionals.nested_statements.hard.q11;
 import java.util.Scanner;
 
 /*
@@ -25,6 +25,7 @@ public class FruitIdentifier {
         String color = scanner.nextLine();
         System.out.println("Enter taste: ");
         String taste = scanner.nextLine();
+        scanner.close();
 
         switch (color) {
             case "Red":
