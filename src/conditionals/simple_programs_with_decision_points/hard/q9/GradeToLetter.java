@@ -3,13 +3,7 @@ package conditionals.simple_programs_with_decision_points.hard.q9;
 import java.util.Scanner;
 
 /*
- Write a Java program that prompts the user to enter a numerical grade and outputs the corresponding letter grade.
- 
- Your program must use a switch statement to determine the letter based on the input grade.
-
- Use the sentence:
-     "Enter the numerical grade: "
- as your prompt to the user.
+ Write a Java program that asks the user to "Enter the numerical grade: " and uses a switch statement to output the corresponding letter grade on its own line. 
 
  Grading scale:
  - 90 and above: A
