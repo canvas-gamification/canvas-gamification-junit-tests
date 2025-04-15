@@ -1,7 +1,11 @@
-package conditionals.nested_statements.q12;
+package conditionals.nested_statements.hard.q12;
+
+/*
+ * Rearrange the following Java code snippets in the correct order to correctly implement a nested switch
+ * statement that determines a grade category based on a score.
+ */
 
 public class ScoreAnalyzer {
-    // Parsons
     public static void main(String[] args) {
         int score = 87;
 
@@ -33,19 +37,19 @@ public class ScoreAnalyzer {
 
                 switch (score / 10) {
                     case 9:
-                        System.out.println("Excellent");
+                        System.out.println("Amazing");
                         break;
                     case 8:
-                        System.out.println("Good");
+                        System.out.println("Pretty Good");
                         break;
                     case 7:
-                        System.out.println("Fair");
+                        System.out.println("Okay");
                         break;
                     case 6:
-                        System.out.println("Needs Improvement");
+                        System.out.println("Almost there");
                         break;
                     default:
-                        System.out.println("Fail");
+                        System.out.println("Try again next time");
                         break;
                 }
                 break;
