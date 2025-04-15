@@ -51,7 +51,7 @@ public class MainTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("inputProvider")
-    void printsCorrectWeather(String inputGrade, String expectedOutput) throws InvalidClauseException {
+    void printsCorrectLetter(String inputGrade, String expectedOutput) throws InvalidClauseException {
         TestOption.incorrectStructureErrorMessage = "Your program does not print the correct letter for the entered grade.";
         runWithInput(inputGrade, new Clause[]{
                 new StringLiteral(expectedOutput)
