@@ -4,7 +4,7 @@ import java.util.Scanner;
 /*
  Rearrange the following Java code snippets to correctly implement a nested switch statement that determines 
  an item based on two input Strings, color and taste. The outer switch should handle color, and the inner 
- switch should handle taste within certain cases. The output should be a single string indicating the item.
+ switch should handle taste within certain cases. The output should be a single string indicating the item matching those descriptors.
 
  Sample output:
  Chili
