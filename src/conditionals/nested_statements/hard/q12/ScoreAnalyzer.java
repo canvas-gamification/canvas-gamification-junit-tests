@@ -1,8 +1,10 @@
 package conditionals.nested_statements.hard.q12;
+
 import java.util.Scanner;
+
 /*
  * Rearrange the following Java code snippets in the correct order to correctly implement a nested switch
- * statement that determines a grade category based on a score.
+ * statement that divide students into groups based on their grade.
  */
 
 public class ScoreAnalyzer {
@@ -10,51 +12,51 @@ public class ScoreAnalyzer {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter score: ");
         int score = scanner.nextInt();
+
         switch (score % 2) {
             case 0:
-                System.out.println("Even Score");
-
                 switch (score / 10) {
+                    case 10:
                     case 9:
-                        System.out.println("Excellent");
+                        System.out.println("Group 2 - A");
                         break;
                     case 8:
-                        System.out.println("Good");
+                        System.out.println("Group 2 - B");
                         break;
                     case 7:
-                        System.out.println("Fair");
+                        System.out.println("Group 2 - C");
                         break;
                     case 6:
-                        System.out.println("Needs Improvement");
+                        System.out.println("Group 2 - D");
                         break;
                     default:
-                        System.out.println("Fail");
+                        System.out.println("Group 2 - F");
                         break;
                 }
                 break;
 
             case 1:
-                System.out.println("Odd Score");
-
                 switch (score / 10) {
+                    case 10:
                     case 9:
-                        System.out.println("Amazing");
+                        System.out.println("Group 1 - A");
                         break;
                     case 8:
-                        System.out.println("Pretty Good");
+                        System.out.println("Group 1 - B");
                         break;
                     case 7:
-                        System.out.println("Okay");
+                        System.out.println("Group 1 - C");
                         break;
                     case 6:
-                        System.out.println("Almost there");
+                        System.out.println("Group 1 - D");
                         break;
                     default:
-                        System.out.println("Try again next time");
+                        System.out.println("Group 1 - F");
                         break;
                 }
                 break;
         }
+
         scanner.close();
     }
 }
