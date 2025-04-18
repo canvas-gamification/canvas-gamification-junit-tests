@@ -3,8 +3,18 @@ package conditionals.nested_statements.hard.q12;
 import java.util.Scanner;
 
 /*
- * Rearrange the following Java code snippets in the correct order to correctly implement a nested switch
- * statement that divide students into groups based on their grade.
+ * Rearrange the following Java code snippets in the correct order to correctly implement a nested switch statement that 
+ * divides students into groups based on their score. Students with even scores are assigned to Group 2, and those with odd 
+ * scores are assigned to Group 1. Then, based on the score range, a letter grade is assigned as follows: 90 and above = A, 
+ * 80–89 = B, 70–79 = C, 60–69 = D, and below 60 = F. The program should print a single line in the format "Group X - Y", 
+ * where X is the group number and Y is the corresponding letter grade. 
+ * 
+ * Sample output:
+ * Enter score: 95
+ * Group 1 - A
+ * 
+ * Enter score: 84
+ * Group 2 - B
  */
 
 public class ScoreAnalyzer {
