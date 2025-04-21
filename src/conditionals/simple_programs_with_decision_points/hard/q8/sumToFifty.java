@@ -1,6 +1,6 @@
 package conditionals.simple_programs_with_decision_points.hard.q8;
 /*
-Write a program that asks the user for two numbers, x and y then state if the sum of the two numbers is less or more than 50.
+Write a program that asks the user for two numbers, x and y then use a switch statement and the Integer.compare method to state if the sum of the two numbers is less or more than 50.
 Sample Output:
 Enter x  
 1  
