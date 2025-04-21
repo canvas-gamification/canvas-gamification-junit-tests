@@ -15,38 +15,38 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
-    
+//Parsons
     @Override
     public Clause[] testSentence() {
         TestOption.isInputTest = true;
         TestOption.defaultInput = "apple\nbanana";
         
         return new Clause[]{
-                new StringLiteral("Enter word1 "),
+                new StringLiteral("Enter word1:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
-                new StringLiteral("Enter word2 "),
+                new StringLiteral("Enter word2:"),
                 new Optional(new StringLiteral(" ")),
                 new NewLine(),
                 new PlaceHolder()
         };
     }
     
-    /**
-     * Provides test cases as (word1, word2, expectedPhrase).<br>
-     * The expected outputs are defined according to:
-     * <ul>
-     *    <li>Combined length < 10: "Short phrase."</li>
-     *    <li>Combined length between 10 and 15 (inclusive): "Medium phrase."</li>
-     *    <li>Combined length > 15: if word1 starts with lowercase 'a', "a-start long phrase." otherwise "Long phrase."</li>
-     * </ul>
-     */
+
     static Stream<Arguments> inputProvider() {
         return Stream.of(
                 // Test: total length 2+3 = 5 (less than 10)
                 Arguments.of("hi", "hey", "Short phrase."),
+                // Test: total length 2+7 = 9 (less than 10)
+                Arguments.of("hi", "heyyyyy", "Short phrase."),
                 // Test: total length 5+5 = 10 (medium)
                 Arguments.of("hello", "world", "Medium phrase."),
+                // Test: total length 5+6 = 11 (medium)
+                Arguments.of("hello", "worldd", "Medium phrase."),
+                // Test: total length 5+9 = 14 (medium)
+                Arguments.of("hello", "worlddddd", "Medium phrase."),
+                // Test: total length 5+11 = 16 (long and word1 does not with lowercase 'a')
+                Arguments.of("hello", "worlddddddd", "Long phrase."),
                 // Test: total length 8+10 = 18 (long and word1 starts with lowercase 'a')
                 Arguments.of("applepie", "watermelon", "a-start long phrase."),
                 // Test: total length 6+10 = 16 (long and word1 does not start with 'a')
@@ -58,7 +58,7 @@ public class MainTest extends BaseTest {
     
     @Override
     public void runMain() {
-        checkWord.main(new String[0]);
+        CheckWord.main(new String[0]);
     }
     
     @ParameterizedTest
