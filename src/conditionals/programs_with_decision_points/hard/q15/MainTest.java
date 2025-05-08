@@ -34,6 +34,9 @@ public class MainTest extends BaseTest {
     
     static Stream<Arguments> inputProvider() {
         return Stream.of(
+            // Test 0: Sum < 10 
+            // Example: num1 = 2 and num2 = 1 => 2+1 = 3
+            Arguments.of(2, 1, "Very small sum."),
             // Test 1: Sum = 10. For example, num1 = 9 and num2 = 1 => 9+1 = 10.
             Arguments.of(9, 1, "Odd-medium sum."),
             // Test 2: Sum between 10 and 19, with num1 even.
