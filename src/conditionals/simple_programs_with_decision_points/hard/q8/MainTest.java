@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 public class MainTest extends BaseTest {
-
+//Parsons
     static final int THRESHOLD = 50;
 
     @Override
@@ -25,10 +25,8 @@ public class MainTest extends BaseTest {
 
         return new Clause[]{
             new StringLiteral("Enter x: "),
-            new Optional(new StringLiteral(" ")),
             new NewLine(),
             new StringLiteral("Enter y: "),
-            new Optional(new StringLiteral(" ")),
             new NewLine(),
             new PlaceHolder()
         };
@@ -37,13 +35,13 @@ public class MainTest extends BaseTest {
     static Stream<Arguments> inputProvider() {
         return Stream.of(
             // Case 1: Sum is less than the threshold
-            Arguments.of(1, 10, "Sum is less than " + THRESHOLD),
+            Arguments.of(1, THRESHOLD / 5, "Sum is less than " + THRESHOLD),
             // Case 2: Sum is less than the threshold
-            Arguments.of(25, 24, "Sum is less than " + THRESHOLD),
+            Arguments.of(THRESHOLD / 2, THRESHOLD / 2 - 1, "Sum is less than " + THRESHOLD),
             // Case 3: Sum is exactly the threshold
             Arguments.of(25, 25, "Sum is exactly " + THRESHOLD),
             // Case 4: Sum is more than the threshold
-            Arguments.of(26, 25, "Sum is more than " + THRESHOLD)
+            Arguments.of(THRESHOLD / 2 +1, THRESHOLD / 2, "Sum is more than " + THRESHOLD)
         );
     }
 
