@@ -39,7 +39,7 @@ public class MainTest extends BaseTest {
             // Case 2: Sum is less than the threshold
             Arguments.of(THRESHOLD / 2, THRESHOLD / 2 - 1, "Sum is less than " + THRESHOLD),
             // Case 3: Sum is exactly the threshold
-            Arguments.of(25, 25, "Sum is exactly " + THRESHOLD),
+            Arguments.of(THRESHOLD / 2, THRESHOLD / 2, "Sum is exactly " + THRESHOLD),
             // Case 4: Sum is more than the threshold
             Arguments.of(THRESHOLD / 2 +1, THRESHOLD / 2, "Sum is more than " + THRESHOLD)
         );
