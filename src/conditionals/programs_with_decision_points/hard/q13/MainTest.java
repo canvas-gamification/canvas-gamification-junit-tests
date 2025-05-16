@@ -29,23 +29,28 @@ public class MainTest extends BaseTest {
         };
     }
 
-    static Stream<Arguments> InputProvider() {
+    static Stream<Arguments> ValidInputProvider() {
         return Stream.of(
-                Arguments.of(1, 1, "You selected a Pink Fiction book."),
-                Arguments.of(1, 2, "You selected a Pink Non-Fiction book."),
-                Arguments.of(1, 3, "You selected a Pink Mystery book."),
-                Arguments.of(2, 1, "You selected a Blue Fiction book."),
-                Arguments.of(2, 2, "You selected a Blue Non-Fiction book."),
-                Arguments.of(2, 3, "You selected a Blue Mystery book."),
-                Arguments.of(3, 1, "You selected a Green Fiction book."),
-                Arguments.of(3, 2, "You selected a Green Non-Fiction book."),
-                Arguments.of(3, 3, "You selected a Green Mystery book."),
-                Arguments.of(1, 4, "Invalid selection."),
-                Arguments.of(2, 5, "Invalid selection."),
-                Arguments.of(3, 0, "Invalid selection."),
-                Arguments.of(4, 1, "Invalid selection."),
-                Arguments.of(-1, 2, "Invalid selection."),
-                Arguments.of(7, 7, "Invalid selection.")
+            Arguments.of(1, 1, "You selected a Pink Fiction book."),
+            Arguments.of(1, 2, "You selected a Pink Non-Fiction book."),
+            Arguments.of(1, 3, "You selected a Pink Mystery book."),
+            Arguments.of(2, 1, "You selected a Blue Fiction book."),
+            Arguments.of(2, 2, "You selected a Blue Non-Fiction book."),
+            Arguments.of(2, 3, "You selected a Blue Mystery book."),
+            Arguments.of(3, 1, "You selected a Green Fiction book."),
+            Arguments.of(3, 2, "You selected a Green Non-Fiction book."),
+            Arguments.of(3, 3, "You selected a Green Mystery book.")
+        );
+    }
+
+    static Stream<Arguments> InvalidInputProvider() {
+        return Stream.of(
+            Arguments.of(1, 4, "Invalid selection."),
+            Arguments.of(2, 5, "Invalid selection."),
+            Arguments.of(3, 0, "Invalid selection."),
+            Arguments.of(4, 1, "Invalid selection."),
+            Arguments.of(-1, 2, "Invalid selection."),
+            Arguments.of(7, 7, "Invalid selection.")
         );
     }
 
